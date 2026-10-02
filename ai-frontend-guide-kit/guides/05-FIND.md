@@ -42,7 +42,8 @@ python tools/laya_select.py --need "…the block need…" --category <category> 
 3. If 0 results: broaden one filter at a time (category → text → drop stack). If still 0, mark "build custom" and move on.
 4. For the top 2–3 results per row run `get` and note: license, commercial flag, dependencies, install command.
 5. Add candidates to your working table; do not stop at the first result — compare at least two when available.
-6. Recommended: rank the shortlist with Laya passing `--direction <id>` and the brief as context (consent once per session); adopt its order and keep the facts from `get`.
+6. Present the shortlist to the user as **2–3 combinations** (see below), not loose links; iterate variants until the set fits.
+7. Recommended: rank the shortlist with Laya passing `--direction <id>` and the brief as context (consent once per session); adopt its order and keep the facts from `get`.
 
 ## Candidate table (extend `INVENTORY.md`)
 
@@ -51,6 +52,16 @@ python tools/laya_select.py --need "…the block need…" --category <category> 
 | Landing hero | aceternity-hero-aurora… | Aceternity | yes (commercial) | gradient + motion matching brand | magicui-…-warp |
 | Pricing | preline-pricing-… | Preline | yes | toggle included, plain markup | floatui-pricing-… |
 | KPI row | motionprimitives-text-… | Motion Primitives | MIT | count-up animation | build custom |
+
+## Combination round (with the user)
+
+Before closing the selection, group candidates into 2–3 purposeful combinations (e.g. nav + hero + background; pricing + toggle + FAQ) and present each one with:
+
+- the rationale — why these pieces fit together (density, motion budget, personality);
+- the catalog ids and the facts from `get` (license, install command);
+- what changes in the other blocks if the user picks it.
+
+The user picks or swaps; offer A/B variants when the trade-off is real. Components found on the web (not in the catalog) stay `provisional` until their license is verified on the origin page — never proposed as usable before that and never added to the catalog automatically. Record every choice with `memory.mjs add` and snapshot the accepted set with `combo save <name>`. Full protocol: `experience/DISCOVERY-LOOP.md` (phase B).
 
 ## Selection heuristics
 

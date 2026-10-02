@@ -12,6 +12,7 @@
  *
  * Usage:
  *   node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> [--style a,b] [--ref "spec:<capability>|story:<id>"] [--notes "..."]
+ *   node tools/memory.mjs add --screen experience --block reference --need "..." --decision adapt --ref "reference:<slug>" [--notes "..."]
  *   node tools/memory.mjs add --screen landing --block custom-x --need "..." --decision build --name "Custom marquee"
  *   node tools/memory.mjs list [--screen landing] [--limit 15] [--json]
  *   node tools/memory.mjs summary
@@ -196,8 +197,10 @@ function commandAdd(args, outputDir, catalog) {
   } else if (flags.decision === 'build') {
     record.name = flags.name ?? `Custom ${flags.block}`;
     record.notes = [record.notes, 'custom build (no catalog entry)'].filter(Boolean).join(' · ');
+  } else if (flags.ref) {
+    record.name = flags.ref;
   } else {
-    fail('--id is required unless --decision build is used.');
+    fail('--id (or --ref for reference/direction notes) is required unless --decision build is used.');
   }
 
   appendFileSync(join(outputDir, 'selections.jsonl'), `${JSON.stringify(record)}\n`, 'utf8');

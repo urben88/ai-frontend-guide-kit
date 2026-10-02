@@ -14,15 +14,16 @@ Do not start from colors, fonts, cards, gradients or a landing template. Start f
 4. Pick a philosophy and explain why (`UX-PHILOSOPHIES.md`).
 5. Describe the user journey: actor, scenario, phases, actions, thoughts, emotions, friction, opportunities.
 6. Design the information architecture: priority content, global/contextual navigation, section order, entry/exit points, search/filter needs.
-7. Choose interaction patterns per screen type (progressive disclosure, wizard, comparison, in-page nav…).
-8. Propose **three** directions: safe, differentiated, experimental (see below).
-9. Explain each direction: why it fits, what it sacrifices, its main risk, the safer alternative.
-10. Recommend one and let the user choose or combine.
-11. Write the visual brief (style, palette intent, typography personality, composition, motion, anti-generic list).
-12. Write `EXPERIENCE-BRIEF.md` with the chosen direction and open questions.
-13. Hand off to `02-UX-FLOWS` (flows and screens must respect the archetype).
-14. Hand the visual brief to `03-TOKENS` (tokens derive from it, not from defaults).
-15. Record the direction (`memory.mjs add --ref "direction:<id>" --notes …`) so future projects can avoid repeating it.
+7. (Recommended) Discover references with the user (`DISCOVERY-LOOP.md`, phase A): idea deck of 3–5 example sites with their structure read, guided browsing, screenshots in `ai-frontend-output/ux/references/` and `[ref: <slug>]` citations.
+8. Choose interaction patterns per screen type (progressive disclosure, wizard, comparison, in-page nav…).
+9. Propose **three** directions: safe, differentiated, experimental (see below).
+10. Explain each direction: why it fits, what it sacrifices, its main risk, the safer alternative.
+11. Recommend one and let the user choose or combine.
+12. Write the visual brief (style, palette intent, typography personality, composition, motion, anti-generic list).
+13. Write `EXPERIENCE-BRIEF.md` with the chosen direction and open questions.
+14. Hand off to `02-UX-FLOWS` (flows and screens must respect the archetype).
+15. Hand the visual brief to `03-TOKENS` (tokens derive from it, not from defaults).
+16. Record the direction (`memory.mjs add --ref "direction:<id>" --notes …`) so future projects can avoid repeating it.
 
 ## Experience archetypes
 
@@ -52,7 +53,7 @@ Organize content by user tasks, not by org chart. Prefer:
 
 ## Use of references
 
-Use the reference bank (`references/INDEX.md`) as **evidence, not decoration**. For each reference used: state the problem it solves, the pattern, why it works, its risks and how you adapt it. Never copy visual identity, assets or copy; patterns and lessons only. New URLs are extracted with the protocol (Playwright MCP when available).
+Use the reference bank (`references/INDEX.md`) as **evidence, not decoration**. For each reference used: state the problem it solves, the pattern, why it works, its risks and how you adapt it. Never copy visual identity, assets or copy; patterns and lessons only. New URLs are extracted with the protocol (Playwright MCP when available). Project picks from the discovery loop (`DISCOVERY-LOOP.md`) live in `ai-frontend-output/ux/references/` with their screenshots; the kit bank stays curated evidence.
 
 ## Decision explanation
 
@@ -73,6 +74,7 @@ Read the anti-generic list and P0/P1 tells in `STYLE-DIRECTIONS.md`. Apply the *
 ## Philosophy     — chosen philosophy · why · discarded alternative
 ## Journey        — actor, phases, actions, thoughts, emotions, friction, opportunities
 ## Information architecture — priority content, navigation, section order, entry/exit, search/filter
+## Reference discoveries — examples chosen with the user, likes/dislikes, [ref: <slug>] citations
 ## Three directions — safe · differentiated · experimental (each: structure, patterns, risks, when not to use)
 ## Recommended direction — id + rationale + risks (+ Laya P(fit) if ranked)
 ## Interaction patterns — per screen type, with the problem each solves

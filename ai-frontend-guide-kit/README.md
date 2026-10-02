@@ -25,7 +25,7 @@ ai-frontend-guide-kit/
 ├── README.md              # this file (copy + integration instructions)
 ├── guides/                # 00-START-HERE (router: intake + 3 phases) … 10-ITERATE (small changes)
 ├── experience/            # direction layer: manifest, question bank, archetypes, philosophies,
-│                          # styles, reference protocol, experience-manifest.json, references/
+│                          # styles, reference protocol, discovery loop, experience-manifest.json, references/
 ├── catalog/
 │   ├── component-manifest.json   # light index (sources, counts, paths)
 │   ├── component-manifest.md     # readable index
@@ -45,6 +45,10 @@ ai-frontend-guide-kit/
 ## Experience direction first (`experience/`)
 
 Before flows or visuals, guide `01-EXPERIENCE-DIRECTION` turns the brief into `ai-frontend-output/ux/EXPERIENCE-BRIEF.md`: adaptive questions in rounds (`QUESTION-BANK.md`), archetype (`SITE-ARCHETYPES.md`), philosophy (`UX-PHILOSOPHIES.md`), journey/IA, three creative directions (safe/differentiated/experimental) and a visual brief. `STYLE-DIRECTIONS.md` carries the style limits and the anti-generic list; `references/` stores the extracted idea cards (`REFERENCE-PROTOCOL.md`). Laya can rank the next question and the direction candidates from `experience-manifest.json` (consent once per session).
+
+## Reference discovery (`experience/DISCOVERY-LOOP.md`)
+
+An interactive loop to choose with the user instead of guessing: the agent proposes an *idea deck* of example sites with their structure, asks which the user prefers and what they highlight while browsing (with Playwright MCP when wanted), collects screenshots into `ai-frontend-output/ux/references/` and records the picks in the brief and in memory. Guide `05` closes the component search with **2–3 combinations** with rationale and catalog facts; web-discovered components stay `provisional` until their license is verified. Bounded rounds and non-blocking fallback (registry + user URLs) keep it token-cheap.
 
 ## UX flows first (`ai-frontend-output/ux/`)
 
@@ -67,6 +71,7 @@ Created next to the kit by the installer and **preserved on refreshes**: append-
 ```bash
 node tools/memory.mjs combo list          # check saved combinations before searching
 node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> --style gradient,dark
+node tools/memory.mjs add --screen experience --block reference --need "..." --decision adapt --ref "reference:<slug>"
 node tools/memory.mjs combo save saas-landing-v1 --note "..."
 node tools/memory.mjs combo apply saas-landing-v1
 ```

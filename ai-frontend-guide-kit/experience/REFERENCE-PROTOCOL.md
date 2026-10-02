@@ -1,6 +1,6 @@
 # Reference Protocol — saved ideas bank
 
-Purpose: turn external references into **reusable, ethical knowledge** the agent can consult and rank, instead of copying screenshots or guessing from memory. Sources are extracted once (curated) and new URLs are extracted on demand; both produce the same card format.
+Purpose: turn external references into **reusable, ethical knowledge** the agent can consult and rank, instead of copying screenshots or guessing from memory. Sources are extracted once (curated) and new URLs are extracted on demand; both produce the same card format. The interactive workflow that searches, proposes and captures references with the user lives in `DISCOVERY-LOOP.md`.
 
 ## Source registry (weights)
 
@@ -62,8 +62,8 @@ Then a short body with the 5–8 most important takeaways and quotes/attribution
 1. Pick the URL (user-provided or chosen from the registry for a specific need).
 2. Fetch with the Playwright MCP already configured (`browser_navigate`, snapshot/screenshot, network requests) or the agent's web fetch if the MCP is unavailable.
 3. Extract structure and behavior, not pixels: sections, navigation model, states, patterns, copy tone, motion role. Note what you cannot verify (private flows, dynamic states).
-4. Write the card with the schema, set `weight`, and add 3–6 tags (`archetype:workflow`, `style:editorial`, `pattern:progressive-disclosure`…).
-5. Update `references/INDEX.md` (one line per card: name, weight, tags, one-line why).
+4. Write the card with the schema, set `weight`, and add 3–6 tags (`archetype:workflow`, `style:editorial`, `pattern:progressive-disclosure`…): to the kit bank for curated sources, to `ai-frontend-output/ux/references/` for discovery picks (with their screenshots).
+5. Update `references/INDEX.md` for kit cards (one line per card: name, weight, tags, one-line why); project cards are cited as `[ref: <slug>]` in `EXPERIENCE-BRIEF.md`.
 6. If the page is unreachable, record the limitation in the card and continue; never block the phase.
 
 ## Ethical rules
@@ -73,9 +73,16 @@ Then a short body with the 5–8 most important takeaways and quotes/attribution
 - Attribute sources in the card; if a source is paywalled, describe the pattern and link, do not reproduce content.
 - Respect licenses: no storing of third-party component code (the kit never ships it).
 
+## Two banks (kit vs project)
+
+- **Kit bank — `experience/references/`:** curated evidence from the source registry. It ships with the kit and is **replaced on kit refresh**; never store project work here.
+- **Project bank — `ai-frontend-output/ux/references/`:** references chosen with the user during discovery (`DISCOVERY-LOOP.md`), with their notes and screenshots (`<slug>-<section>.png` next to `reference-<slug>.md`). It survives refreshes and is project history.
+
+Both use the same card schema. A project card is promoted to the kit bank only through curation, following the same registry rules.
+
 ## Using saved ideas
 
-- Browse `references/INDEX.md` by tag; open only the cards you need.
+- Browse `references/INDEX.md` by tag; open only the cards you need. Project cards live in `ai-frontend-output/ux/references/` and are cited in the brief.
 - Rank candidate cards for a need with Laya? Use `--dataset components` when the need maps to a component; for direction questions use the experience manifest. Cards are evidence to cite in the brief, not automatic choices.
 - In `EXPERIENCE-BRIEF.md`, cite cards as `[ref: <slug>]` next to the direction or pattern they justify.
 

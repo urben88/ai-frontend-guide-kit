@@ -2,7 +2,7 @@
 
 Purpose: decide **what experience we are building** — archetype, philosophy, journey, IA and three creative directions — and write `EXPERIENCE-BRIEF.md` before any flow, token or component. Full detail lives in `experience/` (load only what you need).
 
-> **Read first:** `ai-frontend-guide-kit/experience/EXPERIENCE-DIRECTION.md` (process, rules, output format). Supporting docs: `QUESTION-BANK.md`, `SITE-ARCHETYPES.md`, `UX-PHILOSOPHIES.md`, `STYLE-DIRECTIONS.md`, `REFERENCE-PROTOCOL.md`.
+> **Read first:** `ai-frontend-guide-kit/experience/EXPERIENCE-DIRECTION.md` (process, rules, output format). Supporting docs: `QUESTION-BANK.md`, `SITE-ARCHETYPES.md`, `UX-PHILOSOPHIES.md`, `STYLE-DIRECTIONS.md`, `REFERENCE-PROTOCOL.md`, `DISCOVERY-LOOP.md`.
 
 ## When to use
 
@@ -39,15 +39,25 @@ Optionally rank candidates with Laya (`--dataset experience --kind archetype|phi
 
 Write the journey (actor, scenario, phases, actions, thoughts, emotions, friction, opportunities) and the IA (priority content, navigation, section order, entry/exit points, search/filter needs). Organize by user tasks, never by org chart. Use patterns from `experience/references/INDEX.md`; cite as `[ref: <slug>]`.
 
-## Step 4 — Three directions
+## Step 4 — Discover references with the user (recommended)
+
+Follow `experience/DISCOVERY-LOOP.md` (phase A) between the IA and the three directions:
+
+- Build an **idea deck** of 3–5 example sites from internet search (structure queries + real product flows), each with its weight, navigation model, structural read (section order, entry/exit) and one moment to observe.
+- Ask the user to browse 1–3 and say **which they prefer and what they highlight**; navigate with them using Playwright MCP when they want.
+- Collect screenshots into `ai-frontend-output/ux/references/`, write a card per chosen reference with the protocol schema, cite it as `[ref: <slug>]` in the brief and record the pick:
+  `memory.mjs add --screen experience --block reference --need "…" --decision adapt --ref "reference:<slug>"`.
+- Bounded rounds (2–3 new candidates per round). If web search or Playwright is unavailable, use the `references/INDEX.md` registry and user URLs, state the limitation and continue — the loop never blocks the phase.
+
+## Step 5 — Three directions
 
 Generate **safe**, **differentiated** and **experimental**, differing in structure (archetype, navigation, journey, composition or narrative) — never three recolors. For each: what it changes, key patterns, what it sacrifices, main risk, when not to use. Apply the purpose and convergence tests and the anti-generic list of `experience/STYLE-DIRECTIONS.md`.
 
-## Step 5 — Write `ai-frontend-output/ux/EXPERIENCE-BRIEF.md`
+## Step 6 — Write `ai-frontend-output/ux/EXPERIENCE-BRIEF.md`
 
 Use the format in `experience/EXPERIENCE-DIRECTION.md` (Context, Goal, Laya consent, Archetype, Philosophy, Journey, Information architecture, Three directions, Recommended direction, Interaction patterns, Visual brief, Accessibility, Open questions). The **visual brief** section (style, palette intent, typography personality, composition, motion, anti-generic list) is what `03-TOKENS.md` consumes.
 
-## Step 6 — Choose and hand off
+## Step 7 — Choose and hand off
 
 Present the three directions; the user chooses or combines. Record the decision:
 

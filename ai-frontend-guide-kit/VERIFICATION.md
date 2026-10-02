@@ -134,5 +134,11 @@ Fresh `create-next-app` (Next.js 16.3.8, Tailwind v4, `--src-dir`) with shadcn/u
 - **Docs**: `guides/05-FIND.md` now makes direction-aware ranking the recommended step after `find`/`get` (with the brief as context and the session consent from guide 01); `AGENTS.md`, the generic skill and both READMEs show the `--direction` example. ✔
 - **Packaging**: `node tools/build-kit.mjs` and `node tools/validate.mjs` OK; `openspec validate add-laya-component-direction --strict` valid. ✔
 
+## Discovery loop + ref-only memory (2026-10-02)
+
+- **New protocol**: `experience/DISCOVERY-LOOP.md` (two phases: structure discovery from guide 01 and component combinations from guide 05, with idea deck, guided browsing, bounded rounds, screenshot intake, persistence map and fallback). `REFERENCE-PROTOCOL.md` now separates the kit bank (`experience/references/`, replaced on refresh) from the project bank (`ai-frontend-output/ux/references/`, survives) and documents the screenshot naming next to each card. Guide 01 gained "Step 4 — Discover references with the user" (steps 5–6 renumbered), guide 05 gained the combination round and a new working-method step, guide 00 updated its tools table and casuistics; `AGENTS.md`, `skills/ai-frontend-guide/SKILL.md` and both READMEs point to the loop. ✔
+- **Ref-only memory E2E**: `memory.mjs add --screen experience --block reference --decision adapt --ref "reference:stripe-dashboard"` and the documented `--decision adapt --ref "direction:exp-archetype-monitor"` both recorded without `--id` in a temp output dir; `SUMMARY.md` shows the ref in its column; `memory.mjs add --decision reuse` without id/ref still exits 1 with the updated message; `combo save discovery-test` snapshotted the 2 ref-only decisions. ✔
+- **Packaging**: `tools/build-kit.mjs` verifies **33 required assets** (adds `experience/DISCOVERY-LOOP.md`), experience manifest OK (106 entries, unique ids, required fields) and catalog coherent with `manifest/`; `node tools/validate.mjs` OK (16 sources, 2,470 entries); `openspec validate add-discovery-loop --strict` valid; `openspec validate --all` 8 passed / 0 failed. ✔
+
 
 

@@ -35,6 +35,7 @@ const REQUIRED_KIT_FILES = [
   'experience/UX-PHILOSOPHIES.md',
   'experience/STYLE-DIRECTIONS.md',
   'experience/REFERENCE-PROTOCOL.md',
+  'experience/DISCOVERY-LOOP.md',
   'experience/experience-manifest.json',
   'experience/references/INDEX.md',
   'tools/find.mjs',

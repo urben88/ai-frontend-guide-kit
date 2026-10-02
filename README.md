@@ -8,7 +8,7 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 | | What | Details |
 |---|---|---|
 | 📚 | **Catalog** | 16 verified sources · 2,470 reusable entries · 20 categories · per-entry licenses and install commands |
-| 🧭 | **Guided kit** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + 3-phase workflow in 10 short guides (00–09) + `find`/`get` query tools. Self-contained: no build, no npm dependencies |
+| 🧭 | **Guided kit** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + 3-phase workflow in 10 short guides (00–10) + `find`/`get` query tools. Self-contained: no build, no npm dependencies |
 | 🧠 | **Agent skills** | `ai-frontend-guide` (workflow), `frontend-polish` (phase 3), `ux-map` (visual screen map) and 16 vendored UX skills (`userflow` + 15 `flow-*`, MIT) |
 | 💾 | **Selection memory** | `ai-frontend-output/`: append-only decision history, styles/components summary and reusable combinations |
 | 🔒 | **Laya (optional)** | Local decision engine that ranks catalog candidates with calibrated probabilities — everything runs on your PC |
@@ -17,7 +17,7 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 
 | Phase | What happens | You get |
 |---|---|---|
-| **1 · 🧠 UX & theory** | Experience direction (`experience/` + Laya for questions/direction) then proven flows (`userflow` + `flow-*`) and design tokens | `EXPERIENCE-BRIEF.md` · `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `DESIGN.md` + theme |
+| **1 · 🧠 UX & theory** | Experience direction (`experience/` + Laya for questions/direction), interactive discovery loop (example sites, likes, screenshots, component combinations), then proven flows (`userflow` + `flow-*`) and design tokens | `EXPERIENCE-BRIEF.md` · `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `DESIGN.md` + theme |
 | **2 · 🧩 Composition** | Inventory → catalog search → reuse/adapt/build decision → install | Components adapted to your tokens |
 | **3 · ✨ Total polish** | External audits (`impeccable`, taste-skill, emilkowalski) + Playwright MCP loop + `@playwright/test` regression | A screen ready to ship |
 
@@ -117,7 +117,7 @@ El ranking de componentes acepta `--direction <id>` (la dirección elegida del b
 ├── ai-frontend-guide-kit/        # 📦 the distributable kit (copy this)
 │   ├── AGENTS.md · README.md · VERIFICATION.md
 │   ├── guides/00..10         # experience direction + reuse-first UX/UI workflow (00 = router, 01 = direction, 02 = flows, 10 = iteration)
-│   ├── experience/           # archetypes, philosophies, styles, question bank, reference cards + experience-manifest.json
+│   ├── experience/           # archetypes, philosophies, styles, question bank, discovery loop, reference cards + experience-manifest.json
 │   ├── catalog/              # index + taxonomy + install-guides + 16 sources
 │   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp
 ├── skills/                   # ai-frontend-guide + frontend-polish + 16 vendored UX flow skills (MIT)

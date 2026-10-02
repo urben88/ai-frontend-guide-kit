@@ -20,14 +20,14 @@ The phases are **entry points, not a fixed pipeline**: enter where the request p
 | **2 · Composition** | `04-INVENTORY`, `05-FIND`, `06-REUSE`, `07-ADAPT` (+ `08-PHILOSOPHY` while composing) | component inventory, candidate shortlist, reuse/adapt/build decisions + install, adapted components |
 | **3 · Total polish** | `frontend-polish` skill + `08-PHILOSOPHY` + `09-VERIFY` | external audits, Playwright MCP loop green, E2E + visual regression green |
 
-Phase 1 starts with the **experience direction** (`01`): adaptive questions guided by Laya → archetype, philosophy, journey, IA, three creative directions and a visual brief in `EXPERIENCE-BRIEF.md`. Then `02-UX-FLOWS` has **four paths** depending on the repository: no UX → design from scratch; existing UX → **ask the user once** to summarize (as-is + audit) or radically redesign (UX only); or a spot audit of one surface. Never redesign silently. If the repo runs **BMAD or a spec-driven flow**, read `ADAPTERS.md` first (the PRD becomes the anchor; specs are the behavioral source of truth).
+Phase 1 starts with the **experience direction** (`01`): adaptive questions guided by Laya → archetype, philosophy, journey, IA, three creative directions and a visual brief in `EXPERIENCE-BRIEF.md`. During `01` run the **discovery loop** (`experience/DISCOVERY-LOOP.md`): example sites with their structure, the user's likes and screenshots (saved in `ai-frontend-output/ux/references/`). Then `02-UX-FLOWS` has **four paths** depending on the repository: no UX → design from scratch; existing UX → **ask the user once** to summarize (as-is + audit) or radically redesign (UX only); or a spot audit of one surface. Never redesign silently. If the repo runs **BMAD or a spec-driven flow**, read `ADAPTERS.md` first (the PRD becomes the anchor; specs are the behavioral source of truth).
 
 ## Casuistics (minimum path)
 
 | Request | Route |
 |---|---|
 | New frontend / major build | Phase 1 → 2 → 3 |
-| Direction only (no UI) | `01-EXPERIENCE-DIRECTION.md` |
+| Direction only (no UI) | `01-EXPERIENCE-DIRECTION.md` (includes the discovery loop) |
 | Small change to an existing UI | `10-ITERATE.md` (do not repeat the UX phase) |
 | Custom component / new feature | `10-ITERATE.md`: combinations → `find`/`get` → build with `08` → polish |
 | Polish only / visual QA | Phase 3: `frontend-polish` + `09-VERIFY` |
@@ -41,12 +41,13 @@ A small new project may compress **1 → 2 → 3** (tokens and philosophy can me
 | Tool / skill | 1 · UX | 2 · Compose | 3 · Polish |
 |---|---|---|---|
 | `experience/` + Laya tasks (`next-question`, `direction`) | yes | — | — |
+| `experience/DISCOVERY-LOOP.md` + web search | example sites, likes, screenshots | component combinations | — |
 | `userflow` + `flow-*` skills | yes | — | optional flow audit |
 | `ux-map` skill + local Excalidraw MCP | direction-aware screen/navigation map | — | flow audit visual |
 | Catalog + `find`/`get` + selection memory + Laya (`fit`) | — | yes | — |
 | `emilkowalski` skills (if installed) | — | interactions | review/improve animations |
 | `impeccable` / taste-skill (if installed) | — | — | audit + polish |
-| Playwright MCP | reference extraction | render a block in isolation | visual/BUILD loop |
+| Playwright MCP | reference discovery + extraction | render a block in isolation | visual/BUILD loop |
 | `@playwright/test` (guide 09) | — | — | regression gate |
 
 Load an external skill only when its description matches what you are doing; if it is not installed, use the distilled rules of `08-PHILOSOPHY.md` and say so.

@@ -1,6 +1,6 @@
 ---
 name: ai-frontend-guide
-description: Reuse-first UI workflow for frontend projects. Use when designing or building any UI/UX (pages, sections, components, forms, animations, landing pages, dashboards) in a project that contains the ai-frontend-guide-kit folder. Decide the experience direction first (adaptive questions guided by the local Laya engine), consult the local component catalog before writing custom code, follow the guided flow in three on-demand phases (experience + UX/theory, composition, total polish), and optionally rank candidates with Laya after asking the user once per session. Covers catalog discovery, reuse/adapt/build decisions, installation, licensing, playbook for small changes/custom additions, the Excalidraw UX map and verification with Playwright MCP.
+description: Reuse-first UI workflow for frontend projects. Use when designing or building any UI/UX (pages, sections, components, forms, animations, landing pages, dashboards) in a project that contains the ai-frontend-guide-kit folder. Decide the experience direction first (adaptive questions guided by the local Laya engine), consult the local component catalog before writing custom code, follow the guided flow in three on-demand phases (experience + UX/theory, composition, total polish), and optionally rank candidates with Laya after asking the user once per session. Covers interactive reference discovery (example sites with the user, likes and screenshots, component combinations), catalog discovery, reuse/adapt/build decisions, installation, licensing, playbook for small changes/custom additions, the Excalidraw UX map and verification with Playwright MCP.
 ---
 
 # AI Frontend Guide
@@ -13,7 +13,7 @@ When this kit is installed, the project contains:
 
 - `ai-frontend-guide-kit/AGENTS.md` — awareness layer (read this first).
 - `ai-frontend-guide-kit/guides/00…10` — the guided workflow (router + direction + three phases + iteration).
-- `ai-frontend-guide-kit/experience/` — direction knowledge: `EXPERIENCE-DIRECTION.md`, `QUESTION-BANK.md`, `SITE-ARCHETYPES.md`, `UX-PHILOSOPHIES.md`, `STYLE-DIRECTIONS.md`, `REFERENCE-PROTOCOL.md`, `experience-manifest.json` and `references/` (saved idea cards).
+- `ai-frontend-guide-kit/experience/` — direction knowledge: `EXPERIENCE-DIRECTION.md`, `QUESTION-BANK.md`, `SITE-ARCHETYPES.md`, `UX-PHILOSOPHIES.md`, `STYLE-DIRECTIONS.md`, `REFERENCE-PROTOCOL.md`, `DISCOVERY-LOOP.md`, `experience-manifest.json` and `references/` (saved idea cards).
 - `ai-frontend-guide-kit/catalog/` — 2,470 reusable entries from 16 verified sources (licenses, install commands, links), plus a light index.
 - `ai-frontend-guide-kit/tools/` — `find.mjs`, `get.mjs`, `laya_select.py` and `excalidraw-mcp.mjs` (local, dependency-free Excalidraw MCP).
 - Sibling skills (when installed): `frontend-polish` (total polish phase), `ux-map` (visual screen map) and the three external design skills (`impeccable`, `design-taste-frontend`, `emilkowalski`).
@@ -48,6 +48,7 @@ For a new frontend or redesign, run the direction phase before any UI:
 
 - Adaptive questions in rounds of 3–5 from `experience/QUESTION-BANK.md`; never ask what the repo/PRD already answers.
 - Optional Laya ranking: `--dataset experience --kind question --task next-question` (which question next) and `--kind archetype|philosophy|style --task direction` (which direction fits).
+- (Recommended) Run the discovery loop (`experience/DISCOVERY-LOOP.md`, phase A) before the three directions: idea deck of example sites with their structure, browsing round with the user, screenshots in `ai-frontend-output/ux/references/`, picks cited as `[ref: <slug>]` and recorded with `--ref "reference:<slug>"`.
 - Write `ai-frontend-output/ux/EXPERIENCE-BRIEF.md` with three directions (safe/differentiated/experimental), the chosen one and the visual brief. **Gate:** no `02-UX-FLOWS` without it.
 - Apply the anti-generic list and the purpose/convergence tests from `experience/STYLE-DIRECTIONS.md`.
 
@@ -88,6 +89,7 @@ Rules:
 - **Reuse → adapt → build.** Create custom only when nothing fits or the license blocks you.
 - Licenses are facts: check `license_type` / `commercial_use` in `get` before using anything.
   Never use `non-commercial` entries in commercial work; verify `unknown` ones on their page.
+- Before closing a selection, present 2–3 **combinations** with rationale and `get` facts; web-discovered components stay `provisional` until their license is verified (`experience/DISCOVERY-LOOP.md`, phase B).
 - Keep high-impact animations to 1–2 per view and respect the brief's anti-generic list.
 
 ## Selection memory (`ai-frontend-output/`)

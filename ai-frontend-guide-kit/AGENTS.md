@@ -5,7 +5,7 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 ## What you have here
 
 - A catalog of **2,470 reusable UI entries** from **16 verified sources** (updated 2026-10-02), organized in 20 categories.
-- An **experience direction layer** (`experience/`): archetypes, philosophies, styles with limits, an adaptive question bank, reference cards with saved ideas and a machine-readable `experience-manifest.json` for Laya.
+- An **experience direction layer** (`experience/`): archetypes, philosophies, styles with limits, an adaptive question bank, reference cards with saved ideas, an interactive discovery loop (`DISCOVERY-LOOP.md`) and a machine-readable `experience-manifest.json` for Laya.
 - Per-entry decision data: what it is, when to use it, where to find it, how to install it and its license constraints.
 - A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–10).
 - Two local query tools (`tools/find.mjs`, `tools/get.mjs`) that answer with minimal output, plus a local Excalidraw MCP server (`tools/excalidraw-mcp.mjs`, no dependencies) for the UX map.
@@ -54,6 +54,8 @@ node tools/find.mjs --text marquee --limit 8
 node tools/get.mjs magicui-micro-interactions-marquee
 ```
 
+Before closing a selection, present 2–3 **combinations** with their rationale and the facts from `get`; web-discovered components stay `provisional` until their license is verified on the origin page (`experience/DISCOVERY-LOOP.md`, phase B).
+
 ## Laya (local decision engine — optional accelerator)
 
 Laya is a fast decision model with **calibrated probabilities** that runs entirely on this PC (no server). It ranks three things: **questions** of the direction phase, **direction** candidates (archetypes, philosophies, styles) and **components** of the catalog. For components, `--direction <id>` injects the chosen direction into the ranking state so the fit matches the UX.
@@ -90,7 +92,7 @@ node tools/context.mjs        # scans the repo → ai-frontend-output/ux/REPO-CO
 
 Then:
 
-1. Follow `guides/01-EXPERIENCE-DIRECTION.md`: adaptive questions (rounds of 3–5, `experience/QUESTION-BANK.md`) → archetype/philosophy/journey/IA → three directions (safe/differentiated/experimental) → `EXPERIENCE-BRIEF.md`. Gate before the flows.
+1. Follow `guides/01-EXPERIENCE-DIRECTION.md`: adaptive questions (rounds of 3–5, `experience/QUESTION-BANK.md`) → archetype/philosophy/journey/IA → three directions (safe/differentiated/experimental) → `EXPERIENCE-BRIEF.md`. Gate before the flows. (Recommended) run the discovery loop first: `experience/DISCOVERY-LOOP.md` phase A proposes example sites with their structure, asks which the user likes, saves screenshots in `ai-frontend-output/ux/references/` and records picks with `--ref "reference:<slug>"`.
 2. Follow `guides/02-UX-FLOWS.md`:
    - **No UX detected** → design from scratch with the `userflow` dispatcher (load 1–4 `flow-*` skills, never from memory) → `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw`.
    - **UX exists** → **ask the user once**: *Summarize* (as-is documentation + anti-pattern audit, no changes) or *Radical redesign* (baseline → ideal UX → diff). Never redesign silently. Redesign is UX-only: `PRODUCT.md` stays.
@@ -122,6 +124,7 @@ Rules:
 
 - Check `combo list` before searching the catalog; reuse existing combinations when they fit.
 - Record every decision with `add` right after choosing (facts come from the catalog).
+- References, likes and directions can be recorded without `--id` using `--ref` (e.g. `--ref "reference:<slug>"`).
 - `ai-frontend-output/SUMMARY.md` is the generated summary of styles and components extracted.
 
 ## License discipline
