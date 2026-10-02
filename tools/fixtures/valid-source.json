@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "source_id": "fixture",
+  "source_name": "Fixture UI",
+  "source_url": "https://example.com",
+  "catalog_url": "https://example.com/components",
+  "license_summary": "MIT",
+  "granularity": "complete",
+  "extraction": {
+    "channel": "registry-json",
+    "method": "script",
+    "evidence_url": "https://example.com/r/registry.json"
+  },
+  "generated_at": "2026-10-02",
+  "entries": [
+    {
+      "id": "fixture-hero-gradient-panel",
+      "name": "Gradient Panel Hero",
+      "source": "Fixture UI",
+      "entry_type": "component",
+      "category": "hero",
+      "subcategory": "hero-sections",
+      "description": "Hero section with animated gradient panel and centered copy.",
+      "use_case": "Landing pages for SaaS and AI products that need a modern first impression.",
+      "decision_hints": ["Pairs well with dark themes", "Keep to one effect per view"],
+      "search_tags": ["hero", "gradient", "animated"],
+      "docs_url": "https://example.com/components/gradient-panel",
+      "registry_url": "https://example.com/r/gradient-panel.json",
+      "stack": ["react", "tailwind"],
+      "dependencies": ["motion"],
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add https://example.com/r/gradient-panel.json",
+      "manual_steps": ["Open the docs page", "Copy the TSX block into src/components"],
+      "variants": ["light", "dark"],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-10-02"
+    },
+    {
+      "id": "fixture-feedback-loading-dots",
+      "name": "Loading Dots",
+      "source": "Fixture UI",
+      "entry_type": "component",
+      "category": "feedback",
+      "description": "Three-dot loading indicator with springy motion.",
+      "use_case": "Inline loading feedback for buttons and async panels.",
+      "search_tags": ["loader", "dots"],
+      "docs_url": "https://example.com/components/loading-dots",
+      "stack": ["html", "css"],
+      "dependencies": [],
+      "install_method": "copy-paste",
+      "manual_steps": ["Copy the HTML and CSS from the docs page"],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-10-02"
+    }
+  ]
+}

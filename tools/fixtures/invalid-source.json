@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "source_id": "Fixture Invalid",
+  "source_name": "Fixture Invalid UI",
+  "source_url": "not-a-url",
+  "generated_at": "02-10-2026",
+  "entries": [
+    {
+      "id": "Fixture_Invalid_ID",
+      "name": "Broken Entry",
+      "source": "Fixture Invalid UI",
+      "entry_type": "widget",
+      "category": "landing",
+      "description": "Missing required use_case, invalid enum values and wrong types.",
+      "docs_url": "https://example.com/broken",
+      "stack": [],
+      "license_type": "BSD",
+      "commercial_use": "maybe",
+      "free": "yes",
+      "verified_at": "yesterday",
+      "unexpected_extra_field": true
+    }
+  ]
+}

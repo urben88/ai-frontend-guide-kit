@@ -1,0 +1,359 @@
+[
+  {
+    "id": "1769894713679",
+    "url": "https://dialtone.dialpad.com/guides/mcp-server/",
+    "name": "Dialtone",
+    "badges": [
+      "new",
+      "mcp-support"
+    ],
+    "company": "Dialpad",
+    "iconUrl": "",
+    "category": "component-library",
+    "createdAt": "2026-01-31T21:25:13.679Z",
+    "companyDomain": "dialpad.com",
+    "additionalUrls": []
+  },
+  {
+    "id": "1769462738095",
+    "url": "https://claude.com/blog/interactive-tools-in-claude",
+    "name": "Claude MCP Apps",
+    "badge": "Recommended",
+    "badges": [
+      "new",
+      "mcp-support"
+    ],
+    "company": "Anthropic",
+    "iconUrl": "",
+    "category": "component-library",
+    "figmaKit": "https://www.figma.com/community/file/1597641111449594397/mcp-apps-for-claude",
+    "createdAt": "2026-01-26T21:25:38.095Z",
+    "updatedAt": "2026-01-26T21:26:24.857Z",
+    "badgeColor": "amber",
+    "companyDomain": "claude.com",
+    "contributedBy": "Raul",
+    "additionalUrls": [],
+    "contributorUrl": "https://www.linkedin.com/in/raulmarincalleja/",
+    "isEditorsChoice": true
+  },
+  {
+    "id": "1768390804536",
+    "url": "https://design.google/library/gemini-ai-visual-design",
+    "name": "Gemini",
+    "badge": "Recommended",
+    "badges": [
+      "new"
+    ],
+    "company": "Google",
+    "iconUrl": "",
+    "category": "component-library",
+    "createdAt": "2026-01-14T11:40:04.536Z",
+    "badgeColor": "amber",
+    "companyDomain": "gemini.google",
+    "additionalUrls": [
+      "https://gemini.google/gemini-drops/"
+    ],
+    "isEditorsChoice": true
+  },
+  {
+    "id": "1767794358872",
+    "url": "https://pro.chakra-ui.com/blocks/ai",
+    "name": "Chakra-UI Pro ",
+    "badges": [
+      "new",
+      "mcp-support"
+    ],
+    "company": "UI kit",
+    "iconUrl": "",
+    "category": "component-library",
+    "createdAt": "2026-01-07T13:59:18.872Z",
+    "updatedAt": "2026-01-07T15:22:49.990Z",
+    "companyDomain": "chakra-ui.com",
+    "contributedBy": "Santiago Botero",
+    "additionalUrls": [
+      "https://chakra-ui.com/docs/get-started/ai/mcp-server"
+    ]
+  },
+  {
+    "id": "1767697531399",
+    "url": "https://contentdesign.intuit.com/ai/",
+    "name": "Content Design System",
+    "badge": "New",
+    "company": "Intuit",
+    "createdAt": "2026-01-06T11:05:31.399Z",
+    "updatedAt": "2026-01-07T14:17:49.213Z",
+    "badgeColor": "green",
+    "companyDomain": "intuit.com",
+    "additionalUrls": []
+  },
+  {
+    "id": "1767697530851",
+    "url": "https://vercel.com/design",
+    "name": "Geist Design System",
+    "badge": "Featured",
+    "company": "Vercel",
+    "figmaKit": "https://www.figma.com/community/file/1555856339129556457/ai-elements-vercel",
+    "createdAt": "2026-01-06T11:05:30.851Z",
+    "updatedAt": "2026-01-06T21:34:15.350Z",
+    "badgeColor": "purple",
+    "companyDomain": "vercel.com",
+    "additionalUrls": []
+  },
+  {
+    "id": "1767697530315",
+    "url": "https://ui.shadcn.com/docs/mcp",
+    "name": "Shadcn UI",
+    "badges": [
+      "mcp-support"
+    ],
+    "company": "Shadcn",
+    "figmaKit": "https://shadcnstudio.com/figma",
+    "createdAt": "2026-01-06T11:05:30.315Z",
+    "updatedAt": "2026-01-06T12:09:19.761Z",
+    "description": "MCP support",
+    "companyDomain": "shadcn.com",
+    "additionalUrls": [
+      "https://shadcnstudio.com/mcp"
+    ]
+  },
+  {
+    "id": "1767697529821",
+    "url": "https://designsystem.backbase.com/latest/guides/beta-ui-ang-with-cursor-f9fdjG0s",
+    "name": "Backbase Design System",
+    "company": "Backbase",
+    "createdAt": "2026-01-06T11:05:29.821Z",
+    "companyDomain": "backbase.com"
+  },
+  {
+    "id": "1767697529200",
+    "url": "https://soul.emplifi.io/latest/patterns/patterns/ai-guidelines/patterns-oahsQIli",
+    "name": "Soul Design System",
+    "company": "Emplifi",
+    "createdAt": "2026-01-06T11:05:29.200Z",
+    "companyDomain": "emplifi.io"
+  },
+  {
+    "id": "1767697528852",
+    "url": "https://seeds.sproutsocial.com/components/mcp-server/",
+    "name": "Seeds Design System",
+    "badges": [
+      "mcp-support"
+    ],
+    "company": "SproutSocial",
+    "createdAt": "2026-01-06T11:05:28.852Z",
+    "updatedAt": "2026-01-06T12:09:14.005Z",
+    "description": "MCP support",
+    "companyDomain": "sproutsocial.com",
+    "additionalUrls": []
+  },
+  {
+    "id": "1767697528426",
+    "url": "https://horizon.servicenow.com/getting-started/ai",
+    "name": "Horizon Design System",
+    "company": "ServiceNow",
+    "createdAt": "2026-01-06T11:05:28.426Z",
+    "companyDomain": "servicenow.com",
+    "additionalUrls": [
+      "https://horizon.servicenow.com/guidelines/ai/having-a-vision-for-ai"
+    ]
+  },
+  {
+    "id": "1767697527827",
+    "url": "https://www.activecampaign.design/docs/patterns/ai",
+    "name": "ActiveCampaign Design System",
+    "badge": "New",
+    "company": "ActiveCampaign",
+    "createdAt": "2026-01-06T11:05:27.827Z",
+    "updatedAt": "2026-01-07T14:18:08.199Z",
+    "badgeColor": "green",
+    "companyDomain": "activecampaign.com",
+    "additionalUrls": []
+  },
+  {
+    "id": "1767697527311",
+    "url": "https://canvas.workday.com/guidelines/ai-guidance/ai-experience-guidelines",
+    "name": "Canvas Design System",
+    "company": "Workday",
+    "createdAt": "2026-01-06T11:05:27.311Z",
+    "companyDomain": "workday.com"
+  },
+  {
+    "id": "1767697526941",
+    "url": "https://www.patternfly.org/patternfly-ai/principles-and-guidelines",
+    "name": "Patternfly Design System",
+    "badge": "Recommended",
+    "company": "Red Hat",
+    "createdAt": "2026-01-06T11:05:26.941Z",
+    "updatedAt": "2026-01-07T14:19:18.432Z",
+    "badgeColor": "amber",
+    "companyDomain": "redhat.com",
+    "additionalUrls": [],
+    "isEditorsChoice": false
+  },
+  {
+    "id": "1767697526424",
+    "url": "https://blade.razorpay.com/?path=/docs/guides-blade-mcp--docs",
+    "name": "Blade Design System",
+    "badges": [
+      "mcp-support"
+    ],
+    "company": "Razorpay",
+    "createdAt": "2026-01-06T11:05:26.424Z",
+    "updatedAt": "2026-01-06T12:08:28.783Z",
+    "description": "MCP support",
+    "companyDomain": "razorpay.com",
+    "additionalUrls": []
+  },
+  {
+    "id": "1767697525876",
+    "url": "https://vibe.monday.com/?path=/docs/mcp-new--docs",
+    "name": "Vibe Design System",
+    "badges": [
+      "mcp-support"
+    ],
+    "company": "Monday",
+    "createdAt": "2026-01-06T11:05:25.876Z",
+    "updatedAt": "2026-01-06T12:08:16.857Z",
+    "description": "MCP support",
+    "companyDomain": "monday.com",
+    "additionalUrls": []
+  },
+  {
+    "id": "1767697525176",
+    "url": "https://x.ant.design/",
+    "name": "Ant Design X",
+    "badge": "New",
+    "company": "Ant Design",
+    "iconUrl": "https://ltuqsyevoyzlrokbbpjf.supabase.co/storage/v1/object/public/make-9f3e46c1-images/1767738029928-uspma.svg",
+    "figmaKit": "https://www.figma.com/community/file/1501193060829090060/ant-design-x-community-design-system-for-ai-products",
+    "createdAt": "2026-01-06T11:05:25.176Z",
+    "updatedAt": "2026-01-06T22:20:32.281Z",
+    "badgeColor": "green",
+    "customLogo": "antdesignx",
+    "companyDomain": "x.ant.design",
+    "additionalUrls": []
+  },
+  {
+    "id": "1767697524605",
+    "url": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
+    "name": "Carbon Design System",
+    "badge": "Featured",
+    "company": "IBM",
+    "createdAt": "2026-01-06T11:05:24.605Z",
+    "badgeColor": "blue",
+    "companyDomain": "ibm.com"
+  },
+  {
+    "id": "1767697523963",
+    "url": "https://design.gitlab.com/patterns/ai-human-interaction",
+    "name": "Pajamas Design System",
+    "company": "GitLab",
+    "createdAt": "2026-01-06T11:05:23.963Z",
+    "companyDomain": "gitlab.com",
+    "additionalUrls": [
+      "https://design.gitlab.com/patterns/duo-agents-and-flows"
+    ]
+  },
+  {
+    "id": "1767697523520",
+    "url": "https://www.ethosdesignsystem.com/style-guides/artificial-intelligence",
+    "name": "Ethos Design System",
+    "company": "GE HealthCare",
+    "createdAt": "2026-01-06T11:05:23.520Z",
+    "companyDomain": "gehealthcare.com"
+  },
+  {
+    "id": "1767697523011",
+    "url": "https://atlassian.design/patterns/ai-rovo#rovo-brand-and-ai-experiences",
+    "name": "Atlassian Design System",
+    "badge": "New",
+    "company": "Atlassian",
+    "createdAt": "2026-01-06T11:05:23.011Z",
+    "badgeColor": "green",
+    "companyDomain": "atlassian.com"
+  },
+  {
+    "id": "1767697522674",
+    "url": "https://cloudscape.design/get-started/for-developers/ai-tools-support/",
+    "name": "Cloudscape Design System",
+    "company": "Amazon",
+    "figmaKit": "https://www.figma.com/community/file/1585292872561164967/cds-component-library-2-0-3",
+    "createdAt": "2026-01-06T11:05:22.674Z",
+    "companyDomain": "amazon.com"
+  },
+  {
+    "id": "1767697522100",
+    "url": "https://geist.co/work/anthropic",
+    "name": "Claude AI (unofficial)",
+    "badge": "New",
+    "badges": [
+      "new"
+    ],
+    "company": "Anthropic",
+    "figmaKit": "https://www.figma.com/community/file/1445575023384366559",
+    "createdAt": "2026-01-06T11:05:22.100Z",
+    "updatedAt": "2026-01-06T12:07:49.964Z",
+    "badgeColor": "green",
+    "companyDomain": "anthropic.com",
+    "additionalUrls": []
+  },
+  {
+    "id": "1767697521546",
+    "url": "https://developers.openai.com/apps-sdk",
+    "name": "Apps SDK UI",
+    "badge": "New",
+    "badges": [
+      "new"
+    ],
+    "company": "OpenAI",
+    "figmaKit": "https://www.figma.com/community/file/1560064615791108827/apps-in-chatgpt-components-templates",
+    "createdAt": "2026-01-06T11:05:21.546Z",
+    "updatedAt": "2026-01-06T12:07:42.085Z",
+    "badgeColor": "green",
+    "companyDomain": "openai.com",
+    "additionalUrls": [
+      "https://openai.github.io/apps-sdk-ui/?path=/docs/overview-introduction--docs",
+      "https://developers.openai.com/apps-sdk/concepts/ui-guidelines"
+    ]
+  },
+  {
+    "id": "1767697520902",
+    "url": "https://medium.com/mercadolibre-tech/how-we-are-using-ai-in-mercado-libres-accessibility-team-e960b83283a9",
+    "name": "Fury Design System",
+    "badge": "New",
+    "badges": [
+      "ai-accessibility"
+    ],
+    "company": "Mercado Libre",
+    "createdAt": "2026-01-06T11:05:20.902Z",
+    "updatedAt": "2026-01-07T14:18:24.372Z",
+    "badgeColor": "green",
+    "description": "AI in accessibility",
+    "companyDomain": "mercadolibre.com",
+    "additionalUrls": [],
+    "isEditorsChoice": false
+  },
+  {
+    "id": "1767697520265",
+    "url": "https://www.lightningdesignsystem.com/2e1ef8501/p/52a7c7-ai-and-slds-2",
+    "name": "Lightning Design System",
+    "badge": "Recommended",
+    "badges": [
+      "ai-accessibility"
+    ],
+    "company": "Salesforce",
+    "figmaKit": "https://www.figma.com/community/file/1478970084463860424/slds-2-pattern-agentic-experiences",
+    "createdAt": "2026-01-06T11:05:20.265Z",
+    "updatedAt": "2026-01-07T15:51:31.866Z",
+    "badgeColor": "amber",
+    "description": "AI in accessibility",
+    "companyDomain": "salesforce.com",
+    "contributedBy": "Raúl",
+    "additionalUrls": [
+      "https://www.lightningdesignsystem.com/2e1ef8501/p/03c548-agentic-patterns",
+      "https://www.salesforce.com/blog/design-ai-interfaces-accessibility/"
+    ],
+    "contributorUrl": "https://www.linkedin.com/in/raulmarincalleja/",
+    "isEditorsChoice": true
+  }
+]

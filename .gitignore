@@ -1,0 +1,15 @@
+# Local artifacts
+node_modules/
+.playwright-mcp/
+__pycache__/
+*.pyc
+.venv/
+*.log
+*.tgz
+.DS_Store
+
+# Note: most of tools/.cache/ is intentionally committed:
+#   - uiverse-raw.json is the captured snapshot required to refresh the Uiverse source
+#   - dsr-design-systems.json is small and makes refreshes cheaper
+# The regenerable 30 MB Agents Kit registry cache is excluded:
+tools/.cache/agentskit-registry.json

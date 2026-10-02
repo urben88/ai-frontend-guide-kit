@@ -1,0 +1,25 @@
+{
+  "name": "ai-frontend-guide-kit",
+  "version": "1.0.0",
+  "description": "Reusable-first UI component catalog and guided kit for AI frontend agents (16 sources, 2,470 entries) with optional local Laya ranking.",
+  "type": "module",
+  "bin": {
+    "ai-frontend-guide": "./install.mjs"
+  },
+  "files": [
+    "install.mjs",
+    "ai-frontend-guide",
+    "README.md"
+  ],
+  "scripts": {
+    "validate": "node tools/validate.mjs",
+    "build:index": "node tools/build-index.mjs",
+    "build:kit": "node tools/build-kit.mjs",
+    "refresh": "node tools/refresh.mjs",
+    "prepublishOnly": "node tools/validate.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
