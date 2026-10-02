@@ -9,11 +9,20 @@ Reusable-first UI component catalog and guided workflow for AI agents building f
 ## Quickstart (install into a project)
 
 ```bash
-# from this repository
-node install.mjs --target ../my-frontend-project
+# one command, straight from GitHub (Node >= 18 + git required)
+npx github:urben88/ai-frontend-guide-kit
 
-# or straight from GitHub once pushed
-npx github:<owner>/<repo>
+# variants
+npx github:urben88/ai-frontend-guide-kit --no-skills          # kit + docs only
+npx github:urben88/ai-frontend-guide-kit --with-laya          # also install/update Laya
+npx github:urben88/ai-frontend-guide-kit --target ../my-app   # install into another folder
+
+# offline / no git: build the package once and reuse the tarball
+npm pack                                   # -> ai-frontend-guide-kit-1.0.0.tgz (~0.2 MB)
+npx ./ai-frontend-guide-kit-1.0.0.tgz      # run it in the destination project
+
+# optional public npm publish (name is free): npm publish --access public
+# then: npx ai-frontend-guide-kit
 ```
 
 The installer:
