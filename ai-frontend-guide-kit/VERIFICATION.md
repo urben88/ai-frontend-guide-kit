@@ -126,5 +126,13 @@ Fresh `create-next-app` (Next.js 16.3.8, Tailwind v4, `--src-dir`) with shadcn/u
 - **Packaging**: `build-kit` verifies the new required assets and validates `experience-manifest.json` (106 entries, unique ids, required fields); `build-index` regenerates the catalog index with the `06-REUSE` pointer; `node tools/validate.mjs` OK; `python -m py_compile` and `node --check` clean on all touched scripts. ✔
 - **Install E2E** (temp project with `.claude/` + `opencode.json`, `--no-design-skills`): `experience/`, `guides/01-EXPERIENCE-DIRECTION.md`, `10-ITERATE.md` and `tools/excalidraw-mcp.mjs` copied; MCP config merged as before; `context.mjs` prints the new direction → flows next step with the four UX outputs; installed-kit Laya experience dry-run exits 0; re-run is idempotent (`.mcp.json`, `opencode.json`, map and `AGENTS.md` hashes unchanged). ✔
 
+## Laya direction context for component ranking (2026-10-02)
+
+- **Flag**: `--direction <id>` resolves the entry in `experience/experience-manifest.json` and composes the ranking state as `need` → `Chosen experience direction (<id>): <profile>` → `Project context`; dry-run JSON and the output header expose the id. Wrong ids warn and continue (fail-soft). ✔
+- **Dry-runs**: components with `--direction exp-archetype-monitor` (exit 0, state contains the direction profile, header shows the id), unknown id (exit 0 with warning, ranking continues), regression without `--direction` (exit 0). ✔
+- **Real run**: `--dataset components --category hero --commercial --need "industrial gateway hero: precise, technical, operation-focused" --direction exp-archetype-monitor --top 5 --confirmed` → model `english`, 19.0 s, header `direction: exp-archetype-monitor`, low-confidence warning (top P(fit)=0.32) and facts (license/install) merged from the catalog. ✔
+- **Docs**: `guides/05-FIND.md` now makes direction-aware ranking the recommended step after `find`/`get` (with the brief as context and the session consent from guide 01); `AGENTS.md`, the generic skill and both READMEs show the `--direction` example. ✔
+- **Packaging**: `node tools/build-kit.mjs` and `node tools/validate.mjs` OK; `openspec validate add-laya-component-direction --strict` valid. ✔
+
 
 

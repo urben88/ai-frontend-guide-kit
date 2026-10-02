@@ -109,7 +109,7 @@ Rules: check combinations before searching; record **every** decision right afte
 
 ## Laya (optional local ranking — consent once per session)
 
-`laya_select.py` ranks questions, experience directions and components with calibrated probabilities, running entirely on this PC. **It is opt-in:** ask the user once per session/project, record `laya_consent` in `EXPERIENCE-BRIEF.md`, then use `--confirmed` per call.
+`laya_select.py` ranks questions, experience directions and components with calibrated probabilities, running entirely on this PC. **It is opt-in:** ask the user once per session/project, record `laya_consent` in `EXPERIENCE-BRIEF.md`, then use `--confirmed` per call. For components, `--direction <id>` passes the chosen direction into the ranking state so the fit matches the UX direction.
 
 ```bash
 python ai-frontend-guide-kit/tools/laya_select.py --check      # ready? (exit 0)
@@ -119,7 +119,8 @@ python ai-frontend-guide-kit/tools/laya_select.py --dataset experience --kind qu
   --task next-question --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 python ai-frontend-guide-kit/tools/laya_select.py --dataset experience --kind archetype \
   --task direction --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
-python ai-frontend-guide-kit/tools/laya_select.py --need "…" --category <category> --commercial --confirmed
+python ai-frontend-guide-kit/tools/laya_select.py --need "…" --category <category> --commercial \
+  --direction <experience-id> --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 ```
 
 Without consent the script exits with code 3 and does not load the model. If Python/Laya is unavailable, continue with the question tree, the heuristic tables and `find`/`get` — the workflow never depends on Laya. Laya scores semantic fit only; licenses and install commands always come from the catalog.

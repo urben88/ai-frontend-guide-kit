@@ -28,7 +28,7 @@ Usage:
 
 Filters (components): --category --stack --license --commercial --free --source --text
 Filters (experience): --kind --phase --text
-Other:    --context/--context-file --task --top N (8 default, 12 max) --model auto|english|multilingual --json
+Other:    --direction <id> --context/--context-file --task --top N (8 default, 12 max) --model auto|english|multilingual --json
 
 Exit codes: 0 ok · 1 environment not ready · 2 no candidates/fallback · 3 missing consent (--confirmed)
 """
@@ -224,6 +224,13 @@ def profile_text(entry: dict) -> str:
     )
 
 
+def resolve_direction(direction_id: str) -> str | None:
+    for entry in load_entries("experience"):
+        if entry.get("id") == direction_id:
+            return profile_text(entry)
+    return None
+
+
 TASK_INSTRUCTIONS = {
     "fit": (
         "Does this candidate fit the stated UI need well enough to be reused in this project?",
@@ -244,8 +251,20 @@ TASK_INSTRUCTIONS = {
 }
 
 
-def build_payload(need: str, context: str | None, candidates: list[dict], task: str = "fit") -> tuple[str, dict]:
-    state = need if not context else f"{need}\n\nProject context:\n{context}"
+def build_payload(
+    need: str,
+    context: str | None,
+    candidates: list[dict],
+    task: str = "fit",
+    direction: str | None = None,
+    direction_id: str | None = None,
+) -> tuple[str, dict]:
+    parts = [need]
+    if direction:
+        parts.append(f"Chosen experience direction ({direction_id}):\n{direction}")
+    if context:
+        parts.append(f"Project context:\n{context}")
+    state = "\n\n".join(parts)
     fit_instruction, choice_instruction = TASK_INSTRUCTIONS.get(task, TASK_INSTRUCTIONS["fit"])
     questions: dict = {}
     for index, entry in enumerate(candidates):
@@ -277,6 +296,14 @@ def run_ranking(args: argparse.Namespace) -> int:
     context = args.context
     if args.context_file:
         context = Path(args.context_file).read_text(encoding="utf-8")
+
+    direction_id = args.direction
+    direction_text = None
+    if direction_id:
+        direction_text = resolve_direction(direction_id)
+        if not direction_text:
+            print(f'Warning: direction "{direction_id}" not found in experience-manifest.json; continuing without it.')
+            direction_id = None
 
     top = max(1, min(args.top, MAX_CANDIDATES))
 
@@ -316,13 +343,13 @@ def run_ranking(args: argparse.Namespace) -> int:
         print("Fallback: node tools/find.mjs ... (components) or the deterministic question tree (experience). No Laya call was made.")
         return 2
 
-    state, questions = build_payload(need, context, candidates, args.task)
+    state, questions = build_payload(need, context, candidates, args.task, direction_text, direction_id)
 
     if args.dry_run:
         if args.json:
-            print(json.dumps({"need": need, "task": args.task, "dataset": args.dataset, "state": state, "questions": questions, "candidate_ids": [c["id"] for c in candidates]}, indent=2))
+            print(json.dumps({"need": need, "task": args.task, "dataset": args.dataset, "direction": direction_id, "state": state, "questions": questions, "candidate_ids": [c["id"] for c in candidates]}, indent=2))
         else:
-            print(f"# Dry run — task {args.task} · dataset {args.dataset} · {len(candidates)} candidates preselected (no Laya import)")
+            print(f"# Dry run — task {args.task} · dataset {args.dataset} · {len(candidates)} candidates preselected (no Laya import)" + (f" · direction {direction_id}" if direction_id else ""))
             for entry in candidates:
                 print(f"- {entry['id']} | {entry['name']} | {entry.get('source')} | {entry.get('license_type', entry.get('kind', ''))}")
             print()
@@ -388,6 +415,7 @@ def run_ranking(args: argparse.Namespace) -> int:
         "task": args.task,
         "dataset": args.dataset,
         "kind": args.kind,
+        "direction": direction_id,
         "elapsed_seconds": elapsed,
         "routing": result.get("routing"),
         "candidates": rows,
@@ -401,7 +429,7 @@ def run_ranking(args: argparse.Namespace) -> int:
     top_fit = rows[0]["fit"] if rows and rows[0]["fit"] is not None else None
     print(f'# Laya ranking — task {args.task} · dataset {args.dataset} — need: "{need}"')
     routing_model = (result.get("routing") or {}).get("model", "unknown")
-    print(f"model: {routing_model} | candidates: {len(rows)} | {elapsed}s" + (f" | choice: {chosen}" if chosen else ""))
+    print(f"model: {routing_model} | candidates: {len(rows)} | {elapsed}s" + (f" | direction: {direction_id}" if direction_id else "") + (f" | choice: {chosen}" if chosen else ""))
     print()
     if args.dataset == "experience":
         print(f"{'rank':<4} {'P(fit)':<7} {'best':<5} candidate | kind | category")
@@ -437,6 +465,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--kind", choices=["archetype", "philosophy", "style", "page-type", "question", "navigation-model"], help="experience entry kind filter")
     parser.add_argument("--phase", type=int, help="question phase filter (experience dataset)")
     parser.add_argument("--task", choices=["fit", "direction", "next-question", "options"], default="fit", help="instruction template (default: fit)")
+    parser.add_argument("--direction", help="experience direction id (experience-manifest.json) injected into the state for better fit")
     parser.add_argument("--context", help="extra project context (PRODUCT.md excerpt, tokens intent…)")
     parser.add_argument("--context-file", help="read the context from a file instead")
     parser.add_argument("--category")

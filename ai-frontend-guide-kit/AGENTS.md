@@ -56,7 +56,7 @@ node tools/get.mjs magicui-micro-interactions-marquee
 
 ## Laya (local decision engine — optional accelerator)
 
-Laya is a fast decision model with **calibrated probabilities** that runs entirely on this PC (no server). It ranks three things: **questions** of the direction phase, **direction** candidates (archetypes, philosophies, styles) and **components** of the catalog.
+Laya is a fast decision model with **calibrated probabilities** that runs entirely on this PC (no server). It ranks three things: **questions** of the direction phase, **direction** candidates (archetypes, philosophies, styles) and **components** of the catalog. For components, `--direction <id>` injects the chosen direction into the ranking state so the fit matches the UX.
 
 ```bash
 python tools/laya_select.py --check       # ready? (exit 0 = usable on this PC)
@@ -67,8 +67,9 @@ python tools/laya_select.py --dataset experience --kind question --task next-que
 # direction (archetype/philosophy/style)
 python tools/laya_select.py --dataset experience --kind archetype --task direction \
   --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
-# components (default dataset)
-python tools/laya_select.py --need "pricing table with monthly/anual toggle" --category pricing --commercial --confirmed
+# components (default dataset) — pass the chosen direction so fit matches the UX direction
+python tools/laya_select.py --need "pricing table with monthly/anual toggle" --category pricing --commercial \
+  --direction <experience-id> --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 ```
 
 Rules:

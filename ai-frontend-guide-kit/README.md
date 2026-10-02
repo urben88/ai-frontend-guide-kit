@@ -83,8 +83,11 @@ python tools/laya_select.py --dataset experience --kind question --task next-que
   --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 python tools/laya_select.py --dataset experience --kind archetype --task direction \
   --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
-python tools/laya_select.py --need "pricing table with monthly toggle" --category pricing --commercial --confirmed
+python tools/laya_select.py --need "pricing table with monthly toggle" --category pricing --commercial \
+  --direction <experience-id> --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 ```
+
+`--direction <id>` injects the chosen archetype/philosophy/style into the component ranking state so the fit matches the UX direction (`experience/experience-manifest.json`); a wrong id warns and continues.
 
 **Ask before using it:** Laya is optional and never runs by default; ranking requires `--confirmed` as proof of the user's consent (without it the script exits with code 3 and does not load the model). Record the session consent in `EXPERIENCE-BRIEF.md`. Facts (licenses, install commands, manifest fields) always come from the catalog/manifest; Laya only scores semantic fit. Without Python/Laya the kit works the same through the question tree and `find`/`get`.
 

@@ -103,8 +103,11 @@ python ai-frontend-guide-kit/tools/laya_select.py --dataset experience --kind qu
   --task next-question --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 python ai-frontend-guide-kit/tools/laya_select.py --dataset experience --kind archetype \
   --task direction --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
-python ai-frontend-guide-kit/tools/laya_select.py --need "pricing table with monthly/anual toggle" --category pricing --commercial --confirmed
+python ai-frontend-guide-kit/tools/laya_select.py --need "pricing table with monthly/anual toggle" --category pricing --commercial \
+  --direction <experience-id> --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 ```
+
+El ranking de componentes acepta `--direction <id>` (la dirección elegida del brief) como contexto, para que el encaje coincida con el UX definido; sin Laya, `find`/`get` y las heurísticas siguen bastando.
 
 ⚠️ The agent **must ask before using it**: consent is once per project/session (recorded in `EXPERIENCE-BRIEF.md`) and `--confirmed` is required per call as proof (without it the script exits with code 3 and loads nothing). Everything runs locally — no server, no external APIs beyond the one-time Hugging Face checkpoint download. Without Python/Laya the kit still works via the question tree and `find.mjs` + `get.mjs`.
 
