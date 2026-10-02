@@ -8,6 +8,9 @@ __pycache__/
 *.tgz
 .DS_Store
 
+# Explainer video render scratch (frames)
+media/explainer/.render/
+
 # Note: most of tools/.cache/ is intentionally committed:
 #   - uiverse-raw.json is the captured snapshot required to refresh the Uiverse source
 #   - dsr-design-systems.json is small and makes refreshes cheaper

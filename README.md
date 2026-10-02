@@ -3,6 +3,22 @@
 **Reuse-first UI catalog + guided workflow for AI agents building frontends.**
 This repository is both the 🏭 **factory** (extraction pipeline + catalog) and the 📦 **distributable kit** you drop into any frontend project.
 
+## 🎬 Presentation — 55 seconds
+
+<p align="center">
+  <a href="media/explainer/video/ai-frontend-guide-kit-es.mp4">
+    <img src="media/explainer/video/teaser.gif" alt="AI Frontend Guide Kit — hand-drawn explainer" width="840">
+  </a>
+</p>
+
+<p align="center">
+  <b>Reuse-first catalog, interactive reference discovery (example sites, likes, screenshots), the three phases and the selection memory — with friendly voice-over.</b><br><br>
+  ▶️ <a href="media/explainer/video/ai-frontend-guide-kit-es.mp4">Español</a> ·
+  <a href="media/explainer/video/ai-frontend-guide-kit-en.mp4">English</a> ·
+  🖋 <a href="media/explainer/guion.md">Storyboard</a> ·
+  🎛 <a href="media/explainer/index.html">Animation source</a>
+</p>
+
 ## ✨ What's inside
 
 | | What | Details |
@@ -122,6 +138,7 @@ El ranking de componentes acepta `--direction <id>` (la dirección elegida del b
 │   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp
 ├── skills/                   # ai-frontend-guide + frontend-polish + 16 vendored UX flow skills (MIT)
 ├── manifest/                 # catalog source of truth (generated)
+├── media/explainer/          # 🎬 hand-drawn explainer: index.html + render.mjs + video (ES/EN, GIF, poster)
 ├── tools/                    # extraction/refresh/build/validate pipeline
 ├── openspec/                 # change specs (OpenSpec)
 └── install.mjs               # one-command installer (bin)
