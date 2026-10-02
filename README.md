@@ -9,7 +9,7 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 |---|---|---|
 | 📚 | **Catalog** | 16 verified sources · 2,470 reusable entries · 20 categories · per-entry licenses and install commands |
 | 🧭 | **Guided kit** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + 3-phase workflow in 10 short guides (00–09) + `find`/`get` query tools. Self-contained: no build, no npm dependencies |
-| 🧠 | **Agent skills** | `ai-frontend-guide` (workflow), `frontend-polish` (phase 3) and 16 vendored UX skills (`userflow` + 15 `flow-*`, MIT) |
+| 🧠 | **Agent skills** | `ai-frontend-guide` (workflow), `frontend-polish` (phase 3), `ux-map` (visual screen map) and 16 vendored UX skills (`userflow` + 15 `flow-*`, MIT) |
 | 💾 | **Selection memory** | `ai-frontend-output/`: append-only decision history, styles/components summary and reusable combinations |
 | 🔒 | **Laya (optional)** | Local decision engine that ranks catalog candidates with calibrated probabilities — everything runs on your PC |
 
@@ -17,7 +17,7 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 
 | Phase | What happens | You get |
 |---|---|---|
-| **1 · 🧠 UX & theory** | Proven flows (`userflow` + `flow-*`) and design tokens | `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `DESIGN.md` + theme |
+| **1 · 🧠 UX & theory** | Proven flows (`userflow` + `flow-*`) and design tokens | `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `DESIGN.md` + theme |
 | **2 · 🧩 Composition** | Inventory → catalog search → reuse/adapt/build decision → install | Components adapted to your tokens |
 | **3 · ✨ Total polish** | External audits (`impeccable`, taste-skill, emilkowalski) + Playwright MCP loop + `@playwright/test` regression | A screen ready to ship |
 
@@ -47,7 +47,7 @@ npx github:urben88/ai-frontend-guide-kit
 |---|---|
 | `--no-skills` | kit + docs only, no skills at all |
 | `--no-design-skills` | skip the 3 external design skills (impeccable/taste-skill/emilkowalski) |
-| `--no-mcp` | skip the Playwright MCP configuration |
+| `--no-mcp` | skip the Playwright + Excalidraw MCP configuration |
 | `--with-laya` | also install/update Laya |
 | `--target <dir>` | install into another folder |
 | `--skills-mode cli` | legacy full CLI flow (lockfile + multi-agent links) |
@@ -68,8 +68,8 @@ Then tell your agent:
 1. 📁 Copies `ai-frontend-guide-kit/` into the target project (removes the legacy `ai-frontend-guide/` if present).
 2. 📌 Adds the intake pointer to the project's `AGENTS.md` (ask first, then route through the three phases).
 3. 💾 Creates `ai-frontend-output/` (selection memory) if missing — never removed on refresh.
-4. 🧩 Installs the **18 skills of this repo** into `.agents/skills/` (clean: no lockfile, no symlink sprawl) plus the **16 external design skills** via their CLI by default. If the project has `.claude/`, the 18 are linked into `.claude/skills/`.
-5. 🎭 Configures the **Playwright MCP** server per detected harness (`.mcp.json` for Claude Code, `opencode.json` for OpenCode); otherwise prints the exact command. Browser once: `npx playwright install chromium`.
+4. 🧩 Installs the **19 skills of this repo** into `.agents/skills/` (clean: no lockfile, no symlink sprawl) plus the **16 external design skills** via their CLI by default. If the project has `.claude/`, the 19 are linked into `.claude/skills/`.
+5. 🎭 Configures the **Playwright + Excalidraw MCP** servers per detected harness (`.mcp.json` for Claude Code, `opencode.json` for OpenCode) and creates the `ai-frontend-output/ux/ux-map.excalidraw` scaffold; otherwise prints the exact commands. Browser once: `npx playwright install chromium`.
 6. 🐍 Checks Python/Laya and prints the exact next step.
 
 > 💡 External skills need network; if they fail the install continues and the kit still works with `find`/`get`.

@@ -16,7 +16,7 @@ The phases are **entry points, not a fixed pipeline**: enter where the request p
 
 | Phase | Guides | You produce |
 |---|---|---|
-| **1 · UX & theory** | `01-UX-FLOWS` (+ `ADAPTERS` if BMAD/spec-driven), `02-TOKENS` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` + `DESIGN.md`/theme |
+| **1 · UX & theory** | `01-UX-FLOWS` (+ `ADAPTERS` if BMAD/spec-driven), `02-TOKENS` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw` + `DESIGN.md`/theme |
 | **2 · Composition** | `03-INVENTORY`, `04-FIND`, `05-REUSE`, `06-ADAPT` (+ `07-PHILOSOPHY` while composing) | component inventory, candidate shortlist, reuse/adapt/build decisions + install, adapted components |
 | **3 · Total polish** | `frontend-polish` skill + `07-PHILOSOPHY` + `08-VERIFY` | external audits, Playwright MCP loop green, E2E + visual regression green |
 
@@ -40,6 +40,7 @@ A small new project may compress **1 → 2 → 3** (tokens and philosophy can me
 | Tool / skill | 1 · UX | 2 · Compose | 3 · Polish |
 |---|---|---|---|
 | `userflow` + `flow-*` skills | yes | — | optional flow audit |
+| `ux-map` skill + Excalidraw MCP | screens/navigation map | — | flow audit visual |
 | Catalog + `find`/`get` + selection memory | — | yes | — |
 | `emilkowalski` skills (if installed) | — | interactions | review/improve animations |
 | `impeccable` / taste-skill (if installed) | — | — | audit + polish |
@@ -59,6 +60,7 @@ Load an external skill only when its description matches what you are doing; if 
 ## Done when
 
 - `UX-SPEC.md` exists with screens, flows and empty/loading/error states (phase 1).
+- `ux-map.excalidraw` matches `UX-SPEC.md`: one node per screen, one labeled arrow per action (phase 1).
 - Every UI need maps to a catalog entry, an adaptation, or a justified custom build (phase 2).
 - Licenses are compatible with the project (commercial/non-commercial).
 - Phase 3 closes green (`frontend-polish` + `08-VERIFY`).

@@ -8,7 +8,7 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 - Per-entry decision data: what it is, when to use it, where to find it, how to install it and its license constraints.
 - A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–09).
 - Two local query tools (`tools/find.mjs`, `tools/get.mjs`) that answer with minimal output.
-- A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses, plus a total-polish skill (`skills/frontend-polish/SKILL.md`).
+- A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses, plus a total-polish skill (`skills/frontend-polish/SKILL.md`) and a visual screen-map skill (`skills/ux-map/SKILL.md`).
 
 ## Golden rule
 
@@ -36,7 +36,7 @@ Before touching code, ask the user what they want and declare the route: new fro
 | Phase | Guide | Output |
 |---|---|---|
 | 0 · Intake | `guides/00-START-HERE.md` | route declared + flow map |
-| 1 · UX & theory | `guides/01-UX-FLOWS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` (4 paths) |
+| 1 · UX & theory | `guides/01-UX-FLOWS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw` (4 paths) |
 | 1 · UX & theory | `guides/02-TOKENS.md` | `DESIGN.md` + Tailwind v4 theme (Figma MCP or fallback) |
 | 2 · Composition | `guides/03-INVENTORY.md` … `guides/06-ADAPT.md` (+ `07` while composing) | inventory, shortlist, reuse/adapt/build + install, adapted components |
 | 3 · Total polish | `frontend-polish` skill + `guides/07-PHILOSOPHY.md` + `guides/08-VERIFY.md` | external audits + Playwright MCP loop + E2E/visual checks green |
@@ -80,12 +80,14 @@ node tools/context.mjs        # scans the repo → ai-frontend-output/ux/REPO-CO
 
 Then follow `guides/01-UX-FLOWS.md`:
 
-- **No UX detected** → design from scratch with the `userflow` dispatcher (load 1–4 `flow-*` skills, never from memory) → `UX-SPEC.md` + `flow-report.html`.
+- **No UX detected** → design from scratch with the `userflow` dispatcher (load 1–4 `flow-*` skills, never from memory) → `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw`.
 - **UX exists** → **ask the user once**: *Summarize* (as-is documentation + anti-pattern audit, no changes) or *Radical redesign* (baseline → ideal UX → diff). Never redesign silently. Redesign is UX-only: `PRODUCT.md` stays.
 - **Single surface** → spot audit via `/userflow audit …` (findings only).
 - **BMAD / spec-driven repos** → read `guides/ADAPTERS.md`. Detection is automatic (`Framework:` in `REPO-CONTEXT.md`): with a BMAD PRD, use it as the business anchor and cite stories with `--ref "story:<id>"`; with OpenSpec, specs are the behavioral source of truth and decisions cite `--ref "spec:<capability>"`.
 
-Gate: do not start the UI steps until `UX-SPEC.md` lists screens with empty/loading/error states and flows. The UI inventory and `memory.mjs --screen/--block` come from it.
+Either path ends with the **visual screen map** (skill `ux-map` + Excalidraw MCP): `ai-frontend-output/ux/ux-map.excalidraw`, one node per screen (name + CTA + key blocks) and one labeled arrow per navigating action. Redesign snapshots `ux-map-baseline.excalidraw` first and updates the map incrementally.
+
+Gate: do not start the UI steps until `UX-SPEC.md` lists screens with empty/loading/error states and flows, and `ux-map.excalidraw` matches those screens. The UI inventory and `memory.mjs --screen/--block` come from it.
 
 ## Total polish phase (`frontend-polish` + Playwright MCP)
 

@@ -28,6 +28,8 @@ Optional accelerator: \`python ai-frontend-guide-kit/tools/laya_select.py --chec
 Selection memory: record every decision with \`node ai-frontend-guide-kit/tools/memory.mjs add ...\` and reuse saved
 combinations from \`ai-frontend-output/\` before searching the catalog.
 Polish phase: use the \`frontend-polish\` skill with Playwright MCP (\`npx @playwright/mcp@latest\`).
+UX map: generate and maintain \`ai-frontend-output/ux/ux-map.excalidraw\` with the \`ux-map\` skill and the Excalidraw MCP
+(\`npx -y @cmd8/excalidraw-mcp --diagram ai-frontend-output/ux/ux-map.excalidraw\`).
 `;
 
 const OUTPUT_README = `# ai-frontend-output
@@ -89,10 +91,10 @@ Usage:
 Options:
   --target <dir>        install into <dir> (default: current directory)
   --no-skills           skip installing skills entirely
-  --skills-mode <mode>  copy (default): copy the 18 kit skills to .agents/skills (clean, no lockfile)
+  --skills-mode <mode>  copy (default): copy the 19 kit skills to .agents/skills (clean, no lockfile)
                         cli: use "npx skills add" (lockfile + multi-agent links, includes design skills)
   --no-design-skills    skip the 3 external design skills (impeccable/taste-skill/emilkowalski; need network)
-  --no-mcp              skip the Playwright MCP configuration
+  --no-mcp              skip the Playwright + Excalidraw MCP configuration
   --with-laya           install/update Laya with pip (heavy: pulls torch on first install)
   --help                show this help
 
@@ -100,12 +102,13 @@ What it does:
   1. Copies ai-frontend-guide-kit/ (catalog + guides + tools) into the target.
   2. Adds a pointer block to the target's AGENTS.md and removes the legacy ai-frontend-guide/ folder.
   3. Creates ai-frontend-output/ (selection memory) if missing; it is never removed on refresh.
-  4. Installs skills into .agents/skills: copy mode copies the 18 kit skills (workflow + 16 UX flows +
-     frontend-polish); if the project has a .claude/ folder, they are also linked into .claude/skills
+     It also creates ai-frontend-output/ux/ux-map.excalidraw (Excalidraw scaffold) if missing.
+  4. Installs skills into .agents/skills: copy mode copies the 19 kit skills (workflow + 16 UX flows +
+     frontend-polish + ux-map); if the project has a .claude/ folder, they are also linked into .claude/skills
      (junction/symlink, fallback to copy). The 3 external design skills also install by default via
      the CLI (use --no-design-skills to skip them).
-  5. Configures the Playwright MCP server for detected harnesses (.claude/ -> .mcp.json,
-     opencode.json -> mcp.playwright); prints instructions otherwise (--no-mcp to skip).
+  5. Configures the Playwright + Excalidraw MCP servers for detected harnesses (.claude/ -> .mcp.json,
+     opencode.json -> mcp.playwright + mcp.excalidraw); prints instructions otherwise (--no-mcp to skip).
   6. Checks Python/Laya; with --with-laya installs it and verifies.
 `);
 }
@@ -168,6 +171,21 @@ function linkSkillsForClaude(target, names) {
 }
 
 const PLAYWRIGHT_MCP_ARGS = ['@playwright/mcp@latest'];
+const EXCALIDRAW_MCP_ARGS = ['-y', '@cmd8/excalidraw-mcp'];
+const DIAGRAM_REL_PATH = 'ai-frontend-output/ux/ux-map.excalidraw';
+
+const DIAGRAM_SCAFFOLD = {
+  type: 'excalidraw',
+  version: 2,
+  source: 'https://excalidraw.com',
+  elements: [],
+  appState: { gridSize: null, viewBackgroundColor: '#ffffff' },
+  files: {},
+};
+
+function excalidrawMcpArgs() {
+  return [...EXCALIDRAW_MCP_ARGS, '--diagram', DIAGRAM_REL_PATH];
+}
 
 function readJsonConfig(path) {
   try {
@@ -179,12 +197,31 @@ function readJsonConfig(path) {
 }
 
 function printMcpInstructions() {
-  console.log('- Playwright MCP: no Claude Code/OpenCode project config found. To enable it:');
+  console.log('- MCP: no Claude Code/OpenCode project config found. To enable Playwright + Excalidraw:');
   console.log('    Claude Code:  claude mcp add playwright -- npx @playwright/mcp@latest');
-  console.log('    OpenCode:     add to opencode.json "mcp": { "playwright": { "type": "local", "command": ["npx", "@playwright/mcp@latest"], "enabled": true } }');
+  console.log(`                  claude mcp add excalidraw -- npx ${excalidrawMcpArgs().join(' ')}`);
+  console.log(`    OpenCode:     add to opencode.json "mcp": { "playwright": { "type": "local", "command": ["npx", "${PLAYWRIGHT_MCP_ARGS[0]}"], "enabled": true }, "excalidraw": { "type": "local", "command": ["npx", ${excalidrawMcpArgs().map((arg) => `"${arg}"`).join(', ')}], "enabled": true } }`);
 }
 
-function setupPlaywrightMcp(target) {
+const MCP_SERVER_DEFS = {
+  playwright: () => ({ command: 'npx', args: PLAYWRIGHT_MCP_ARGS }),
+  excalidraw: () => ({ command: 'npx', args: excalidrawMcpArgs() }),
+};
+
+const OPENCODE_MCP_DEFS = {
+  playwright: () => ({ type: 'local', command: ['npx', ...PLAYWRIGHT_MCP_ARGS], enabled: true }),
+  excalidraw: () => ({ type: 'local', command: ['npx', ...excalidrawMcpArgs()], enabled: true }),
+};
+
+const MCP_SERVER_NAMES = ['playwright', 'excalidraw'];
+
+function mergeMissingServers(container, defs) {
+  const missing = MCP_SERVER_NAMES.filter((name) => !container[name]);
+  for (const name of missing) container[name] = defs[name]();
+  return missing;
+}
+
+function setupMcp(target) {
   let detected = false;
   let configured = false;
   const claudeDir = join(target, '.claude');
@@ -195,21 +232,27 @@ function setupPlaywrightMcp(target) {
     detected = true;
     const mcpPath = join(target, '.mcp.json');
     if (!existsSync(mcpPath)) {
-      writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: { playwright: { command: 'npx', args: PLAYWRIGHT_MCP_ARGS } } }, null, 2)}\n`, 'utf8');
-      console.log('- Playwright MCP: created .mcp.json (Claude Code)');
+      const mcpServers = {};
+      mergeMissingServers(mcpServers, MCP_SERVER_DEFS);
+      writeFileSync(mcpPath, `${JSON.stringify({ mcpServers }, null, 2)}\n`, 'utf8');
+      console.log('- MCP: created .mcp.json with playwright + excalidraw (Claude Code)');
       configured = true;
     } else {
       const parsed = readJsonConfig(mcpPath);
       if (!parsed.ok) {
-        console.warn('  ! Playwright MCP: .mcp.json is not valid JSON; not modified. Add manually: "mcpServers": { "playwright": { "command": "npx", "args": ["@playwright/mcp@latest"] } }');
-      } else if (parsed.data.mcpServers && parsed.data.mcpServers.playwright) {
-        console.log('- Playwright MCP: already configured in .mcp.json (Claude Code)');
-        configured = true;
+        console.warn('  ! MCP: .mcp.json is not valid JSON; not modified. Add manually: "mcpServers": { "playwright": { "command": "npx", "args": ["@playwright/mcp@latest"] }, "excalidraw": { "command": "npx", "args": ["-y", "@cmd8/excalidraw-mcp", "--diagram", "ai-frontend-output/ux/ux-map.excalidraw"] } }');
       } else {
-        parsed.data.mcpServers = { ...(parsed.data.mcpServers ?? {}), playwright: { command: 'npx', args: PLAYWRIGHT_MCP_ARGS } };
-        writeFileSync(mcpPath, `${JSON.stringify(parsed.data, null, 2)}\n`, 'utf8');
-        console.log('- Playwright MCP: added to .mcp.json (Claude Code)');
-        configured = true;
+        const mcpServers = parsed.data.mcpServers && typeof parsed.data.mcpServers === 'object' ? parsed.data.mcpServers : {};
+        const missing = mergeMissingServers(mcpServers, MCP_SERVER_DEFS);
+        if (missing.length === 0) {
+          console.log('- MCP: playwright + excalidraw already configured in .mcp.json (Claude Code)');
+          configured = true;
+        } else {
+          parsed.data.mcpServers = mcpServers;
+          writeFileSync(mcpPath, `${JSON.stringify(parsed.data, null, 2)}\n`, 'utf8');
+          console.log(`- MCP: added ${missing.join(' + ')} to .mcp.json (Claude Code)`);
+          configured = true;
+        }
       }
     }
   }
@@ -218,26 +261,30 @@ function setupPlaywrightMcp(target) {
     detected = true;
     const parsed = readJsonConfig(opencodePath);
     if (!parsed.ok) {
-      console.warn('  ! Playwright MCP: opencode.json is not valid JSON; not modified. Add manually: "mcp": { "playwright": { "type": "local", "command": ["npx", "@playwright/mcp@latest"], "enabled": true } }');
-    } else if (parsed.data.mcp && parsed.data.mcp.playwright) {
-      console.log('- Playwright MCP: already configured in opencode.json');
-      configured = true;
+      console.warn('  ! MCP: opencode.json is not valid JSON; not modified. Add manually: "mcp": { "playwright": { "type": "local", "command": ["npx", "@playwright/mcp@latest"], "enabled": true }, "excalidraw": { "type": "local", "command": ["npx", "-y", "@cmd8/excalidraw-mcp", "--diagram", "ai-frontend-output/ux/ux-map.excalidraw"], "enabled": true } }');
     } else {
-      parsed.data.mcp = { ...(parsed.data.mcp ?? {}), playwright: { type: 'local', command: ['npx', ...PLAYWRIGHT_MCP_ARGS], enabled: true } };
-      writeFileSync(opencodePath, `${JSON.stringify(parsed.data, null, 2)}\n`, 'utf8');
-      console.log('- Playwright MCP: added to opencode.json');
-      configured = true;
+      const mcp = parsed.data.mcp && typeof parsed.data.mcp === 'object' ? parsed.data.mcp : {};
+      const missing = mergeMissingServers(mcp, OPENCODE_MCP_DEFS);
+      if (missing.length === 0) {
+        console.log('- MCP: playwright + excalidraw already configured in opencode.json');
+        configured = true;
+      } else {
+        parsed.data.mcp = mcp;
+        writeFileSync(opencodePath, `${JSON.stringify(parsed.data, null, 2)}\n`, 'utf8');
+        console.log(`- MCP: added ${missing.join(' + ')} to opencode.json`);
+        configured = true;
+      }
     }
   }
 
   if (existsSync(opencodeJsoncPath)) {
     detected = true;
-    console.log('- Playwright MCP: opencode.jsonc detected; it is not edited (comments would be lost). Add manually:');
-    console.log('    "mcp": { "playwright": { "type": "local", "command": ["npx", "@playwright/mcp@latest"], "enabled": true } }');
+    console.log('- MCP: opencode.jsonc detected; it is not edited (comments would be lost). Add manually:');
+    console.log('    "mcp": { "playwright": { "type": "local", "command": ["npx", "@playwright/mcp@latest"], "enabled": true }, "excalidraw": { "type": "local", "command": ["npx", "-y", "@cmd8/excalidraw-mcp", "--diagram", "ai-frontend-output/ux/ux-map.excalidraw"], "enabled": true } }');
   }
 
   if (!detected) printMcpInstructions();
-  if (!configured && detected) console.log('  Add the playwright server manually as shown above.');
+  if (!configured && detected) console.log('  Add the missing servers manually as shown above.');
   console.log('- Playwright MCP: install the browser once before the polish phase: npx playwright install chromium');
 }
 
@@ -268,6 +315,18 @@ function findPython() {
 function runLaya(python, kitDir, extraArgs) {
   const script = join(kitDir, 'tools', 'laya_select.py');
   return spawnSync(python.bin, [...python.extra, script, ...extraArgs], { stdio: 'inherit' });
+}
+
+function ensureUxMap(target) {
+  const uxDir = join(target, 'ai-frontend-output', 'ux');
+  mkdirSync(uxDir, { recursive: true });
+  const mapPath = join(uxDir, 'ux-map.excalidraw');
+  if (existsSync(mapPath)) {
+    console.log('- ai-frontend-output/ux/ux-map.excalidraw found: preserved');
+    return;
+  }
+  writeFileSync(mapPath, `${JSON.stringify(DIAGRAM_SCAFFOLD, null, 2)}\n`, 'utf8');
+  console.log('- created ai-frontend-output/ux/ux-map.excalidraw (Excalidraw scaffold; the Excalidraw MCP needs it to exist)');
 }
 
 function main() {
@@ -308,6 +367,8 @@ function main() {
     console.log('- ai-frontend-output/ found: preserved (history and combinations untouched)');
   }
 
+  ensureUxMap(target);
+
   const agentsPath = join(target, 'AGENTS.md');
   if (existsSync(agentsPath)) {
     const current = readFileSync(agentsPath, 'utf8');
@@ -345,9 +406,9 @@ function main() {
   }
 
   if (args.mcp) {
-    setupPlaywrightMcp(target);
+    setupMcp(target);
   } else {
-    console.log('- Playwright MCP skipped (--no-mcp)');
+    console.log('- MCP setup skipped (--no-mcp)');
   }
 
   const python = findPython();
@@ -373,7 +434,8 @@ Done. Next steps for the agent:
      or polish only. Phases are entry points, not a fixed pipeline.
   2. Phase 1 (UX/teoria): node ai-frontend-guide-kit/tools/context.mjs, then follow
      guides/01-UX-FLOWS.md (if the repo already has UX, ask the user: summarize as-is
-     or radical redesign).
+     or radical redesign). Generate and maintain the visual screen map with the ux-map
+     skill and the Excalidraw MCP -> ai-frontend-output/ux/ux-map.excalidraw.
   3. Phase 2 (composition): check saved combinations first with
      node ai-frontend-guide-kit/tools/memory.mjs combo list, follow guides/00-START-HERE.md,
      and record every decision:

@@ -17,19 +17,27 @@ El repositorio SHALL ofrecer un único comando (`node install.mjs`) que copie el
 - **THEN** el instalador continúa, informa del fallo y el kit sigue siendo funcional con `find`/`get`
 
 ### Requirement: Skills installation
-El instalador SHALL instalar por defecto las skills de diseño `pbakaus/impeccable`, `Leonxlnx/taste-skill` y `emilkowalski/skills`, más la skill propia del kit (`urben88/ai-frontend-guide-kit`, skill `ai-frontend-guide`), mediante sus comandos oficiales `npx skills add`, y SHALL permitir omitirlas todas con una bandera explícita.
+El instalador SHALL instalar por defecto las 18 skills del kit en `<destino>/.agents/skills/` (copia limpia en modo copy), las tres skills externas de diseño (`pbakaus/impeccable`, `Leonxlnx/taste-skill`, `emilkowalski/skills`, 16 skills) mediante `npx skills add`, y SHALL permitir omitir las externas con `--no-design-skills` o todas con `--no-skills`. Si una instalación externa falla (sin red o sin npx), el instalador SHALL continuar, informar del fallo y dejar el kit funcional con `find`/`get`.
 
 #### Scenario: Skills por defecto
 - **WHEN** se ejecuta el instalador sin banderas
-- **THEN** se ejecutan los cuatro comandos `npx skills add` y se reporta el resultado de cada uno
+- **THEN** las 18 skills del kit quedan en `.agents/skills/` y se ejecutan los comandos `npx skills add` de las tres skills externas, reportando el resultado de cada una
 
 #### Scenario: Skill propia incluida
 - **WHEN** termina la instalación de skills
 - **THEN** la skill `ai-frontend-guide` está presente para los agentes detectados y enseña el flujo del kit
 
+#### Scenario: Sin red para las skills externas
+- **WHEN** falla un `npx skills add` (sin red o sin npx)
+- **THEN** el instalador continúa, informa del fallo y el kit sigue funcional
+
+#### Scenario: Omitir externas
+- **WHEN** se ejecuta con `--no-design-skills`
+- **THEN** no se ejecuta ningún `npx skills add` y las 18 skills del kit siguen instaladas
+
 #### Scenario: Omitir skills
 - **WHEN** se ejecuta con la bandera de omisión
-- **THEN** no se ejecuta ningún comando `npx skills add`
+- **THEN** no se copia ninguna skill del kit ni se ejecuta `npx skills add`
 
 ### Requirement: Laya step
 El instalador SHALL verificar siempre el entorno de Laya (Python/pip/laya) y SHALL permitir instalarlo en el mismo comando con una bandera explícita; sin la bandera, SHALL imprimir el comando exacto para hacerlo después.
@@ -43,7 +51,7 @@ El instalador SHALL verificar siempre el entorno de Laya (Python/pip/laya) y SHA
 - **THEN** el instalador ejecuta `python -m pip install -U laya` y verifica la importación
 
 ### Requirement: Target safety
-El instalador SHALL copiar únicamente dentro del destino indicado (por defecto el directorio actual), SHALL refrescar la carpeta del kit si ya existe, SHALL eliminar la carpeta legada `ai-frontend-guide/` si está presente (creada por versiones anteriores) y SHALL limitarse a añadir o crear el puntero en `AGENTS.md`, sin modificar ningún otro archivo del proyecto.
+El instalador SHALL copiar únicamente dentro del destino indicado (por defecto el directorio actual), SHALL refrescar la carpeta del kit si ya existe, SHALL eliminar la carpeta legada `ai-frontend-guide/` si está presente (creada por versiones anteriores) y SHALL limitarse a: añadir o crear el puntero en `AGENTS.md`, y fusionar la configuración de Playwright MCP en arneses ya presentes (`<destino>/.claude/`, `<destino>/opencode.json`) sin crear configuraciones de arneses inexistentes ni modificar otras claves. Ningún otro archivo del proyecto SHALL modificarse.
 
 #### Scenario: Kit existente
 - **WHEN** el destino ya contiene `ai-frontend-guide-kit/`
@@ -56,6 +64,10 @@ El instalador SHALL copiar únicamente dentro del destino indicado (por defecto 
 #### Scenario: Puntero en AGENTS.md
 - **WHEN** el proyecto tiene un `AGENTS.md` propio
 - **THEN** el instalador añade o actualiza la sección de referencia al kit sin tocar el resto del contenido; si no existe, lo crea
+
+#### Scenario: Config MCP existente
+- **WHEN** el destino tiene `.claude/` u `opencode.json` con otros servidores MCP
+- **THEN** solo se añade el servidor `playwright` si falta, preservando el resto del archivo
 
 ### Requirement: Repository packaging
 El repositorio SHALL incluir `package.json` con el instalador expuesto como `bin` (para `npx github:<repo>`), un `README.md` raíz con el quickstart y un `.gitignore` que excluya artefactos locales, manteniendo cero dependencias de runtime.
@@ -91,19 +103,19 @@ El instalador SHALL crear `<destino>/ai-frontend-output/` con un `README.md` exp
 - **THEN** incluye registrar decisiones con `memory.mjs` y consultar combinaciones guardadas antes de buscar
 
 ### Requirement: UX skills distribution
-El instalador SHALL instalar las 16 UX skills vendorizadas junto con la skill del kit desde este repositorio (`npx skills add urben88/ai-frontend-guide-kit`, 17 skills), además de las tres skills de diseño existentes, y SHALL permitir omitirlas todas con la bandera ya existente. El empaquetado (`tools/build-kit.mjs`) SHALL verificar la presencia de las skills vendorizadas y de su archivo de origen en el repositorio.
+El instalador SHALL instalar las 18 skills de este repositorio (workflow `ai-frontend-guide`, 16 UX vendorizadas y `frontend-polish`) y, por defecto, las tres skills de diseño externas; SHALL permitir omitir las externas con `--no-design-skills` y todas con `--no-skills`. El empaquetado (`tools/build-kit.mjs`) SHALL verificar la presencia de las skills vendorizadas, de `frontend-polish` y de sus archivos de origen/licencia en el repositorio.
 
 #### Scenario: Instalación completa
 - **WHEN** se ejecuta el instalador sin `--no-skills`
-- **THEN** quedan instaladas las 17 skills del repo (workflow + 16 UX) y las tres de diseño
+- **THEN** quedan instaladas las 18 skills del kit y las tres externas (salvo `--no-design-skills`)
 
 #### Scenario: Empaquetado verificado
 - **WHEN** se ejecuta el empaquetado
-- **THEN** falla si faltan `skills/userflow/SKILL.md`, alguna `flow-*` o `skills/UX-SKILLS-ORIGIN.md`, y reporta coherencia del catálogo
+- **THEN** falla si faltan `skills/userflow/SKILL.md`, alguna `flow-*`, `skills/frontend-polish/SKILL.md` o `skills/UX-SKILLS-ORIGIN.md`, y reporta coherencia del catálogo
 
 #### Scenario: Salida final con UX
 - **WHEN** el instalador imprime los siguientes pasos
-- **THEN** el primer paso es la fase UX (`tools/context.mjs` + guía `01-UX-FLOWS`) antes de la memoria y la selección de componentes
+- **THEN** el primer paso es la fase UX (`tools/context.mjs` + guía `01-UX-FLOWS`) y se mencionan las tres fases y el MCP Playwright
 
 ### Requirement: Package install mode
 El paquete SHALL poder instalarse como dependencia de `package.json` (`npm i -D github:urben88/ai-frontend-guide-kit`; registro npm diferido) y SHALL exponer el bin `ai-frontend-guide-kit`. El setup NO SHALL ejecutarse por `postinstall`: SHALL ser un comando explícito e idempotente (`npx ai-frontend-guide-kit`). El empaquetado SHALL incluir `skills/` en `files` para permitir la instalación de skills sin red.
@@ -117,30 +129,30 @@ El paquete SHALL poder instalarse como dependencia de `package.json` (`npm i -D 
 - **THEN** el tarball incluye `install.mjs`, `ai-frontend-guide-kit/`, `skills/` y `README.md`, y el bin resuelve desde `node_modules`
 
 ### Requirement: Clean skills copy mode
-Por defecto (`--skills-mode copy`) el instalador SHALL copiar las 17 skills del paquete (workflow + 16 UX) a `<destino>/.agents/skills/`, de forma idempotente, SIN crear `skills-lock.json` ni symlinks, y sin tocar skills ajenas al kit. `--skills-mode cli` SHALL conservar el flujo anterior (CLI `skills`, lockfile y enlaces multiagente) y `--no-skills` SHALL seguir omitiendo toda instalación de skills.
+Por defecto (`--skills-mode copy`) el instalador SHALL copiar las 18 skills del paquete (workflow + 16 UX + pulido) a `<destino>/.agents/skills/`, de forma idempotente, SIN crear `skills-lock.json` ni symlinks para esas skills y sin tocar skills ajenas al kit. Además, en modo copy instalará por defecto las tres skills externas mediante `npx skills add` (sus artefactos propios, como lockfile o enlaces, los gestiona el CLI), salvo `--no-design-skills`. `--skills-mode cli` SHALL conservar el flujo anterior (CLI `skills` completo con lockfile y enlaces multiagente) y `--no-skills` SHALL omitir toda instalación de skills.
 
 #### Scenario: Instalación limpia
-- **WHEN** se ejecuta el setup en modo copy sobre un proyecto sin skills previas
-- **THEN** `.agents/skills/` contiene las 17 skills del kit y no existe `skills-lock.json`
+- **WHEN** se ejecuta el setup en modo copy con `--no-design-skills` sobre un proyecto sin skills previas
+- **THEN** `.agents/skills/` contiene las 18 skills del kit y no existe `skills-lock.json`
 
 #### Scenario: Idempotencia y respeto
 - **WHEN** se repite el setup en modo copy sobre un proyecto con skills propias
-- **THEN** las 17 del kit se actualizan y las skills ajenas quedan intactas
+- **THEN** las 18 del kit se actualizan y las skills ajenas quedan intactas
 
 #### Scenario: Modo CLI
 - **WHEN** se ejecuta con `--skills-mode cli`
-- **THEN** se usa `npx skills add` como antes (lockfile y enlaces multiagente incluidos)
+- **THEN** se usa `npx skills add` para las 18 skills del kit y las tres externas (lockfile y enlaces multiagente incluidos)
 
 #### Scenario: Skills externas de diseño
-- **WHEN** se ejecuta con `--design-skills`
-- **THEN** impeccable, taste-skill y emilkowalski se instalan vía `npx skills add` (requiere red)
+- **WHEN** se ejecuta el setup sin `--no-design-skills`
+- **THEN** impeccable, taste-skill y emilkowalski se instalan vía `npx skills add` (requiere red) además de las 18 skills del kit
 
 ### Requirement: Claude Code linking
-Si el proyecto destino contiene un directorio `.claude/`, el instalador SHALL enlazar las 17 skills en `.claude/skills/<nombre>` (junction en Windows, symlink en POSIX) y SHALL recurrir a copia si el sistema no permite enlaces. Si no existe `.claude/`, NO SHALL crear ese directorio.
+Si el proyecto destino contiene un directorio `.claude/`, el instalador SHALL enlazar las 18 skills en `.claude/skills/<nombre>` (junction en Windows, symlink en POSIX) y SHALL recurrir a copia si el sistema no permite enlaces. Si no existe `.claude/`, NO SHALL crear ese directorio.
 
 #### Scenario: Proyecto con Claude Code
 - **WHEN** el destino contiene `.claude/`
-- **THEN** `.claude/skills/` incluye las 17 skills (enlace o copia) y el resto de `.claude/` no se modifica
+- **THEN** `.claude/skills/` incluye las 18 skills (enlace o copia) y el resto de `.claude/` no se modifica
 
 #### Scenario: Proyecto sin Claude Code
 - **WHEN** el destino no contiene `.claude/`
@@ -149,3 +161,30 @@ Si el proyecto destino contiene un directorio `.claude/`, el instalador SHALL en
 #### Scenario: Enlaces no permitidos
 - **WHEN** la creación del enlace falla (permisos del sistema)
 - **THEN** la skill se copia como fallback y el instalador informa del modo usado
+
+### Requirement: Playwright MCP setup
+El instalador SHALL configurar el servidor Playwright MCP (`npx @playwright/mcp@latest`) en los arneses ya presentes en el destino: si existe `<destino>/.claude/`, SHALL fusionar `mcpServers.playwright` en `<destino>/.mcp.json` (creándolo si falta); si existe `<destino>/opencode.json`, SHALL fusionar `mcp.playwright` (transporte local, habilitado) preservando el resto del archivo. NO SHALL crear configuraciones de arneses inexistentes, NO SHALL modificar otras claves y SHALL ser idempotente. En arneses sin archivo de proyecto SHALL imprimir el comando o snippet exacto. Si el archivo existe pero no es JSON válido, SHALL avisar y no modificarlo. `--no-mcp` SHALL omitir el paso. El instalador SHALL imprimir `npx playwright install chromium` como paso previo a la fase de pulimiento.
+
+#### Scenario: Claude Code detectado
+- **WHEN** el destino contiene `.claude/` y no tiene `.mcp.json`
+- **THEN** el instalador crea `.mcp.json` con `mcpServers.playwright` = `npx @playwright/mcp@latest` y no toca ningún otro archivo de `.claude/`
+
+#### Scenario: OpenCode detectado
+- **WHEN** el destino contiene `opencode.json`
+- **THEN** el instalador añade `mcp.playwright` (local, habilitado) preservando el resto de claves y servidores
+
+#### Scenario: Arnés sin config de proyecto
+- **WHEN** el destino no contiene `.claude/` ni `opencode.json`
+- **THEN** el instalador imprime el comando exacto para configurar Playwright MCP y no escribe ninguna configuración
+
+#### Scenario: Idempotencia
+- **WHEN** `playwright` ya está presente en la configuración detectada
+- **THEN** el instalador informa que ya está configurado y no reescribe el archivo
+
+#### Scenario: JSON inválido
+- **WHEN** el archivo de configuración existe pero no es JSON válido
+- **THEN** el instalador avisa, no modifica el archivo y continúa
+
+#### Scenario: Omitir MCP
+- **WHEN** se ejecuta con `--no-mcp`
+- **THEN** no se detecta ni se escribe ninguna configuración MCP

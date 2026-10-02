@@ -24,11 +24,11 @@ El kit SHALL incluir `AGENTS.md` como capa de conciencia (≤ ~1 página) que de
 - **THEN** sabe que existe un catálogo con N fuentes y que debe consultarlo antes de crear componentes desde cero
 
 ### Requirement: Guided workflow steps
-El kit SHALL incluir guías breves (≤ ~120 líneas cada una) numeradas que conduzcan el flujo completo: fase UX (contexto, flujos probados con `userflow`, UX-SPEC y modos resumir/rediseñar), anclaje de negocio, tokens de diseño, inventario de componentes, búsqueda en catálogo, decisión reutilizar/adaptar/crear, instalación, adaptación, filosofía y verificación.
+El kit SHALL incluir guías breves (≤ ~120 líneas cada una) organizadas en tres fases: **Teoría y UX** (contexto, flujos probados con `userflow`, `UX-SPEC`, tokens), **Composición** (inventario, búsqueda en catálogo, decisión reutilizar/adaptar/crear, instalación, adaptación e interacciones) y **Pulimiento total** (auditorías externas, bucle Playwright MCP y regresión). El router `00-START-HERE.md` SHALL presentar las tres fases como puntos de entrada con su camino mínimo por casuística, y las guías individuales SHALL seguir siendo breves y autocontenidas.
 
 #### Scenario: Flujo completo
-- **WHEN** el agente sigue las guías en orden
-- **THEN** produce primero la UX-SPEC (pantallas, flujos y estados), luego el inventario de componentes, selecciona candidatos del catálogo, los instala o adapta y verifica con Playwright
+- **WHEN** el agente sigue las fases en orden para un proyecto nuevo
+- **THEN** produce primero la UX-SPEC (pantallas, flujos y estados), luego el inventario de componentes, selecciona candidatos del catálogo, los instala o adapta y cierra con el pulimiento y la verificación
 
 #### Scenario: Sin Figma
 - **WHEN** el proyecto no dispone de Figma MCP
@@ -46,11 +46,15 @@ El flujo SHALL exigir consultar el catálogo antes de crear cualquier componente
 - **THEN** el agente crea el componente siguiendo la filosofía del kit y documenta por qué no reutilizó
 
 ### Requirement: Design philosophy distillation
-El kit SHALL incluir una guía de filosofía que destile las reglas aplicables de `impeccable` (anti-genérico, auditoría de acabado), `taste-skill` (jerarquía, densidad, proporciones) y `emilkowalski` (springs, micro-feedback, `whileTap`), más las reglas de combinación (p. ej. máximo 1–2 efectos de alto impacto por vista).
+El kit SHALL incluir una guía de filosofía que destile las reglas aplicables de `impeccable` (anti-genérico, auditoría de acabado), `taste-skill` (jerarquía, densidad, proporciones) y `emilkowalski` (springs, micro-feedback, `whileTap`), más las reglas de combinación (p. ej. máximo 1–2 efectos de alto impacto por vista). Cuando las skills externas estén instaladas, el flujo SHALL cargarlas en su fase (emilkowalski al componer interacciones; impeccable/taste al pulir) y SHALL usar la guía destilada como fallback.
 
 #### Scenario: Reglas aplicables sin skills instaladas
 - **WHEN** el proyecto destino no tiene las skills instaladas
 - **THEN** el agente puede aplicar las reglas destiladas de la guía de filosofía
+
+#### Scenario: Skills externas disponibles
+- **WHEN** las skills externas están instaladas
+- **THEN** el flujo las invoca en la fase correspondiente (composición o pulimiento) en lugar de depender solo de las reglas destiladas
 
 ### Requirement: Token-efficient query tools
 El kit SHALL incluir herramientas locales (`tools/find.*`, `tools/get.*`) que consulten el catálogo con salidas mínimas: `find` filtra por categoría/stack/licencia/free y devuelve IDs con resúmenes cortos; `get` devuelve la ficha de una entrada con su comando de instalación. Las guías NO SHALL requerir cargar todos los JSON de fuentes.
@@ -78,7 +82,7 @@ Los datos y la semántica de consulta del kit (índice, fichas, `find`/`get`) SH
 - **THEN** el servidor expone las mismas consultas (list/find/get) leyendo los mismos archivos del catálogo
 
 ### Requirement: Generic agent skill
-El repositorio SHALL incluir una skill genérica en formato agent-skills (`skills/ai-frontend-guide/SKILL.md`, con frontmatter `name` y `description`) que enseñe a usar la herramienta: principio reuse-first, orden de las guías 00–08, herramientas `find`/`get`, consentimiento previo de Laya (`--confirmed`) y reglas de licencia. La skill SHALL ser instalable con `npx skills add <repo> --skill ai-frontend-guide` y NO SHALL duplicar el contenido completo del kit: SHALL apuntar a `AGENTS.md` y a las guías.
+El repositorio SHALL incluir una skill genérica en formato agent-skills (`skills/ai-frontend-guide/SKILL.md`, con frontmatter `name` y `description`) que enseñe a usar la herramienta: principio reuse-first, intake y tres fases on-demand, herramientas `find`/`get`, memoria, consentimiento previo de Laya (`--confirmed`), reglas de licencia y uso de las skills externas y Playwright MCP en el pulimiento. La skill SHALL ser instalable con `npx skills add <repo> --skill ai-frontend-guide` y NO SHALL duplicar el contenido completo del kit: SHALL apuntar a `AGENTS.md` y a las guías.
 
 #### Scenario: Instalación de la skill
 - **WHEN** un agente o usuario ejecuta `npx skills add urben88/ai-frontend-guide-kit --skill ai-frontend-guide`
@@ -86,7 +90,7 @@ El repositorio SHALL incluir una skill genérica en formato agent-skills (`skill
 
 #### Scenario: Uso desde la skill
 - **WHEN** un agente lee `SKILL.md`
-- **THEN** sabe que debe leer `ai-frontend-guide-kit/AGENTS.md`, seguir las guías en orden y no ejecutar Laya sin `--confirmed`
+- **THEN** sabe que debe leer `ai-frontend-guide-kit/AGENTS.md`, preguntar el intake antes de enrutar, seguir las tres fases y no ejecutar Laya sin `--confirmed`
 
 #### Scenario: Sin duplicación
 - **WHEN** el kit evoluciona
@@ -104,7 +108,7 @@ La integración del kit SHALL documentar el sistema de memoria en la capa de con
 - **THEN** la guía le indica comprobar `memory.mjs combo list` antes de consultar el catálogo
 
 ### Requirement: UX phase integration
-La capa de conciencia (`AGENTS.md`) y la skill genérica (`SKILL.md`) SHALL documentar la fase UX como primer paso del flujo, los cuatro caminos (sin UX, resumen, rediseño, auditoría), el comando de contexto (`tools/context.mjs`) y la regla de no rediseñar sin elección explícita del usuario. El mapa de la guía 00 SHALL reflejar el reemplazo de `01-ANCHOR` por `01-UX-FLOWS`.
+La capa de conciencia (`AGENTS.md`) y la skill genérica (`SKILL.md`) SHALL documentar la fase UX como primera fase del flujo, los cuatro caminos (sin UX, resumen, rediseño, auditoría), el comando de contexto (`tools/context.mjs`) y la regla de no rediseñar sin elección explícita del usuario. El mapa de la guía 00 SHALL reflejar el router de tres fases con la fase UX como primera fase y el intake previo.
 
 #### Scenario: Agente entra al repo con UX
 - **WHEN** un agente lee `AGENTS.md` o `SKILL.md` en un proyecto con UX existente
@@ -112,4 +116,45 @@ La capa de conciencia (`AGENTS.md`) y la skill genérica (`SKILL.md`) SHALL docu
 
 #### Scenario: Mapa actualizado
 - **WHEN** un agente sigue la guía `00-START-HERE.md`
-- **THEN** encuentra la fase UX como paso 1 y los cuatro caminos con sus salidas
+- **THEN** encuentra el intake, las tres fases como puntos de entrada y los cuatro caminos de la fase UX con sus salidas
+
+### Requirement: Three-phase on-demand workflow
+El kit SHALL organizar el flujo en tres fases (Teoría y UX, Composición, Pulimiento total) que actúan como puntos de entrada independientes. Antes de enrutar, el agente SHALL preguntar al usuario qué busca y SHALL declarar la ruta elegida. Las fases NO SHALL ser obligatoriamente secuenciales y el agente SHALL poder entrar directamente por la fase solicitada (p. ej. solo pulir o solo UX). El kit SHALL documentar las casuísticas con su camino mínimo: proyecto nuevo, cambio pequeño/iteración, componente personalizado, solo pulido y solo UX/rediseño.
+
+#### Scenario: Intake de proyecto nuevo
+- **WHEN** el usuario pide un frontend nuevo sin más contexto
+- **THEN** el agente pregunta el alcance y propone la ruta Teoría → Composición → Pulimiento antes de tocar código
+
+#### Scenario: Entrada directa
+- **WHEN** el usuario pide solo pulir o solo rediseñar la UX
+- **THEN** el agente entra directamente por la fase correspondiente sin recorrer las anteriores
+
+#### Scenario: Cambio pequeño
+- **WHEN** el usuario pide un cambio puntual en una UI existente
+- **THEN** el flujo ofrece el camino de iteración sin rehacer la fase UX
+
+### Requirement: Incremental iteration path
+El kit SHALL incluir una guía corta de iteración (`09-ITERATE.md`) para cambios pequeños y añadidos personalizados con el loop mínimo: localizar el bloque en `UX-SPEC`/código, consultar combinaciones y catálogo, decidir reuse/adapt/build, aplicar la filosofía y pulir con la skill de pulimiento, registrando la decisión en memoria. El loop SHALL poder ejecutarse sin repetir las guías completas.
+
+#### Scenario: Cambio pequeño
+- **WHEN** el usuario pide ajustar un bloque existente
+- **THEN** el agente localiza el bloque, consulta memoria/catálogo, aplica el cambio y lo registra sin rehacer la fase UX
+
+#### Scenario: Componente personalizado
+- **WHEN** el usuario pide algo nuevo que no está en el catálogo
+- **THEN** el agente busca primero en combinaciones y catálogo, construye custom siguiendo la guía de filosofía y registra la justificación
+
+### Requirement: Total polish phase with Playwright MCP
+El kit SHALL incluir una skill de pulimiento (`skills/frontend-polish/SKILL.md`) que: (a) use las skills externas instaladas (impeccable audit/polish, taste-skill, emilkowalski `review-animations`/`improve-animations`) cuando estén disponibles; (b) ejecute un bucle visual con Playwright MCP (navegar, snapshot de accesibilidad, capturas de estados hover/focus/loading/empty/error, consola sin errores, teclado, reduced-motion y responsive) corrigiendo y repitiendo; (c) cierre con la regresión `@playwright/test` de la guía 08; y (d) funcione con fallback (checklist de 07/08) cuando falten herramientas, sin bloquear el flujo. El pulimiento SHALL respetar el presupuesto de 1–2 efectos de alto impacto por vista.
+
+#### Scenario: Pulido con herramientas completas
+- **WHEN** el usuario pide pulir una pantalla y las skills externas y Playwright MCP están disponibles
+- **THEN** el agente ejecuta las auditorías, recorre los estados con Playwright MCP, corrige los hallazgos y cierra con la regresión y el checklist
+
+#### Scenario: Fallback sin herramientas
+- **WHEN** Playwright MCP o las skills externas no están disponibles
+- **THEN** el agente aplica el checklist destilado de 07/08 y deja constancia de las herramientas ausentes
+
+#### Scenario: Presupuesto de efectos
+- **WHEN** el pulido propone añadir animaciones o efectos
+- **THEN** el resultado mantiene máximo 1–2 efectos de alto impacto por vista

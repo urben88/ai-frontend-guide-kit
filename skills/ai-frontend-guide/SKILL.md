@@ -15,7 +15,7 @@ When this kit is installed, the project contains:
 - `ai-frontend-guide-kit/guides/00…09` — the guided workflow (router + three phases + iteration).
 - `ai-frontend-guide-kit/catalog/` — 2,470 reusable entries from 16 verified sources (licenses, install commands, links), plus a light index.
 - `ai-frontend-guide-kit/tools/` — `find.mjs`, `get.mjs` and `laya_select.py`.
-- Sibling skills (when installed): `frontend-polish` (total polish phase) and the three external design skills (`impeccable`, `design-taste-frontend`, `emilkowalski`).
+- Sibling skills (when installed): `frontend-polish` (total polish phase), `ux-map` (visual screen map with the Excalidraw MCP) and the three external design skills (`impeccable`, `design-taste-frontend`, `emilkowalski`).
 
 If the folder is missing, install it with:
 
@@ -35,7 +35,7 @@ Ask the user what they want before touching code and declare the route: new fron
 | Phase | Guide | Output |
 |---|---|---|
 | 0 · Intake | `00-START-HERE.md` | route declared + phase map |
-| 1 · UX & theory | `01-UX-FLOWS.md`, `02-TOKENS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` + `DESIGN.md` |
+| 1 · UX & theory | `01-UX-FLOWS.md`, `02-TOKENS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw` + `DESIGN.md` |
 | 2 · Composition | `03-INVENTORY.md` … `06-ADAPT.md` | inventory, shortlist, reuse/adapt/build + install, adapted components |
 | 3 · Total polish | `frontend-polish` skill + `07-PHILOSOPHY.md`, `08-VERIFY.md` | audits + Playwright MCP loop + E2E/visual checks green |
 | Iterate | `09-ITERATE.md` | small changes and custom additions |
@@ -50,9 +50,11 @@ node ai-frontend-guide-kit/tools/context.mjs   # → ai-frontend-output/ux/REPO-
 
 Then follow `ai-frontend-guide-kit/guides/01-UX-FLOWS.md`:
 
-- No UX in the repo → design from scratch with `userflow` (load 1–4 flow skills, never from memory) → `UX-SPEC.md` + `flow-report.html`.
+- No UX in the repo → design from scratch with `userflow` (load 1–4 flow skills, never from memory) → `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw`.
 - UX exists → **ask the user once**: Summarize (as-is + audit, no changes) or Radical redesign (baseline → ideal UX → diff). Never redesign silently; redesign is UX-only (`PRODUCT.md` stays).
 - Single surface → `/userflow audit …` (findings only).
+
+The visual screen map is part of the phase: use the sibling `ux-map` skill with the Excalidraw MCP (one node per screen, one labeled arrow per navigating action). Redesign snapshots `ux-map-baseline.excalidraw` before updating `ux-map.excalidraw`; the map is maintained incrementally, never regenerated blind. If the MCP is unavailable, use the skill's manual fallback and say so.
 
 **BMAD / spec-driven repos:** `context.mjs` detects them (`Framework:` in `REPO-CONTEXT.md`). Read `ai-frontend-guide-kit/guides/ADAPTERS.md`: with a BMAD PRD use it as the business anchor (no duplicate `PRODUCT.md`) and cite stories with `--ref "story:<id>"`; with OpenSpec, specs are the behavioral source of truth and decisions cite `--ref "spec:<capability>"`.
 

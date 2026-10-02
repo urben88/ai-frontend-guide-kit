@@ -26,9 +26,9 @@ If `PRODUCT.md` does not exist, create it (this is the business anchor and the c
 
 | Context | Path | You produce |
 |---|---|---|
-| `ux_present: false` | **A · UX from scratch** | ideal `UX-SPEC.md` + `flow-report.html` |
-| `ux_present: true` + user picks Summarize | **B · As-is summary** | current-state `UX-SPEC.md` + audit, **no changes** |
-| `ux_present: true` + user picks Redesign | **C · Radical redesign** | `UX-BASELINE.md` → ideal `UX-SPEC.md` + `UX-DIFF.md` |
+| `ux_present: false` | **A · UX from scratch** | ideal `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw` |
+| `ux_present: true` + user picks Summarize | **B · As-is summary** | current-state `UX-SPEC.md` + audit + as-is `ux-map.excalidraw`, **no changes** |
+| `ux_present: true` + user picks Redesign | **C · Radical redesign** | `UX-BASELINE.md` → ideal `UX-SPEC.md` + `UX-DIFF.md`; `ux-map-baseline.excalidraw` → updated `ux-map.excalidraw` |
 | A single surface to review | **D · Spot audit** | findings report, **no changes** |
 
 **With `ux_present: true` you MUST ask the user once**: *"There is existing UX. Do you want a summary of what exists (as-is) or a radical redesign?"* Never redesign silently. Path C is UX-only: objective, audience and conversion in `PRODUCT.md` stay untouched; product-level ideas go to `OPEN-QUESTIONS.md`.
@@ -55,6 +55,15 @@ Required content (this is what the UI phase consumes):
 - Path C adds `UX-DIFF.md`: added / removed / restructured screens and flows vs baseline.
 - Path B adds no proposals — findings only.
 
+## Step 5 — Draw the visual screen map (`ux-map`)
+
+Generate the visual map of screens and navigation with the `ux-map` skill (load it; it carries the recipe and the Excalidraw MCP protocol):
+
+- `ai-frontend-output/ux/ux-map.excalidraw`: one node per screen (name + CTA + key blocks), one labeled arrow per navigating button/action, area colors and a start node.
+- Screen labels MUST match `UX-SPEC.md` exactly (they are the key for edges and updates).
+- **Path C:** before updating the map, snapshot the current one as `ux-map-baseline.excalidraw`.
+- If the Excalidraw MCP is unavailable, use the skill's manual fallback and state the limitation — never block the phase on the map.
+
 ## Gate to the UI phase
 
 Do **not** continue to `02-TOKENS.md` until:
@@ -62,7 +71,8 @@ Do **not** continue to `02-TOKENS.md` until:
 - [ ] `PRODUCT.md` exists (product anchored).
 - [ ] `UX-SPEC.md` lists screens with their empty/loading/error states and numbered flows.
 - [ ] `flow-report.html` is in `ai-frontend-output/ux/`.
+- [ ] `ux-map.excalidraw` exists in `ai-frontend-output/ux/` and matches the screens/flows of `UX-SPEC.md`.
 - [ ] Anti-patterns were checked against the loaded skills.
-- [ ] Path C: `UX-BASELINE.md` + `UX-DIFF.md` exist; `PRODUCT.md` unchanged.
+- [ ] Path C: `UX-BASELINE.md` + `UX-DIFF.md` + `ux-map-baseline.excalidraw` exist; `PRODUCT.md` unchanged.
 
 The UI phase (`02`…`08`) uses `UX-SPEC.md` as the source of truth: inventory rows and `memory.mjs --screen/--block` come from it.

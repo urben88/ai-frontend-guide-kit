@@ -8,8 +8,9 @@ For requests that are **not** a new build: adjusting a block, adding a custom co
 2. **Reuse first.** Check saved combinations (`node ai-frontend-guide-kit/tools/memory.mjs combo list`) and query the catalog (`find`/`get`). Facts — license, dependencies, install command — always come from `get`.
 3. **Decide.** reuse (install as-is) / adapt (tokens, props) / build (only if nothing fits or the license blocks you; follow `07-PHILOSOPHY.md`).
 4. **Apply.** Make the smallest change that satisfies the request; keep the design tokens and the interaction physics (springs, transform/opacity only, 1–2 high-impact effects per view).
-5. **Polish.** Run the `frontend-polish` skill on the touched screen/block. Fallback: `07-PHILOSOPHY.md` checklist + the `@playwright/test` regression of `08-VERIFY.md`.
-6. **Record.** Register the decision right away:
+5. **Map.** If the change adds, removes or renames screens or transitions, update `ai-frontend-output/ux/ux-map.excalidraw` with the `ux-map` skill (incremental; labels = `UX-SPEC.md` names).
+6. **Polish.** Run the `frontend-polish` skill on the touched screen/block. Fallback: `07-PHILOSOPHY.md` checklist + the `@playwright/test` regression of `08-VERIFY.md`.
+7. **Record.** Register the decision right away:
 
 ```bash
 node ai-frontend-guide-kit/tools/memory.mjs add --screen <screen> --block <block> --need "..." \

@@ -13,7 +13,7 @@ Self-contained guided kit for building frontend UX/UI with a reuse-first workflo
 Before creating UI components, follow `ai-frontend-guide-kit/AGENTS.md` (reuse-first workflow).
 ```
 
-Prefer the installer (`npm i -D github:urben88/ai-frontend-guide-kit` + `npx ai-frontend-guide-kit`): it copies this folder, creates `ai-frontend-output/`, patches `AGENTS.md`, installs the 18 skills of the repo cleanly into `.agents/skills/` (plus `.claude/skills/` when a `.claude/` folder exists), installs the 3 external design skills via their CLI (`--no-design-skills` to skip) and configures Playwright MCP for detected harnesses (`--no-mcp` to skip).
+Prefer the installer (`npm i -D github:urben88/ai-frontend-guide-kit` + `npx ai-frontend-guide-kit`): it copies this folder, creates `ai-frontend-output/`, patches `AGENTS.md`, installs the 19 skills of the repo cleanly into `.agents/skills/` (plus `.claude/skills/` when a `.claude/` folder exists), installs the 3 external design skills via their CLI (`--no-design-skills` to skip) and configures the Playwright + Excalidraw MCP servers for detected harnesses (`--no-mcp` to skip).
 
 Requirements: none for reading the guides or catalog. The query tools need Node.js ≥ 18; no npm packages are required.
 
@@ -44,10 +44,10 @@ ai-frontend-guide-kit/
 The kit ships **16 vendored UX skills** (MIT, from `jpoindexter/ux-flow-skills`): the `userflow` dispatcher plus 15 `flow-*` skills (auth, onboarding, checkout, paywall, settings, navigation, app shell, tables, search, forms, errors, empty states, permissions, sharing, AI chat). Guide `01-UX-FLOWS` runs before any UI work:
 
 - `node tools/context.mjs` → `REPO-CONTEXT.md` (includes whether the repo already has UX).
-- **No UX** → design from scratch with `userflow` → `UX-SPEC.md` + `flow-report.html`.
+- **No UX** → design from scratch with `userflow` → `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw`.
 - **UX exists** → ask the user: *Summarize* (as-is + audit) or *Radical redesign* (baseline + ideal UX + diff, UX only). Never redesign silently.
 
-The UI inventory and `memory.mjs --screen/--block` derive from `UX-SPEC.md`.
+The `ux-map` skill draws the living screen map (one node per screen with its CTA/key blocks, one labeled arrow per navigating action) as `ux-map.excalidraw` through the Excalidraw MCP; it updates incrementally and snapshots `ux-map-baseline.excalidraw` before a redesign. The UI inventory and `memory.mjs --screen/--block` derive from `UX-SPEC.md`.
 
 ## Total polish phase (`frontend-polish` + Playwright MCP)
 

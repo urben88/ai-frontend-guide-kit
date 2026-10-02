@@ -62,6 +62,7 @@ const REQUIRED_REPO_FILES = [
   'skills/UX-SKILLS-LICENSE',
   'skills/ai-frontend-guide/SKILL.md',
   'skills/frontend-polish/SKILL.md',
+  'skills/ux-map/SKILL.md',
   'skills/userflow/SKILL.md',
   'skills/userflow/report-template.html',
   ...FLOW_SKILLS.map((name) => `skills/${name}/SKILL.md`),
@@ -118,7 +119,7 @@ function main() {
   const totalBytes = dirSize(KIT_DIR);
   console.log(`kit: ${REQUIRED_KIT_FILES.length} required assets present, ${sourceFiles.length} source files synced`);
   console.log(`kit: ${FLOW_SKILLS.length + 1} UX skills vendored (userflow + ${FLOW_SKILLS.length} flow-*) with license + origin pin`);
-  console.log('kit: 18 repo skills verified (ai-frontend-guide + frontend-polish + 16 UX)');
+  console.log('kit: 19 repo skills verified (ai-frontend-guide + frontend-polish + ux-map + 16 UX)');
   console.log(`kit: catalog coherent with manifest: ${coherent ? 'yes' : 'NO'}`);
   console.log(`kit: total size ${(totalBytes / 1024 / 1024).toFixed(2)} MB at ${relative(ROOT, KIT_DIR)}`);
   if (!coherent) process.exit(1);
