@@ -17,7 +17,7 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 
 | Phase | What happens | You get |
 |---|---|---|
-| **1 · 🧠 UX & theory** | Proven flows (`userflow` + `flow-*`) and design tokens | `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `DESIGN.md` + theme |
+| **1 · 🧠 UX & theory** | Experience direction (`experience/` + Laya for questions/direction) then proven flows (`userflow` + `flow-*`) and design tokens | `EXPERIENCE-BRIEF.md` · `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `DESIGN.md` + theme |
 | **2 · 🧩 Composition** | Inventory → catalog search → reuse/adapt/build decision → install | Components adapted to your tokens |
 | **3 · ✨ Total polish** | External audits (`impeccable`, taste-skill, emilkowalski) + Playwright MCP loop + `@playwright/test` regression | A screen ready to ship |
 
@@ -92,26 +92,31 @@ It lives outside the kit so refreshes never touch it; share combinations across 
 
 ## 🔒 Laya (local decision engine, optional)
 
-Laya is a fast, non-autoregressive decision model with calibrated probabilities. Here it ranks component candidates by semantic fit; licenses and install commands always come from the catalog.
+Laya is a fast, non-autoregressive decision model with calibrated probabilities. Here it ranks the **next adaptive question**, the **experience direction** (archetypes/philosophies/styles) and **component candidates**; licenses, install commands and manifest fields always come from the catalog/manifest.
 
 ```bash
 python ai-frontend-guide-kit/tools/laya_select.py --check       # status (exit 0 = ready)
 python ai-frontend-guide-kit/tools/laya_select.py --install     # pip install -U laya (first run downloads checkpoints)
 python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # preview the payload, no model
-# after asking the user for consent:
+# after asking the user once per session:
+python ai-frontend-guide-kit/tools/laya_select.py --dataset experience --kind question \
+  --task next-question --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
+python ai-frontend-guide-kit/tools/laya_select.py --dataset experience --kind archetype \
+  --task direction --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 python ai-frontend-guide-kit/tools/laya_select.py --need "pricing table with monthly/anual toggle" --category pricing --commercial --confirmed
 ```
 
-⚠️ The agent **must ask before using it**: ranking requires `--confirmed` as proof of consent (without it the script exits with code 3 and loads nothing). Everything runs locally — no server, no external APIs beyond the one-time Hugging Face checkpoint download. Without Python/Laya the kit still works via `find.mjs` + `get.mjs`.
+⚠️ The agent **must ask before using it**: consent is once per project/session (recorded in `EXPERIENCE-BRIEF.md`) and `--confirmed` is required per call as proof (without it the script exits with code 3 and loads nothing). Everything runs locally — no server, no external APIs beyond the one-time Hugging Face checkpoint download. Without Python/Laya the kit still works via the question tree and `find.mjs` + `get.mjs`.
 
 ## 📂 Repository layout
 
 ```
 ├── ai-frontend-guide-kit/        # 📦 the distributable kit (copy this)
 │   ├── AGENTS.md · README.md · VERIFICATION.md
-│   ├── guides/00..09         # reuse-first UX/UI workflow (00 = router, 01 = UX flows, 09 = iteration)
+│   ├── guides/00..10         # experience direction + reuse-first UX/UI workflow (00 = router, 01 = direction, 02 = flows, 10 = iteration)
+│   ├── experience/           # archetypes, philosophies, styles, question bank, reference cards + experience-manifest.json
 │   ├── catalog/              # index + taxonomy + install-guides + 16 sources
-│   └── tools/                # context · find · get · memory · laya_select
+│   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp
 ├── skills/                   # ai-frontend-guide + frontend-polish + 16 vendored UX flow skills (MIT)
 ├── manifest/                 # catalog source of truth (generated)
 ├── tools/                    # extraction/refresh/build/validate pipeline

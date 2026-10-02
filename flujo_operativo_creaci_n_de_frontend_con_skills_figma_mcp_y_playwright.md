@@ -96,16 +96,16 @@ Configura tu archivo de configuración de MCP (`claude_desktop_config.json` o la
 
 Con los tokens definidos, copia la carpeta `ai-frontend-guide-kit/` a la raíz del proyecto y sigue sus guías en orden:
 
-1. **Inventario (`03-INVENTORY.md`):** cada pantalla → bloques → categorías de la taxonomía (sin elegir librerías todavía).
-2. **Búsqueda (`04-FIND.md`):** 
+1. **Inventario (`04-INVENTORY.md`):** cada pantalla → bloques → categorías de la taxonomía (sin elegir librerías todavía).
+2. **Búsqueda (`05-FIND.md`):** 
    ```bash
    node ai-frontend-guide-kit/tools/find.mjs --category hero --stack react --commercial
    node ai-frontend-guide-kit/tools/get.mjs <entry-id>
    ```
    `find` devuelve candidatos cortos; `get` da la ficha con licencia, dependencias y comando exacto.
-3. **Decisión (`05-REUSE.md`):** reutilizar → adaptar → crear, registrando la justificación. Queda prohibido crear desde cero sin haber consultado el catálogo.
+3. **Decisión (`06-REUSE.md`):** reutilizar → adaptar → crear, registrando la justificación. Queda prohibido crear desde cero sin haber consultado el catálogo.
 4. **Instalación:** usar el `install_command` de la ficha (`npx shadcn@latest add …`, `npm i …`, o copy-paste según la fuente). Respetar los límites gratuitos (p. ej. 21st.dev: 2 copias/día) y las licencias (`license_type` / `commercial_use`).
-5. **Adaptación (`06-ADAPT.md`):** tokens, props y springs; sin reescribir los internals del componente.
+5. **Adaptación (`07-ADAPT.md`):** tokens, props y springs; sin reescribir los internals del componente.
 
 Regla de combinación: máximo 1–2 efectos de alto impacto por vista; el resto, componentes funcionales estables. La verificación visual de estas piezas ocurre en la Fase 5 (Playwright).
 

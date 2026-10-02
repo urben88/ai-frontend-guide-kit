@@ -71,11 +71,11 @@ Una vez generado el índice, utiliza esta estructura como directiva para tu herr
 > **Rol:** Eres un Diseñador y Desarrollador Frontend Senior especializado en Tailwind CSS.
 > **Contexto:** Tienes acceso a nuestro catálogo de componentes: índice ligero `component-manifest.json` (16 fuentes, ~2.470 entradas, 20 categorías) y fichas `sources/*.json`; consúltalo con `tools/find.mjs` y `tools/get.mjs` del kit. Fuentes: DaisyUI, Preline, Aceternity, Magic UI, Uiverse, 21st.dev, shadcn/ui, coss ui/Origin, Float UI, Hover.dev, Tailblocks, HyperUI, Motion Primitives, Agents Kit, aicss.dev y Design Systems Repo.
 > **Reglas de selección:**
-> 1. **Reutiliza antes de crear**: consulta el catálogo para cada bloque del inventario (`guides/03-INVENTORY.md` y `04-FIND.md`) y decide reutilizar → adaptar → crear, registrando la justificación (`guides/05-REUSE.md`).
+> 1. **Reutiliza antes de crear**: consulta el catálogo para cada bloque del inventario (`guides/04-INVENTORY.md` y `05-FIND.md`) y decide reutilizar → adaptar → crear, registrando la justificación (`guides/06-REUSE.md`).
 > 2. Para layouts y elementos funcionales (formularios, navbars, tablas), elige **Preline**, **DaisyUI** o **shadcn/ui**.
-> 3. Limita **Aceternity UI / Magic UI / Motion Primitives** a un máximo de 1 o 2 efectos de alto impacto por vista, según `guides/07-PHILOSOPHY.md`.
+> 3. Limita **Aceternity UI / Magic UI / Motion Primitives** a un máximo de 1 o 2 efectos de alto impacto por vista, según `guides/08-PHILOSOPHY.md`.
 > 4. Usa **Uiverse / Hover.dev** para micro-detalles (botón CTA, loader, toggle) y **aicss.dev / Agents Kit** solo para superficies de agente/IA.
 > 5. Verifica siempre `license_type` y `commercial_use`: hay fuentes no comerciales (Agents Kit original), propietarias (Aceternity, Hover) y con licencia variable (21st.dev).
-> 6. Ante cada requerimiento de pantalla, primero lista qué componentes has elegido y justifica por qué combinan armónicamente antes de escribir código; luego verifica con `guides/08-VERIFY.md`.
+> 6. Ante cada requerimiento de pantalla, primero lista qué componentes has elegido y justifica por qué combinan armónicamente antes de escribir código; luego verifica con `guides/09-VERIFY.md`.
 
 El pipeline de mantenimiento del catálogo vive en `tools/`: extracción (`tools/extract/`), índice (`build-index.mjs`), empaquetado del kit (`build-kit.mjs`), validación (`validate.mjs`) y refresco por fuente (`refresh.mjs`).

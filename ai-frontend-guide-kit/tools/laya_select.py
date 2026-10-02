@@ -1,19 +1,34 @@
 #!/usr/bin/env python3
 """
-laya_select — rank component-manifest candidates with the local Laya decision engine.
+laya_select — rank candidates with the local Laya decision engine.
+
+Datasets:
+  components (default): catalog/sources/*.json (reusable UI entries).
+  experience:            experience/experience-manifest.json (archetypes, philosophies,
+                         styles, page-types, navigation models and questions).
+
+Tasks:
+  fit (default): is this candidate a good fit for the need?
+  direction:     which archetype/philosophy/style best fits the project state?
+  next-question: which eligible question should be asked next?
+  options:       which option of a question best matches the user's words (--text <id|name>)?
 
 Runs entirely on this machine (no server, no third-party APIs beyond the
 one-time Hugging Face checkpoint download). Facts (license, install command,
-links) always come from the catalog; Laya only scores semantic fit.
+links, manifest fields) always come from the catalog/manifest; Laya only
+scores semantic fit.
 
 Usage:
   python tools/laya_select.py --check                 # environment status (exit 0 = ready, 1 = missing)
   python tools/laya_select.py --install               # python -m pip install -U laya, then verify
   python tools/laya_select.py --need "..." [filters] --confirmed  # rank (ask the user for consent first)
   python tools/laya_select.py --need "..." --dry-run  # print state + questions without importing Laya
+  python tools/laya_select.py --dataset experience --kind question --task next-question \
+      --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 
-Filters: --category --stack --license --commercial --free --source --text
-Other:   --context/--context-file --top N (8 default, 12 max) --model auto|english|multilingual --json
+Filters (components): --category --stack --license --commercial --free --source --text
+Filters (experience): --kind --phase --text
+Other:    --context/--context-file --task --top N (8 default, 12 max) --model auto|english|multilingual --json
 
 Exit codes: 0 ok · 1 environment not ready · 2 no candidates/fallback · 3 missing consent (--confirmed)
 """
@@ -37,11 +52,13 @@ LOW_CONFIDENCE = 0.50
 KIT_DIR = Path(__file__).resolve().parent.parent
 CATALOG_DIR = KIT_DIR / "catalog"
 SOURCES_DIR = CATALOG_DIR / "sources"
+EXPERIENCE_MANIFEST = KIT_DIR / "experience" / "experience-manifest.json"
 HF_CACHE = Path.home() / ".cache" / "huggingface" / "hub" / "models--convaiinnovations--laya"
 
 DISCLAIMER = (
     "Laya scores semantic fit only (calibrated probabilities). Licenses, install "
-    "commands and links are catalog facts and must be verified with `get`."
+    "commands, links and manifest fields are source facts and must be verified with "
+    "`get` (components) or the manifest itself (experience)."
 )
 
 
@@ -137,7 +154,13 @@ def run_install() -> int:
     return 0
 
 
-def load_entries() -> list[dict]:
+def load_entries(dataset: str = "components") -> list[dict]:
+    if dataset == "experience":
+        if not EXPERIENCE_MANIFEST.exists():
+            print(f"Experience manifest not found at {EXPERIENCE_MANIFEST}. Run this script from the ai-frontend-guide-kit folder.")
+            sys.exit(2)
+        data = json.loads(EXPERIENCE_MANIFEST.read_text(encoding="utf-8"))
+        return data.get("entries", [])
     if not SOURCES_DIR.exists():
         print(f"Catalog not found at {SOURCES_DIR}. Run this script from the ai-frontend-guide-kit folder.")
         sys.exit(2)
@@ -149,6 +172,10 @@ def load_entries() -> list[dict]:
 
 
 def matches(entry: dict, args: argparse.Namespace) -> bool:
+    if args.kind and entry.get("kind") != args.kind:
+        return False
+    if args.phase and entry.get("phase") != args.phase:
+        return False
     if args.category and entry.get("category") != args.category:
         return False
     if args.type and entry.get("entry_type") != args.type:
@@ -174,6 +201,8 @@ def matches(entry: dict, args: argparse.Namespace) -> bool:
 
 
 def preselect(entries: list[dict], need: str, top: int) -> list[dict]:
+    if len(entries) <= top:
+        return entries
     tokens = {t for t in re.split(r"[^a-z0-9]+", need.lower()) if len(t) > 2}
 
     def score(entry: dict) -> float:
@@ -195,20 +224,38 @@ def profile_text(entry: dict) -> str:
     )
 
 
-def build_payload(need: str, context: str | None, candidates: list[dict]) -> tuple[str, dict]:
+TASK_INSTRUCTIONS = {
+    "fit": (
+        "Does this candidate fit the stated UI need well enough to be reused in this project?",
+        "Which single candidate best fits the stated UI need?",
+    ),
+    "direction": (
+        "Given the project state, does this direction fit well enough to be recommended?",
+        "Which single direction best fits the project state?",
+    ),
+    "next-question": (
+        "Given the project state, is this the most valuable question to ask the user next?",
+        "Which question should be asked next?",
+    ),
+    "options": (
+        "Does this option best match the user's stated intent?",
+        "Which option best matches the user's stated intent?",
+    ),
+}
+
+
+def build_payload(need: str, context: str | None, candidates: list[dict], task: str = "fit") -> tuple[str, dict]:
     state = need if not context else f"{need}\n\nProject context:\n{context}"
+    fit_instruction, choice_instruction = TASK_INSTRUCTIONS.get(task, TASK_INSTRUCTIONS["fit"])
     questions: dict = {}
     for index, entry in enumerate(candidates):
         questions[f"fit_{index:02d}"] = {
             "type": "noul",
-            "instructions": (
-                f"Candidate: {profile_text(entry)}\n"
-                "Does this candidate fit the stated UI need well enough to be reused in this project?"
-            ),
+            "instructions": f"Candidate: {profile_text(entry)}\n{fit_instruction}",
         }
     questions["best_overall"] = {
         "type": "choice",
-        "instructions": "Which single candidate best fits the stated UI need?",
+        "instructions": choice_instruction,
         "criteria": {entry["id"]: profile_text(entry) for entry in candidates},
     }
     return state, questions
@@ -231,24 +278,53 @@ def run_ranking(args: argparse.Namespace) -> int:
     if args.context_file:
         context = Path(args.context_file).read_text(encoding="utf-8")
 
-    entries = [entry for entry in load_entries() if matches(entry, args)]
     top = max(1, min(args.top, MAX_CANDIDATES))
-    candidates = preselect(entries, need, top)
+
+    if args.task == "options":
+        reference = args.text or need
+        question = next(
+            (
+                entry
+                for entry in load_entries("experience")
+                if entry.get("kind") == "question"
+                and (entry.get("id") == reference or reference.lower() in entry.get("name", "").lower())
+            ),
+            None,
+        )
+        if not question:
+            print(f'No question matching "{reference}" in experience-manifest.json (use --text <question-id|name>).')
+            return 2
+        candidates = [
+            {
+                "id": f"opt-{index + 1:02d}",
+                "name": option,
+                "kind": "question-option",
+                "category": question["id"],
+                "source": question["id"],
+                "description": f'Option for the question: {question["name"]}',
+                "use_case": question.get("use_case", ""),
+                "search_tags": question.get("search_tags", []),
+            }
+            for index, option in enumerate(question.get("options", []))
+        ]
+    else:
+        entries = [entry for entry in load_entries(args.dataset) if matches(entry, args)]
+        candidates = preselect(entries, need, top)
 
     if not candidates:
         print("No candidates after the deterministic filter. Broaden filters (try --text or drop --stack).")
-        print("Fallback: node tools/find.mjs ... — no Laya call was made.")
+        print("Fallback: node tools/find.mjs ... (components) or the deterministic question tree (experience). No Laya call was made.")
         return 2
 
-    state, questions = build_payload(need, context, candidates)
+    state, questions = build_payload(need, context, candidates, args.task)
 
     if args.dry_run:
         if args.json:
-            print(json.dumps({"need": need, "state": state, "questions": questions, "candidate_ids": [c["id"] for c in candidates]}, indent=2))
+            print(json.dumps({"need": need, "task": args.task, "dataset": args.dataset, "state": state, "questions": questions, "candidate_ids": [c["id"] for c in candidates]}, indent=2))
         else:
-            print(f"# Dry run — {len(candidates)} candidates preselected (no Laya import)")
+            print(f"# Dry run — task {args.task} · dataset {args.dataset} · {len(candidates)} candidates preselected (no Laya import)")
             for entry in candidates:
-                print(f"- {entry['id']} | {entry['name']} | {entry['source']} | {entry['license_type']}")
+                print(f"- {entry['id']} | {entry['name']} | {entry.get('source')} | {entry.get('license_type', entry.get('kind', ''))}")
             print()
             print("State:")
             print(state if len(state) < 1500 else state[:1500] + "…")
@@ -295,6 +371,7 @@ def run_ranking(args: argparse.Namespace) -> int:
                 "name": entry["name"],
                 "source": entry["source"],
                 "category": entry["category"],
+                "kind": entry.get("kind"),
                 "fit": fit,
                 "choice_probability": choice_probs.get(entry["id"]),
                 "is_choice_pick": entry["id"] == chosen,
@@ -308,6 +385,9 @@ def run_ranking(args: argparse.Namespace) -> int:
 
     payload = {
         "need": need,
+        "task": args.task,
+        "dataset": args.dataset,
+        "kind": args.kind,
         "elapsed_seconds": elapsed,
         "routing": result.get("routing"),
         "candidates": rows,
@@ -319,18 +399,25 @@ def run_ranking(args: argparse.Namespace) -> int:
         return 0
 
     top_fit = rows[0]["fit"] if rows and rows[0]["fit"] is not None else None
-    print(f'# Laya ranking — need: "{need}"')
+    print(f'# Laya ranking — task {args.task} · dataset {args.dataset} — need: "{need}"')
     routing_model = (result.get("routing") or {}).get("model", "unknown")
     print(f"model: {routing_model} | candidates: {len(rows)} | {elapsed}s" + (f" | choice: {chosen}" if chosen else ""))
     print()
-    print(f"{'rank':<4} {'P(fit)':<7} {'best':<5} candidate | source | license | commercial | install")
-    for position, row in enumerate(rows, start=1):
-        fit = f"{row['fit']:.2f}" if row["fit"] is not None else "n/a"
-        star = "*" if row["is_choice_pick"] else ""
-        print(
-            f"{position:<4} {fit:<7} {star:<5} {row['id']} | {row['source']} | "
-            f"{row['license_type']} | {row['commercial_use']} | {row['install_command'] or row['docs_url']}"
-        )
+    if args.dataset == "experience":
+        print(f"{'rank':<4} {'P(fit)':<7} {'best':<5} candidate | kind | category")
+        for position, row in enumerate(rows, start=1):
+            fit = f"{row['fit']:.2f}" if row["fit"] is not None else "n/a"
+            star = "*" if row["is_choice_pick"] else ""
+            print(f"{position:<4} {fit:<7} {star:<5} {row['id']} | {row.get('kind') or ''} | {row['category']}")
+    else:
+        print(f"{'rank':<4} {'P(fit)':<7} {'best':<5} candidate | source | license | commercial | install")
+        for position, row in enumerate(rows, start=1):
+            fit = f"{row['fit']:.2f}" if row["fit"] is not None else "n/a"
+            star = "*" if row["is_choice_pick"] else ""
+            print(
+                f"{position:<4} {fit:<7} {star:<5} {row['id']} | {row['source']} | "
+                f"{row['license_type']} | {row['commercial_use']} | {row['install_command'] or row['docs_url']}"
+            )
     print()
     if top_fit is not None and top_fit < LOW_CONFIDENCE:
         print(f"WARNING: low confidence (top P(fit)={top_fit:.2f}); compare alternatives or broaden filters.")
@@ -341,11 +428,15 @@ def run_ranking(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="laya_select",
-        description="Rank component-manifest candidates with the local Laya decision engine.",
+        description="Rank component-catalog or experience-manifest candidates with the local Laya decision engine.",
     )
     parser.add_argument("--check", action="store_true", help="report environment status (exit 0 = ready)")
     parser.add_argument("--install", action="store_true", help="install/update laya with pip, then verify")
-    parser.add_argument("--need", help="the UI need to rank for (e.g. 'pricing table with monthly toggle')")
+    parser.add_argument("--need", help="the need/state to rank for (e.g. 'pricing table with monthly toggle', or the brief summary)")
+    parser.add_argument("--dataset", choices=["components", "experience"], default="components", help="which manifest to rank (default: components)")
+    parser.add_argument("--kind", choices=["archetype", "philosophy", "style", "page-type", "question", "navigation-model"], help="experience entry kind filter")
+    parser.add_argument("--phase", type=int, help="question phase filter (experience dataset)")
+    parser.add_argument("--task", choices=["fit", "direction", "next-question", "options"], default="fit", help="instruction template (default: fit)")
     parser.add_argument("--context", help="extra project context (PRODUCT.md excerpt, tokens intent…)")
     parser.add_argument("--context-file", help="read the context from a file instead")
     parser.add_argument("--category")

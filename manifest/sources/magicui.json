@@ -20,7 +20,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "An animated beam of light which travels along a path. Useful for showcasing the integration features of a website.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "animated",
@@ -42,7 +42,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/animated-beam.json",
       "install_method": "shadcn-cli",
@@ -58,7 +58,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A animated background grid pattern made with SVGs, fully customizable using Tailwind CSS.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "animated",
@@ -81,7 +81,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/animated-grid-pattern.json",
       "install_method": "shadcn-cli",
@@ -97,7 +97,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "An animated beam of light which travels along the border of its container.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "border",
@@ -119,7 +119,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/border-beam.json",
       "install_method": "shadcn-cli",
@@ -135,7 +135,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A background dot pattern made with SVGs, fully customizable using Tailwind CSS.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "dot",
@@ -155,7 +155,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/dot-pattern.json",
       "install_method": "shadcn-cli",
@@ -171,7 +171,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A flickering grid background made with SVGs, fully customizable using Tailwind CSS.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "flickering",
@@ -191,7 +191,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/flickering-grid.json",
       "install_method": "shadcn-cli",
@@ -207,7 +207,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A canvas-based pseudo-3D particle field with perspective projection, continuous rotation and buoyant drift.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "floating",
@@ -228,7 +228,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/floating-3d-particles.json",
       "install_method": "shadcn-cli",
@@ -244,7 +244,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A background grid pattern made with SVGs, fully customizable using Tailwind CSS.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "grid",
@@ -264,7 +264,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/grid-pattern.json",
       "install_method": "shadcn-cli",
@@ -280,7 +280,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A interactive background grid pattern made with SVGs, fully customizable using Tailwind CSS.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "interactive",
@@ -301,7 +301,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/interactive-grid-pattern.json",
       "install_method": "shadcn-cli",
@@ -317,7 +317,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A component with animated light rays which shine down from above.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "light",
@@ -339,7 +339,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/light-rays.json",
       "install_method": "shadcn-cli",
@@ -355,7 +355,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A meteor shower effect.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "meteors",
@@ -374,7 +374,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/meteors.json",
       "install_method": "shadcn-cli",
@@ -390,7 +390,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A collection of circles which move in orbit along a circular path",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "orbiting",
@@ -410,7 +410,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/orbiting-circles.json",
       "install_method": "shadcn-cli",
@@ -426,7 +426,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "Particles are a fun way to add some visual flair to your website. They can be used to create a sense of depth, movement, and interactivity.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "particles",
@@ -445,7 +445,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/particles.json",
       "install_method": "shadcn-cli",
@@ -461,7 +461,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "An animated scrolling retro grid effect",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "retro",
@@ -481,7 +481,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/retro-grid.json",
       "install_method": "shadcn-cli",
@@ -497,7 +497,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A background striped pattern made with SVGs, fully customizable using Tailwind CSS.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "striped",
@@ -517,7 +517,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/striped-pattern.json",
       "install_method": "shadcn-cli",
@@ -533,7 +533,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A card with a time warping background effect.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "magicui",
         "warp",
@@ -555,7 +555,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/warp-background.json",
       "install_method": "shadcn-cli",
@@ -591,7 +591,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/avatar-circles.json",
       "install_method": "shadcn-cli",
@@ -629,7 +629,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/bento-grid.json",
       "install_method": "shadcn-cli",
@@ -667,7 +667,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/animated-circular-progress-bar.json",
       "install_method": "shadcn-cli",
@@ -705,7 +705,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/scroll-progress.json",
       "install_method": "shadcn-cli",
@@ -740,7 +740,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/android.json",
       "install_method": "shadcn-cli",
@@ -776,7 +776,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/file-tree.json",
       "install_method": "shadcn-cli",
@@ -814,7 +814,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/globe.json",
       "install_method": "shadcn-cli",
@@ -853,7 +853,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/hero-video-dialog.json",
       "install_method": "shadcn-cli",
@@ -891,7 +891,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/icon-cloud.json",
       "install_method": "shadcn-cli",
@@ -926,7 +926,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/iphone.json",
       "install_method": "shadcn-cli",
@@ -963,7 +963,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/lens.json",
       "install_method": "shadcn-cli",
@@ -998,7 +998,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/safari.json",
       "install_method": "shadcn-cli",
@@ -1033,7 +1033,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/terminal.json",
       "install_method": "shadcn-cli",
@@ -1071,7 +1071,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/animated-list.json",
       "install_method": "shadcn-cli",
@@ -1109,7 +1109,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/animated-theme-toggler.json",
       "install_method": "shadcn-cli",
@@ -1144,7 +1144,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/backlight.json",
       "install_method": "shadcn-cli",
@@ -1182,7 +1182,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/blur-fade.json",
       "install_method": "shadcn-cli",
@@ -1221,7 +1221,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/client-tweet-card.json",
       "install_method": "shadcn-cli",
@@ -1260,7 +1260,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/code-comparison.json",
       "install_method": "shadcn-cli",
@@ -1298,7 +1298,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/confetti.json",
       "install_method": "shadcn-cli",
@@ -1334,7 +1334,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/cool-mode.json",
       "install_method": "shadcn-cli",
@@ -1371,7 +1371,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/dock.json",
       "install_method": "shadcn-cli",
@@ -1409,7 +1409,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/dotted-map.json",
       "install_method": "shadcn-cli",
@@ -1445,7 +1445,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/glare-hover.json",
       "install_method": "shadcn-cli",
@@ -1481,7 +1481,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/glyph-matrix.json",
       "install_method": "shadcn-cli",
@@ -1517,7 +1517,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/hexagon-pattern.json",
       "install_method": "shadcn-cli",
@@ -1555,7 +1555,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/highlighter.json",
       "install_method": "shadcn-cli",
@@ -1592,7 +1592,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/interactive-hover-button.json",
       "install_method": "shadcn-cli",
@@ -1631,7 +1631,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/magic-card.json",
       "install_method": "shadcn-cli",
@@ -1666,7 +1666,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/marquee.json",
       "install_method": "shadcn-cli",
@@ -1703,7 +1703,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/neon-gradient-card.json",
       "install_method": "shadcn-cli",
@@ -1739,7 +1739,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/pixel-image.json",
       "install_method": "shadcn-cli",
@@ -1776,7 +1776,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/pointer.json",
       "install_method": "shadcn-cli",
@@ -1812,7 +1812,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/progressive-blur.json",
       "install_method": "shadcn-cli",
@@ -1848,7 +1848,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/pulsating-button.json",
       "install_method": "shadcn-cli",
@@ -1884,7 +1884,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/rainbow-button.json",
       "install_method": "shadcn-cli",
@@ -1919,7 +1919,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/ripple.json",
       "install_method": "shadcn-cli",
@@ -1955,7 +1955,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/ripple-button.json",
       "install_method": "shadcn-cli",
@@ -1991,7 +1991,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/shine-border.json",
       "install_method": "shadcn-cli",
@@ -2029,7 +2029,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/smooth-cursor.json",
       "install_method": "shadcn-cli",
@@ -2067,7 +2067,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/tweet-card.json",
       "install_method": "shadcn-cli",
@@ -2103,7 +2103,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/animated-gradient-text.json",
       "install_method": "shadcn-cli",
@@ -2139,7 +2139,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/animated-shiny-text.json",
       "install_method": "shadcn-cli",
@@ -2174,7 +2174,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/aurora-text.json",
       "install_method": "shadcn-cli",
@@ -2211,7 +2211,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/comic-text.json",
       "install_method": "shadcn-cli",
@@ -2249,7 +2249,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/dia-text-reveal.json",
       "install_method": "shadcn-cli",
@@ -2286,7 +2286,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/hyper-text.json",
       "install_method": "shadcn-cli",
@@ -2321,7 +2321,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/kinetic-text.json",
       "install_method": "shadcn-cli",
@@ -2359,7 +2359,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/line-shadow-text.json",
       "install_method": "shadcn-cli",
@@ -2394,7 +2394,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/morphing-text.json",
       "install_method": "shadcn-cli",
@@ -2430,7 +2430,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/noise-texture.json",
       "install_method": "shadcn-cli",
@@ -2468,7 +2468,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/number-ticker.json",
       "install_method": "shadcn-cli",
@@ -2507,7 +2507,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/scroll-based-velocity.json",
       "install_method": "shadcn-cli",
@@ -2543,7 +2543,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/shimmer-button.json",
       "install_method": "shadcn-cli",
@@ -2581,7 +2581,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/shiny-button.json",
       "install_method": "shadcn-cli",
@@ -2618,7 +2618,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/sparkles-text.json",
       "install_method": "shadcn-cli",
@@ -2655,7 +2655,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/spinning-text.json",
       "install_method": "shadcn-cli",
@@ -2693,7 +2693,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/text-3d-flip.json",
       "install_method": "shadcn-cli",
@@ -2730,7 +2730,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/text-animate.json",
       "install_method": "shadcn-cli",
@@ -2767,7 +2767,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/text-reveal.json",
       "install_method": "shadcn-cli",
@@ -2805,7 +2805,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/typing-animation.json",
       "install_method": "shadcn-cli",
@@ -2840,7 +2840,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/video-text.json",
       "install_method": "shadcn-cli",
@@ -2878,7 +2878,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Requires Motion; see 07-PHILOSOPHY for animation limits"
+        "Requires Motion; see 08-PHILOSOPHY for animation limits"
       ],
       "registry_url": "https://magicui.design/r/word-rotate.json",
       "install_method": "shadcn-cli",

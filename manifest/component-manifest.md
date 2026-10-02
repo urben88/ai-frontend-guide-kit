@@ -2,7 +2,7 @@
 
 Light index of 2470 reusable UI entries across 16 sources. Generated 2026-10-02.
 
-**Rule:** consult this catalog before writing any component from scratch. Filter with `find`, inspect with `get`, then follow `guides/05-REUSE.md`.
+**Rule:** consult this catalog before writing any component from scratch. Filter with `find`, inspect with `get`, then follow `guides/06-REUSE.md`.
 
 ## Sources
 

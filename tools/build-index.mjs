@@ -59,7 +59,7 @@ function main() {
       detail: 'sources/<source_id>.json',
       guides: 'guides/00-START-HERE.md',
       installGuides: 'install-guides.md',
-      reuseRule: 'Consult this catalog before writing any component from scratch (see guides/05-REUSE.md).',
+      reuseRule: 'Consult this catalog before writing any component from scratch (see guides/06-REUSE.md).',
     },
     sources: sourceSummaries,
   };
@@ -73,7 +73,7 @@ function main() {
   lines.push('');
   lines.push(`Light index of ${totalEntries} reusable UI entries across ${sources.length} sources. Generated ${TODAY}.`);
   lines.push('');
-  lines.push('**Rule:** consult this catalog before writing any component from scratch. Filter with `find`, inspect with `get`, then follow `guides/05-REUSE.md`.');
+  lines.push('**Rule:** consult this catalog before writing any component from scratch. Filter with `find`, inspect with `get`, then follow `guides/06-REUSE.md`.');
   lines.push('');
   lines.push('## Sources');
   lines.push('');

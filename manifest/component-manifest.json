@@ -54,7 +54,7 @@
     "detail": "sources/<source_id>.json",
     "guides": "guides/00-START-HERE.md",
     "installGuides": "install-guides.md",
-    "reuseRule": "Consult this catalog before writing any component from scratch (see guides/05-REUSE.md)."
+    "reuseRule": "Consult this catalog before writing any component from scratch (see guides/06-REUSE.md)."
   },
   "sources": [
     {

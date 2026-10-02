@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * context — compact repository context for the UX phase (guide 01-UX-FLOWS).
+ * context — compact repository context for the direction + UX phase (guides 01-EXPERIENCE-DIRECTION + 02-UX-FLOWS).
  *
  * Scans the project (stack, routes/screens, docs, OpenSpec specs, previous UX
  * artifacts) and writes ai-frontend-output/ux/REPO-CONTEXT.md so the agent does
@@ -252,7 +252,7 @@ function main() {
     lines.push('## Framework adaptation');
     lines.push('');
     if (framework.bmad) {
-      lines.push('- **BMAD detected:** the PRD/brief is the business anchor (do not duplicate it in `PRODUCT.md` — point to it instead); existing UX docs are the as-is state for guide 01; map stories to screens and cite them with `--ref "story:<id>"`. See `guides/ADAPTERS.md`.');
+      lines.push('- **BMAD detected:** the PRD/brief is the business anchor (do not duplicate it in `PRODUCT.md` — point to it instead); existing UX docs are the as-is state for guide 02; map stories to screens and cite them with `--ref "story:<id>"`. See `guides/ADAPTERS.md`.');
     }
     if (framework.specDriven) {
       lines.push('- **Spec-driven detected:** `openspec/specs/` is the behavioral source of truth; UX and UI decisions must not contradict it — cite capabilities with `--ref "spec:<capability>"` (or the active change). See `guides/ADAPTERS.md`.');
@@ -261,11 +261,11 @@ function main() {
   }
   lines.push('## Next step');
   lines.push('');
-  lines.push('Follow `ai-frontend-guide-kit/guides/01-UX-FLOWS.md`:');
+  lines.push('Follow `ai-frontend-guide-kit/guides/01-EXPERIENCE-DIRECTION.md` (adaptive questions → archetype/philosophy → three directions → `EXPERIENCE-BRIEF.md`), then `ai-frontend-guide-kit/guides/02-UX-FLOWS.md`:');
   lines.push(uxPresent
     ? '- UX exists: **ask the user** to choose Summarize (as-is documentation + audit) or Radical redesign (baseline + ideal UX + diff, UX only, respecting PRODUCT.md).'
     : '- No UX detected: design from scratch with the `userflow` dispatcher (1–4 flow skills, anti-patterns checked).');
-  lines.push('- Outputs go to `ai-frontend-output/ux/`: `UX-SPEC.md` + `flow-report.html`.');
+  lines.push('- Outputs go to `ai-frontend-output/ux/`: `EXPERIENCE-BRIEF.md` + `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw`.');
   lines.push('');
   writeFileSync(join(outDir, 'REPO-CONTEXT.md'), lines.join('\n'), 'utf8');
   console.log(`context: ${routes.length} routes, ${docs.length} docs, ux_present=${uxPresent}`);

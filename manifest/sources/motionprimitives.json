@@ -20,7 +20,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A component that provides animated background effects for UI elements.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "motion-primitives",
         "springs",
@@ -44,7 +44,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add animated-background",
@@ -59,7 +59,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "An effect that creates animated border trails around elements on interaction.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "motion-primitives",
         "springs",
@@ -83,7 +83,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add border-trail",
@@ -98,7 +98,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A component that creates a glowing effect on elements based on cursor movement.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "motion-primitives",
         "springs",
@@ -122,7 +122,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add glow-effect",
@@ -137,7 +137,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A component that applies progressive blur effects to elements.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "motion-primitives",
         "springs",
@@ -161,7 +161,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add progressive-blur",
@@ -176,7 +176,7 @@
       "entry_type": "component",
       "category": "backgrounds-effects",
       "description": "A component that creates a spotlight effect following cursor movement.",
-      "use_case": "Add decorative depth to a section; use sparingly (1–2 per view).",
+      "use_case": "Add decorative depth to a section; use sparingly (1â€“2 per view).",
       "search_tags": [
         "motion-primitives",
         "springs",
@@ -199,7 +199,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add spotlight",
@@ -238,7 +238,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add scroll-progress",
@@ -276,7 +276,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add carousel",
@@ -315,7 +315,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add image-comparison",
@@ -355,7 +355,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add infinite-slider",
@@ -393,7 +393,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add accordion",
@@ -432,7 +432,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add animated-group",
@@ -470,7 +470,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add cursor",
@@ -508,7 +508,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add disclosure",
@@ -547,7 +547,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add in-view",
@@ -585,7 +585,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add magnetic",
@@ -623,7 +623,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add tilt",
@@ -662,7 +662,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add transition-panel",
@@ -700,7 +700,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add dock",
@@ -739,7 +739,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add toolbar-dynamic",
@@ -779,7 +779,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add toolbar-expandable",
@@ -817,7 +817,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add dialog",
@@ -856,7 +856,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add morphing-dialog",
@@ -895,7 +895,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add morphing-popover",
@@ -934,7 +934,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add animated-number",
@@ -974,7 +974,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add sliding-number",
@@ -1012,7 +1012,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add spinning-text",
@@ -1050,7 +1050,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add text-effect",
@@ -1088,7 +1088,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add text-loop",
@@ -1126,7 +1126,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add text-morph",
@@ -1164,7 +1164,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add text-roll",
@@ -1202,7 +1202,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add text-scramble",
@@ -1240,7 +1240,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add text-shimmer",
@@ -1279,7 +1279,7 @@
       "free": true,
       "verified_at": "2026-10-02",
       "decision_hints": [
-        "Built on Motion — matches the spring physics rules in 07-PHILOSOPHY"
+        "Built on Motion â€” matches the spring physics rules in 08-PHILOSOPHY"
       ],
       "install_method": "npm",
       "install_command": "npx motion-primitives@latest add text-shimmer-wave",

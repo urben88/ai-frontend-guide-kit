@@ -112,7 +112,7 @@ export const USE_BY_CATEGORY = {
   template: 'Start from a complete page template and adapt it to the product.',
 };
 
-export const RULE_REUSE = 'Prefer reuse or adaptation before writing a new component. See 05-REUSE.';
+export const RULE_REUSE = 'Prefer reuse or adaptation before writing a new component. See 06-REUSE.';
 
 /**
  * rules: array of [RegExp, canonicalCategory] checked in order.

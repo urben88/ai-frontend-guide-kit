@@ -10,13 +10,13 @@ Phase 3 of the `ai-frontend-guide-kit` workflow. Goal: a screen that survives sc
 ## When to use
 
 - "Pulir", "polish", "revisión final", "QA visual", "dejar impecable", "last pass" on a screen or block.
-- After composition (phase 2) or after any small change (see `09-ITERATE.md`).
-- **NOT for**: changing flows or restructuring screens — that is the UX phase (`01-UX-FLOWS.md`); polish never redesigns silently.
+- After composition (phase 2) or after any small change (see `10-ITERATE.md`).
+- **NOT for**: changing flows or restructuring screens — that is the UX phase (`02-UX-FLOWS.md`); polish never redesigns silently.
 
 ## Step 0 — Scope and context (always)
 
 1. Ask/confirm the scope: which screen, route or block; which states matter. One screen per pass.
-2. Read the existing artifacts, do not re-explore the repo: `ai-frontend-output/ux/UX-SPEC.md`, `DESIGN.md`, `PRODUCT.md`, and the `05-REUSE` decision log if present.
+2. Read the existing artifacts, do not re-explore the repo: `ai-frontend-output/ux/EXPERIENCE-BRIEF.md`, `ai-frontend-output/ux/UX-SPEC.md`, `DESIGN.md`, `PRODUCT.md`, and the `06-REUSE` decision log if present.
 3. Look at what changed: `git status` + `git diff --stat` (polish what moved, not the whole app).
 4. Declare the plan in one line: screen + states + tools available.
 
@@ -27,7 +27,7 @@ Skills are opt-in by their own descriptions; load them when present, never assum
 - **`impeccable`** (if installed): run its `audit` workflow on the screen, then its `polish` workflow. Treat its findings as the primary craft checklist.
 - **`design-taste-frontend`** / taste-skill (if installed): hierarchy, density and proportion review.
 - **emilkowalski** (if installed): `review-animations` (or `improve-animations`) when the screen has motion; `emil-design-eng` for interaction physics.
-- If none are installed, use the distilled checklist in `guides/07-PHILOSOPHY.md` (anti-generic rules, springs, effect budget).
+- If none are installed, use the distilled checklist in `guides/08-PHILOSOPHY.md` (anti-generic rules, springs, effect budget).
 
 Record every accepted finding with its fix; do not apply an external suggestion that contradicts `PRODUCT.md`, tokens or the license rules.
 
@@ -48,22 +48,22 @@ Report each iteration with evidence: state + screenshot + what changed. Keep a r
 
 ## Step 3 — Regression gate
 
-Close with `guides/08-VERIFY.md`:
+Close with `guides/09-VERIFY.md`:
 
 - `npx playwright test` — critical funnel E2E + visual snapshots for the polished states.
 - Red test = not done; fix the exact reported issue and re-run the full suite.
 
 ## Step 4 — Close
 
-- Checklist from `08-VERIFY.md` (reduced motion, keyboard, console, licenses) is green.
+- Checklist from `09-VERIFY.md` (reduced motion, keyboard, console, licenses) is green.
 - Effect budget respected: max 1–2 high-impact effects per view; effects do not compete.
 - If the pass changed a component decision (replaced/adapted a catalog entry), record it: `node ai-frontend-guide-kit/tools/memory.mjs add --screen ... --block ... --need "..." --decision reuse|adapt|build [--id <entry-id>]`.
 - Summarize: findings found, fixes applied, checks run, anything deliberately left open.
 
 ## Fallback without tools
 
-- No Playwright MCP → use the `@playwright/test` suite from guide 08 plus the self-review checklist of `07-PHILOSOPHY.md`; state clearly which interactive checks could not be run.
-- No external skills → apply the distilled rules of `07-PHILOSOPHY.md`.
+- No Playwright MCP → use the `@playwright/test` suite from guide 09 plus the self-review checklist of `08-PHILOSOPHY.md`; state clearly which interactive checks could not be run.
+- No external skills → apply the distilled rules of `08-PHILOSOPHY.md`.
 - Never block the pass on missing tools; never claim a check that was not executed.
 
 ## Rules
