@@ -1,6 +1,6 @@
 {
   "name": "ai-frontend-guide-kit",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Reusable-first UI component catalog and guided kit for AI frontend agents (16 sources, 2,470 entries) with optional local Laya ranking.",
   "repository": {
     "type": "git",

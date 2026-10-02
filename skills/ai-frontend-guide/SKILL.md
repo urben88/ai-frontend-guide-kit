@@ -1,6 +1,6 @@
 ---
 name: ai-frontend-guide
-description: Reuse-first UI workflow for frontend projects. Use when designing or building any UI/UX (pages, sections, components, forms, animations, landing pages, dashboards) in a project that contains the ai-frontend-guide-kit folder. Consult the local component catalog before writing custom code, follow the 9-step guided flow, and optionally rank candidates with the local Laya decision engine after asking the user. Covers catalog discovery, reuse/adapt/build decisions, installation, licensing and verification.
+description: Reuse-first UI workflow for frontend projects. Use when designing or building any UI/UX (pages, sections, components, forms, animations, landing pages, dashboards) in a project that contains the ai-frontend-guide-kit folder. Consult the local component catalog before writing custom code, follow the guided flow in three on-demand phases (UX/theory, composition, total polish), and optionally rank candidates with the local Laya decision engine after asking the user. Covers catalog discovery, reuse/adapt/build decisions, installation, licensing, playbook for small changes/custom additions, and verification with Playwright MCP.
 ---
 
 # AI Frontend Guide
@@ -12,9 +12,10 @@ Reusable-first UI workflow for AI agents. The point: **search what already exist
 When this kit is installed, the project contains:
 
 - `ai-frontend-guide-kit/AGENTS.md` — awareness layer (read this first).
-- `ai-frontend-guide-kit/guides/00…08` — the 9-step UX/UI workflow.
+- `ai-frontend-guide-kit/guides/00…09` — the guided workflow (router + three phases + iteration).
 - `ai-frontend-guide-kit/catalog/` — 2,470 reusable entries from 16 verified sources (licenses, install commands, links), plus a light index.
 - `ai-frontend-guide-kit/tools/` — `find.mjs`, `get.mjs` and `laya_select.py`.
+- Sibling skills (when installed): `frontend-polish` (total polish phase) and the three external design skills (`impeccable`, `design-taste-frontend`, `emilkowalski`).
 
 If the folder is missing, install it with:
 
@@ -22,21 +23,22 @@ If the folder is missing, install it with:
 npx github:urben88/ai-frontend-guide-kit
 ```
 
+## Route first (intake)
+
+Ask the user what they want before touching code and declare the route: new frontend (phases 1→2→3), small change or custom addition (`09-ITERATE.md`), polish only (phase 3), UX only (`01-UX-FLOWS.md`). The phases are entry points, not a fixed pipeline.
+
 ## Start here
 
 1. Read `ai-frontend-guide-kit/AGENTS.md`.
-2. Follow the guides in order — read **only the guide for the current step**:
+2. Follow the phase that matches the route — read **only the guide for the current phase/step**:
 
-| Step | Guide | Output |
+| Phase | Guide | Output |
 |---|---|---|
-| 1 | `01-UX-FLOWS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` (4 paths) |
-| 2 | `02-TOKENS.md` | `DESIGN.md` + theme (Figma MCP or fallback) |
-| 3 | `03-INVENTORY.md` | components needed per screen (no libraries yet) |
-| 4 | `04-FIND.md` | candidate shortlist from the catalog |
-| 5 | `05-REUSE.md` | reuse / adapt / build decision + install + memory record |
-| 6 | `06-ADAPT.md` | adapted components with your tokens |
-| 7 | `07-PHILOSOPHY.md` | hierarchy, springs, anti-generic rules |
-| 8 | `08-VERIFY.md` | Playwright checks green |
+| 0 · Intake | `00-START-HERE.md` | route declared + phase map |
+| 1 · UX & theory | `01-UX-FLOWS.md`, `02-TOKENS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` + `DESIGN.md` |
+| 2 · Composition | `03-INVENTORY.md` … `06-ADAPT.md` | inventory, shortlist, reuse/adapt/build + install, adapted components |
+| 3 · Total polish | `frontend-polish` skill + `07-PHILOSOPHY.md`, `08-VERIFY.md` | audits + Playwright MCP loop + E2E/visual checks green |
+| Iterate | `09-ITERATE.md` | small changes and custom additions |
 
 ## UX first (proven flows)
 
@@ -55,6 +57,10 @@ Then follow `ai-frontend-guide-kit/guides/01-UX-FLOWS.md`:
 **BMAD / spec-driven repos:** `context.mjs` detects them (`Framework:` in `REPO-CONTEXT.md`). Read `ai-frontend-guide-kit/guides/ADAPTERS.md`: with a BMAD PRD use it as the business anchor (no duplicate `PRODUCT.md`) and cite stories with `--ref "story:<id>"`; with OpenSpec, specs are the behavioral source of truth and decisions cite `--ref "spec:<capability>"`.
 
 The UI inventory and memory `--screen/--block` names come from `UX-SPEC.md`.
+
+## Total polish (phase 3)
+
+Before closing a screen, run the sibling skill `frontend-polish` when installed: external audits (`impeccable`, taste-skill, emilkowalski) if available, the Playwright MCP loop (states, console, accessibility, keyboard, reduced motion, responsive) and the closing `@playwright/test` regression of `08-VERIFY`. Fallback without tools: the distilled checklist of `07-PHILOSOPHY`.
 
 ## Query the catalog (do this before writing components)
 

@@ -27,6 +27,7 @@ const REQUIRED_KIT_FILES = [
   'guides/06-ADAPT.md',
   'guides/07-PHILOSOPHY.md',
   'guides/08-VERIFY.md',
+  'guides/09-ITERATE.md',
   'tools/find.mjs',
   'tools/get.mjs',
   'tools/laya_select.py',
@@ -59,6 +60,8 @@ const FLOW_SKILLS = [
 const REQUIRED_REPO_FILES = [
   'skills/UX-SKILLS-ORIGIN.md',
   'skills/UX-SKILLS-LICENSE',
+  'skills/ai-frontend-guide/SKILL.md',
+  'skills/frontend-polish/SKILL.md',
   'skills/userflow/SKILL.md',
   'skills/userflow/report-template.html',
   ...FLOW_SKILLS.map((name) => `skills/${name}/SKILL.md`),
@@ -96,8 +99,8 @@ function main() {
 
   const missingRepo = REQUIRED_REPO_FILES.filter((file) => !existsSync(join(ROOT, file)));
   if (missingRepo.length > 0) {
-    console.error(`Kit build FAILED. Missing vendored UX skills:\n- ${missingRepo.join('\n- ')}`);
-    console.error('Run: node tools/sync-ux-skills.mjs');
+    console.error(`Kit build FAILED. Missing repo skills/assets:\n- ${missingRepo.join('\n- ')}`);
+    console.error('Run: node tools/sync-ux-skills.mjs (UX skills) and check the kit skills.');
     process.exit(1);
   }
 
@@ -115,6 +118,7 @@ function main() {
   const totalBytes = dirSize(KIT_DIR);
   console.log(`kit: ${REQUIRED_KIT_FILES.length} required assets present, ${sourceFiles.length} source files synced`);
   console.log(`kit: ${FLOW_SKILLS.length + 1} UX skills vendored (userflow + ${FLOW_SKILLS.length} flow-*) with license + origin pin`);
+  console.log('kit: 18 repo skills verified (ai-frontend-guide + frontend-polish + 16 UX)');
   console.log(`kit: catalog coherent with manifest: ${coherent ? 'yes' : 'NO'}`);
   console.log(`kit: total size ${(totalBytes / 1024 / 1024).toFixed(2)} MB at ${relative(ROOT, KIT_DIR)}`);
   if (!coherent) process.exit(1);

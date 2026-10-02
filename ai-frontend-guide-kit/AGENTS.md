@@ -6,9 +6,9 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 
 - A catalog of **2,470 reusable UI entries** from **16 verified sources** (updated 2026-10-02), organized in 20 categories.
 - Per-entry decision data: what it is, when to use it, where to find it, how to install it and its license constraints.
-- A standardized reuse-first workflow in 9 short guides.
+- A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–09).
 - Two local query tools (`tools/find.mjs`, `tools/get.mjs`) that answer with minimal output.
-- A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses.
+- A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses, plus a total-polish skill (`skills/frontend-polish/SKILL.md`).
 
 ## Golden rule
 
@@ -21,25 +21,26 @@ Only if nothing fits (or the license blocks you), build custom — and follow `g
 | Layer | Read / run | Cost |
 |---|---|---|
 | 0 · Awareness | this file | ~1 page |
-| 1 · Guide | only the guide for the current step (`guides/00` … `08`) | ≤ ~120 lines |
+| 1 · Guide | only the guide for the current phase/step (`guides/00` … `09`) | ≤ ~120 lines |
 | 2 · Query | `node tools/find.mjs ...` and `node tools/get.mjs <id>` | < 1 KB each |
 | 3 · Detail | `catalog/sources/<source>.json` or the official docs URL | only when needed |
 
 Never load all `catalog/sources/*.json` files into context. Never read `install-guides.md` end-to-end — jump to the section of the chosen source.
 
-## Workflow map
+## Route first (intake)
 
-| Step | Guide | Output |
+Before touching code, ask the user what they want and declare the route: new frontend (phases 1→2→3), small change or custom addition (`guides/09-ITERATE.md`), polish only (phase 3), UX only (`guides/01-UX-FLOWS.md`). **The phases are entry points, not a fixed pipeline** — never run a phase the user did not ask for.
+
+## Workflow map (three phases)
+
+| Phase | Guide | Output |
 |---|---|---|
-| 0 | `guides/00-START-HERE.md` | flow map + rules |
-| 1 | `guides/01-UX-FLOWS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` |
-| 2 | `guides/02-TOKENS.md` | `DESIGN.md` + Tailwind v4 theme (Figma MCP or fallback) |
-| 3 | `guides/03-INVENTORY.md` | component inventory per screen |
-| 4 | `guides/04-FIND.md` | shortlist of candidates per need (optionally Laya-ranked) |
-| 5 | `guides/05-REUSE.md` | reuse/adapt/build decision + install |
-| 6 | `guides/06-ADAPT.md` | adapted component with tokens |
-| 7 | `guides/07-PHILOSOPHY.md` | hierarchy, springs, anti-generic rules |
-| 8 | `guides/08-VERIFY.md` | Playwright E2E + visual checks green |
+| 0 · Intake | `guides/00-START-HERE.md` | route declared + flow map |
+| 1 · UX & theory | `guides/01-UX-FLOWS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` (4 paths) |
+| 1 · UX & theory | `guides/02-TOKENS.md` | `DESIGN.md` + Tailwind v4 theme (Figma MCP or fallback) |
+| 2 · Composition | `guides/03-INVENTORY.md` … `guides/06-ADAPT.md` (+ `07` while composing) | inventory, shortlist, reuse/adapt/build + install, adapted components |
+| 3 · Total polish | `frontend-polish` skill + `guides/07-PHILOSOPHY.md` + `guides/08-VERIFY.md` | external audits + Playwright MCP loop + E2E/visual checks green |
+| Iterate | `guides/09-ITERATE.md` | small changes and custom additions without repeating the UX phase |
 
 ## Query examples
 
@@ -85,6 +86,10 @@ Then follow `guides/01-UX-FLOWS.md`:
 - **BMAD / spec-driven repos** → read `guides/ADAPTERS.md`. Detection is automatic (`Framework:` in `REPO-CONTEXT.md`): with a BMAD PRD, use it as the business anchor and cite stories with `--ref "story:<id>"`; with OpenSpec, specs are the behavioral source of truth and decisions cite `--ref "spec:<capability>"`.
 
 Gate: do not start the UI steps until `UX-SPEC.md` lists screens with empty/loading/error states and flows. The UI inventory and `memory.mjs --screen/--block` come from it.
+
+## Total polish phase (`frontend-polish` + Playwright MCP)
+
+Before closing any screen, run the `frontend-polish` skill: external audits when installed (impeccable, taste-skill, emilkowalski), the Playwright MCP loop (a11y snapshot, states, console, keyboard, reduced motion, responsive) and the `@playwright/test` regression of `guides/08-VERIFY.md`. The installer configures Playwright MCP for detected harnesses; the browser installs once with `npx playwright install chromium`. Fallback: the checklist in `guides/07-PHILOSOPHY.md`.
 
 ## Selection memory (`ai-frontend-output/`)
 

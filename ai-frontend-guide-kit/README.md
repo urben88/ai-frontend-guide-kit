@@ -13,7 +13,7 @@ Self-contained guided kit for building frontend UX/UI with a reuse-first workflo
 Before creating UI components, follow `ai-frontend-guide-kit/AGENTS.md` (reuse-first workflow).
 ```
 
-Prefer the installer (`npm i -D github:urben88/ai-frontend-guide-kit` + `npx ai-frontend-guide-kit`): it copies this folder, creates `ai-frontend-output/`, patches `AGENTS.md` and installs the 17 skills cleanly into `.agents/skills/` (plus `.claude/skills/` when a `.claude/` folder exists).
+Prefer the installer (`npm i -D github:urben88/ai-frontend-guide-kit` + `npx ai-frontend-guide-kit`): it copies this folder, creates `ai-frontend-output/`, patches `AGENTS.md`, installs the 18 skills of the repo cleanly into `.agents/skills/` (plus `.claude/skills/` when a `.claude/` folder exists), installs the 3 external design skills via their CLI (`--no-design-skills` to skip) and configures Playwright MCP for detected harnesses (`--no-mcp` to skip).
 
 Requirements: none for reading the guides or catalog. The query tools need Node.js ≥ 18; no npm packages are required.
 
@@ -23,7 +23,7 @@ Requirements: none for reading the guides or catalog. The query tools need Node.
 ai-frontend-guide-kit/
 ├── AGENTS.md              # awareness layer: scope, golden rule, navigation
 ├── README.md              # this file (copy + integration instructions)
-├── guides/                # 00-START-HERE … 08-VERIFY (the workflow)
+├── guides/                # 00-START-HERE (router: intake + 3 phases) … 09-ITERATE (small changes)
 ├── catalog/
 │   ├── component-manifest.json   # light index (sources, counts, paths)
 │   ├── component-manifest.md     # readable index
@@ -48,6 +48,10 @@ The kit ships **16 vendored UX skills** (MIT, from `jpoindexter/ux-flow-skills`)
 - **UX exists** → ask the user: *Summarize* (as-is + audit) or *Radical redesign* (baseline + ideal UX + diff, UX only). Never redesign silently.
 
 The UI inventory and `memory.mjs --screen/--block` derive from `UX-SPEC.md`.
+
+## Total polish phase (`frontend-polish` + Playwright MCP)
+
+The kit workflow ends with phase 3, run by the sibling `frontend-polish` skill: external audits when installed (`impeccable`, taste-skill, emilkowalski), an interactive Playwright MCP loop (a11y snapshot, states hover/focus/loading/empty/error, console, keyboard, reduced motion, responsive) and the `@playwright/test` regression of `08-VERIFY`. Without those tools, it falls back to the distilled checklist of `07-PHILOSOPHY`. Browse installs once with `npx playwright install chromium`.
 
 ## Selection memory (`ai-frontend-output/`)
 
@@ -89,6 +93,7 @@ Copy the updated folder again into projects when the catalog changes. Each entry
 ## Rules of engagement
 
 - Reuse or adapt before creating (see `guides/05-REUSE.md`).
+- Polish before closing a screen: `frontend-polish` + `guides/08-VERIFY.md`, never ship an unverified draft.
 - Respect `license_type` / `commercial_use` / `limits` (see `AGENTS.md`).
 - Keep high-impact animations to 1–2 per view (see `guides/07-PHILOSOPHY.md`).
 - Do not paste third-party component source into this kit — the catalog stores metadata and links only; the vendored UX skills keep their own MIT license (see `skills/UX-SKILLS-LICENSE` in the repository).

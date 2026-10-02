@@ -22,9 +22,12 @@ const KIT_SOURCE = join(REPO_ROOT, 'ai-frontend-guide-kit');
 
 const AGENTS_BLOCK = `## Frontend UI
 Before creating UI components, follow \`ai-frontend-guide-kit/AGENTS.md\` (reuse-first workflow).
+Ask the user first what they want (new frontend UX -> composition -> polish, a small change, a custom
+addition, or polish only) and enter the three-phase workflow at the right point before touching code.
 Optional accelerator: \`python ai-frontend-guide-kit/tools/laya_select.py --check\` (local Laya decision engine).
 Selection memory: record every decision with \`node ai-frontend-guide-kit/tools/memory.mjs add ...\` and reuse saved
 combinations from \`ai-frontend-output/\` before searching the catalog.
+Polish phase: use the \`frontend-polish\` skill with Playwright MCP (\`npx @playwright/mcp@latest\`).
 `;
 
 const OUTPUT_README = `# ai-frontend-output
@@ -58,12 +61,14 @@ const DESIGN_SKILL_REPOS = [
 ];
 
 function parseArgs(argv) {
-  const args = { target: process.cwd(), skills: true, skillsMode: 'copy', designSkills: false, laya: false, help: false };
+  const args = { target: process.cwd(), skills: true, skillsMode: 'copy', designSkills: true, mcp: true, laya: false, help: false };
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i];
     if (token === '--help' || token === '-h') args.help = true;
     else if (token === '--no-skills') args.skills = false;
     else if (token === '--design-skills') args.designSkills = true;
+    else if (token === '--no-design-skills') args.designSkills = false;
+    else if (token === '--no-mcp') args.mcp = false;
     else if (token === '--skills-mode') args.skillsMode = argv[++i];
     else if (token === '--with-laya') args.laya = true;
     else if (token === '--target') args.target = argv[++i];
@@ -84,9 +89,10 @@ Usage:
 Options:
   --target <dir>        install into <dir> (default: current directory)
   --no-skills           skip installing skills entirely
-  --skills-mode <mode>  copy (default): copy the 17 kit skills to .agents/skills (clean, no lockfile)
+  --skills-mode <mode>  copy (default): copy the 18 kit skills to .agents/skills (clean, no lockfile)
                         cli: use "npx skills add" (lockfile + multi-agent links, includes design skills)
-  --design-skills       also install impeccable/taste-skill/emilkowalski via the skills CLI (needs network)
+  --no-design-skills    skip the 3 external design skills (impeccable/taste-skill/emilkowalski; need network)
+  --no-mcp              skip the Playwright MCP configuration
   --with-laya           install/update Laya with pip (heavy: pulls torch on first install)
   --help                show this help
 
@@ -94,10 +100,13 @@ What it does:
   1. Copies ai-frontend-guide-kit/ (catalog + guides + tools) into the target.
   2. Adds a pointer block to the target's AGENTS.md and removes the legacy ai-frontend-guide/ folder.
   3. Creates ai-frontend-output/ (selection memory) if missing; it is never removed on refresh.
-  4. Installs skills into .agents/skills: copy mode copies the 17 kit skills (workflow + 16 UX flows);
-     if the project has a .claude/ folder, they are also linked into .claude/skills (junction/symlink,
-     fallback to copy). --design-skills adds the three external design skills via the CLI.
-  5. Checks Python/Laya; with --with-laya installs it and verifies.
+  4. Installs skills into .agents/skills: copy mode copies the 18 kit skills (workflow + 16 UX flows +
+     frontend-polish); if the project has a .claude/ folder, they are also linked into .claude/skills
+     (junction/symlink, fallback to copy). The 3 external design skills also install by default via
+     the CLI (use --no-design-skills to skip them).
+  5. Configures the Playwright MCP server for detected harnesses (.claude/ -> .mcp.json,
+     opencode.json -> mcp.playwright); prints instructions otherwise (--no-mcp to skip).
+  6. Checks Python/Laya; with --with-laya installs it and verifies.
 `);
 }
 
@@ -156,6 +165,80 @@ function linkSkillsForClaude(target, names) {
     }
   }
   return { skipped: false, linked, copied };
+}
+
+const PLAYWRIGHT_MCP_ARGS = ['@playwright/mcp@latest'];
+
+function readJsonConfig(path) {
+  try {
+    const raw = readFileSync(path, 'utf8').replace(/^\uFEFF/, ''); // tolerate a UTF-8 BOM (Windows editors)
+    return { ok: true, data: JSON.parse(raw) };
+  } catch {
+    return { ok: false };
+  }
+}
+
+function printMcpInstructions() {
+  console.log('- Playwright MCP: no Claude Code/OpenCode project config found. To enable it:');
+  console.log('    Claude Code:  claude mcp add playwright -- npx @playwright/mcp@latest');
+  console.log('    OpenCode:     add to opencode.json "mcp": { "playwright": { "type": "local", "command": ["npx", "@playwright/mcp@latest"], "enabled": true } }');
+}
+
+function setupPlaywrightMcp(target) {
+  let detected = false;
+  let configured = false;
+  const claudeDir = join(target, '.claude');
+  const opencodePath = join(target, 'opencode.json');
+  const opencodeJsoncPath = join(target, 'opencode.jsonc');
+
+  if (existsSync(claudeDir)) {
+    detected = true;
+    const mcpPath = join(target, '.mcp.json');
+    if (!existsSync(mcpPath)) {
+      writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: { playwright: { command: 'npx', args: PLAYWRIGHT_MCP_ARGS } } }, null, 2)}\n`, 'utf8');
+      console.log('- Playwright MCP: created .mcp.json (Claude Code)');
+      configured = true;
+    } else {
+      const parsed = readJsonConfig(mcpPath);
+      if (!parsed.ok) {
+        console.warn('  ! Playwright MCP: .mcp.json is not valid JSON; not modified. Add manually: "mcpServers": { "playwright": { "command": "npx", "args": ["@playwright/mcp@latest"] } }');
+      } else if (parsed.data.mcpServers && parsed.data.mcpServers.playwright) {
+        console.log('- Playwright MCP: already configured in .mcp.json (Claude Code)');
+        configured = true;
+      } else {
+        parsed.data.mcpServers = { ...(parsed.data.mcpServers ?? {}), playwright: { command: 'npx', args: PLAYWRIGHT_MCP_ARGS } };
+        writeFileSync(mcpPath, `${JSON.stringify(parsed.data, null, 2)}\n`, 'utf8');
+        console.log('- Playwright MCP: added to .mcp.json (Claude Code)');
+        configured = true;
+      }
+    }
+  }
+
+  if (existsSync(opencodePath)) {
+    detected = true;
+    const parsed = readJsonConfig(opencodePath);
+    if (!parsed.ok) {
+      console.warn('  ! Playwright MCP: opencode.json is not valid JSON; not modified. Add manually: "mcp": { "playwright": { "type": "local", "command": ["npx", "@playwright/mcp@latest"], "enabled": true } }');
+    } else if (parsed.data.mcp && parsed.data.mcp.playwright) {
+      console.log('- Playwright MCP: already configured in opencode.json');
+      configured = true;
+    } else {
+      parsed.data.mcp = { ...(parsed.data.mcp ?? {}), playwright: { type: 'local', command: ['npx', ...PLAYWRIGHT_MCP_ARGS], enabled: true } };
+      writeFileSync(opencodePath, `${JSON.stringify(parsed.data, null, 2)}\n`, 'utf8');
+      console.log('- Playwright MCP: added to opencode.json');
+      configured = true;
+    }
+  }
+
+  if (existsSync(opencodeJsoncPath)) {
+    detected = true;
+    console.log('- Playwright MCP: opencode.jsonc detected; it is not edited (comments would be lost). Add manually:');
+    console.log('    "mcp": { "playwright": { "type": "local", "command": ["npx", "@playwright/mcp@latest"], "enabled": true } }');
+  }
+
+  if (!detected) printMcpInstructions();
+  if (!configured && detected) console.log('  Add the playwright server manually as shown above.');
+  console.log('- Playwright MCP: install the browser once before the polish phase: npx playwright install chromium');
 }
 
 function findPython() {
@@ -246,9 +329,9 @@ function main() {
       const { names, copied } = installSkillsCopy(target);
       console.log(`- ${copied} skills copied to .agents/skills/ (clean: no lockfile, no symlinks)`);
       if (args.designSkills) {
-        runCliSkills(target, DESIGN_SKILL_REPOS, 'external design skills (--design-skills)');
+        runCliSkills(target, DESIGN_SKILL_REPOS, 'external design skills (impeccable + taste-skill + emilkowalski)');
       } else {
-        console.log('- external design skills skipped (add --design-skills for impeccable/taste-skill/emilkowalski)');
+        console.log('- external design skills skipped (--no-design-skills)');
       }
       const claude = linkSkillsForClaude(target, names);
       if (claude.skipped) {
@@ -259,6 +342,12 @@ function main() {
     }
   } else {
     console.log('- skills skipped (--no-skills)');
+  }
+
+  if (args.mcp) {
+    setupPlaywrightMcp(target);
+  } else {
+    console.log('- Playwright MCP skipped (--no-mcp)');
   }
 
   const python = findPython();
@@ -279,14 +368,20 @@ function main() {
 
   console.log(`
 Done. Next steps for the agent:
-  1. Read ai-frontend-guide-kit/AGENTS.md.
-  2. UX first: node ai-frontend-guide-kit/tools/context.mjs, then follow guides/01-UX-FLOWS.md
-     (if the repo already has UX, ask the user: summarize as-is or radical redesign).
-  3. Before searching components, check saved combinations: node ai-frontend-guide-kit/tools/memory.mjs combo list
-  4. Follow guides/00-START-HERE.md and record every decision:
+  1. Read ai-frontend-guide-kit/AGENTS.md and ask the user what they want before routing:
+     a new frontend (UX -> composition -> polish), a small change, a custom addition,
+     or polish only. Phases are entry points, not a fixed pipeline.
+  2. Phase 1 (UX/teoria): node ai-frontend-guide-kit/tools/context.mjs, then follow
+     guides/01-UX-FLOWS.md (if the repo already has UX, ask the user: summarize as-is
+     or radical redesign).
+  3. Phase 2 (composition): check saved combinations first with
+     node ai-frontend-guide-kit/tools/memory.mjs combo list, follow guides/00-START-HERE.md,
+     and record every decision:
      node ai-frontend-guide-kit/tools/memory.mjs add --screen ... --block ... --need "..." --decision reuse|adapt|build --id <entry-id>
-  5. Query candidates with node ai-frontend-guide-kit/tools/find.mjs ... and, only after asking
+     Query candidates with node ai-frontend-guide-kit/tools/find.mjs ... and, only after asking
      the user for consent, rank them with python ai-frontend-guide-kit/tools/laya_select.py --need "..." --confirmed.
+  4. Phase 3 (polish): use the frontend-polish skill with Playwright MCP; run
+     npx playwright install chromium once before the first browser pass.
 `);
 }
 

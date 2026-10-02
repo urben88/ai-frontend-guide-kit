@@ -1,58 +1,82 @@
-# AI Frontend Guide Kit
+# 🎨 AI Frontend Guide Kit
 
-Reusable-first UI component catalog and guided workflow for AI agents building frontends. This repository is both the **factory** (extraction pipeline + catalog) and the **distributable kit** you copy into any frontend project.
+**Reuse-first UI catalog + guided workflow for AI agents building frontends.**
+This repository is both the 🏭 **factory** (extraction pipeline + catalog) and the 📦 **distributable kit** you drop into any frontend project.
 
-- **Catalog:** 16 verified sources, 2,470 reusable entries, 20 categories, per-entry licenses and install commands.
-- **Guided kit (`ai-frontend-guide-kit/`):** `AGENTS.md` + 9 short guides (00–08) + `find`/`get` query tools. Self-contained, no build, no npm dependencies.
-- **Generic agent skill:** `skills/ai-frontend-guide/SKILL.md` teaches Codex/OpenAI, Claude Code, OpenCode and other agents how to use the kit. Install it standalone with `npx skills add urben88/ai-frontend-guide-kit --skill ai-frontend-guide`.
-- **UX flow layer:** 16 vendored UX skills (MIT, from `jpoindexter/ux-flow-skills`): `userflow` + 15 `flow-*` (auth, onboarding, checkout, paywall, settings, navigation, tables, forms, errors, empty states, AI chat…). They analyze the repo and produce a proven `UX-SPEC.md` + `flow-report.html` before any UI work; existing UX can be summarized as-is or radically redesigned (UX only).
-- **Selection memory:** `ai-frontend-output/` (per project) keeps an append-only history of decisions, a generated styles/components summary and named reusable combinations via `memory.mjs`.
-- **Local Laya ranking (optional):** `laya_select.py` ranks catalog candidates with calibrated probabilities, running entirely on the development PC.
+## ✨ What's inside
 
-## Install as a dependency (recommended)
+| | What | Details |
+|---|---|---|
+| 📚 | **Catalog** | 16 verified sources · 2,470 reusable entries · 20 categories · per-entry licenses and install commands |
+| 🧭 | **Guided kit** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + 3-phase workflow in 10 short guides (00–09) + `find`/`get` query tools. Self-contained: no build, no npm dependencies |
+| 🧠 | **Agent skills** | `ai-frontend-guide` (workflow), `frontend-polish` (phase 3) and 16 vendored UX skills (`userflow` + 15 `flow-*`, MIT) |
+| 💾 | **Selection memory** | `ai-frontend-output/`: append-only decision history, styles/components summary and reusable combinations |
+| 🔒 | **Laya (optional)** | Local decision engine that ranks catalog candidates with calibrated probabilities — everything runs on your PC |
+
+## 🔄 The three-phase workflow
+
+| Phase | What happens | You get |
+|---|---|---|
+| **1 · 🧠 UX & theory** | Proven flows (`userflow` + `flow-*`) and design tokens | `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `DESIGN.md` + theme |
+| **2 · 🧩 Composition** | Inventory → catalog search → reuse/adapt/build decision → install | Components adapted to your tokens |
+| **3 · ✨ Total polish** | External audits (`impeccable`, taste-skill, emilkowalski) + Playwright MCP loop + `@playwright/test` regression | A screen ready to ship |
+
+> 🔀 The phases are **entry points, not a strict pipeline**: the agent asks what you want — new frontend, small change, custom addition, polish only, UX only — and enters exactly where it fits.
+
+## 🚀 Quickstart
+
+### Option A · as a dependency (recommended)
 
 ```bash
-npm i -D github:urben88/ai-frontend-guide-kit          # or pin a version: #v1.1.0
-npx ai-frontend-guide-kit                              # setup (explicit, idempotent)
+npm i -D github:urben88/ai-frontend-guide-kit    # pin a version if you want: #v1.2.0
+npx ai-frontend-guide-kit                        # explicit, idempotent setup
 ```
 
-Optionally add a script to re-run it after updating the dependency: `"kit": "ai-frontend-guide-kit"` → `npm run kit`.
+Optional: add `"kit": "ai-frontend-guide-kit"` to your scripts and run `npm run kit` after updating.
+There is **no `postinstall`** — plain `npm install` never mutates your project.
 
-- Installs skills **cleanly into `.agents/skills/`** (17: workflow + 16 UX flows) — no `skills-lock.json`, no symlink sprawl.
-- If the project has a `.claude/` folder, the skills are also linked into `.claude/skills/` (junction/symlink, copy fallback).
-- `--design-skills` additionally installs impeccable/taste-skill/emilkowalski via the skills CLI (needs network).
-- `--skills-mode cli` keeps the previous full CLI flow (lockfile + multi-agent links).
-- npm registry publish is planned; for now use the GitHub ref (commit `main` or a version tag). There is **no `postinstall`**: `npm install` alone never mutates the project.
-
-## One-shot (no dependency)
+### Option B · one-shot (no dependency)
 
 ```bash
 npx github:urben88/ai-frontend-guide-kit
-
-# variants
-npx github:urben88/ai-frontend-guide-kit --no-skills          # kit + docs only
-npx github:urben88/ai-frontend-guide-kit --with-laya          # also install/update Laya
-npx github:urben88/ai-frontend-guide-kit --target ../my-app   # install into another folder
-npx github:urben88/ai-frontend-guide-kit --design-skills      # + external design skills via CLI
-
-# offline / no git: build the package once and reuse the tarball
-npm pack                                   # -> ai-frontend-guide-kit-1.1.0.tgz (~0.3 MB, includes skills)
-npx ./ai-frontend-guide-kit-1.1.0.tgz      # run it in the destination project
 ```
 
-The installer:
+### 🎛️ Flags
 
-1. Copies `ai-frontend-guide-kit/` into the target project (and removes the legacy `ai-frontend-guide/` folder if present).
-2. Adds a pointer block to the project's `AGENTS.md`.
-3. Creates `ai-frontend-output/` (selection memory) if missing — it is never removed on refresh.
-4. Copies the 17 kit skills (workflow + 16 UX flows) into `.agents/skills/`; links them into `.claude/skills/` when a `.claude/` folder exists; `--design-skills` adds the three external design skills via the skills CLI; `--skills-mode cli` uses the full CLI flow.
-5. Checks Python/Laya and prints the exact next step (use `--with-laya` to install Laya in the same command).
+| Flag | Effect |
+|---|---|
+| `--no-skills` | kit + docs only, no skills at all |
+| `--no-design-skills` | skip the 3 external design skills (impeccable/taste-skill/emilkowalski) |
+| `--no-mcp` | skip the Playwright MCP configuration |
+| `--with-laya` | also install/update Laya |
+| `--target <dir>` | install into another folder |
+| `--skills-mode cli` | legacy full CLI flow (lockfile + multi-agent links) |
 
-Then tell your agent: *"Read `ai-frontend-guide-kit/AGENTS.md` and follow its workflow."*
+### 📦 Offline / no git
 
-## Selection memory (`ai-frontend-output/`)
+```bash
+npm pack                                  # -> ai-frontend-guide-kit-1.2.0.tgz (~0.3 MB, includes skills)
+npx ./ai-frontend-guide-kit-1.2.0.tgz     # run it in the destination project
+```
 
-After every component decision the agent records it, so each project keeps an auditable history and reusable combinations:
+Then tell your agent:
+
+> *"Read `ai-frontend-guide-kit/AGENTS.md` and follow its workflow."*
+
+## 🛠️ What the installer does
+
+1. 📁 Copies `ai-frontend-guide-kit/` into the target project (removes the legacy `ai-frontend-guide/` if present).
+2. 📌 Adds the intake pointer to the project's `AGENTS.md` (ask first, then route through the three phases).
+3. 💾 Creates `ai-frontend-output/` (selection memory) if missing — never removed on refresh.
+4. 🧩 Installs the **18 skills of this repo** into `.agents/skills/` (clean: no lockfile, no symlink sprawl) plus the **16 external design skills** via their CLI by default. If the project has `.claude/`, the 18 are linked into `.claude/skills/`.
+5. 🎭 Configures the **Playwright MCP** server per detected harness (`.mcp.json` for Claude Code, `opencode.json` for OpenCode); otherwise prints the exact command. Browser once: `npx playwright install chromium`.
+6. 🐍 Checks Python/Laya and prints the exact next step.
+
+> 💡 External skills need network; if they fail the install continues and the kit still works with `find`/`get`.
+
+## 💾 Selection memory (`ai-frontend-output/`)
+
+Every component decision is recorded, so each project keeps an auditable history and reusable combinations:
 
 ```bash
 node ai-frontend-guide-kit/tools/memory.mjs combo list       # check saved combinations before searching
@@ -63,9 +87,10 @@ node ai-frontend-guide-kit/tools/memory.mjs combo show saas-landing-v1   # entri
 node ai-frontend-guide-kit/tools/memory.mjs combo apply saas-landing-v1  # reuse in another project
 ```
 
-The folder contains `selections.jsonl` (append-only history), `combinations.json` (named reusable sets) and `SUMMARY.md` (generated summary of styles and components extracted). It lives outside the kit so refreshes never touch it; reuse combinations across projects by copying `combinations.json` or pointing `AI_FRONTEND_OUTPUT` to a shared folder.
+The folder holds `selections.jsonl` (history), `combinations.json` (named sets) and `SUMMARY.md` (generated summary).
+It lives outside the kit so refreshes never touch it; share combinations across projects by copying `combinations.json` or pointing `AI_FRONTEND_OUTPUT` to a shared folder.
 
-## Laya (local decision engine)
+## 🔒 Laya (local decision engine, optional)
 
 Laya is a fast, non-autoregressive decision model with calibrated probabilities. Here it ranks component candidates by semantic fit; licenses and install commands always come from the catalog.
 
@@ -77,24 +102,24 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # pre
 python ai-frontend-guide-kit/tools/laya_select.py --need "pricing table with monthly/anual toggle" --category pricing --commercial --confirmed
 ```
 
-Laya is optional and the agent must ask before using it: ranking requires `--confirmed` as proof of consent (without it the script exits with code 3 and loads nothing). Everything runs locally: no server, no external APIs beyond the one-time Hugging Face checkpoint download. Without Python/Laya the kit still works via `node ai-frontend-guide-kit/tools/find.mjs` + `get.mjs`.
+⚠️ The agent **must ask before using it**: ranking requires `--confirmed` as proof of consent (without it the script exits with code 3 and loads nothing). Everything runs locally — no server, no external APIs beyond the one-time Hugging Face checkpoint download. Without Python/Laya the kit still works via `find.mjs` + `get.mjs`.
 
-## Repository layout
+## 📂 Repository layout
 
 ```
-├── ai-frontend-guide-kit/        # the distributable kit (copy this)
+├── ai-frontend-guide-kit/        # 📦 the distributable kit (copy this)
 │   ├── AGENTS.md · README.md · VERIFICATION.md
-│   ├── guides/00..08         # reuse-first UX/UI workflow (01 = UX flows)
+│   ├── guides/00..09         # reuse-first UX/UI workflow (00 = router, 01 = UX flows, 09 = iteration)
 │   ├── catalog/              # index + taxonomy + install-guides + 16 sources
 │   └── tools/                # context · find · get · memory · laya_select
-├── skills/                   # ai-frontend-guide + 16 vendored UX flow skills (MIT)
+├── skills/                   # ai-frontend-guide + frontend-polish + 16 vendored UX flow skills (MIT)
 ├── manifest/                 # catalog source of truth (generated)
 ├── tools/                    # extraction/refresh/build/validate pipeline
 ├── openspec/                 # change specs (OpenSpec)
 └── install.mjs               # one-command installer (bin)
 ```
 
-## Maintainer commands
+## 🧑‍🔧 Maintainer commands
 
 ```bash
 node tools/refresh.mjs <source_id>   # refresh one source (or "all")
@@ -106,8 +131,8 @@ node tools/validate.mjs --urls 10    # sample links
 npm run validate                     # same as above
 ```
 
-## Licensing
+## ⚖️ Licensing
 
-- The tooling and documentation in this repository follow their own licenses; check `openspec/` history for decisions.
-- Catalog entries inherit the license of their source (`license_type`, `commercial_use`, `limits` fields). Non-commercial entries (e.g. original Agents Kit families) are flagged and must not be used in commercial work.
-- The kit stores metadata and links only — never third-party component code.
+- 🧾 The tooling and documentation in this repository follow their own licenses; check `openspec/` history for decisions.
+- 📜 Catalog entries inherit the license of their source (`license_type`, `commercial_use`, `limits`). Non-commercial entries (e.g. original Agents Kit families) are flagged and must not be used in commercial work.
+- 🚫 The kit stores metadata and links only — never third-party component code.

@@ -12,8 +12,8 @@ Evidence recorded by the factory repo (`PilaresAplicaciones/Diseño`) when this 
 
 | Layer | Asset | Measured | Budget |
 |---|---|---|---|
-| 0 · Awareness | `AGENTS.md` | 56 lines | ~1 page |
-| 1 · Guides | `guides/*.md` | 28–63 lines each | ≤ 120 lines |
+| 0 · Awareness | `AGENTS.md` | 117 lines | ~1 page |
+| 1 · Guides | `guides/*.md` | 28–74 lines each | ≤ 120 lines |
 | 2 · Query | `find.mjs` example output | 945 bytes | < 1 KB |
 | 2 · Query | `get.mjs` example output | 715 bytes | < 2 KB |
 | Index | `catalog/component-manifest.json` | 7.6 KB | ≤ 10 KB |
@@ -88,3 +88,15 @@ Fresh `create-next-app` (Next.js 16.3.8, Tailwind v4, `--src-dir`) with shadcn/u
 - Claude linking: project with `.claude/skills/other-skill` → 17 junctions created (`LinkType: Junction → .agents/skills/<name>`), foreign skill untouched, zero fallback copies. Project without `.claude/` → the folder is not created. ✔
 - CLI regression: `--skills-mode cli` → 39 skills via the skills CLI (userflow + ai-frontend-guide + impeccable present) and `skills-lock.json` created, i.e. previous behavior preserved. ✔
 - No `postinstall`: plain `npm install` never mutates the project; setup is the explicit `npx ai-frontend-guide-kit`. npm registry publish deferred by the user. ✔
+
+## Three phases, external skills by default and Playwright MCP (2026-10-02)
+
+- **Default run** (`node install.mjs --target <temp>`) on a project with `.claude/`: 18 kit skills copied clean to `.agents/skills/` (workflow + 16 UX + `frontend-polish`), the 3 external repos installed via the skills CLI (impeccable 1 + design-taste-frontend 1 + emilkowalski 14 = 16), 34 skills total in `.agents/skills/` and linked in `.claude/skills/`, `.mcp.json` created with `mcpServers.playwright`, `AGENTS.md` preserved with the pointer appended, `ai-frontend-output/` created, Laya check OK and the closing message shows the three phases. ✔
+- **OpenCode merge**: `opencode.json` with an existing `mcp.other` server and `theme` key → `mcp.playwright` (local, enabled) added, other keys/servers preserved verbatim; a UTF-8 BOM (written by Windows editors) is tolerated by the parser (`readJsonConfig` strips it). ✔
+- **Idempotency**: second run reports `AGENTS.md already points`, `already configured in opencode.json` and refreshes the 18 skills without rewriting configs. ✔
+- **Invalid JSON**: `.mcp.json` with broken JSON → warning, file left unchanged, static instructions printed. ✔
+- **Opt-outs**: `--no-skills --no-mcp` installs no skills and writes no MCP config (`.agents/` absent); `--no-design-skills` copies the 18 kit skills and skips the CLI. ✔
+- **Offline / no npx**: PATH without npm → the 3 `npx skills add` calls fail with a warning each and the install continues (18 kit skills present, kit functional); Python/Laya not found is reported with the fallback message. ✔
+- **CLI regression** (`--skills-mode cli`): all repo skills + the 3 external repos installed via the skills CLI with lockfile, and Playwright MCP configured. Previous behavior preserved. ✔
+- **Packaging**: `node tools/build-kit.mjs` verifies 18 repo skills (adds `skills/frontend-polish/SKILL.md` and `guides/09-ITERATE.md` to the required assets); `node tools/validate.mjs` OK (2,470 entries). `npm pack --dry-run` (v1.2.0) includes the new skill and guide (64 files, 295 kB). ✔
+
