@@ -30,11 +30,22 @@ ai-frontend-guide-kit/
 │   ├── schema.json               # entry schema
 │   └── sources/*.json            # 16 source files (2,470 entries)
 └── tools/
+    ├── context.mjs        # repo context for the UX phase (REPO-CONTEXT.md)
     ├── find.mjs           # filtered catalog search (short output)
     ├── get.mjs            # full decision card for one entry
     ├── memory.mjs         # selection memory: history, summary, combinations
     └── laya_select.py     # local Laya ranking (optional accelerator; Python >= 3.10)
 ```
+
+## UX flows first (`ai-frontend-output/ux/`)
+
+The kit ships **16 vendored UX skills** (MIT, from `jpoindexter/ux-flow-skills`): the `userflow` dispatcher plus 15 `flow-*` skills (auth, onboarding, checkout, paywall, settings, navigation, app shell, tables, search, forms, errors, empty states, permissions, sharing, AI chat). Guide `01-UX-FLOWS` runs before any UI work:
+
+- `node tools/context.mjs` → `REPO-CONTEXT.md` (includes whether the repo already has UX).
+- **No UX** → design from scratch with `userflow` → `UX-SPEC.md` + `flow-report.html`.
+- **UX exists** → ask the user: *Summarize* (as-is + audit) or *Radical redesign* (baseline + ideal UX + diff, UX only). Never redesign silently.
+
+The UI inventory and `memory.mjs --screen/--block` derive from `UX-SPEC.md`.
 
 ## Selection memory (`ai-frontend-output/`)
 
@@ -78,4 +89,4 @@ Copy the updated folder again into projects when the catalog changes. Each entry
 - Reuse or adapt before creating (see `guides/05-REUSE.md`).
 - Respect `license_type` / `commercial_use` / `limits` (see `AGENTS.md`).
 - Keep high-impact animations to 1–2 per view (see `guides/07-PHILOSOPHY.md`).
-- Do not paste third-party source into this kit — it stores metadata and links only.
+- Do not paste third-party component source into this kit — the catalog stores metadata and links only; the vendored UX skills keep their own MIT license (see `skills/UX-SKILLS-LICENSE` in the repository).

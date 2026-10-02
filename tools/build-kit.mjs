@@ -18,7 +18,8 @@ const REQUIRED_KIT_FILES = [
   'AGENTS.md',
   'README.md',
   'guides/00-START-HERE.md',
-  'guides/01-ANCHOR.md',
+  'guides/01-UX-FLOWS.md',
+  'guides/ADAPTERS.md',
   'guides/02-TOKENS.md',
   'guides/03-INVENTORY.md',
   'guides/04-FIND.md',
@@ -30,10 +31,37 @@ const REQUIRED_KIT_FILES = [
   'tools/get.mjs',
   'tools/laya_select.py',
   'tools/memory.mjs',
+  'tools/context.mjs',
   'catalog/component-manifest.json',
   'catalog/taxonomy.md',
   'catalog/install-guides.md',
   'catalog/schema.json',
+];
+
+const FLOW_SKILLS = [
+  'flow-ai-chat',
+  'flow-app-shell',
+  'flow-auth',
+  'flow-checkout',
+  'flow-empty-states',
+  'flow-errors',
+  'flow-forms',
+  'flow-navigation',
+  'flow-onboarding',
+  'flow-paywall',
+  'flow-permissions',
+  'flow-search',
+  'flow-settings',
+  'flow-sharing',
+  'flow-tables',
+];
+
+const REQUIRED_REPO_FILES = [
+  'skills/UX-SKILLS-ORIGIN.md',
+  'skills/UX-SKILLS-LICENSE',
+  'skills/userflow/SKILL.md',
+  'skills/userflow/report-template.html',
+  ...FLOW_SKILLS.map((name) => `skills/${name}/SKILL.md`),
 ];
 
 function hashFile(path) {
@@ -66,6 +94,13 @@ function main() {
     process.exit(1);
   }
 
+  const missingRepo = REQUIRED_REPO_FILES.filter((file) => !existsSync(join(ROOT, file)));
+  if (missingRepo.length > 0) {
+    console.error(`Kit build FAILED. Missing vendored UX skills:\n- ${missingRepo.join('\n- ')}`);
+    console.error('Run: node tools/sync-ux-skills.mjs');
+    process.exit(1);
+  }
+
   const sourceFiles = readdirSync(join(MANIFEST_DIR, 'sources')).filter((name) => name.endsWith('.json'));
   let coherent = true;
   for (const file of sourceFiles) {
@@ -79,6 +114,7 @@ function main() {
 
   const totalBytes = dirSize(KIT_DIR);
   console.log(`kit: ${REQUIRED_KIT_FILES.length} required assets present, ${sourceFiles.length} source files synced`);
+  console.log(`kit: ${FLOW_SKILLS.length + 1} UX skills vendored (userflow + ${FLOW_SKILLS.length} flow-*) with license + origin pin`);
   console.log(`kit: catalog coherent with manifest: ${coherent ? 'yes' : 'NO'}`);
   console.log(`kit: total size ${(totalBytes / 1024 / 1024).toFixed(2)} MB at ${relative(ROOT, KIT_DIR)}`);
   if (!coherent) process.exit(1);

@@ -29,7 +29,7 @@ npx github:urben88/ai-frontend-guide-kit
 
 | Step | Guide | Output |
 |---|---|---|
-| 1 | `01-ANCHOR.md` | `PRODUCT.md` (audience, conversion, flows, screens) |
+| 1 | `01-UX-FLOWS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` (4 paths) |
 | 2 | `02-TOKENS.md` | `DESIGN.md` + theme (Figma MCP or fallback) |
 | 3 | `03-INVENTORY.md` | components needed per screen (no libraries yet) |
 | 4 | `04-FIND.md` | candidate shortlist from the catalog |
@@ -37,6 +37,24 @@ npx github:urben88/ai-frontend-guide-kit
 | 6 | `06-ADAPT.md` | adapted components with your tokens |
 | 7 | `07-PHILOSOPHY.md` | hierarchy, springs, anti-generic rules |
 | 8 | `08-VERIFY.md` | Playwright checks green |
+
+## UX first (proven flows)
+
+Run the UX phase before any UI work. It uses the bundled UX flow skills (`userflow` + 15 `flow-*`: auth, onboarding, checkout, paywall, settings, navigation, tables, forms, errors, empty states, AI chat…).
+
+```bash
+node ai-frontend-guide-kit/tools/context.mjs   # → ai-frontend-output/ux/REPO-CONTEXT.md (incl. ux_present)
+```
+
+Then follow `ai-frontend-guide-kit/guides/01-UX-FLOWS.md`:
+
+- No UX in the repo → design from scratch with `userflow` (load 1–4 flow skills, never from memory) → `UX-SPEC.md` + `flow-report.html`.
+- UX exists → **ask the user once**: Summarize (as-is + audit, no changes) or Radical redesign (baseline → ideal UX → diff). Never redesign silently; redesign is UX-only (`PRODUCT.md` stays).
+- Single surface → `/userflow audit …` (findings only).
+
+**BMAD / spec-driven repos:** `context.mjs` detects them (`Framework:` in `REPO-CONTEXT.md`). Read `ai-frontend-guide-kit/guides/ADAPTERS.md`: with a BMAD PRD use it as the business anchor (no duplicate `PRODUCT.md`) and cite stories with `--ref "story:<id>"`; with OpenSpec, specs are the behavioral source of truth and decisions cite `--ref "spec:<capability>"`.
+
+The UI inventory and memory `--screen/--block` names come from `UX-SPEC.md`.
 
 ## Query the catalog (do this before writing components)
 

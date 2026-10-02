@@ -66,3 +66,16 @@ Fresh `create-next-app` (Next.js 16.3.8, Tailwind v4, `--src-dir`) with shadcn/u
 - Combinations: `combo save saas-landing-v1 --note …` stored both decisions with aggregated styles; `combo list` printed one line per combination; `combo show` listed entries with install commands re-read from the catalog; `combo apply` appended the decisions to the history with the "from combination …" note. ✔
 - Installer provisioning: first install created `ai-frontend-output/` with its README; after recording a decision, a second install reported "ai-frontend-output/ found: preserved" and the history was intact. ✔
 - Docs and skill updated: `AGENTS.md`, `guides/00`, `guides/04` (check combinations first), `guides/05` (record every decision), `SKILL.md` generic skill, kit and root READMEs. ✔
+
+## UX flow layer (2026-10-02)
+
+- 16 UX skills vendored from `jpoindexter/ux-flow-skills` at commit `fc7f4a4b91` (MIT license copied verbatim; every SKILL.md validated: frontmatter `name` matches the directory and `description` present). `sync-ux-skills.mjs --check` reports "up to date". ✔
+- `tools/sync-ux-skills.mjs` re-vendors from the pinned source, aborts if the origin license is not MIT, removes upstream-deleted skills and refreshes `UX-SKILLS-ORIGIN.md` + `UX-SKILLS-LICENSE`. ✔
+- `tools/context.mjs` on a real Next.js repo: detected Next.js + Tailwind v4 + motion/shadcn/daisyui, 1 route, 4 docs, `ux_present=true` and the summarize-vs-redesign suggestion; on an empty repo: `ux_present=false` → from scratch. Output ≤ ~150 lines in `ai-frontend-output/ux/REPO-CONTEXT.md`. ✔
+- Guide `01-UX-FLOWS.md` replaces `01-ANCHOR.md`: four paths (A from scratch, B as-is summary, C radical redesign with mandatory baseline + diff, UX-only respecting PRODUCT.md, D spot audit) and the gate that blocks the UI phase without `UX-SPEC.md` (screens + empty/loading/error states + flows). ✔
+
+## Framework adapters (BMAD / spec-driven)
+
+- Detection verified: a simulated BMAD repo (`.bmad-core/`, `docs/prd.md`, 2 story files) → `framework: bmad` with evidence; this repository (`openspec/`) → `framework: spec-driven`. Feature detection is tolerant and does not false-positive on a plain product repo. ✔
+- `guides/ADAPTERS.md` documents the artifact mapping (PRD/brief as anchor, UX docs as the as-is state, stories → screens, OpenSpec specs as the behavioral contract) and the no-duplicate-sources rule; it is linked from `AGENTS.md`, `SKILL.md`, `00-START-HERE` and `01-UX-FLOWS`. ✔
+- `memory.mjs add --ref "story:3.2"` stores the trace and `SUMMARY.md` shows it in the new Ref column (verified with a real record). ✔

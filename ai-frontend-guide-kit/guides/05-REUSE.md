@@ -58,6 +58,7 @@ node tools/memory.mjs add --screen <screen> --block <block> --need "<need>" \
 ```
 
 - Facts (license, commercial flag, install command) are copied from the catalog — never type them by hand.
+- `--screen` and `--block` MUST match the names used in `ai-frontend-output/ux/UX-SPEC.md` (this keeps UX and component decisions in sync).
 - Custom build: `--decision build --name "Custom logo marquee"` (no id needed).
 - Check progress with `node tools/memory.mjs list`; the generated summary lives in `ai-frontend-output/SUMMARY.md`.
 - When a screen's decisions are complete, save them as a reusable combination:

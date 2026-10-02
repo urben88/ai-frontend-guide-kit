@@ -32,7 +32,7 @@ Never load all `catalog/sources/*.json` files into context. Never read `install-
 | Step | Guide | Output |
 |---|---|---|
 | 0 | `guides/00-START-HERE.md` | flow map + rules |
-| 1 | `guides/01-ANCHOR.md` | `PRODUCT.md` (audience, conversion, flows, screens) |
+| 1 | `guides/01-UX-FLOWS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` |
 | 2 | `guides/02-TOKENS.md` | `DESIGN.md` + Tailwind v4 theme (Figma MCP or fallback) |
 | 3 | `guides/03-INVENTORY.md` | component inventory per screen |
 | 4 | `guides/04-FIND.md` | shortlist of candidates per need (optionally Laya-ranked) |
@@ -68,6 +68,23 @@ Rules:
 - Treat probabilities as **relative** between candidates; if the top score is low the script says so — compare alternatives or broaden filters.
 - If Python/Laya is unavailable, continue with `find`/`get`. Never block the workflow on Laya.
 - Pre-filter is deterministic and mandatory: non-commercial entries never reach the model for commercial projects.
+
+## UX phase first (`ai-frontend-output/ux/`)
+
+Before any UI work, run the UX phase with the bundled UX flow skills (`userflow` + 15 `flow-*`, proven patterns for auth, onboarding, checkout, paywall, settings, navigation, tables, forms, errors, empty states, AI chat…):
+
+```bash
+node tools/context.mjs        # scans the repo → ai-frontend-output/ux/REPO-CONTEXT.md (incl. ux_present)
+```
+
+Then follow `guides/01-UX-FLOWS.md`:
+
+- **No UX detected** → design from scratch with the `userflow` dispatcher (load 1–4 `flow-*` skills, never from memory) → `UX-SPEC.md` + `flow-report.html`.
+- **UX exists** → **ask the user once**: *Summarize* (as-is documentation + anti-pattern audit, no changes) or *Radical redesign* (baseline → ideal UX → diff). Never redesign silently. Redesign is UX-only: `PRODUCT.md` stays.
+- **Single surface** → spot audit via `/userflow audit …` (findings only).
+- **BMAD / spec-driven repos** → read `guides/ADAPTERS.md`. Detection is automatic (`Framework:` in `REPO-CONTEXT.md`): with a BMAD PRD, use it as the business anchor and cite stories with `--ref "story:<id>"`; with OpenSpec, specs are the behavioral source of truth and decisions cite `--ref "spec:<capability>"`.
+
+Gate: do not start the UI steps until `UX-SPEC.md` lists screens with empty/loading/error states and flows. The UI inventory and `memory.mjs --screen/--block` come from it.
 
 ## Selection memory (`ai-frontend-output/`)
 

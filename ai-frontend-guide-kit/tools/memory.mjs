@@ -11,7 +11,7 @@
  *   SUMMARY.md          generated summary (regenerated on every mutation)
  *
  * Usage:
- *   node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> [--style a,b] [--notes "..."]
+ *   node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> [--style a,b] [--ref "spec:<capability>|story:<id>"] [--notes "..."]
  *   node tools/memory.mjs add --screen landing --block custom-x --need "..." --decision build --name "Custom marquee"
  *   node tools/memory.mjs list [--screen landing] [--limit 15] [--json]
  *   node tools/memory.mjs summary
@@ -129,10 +129,10 @@ function regenerateSummary(outputDir) {
   lines.push('');
   lines.push('## Latest decision per screen/block');
   lines.push('');
-  lines.push('| Screen | Block | Decision | Component | Source | License |');
-  lines.push('|---|---|---|---|---|---|');
+  lines.push('| Screen | Block | Decision | Component | Source | License | Ref |');
+  lines.push('|---|---|---|---|---|---|---|');
   for (const record of latest.sort((a, b) => `${a.screen}/${a.block}`.localeCompare(`${b.screen}/${b.block}`))) {
-    lines.push(`| ${record.screen} | ${record.block} | ${record.decision} | ${record.entry_id ?? record.name ?? '—'} | ${record.source ?? '—'} | ${record.license_type ?? '—'} |`);
+    lines.push(`| ${record.screen} | ${record.block} | ${record.decision} | ${record.entry_id ?? record.name ?? '—'} | ${record.source ?? '—'} | ${record.license_type ?? '—'} | ${record.ref ?? '—'} |`);
   }
   lines.push('');
   if (Object.keys(styleCounts).length > 0) {
@@ -181,6 +181,7 @@ function commandAdd(args, outputDir, catalog) {
     style_tags: flags.style ? String(flags.style).split(',').map((tag) => tag.trim()).filter(Boolean) : [],
     notes: flags.notes ?? '',
   };
+  if (flags.ref) record.ref = flags.ref;
 
   if (flags.id) {
     const entry = catalog.get(flags.id);
@@ -216,7 +217,7 @@ function commandList(args, outputDir) {
   }
   console.log(`# ${filtered.length} decisions recorded (showing ${rows.length}) — memory dir: ${outputDir}`);
   for (const record of rows) {
-    console.log(`${record.ts.slice(0, 10)} | ${record.screen}/${record.block} | ${record.decision} | ${record.entry_id ?? record.name} | ${record.license_type ?? '—'}`);
+    console.log(`${record.ts.slice(0, 10)} | ${record.screen}/${record.block} | ${record.decision} | ${record.entry_id ?? record.name} | ${record.license_type ?? '—'}${record.ref ? ` | ${record.ref}` : ''}`);
   }
 }
 

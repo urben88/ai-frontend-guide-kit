@@ -44,7 +44,7 @@ const SKILLS = [
   ['https://github.com/pbakaus/impeccable', '--skill', 'impeccable'],
   ['https://github.com/Leonxlnx/taste-skill', '--skill', 'design-taste-frontend'],
   ['https://github.com/emilkowalski/skills', null],
-  ['https://github.com/urben88/ai-frontend-guide-kit', '--skill', 'ai-frontend-guide'],
+  ['https://github.com/urben88/ai-frontend-guide-kit', null],
 ];
 
 function parseArgs(argv) {
@@ -75,7 +75,8 @@ What it does:
   1. Copies ai-frontend-guide-kit/ (catalog + guides + tools) into the target.
   2. Adds a pointer block to the target's AGENTS.md and removes the legacy ai-frontend-guide/ folder.
   3. Creates ai-frontend-output/ (selection memory) if missing; it is never removed on refresh.
-  4. Installs the design skills and the kit's own agent skill via "npx skills add" unless --no-skills.
+  4. Installs via "npx skills add": the workflow skill + 16 UX flow skills (userflow, flow-*) from
+     this repo, plus impeccable, taste-skill and emilkowalski — unless --no-skills.
   5. Checks Python/Laya; with --with-laya installs it and verifies.
 `);
 }
@@ -162,7 +163,7 @@ function main() {
   }
 
   if (args.skills) {
-    console.log('- installing skills (impeccable, taste-skill, emilkowalski, ai-frontend-guide)');
+    console.log('- installing skills (workflow + 16 UX flow skills from this repo, plus impeccable/taste-skill/emilkowalski)');
     const isWindows = process.platform === 'win32';
     for (const [repo, flag, skill] of SKILLS) {
       const skillArgs = flag && skill ? [flag, skill] : [];
@@ -199,9 +200,11 @@ function main() {
   console.log(`
 Done. Next steps for the agent:
   1. Read ai-frontend-guide-kit/AGENTS.md.
-  2. Before searching, check saved combinations: node ai-frontend-guide-kit/tools/memory.mjs combo list
-  3. Follow guides/00-START-HERE.md.
-  4. Record every decision: node ai-frontend-guide-kit/tools/memory.mjs add --screen ... --block ... --need "..." --decision reuse|adapt|build --id <entry-id>
+  2. UX first: node ai-frontend-guide-kit/tools/context.mjs, then follow guides/01-UX-FLOWS.md
+     (if the repo already has UX, ask the user: summarize as-is or radical redesign).
+  3. Before searching components, check saved combinations: node ai-frontend-guide-kit/tools/memory.mjs combo list
+  4. Follow guides/00-START-HERE.md and record every decision:
+     node ai-frontend-guide-kit/tools/memory.mjs add --screen ... --block ... --need "..." --decision reuse|adapt|build --id <entry-id>
   5. Query candidates with node ai-frontend-guide-kit/tools/find.mjs ... and, only after asking
      the user for consent, rank them with python ai-frontend-guide-kit/tools/laya_select.py --need "..." --confirmed.
 `);

@@ -2,6 +2,8 @@
 
 Purpose: turn each screen into a list of **needed components by category**, before looking at any library. This is the reflection step that makes the catalog useful.
 
+**Source of truth:** `ai-frontend-output/ux/UX-SPEC.md` (from guide 01). Inventory rows derive from its screens/blocks — including the empty, loading and error states listed there. Do not invent screens outside the UX-SPEC.
+
 ## Method
 
 For every screen in `PRODUCT.md`:
