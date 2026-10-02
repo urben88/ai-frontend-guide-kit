@@ -58,3 +58,11 @@ Fresh `create-next-app` (Next.js 16.3.8, Tailwind v4, `--src-dir`) with shadcn/u
 - `--check` and `--dry-run` still exit **0** without consent (they do not execute the model). ✔
 - Ranking with `--confirmed` (same test need as before) → exit **0**, model `english`, 5 candidates, **9.4 s** with the checkpoint cached; top result unchanged (`floatui-hero-hero-section-with-gradient-background`, P(fit)=0.76, also the `choice` pick). ✔
 - Rule documented in `AGENTS.md` (first Laya rule), `guides/04-FIND.md`, both `README.md` files and the installer's closing message; the flag is also documented in the script docstring with its exit codes. ✔
+
+## Selection memory (2026-10-02)
+
+- `memory.mjs add` recorded a real decision enriched from the catalog (Float UI hero → license `custom`, commercial `conditional`, install command copied from the entry) plus a `build` decision without id; an unknown id exited 1 with a clear message pointing to `find.mjs`. ✔
+- `SUMMARY.md` regenerated on every mutation with totals, latest decision per screen/block, style counts, sources used, saved combinations and recent decisions. ✔
+- Combinations: `combo save saas-landing-v1 --note …` stored both decisions with aggregated styles; `combo list` printed one line per combination; `combo show` listed entries with install commands re-read from the catalog; `combo apply` appended the decisions to the history with the "from combination …" note. ✔
+- Installer provisioning: first install created `ai-frontend-output/` with its README; after recording a decision, a second install reported "ai-frontend-output/ found: preserved" and the history was intact. ✔
+- Docs and skill updated: `AGENTS.md`, `guides/00`, `guides/04` (check combinations first), `guides/05` (record every decision), `SKILL.md` generic skill, kit and root READMEs. ✔

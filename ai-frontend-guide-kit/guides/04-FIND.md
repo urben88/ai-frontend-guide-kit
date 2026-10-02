@@ -32,11 +32,16 @@ python tools/laya_select.py --need "…the need…" --category <category> --comm
 
 ## Working method
 
-1. For each inventory row run **one** `find` with the tightest filters.
-2. If 0 results: broaden one filter at a time (category → text → drop stack). If still 0, mark "build custom" and move on.
-3. For the top 2–3 results per row run `get` and note: license, commercial flag, dependencies, install command.
-4. Add candidates to your working table; do not stop at the first result — compare at least two when available.
-5. Optional: when the comparison is hard, ask the user for consent and then run `python tools/laya_select.py --need "…" --confirmed` with the same filters; adopt its order as the shortlist order (facts still come from `get`).
+1. Before searching, check saved combinations (they live next to the kit and survive refreshes):
+   ```bash
+   node tools/memory.mjs combo list
+   ```
+   If one fits this project, `node tools/memory.mjs combo show <name>` and reuse its entries (record them with `combo apply` or `add`).
+2. For each inventory row run **one** `find` with the tightest filters.
+3. If 0 results: broaden one filter at a time (category → text → drop stack). If still 0, mark "build custom" and move on.
+4. For the top 2–3 results per row run `get` and note: license, commercial flag, dependencies, install command.
+5. Add candidates to your working table; do not stop at the first result — compare at least two when available.
+6. Optional: when the comparison is hard, ask the user for consent and then run `python tools/laya_select.py --need "…" --confirmed` with the same filters; adopt its order as the shortlist order (facts still come from `get`).
 
 ## Candidate table (extend `INVENTORY.md`)
 

@@ -33,7 +33,7 @@ npx github:urben88/ai-frontend-guide-kit
 | 2 | `02-TOKENS.md` | `DESIGN.md` + theme (Figma MCP or fallback) |
 | 3 | `03-INVENTORY.md` | components needed per screen (no libraries yet) |
 | 4 | `04-FIND.md` | candidate shortlist from the catalog |
-| 5 | `05-REUSE.md` | reuse / adapt / build decision + install |
+| 5 | `05-REUSE.md` | reuse / adapt / build decision + install + memory record |
 | 6 | `06-ADAPT.md` | adapted components with your tokens |
 | 7 | `07-PHILOSOPHY.md` | hierarchy, springs, anti-generic rules |
 | 8 | `08-VERIFY.md` | Playwright checks green |
@@ -52,6 +52,21 @@ Rules:
 - Licenses are facts: check `license_type` / `commercial_use` in `get` before using anything.
   Never use `non-commercial` entries in commercial work; verify `unknown` ones on their page.
 - Keep high-impact animations to 1–2 per view.
+
+## Selection memory (`ai-frontend-output/`)
+
+Keep a reusable history of decisions and combinations (the folder survives kit refreshes):
+
+```bash
+node ai-frontend-guide-kit/tools/memory.mjs combo list     # check saved combinations BEFORE searching
+node ai-frontend-guide-kit/tools/memory.mjs add --screen <screen> --block <block> --need "..." \
+  --decision reuse|adapt|build --id <entry-id> [--style a,b] [--notes "..."]
+node ai-frontend-guide-kit/tools/memory.mjs combo save <name> --note "..."   # snapshot for reuse
+node ai-frontend-guide-kit/tools/memory.mjs combo show <name>                # entries + install commands
+node ai-frontend-guide-kit/tools/memory.mjs combo apply <name>               # reuse in this project
+```
+
+Rules: check combinations before searching; record **every** decision right after choosing (facts come from the catalog); `ai-frontend-output/SUMMARY.md` is the generated styles/components summary.
 
 ## Laya (optional local ranking — ask the user first)
 

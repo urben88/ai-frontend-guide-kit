@@ -16,7 +16,7 @@ You are about to build frontend UX/UI. This workflow exists so you **reuse befor
 | 2 | `02-TOKENS.md` | `DESIGN.md` + Tailwind v4 theme (Figma MCP or fallback) |
 | 3 | `03-INVENTORY.md` | Component inventory per screen (categories, not code) |
 | 4 | `04-FIND.md` | Shortlist of catalog candidates per need |
-| 5 | `05-REUSE.md` | Decision per need: reuse / adapt / build + install command |
+| 5 | `05-REUSE.md` | Decision per need: reuse / adapt / build + install + memory record |
 | 6 | `06-ADAPT.md` | Adapted components using your tokens |
 | 7 | `07-PHILOSOPHY.md` | Hierarchy, springs and anti-generic rules applied |
 | 8 | `08-VERIFY.md` | Playwright checks green + audit loop closed |

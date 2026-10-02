@@ -50,8 +50,24 @@ After install: run the dev server, render the component in isolation once, and c
 - Never strip license notices from copied files.
 - Do not install a component whose license you have not confirmed when `commercial_use` is `conditional` or `unknown`.
 
+## Record every decision (required)
+
+```bash
+node tools/memory.mjs add --screen <screen> --block <block> --need "<need>" \
+  --decision reuse|adapt|build --id <entry-id> [--style a,b] [--notes "..."]
+```
+
+- Facts (license, commercial flag, install command) are copied from the catalog — never type them by hand.
+- Custom build: `--decision build --name "Custom logo marquee"` (no id needed).
+- Check progress with `node tools/memory.mjs list`; the generated summary lives in `ai-frontend-output/SUMMARY.md`.
+- When a screen's decisions are complete, save them as a reusable combination:
+  ```bash
+  node tools/memory.mjs combo save <name> --note "what this combination is for"
+  ```
+  Combinations can be reused in other projects (`combo show`/`combo apply`) by copying `combinations.json` or pointing `AI_FRONTEND_OUTPUT` to a shared folder.
+
 ## Deliverable
 
-Decision log per row: `reused | adapted | built` + entry id + justification. Attach it to the PR or keep it next to `INVENTORY.md`.
+Every inventory row recorded in the memory: `reused | adapted | built` + entry id + justification. The history and `SUMMARY.md` are the auditable decision log.
 
 Next: `06-ADAPT.md`.

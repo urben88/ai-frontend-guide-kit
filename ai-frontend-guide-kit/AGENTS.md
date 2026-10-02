@@ -69,6 +69,24 @@ Rules:
 - If Python/Laya is unavailable, continue with `find`/`get`. Never block the workflow on Laya.
 - Pre-filter is deterministic and mandatory: non-commercial entries never reach the model for commercial projects.
 
+## Selection memory (`ai-frontend-output/`)
+
+Every decision is recorded and reusable. The folder lives next to the kit and **survives kit refreshes** — never store memory inside `ai-frontend-guide-kit/`.
+
+```bash
+node tools/memory.mjs combo list        # check saved combinations BEFORE searching
+node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> --style gradient,dark
+node tools/memory.mjs list              # recent decisions
+node tools/memory.mjs combo save saas-landing-v1 --note "..."   # snapshot for reuse
+node tools/memory.mjs combo apply saas-landing-v1                # reuse in this project
+```
+
+Rules:
+
+- Check `combo list` before searching the catalog; reuse existing combinations when they fit.
+- Record every decision with `add` right after choosing (facts come from the catalog).
+- `ai-frontend-output/SUMMARY.md` is the generated summary of styles and components extracted.
+
 ## License discipline
 
 - `license_type: non-commercial` → **do not use in commercial work** (permission required).

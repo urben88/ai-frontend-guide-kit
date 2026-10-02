@@ -5,6 +5,7 @@ Reusable-first UI component catalog and guided workflow for AI agents building f
 - **Catalog:** 16 verified sources, 2,470 reusable entries, 20 categories, per-entry licenses and install commands.
 - **Guided kit (`ai-frontend-guide-kit/`):** `AGENTS.md` + 9 short guides (00–08) + `find`/`get` query tools. Self-contained, no build, no npm dependencies.
 - **Generic agent skill:** `skills/ai-frontend-guide/SKILL.md` teaches Codex/OpenAI, Claude Code, OpenCode and other agents how to use the kit. Install it standalone with `npx skills add urben88/ai-frontend-guide-kit --skill ai-frontend-guide`.
+- **Selection memory:** `ai-frontend-output/` (per project) keeps an append-only history of decisions, a generated styles/components summary and named reusable combinations via `memory.mjs`.
 - **Local Laya ranking (optional):** `laya_select.py` ranks catalog candidates with calibrated probabilities, running entirely on the development PC.
 
 ## Quickstart (install into a project)
@@ -30,10 +31,26 @@ The installer:
 
 1. Copies `ai-frontend-guide-kit/` into the target project (and removes the legacy `ai-frontend-guide/` folder if present).
 2. Adds a pointer block to the project's `AGENTS.md`.
-3. Installs the design skills (`impeccable`, `taste-skill`, `emilkowalski`) plus the kit's own agent skill (`ai-frontend-guide`) unless `--no-skills`.
-4. Checks Python/Laya and prints the exact next step (use `--with-laya` to install Laya in the same command).
+3. Creates `ai-frontend-output/` (selection memory) if missing — it is never removed on refresh.
+4. Installs the design skills (`impeccable`, `taste-skill`, `emilkowalski`) plus the kit's own agent skill (`ai-frontend-guide`) unless `--no-skills`.
+5. Checks Python/Laya and prints the exact next step (use `--with-laya` to install Laya in the same command).
 
 Then tell your agent: *"Read `ai-frontend-guide-kit/AGENTS.md` and follow its workflow."*
+
+## Selection memory (`ai-frontend-output/`)
+
+After every component decision the agent records it, so each project keeps an auditable history and reusable combinations:
+
+```bash
+node ai-frontend-guide-kit/tools/memory.mjs combo list       # check saved combinations before searching
+node ai-frontend-guide-kit/tools/memory.mjs add --screen landing --block hero --need "..." \
+  --decision reuse --id <entry-id> --style gradient,dark
+node ai-frontend-guide-kit/tools/memory.mjs combo save saas-landing-v1 --note "landing SaaS minimalista"
+node ai-frontend-guide-kit/tools/memory.mjs combo show saas-landing-v1   # entries + install commands
+node ai-frontend-guide-kit/tools/memory.mjs combo apply saas-landing-v1  # reuse in another project
+```
+
+The folder contains `selections.jsonl` (append-only history), `combinations.json` (named reusable sets) and `SUMMARY.md` (generated summary of styles and components extracted). It lives outside the kit so refreshes never touch it; reuse combinations across projects by copying `combinations.json` or pointing `AI_FRONTEND_OUTPUT` to a shared folder.
 
 ## Laya (local decision engine)
 

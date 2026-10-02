@@ -29,6 +29,7 @@ const REQUIRED_KIT_FILES = [
   'tools/find.mjs',
   'tools/get.mjs',
   'tools/laya_select.py',
+  'tools/memory.mjs',
   'catalog/component-manifest.json',
   'catalog/taxonomy.md',
   'catalog/install-guides.md',

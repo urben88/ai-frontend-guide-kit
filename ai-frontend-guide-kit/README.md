@@ -32,7 +32,19 @@ ai-frontend-guide-kit/
 └── tools/
     ├── find.mjs           # filtered catalog search (short output)
     ├── get.mjs            # full decision card for one entry
+    ├── memory.mjs         # selection memory: history, summary, combinations
     └── laya_select.py     # local Laya ranking (optional accelerator; Python >= 3.10)
+```
+
+## Selection memory (`ai-frontend-output/`)
+
+Created next to the kit by the installer and **preserved on refreshes**: append-only history (`selections.jsonl`), named reusable combinations (`combinations.json`) and a generated styles/components summary (`SUMMARY.md`).
+
+```bash
+node tools/memory.mjs combo list          # check saved combinations before searching
+node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> --style gradient,dark
+node tools/memory.mjs combo save saas-landing-v1 --note "..."
+node tools/memory.mjs combo apply saas-landing-v1
 ```
 
 ## Laya (optional local ranking)

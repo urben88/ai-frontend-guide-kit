@@ -23,6 +23,21 @@ const KIT_SOURCE = join(REPO_ROOT, 'ai-frontend-guide-kit');
 const AGENTS_BLOCK = `## Frontend UI
 Before creating UI components, follow \`ai-frontend-guide-kit/AGENTS.md\` (reuse-first workflow).
 Optional accelerator: \`python ai-frontend-guide-kit/tools/laya_select.py --check\` (local Laya decision engine).
+Selection memory: record every decision with \`node ai-frontend-guide-kit/tools/memory.mjs add ...\` and reuse saved
+combinations from \`ai-frontend-output/\` before searching the catalog.
+`;
+
+const OUTPUT_README = `# ai-frontend-output
+
+Selection memory of the AI Frontend Guide kit. Created by the installer and preserved on kit refreshes.
+
+- \`selections.jsonl\` — append-only history of component decisions.
+- \`combinations.json\` — named, reusable combinations of decisions.
+- \`SUMMARY.md\` — generated summary of styles and components extracted.
+
+Managed via \`node ai-frontend-guide-kit/tools/memory.mjs\` (\`add\`, \`list\`, \`summary\`, \`combo save|list|show|apply\`).
+Reuse combinations across projects by copying \`combinations.json\` or pointing \`AI_FRONTEND_OUTPUT\` to a shared folder.
+Recommended: commit this folder with the project (it is project history, not build output).
 `;
 
 const SKILLS = [
@@ -59,8 +74,9 @@ Options:
 What it does:
   1. Copies ai-frontend-guide-kit/ (catalog + guides + tools) into the target.
   2. Adds a pointer block to the target's AGENTS.md and removes the legacy ai-frontend-guide/ folder.
-  3. Installs the design skills and the kit's own agent skill via "npx skills add" unless --no-skills.
-  4. Checks Python/Laya; with --with-laya installs it and verifies.
+  3. Creates ai-frontend-output/ (selection memory) if missing; it is never removed on refresh.
+  4. Installs the design skills and the kit's own agent skill via "npx skills add" unless --no-skills.
+  5. Checks Python/Laya; with --with-laya installs it and verifies.
 `);
 }
 
@@ -122,6 +138,15 @@ function main() {
   cpSync(KIT_SOURCE, kitDest, { recursive: true });
   console.log('- kit copied (catalog + guides + tools)');
 
+  const outputDir = join(target, 'ai-frontend-output');
+  if (!existsSync(outputDir)) {
+    mkdirSync(outputDir, { recursive: true });
+    writeFileSync(join(outputDir, 'README.md'), OUTPUT_README, 'utf8');
+    console.log('- created ai-frontend-output/ (selection memory; preserved on refresh)');
+  } else {
+    console.log('- ai-frontend-output/ found: preserved (history and combinations untouched)');
+  }
+
   const agentsPath = join(target, 'AGENTS.md');
   if (existsSync(agentsPath)) {
     const current = readFileSync(agentsPath, 'utf8');
@@ -174,8 +199,10 @@ function main() {
   console.log(`
 Done. Next steps for the agent:
   1. Read ai-frontend-guide-kit/AGENTS.md.
-  2. Follow guides/00-START-HERE.md.
-  3. Query candidates with node ai-frontend-guide-kit/tools/find.mjs ... and, only after asking
+  2. Before searching, check saved combinations: node ai-frontend-guide-kit/tools/memory.mjs combo list
+  3. Follow guides/00-START-HERE.md.
+  4. Record every decision: node ai-frontend-guide-kit/tools/memory.mjs add --screen ... --block ... --need "..." --decision reuse|adapt|build --id <entry-id>
+  5. Query candidates with node ai-frontend-guide-kit/tools/find.mjs ... and, only after asking
      the user for consent, rank them with python ai-frontend-guide-kit/tools/laya_select.py --need "..." --confirmed.
 `);
 }
