@@ -9,23 +9,35 @@ Reusable-first UI component catalog and guided workflow for AI agents building f
 - **Selection memory:** `ai-frontend-output/` (per project) keeps an append-only history of decisions, a generated styles/components summary and named reusable combinations via `memory.mjs`.
 - **Local Laya ranking (optional):** `laya_select.py` ranks catalog candidates with calibrated probabilities, running entirely on the development PC.
 
-## Quickstart (install into a project)
+## Install as a dependency (recommended)
 
 ```bash
-# one command, straight from GitHub (Node >= 18 + git required)
+npm i -D github:urben88/ai-frontend-guide-kit          # or pin a version: #v1.1.0
+npx ai-frontend-guide-kit                              # setup (explicit, idempotent)
+```
+
+Optionally add a script to re-run it after updating the dependency: `"kit": "ai-frontend-guide-kit"` → `npm run kit`.
+
+- Installs skills **cleanly into `.agents/skills/`** (17: workflow + 16 UX flows) — no `skills-lock.json`, no symlink sprawl.
+- If the project has a `.claude/` folder, the skills are also linked into `.claude/skills/` (junction/symlink, copy fallback).
+- `--design-skills` additionally installs impeccable/taste-skill/emilkowalski via the skills CLI (needs network).
+- `--skills-mode cli` keeps the previous full CLI flow (lockfile + multi-agent links).
+- npm registry publish is planned; for now use the GitHub ref (commit `main` or a version tag). There is **no `postinstall`**: `npm install` alone never mutates the project.
+
+## One-shot (no dependency)
+
+```bash
 npx github:urben88/ai-frontend-guide-kit
 
 # variants
 npx github:urben88/ai-frontend-guide-kit --no-skills          # kit + docs only
 npx github:urben88/ai-frontend-guide-kit --with-laya          # also install/update Laya
 npx github:urben88/ai-frontend-guide-kit --target ../my-app   # install into another folder
+npx github:urben88/ai-frontend-guide-kit --design-skills      # + external design skills via CLI
 
 # offline / no git: build the package once and reuse the tarball
-npm pack                                   # -> ai-frontend-guide-kit-1.0.0.tgz (~0.2 MB)
-npx ./ai-frontend-guide-kit-1.0.0.tgz      # run it in the destination project
-
-# optional public npm publish (name is free): npm publish --access public
-# then: npx ai-frontend-guide-kit
+npm pack                                   # -> ai-frontend-guide-kit-1.1.0.tgz (~0.3 MB, includes skills)
+npx ./ai-frontend-guide-kit-1.1.0.tgz      # run it in the destination project
 ```
 
 The installer:
@@ -33,7 +45,7 @@ The installer:
 1. Copies `ai-frontend-guide-kit/` into the target project (and removes the legacy `ai-frontend-guide/` folder if present).
 2. Adds a pointer block to the project's `AGENTS.md`.
 3. Creates `ai-frontend-output/` (selection memory) if missing — it is never removed on refresh.
-4. Installs the design skills (`impeccable`, `taste-skill`, `emilkowalski`) plus the 17 skills from this repository (workflow + 16 UX flows) unless `--no-skills`.
+4. Copies the 17 kit skills (workflow + 16 UX flows) into `.agents/skills/`; links them into `.claude/skills/` when a `.claude/` folder exists; `--design-skills` adds the three external design skills via the skills CLI; `--skills-mode cli` uses the full CLI flow.
 5. Checks Python/Laya and prints the exact next step (use `--with-laya` to install Laya in the same command).
 
 Then tell your agent: *"Read `ai-frontend-guide-kit/AGENTS.md` and follow its workflow."*

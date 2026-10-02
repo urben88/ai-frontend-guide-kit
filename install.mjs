@@ -12,7 +12,7 @@
  *   npx github:<owner>/<repo>
  * runs it without installing dependencies.
  */
-import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -40,21 +40,37 @@ Reuse combinations across projects by copying \`combinations.json\` or pointing 
 Recommended: commit this folder with the project (it is project history, not build output).
 `;
 
-const SKILLS = [
+const KIT_SKILLS_DIR = join(REPO_ROOT, 'skills');
+
+// CLI mode (--skills-mode cli): the previous full flow, lockfile + multi-agent links.
+const CLI_SKILL_REPOS = [
   ['https://github.com/pbakaus/impeccable', '--skill', 'impeccable'],
   ['https://github.com/Leonxlnx/taste-skill', '--skill', 'design-taste-frontend'],
   ['https://github.com/emilkowalski/skills', null],
   ['https://github.com/urben88/ai-frontend-guide-kit', null],
 ];
 
+// Optional external design skills in copy mode (--design-skills).
+const DESIGN_SKILL_REPOS = [
+  ['https://github.com/pbakaus/impeccable', '--skill', 'impeccable'],
+  ['https://github.com/Leonxlnx/taste-skill', '--skill', 'design-taste-frontend'],
+  ['https://github.com/emilkowalski/skills', null],
+];
+
 function parseArgs(argv) {
-  const args = { target: process.cwd(), skills: true, laya: false, help: false };
+  const args = { target: process.cwd(), skills: true, skillsMode: 'copy', designSkills: false, laya: false, help: false };
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i];
     if (token === '--help' || token === '-h') args.help = true;
     else if (token === '--no-skills') args.skills = false;
+    else if (token === '--design-skills') args.designSkills = true;
+    else if (token === '--skills-mode') args.skillsMode = argv[++i];
     else if (token === '--with-laya') args.laya = true;
     else if (token === '--target') args.target = argv[++i];
+  }
+  if (!['copy', 'cli'].includes(args.skillsMode)) {
+    console.error(`Invalid --skills-mode "${args.skillsMode}". Use "copy" (default) or "cli".`);
+    process.exit(1);
   }
   return args;
 }
@@ -66,19 +82,80 @@ Usage:
   node install.mjs [options]
 
 Options:
-  --target <dir>   install into <dir> (default: current directory)
-  --no-skills      skip installing all skills
-  --with-laya      install/update Laya with pip (heavy: pulls torch on first install)
-  --help           show this help
+  --target <dir>        install into <dir> (default: current directory)
+  --no-skills           skip installing skills entirely
+  --skills-mode <mode>  copy (default): copy the 17 kit skills to .agents/skills (clean, no lockfile)
+                        cli: use "npx skills add" (lockfile + multi-agent links, includes design skills)
+  --design-skills       also install impeccable/taste-skill/emilkowalski via the skills CLI (needs network)
+  --with-laya           install/update Laya with pip (heavy: pulls torch on first install)
+  --help                show this help
 
 What it does:
   1. Copies ai-frontend-guide-kit/ (catalog + guides + tools) into the target.
   2. Adds a pointer block to the target's AGENTS.md and removes the legacy ai-frontend-guide/ folder.
   3. Creates ai-frontend-output/ (selection memory) if missing; it is never removed on refresh.
-  4. Installs via "npx skills add": the workflow skill + 16 UX flow skills (userflow, flow-*) from
-     this repo, plus impeccable, taste-skill and emilkowalski — unless --no-skills.
+  4. Installs skills into .agents/skills: copy mode copies the 17 kit skills (workflow + 16 UX flows);
+     if the project has a .claude/ folder, they are also linked into .claude/skills (junction/symlink,
+     fallback to copy). --design-skills adds the three external design skills via the CLI.
   5. Checks Python/Laya; with --with-laya installs it and verifies.
 `);
+}
+
+function runCliSkills(target, repos, label) {
+  console.log(`- installing ${label} via skills CLI (needs network)`);
+  const isWindows = process.platform === 'win32';
+  for (const [repo, flag, skill] of repos) {
+    const skillArgs = flag && skill ? [flag, skill] : [];
+    const result = spawnSync('npx', ['--yes', 'skills', 'add', repo, ...skillArgs, '--yes'], {
+      stdio: 'inherit',
+      cwd: target,
+      timeout: 300000,
+      shell: isWindows, // npx is npx.cmd on Windows; needs the shell to resolve
+    });
+    if (result.status !== 0) {
+      console.warn(`  ! skill install failed for ${repo}${result.error ? ` (${result.error.message})` : ''} (continuing; kit works without skills)`);
+    }
+  }
+}
+
+function installSkillsCopy(target) {
+  if (!existsSync(KIT_SKILLS_DIR)) {
+    console.warn('  ! skills/ not found in the package; skipping skill copy (use --skills-mode cli)');
+    return { names: [], copied: 0 };
+  }
+  const names = readdirSync(KIT_SKILLS_DIR, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
+  const destRoot = join(target, '.agents', 'skills');
+  mkdirSync(destRoot, { recursive: true });
+  for (const name of names) {
+    const dest = join(destRoot, name);
+    if (existsSync(dest)) rmSync(dest, { recursive: true, force: true });
+    cpSync(join(KIT_SKILLS_DIR, name), dest, { recursive: true });
+  }
+  return { names, copied: names.length };
+}
+
+function linkSkillsForClaude(target, names) {
+  const claudeDir = join(target, '.claude');
+  if (!existsSync(claudeDir) || names.length === 0) return { skipped: true, linked: 0, copied: 0 };
+  const destRoot = join(claudeDir, 'skills');
+  mkdirSync(destRoot, { recursive: true });
+  let linked = 0;
+  let copied = 0;
+  for (const name of names) {
+    const source = join(target, '.agents', 'skills', name);
+    const dest = join(destRoot, name);
+    if (existsSync(dest)) rmSync(dest, { recursive: true, force: true });
+    try {
+      symlinkSync(source, dest, process.platform === 'win32' ? 'junction' : 'dir');
+      linked += 1;
+    } catch {
+      cpSync(source, dest, { recursive: true });
+      copied += 1;
+    }
+  }
+  return { skipped: false, linked, copied };
 }
 
 function findPython() {
@@ -163,18 +240,21 @@ function main() {
   }
 
   if (args.skills) {
-    console.log('- installing skills (workflow + 16 UX flow skills from this repo, plus impeccable/taste-skill/emilkowalski)');
-    const isWindows = process.platform === 'win32';
-    for (const [repo, flag, skill] of SKILLS) {
-      const skillArgs = flag && skill ? [flag, skill] : [];
-      const result = spawnSync('npx', ['--yes', 'skills', 'add', repo, ...skillArgs, '--yes'], {
-        stdio: 'inherit',
-        cwd: target,
-        timeout: 300000,
-        shell: isWindows, // npx is npx.cmd on Windows; needs the shell to resolve
-      });
-      if (result.status !== 0) {
-        console.warn(`  ! skill install failed for ${repo}${result.error ? ` (${result.error.message})` : ''} (continuing; kit works without skills)`);
+    if (args.skillsMode === 'cli') {
+      runCliSkills(target, CLI_SKILL_REPOS, 'all skills (workflow + UX + design)');
+    } else {
+      const { names, copied } = installSkillsCopy(target);
+      console.log(`- ${copied} skills copied to .agents/skills/ (clean: no lockfile, no symlinks)`);
+      if (args.designSkills) {
+        runCliSkills(target, DESIGN_SKILL_REPOS, 'external design skills (--design-skills)');
+      } else {
+        console.log('- external design skills skipped (add --design-skills for impeccable/taste-skill/emilkowalski)');
+      }
+      const claude = linkSkillsForClaude(target, names);
+      if (claude.skipped) {
+        console.log('- no .claude/ folder found: Claude Code linking skipped');
+      } else {
+        console.log(`- Claude Code: ${claude.linked} skill(s) linked, ${claude.copied} copied (fallback) in .claude/skills/`);
       }
     }
   } else {

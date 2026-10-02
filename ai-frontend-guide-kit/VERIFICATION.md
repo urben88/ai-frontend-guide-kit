@@ -79,3 +79,12 @@ Fresh `create-next-app` (Next.js 16.3.8, Tailwind v4, `--src-dir`) with shadcn/u
 - Detection verified: a simulated BMAD repo (`.bmad-core/`, `docs/prd.md`, 2 story files) → `framework: bmad` with evidence; this repository (`openspec/`) → `framework: spec-driven`. Feature detection is tolerant and does not false-positive on a plain product repo. ✔
 - `guides/ADAPTERS.md` documents the artifact mapping (PRD/brief as anchor, UX docs as the as-is state, stories → screens, OpenSpec specs as the behavioral contract) and the no-duplicate-sources rule; it is linked from `AGENTS.md`, `SKILL.md`, `00-START-HERE` and `01-UX-FLOWS`. ✔
 - `memory.mjs add --ref "story:3.2"` stores the trace and `SUMMARY.md` shows it in the new Ref column (verified with a real record). ✔
+
+## Package install mode and clean skills (2026-10-02)
+
+- `package.json` `files` now includes `skills/`; `npm pack` produces `ai-frontend-guide-kit-1.1.0.tgz` (0.27 MB) containing installer + kit + skills + README. ✔
+- Dependency install: `npm i -D file:<tarball>` in a temp project + `npx --no-install ai-frontend-guide-kit` → kit copied, `ai-frontend-output/` created, `AGENTS.md` pointer added, 17 skills in `.agents/skills/`, no `skills-lock.json`; second run idempotent. ✔
+- Copy mode respects foreign skills: a pre-existing `.agents/skills/my-own` survived a re-run (18 total). ✔
+- Claude linking: project with `.claude/skills/other-skill` → 17 junctions created (`LinkType: Junction → .agents/skills/<name>`), foreign skill untouched, zero fallback copies. Project without `.claude/` → the folder is not created. ✔
+- CLI regression: `--skills-mode cli` → 39 skills via the skills CLI (userflow + ai-frontend-guide + impeccable present) and `skills-lock.json` created, i.e. previous behavior preserved. ✔
+- No `postinstall`: plain `npm install` never mutates the project; setup is the explicit `npx ai-frontend-guide-kit`. npm registry publish deferred by the user. ✔

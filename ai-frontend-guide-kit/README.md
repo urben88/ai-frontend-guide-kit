@@ -13,6 +13,8 @@ Self-contained guided kit for building frontend UX/UI with a reuse-first workflo
 Before creating UI components, follow `ai-frontend-guide-kit/AGENTS.md` (reuse-first workflow).
 ```
 
+Prefer the installer (`npm i -D github:urben88/ai-frontend-guide-kit` + `npx ai-frontend-guide-kit`): it copies this folder, creates `ai-frontend-output/`, patches `AGENTS.md` and installs the 17 skills cleanly into `.agents/skills/` (plus `.claude/skills/` when a `.claude/` folder exists).
+
 Requirements: none for reading the guides or catalog. The query tools need Node.js ≥ 18; no npm packages are required.
 
 ## Structure
