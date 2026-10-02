@@ -29,7 +29,7 @@ Fresh `create-next-app` (Next.js 16.3.8, Tailwind v4, `--src-dir`) with shadcn/u
 
 ## Clean copy test
 
-`ai-frontend-guide/` was copied to an empty directory and used from there: `find.mjs` and `get.mjs` resolved the catalog with relative paths and returned results; guides are plain Markdown. No build step, no npm install, no network required to query the catalog. ✔
+`ai-frontend-guide-kit/` was copied to an empty directory and used from there: `find.mjs` and `get.mjs` resolved the catalog with relative paths and returned results; guides are plain Markdown. No build step, no npm install, no network required to query the catalog. ✔
 
 ## License checks (practical)
 

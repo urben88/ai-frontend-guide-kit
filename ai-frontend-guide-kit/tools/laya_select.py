@@ -139,7 +139,7 @@ def run_install() -> int:
 
 def load_entries() -> list[dict]:
     if not SOURCES_DIR.exists():
-        print(f"Catalog not found at {SOURCES_DIR}. Run this script from the ai-frontend-guide folder.")
+        print(f"Catalog not found at {SOURCES_DIR}. Run this script from the ai-frontend-guide-kit folder.")
         sys.exit(2)
     entries: list[dict] = []
     for file in sorted(SOURCES_DIR.glob("*.json")):

@@ -1,6 +1,6 @@
 /**
  * Builds the portable kit: syncs the catalog from manifest/ into
- * ai-frontend-guide/catalog/ and verifies every kit asset is present.
+ * ai-frontend-guide-kit/catalog/ and verifies every kit asset is present.
  * Idempotent: running it twice produces the same tree.
  *
  * Usage: node tools/build-kit.mjs
@@ -10,7 +10,7 @@ import { join, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 import { ROOT, MANIFEST_DIR } from './extract/lib.mjs';
 
-const KIT_DIR = join(ROOT, 'ai-frontend-guide');
+const KIT_DIR = join(ROOT, 'ai-frontend-guide-kit');
 const CATALOG_DIR = join(KIT_DIR, 'catalog');
 
 const CATALOG_FILES = ['component-manifest.json', 'component-manifest.md', 'taxonomy.md', 'install-guides.md', 'schema.json'];

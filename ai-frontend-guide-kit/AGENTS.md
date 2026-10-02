@@ -8,6 +8,7 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 - Per-entry decision data: what it is, when to use it, where to find it, how to install it and its license constraints.
 - A standardized reuse-first workflow in 9 short guides.
 - Two local query tools (`tools/find.mjs`, `tools/get.mjs`) that answer with minimal output.
+- A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses.
 
 ## Golden rule
 

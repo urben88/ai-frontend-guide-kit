@@ -1,6 +1,6 @@
 > **Estado (2026-10-02):** este documento fue la especificación inicial. El sistema ya está implementado:
 > - Catálogo generado: `manifest/` (`component-manifest.json`, `component-manifest.md`, `taxonomy.md`, `install-guides.md`, `schema.json`, `sources/*.json`).
-> - Carpeta guiada copiable: `ai-frontend-guide/` (AGENTS.md + 9 guías + catálogo + herramientas `find`/`get`).
+> - Carpeta guiada copiable: `ai-frontend-guide-kit/` (AGENTS.md + 9 guías + catálogo + herramientas `find`/`get`).
 > - Pipeline: `tools/` (`extract/`, `build-index.mjs`, `build-kit.mjs`, `validate.mjs`, `refresh.mjs`).
 > La sección 4 de abajo conserva el prompt de orquestación, ya alineado con las rutas reales.
 
@@ -66,7 +66,7 @@ Ejemplo de entrada del catálogo real:
 
 ## 4. Prompt de contexto para orquestación creativa
 
-Una vez generado el índice, utiliza esta estructura como directiva para tu herramienta de IA (Cursor, v0 o ChatGPT). En proyectos reales, la vía recomendada es copiar `ai-frontend-guide/` al repo y seguir sus guías 00–08; este prompt resume la directiva:
+Una vez generado el índice, utiliza esta estructura como directiva para tu herramienta de IA (Cursor, v0 o ChatGPT). En proyectos reales, la vía recomendada es copiar `ai-frontend-guide-kit/` al repo y seguir sus guías 00–08; este prompt resume la directiva:
 
 > **Rol:** Eres un Diseñador y Desarrollador Frontend Senior especializado en Tailwind CSS.
 > **Contexto:** Tienes acceso a nuestro catálogo de componentes: índice ligero `component-manifest.json` (16 fuentes, ~2.470 entradas, 20 categorías) y fichas `sources/*.json`; consúltalo con `tools/find.mjs` y `tools/get.mjs` del kit. Fuentes: DaisyUI, Preline, Aceternity, Magic UI, Uiverse, 21st.dev, shadcn/ui, coss ui/Origin, Float UI, Hover.dev, Tailblocks, HyperUI, Motion Primitives, Agents Kit, aicss.dev y Design Systems Repo.

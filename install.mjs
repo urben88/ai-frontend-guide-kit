@@ -2,7 +2,7 @@
 /**
  * One-command installer for the AI Frontend Guide kit.
  *
- * Copies ai-frontend-guide/ into the target project, installs the design
+ * Copies ai-frontend-guide-kit/ into the target project, installs the design
  * skills (optional) and checks (or installs) the local Laya decision engine.
  *
  * Usage:
@@ -18,17 +18,18 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = dirname(fileURLToPath(import.meta.url));
-const KIT_SOURCE = join(REPO_ROOT, 'ai-frontend-guide');
+const KIT_SOURCE = join(REPO_ROOT, 'ai-frontend-guide-kit');
 
 const AGENTS_BLOCK = `## Frontend UI
-Before creating UI components, follow \`ai-frontend-guide/AGENTS.md\` (reuse-first workflow).
-Optional accelerator: \`python ai-frontend-guide/tools/laya_select.py --check\` (local Laya decision engine).
+Before creating UI components, follow \`ai-frontend-guide-kit/AGENTS.md\` (reuse-first workflow).
+Optional accelerator: \`python ai-frontend-guide-kit/tools/laya_select.py --check\` (local Laya decision engine).
 `;
 
 const SKILLS = [
   ['https://github.com/pbakaus/impeccable', '--skill', 'impeccable'],
   ['https://github.com/Leonxlnx/taste-skill', '--skill', 'design-taste-frontend'],
   ['https://github.com/emilkowalski/skills', null],
+  ['https://github.com/urben88/ai-frontend-guide-kit', '--skill', 'ai-frontend-guide'],
 ];
 
 function parseArgs(argv) {
@@ -51,14 +52,14 @@ Usage:
 
 Options:
   --target <dir>   install into <dir> (default: current directory)
-  --no-skills      skip installing the design skills
+  --no-skills      skip installing all skills
   --with-laya      install/update Laya with pip (heavy: pulls torch on first install)
   --help           show this help
 
 What it does:
-  1. Copies ai-frontend-guide/ (catalog + guides + tools) into the target.
-  2. Adds a pointer block to the target's AGENTS.md.
-  3. Installs design skills via "npx skills add" unless --no-skills.
+  1. Copies ai-frontend-guide-kit/ (catalog + guides + tools) into the target.
+  2. Adds a pointer block to the target's AGENTS.md and removes the legacy ai-frontend-guide/ folder.
+  3. Installs the design skills and the kit's own agent skill via "npx skills add" unless --no-skills.
   4. Checks Python/Laya; with --with-laya installs it and verifies.
 `);
 }
@@ -106,11 +107,16 @@ function main() {
 
   const target = resolve(args.target);
   mkdirSync(target, { recursive: true });
-  const kitDest = join(target, 'ai-frontend-guide');
+  const kitDest = join(target, 'ai-frontend-guide-kit');
 
   console.log(`Installing AI Frontend Guide into: ${target}`);
+  const legacyKit = join(target, 'ai-frontend-guide');
+  if (existsSync(legacyKit)) {
+    rmSync(legacyKit, { recursive: true, force: true });
+    console.log('- removed legacy ai-frontend-guide/ folder (replaced by ai-frontend-guide-kit/)');
+  }
   if (existsSync(kitDest)) {
-    console.log('- existing ai-frontend-guide/ found: refreshing it');
+    console.log('- existing ai-frontend-guide-kit/ found: refreshing it');
     rmSync(kitDest, { recursive: true, force: true });
   }
   cpSync(KIT_SOURCE, kitDest, { recursive: true });
@@ -119,7 +125,7 @@ function main() {
   const agentsPath = join(target, 'AGENTS.md');
   if (existsSync(agentsPath)) {
     const current = readFileSync(agentsPath, 'utf8');
-    if (current.includes('ai-frontend-guide/AGENTS.md')) {
+    if (current.includes('ai-frontend-guide-kit/AGENTS.md')) {
       console.log('- AGENTS.md already points to the kit');
     } else {
       writeFileSync(agentsPath, `${current.trimEnd()}\n\n${AGENTS_BLOCK}`, 'utf8');
@@ -131,7 +137,7 @@ function main() {
   }
 
   if (args.skills) {
-    console.log('- installing design skills (impeccable, taste-skill, emilkowalski)');
+    console.log('- installing skills (impeccable, taste-skill, emilkowalski, ai-frontend-guide)');
     const isWindows = process.platform === 'win32';
     for (const [repo, flag, skill] of SKILLS) {
       const skillArgs = flag && skill ? [flag, skill] : [];
@@ -161,16 +167,16 @@ function main() {
   } else {
     runLaya(python, kitDest, ['--check']);
     if (spawnSync(python.bin, [...python.extra, '-c', 'import laya'], { timeout: 60000 }).status !== 0) {
-      console.log(`  To enable local ranking later: python ai-frontend-guide/tools/laya_select.py --install`);
+      console.log(`  To enable local ranking later: python ai-frontend-guide-kit/tools/laya_select.py --install`);
     }
   }
 
   console.log(`
 Done. Next steps for the agent:
-  1. Read ai-frontend-guide/AGENTS.md.
+  1. Read ai-frontend-guide-kit/AGENTS.md.
   2. Follow guides/00-START-HERE.md.
-  3. Query candidates with node ai-frontend-guide/tools/find.mjs ... and, only after asking
-     the user for consent, rank them with python ai-frontend-guide/tools/laya_select.py --need "..." --confirmed.
+  3. Query candidates with node ai-frontend-guide-kit/tools/find.mjs ... and, only after asking
+     the user for consent, rank them with python ai-frontend-guide-kit/tools/laya_select.py --need "..." --confirmed.
 `);
 }
 

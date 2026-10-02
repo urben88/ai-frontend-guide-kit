@@ -6,7 +6,7 @@ Esta guía describe el paso a paso exacto para arrancar tu proyecto desde cero u
 - **Modelos:** Claude (orquestador visual / frontend) y DeepSeek (arquitectura de datos, lógica de negocio y generación de tests Playwright).
 - **Herramientas de entorno:** Figma MCP y Playwright Test Runner.
 
-> **Integración con el Component Manifest (2026-10-02):** el paso de reutilización ya está estandarizado en la carpeta guiada `ai-frontend-guide/` (catálogo de 16 fuentes y 2.470 entradas + guías 00–08 + herramientas `find`/`get`). Copia esa carpeta al repo del proyecto y sigue su flujo; esta guía describe el ciclo completo alrededor de ella.
+> **Integración con el Component Manifest (2026-10-02):** el paso de reutilización ya está estandarizado en la carpeta guiada `ai-frontend-guide-kit/` (catálogo de 16 fuentes y 2.470 entradas + guías 00–08 + herramientas `find`/`get`). Copia esa carpeta al repo del proyecto y sigue su flujo; esta guía describe el ciclo completo alrededor de ella.
 
 ---
 
@@ -19,7 +19,7 @@ Esta guía describe el paso a paso exacto para arrancar tu proyecto desde cero u
 | **`leonxlnx/taste-skill`** | Establece el criterio visual de alto nivel (jerarquía, densidad de información y micro-detalles). |
 | **`emilkowal.ski/skill`** | Reglas de interacción, físicas de muelles (*springs*), micro-feedback y animaciones perceptuales. |
 | **Figma MCP** | Inspecciona nodos, extrae tokens numéricos y estructuras exactas de Figma a la IA. |
-| **`ai-frontend-guide/`** | Catálogo reusable-first: qué componentes existen, dónde, cómo se instalan y con qué licencia (guías 00–08 + `find`/`get`). |
+| **`ai-frontend-guide-kit/`** | Catálogo reusable-first: qué componentes existen, dónde, cómo se instalan y con qué licencia (guías 00–08 + `find`/`get`). |
 | **Claude** | Orquestación visual, aplicación de las *skills* y maquetación de componentes interactivos. |
 | **DeepSeek (API)** | Generación intensiva de lógica de negocio, mocks de backend y creación de suites de tests de Playwright. |
 | **Playwright** | Ejecutor de verificación: tests de flujo E2E y regresión visual automática. |
@@ -92,15 +92,15 @@ Configura tu archivo de configuración de MCP (`claude_desktop_config.json` o la
 
 ---
 
-## 5. Fase 2.5: Reutilizar antes de programar con `ai-frontend-guide/`
+## 5. Fase 2.5: Reutilizar antes de programar con `ai-frontend-guide-kit/`
 
-Con los tokens definidos, copia la carpeta `ai-frontend-guide/` a la raíz del proyecto y sigue sus guías en orden:
+Con los tokens definidos, copia la carpeta `ai-frontend-guide-kit/` a la raíz del proyecto y sigue sus guías en orden:
 
 1. **Inventario (`03-INVENTORY.md`):** cada pantalla → bloques → categorías de la taxonomía (sin elegir librerías todavía).
 2. **Búsqueda (`04-FIND.md`):** 
    ```bash
-   node ai-frontend-guide/tools/find.mjs --category hero --stack react --commercial
-   node ai-frontend-guide/tools/get.mjs <entry-id>
+   node ai-frontend-guide-kit/tools/find.mjs --category hero --stack react --commercial
+   node ai-frontend-guide-kit/tools/get.mjs <entry-id>
    ```
    `find` devuelve candidatos cortos; `get` da la ficha con licencia, dependencias y comando exacto.
 3. **Decisión (`05-REUSE.md`):** reutilizar → adaptar → crear, registrando la justificación. Queda prohibido crear desde cero sin haber consultado el catálogo.
@@ -206,7 +206,7 @@ test.describe('Auditoría Visual de Microinteracciones', () => {
 2. Extraer cambios de diseño con Figma MCP
          │
          ▼
-3. Reutilizar/instalar componentes (ai-frontend-guide: find → get → REUSE)
+3. Reutilizar/instalar componentes (ai-frontend-guide-kit: find → get → REUSE)
          │
          ▼
 4. Claude programa la integración aplicando:

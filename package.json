@@ -9,11 +9,11 @@
   "homepage": "https://github.com/urben88/ai-frontend-guide-kit#readme",
   "type": "module",
   "bin": {
-    "ai-frontend-guide": "./install.mjs"
+    "ai-frontend-guide-kit": "./install.mjs"
   },
   "files": [
     "install.mjs",
-    "ai-frontend-guide",
+    "ai-frontend-guide-kit",
     "README.md"
   ],
   "scripts": {

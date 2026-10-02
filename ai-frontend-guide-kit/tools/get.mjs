@@ -22,7 +22,7 @@ if (!id || id.startsWith('--')) {
 }
 
 if (!existsSync(SOURCES_DIR)) {
-  console.error('Catalog not found. Run this script from the ai-frontend-guide folder.');
+  console.error('Catalog not found. Run this script from the ai-frontend-guide-kit folder.');
   process.exit(1);
 }
 

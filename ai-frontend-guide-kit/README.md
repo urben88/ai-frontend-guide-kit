@@ -1,16 +1,16 @@
-# ai-frontend-guide — README
+# ai-frontend-guide-kit — README
 
 Self-contained guided kit for building frontend UX/UI with a reuse-first workflow. Copy this folder into any frontend repository and point your AI agent to `AGENTS.md`.
 
 ## Copy into a project
 
-1. Copy the whole `ai-frontend-guide/` folder to the target repository root (keep the folder intact).
-2. Tell the agent: *"Read `ai-frontend-guide/AGENTS.md` and follow its workflow."*
+1. Copy the whole `ai-frontend-guide-kit/` folder to the target repository root (keep the folder intact).
+2. Tell the agent: *"Read `ai-frontend-guide-kit/AGENTS.md` and follow its workflow."*
 3. Optional: add a pointer in the project's own `AGENTS.md`:
 
 ```markdown
 ## Frontend UI
-Before creating UI components, follow `ai-frontend-guide/AGENTS.md` (reuse-first workflow).
+Before creating UI components, follow `ai-frontend-guide-kit/AGENTS.md` (reuse-first workflow).
 ```
 
 Requirements: none for reading the guides or catalog. The query tools need Node.js ≥ 18; no npm packages are required.
@@ -18,7 +18,7 @@ Requirements: none for reading the guides or catalog. The query tools need Node.
 ## Structure
 
 ```
-ai-frontend-guide/
+ai-frontend-guide-kit/
 ├── AGENTS.md              # awareness layer: scope, golden rule, navigation
 ├── README.md              # this file (copy + integration instructions)
 ├── guides/                # 00-START-HERE … 08-VERIFY (the workflow)
@@ -55,7 +55,7 @@ The catalog is generated in the factory repo (`PilaresAplicaciones/Diseño`):
 ```bash
 node tools/refresh.mjs <source_id>   # refresh one source
 node tools/build-index.mjs           # rebuild the light index
-node tools/build-kit.mjs             # re-sync catalog into ai-frontend-guide/
+node tools/build-kit.mjs             # re-sync catalog into ai-frontend-guide-kit/
 node tools/validate.mjs              # schema + consistency check
 ```
 

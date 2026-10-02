@@ -36,7 +36,7 @@ function parseArgs(argv) {
 
 function loadEntries() {
   if (!existsSync(SOURCES_DIR)) {
-    console.error('Catalog not found. Run this script from the ai-frontend-guide folder or rebuild the kit.');
+    console.error('Catalog not found. Run this script from the ai-frontend-guide-kit folder or rebuild the kit.');
     process.exit(1);
   }
   const entries = [];
