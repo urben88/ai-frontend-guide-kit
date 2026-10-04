@@ -32,7 +32,7 @@ ai-frontend-guide-kit/
 │   ├── taxonomy.md               # category definitions + source mappings
 │   ├── install-guides.md         # install/code retrieval per source
 │   ├── schema.json               # entry schema
-│   └── sources/*.json            # 16 source files (2,470 entries)
+│   └── sources/*.json            # 20 source files (3,603 entries)
 └── tools/
     ├── context.mjs        # repo context for the UX phase (REPO-CONTEXT.md)
     ├── find.mjs           # filtered catalog search (short output)

@@ -36,6 +36,9 @@ Pick one, at most two. `navigation_model` drives the Excalidraw map template.
 | Workflow | Complete a process | Calm | wizard, progress, validation, save/resume | `flow` |
 | Portfolio | Prove capability | Admiration | cases, work, visual narrative | `one-page`/`hub` |
 | Editorial | Read and explore ideas | Immersion | typography, columns, rhythm | `tree` or `single-page-anchors` |
+| Assistant | Converse with or delegate to AI | Trust | streaming, citations, confirm-before-action, history | `console` |
+| Activator | Reach first success | Momentum | checklist, empty states, sample data, skip/resume | `flow` |
+| Scheduler | Pick a time or resource | Certainty | calendar, slots, timezone, confirmation | `flow` |
 
 Example: the same product can be a console (operations), an architecture explainer (presales), a configurator (quotes) or a monitor (support). Different archetypes → different pages, navigation and map.
 

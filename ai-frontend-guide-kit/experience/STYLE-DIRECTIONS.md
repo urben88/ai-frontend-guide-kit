@@ -24,8 +24,14 @@ A style is a visual language, not a palette. Choose with `--task direction` (Lay
 | Organic / natural | Warm, human | Health, food, sustainability | Vagueness; needs real content/photos |
 | Playful / friendly | Approachable | Consumer, education, onboarding | Undermines trust in regulated domains |
 | Dark technical | Focused, modern | Dev tools, dashboards, monitoring | Contrast discipline; not "invert colors" |
+| Liquid glass | Fluid, translucent depth | Media-led apps, overlays, Apple-like products | Contrast and legibility traps; GPU cost |
+| Kinetic typography | Alive, type-led | Brand sites, campaigns, portfolios | Motion sickness, CLS, small-size legibility |
+| Hand-drawn / sketch | Human, warm | Creative tools, education, explainers | Weak in regulated or financial contexts |
+| Anti-design | Raw, irreverent | Culture, art, launches | Usability friction; poor for conversion |
+| Tactile / soft skeuomorphic | Physical, touchable | Audio/creative tools, playful apps | Visual noise; dated if overdone |
+| Monochrome bold type | Confident, stark | Studios, portfolios, launches | Cold without craft; state colours conflict |
 
-Recommended combos: minimal functional + editorial; swiss + data-dense; dark technical + terminal; neubrutalism + playful; luxury + editorial.
+Recommended combos: minimal functional + editorial; swiss + data-dense; dark technical + terminal; neubrutalism + playful; luxury + editorial; kinetic typography + monochrome bold type; hand-drawn + playful; liquid glass only for overlays over rich media.
 
 ## Anti-generic tells (P0/P1)
 

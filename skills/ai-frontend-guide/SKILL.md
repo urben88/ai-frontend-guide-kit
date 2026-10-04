@@ -14,7 +14,7 @@ When this kit is installed, the project contains:
 - `ai-frontend-guide-kit/AGENTS.md` — awareness layer (read this first).
 - `ai-frontend-guide-kit/guides/00…10` — the guided workflow (router + direction + three phases + iteration).
 - `ai-frontend-guide-kit/experience/` — direction knowledge: `EXPERIENCE-DIRECTION.md`, `QUESTION-BANK.md`, `SITE-ARCHETYPES.md`, `UX-PHILOSOPHIES.md`, `STYLE-DIRECTIONS.md`, `REFERENCE-PROTOCOL.md`, `DISCOVERY-LOOP.md`, `experience-manifest.json` and `references/` (saved idea cards).
-- `ai-frontend-guide-kit/catalog/` — 2,470 reusable entries from 16 verified sources (licenses, install commands, links), plus a light index.
+- `ai-frontend-guide-kit/catalog/` — 3,603 reusable entries from 20 verified sources (licenses, install commands, links), plus a light index.
 - `ai-frontend-guide-kit/tools/` — `find.mjs`, `get.mjs`, `laya_select.py` and `excalidraw-mcp.mjs` (local, dependency-free Excalidraw MCP).
 - Sibling skills (when installed): `frontend-polish` (total polish phase), `ux-map` (visual screen map) and the three external design skills (`impeccable`, `design-taste-frontend`, `emilkowalski`).
 

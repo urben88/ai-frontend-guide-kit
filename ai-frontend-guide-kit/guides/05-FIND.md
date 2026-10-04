@@ -66,7 +66,7 @@ The user picks or swaps; offer A/B variants when the trade-off is real. Componen
 ## Selection heuristics
 
 - **Structural blocks** (nav, forms, tables): choose `daisyui`, `preline`, `shadcn`, `coss` — predictable, low animation.
-- **Expressive blocks** (hero, backgrounds): choose `aceternity` / `magicui` / `motionprimitives`, max 1–2 per view.
+- **Expressive blocks** (hero, backgrounds): choose `aceternity` / `magicui` / `motionprimitives` / `reactbits` / `animateui`, max 1–2 per view and within the performance budget (`09-VERIFY` section 5).
 - **Micro details** (buttons, loaders, toggles): `uiverse`, `hover`, `motionprimitives`.
 - **AI/agent surfaces**: `aicss`, `agentskit`, `21stdev` (check licenses first).
 - Prefer the smallest dependency footprint; every `motion`-based piece costs bundle size and attention.

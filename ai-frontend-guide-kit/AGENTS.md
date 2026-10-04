@@ -4,7 +4,7 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 
 ## What you have here
 
-- A catalog of **2,470 reusable UI entries** from **16 verified sources** (updated 2026-10-02), organized in 20 categories.
+- A catalog of **3,603 reusable UI entries** from **20 verified sources** (updated 2026-10-04), organized in 20 categories.
 - An **experience direction layer** (`experience/`): archetypes, philosophies, styles with limits, an adaptive question bank, reference cards with saved ideas, an interactive discovery loop (`DISCOVERY-LOOP.md`) and a machine-readable `experience-manifest.json` for Laya.
 - Per-entry decision data: what it is, when to use it, where to find it, how to install it and its license constraints.
 - A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–10).

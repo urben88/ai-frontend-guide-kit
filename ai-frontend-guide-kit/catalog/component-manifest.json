@@ -1,22 +1,22 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-02",
+  "generated_at": "2026-10-04",
   "totals": {
-    "sources": 16,
-    "entries": 2470,
+    "sources": 20,
+    "entries": 3603,
     "categories": {
-      "forms": 402,
-      "data-display": 278,
-      "feedback": 246,
-      "micro-interactions": 241,
-      "ai-surfaces": 226,
-      "navigation": 163,
-      "backgrounds-effects": 134,
+      "micro-interactions": 840,
+      "forms": 478,
+      "data-display": 367,
+      "feedback": 291,
+      "ai-surfaces": 239,
+      "backgrounds-effects": 221,
+      "navigation": 220,
+      "text": 165,
+      "overlay": 139,
       "blocks-sections": 127,
-      "overlay": 93,
-      "text": 90,
+      "media": 118,
       "layout": 84,
-      "media": 72,
       "cta": 57,
       "features": 53,
       "testimonials": 52,
@@ -98,6 +98,16 @@
       "file": "sources/aicss.json"
     },
     {
+      "source_id": "animateui",
+      "source_name": "Animate UI",
+      "source_url": "https://animate-ui.com",
+      "catalog_url": "https://animate-ui.com/docs/components",
+      "entry_count": 573,
+      "license_summary": "MIT + Commons Clause (use in products; no resale of the components)",
+      "granularity": "complete (all registry:ui items)",
+      "file": "sources/animateui.json"
+    },
+    {
       "source_id": "coss",
       "source_name": "coss ui / Origin UI",
       "source_url": "https://coss.com/ui",
@@ -106,6 +116,16 @@
       "license_summary": "MIT for component directories (apps/ui and apps/origin); AGPL elsewhere in the repo",
       "granularity": "coss ui complete; legacy Origin indexed at base-component level (30 categories, ~604 variants upstream)",
       "file": "sources/coss.json"
+    },
+    {
+      "source_id": "cultui",
+      "source_name": "cult/ui",
+      "source_url": "https://www.cult-ui.com",
+      "catalog_url": "https://www.cult-ui.com/docs/components",
+      "entry_count": 307,
+      "license_summary": "MIT (open-source components); Pro blocks have a separate license",
+      "granularity": "complete (registry:ui + registry:component)",
+      "file": "sources/cultui.json"
     },
     {
       "source_id": "daisyui",
@@ -158,6 +178,16 @@
       "file": "sources/hyperui.json"
     },
     {
+      "source_id": "kiboui",
+      "source_name": "Kibo UI",
+      "source_url": "https://www.kibo-ui.com",
+      "catalog_url": "https://www.kibo-ui.com/components",
+      "entry_count": 40,
+      "license_summary": "Free and open source per site; SPDX license not published — verify before commercial use",
+      "granularity": "complete (all registry:ui items)",
+      "file": "sources/kiboui.json"
+    },
+    {
       "source_id": "magicui",
       "source_name": "Magic UI",
       "source_url": "https://magicui.design",
@@ -186,6 +216,16 @@
       "license_summary": "MIT + Preline UI Fair Use License (dual)",
       "granularity": "complete at page level (component docs pages with variant headings)",
       "file": "sources/preline.json"
+    },
+    {
+      "source_id": "reactbits",
+      "source_name": "React Bits",
+      "source_url": "https://reactbits.dev",
+      "catalog_url": "https://reactbits.dev",
+      "entry_count": 213,
+      "license_summary": "MIT + Commons Clause (use in products; no resale of the components)",
+      "granularity": "complete (one entry per component, TS + Tailwind variant)",
+      "file": "sources/reactbits.json"
     },
     {
       "source_id": "shadcn",

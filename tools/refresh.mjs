@@ -25,6 +25,10 @@ const SOURCE_SCRIPTS = {
   uiverse: ['extract/uiverse.mjs'],
   '21stdev': ['extract/twentyfirst.mjs'],
   hover: ['extract/hover.mjs'],
+  kiboui: ['extract/registry-extra.mjs', 'kibo'],
+  animateui: ['extract/registry-extra.mjs', 'animateui'],
+  cultui: ['extract/registry-extra.mjs', 'cultui'],
+  reactbits: ['extract/registry-extra.mjs', 'reactbits'],
 };
 
 function run(scriptRelativePath, extraArgs = []) {

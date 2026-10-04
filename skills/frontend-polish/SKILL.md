@@ -42,7 +42,8 @@ If Playwright MCP is configured, verify the browser once (`npx playwright instal
 5. **Reduced motion**: emulate `prefers-reduced-motion: reduce`; animations must degrade to no-motion or opacity-only.
 6. **Responsive**: resize to the project's breakpoints (e.g. 375 / 768 / 1280 / 1536); check layout collapse, overflow and touch targets (≥ 44px).
 7. **Content**: text hierarchy (max 3 sizes), contrast (body ≥ 4.5:1, large ≥ 3:1), spacing from the scale, no boxes-inside-boxes.
-8. **Fix exactly what was reported**, then re-run the affected checks. No finding is closed without a re-check.
+8. **Automated a11y and performance**: run the axe and Lighthouse checks from `guides/09-VERIFY.md` (sections 4–5) and the honesty audit (section 6) for conversion flows.
+9. **Fix exactly what was reported**, then re-run the affected checks. No finding is closed without a re-check.
 
 Report each iteration with evidence: state + screenshot + what changed. Keep a running findings list (optionally `ai-frontend-output/polish-report.md`).
 

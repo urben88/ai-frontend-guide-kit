@@ -23,7 +23,7 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 
 | | What | Details |
 |---|---|---|
-| 📚 | **Catalog** | 16 verified sources · 2,470 reusable entries · 20 categories · per-entry licenses and install commands |
+| 📚 | **Catalog** | 20 verified sources · 3,603 reusable entries · 20 categories · per-entry licenses and install commands |
 | 🧭 | **Guided kit** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + 3-phase workflow in 10 short guides (00–10) + `find`/`get` query tools. Self-contained: no build, no npm dependencies |
 | 🧠 | **Agent skills** | `ai-frontend-guide` (workflow), `frontend-polish` (phase 3), `ux-map` (visual screen map) and 16 vendored UX skills (`userflow` + 15 `flow-*`, MIT) |
 | 💾 | **Selection memory** | `ai-frontend-output/`: append-only decision history, styles/components summary and reusable combinations |
@@ -134,7 +134,7 @@ El ranking de componentes acepta `--direction <id>` (la dirección elegida del b
 │   ├── AGENTS.md · README.md · VERIFICATION.md
 │   ├── guides/00..10         # experience direction + reuse-first UX/UI workflow (00 = router, 01 = direction, 02 = flows, 10 = iteration)
 │   ├── experience/           # archetypes, philosophies, styles, question bank, discovery loop, reference cards + experience-manifest.json
-│   ├── catalog/              # index + taxonomy + install-guides + 16 sources
+│   ├── catalog/              # index + taxonomy + install-guides + 20 sources
 │   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp
 ├── skills/                   # ai-frontend-guide + frontend-polish + 16 vendored UX flow skills (MIT)
 ├── manifest/                 # catalog source of truth (generated)

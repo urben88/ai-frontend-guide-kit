@@ -168,3 +168,30 @@ Practical checks run in a fresh Next.js 16 + Tailwind v4 + `--src-dir` project:
 - **Aceternity premium detection:** premium registry items return HTTP 401 while free ones return 200 — this is the mechanism the extractor uses to exclude Pro content.
 - **Agents Kit license:** `LICENSE.md` in the repository is a custom Non-Commercial License; commercial use of original Agents Kit families requires written permission. Ported collections keep MIT/Apache-2.0 (see each entry's `license_type`).
 
+## Kibo UI
+
+- **Catalog:** https://www.kibo-ui.com/components (40 compound components: kanban, gantt, table, editor, AI blocks, calendar).
+- **Install:** `npx shadcn@latest add https://www.kibo-ui.com/r/<name>.json` or `npx kibo-ui add <name>`.
+- **Stack / Tailwind:** React + shadcn/ui + Tailwind.
+- **License / limits:** the site says "free and open source" but no SPDX license was found; entries are marked `unknown`. Confirm before client delivery.
+
+## Animate UI
+
+- **Catalog:** https://animate-ui.com/docs/components (animated shadcn-style primitives, Radix and Base UI variants).
+- **Install:** `npx shadcn@latest add https://animate-ui.com/r/<name>.json`.
+- **Dependencies:** `motion`, `tw-animate-css`, `class-variance-authority`, `lucide-react`.
+- **License / limits:** MIT + Commons Clause — free inside apps, sites and products; do not resell the components as a library or template.
+
+## cult/ui
+
+- **Catalog:** https://www.cult-ui.com/docs/components (animated and AI-oriented components, 150+ ui and component items).
+- **Install:** `npx shadcn@latest add https://www.cult-ui.com/r/<name>.json`.
+- **Dependencies:** mostly `motion`; some entries add `zustand`, `ai` or editor libraries — read `dependencies` in the entry.
+- **License / limits:** MIT (open-source components); Pro blocks have a separate license.
+
+## React Bits
+
+- **Catalog:** https://reactbits.dev (animations, backgrounds, text effects, components; indexed one entry per component, TS + Tailwind variant).
+- **Install:** `npx shadcn@latest add @react-bits/<Name>-TS-TW` (variants: `JS-CSS`, `JS-TW`, `TS-CSS`, `TS-TW`).
+- **Dependencies:** often `gsap`, `three`, `ogl` or `motion`; WebGL entries cost INP/LCP — see `reference-core-web-vitals.md`.
+- **License / limits:** MIT + Commons Clause — free in products; no resale of the components themselves.

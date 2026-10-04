@@ -51,11 +51,52 @@ npx playwright test
 - If the `impeccable` skill is installed: `/impeccable audit <screen>` and `/impeccable polish <screen>` before closing each screen.
 - Failures: fix the exact reported issue, then re-run the full suite. No screen is done with a red test.
 
+## 4. Automated accessibility (WCAG 2.2)
+
+```bash
+npm i -D @axe-core/playwright
+```
+
+```ts
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+test('home has no detectable WCAG 2.x A/AA violations', async ({ page }) => {
+  await page.goto('/');
+  const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag22aa']).analyze();
+  expect(results.violations).toEqual([]);
+});
+```
+
+Automated checks catch roughly a third of issues; keep the manual pass. Check by hand what axe cannot: focus not hidden by sticky bars (2.4.11), 24px minimum targets (2.5.8), a non-drag alternative (2.5.7), login without cognitive tests (3.3.8). Reference: `experience/references/reference-wcag-22.md`.
+
+## 5. Performance budget
+
+```bash
+npx lighthouse http://localhost:3000 --only-categories=performance,accessibility --output=json --output-path=./lighthouse.json --chrome-flags="--headless"
+```
+
+Targets (field, 75th percentile): LCP <= 2.5 s, INP <= 200 ms, CLS <= 0.1. If an expressive effect from the catalog breaks the budget, replace or lazy-load it. Reference: `experience/references/reference-core-web-vitals.md`.
+
+## 6. Honesty audit (deceptive patterns)
+
+For every conversion flow (signup, checkout, subscription, consent, cancel) confirm:
+
+- [ ] Reject / cancel / decline takes about the same effort as accept / subscribe.
+- [ ] Total price and recurring terms are visible before the last step; no pre-checked paid extras.
+- [ ] No fake scarcity, countdowns, testimonials or metrics; copy is neutral, no confirmshaming.
+- [ ] AI-generated content is labelled, sources and undo exist (`reference-shape-of-ai.md`).
+
+Reference: `experience/references/reference-deceptive-patterns.md`.
+
 ## Done checklist
 
 - [ ] All critical flows pass E2E.
 - [ ] Visual snapshots exist for key interactive states.
 - [ ] Reduced motion and keyboard focus verified manually once per screen.
+- [ ] axe reports no A/AA violations; 2.2 criteria checked by hand.
+- [ ] Core Web Vitals within the budget.
+- [ ] Honesty audit passed for every conversion flow.
 - [ ] Console free of hydration/React errors.
 - [ ] License notices kept for every reused component.
 - [ ] Decision log (`06-REUSE`) attached.

@@ -50,7 +50,7 @@ function loadEntries() {
 function matches(entry, args) {
   if (args.category && entry.category !== args.category) return false;
   if (args.type && entry.entry_type !== args.type) return false;
-  if (args.source && entry.source.toLowerCase().replace(/\s+/g, '-').includes(String(args.source).toLowerCase())) return false;
+  if (args.source && !entry.source.toLowerCase().replace(/[^a-z0-9]/g, '').includes(String(args.source).toLowerCase().replace(/[^a-z0-9]/g, ''))) return false;
   if (args.stack && !(entry.stack ?? []).some((item) => String(item).toLowerCase() === String(args.stack).toLowerCase())) return false;
   if (args.license && entry.license_type !== args.license) return false;
   if (args.commercial && entry.commercial_use === false) return false;

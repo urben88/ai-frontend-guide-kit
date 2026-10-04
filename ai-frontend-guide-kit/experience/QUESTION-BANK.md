@@ -20,6 +20,7 @@ The agent asks these questions **in rounds of 3–5**, never as a single form. E
 | q04-success | What action proves success? | sign up · buy · contact/lead · finish a task · return/learn |
 | q05-frequency | How often will they use it? | once · occasionally · weekly · daily |
 | q06-existing | Starting point? | from scratch · redesign · add a new area |
+| q42-content-ready | Do real content and brand assets exist? | yes · partly · placeholders needed · AI-generated allowed |
 
 ## Phase 2 · Experience philosophy
 
@@ -75,6 +76,11 @@ The agent asks these questions **in rounds of 3–5**, never as a single form. E
 | q34-environment | Special environment? | no · industrial/gloves · touch/kiosk · low light |
 | q35-wcag | WCAG target? | AA · AAA where possible · not defined |
 | q36-limits | Biggest constraint? | time · budget · content · stack |
+| q37-ai-features | Does the product include AI features? | no · assistive · conversational · agentic |
+| q38-languages | Languages and regions? | one · several · RTL needed · not sure |
+| q39-performance | Performance budget? | standard (CWV good) · strict (low-end) · effects if justified · not defined |
+| q40-theme | Light, dark or both? | light · dark · both (system) · both (user switch) |
+| q41-consent-legal | Personal data, payments or regulation? | no · personal data/cookies · payments · regulated sector |
 
 ## Laya commands
 
