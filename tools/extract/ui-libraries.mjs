@@ -1,11 +1,12 @@
 /**
  * Extraction: component libraries distributed as npm packages (not copy-paste registries).
- * Sources: Mantine (MIT), Base UI (MIT, unstyled primitives), React Aria Components (Apache-2.0, accessible primitives).
+ * Sources: Mantine, Base UI, React Aria Components, Material UI, Chakra UI, Ant Design, Radix Primitives,
+ *          Headless UI, Flowbite, Mantine UI (page-section categories).
  * Component lists come from the public GitHub directory listing of each package.
  *
- * Usage: node tools/extract/ui-libraries.mjs [mantine|baseui|reactaria|all]
+ * Usage: node tools/extract/ui-libraries.mjs [mantine|baseui|reactaria|mui|chakra|antd|radix|headlessui|flowbite|mantineui|all]
  */
-import { fetchJSON, buildEntry, writeSource, slugify, titleCase, categoryFromKeywords, USE_BY_CATEGORY } from './lib.mjs';
+import { fetchJSON, fetchText, mapLimit, buildEntry, writeSource, slugify, titleCase, categoryFromKeywords, USE_BY_CATEGORY } from './lib.mjs';
 
 const RULES = [
   [/accordion|collapse|disclosure|spoiler|tooltip-group/, 'micro-interactions'],
@@ -97,7 +98,147 @@ async function reactaria() {
   return writeSource('reactaria', { sourceName: cfg.label, sourceUrl: 'https://react-spectrum.adobe.com/react-aria/', catalogUrl: 'https://react-spectrum.adobe.com/react-aria/components.html', licenseSummary: 'Apache-2.0', granularity: 'complete (react-aria-components source files)', extraction: { channel: 'github-contents', method: 'Directory listing of packages/react-aria-components/src', evidence_url: 'https://github.com/adobe/react-spectrum/tree/main/packages/react-aria-components/src' } }, entries);
 }
 
+/** Drops entries whose docs page is a 404 (names in repos do not always match the docs routes). 403/429/network errors are kept. */
+async function verifyDocs(entries, label) {
+  const checked = await mapLimit(entries, 8, async (entry) => {
+    try {
+      const { status } = await fetchText(entry.docs_url, { timeout: 15000, retries: 1, method: 'GET' });
+      return { entry, dead: status === 404 || status === 410 };
+    } catch {
+      return { entry, dead: false };
+    }
+  });
+  const alive = checked.filter((c) => !c.dead).map((c) => c.entry);
+  console.log(`${label}: docs verified, ${checked.length - alive.length} dropped (404), ${alive.length} kept`);
+  return alive;
+}
+
+async function simple(cfg, items, meta) {
+  const entries = items.map(({ name, slug }) => entryFor(cfg, name, slug));
+  return writeSource(cfg.prefix, meta, await verifyDocs(entries, cfg.label));
+}
+
+const dirNames = async (repo, path) => (await listDir(repo, path)).filter((i) => i.type === 'dir').map((i) => i.name);
+
+// Folder names that do not match the docs route.
+const MUI_DOC = { Fab: 'floating-action-button', CircularProgress: 'progress', LinearProgress: 'progress', Radio: 'radio-button', RadioGroup: 'radio-button', ImageList: 'image-list', SwipeableDrawer: 'drawer', MobileStepper: 'stepper', TablePagination: 'table', ToggleButtonGroup: 'toggle-button', Toolbar: 'app-bar', IconButton: 'button', FormControlLabel: 'checkbox', TextField: 'text-field', MenuItem: 'menu', MenuList: 'menu', ListSubheader: 'list', ImageListItem: 'image-list' };
+
+async function mui() {
+  const cfg = {
+    prefix: 'mui', label: 'Material UI', pkg: '@mui/material', license: 'MIT', stack: ['react', 'emotion'],
+    blurb: 'a Material Design React component with a deep theming system.',
+    hints: ['Material Design look by default; heavy theming (createTheme) needed to avoid the default Material feel', 'Strong for dashboards and enterprise admin apps'],
+    install: 'npm i @mui/material @emotion/react @emotion/styled',
+    docsUrl: (name, slug) => `https://mui.com/material-ui/react-${MUI_DOC[name] ?? slug}/`,
+  };
+  const PART = /(Actions|Details|Summary|Title|Content|ContentText|Header|Media|ActionArea|Base|Label|ItemText|ItemIcon|ItemButton|ItemAvatar|Provider|Listener|Baseline|Context|Panel|Root|Track)$/;
+  const KEEP_GROUPS = /^(ToggleButtonGroup|ButtonGroup|AvatarGroup)$/;
+  const SKIP = /^(Fade|Grow|Slide|Zoom|Collapse|Icon|SvgIcon|Input|Tab)$|^(Portal|NoSsr|Popper|ScopedCssBaseline|StyledEngineProvider|GlobalStyles|InitColorSchemeScript|Unstable|Experimental|Pigment|OverridableComponent|FormControl$|FormGroup|FormHelperText|FormLabel|InputBase|InputAdornment|InputLabel|FilledInput|OutlinedInput|NativeSelect|Backdrop|ButtonBase|TextareaAutosize|Hidden)/;
+  const names = (await dirNames('mui/material-ui', 'packages/mui-material/src')).filter((n) => /^[A-Z]/.test(n) && !SKIP.test(n) && (KEEP_GROUPS.test(n) || !PART.test(n)));
+  return simple(cfg, names.map((name) => ({ name, slug: kebab(name) })), { sourceName: cfg.label, sourceUrl: 'https://mui.com/material-ui/', catalogUrl: 'https://mui.com/material-ui/all-components/', licenseSummary: 'MIT (core); MUI X Pro/Premium and templates are paid', granularity: 'main components of @mui/material (sub-parts folded into their parent, docs URLs verified)', extraction: { channel: 'github-contents', method: 'Directory listing of packages/mui-material/src with docs URL verification', evidence_url: 'https://github.com/mui/material-ui/tree/master/packages/mui-material/src' } });
+}
+
+async function chakra() {
+  const cfg = {
+    prefix: 'chakra', label: 'Chakra UI', pkg: '@chakra-ui/react', license: 'MIT', stack: ['react', 'emotion'],
+    blurb: 'an accessible React component styled through Chakra theme tokens and style props.',
+    hints: ['Own style system (tokens, recipes), not Tailwind; v3 uses Ark UI primitives', 'Good when a theme-token-driven system is wanted'],
+    install: 'npm i @chakra-ui/react @emotion/react',
+    docsUrl: (name, slug) => `https://chakra-ui.com/docs/components/${slug}`,
+  };
+  const SKIP = /^(absolute-center|bleed|circle|client-only|environment|focus-trap|float$|em$|download-trigger|format|locale|portal|presence|show|visually-hidden|for$|mark$|wrap|stack|group)/;
+  const names = (await dirNames('chakra-ui/chakra-ui', 'packages/react/src/components')).filter((n) => !SKIP.test(n));
+  return simple(cfg, names.map((name) => ({ name, slug: name })), { sourceName: cfg.label, sourceUrl: 'https://chakra-ui.com', catalogUrl: 'https://chakra-ui.com/docs/components/concepts/overview', licenseSummary: 'MIT', granularity: 'components of @chakra-ui/react v3 (docs URLs verified)', extraction: { channel: 'github-contents', method: 'Directory listing of packages/react/src/components with docs URL verification', evidence_url: 'https://github.com/chakra-ui/chakra-ui/tree/main/packages/react/src/components' } });
+}
+
+async function antd() {
+  const cfg = {
+    prefix: 'antd', label: 'Ant Design', pkg: 'antd', license: 'MIT', stack: ['react', 'css-in-js'],
+    blurb: 'an enterprise-grade React component for admin apps, tables, forms and dashboards.',
+    hints: ['Dense enterprise look; theme through design tokens (ConfigProvider)', 'Best for back-office and data-heavy products; large bundle'],
+    install: 'npm i antd',
+    docsUrl: (name, slug) => `https://ant.design/components/${slug}`,
+  };
+  const SKIP = /^(_|__|config-provider$|locale$|icon$|style$|theme$|index|version$|col$|row$|border-beam|back-top$|listy|masonry$)/;
+  const names = (await dirNames('ant-design/ant-design', 'components')).filter((n) => !SKIP.test(n));
+  return simple(cfg, names.map((name) => ({ name, slug: name })), { sourceName: cfg.label, sourceUrl: 'https://ant.design', catalogUrl: 'https://ant.design/components/overview', licenseSummary: 'MIT', granularity: 'components of antd (docs URLs verified)', extraction: { channel: 'github-contents', method: 'Directory listing of components/ with docs URL verification', evidence_url: 'https://github.com/ant-design/ant-design/tree/master/components' } });
+}
+
+async function radix() {
+  const cfg = {
+    prefix: 'radix', label: 'Radix Primitives', pkg: 'radix-ui', license: 'MIT', stack: ['react', 'headless'],
+    blurb: 'an unstyled, accessible React primitive that owns behavior and focus management; you bring the styles.',
+    hints: ['Headless: pairs with Tailwind or CSS; the foundation of shadcn/ui', 'Best when the design system must own every visual detail'],
+    install: 'npm i radix-ui',
+    docsUrl: (name, slug) => `https://www.radix-ui.com/primitives/docs/components/${slug}`,
+  };
+  const KEEP = new Set(['accessible-icon', 'accordion', 'alert-dialog', 'aspect-ratio', 'avatar', 'checkbox', 'collapsible', 'context-menu', 'dialog', 'dropdown-menu', 'form', 'hover-card', 'label', 'menubar', 'navigation-menu', 'one-time-password-field', 'password-toggle-field', 'popover', 'progress', 'radio-group', 'scroll-area', 'select', 'separator', 'slider', 'switch', 'tabs', 'toast', 'toggle', 'toggle-group', 'toolbar', 'tooltip', 'visually-hidden']);
+  const names = (await dirNames('radix-ui/primitives', 'packages/react')).filter((n) => KEEP.has(n));
+  return simple(cfg, names.map((name) => ({ name, slug: name })), { sourceName: cfg.label, sourceUrl: 'https://www.radix-ui.com/primitives', catalogUrl: 'https://www.radix-ui.com/primitives/docs/overview/introduction', licenseSummary: 'MIT', granularity: 'public primitives of Radix (docs URLs verified)', extraction: { channel: 'github-contents', method: 'Directory listing of packages/react filtered to public primitives with docs URL verification', evidence_url: 'https://github.com/radix-ui/primitives/tree/main/packages/react' } });
+}
+
+async function headlessui() {
+  const cfg = {
+    prefix: 'headlessui', label: 'Headless UI', pkg: '@headlessui/react', license: 'MIT', stack: ['react', 'vue', 'headless'],
+    blurb: 'an unstyled, accessible component from the Tailwind team for React and Vue.',
+    hints: ['Headless and Tailwind-friendly; fewer components than Radix/React Aria but a very simple API'],
+    install: 'npm i @headlessui/react',
+    docsUrl: (name, slug) => `https://headlessui.com/react/${slug}`,
+  };
+  const names = ['button', 'checkbox', 'combobox', 'description', 'dialog', 'disclosure', 'field', 'fieldset', 'input', 'label', 'legend', 'listbox', 'menu', 'popover', 'radio-group', 'select', 'switch', 'tabs', 'textarea', 'transition'];
+  return simple(cfg, names.map((name) => ({ name, slug: name })), { sourceName: cfg.label, sourceUrl: 'https://headlessui.com', catalogUrl: 'https://headlessui.com/react/menu', licenseSummary: 'MIT', granularity: 'public components of @headlessui/react (docs URLs verified)', extraction: { channel: 'github-contents', method: 'Component list from the headlessui package with docs URL verification', evidence_url: 'https://github.com/tailwindlabs/headlessui/tree/main/packages/@headlessui-react/src/components' } });
+}
+
+async function flowbite() {
+  const cfg = {
+    prefix: 'flowbite', label: 'Flowbite', pkg: 'flowbite', license: 'MIT', stack: ['html', 'tailwind'],
+    blurb: 'a Tailwind CSS component with ready HTML plus optional JavaScript behavior.',
+    hints: ['Plain HTML + Tailwind classes; framework wrappers exist (React, Svelte, Vue)', 'Flowbite Pro blocks and templates are paid and are not indexed'],
+    install: 'npm i flowbite (add the plugin in your Tailwind config)',
+    docsUrl: (name, slug) => `https://flowbite.com/docs/components/${slug}/`,
+  };
+  const files = (await listDir('themesberg/flowbite', 'content/components')).filter((i) => i.type === 'file' && /\.md$/.test(i.name));
+  return simple(cfg, files.map((f) => ({ name: f.name, slug: f.name.replace(/\.md$/, '') })), { sourceName: cfg.label, sourceUrl: 'https://flowbite.com', catalogUrl: 'https://flowbite.com/docs/getting-started/introduction/', licenseSummary: 'MIT (open-source components); Flowbite Pro blocks/templates and part of Flowbite Blocks are paid', granularity: 'components of the open-source Flowbite docs (docs URLs verified)', extraction: { channel: 'github-contents', method: 'Directory listing of content/components with docs URL verification', evidence_url: 'https://github.com/themesberg/flowbite/tree/main/content/components' } });
+}
+
+async function mantineui() {
+  const text = (await fetchText('https://raw.githubusercontent.com/mantinedev/ui.mantine.dev/master/data/categories.ts')).text;
+  const categories = [...text.matchAll(/slug:\s*'([^']+)',\s*name:\s*(?:'([^']+)'|"([^"]+)")/g)].map((m) => ({ slug: m[1], name: m[2] ?? m[3] }));
+  const GROUP = { navbars: 'navigation', headers: 'navigation', footers: 'layout', grids: 'layout', users: 'data-display', inputs: 'forms', buttons: 'micro-interactions', sliders: 'media', dropzones: 'forms', 'app-cards': 'data-display', stats: 'data-display', tables: 'data-display', dnd: 'micro-interactions', carousels: 'media', hero: 'hero', features: 'features', authentication: 'forms', faq: 'faq', contact: 'forms', 'error-pages': 'layout', banners: 'cta', 'article-cards': 'blocks-sections', toc: 'navigation', comments: 'data-display' };
+  const entries = categories.map(({ slug, name }) => {
+    const category = GROUP[slug] ?? 'blocks-sections';
+    return buildEntry({
+      id: `mantineui-${category}-${slugify(slug)}`,
+      name: `Mantine UI ${name}`,
+      source: 'Mantine UI',
+      entryType: 'block',
+      category,
+      description: `Collection of ready ${name.toLowerCase()} examples built on Mantine, with copy-paste code.`,
+      useCase: USE_BY_CATEGORY[category],
+      decisionHints: ['Requires Mantine (@mantine/core); one entry per category, each page holds several variants'],
+      searchTags: ['mantine', 'mantine-ui', ...slugify(name).split('-')],
+      docsUrl: `https://ui.mantine.dev/category/${slug}/`,
+      stack: ['react', 'css-modules'],
+      dependencies: ['@mantine/core'],
+      installMethod: 'copy-paste',
+      manualSteps: [`Open https://ui.mantine.dev/category/${slug}/ and copy the variant you need.`],
+      licenseType: 'MIT',
+      commercialUse: true,
+      free: true,
+    });
+  });
+  return writeSource('mantineui', { sourceName: 'Mantine UI', sourceUrl: 'https://ui.mantine.dev', catalogUrl: 'https://ui.mantine.dev', licenseSummary: 'MIT', granularity: 'one entry per category (about 120 variants inside)', extraction: { channel: 'github-contents', method: 'Category list from data/categories.ts of the ui.mantine.dev repository', evidence_url: 'https://github.com/mantinedev/ui.mantine.dev/blob/master/data/categories.ts' } }, await verifyDocs(entries, 'Mantine UI'));
+}
+
+
 const target = process.argv[2] ?? 'all';
 if (target === 'all' || target === 'mantine') await mantine();
 if (target === 'all' || target === 'baseui') await baseui();
 if (target === 'all' || target === 'reactaria') await reactaria();
+if (target === 'all' || target === 'mui') await mui();
+if (target === 'all' || target === 'chakra') await chakra();
+if (target === 'all' || target === 'antd') await antd();
+if (target === 'all' || target === 'radix') await radix();
+if (target === 'all' || target === 'headlessui') await headlessui();
+if (target === 'all' || target === 'flowbite') await flowbite();
+if (target === 'all' || target === 'mantineui') await mantineui();

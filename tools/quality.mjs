@@ -14,7 +14,7 @@ import { SOURCES_DIR } from './extract/lib.mjs';
 const SOURCE_TIER = {
   shadcn: 20, shadcnvue: 18, shadcnsvelte: 18, magicui: 18, coss: 18, motionprimitives: 17,
   daisyui: 16, aceternity: 16, hyperui: 15, preline: 15, kiboui: 15, cultui: 14, animateui: 14,
-  reactbits: 14, arcui: 14, mantine: 18, baseui: 17, reactaria: 18, aicss: 12, tailblocks: 10, floatui: 12, hover: 12, agentskit: 12, uiverse: 8, '21stdev': 8, dsr: 10,
+  reactbits: 14, arcui: 14, mui: 18, chakra: 17, antd: 17, radix: 19, headlessui: 17, flowbite: 15, mantineui: 15, resources: 12, mantine: 18, baseui: 17, reactaria: 18, aicss: 12, tailblocks: 10, floatui: 12, hover: 12, agentskit: 12, uiverse: 8, '21stdev': 8, dsr: 10,
 };
 
 const LICENSE_POINTS = { MIT: 30, 'Apache-2.0': 30, custom: 18, proprietary: 12, unknown: 4, 'non-commercial': 0 };

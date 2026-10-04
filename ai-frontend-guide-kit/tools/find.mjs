@@ -15,6 +15,7 @@
  *   Near-identical entries (same name, category and framework across sources) are collapsed to the best one; --all shows every copy.
  *   Icons are hidden unless --type icon or --all.
  *   --licensed drops entries whose license is unknown.
+ *   --source takes a source id (mui, shadcn, reactaria, ...) for an exact match, or part of a source name.
  *
  * Examples:
  *   node tools/find.mjs --category hero --stack react --commercial
@@ -80,7 +81,12 @@ export function matches(entry, args) {
   if (args.type) {
     if (entry.entry_type !== args.type) return false;
   } else if (!args.all && entry.entry_type === 'icon') return false;
-  if (args.source && !squash(entry.source).includes(squash(args.source))) return false;
+  if (args.source) {
+    // A source id (the id prefix, e.g. mui, shadcn, reactaria) matches exactly; otherwise fall back to a name substring.
+    if (args._exactSource) {
+      if (!entry.id.startsWith(`${args.source}-`)) return false;
+    } else if (!squash(entry.source).includes(squash(args.source))) return false;
+  }
   if (args.stack && !(entry.stack ?? []).some((item) => String(item).toLowerCase() === String(args.stack).toLowerCase())) return false;
   if (args.license && entry.license_type !== args.license) return false;
   if (args.licensed && entry.license_type === 'unknown') return false;
@@ -102,6 +108,7 @@ function dedupeKey(entry) {
 }
 
 export function search(entries, args) {
+  if (args.source && args._exactSource === undefined) args = { ...args, _exactSource: entries.some((entry) => entry.id.startsWith(`${args.source}-`)) };
   const filtered = entries.filter((entry) => matches(entry, args));
   const sort = args.sort ?? (args.text ? 'relevance' : 'quality');
   const rel = new Map(filtered.map((entry) => [entry, args.text ? relevance(entry, args.text) : 0]));

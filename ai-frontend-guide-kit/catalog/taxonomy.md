@@ -26,6 +26,7 @@ Canonical categories used by the Component Manifest. Every entry's `category` MU
 | `ai-surfaces` | Agent/AI conversation UI: chat, thinking states, tool calls, streaming text, approvals, voice |
 | `design-system` | Full design systems and token/theme references (not single components) |
 | `template` | Complete page templates (landing, portfolio, dashboard) |
+| `assets` | Icon sets, illustrations and design-tool libraries (not code components) |
 
 ## Source → canonical mapping
 

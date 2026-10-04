@@ -110,6 +110,7 @@ export const USE_BY_CATEGORY = {
   'ai-surfaces': 'Build agent and AI conversation interfaces (chat, thinking, tools, streaming).',
   'design-system': 'Reference a full design system for tokens, components and theming guidance.',
   template: 'Start from a complete page template and adapt it to the product.',
+  assets: 'Add icons, illustrations or design kits that keep the visual language consistent.',
 };
 
 export const RULE_REUSE = 'Prefer reuse or adaptation before writing a new component. See 06-REUSE.';

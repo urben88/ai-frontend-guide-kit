@@ -227,3 +227,60 @@ Practical checks run in a fresh Next.js 16 + Tailwind v4 + `--src-dir` project:
 - **Install:** register `@uiarc` (`https://uiarc.dev/r/{name}.json`) in `components.json`, then `npx shadcn@latest add @uiarc/<name>`. Each item pulls the shared `arc-foundation` item (design and motion tokens).
 - **Stack:** React + `motion` + CSS modules (not Tailwind): map your tokens into `arc-foundation`.
 - **License / limits:** MIT for the free source (verified from the `kuratlielia/arc-library` LICENSE). Pro components have extra restrictions and are not indexed.
+
+## Material UI
+
+- **Catalog:** https://mui.com/material-ui/all-components/
+- **Install:** `npm i @mui/material @emotion/react @emotion/styled`; wrap the app in `ThemeProvider` and define tokens with `createTheme`.
+- **Stack:** React + Emotion (not Tailwind). Material Design look by default: theme heavily if the brand is not Material.
+- **License / limits:** MIT (core). MUI X Pro/Premium and paid templates are separate and not indexed.
+
+## Chakra UI
+
+- **Catalog:** https://chakra-ui.com/docs/components/concepts/overview (v3, built on Ark UI).
+- **Install:** `npm i @chakra-ui/react @emotion/react`, then `npx @chakra-ui/cli snippet add <name>` for the copy-in snippets.
+- **License / limits:** MIT.
+
+## Ant Design
+
+- **Catalog:** https://ant.design/components/overview
+- **Install:** `npm i antd`; theme through `ConfigProvider` design tokens.
+- **Stack:** React + CSS-in-JS. Dense enterprise look; large bundle, tree-shake imports.
+- **License / limits:** MIT.
+
+## Radix Primitives
+
+- **Catalog:** https://www.radix-ui.com/primitives
+- **Install:** `npm i radix-ui` (or a single package, e.g. `@radix-ui/react-dialog`). Unstyled: bring Tailwind or CSS.
+- **License / limits:** MIT. It is the behavior layer under shadcn/ui.
+
+## Headless UI
+
+- **Catalog:** https://headlessui.com/react/menu
+- **Install:** `npm i @headlessui/react` (a Vue package, `@headlessui/vue`, also exists). Unstyled, Tailwind-friendly.
+- **License / limits:** MIT.
+
+## Flowbite
+
+- **Catalog:** https://flowbite.com/docs/getting-started/introduction/
+- **Install:** `npm i flowbite`, add the plugin to the Tailwind config and import `flowbite/dist/flowbite.min.js` for interactive parts. Plain HTML + Tailwind; framework wrappers exist.
+- **License / limits:** MIT for the open-source components. Flowbite Pro and most of Flowbite Blocks are paid (see the `resources` source entry).
+
+## Mantine UI
+
+- **Catalog:** https://ui.mantine.dev (about 120 copy-paste sections on Mantine, one catalog entry per category).
+- **Install:** requires Mantine (`@mantine/core`); open the category page and copy the variant you want.
+- **License / limits:** MIT.
+
+## shadcn/ui blocks
+
+- Official free blocks (dashboard-01, sidebar-01..16, login-01..05, signup-01..05, chart variants) are indexed in the `shadcn` source with `entry_type: block`.
+- **Install:** `npx shadcn@latest add dashboard-01` (pulls the shadcn/ui components it needs).
+
+## Curated resources (icons, illustrations, kits)
+
+- **Icon sets:** Lucide (ISC), Heroicons (MIT), Tabler Icons (MIT), Phosphor Icons (MIT): install via npm (`lucide-react`, `@heroicons/react`, `@tabler/icons-react`, `@phosphor-icons/react`). Use one set per project.
+- **Illustrations:** unDraw (free, no attribution, no redistribution or AI training), Storyset (free with attribution; Flaticon Premium removes it).
+- **Design-tool libraries:** Figma Community (free files are CC BY 4.0, per-file license), Canva (Content License Agreement; check branded and people/logo content).
+- **Paid or partly paid:** Tailwind Plus (paid one-time license), Untitled UI React (free MIT tier + PRO), Flowbite Blocks (free subset + Pro). Only reference entries exist: the kit never stores their code.
+- Each entry links the license evidence page in `manual_steps`; re-verify before client delivery because terms and prices change.

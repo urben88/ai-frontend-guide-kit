@@ -104,7 +104,7 @@ test('get prints an entry with quality, and fails clearly for a missing id', () 
 });
 
 test('find CLI --json returns structured results for the new sources', () => {
-  for (const source of ['reactbits', 'arcui', 'cultui', 'kiboui', 'animateui', 'shadcnvue', 'shadcnsvelte']) {
+  for (const source of ['reactbits', 'arcui', 'mui', 'chakra', 'antd', 'radix', 'headlessui', 'flowbite', 'mantineui', 'cultui', 'kiboui', 'animateui', 'shadcnvue', 'shadcnsvelte']) {
     const run = spawnSync(process.execPath, [join(KIT, 'tools', 'find.mjs'), '--source', source, '--limit', '2', '--json'], { encoding: 'utf8' });
     assert.equal(run.status, 0, source);
     const json = JSON.parse(run.stdout);
@@ -116,4 +116,18 @@ test('find CLI --json returns structured results for the new sources', () => {
 test('category audit stays under the 3% suspicious threshold', () => {
   const run = spawnSync(process.execPath, [join(ROOT, 'tools', 'audit-categories.mjs'), '--strict'], { encoding: 'utf8' });
   assert.equal(run.status, 0, run.stdout);
+});
+
+test('--source with a source id matches exactly (shadcn does not include shadcnvue; mui works)', () => {
+  const ids = (source) => JSON.parse(spawnSync(process.execPath, [join(KIT, 'tools', 'find.mjs'), '--source', source, '--limit', '200', '--json'], { encoding: 'utf8' }).stdout).results.map((r) => r.id);
+  assert.ok(ids('shadcn').length > 0 && ids('shadcn').every((id) => id.startsWith('shadcn-')));
+  assert.ok(ids('mui').every((id) => id.startsWith('mui-')));
+});
+
+test('assets category holds icon sets and illustrations with license evidence', () => {
+  const run = spawnSync(process.execPath, [join(KIT, 'tools', 'find.mjs'), '--category', 'assets', '--json', '--limit', '50'], { encoding: 'utf8' });
+  const { results } = JSON.parse(run.stdout);
+  const names = results.map((r) => r.name);
+  for (const expected of ['Lucide Icons', 'Heroicons', 'Tabler Icons', 'Phosphor Icons', 'unDraw', 'Storyset']) assert.ok(names.includes(expected), expected);
+  assert.ok(results.every((r) => (r.manual_steps ?? []).some((s) => s.startsWith('License evidence:'))));
 });

@@ -275,6 +275,39 @@ async function extractShadcn() {
         free: true,
       });
     });
+
+  // Free official blocks (dashboards, sidebars, login/signup, charts) live in the style registry, not in index.json.
+  try {
+    const { data: styleRegistry } = await fetchJSON('https://ui.shadcn.com/r/styles/new-york-v4/registry.json');
+    for (const item of (styleRegistry.items ?? []).filter((i) => i.type === 'registry:block')) {
+      const name = item.name;
+      const category = /^chart-/.test(name) ? 'data-display' : /^sidebar-/.test(name) ? 'navigation' : /^(login|signup|otp)-/.test(name) ? 'forms' : /^dashboard-/.test(name) ? 'template' : /^calendar-/.test(name) ? 'forms' : 'blocks-sections';
+      entries.push(
+        buildEntry({
+          id: `shadcn-${category}-${slugify(name)}`,
+          name: `shadcn/ui Block ${titleCase(name)}`,
+          source: 'shadcn/ui',
+          entryType: 'block',
+          category,
+          description: truncate(item.description ?? `${titleCase(name)} block: a ready composition of shadcn/ui components.`),
+          useCase: USE_BY_CATEGORY[category],
+          decisionHints: ['Official block: copy and adapt to your tokens; it pulls the shadcn/ui components it needs'],
+          searchTags: ['shadcn', 'block', ...slugify(name).split('-')],
+          docsUrl: 'https://ui.shadcn.com/blocks',
+          registryUrl: `https://ui.shadcn.com/r/styles/new-york-v4/${name}.json`,
+          stack: ['react', 'tailwind'],
+          dependencies: [...new Set(item.dependencies ?? [])],
+          installMethod: 'shadcn-cli',
+          installCommand: `npx shadcn@latest add ${name}`,
+          licenseType: 'MIT',
+          commercialUse: true,
+          free: true,
+        }),
+      );
+    }
+  } catch (error) {
+    console.log(`shadcn: blocks skipped (${error.message})`);
+  }
   return writeSource(
     'shadcn',
     {
@@ -282,10 +315,10 @@ async function extractShadcn() {
       sourceUrl: 'https://ui.shadcn.com',
       catalogUrl: 'https://ui.shadcn.com/docs/components',
       licenseSummary: 'MIT',
-      granularity: 'complete (registry:ui items)',
+      granularity: 'complete (registry:ui items + official registry:block items)',
       extraction: {
         channel: 'registry-json',
-        method: 'Node script downloading the official registry index',
+        method: 'Node script downloading the official registry index and the new-york-v4 style registry (blocks)',
         evidence_url: 'https://ui.shadcn.com/r/index.json',
       },
     },

@@ -148,3 +148,10 @@ Fresh `create-next-app` (Next.js 16.3.8, Tailwind v4, `--src-dir`) with shadcn/u
 - **Audits**: `audit-honesty`, `audit-a11y`, `audit-perf` added to the kit; `09-VERIFY` sections 4-6.
 - **Tests**: `npm test` → 23 passing (find/get/quality, installer idempotency, memory, audits, license classifier, experience manifest, walkthrough example). CI: `.github/workflows/ci.yml`; monthly `refresh.yml` (PR) and `links.yml`.
 - **Links**: stratified check (`validate --urls 176`) → 0 broken in new sources after fixes; remaining broken: 1 HyperUI page and 2 external DSR pages (upstream); 403s are bot protection (Uiverse, DSR).
+
+## 2026-10-04 · Second batch from the user's list
+
+- **New sources (34 total, 4,287 entries)**: Arc UI, Material UI, Chakra UI, Ant Design, Radix Primitives, Headless UI, Flowbite, Mantine UI (per category), shadcn/ui official blocks (97), plus `resources` (icons, illustrations, design-tool libraries, paid kits). Docs URLs of library sources are verified at extraction time (404s dropped).
+- **License evidence**: repo LICENSE files cross-checked for all new library sources (all match). `resources` entries link their evidence page; Lucide is ISC (+ MIT portions), unDraw and Storyset have custom terms, Tailwind Plus and Flowbite Pro are paid and indexed as reference only.
+- **New category** `assets` (icon sets, illustrations, design kits) and entry type `asset`; `find --source` now accepts source ids exactly (`mui`, `shadcn`).
+- `npm test` → 25 passing; `validate --urls 150`: 2 broken (older sources: Aceternity label page, coss origin calendar), 7 blocked by bot protection.

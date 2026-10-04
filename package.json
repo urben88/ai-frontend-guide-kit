@@ -1,7 +1,7 @@
 {
   "name": "ai-frontend-guide-kit",
   "version": "1.3.0",
-  "description": "Reusable-first UI component catalog and guided kit for AI frontend agents (26 sources, 3,858 entries, React/Vue/Svelte) with quality ranking, audits and optional local Laya ranking.",
+  "description": "Reusable-first UI component catalog and guided kit for AI frontend agents (34 sources, 4,287 entries, React/Vue/Svelte) with quality ranking, audits and optional local Laya ranking.",
   "repository": {
     "type": "git",
     "url": "https://github.com/urben88/ai-frontend-guide-kit.git"

@@ -35,6 +35,14 @@ const SOURCE_SCRIPTS = {
   mantine: ['extract/ui-libraries.mjs', 'mantine'],
   baseui: ['extract/ui-libraries.mjs', 'baseui'],
   reactaria: ['extract/ui-libraries.mjs', 'reactaria'],
+  mui: ['extract/ui-libraries.mjs', 'mui'],
+  chakra: ['extract/ui-libraries.mjs', 'chakra'],
+  antd: ['extract/ui-libraries.mjs', 'antd'],
+  radix: ['extract/ui-libraries.mjs', 'radix'],
+  headlessui: ['extract/ui-libraries.mjs', 'headlessui'],
+  flowbite: ['extract/ui-libraries.mjs', 'flowbite'],
+  mantineui: ['extract/ui-libraries.mjs', 'mantineui'],
+  resources: ['extract/resources.mjs'],
 };
 
 function run(scriptRelativePath, extraArgs = []) {

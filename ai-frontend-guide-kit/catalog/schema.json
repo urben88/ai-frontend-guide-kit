@@ -55,7 +55,8 @@
         "blocks-sections",
         "ai-surfaces",
         "design-system",
-        "template"
+        "template",
+        "assets"
       ]
     },
     "entry": {
@@ -80,7 +81,7 @@
         "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
         "name": { "type": "string", "minLength": 1 },
         "source": { "type": "string", "minLength": 1 },
-        "entry_type": { "enum": ["component", "block", "design-system", "icon"] },
+        "entry_type": { "enum": ["component", "block", "design-system", "icon", "asset"] },
         "category": { "$ref": "#/$defs/category" },
         "subcategory": { "type": "string" },
         "description": { "type": "string", "minLength": 10 },
