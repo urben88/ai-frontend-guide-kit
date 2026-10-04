@@ -3,7 +3,7 @@
  * Sources: Kibo UI (MIT), Animate UI (MIT + Commons Clause),
  *          cult/ui (MIT), React Bits (MIT + Commons Clause).
  *
- * Usage: node tools/extract/registry-extra.mjs [kibo|animateui|cultui|reactbits|all]
+ * Usage: node tools/extract/registry-extra.mjs [kibo|animateui|cultui|reactbits|arcui|all]
  */
 import { fetchJSON, buildEntry, writeSource, slugify, titleCase, categoryFromKeywords, truncate, USE_BY_CATEGORY } from './lib.mjs';
 
@@ -40,13 +40,13 @@ function mapItems(items, cfg) {
         useCase: USE_BY_CATEGORY[category],
         decisionHints: [...cfg.hints, HINT],
         searchTags: [cfg.prefix, ...slugify(display).split('-')],
-        docsUrl: cfg.docsUrl(item.name),
+        docsUrl: cfg.docsUrl(item.name, item),
         registryUrl: cfg.registryUrl?.(item.name),
         stack: cfg.stack(item),
         dependencies: [...new Set(item.dependencies ?? [])],
         installMethod: 'shadcn-cli',
         installCommand: cfg.install(item.name),
-        manualSteps: [`Or copy the source from ${cfg.docsUrl(item.name)}`],
+        manualSteps: [`Or copy the source from ${cfg.docsUrl(item.name, item)}`],
         licenseType: cfg.licenseType,
         commercialUse: true,
         free: true,
@@ -62,6 +62,19 @@ async function run(id, url, cfg, meta) {
   const entries = mapItems(data.items ?? data, cfg);
   return writeSource(id, { ...meta, extraction: { channel: 'registry-json', method: 'Node script downloading the public shadcn-compatible registry', evidence_url: url } }, entries);
 }
+
+const ARC_BLOCK_CATEGORY = [
+  [/hero/, 'hero'], [/faq/, 'faq'], [/cta|newsletter/, 'cta'], [/plan-comparison|pricing|comparison-table/, 'pricing'],
+  [/site-header|command-palette/, 'navigation'], [/site-footer|page-header|empty-states|stats-band/, 'layout'],
+  [/sign-in|signup|login|otp|contact|file-upload/, 'forms'], [/notification|changelog|blog/, 'data-display'], [/logo-marquee/, 'testimonials'],
+];
+// Names the generic keyword rules get wrong ('context' matches text, 'stack' matches media, ...).
+const ARC_OVERRIDE = {
+  'context-menu': 'overlay', 'number-field': 'forms', 'password-field': 'forms', textarea: 'forms', 'toast-stack': 'feedback',
+  'scroll-area': 'layout', 'resizable-panels': 'layout', accordion: 'micro-interactions', 'theme-switch-split': 'forms',
+  'split-button': 'micro-interactions', sparkline: 'data-display', 'card-stack': 'data-display',
+};
+const ARC_GROUP_CATEGORY = { actions: 'micro-interactions', disclosure: 'overlay', data: 'data-display', inputs: 'forms', feedback: 'feedback', text: 'text', ai: 'ai-surfaces', special: 'micro-interactions' };
 
 const reactStack = (item) => ['react', 'tailwind', ...((item.dependencies ?? []).some((d) => /^(motion|framer-motion)/.test(d)) ? ['motion'] : [])];
 
@@ -153,6 +166,38 @@ async function cultui() {
   );
 }
 
+async function arcui() {
+  return run(
+    'arcui',
+    'https://uiarc.dev/r/registry.json',
+    {
+      prefix: 'arcui',
+      label: 'Arc UI',
+      types: new Set(['registry:ui', 'registry:block']),
+      skip: /^(arc-foundation)$/,
+      fallback: 'micro-interactions',
+      categoryOf: (item) =>
+        ARC_OVERRIDE[item.name] ??
+        (item.type === 'registry:block'
+          ? categoryFromKeywords(item.name, ARC_BLOCK_CATEGORY, 'blocks-sections')
+          : categoryFromKeywords(item.name, RULES, undefined) ?? ARC_GROUP_CATEGORY[(item.categories ?? [])[0]] ?? 'micro-interactions'),
+      hints: ['Calm motion built in; every item depends on the shared arc-foundation item (design and motion tokens)', 'Styled with CSS modules, not Tailwind: map your tokens into arc-foundation'],
+      docsUrl: (n, item) => (item?.type === 'registry:block' ? `https://uiarc.dev/components/blocks/${n}` : `https://uiarc.dev/components/${n}`),
+      registryUrl: (n) => `https://uiarc.dev/r/${n}.json`,
+      stack: () => ['react', 'css-modules', 'motion'],
+      install: (n) => `npx shadcn@latest add @uiarc/${n}`,
+      licenseType: 'MIT',
+    },
+    {
+      sourceName: 'Arc UI',
+      sourceUrl: 'https://uiarc.dev',
+      catalogUrl: 'https://uiarc.dev',
+      licenseSummary: 'MIT (free source; Pro components have additional restrictions and are not indexed)',
+      granularity: 'complete (registry:ui + registry:block, all marked free)',
+    },
+  );
+}
+
 async function reactbits() {
   return run(
     'reactbits',
@@ -187,3 +232,4 @@ if (target === 'all' || target === 'kibo') await kibo();
 if (target === 'all' || target === 'animateui') await animateui();
 if (target === 'all' || target === 'cultui') await cultui();
 if (target === 'all' || target === 'reactbits') await reactbits();
+if (target === 'all' || target === 'arcui') await arcui();

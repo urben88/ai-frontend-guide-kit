@@ -1,6 +1,6 @@
 # Component Manifest
 
-Light index of 3731 reusable UI entries across 25 sources. Generated 2026-10-04.
+Light index of 3858 reusable UI entries across 26 sources. Generated 2026-10-04.
 
 **Rule:** consult this catalog before writing any component from scratch. Filter with `find`, inspect with `get`, then follow `guides/06-REUSE.md`.
 
@@ -13,6 +13,7 @@ Light index of 3731 reusable UI entries across 25 sources. Generated 2026-10-04.
 | Agents Kit | 224 | Non-commercial for original families; MIT/Apache-2.0 for ported collections | complete (224 registry blocks) | `sources/agentskit.json` |
 | aicss.dev | 13 | MIT (free components); Pro under a custom one-time license | complete for the 13 free components (Pro excluded by design) | `sources/aicss.json` |
 | Animate UI | 414 | MIT + Commons Clause (use in products; no resale of the components) | complete (all registry:ui items) | `sources/animateui.json` |
+| Arc UI | 127 | MIT (free source; Pro components have additional restrictions and are not indexed) | complete (registry:ui + registry:block, all marked free) | `sources/arcui.json` |
 | Base UI | 38 | MIT | complete (components of @base-ui/react) | `sources/baseui.json` |
 | coss ui / Origin UI | 76 | MIT for component directories (apps/ui and apps/origin); AGPL elsewhere in the repo | coss ui complete; legacy Origin indexed at base-component level (30 categories, ~604 variants upstream) | `sources/coss.json` |
 | cult/ui | 155 | MIT (open-source components); Pro blocks have a separate license | complete (registry:ui + registry:component) | `sources/cultui.json` |
@@ -38,24 +39,24 @@ Light index of 3731 reusable UI entries across 25 sources. Generated 2026-10-04.
 
 | Category | Entries |
 |---|---|
-| micro-interactions | 744 |
-| forms | 584 |
-| data-display | 461 |
-| feedback | 300 |
-| navigation | 249 |
-| ai-surfaces | 237 |
+| micro-interactions | 756 |
+| forms | 622 |
+| data-display | 491 |
+| feedback | 308 |
+| navigation | 257 |
+| ai-surfaces | 238 |
 | backgrounds-effects | 200 |
-| overlay | 163 |
-| text | 139 |
+| overlay | 169 |
+| text | 147 |
 | blocks-sections | 128 |
-| media | 111 |
-| layout | 108 |
+| layout | 114 |
+| media | 114 |
 | features | 53 |
-| testimonials | 52 |
-| hero | 48 |
-| cta | 45 |
-| pricing | 42 |
-| faq | 40 |
+| testimonials | 53 |
+| hero | 49 |
+| cta | 47 |
+| pricing | 44 |
+| faq | 41 |
 | design-system | 26 |
 | template | 1 |
 

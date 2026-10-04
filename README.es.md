@@ -19,7 +19,7 @@ Este repositorio es a la vez la 🏭 **fábrica** (pipeline de extracción + cat
 
 | | Qué | Detalle |
 |---|---|---|
-| 📚 | **Catálogo** | 25 fuentes verificadas · 3.731 entradas reutilizables · 20 categorías · puntuación de calidad, licencia e instalación por entrada · React, Vue y Svelte · `explorer.html` sin conexión |
+| 📚 | **Catálogo** | 26 fuentes verificadas · 3.858 entradas reutilizables · 20 categorías · puntuación de calidad, licencia e instalación por entrada · React, Vue y Svelte · `explorer.html` sin conexión |
 | 🧭 | **Kit guiado** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + flujo de 3 fases en 10 guías cortas (00–10) + herramientas `find`/`get`. Autocontenido: sin build ni dependencias npm |
 | 🧠 | **Skills para agentes** | `ai-frontend-guide` (flujo), `frontend-polish` (fase 3), `ux-map` (mapa visual de pantallas) y 16 skills UX incluidas (`userflow` + 15 `flow-*`, MIT) |
 | 💾 | **Memoria de selección** | `ai-frontend-output/`: historial de decisiones (solo añade), resumen de estilos/componentes y combinaciones reutilizables |
@@ -140,7 +140,7 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # vis
 │   ├── AGENTS.md · README.md · VERIFICATION.md
 │   ├── guides/00..10         # dirección de experiencia + flujo UX/UI "reutilizar primero"
 │   ├── experience/           # arquetipos, filosofías, estilos, banco de preguntas, bucle de descubrimiento, fichas de referencia + experience-manifest.json
-│   ├── catalog/              # índice + taxonomía + guías de instalación + 25 fuentes + explorer.html + license-report.md
+│   ├── catalog/              # índice + taxonomía + guías de instalación + 26 fuentes + explorer.html + license-report.md
 │   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp · audit-honesty · audit-a11y · audit-perf
 ├── skills/                   # ai-frontend-guide + frontend-polish + 16 skills UX incluidas (MIT)
 ├── manifest/                 # fuente de verdad del catálogo (generado)

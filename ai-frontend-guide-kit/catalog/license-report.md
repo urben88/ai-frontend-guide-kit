@@ -9,6 +9,7 @@ Generated 2026-10-04 by `node tools/check-licenses.mjs`. Declared = license_type
 | agentskit | - | non-commercial, Apache-2.0, MIT | per-entry | verify each entry |
 | aicss | - | MIT | not found | unresolved |
 | animateui | imskyleen/animate-ui | custom | MIT + Commons Clause | match |
+| arcui | kuratlielia/arc-library | MIT | MIT | match |
 | baseui | mui/base-ui | MIT | MIT | match |
 | coss | cosscom/coss | MIT | AGPL-3.0 | accepted: indexed component dirs are MIT; repo root is AGPL |
 | cultui | nolly-studio/cult-ui | MIT | MIT | match |

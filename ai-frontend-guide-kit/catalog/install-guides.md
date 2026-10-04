@@ -220,3 +220,10 @@ Practical checks run in a fresh Next.js 16 + Tailwind v4 + `--src-dir` project:
 - **Catalog:** https://react-spectrum.adobe.com/react-aria/components.html (accessible, unstyled; best i18n and keyboard behavior).
 - **Install:** `npm i react-aria-components`; Tailwind users add `tailwindcss-react-aria-components`.
 - **License / limits:** Apache-2.0.
+
+## Arc UI
+
+- **Catalog:** https://uiarc.dev (105 components and 22 blocks with calm motion: actions, inputs, data, disclosure, feedback, text; blocks such as sign-in, plan comparison, hero, FAQ, command palette).
+- **Install:** register `@uiarc` (`https://uiarc.dev/r/{name}.json`) in `components.json`, then `npx shadcn@latest add @uiarc/<name>`. Each item pulls the shared `arc-foundation` item (design and motion tokens).
+- **Stack:** React + `motion` + CSS modules (not Tailwind): map your tokens into `arc-foundation`.
+- **License / limits:** MIT for the free source (verified from the `kuratlielia/arc-library` LICENSE). Pro components have extra restrictions and are not indexed.

@@ -24,6 +24,7 @@ const REPOS = {
   cultui: ['nolly-studio/cult-ui'],
   animateui: ['imskyleen/animate-ui'],
   reactbits: ['DavidHDev/react-bits'],
+  arcui: ['kuratlielia/arc-library'],
   kiboui: ['haydenbleasel/kibo-ui', 'kibo-ui/kibo', 'shadcnblocks/kibo', 'haydenbleasel/kibo'],
   shadcnvue: ['unovue/shadcn-vue'],
   shadcnsvelte: ['huntabyte/shadcn-svelte'],
