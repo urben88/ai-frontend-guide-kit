@@ -4,23 +4,31 @@
  *
  * Usage:
  *   node tools/find.mjs [--category hero] [--stack react] [--license MIT]
- *                       [--commercial] [--free] [--source magicui]
- *                       [--type component|block|design-system] [--text <query>]
- *                       [--limit N] [--json]
+ *                       [--commercial] [--free] [--licensed] [--source magicui]
+ *                       [--type component|block|design-system|icon] [--text <query>]
+ *                       [--min-quality N] [--sort relevance|quality|name]
+ *                       [--all] [--limit N] [--json]
+ *
+ * Behavior:
+ *   --text splits into words (all must match) and ranks by weighted relevance (name > tags > category > description).
+ *   Results are ranked by quality (license clarity, install effort, dependencies, source tier) unless --sort says otherwise.
+ *   Near-identical entries (same name, category and framework across sources) are collapsed to the best one; --all shows every copy.
+ *   Icons are hidden unless --type icon or --all.
+ *   --licensed drops entries whose license is unknown.
  *
  * Examples:
  *   node tools/find.mjs --category hero --stack react --commercial
- *   node tools/find.mjs --text marquee
+ *   node tools/find.mjs --text "marquee logos" --min-quality 60
  */
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const CATALOG_DIR = join(__dirname, '..', 'catalog');
+const CATALOG_DIR = process.env.KIT_CATALOG_DIR ?? join(__dirname, '..', 'catalog');
 const SOURCES_DIR = join(CATALOG_DIR, 'sources');
 
-function parseArgs(argv) {
+export function parseArgs(argv) {
   const args = { limit: 12, json: false };
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i];
@@ -34,7 +42,7 @@ function parseArgs(argv) {
   return args;
 }
 
-function loadEntries() {
+export function loadEntries() {
   if (!existsSync(SOURCES_DIR)) {
     console.error('Catalog not found. Run this script from the ai-frontend-guide-kit folder or rebuild the kit.');
     process.exit(1);
@@ -47,35 +55,93 @@ function loadEntries() {
   return entries;
 }
 
-function matches(entry, args) {
+const squash = (value) => String(value).toLowerCase().replace(/[^a-z0-9]/g, '');
+const words = (value) => String(value).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+
+export function relevance(entry, query) {
+  const terms = words(query);
+  if (terms.length === 0) return 0;
+  const name = String(entry.name).toLowerCase();
+  const tags = (entry.search_tags ?? []).join(' ').toLowerCase();
+  const category = String(entry.category).toLowerCase();
+  const description = `${entry.description ?? ''} ${entry.use_case ?? ''}`.toLowerCase();
+  const source = String(entry.source).toLowerCase();
+  let score = 0;
+  for (const term of terms) {
+    const hit = (name.includes(term) ? 5 : 0) + (tags.includes(term) ? 3 : 0) + (category.includes(term) ? 2 : 0) + (source.includes(term) ? 1 : 0) + (description.includes(term) ? 1 : 0);
+    if (hit === 0) return 0; // every word must match somewhere
+    score += hit;
+  }
+  return score;
+}
+
+export function matches(entry, args) {
   if (args.category && entry.category !== args.category) return false;
-  if (args.type && entry.entry_type !== args.type) return false;
-  if (args.source && !entry.source.toLowerCase().replace(/[^a-z0-9]/g, '').includes(String(args.source).toLowerCase().replace(/[^a-z0-9]/g, ''))) return false;
+  if (args.type) {
+    if (entry.entry_type !== args.type) return false;
+  } else if (!args.all && entry.entry_type === 'icon') return false;
+  if (args.source && !squash(entry.source).includes(squash(args.source))) return false;
   if (args.stack && !(entry.stack ?? []).some((item) => String(item).toLowerCase() === String(args.stack).toLowerCase())) return false;
   if (args.license && entry.license_type !== args.license) return false;
+  if (args.licensed && entry.license_type === 'unknown') return false;
   if (args.commercial && entry.commercial_use === false) return false;
   if (args.free && entry.free !== true) return false;
-  if (args.text) {
-    const haystack = [entry.name, entry.description, entry.category, entry.source, ...(entry.search_tags ?? [])].join(' ').toLowerCase();
-    if (!haystack.includes(String(args.text).toLowerCase())) return false;
-  }
+  if (args['min-quality'] && (entry.quality ?? 0) < Number(args['min-quality'])) return false;
+  if (args.text && relevance(entry, args.text) === 0) return false;
   return true;
 }
 
-const args = parseArgs(process.argv.slice(2));
-const entries = loadEntries().filter((entry) => matches(entry, args));
-const limited = entries.slice(0, Number(args.limit));
-
-if (args.json) {
-  console.log(JSON.stringify({ total: entries.length, shown: limited.length, results: limited }, null, 2));
-  process.exit(0);
+function frameworkOf(entry) {
+  const stack = (entry.stack ?? []).map((s) => String(s).toLowerCase());
+  return ['react', 'vue', 'svelte', 'html'].find((f) => stack.includes(f)) ?? stack[0] ?? 'any';
 }
 
-console.log(`# ${entries.length} matches (showing ${limited.length}) — use get <id> for details`);
-for (const entry of limited) {
-  const license = entry.license_type + (entry.commercial_use === false ? ' (non-commercial)' : entry.commercial_use === 'conditional' ? ' (verify)' : '');
-  console.log(`${entry.id} | ${entry.name} | ${entry.source} | ${entry.category} | ${license}`);
+function dedupeKey(entry) {
+  const base = squash(String(entry.name).replace(new RegExp(`^${String(entry.source).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s+`, 'i'), '').replace(/\b(demo|example)\b/gi, ''));
+  return `${entry.category}|${frameworkOf(entry)}|${base}`;
 }
-if (entries.length === 0) {
-  console.log('No matches. Broaden filters or check the category list in catalog/component-manifest.md.');
+
+export function search(entries, args) {
+  const filtered = entries.filter((entry) => matches(entry, args));
+  const sort = args.sort ?? (args.text ? 'relevance' : 'quality');
+  const rel = new Map(filtered.map((entry) => [entry, args.text ? relevance(entry, args.text) : 0]));
+  const compare = {
+    relevance: (a, b) => rel.get(b) - rel.get(a) || (b.quality ?? 0) - (a.quality ?? 0) || a.id.localeCompare(b.id),
+    quality: (a, b) => (b.quality ?? 0) - (a.quality ?? 0) || a.id.localeCompare(b.id),
+    name: (a, b) => a.name.localeCompare(b.name),
+  }[sort] ?? ((a, b) => a.id.localeCompare(b.id));
+  const ranked = [...filtered].sort(compare);
+  if (args.all) return { total: ranked.length, hidden: 0, results: ranked };
+  const seen = new Set();
+  const results = [];
+  for (const entry of ranked) {
+    const key = dedupeKey(entry);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    results.push(entry);
+  }
+  return { total: results.length, hidden: ranked.length - results.length, results };
 }
+
+function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const { total, hidden, results } = search(loadEntries(), args);
+  const limited = results.slice(0, Number(args.limit));
+
+  if (args.json) {
+    console.log(JSON.stringify({ total, hidden_duplicates: hidden, shown: limited.length, results: limited }, null, 2));
+    return;
+  }
+
+  const note = hidden > 0 ? `, ${hidden} near-duplicates hidden (use --all)` : '';
+  console.log(`# ${total} matches (showing ${limited.length}${note}) — use get <id> for details`);
+  for (const entry of limited) {
+    const license = entry.license_type + (entry.commercial_use === false ? ' (non-commercial)' : entry.commercial_use === 'conditional' ? ' (verify)' : '');
+    console.log(`${entry.id} | ${entry.name} | ${entry.source} | ${entry.category} | ${license} | q${entry.quality ?? '-'}`);
+  }
+  if (total === 0) {
+    console.log('No matches. Broaden filters or check the category list in catalog/component-manifest.md.');
+  }
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) main();

@@ -1,0 +1,8 @@
+# Keep LF in the repo and in working trees so generated JSON/MD stay byte-stable across Windows/macOS/Linux
+* text=auto eol=lf
+
+*.mp4 binary
+*.gif binary
+*.png binary
+*.woff2 binary
+*.tgz binary

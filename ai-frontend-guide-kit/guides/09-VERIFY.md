@@ -53,6 +53,8 @@ npx playwright test
 
 ## 4. Automated accessibility (WCAG 2.2)
 
+Shortcut: `node ai-frontend-guide-kit/tools/audit-a11y.mjs http://localhost:3000` (needs `@axe-core/playwright`). Spec form:
+
 ```bash
 npm i -D @axe-core/playwright
 ```
@@ -72,6 +74,8 @@ Automated checks catch roughly a third of issues; keep the manual pass. Check by
 
 ## 5. Performance budget
 
+Shortcut: `node ai-frontend-guide-kit/tools/audit-perf.mjs http://localhost:3000` (Lighthouse; fails above LCP 2.5 s, CLS 0.1, TBT 200 ms). Manual form:
+
 ```bash
 npx lighthouse http://localhost:3000 --only-categories=performance,accessibility --output=json --output-path=./lighthouse.json --chrome-flags="--headless"
 ```
@@ -79,6 +83,8 @@ npx lighthouse http://localhost:3000 --only-categories=performance,accessibility
 Targets (field, 75th percentile): LCP <= 2.5 s, INP <= 200 ms, CLS <= 0.1. If an expressive effect from the catalog breaks the budget, replace or lazy-load it. Reference: `experience/references/reference-core-web-vitals.md`.
 
 ## 6. Honesty audit (deceptive patterns)
+
+First run the static scan: `node ai-frontend-guide-kit/tools/audit-honesty.mjs src --strict` (scarcity, urgency, confirmshaming, pre-checked boxes, placeholder proof, unverified metrics, consent asymmetry). Then confirm by hand:
 
 For every conversion flow (signup, checkout, subscription, consent, cancel) confirm:
 

@@ -49,7 +49,8 @@
       "registry_url": "https://ui.aceternity.com/registry/3d-pin.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/3d-pin.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-ascii-art",
@@ -86,7 +87,8 @@
       "registry_url": "https://ui.aceternity.com/registry/ascii-art.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/ascii-art.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-aurora-background",
@@ -121,7 +123,8 @@
       "registry_url": "https://ui.aceternity.com/registry/aurora-background.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/aurora-background.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-background-beams",
@@ -158,7 +161,8 @@
       "registry_url": "https://ui.aceternity.com/registry/background-beams.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/background-beams.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-background-beams-with-collision",
@@ -197,7 +201,8 @@
       "registry_url": "https://ui.aceternity.com/registry/background-beams-with-collision.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/background-beams-with-collision.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-background-boxes",
@@ -235,7 +240,8 @@
       "registry_url": "https://ui.aceternity.com/registry/background-boxes.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/background-boxes.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-background-gradient",
@@ -272,7 +278,8 @@
       "registry_url": "https://ui.aceternity.com/registry/background-gradient.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/background-gradient.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-background-gradient-animation",
@@ -308,7 +315,8 @@
       "registry_url": "https://ui.aceternity.com/registry/background-gradient-animation.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/background-gradient-animation.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-background-lines",
@@ -345,7 +353,8 @@
       "registry_url": "https://ui.aceternity.com/registry/background-lines.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/background-lines.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-canvas-reveal-effect",
@@ -384,7 +393,8 @@
       "registry_url": "https://ui.aceternity.com/registry/canvas-reveal-effect.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/canvas-reveal-effect.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-chromatic-image",
@@ -419,7 +429,8 @@
       "registry_url": "https://ui.aceternity.com/registry/chromatic-image.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/chromatic-image.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-cloud-shader",
@@ -454,7 +465,8 @@
       "registry_url": "https://ui.aceternity.com/registry/cloud-shader.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/cloud-shader.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-code-block",
@@ -492,7 +504,8 @@
       "registry_url": "https://ui.aceternity.com/registry/code-block.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/code-block.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-compare",
@@ -529,7 +542,8 @@
       "registry_url": "https://ui.aceternity.com/registry/compare.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/compare.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-container-scroll-animation",
@@ -567,7 +581,8 @@
       "registry_url": "https://ui.aceternity.com/registry/container-scroll-animation.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/container-scroll-animation.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-cover",
@@ -603,7 +618,8 @@
       "registry_url": "https://ui.aceternity.com/registry/cover.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/cover.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-dither-shader",
@@ -638,7 +654,8 @@
       "registry_url": "https://ui.aceternity.com/registry/dither-shader.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/dither-shader.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-file-upload",
@@ -677,7 +694,8 @@
       "registry_url": "https://ui.aceternity.com/registry/file-upload.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/file-upload.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 67
     },
     {
       "id": "aceternity-backgrounds-effects-flip-words",
@@ -714,7 +732,8 @@
       "registry_url": "https://ui.aceternity.com/registry/flip-words.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/flip-words.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-google-gemini-effect",
@@ -752,7 +771,8 @@
       "registry_url": "https://ui.aceternity.com/registry/google-gemini-effect.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/google-gemini-effect.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-grid",
@@ -786,7 +806,8 @@
       "registry_url": "https://ui.aceternity.com/registry/grid.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/grid.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-keyboard",
@@ -823,7 +844,8 @@
       "registry_url": "https://ui.aceternity.com/registry/keyboard.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/keyboard.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-label",
@@ -859,7 +881,8 @@
       "registry_url": "https://ui.aceternity.com/registry/label.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/label.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-lamp",
@@ -895,7 +918,8 @@
       "registry_url": "https://ui.aceternity.com/registry/lamp.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/lamp.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-layout-grid",
@@ -932,7 +956,8 @@
       "registry_url": "https://ui.aceternity.com/registry/layout-grid.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/layout-grid.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-link-preview",
@@ -971,7 +996,8 @@
       "registry_url": "https://ui.aceternity.com/registry/link-preview.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/link-preview.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 67
     },
     {
       "id": "aceternity-backgrounds-effects-macbook-scroll",
@@ -1009,7 +1035,8 @@
       "registry_url": "https://ui.aceternity.com/registry/macbook-scroll.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/macbook-scroll.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-meteors",
@@ -1043,7 +1070,8 @@
       "registry_url": "https://ui.aceternity.com/registry/meteors.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/meteors.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-moving-border",
@@ -1080,7 +1108,8 @@
       "registry_url": "https://ui.aceternity.com/registry/moving-border.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/moving-border.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-moving-line",
@@ -1117,7 +1146,8 @@
       "registry_url": "https://ui.aceternity.com/registry/moving-line.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/moving-line.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-noise-background",
@@ -1152,7 +1182,8 @@
       "registry_url": "https://ui.aceternity.com/registry/noise-background.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/noise-background.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-notch",
@@ -1188,7 +1219,8 @@
       "registry_url": "https://ui.aceternity.com/registry/notch.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/notch.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-parallax-scroll",
@@ -1225,7 +1257,8 @@
       "registry_url": "https://ui.aceternity.com/registry/parallax-scroll.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/parallax-scroll.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-parallax-scroll-2",
@@ -1263,7 +1296,8 @@
       "registry_url": "https://ui.aceternity.com/registry/parallax-scroll-2.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/parallax-scroll-2.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-pixelated-canvas",
@@ -1298,7 +1332,8 @@
       "registry_url": "https://ui.aceternity.com/registry/pixelated-canvas.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/pixelated-canvas.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-scales",
@@ -1332,7 +1367,8 @@
       "registry_url": "https://ui.aceternity.com/registry/scales.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/scales.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-shooting-stars",
@@ -1367,7 +1403,8 @@
       "registry_url": "https://ui.aceternity.com/registry/shooting-stars.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/shooting-stars.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-sidebar",
@@ -1404,7 +1441,8 @@
       "registry_url": "https://ui.aceternity.com/registry/sidebar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/sidebar.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-sparkles",
@@ -1443,7 +1481,8 @@
       "registry_url": "https://ui.aceternity.com/registry/sparkles.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/sparkles.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 67
     },
     {
       "id": "aceternity-backgrounds-effects-stars-background",
@@ -1478,7 +1517,8 @@
       "registry_url": "https://ui.aceternity.com/registry/stars-background.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/stars-background.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-sticky-banner",
@@ -1513,7 +1553,8 @@
       "registry_url": "https://ui.aceternity.com/registry/sticky-banner.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/sticky-banner.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-sticky-scroll-reveal",
@@ -1551,7 +1592,8 @@
       "registry_url": "https://ui.aceternity.com/registry/sticky-scroll-reveal.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/sticky-scroll-reveal.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-svg-mask-effect",
@@ -1589,7 +1631,8 @@
       "registry_url": "https://ui.aceternity.com/registry/svg-mask-effect.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/svg-mask-effect.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-tracing-beam",
@@ -1626,7 +1669,8 @@
       "registry_url": "https://ui.aceternity.com/registry/tracing-beam.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/tracing-beam.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-typewriter-effect",
@@ -1663,7 +1707,8 @@
       "registry_url": "https://ui.aceternity.com/registry/typewriter-effect.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/typewriter-effect.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-vortex",
@@ -1700,7 +1745,8 @@
       "registry_url": "https://ui.aceternity.com/registry/vortex.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/vortex.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-wavy-background",
@@ -1737,7 +1783,8 @@
       "registry_url": "https://ui.aceternity.com/registry/wavy-background.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/wavy-background.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-backgrounds-effects-webcam-pixel-grid",
@@ -1773,7 +1820,8 @@
       "registry_url": "https://ui.aceternity.com/registry/webcam-pixel-grid.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/webcam-pixel-grid.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-backgrounds-effects-world-map",
@@ -1811,7 +1859,8 @@
       "registry_url": "https://ui.aceternity.com/registry/world-map.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/world-map.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-data-display-images-badge",
@@ -1846,7 +1895,8 @@
       "registry_url": "https://ui.aceternity.com/registry/images-badge.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/images-badge.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-data-display-timeline",
@@ -1882,7 +1932,8 @@
       "registry_url": "https://ui.aceternity.com/registry/timeline.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/timeline.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-features-bento-grid",
@@ -1919,7 +1970,8 @@
       "registry_url": "https://ui.aceternity.com/registry/bento-grid.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/bento-grid.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-feedback-animated-tooltip",
@@ -1956,7 +2008,8 @@
       "registry_url": "https://ui.aceternity.com/registry/animated-tooltip.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/animated-tooltip.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-feedback-image-generation-loader",
@@ -1992,7 +2045,8 @@
       "registry_url": "https://ui.aceternity.com/registry/image-generation-loader.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/image-generation-loader.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-feedback-loader",
@@ -2026,7 +2080,8 @@
       "registry_url": "https://ui.aceternity.com/registry/loader.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/loader.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-feedback-multi-step-loader",
@@ -2065,7 +2120,8 @@
       "registry_url": "https://ui.aceternity.com/registry/multi-step-loader.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/multi-step-loader.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-forms-gooey-input",
@@ -2102,7 +2158,8 @@
       "registry_url": "https://ui.aceternity.com/registry/gooey-input.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/gooey-input.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-forms-input",
@@ -2138,7 +2195,8 @@
       "registry_url": "https://ui.aceternity.com/registry/input.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/input.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-forms-placeholders-and-vanish-input",
@@ -2177,7 +2235,8 @@
       "registry_url": "https://ui.aceternity.com/registry/placeholders-and-vanish-input.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/placeholders-and-vanish-input.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-hero-hero-highlight",
@@ -2214,7 +2273,8 @@
       "registry_url": "https://ui.aceternity.com/registry/hero-highlight.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/hero-highlight.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-hero-hero-parallax",
@@ -2250,7 +2310,8 @@
       "registry_url": "https://ui.aceternity.com/registry/hero-parallax.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/hero-parallax.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-hero-parallax-hero-images",
@@ -2287,7 +2348,8 @@
       "registry_url": "https://ui.aceternity.com/registry/parallax-hero-images.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/parallax-hero-images.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-media-3d-globe",
@@ -2326,7 +2388,8 @@
       "registry_url": "https://ui.aceternity.com/registry/3d-globe.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/3d-globe.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 67
     },
     {
       "id": "aceternity-media-carousel",
@@ -2362,7 +2425,8 @@
       "registry_url": "https://ui.aceternity.com/registry/carousel.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/carousel.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-media-globe",
@@ -2401,7 +2465,8 @@
       "registry_url": "https://ui.aceternity.com/registry/globe.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/globe.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 67
     },
     {
       "id": "aceternity-media-images-slider",
@@ -2438,7 +2503,8 @@
       "registry_url": "https://ui.aceternity.com/registry/images-slider.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/images-slider.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-media-lens",
@@ -2474,7 +2540,8 @@
       "registry_url": "https://ui.aceternity.com/registry/lens.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/lens.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-media-terminal",
@@ -2508,7 +2575,8 @@
       "registry_url": "https://ui.aceternity.com/registry/terminal.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/terminal.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-3d-card",
@@ -2543,7 +2611,8 @@
       "registry_url": "https://ui.aceternity.com/registry/3d-card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/3d-card.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-3d-marquee",
@@ -2578,7 +2647,8 @@
       "registry_url": "https://ui.aceternity.com/registry/3d-marquee.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/3d-marquee.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-apple-cards-carousel",
@@ -2617,7 +2687,8 @@
       "registry_url": "https://ui.aceternity.com/registry/apple-cards-carousel.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/apple-cards-carousel.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-background-ripple-effect",
@@ -2655,7 +2726,8 @@
       "registry_url": "https://ui.aceternity.com/registry/background-ripple-effect.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/background-ripple-effect.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-card-hover-effect",
@@ -2693,7 +2765,8 @@
       "registry_url": "https://ui.aceternity.com/registry/card-hover-effect.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/card-hover-effect.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-card-spotlight",
@@ -2730,7 +2803,8 @@
       "registry_url": "https://ui.aceternity.com/registry/card-spotlight.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/card-spotlight.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-card-stack",
@@ -2767,7 +2841,8 @@
       "registry_url": "https://ui.aceternity.com/registry/card-stack.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/card-stack.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-comet-card",
@@ -2802,7 +2877,8 @@
       "registry_url": "https://ui.aceternity.com/registry/comet-card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/comet-card.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-direction-aware-hover",
@@ -2840,7 +2916,8 @@
       "registry_url": "https://ui.aceternity.com/registry/direction-aware-hover.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/direction-aware-hover.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-dotted-glow-background",
@@ -2876,7 +2953,8 @@
       "registry_url": "https://ui.aceternity.com/registry/dotted-glow-background.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/dotted-glow-background.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-draggable-card",
@@ -2911,7 +2989,8 @@
       "registry_url": "https://ui.aceternity.com/registry/draggable-card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/draggable-card.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-evervault-card",
@@ -2948,7 +3027,8 @@
       "registry_url": "https://ui.aceternity.com/registry/evervault-card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/evervault-card.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-floating-dock",
@@ -2986,7 +3066,8 @@
       "registry_url": "https://ui.aceternity.com/registry/floating-dock.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/floating-dock.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-focus-cards",
@@ -3021,7 +3102,8 @@
       "registry_url": "https://ui.aceternity.com/registry/focus-cards.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/focus-cards.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-following-pointer",
@@ -3058,7 +3140,8 @@
       "registry_url": "https://ui.aceternity.com/registry/following-pointer.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/following-pointer.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-glare-card",
@@ -3093,7 +3176,8 @@
       "registry_url": "https://ui.aceternity.com/registry/glare-card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/glare-card.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-glowing-effect",
@@ -3130,7 +3214,8 @@
       "registry_url": "https://ui.aceternity.com/registry/glowing-effect.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/glowing-effect.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-glowing-stars",
@@ -3167,7 +3252,8 @@
       "registry_url": "https://ui.aceternity.com/registry/glowing-stars.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/glowing-stars.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-hover-border-gradient",
@@ -3205,7 +3291,8 @@
       "registry_url": "https://ui.aceternity.com/registry/hover-border-gradient.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/hover-border-gradient.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-infinite-moving-cards",
@@ -3241,7 +3328,8 @@
       "registry_url": "https://ui.aceternity.com/registry/infinite-moving-cards.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/infinite-moving-cards.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-magnetic-button",
@@ -3278,7 +3366,8 @@
       "registry_url": "https://ui.aceternity.com/registry/magnetic-button.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/magnetic-button.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-pointer-highlight",
@@ -3313,7 +3402,8 @@
       "registry_url": "https://ui.aceternity.com/registry/pointer-highlight.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/pointer-highlight.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-spotlight",
@@ -3347,7 +3437,8 @@
       "registry_url": "https://ui.aceternity.com/registry/spotlight.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/spotlight.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-spotlight-new",
@@ -3382,7 +3473,8 @@
       "registry_url": "https://ui.aceternity.com/registry/spotlight-new.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/spotlight-new.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-stateful-button",
@@ -3417,7 +3509,8 @@
       "registry_url": "https://ui.aceternity.com/registry/stateful-button.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/stateful-button.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-tailwindcss-buttons",
@@ -3454,7 +3547,8 @@
       "registry_url": "https://ui.aceternity.com/registry/tailwindcss-buttons.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/tailwindcss-buttons.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-micro-interactions-tooltip-card",
@@ -3489,7 +3583,8 @@
       "registry_url": "https://ui.aceternity.com/registry/tooltip-card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/tooltip-card.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-micro-interactions-wobble-card",
@@ -3526,7 +3621,8 @@
       "registry_url": "https://ui.aceternity.com/registry/wobble-card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/wobble-card.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-navigation-floating-navbar",
@@ -3563,7 +3659,8 @@
       "registry_url": "https://ui.aceternity.com/registry/floating-navbar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/floating-navbar.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-navigation-navbar-menu",
@@ -3600,7 +3697,8 @@
       "registry_url": "https://ui.aceternity.com/registry/navbar-menu.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/navbar-menu.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-navigation-resizable-navbar",
@@ -3635,7 +3733,8 @@
       "registry_url": "https://ui.aceternity.com/registry/resizable-navbar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/resizable-navbar.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-navigation-tabs",
@@ -3671,7 +3770,8 @@
       "registry_url": "https://ui.aceternity.com/registry/tabs.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/tabs.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-overlay-animated-modal",
@@ -3708,7 +3808,8 @@
       "registry_url": "https://ui.aceternity.com/registry/animated-modal.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/animated-modal.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-testimonials-animated-testimonials",
@@ -3745,7 +3846,8 @@
       "registry_url": "https://ui.aceternity.com/registry/animated-testimonials.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/animated-testimonials.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-text-canvas-text",
@@ -3779,7 +3881,8 @@
       "registry_url": "https://ui.aceternity.com/registry/canvas-text.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/canvas-text.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-text-colourful-text",
@@ -3813,7 +3916,8 @@
       "registry_url": "https://ui.aceternity.com/registry/colourful-text.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/colourful-text.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-text-container-text-flip",
@@ -3848,7 +3952,8 @@
       "registry_url": "https://ui.aceternity.com/registry/container-text-flip.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/container-text-flip.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-text-encrypted-text",
@@ -3884,7 +3989,8 @@
       "registry_url": "https://ui.aceternity.com/registry/encrypted-text.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/encrypted-text.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-text-layout-text-flip",
@@ -3921,7 +4027,8 @@
       "registry_url": "https://ui.aceternity.com/registry/layout-text-flip.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/layout-text-flip.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-text-squiggly-text",
@@ -3955,7 +4062,8 @@
       "registry_url": "https://ui.aceternity.com/registry/squiggly-text.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/squiggly-text.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 73
     },
     {
       "id": "aceternity-text-text-flipping-board",
@@ -3992,7 +4100,8 @@
       "registry_url": "https://ui.aceternity.com/registry/text-flipping-board.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/text-flipping-board.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-text-text-generate-effect",
@@ -4029,7 +4138,8 @@
       "registry_url": "https://ui.aceternity.com/registry/text-generate-effect.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/text-generate-effect.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-text-text-hover-effect",
@@ -4066,7 +4176,8 @@
       "registry_url": "https://ui.aceternity.com/registry/text-hover-effect.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/text-hover-effect.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     },
     {
       "id": "aceternity-text-text-reveal-card",
@@ -4103,7 +4214,8 @@
       "registry_url": "https://ui.aceternity.com/registry/text-reveal-card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://ui.aceternity.com/registry/text-reveal-card.json",
-      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan."
+      "limits": "Free tier usable in commercial client projects; reselling/redistributing components as a competing library is not allowed. Premium blocks/templates need the All-Access plan.",
+      "quality": 70
     }
   ]
 }

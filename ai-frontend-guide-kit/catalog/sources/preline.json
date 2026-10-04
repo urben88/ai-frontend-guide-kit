@@ -57,7 +57,8 @@
       "variants": [
         "Mark Wanner"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-avatar-group",
@@ -103,7 +104,8 @@
       "variants": [
         "Requires JS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-blockquote",
@@ -145,7 +147,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-card",
@@ -191,7 +194,8 @@
         "Attention needed",
         "Requires JS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-charts",
@@ -237,7 +241,8 @@
         "Install Apexcharts",
         "Add the Apexcharts CSS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-datamaps",
@@ -282,7 +287,8 @@
       "variants": [
         "Install Datamaps"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-datatables",
@@ -330,7 +336,8 @@
         "Install Datatbles.net.",
         "Add additional CSS."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-kbd",
@@ -372,7 +379,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-list-group",
@@ -415,7 +423,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-lists",
@@ -457,7 +466,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-ratings",
@@ -499,7 +509,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-static-icons",
@@ -542,7 +553,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-tables",
@@ -584,7 +596,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-data-display-timeline",
@@ -626,7 +639,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-feedback-alerts",
@@ -671,7 +685,8 @@
       "variants": [
         "Requires JS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-feedback-badge",
@@ -713,7 +728,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-feedback-progress",
@@ -758,7 +774,8 @@
       "variants": [
         "Progress title"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-feedback-skeleton",
@@ -803,7 +820,8 @@
       "variants": [
         "When to use:"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-feedback-spinners",
@@ -845,7 +863,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-feedback-toast-notifications",
@@ -891,7 +910,8 @@
       "variants": [
         "Install Toastify"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-feedback-toasts",
@@ -936,7 +956,8 @@
       "variants": [
         "Requires JS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-feedback-tooltip",
@@ -978,7 +999,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-advanced-datepicker",
@@ -1021,7 +1043,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-advanced-range-slider",
@@ -1068,7 +1091,8 @@
       "variants": [
         "Install noUiSlider."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-advanced-select",
@@ -1111,7 +1135,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-checkbox",
@@ -1153,7 +1178,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-color-picker",
@@ -1196,7 +1222,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-combobox",
@@ -1238,7 +1265,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-datepicker",
@@ -1280,7 +1308,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-file-input",
@@ -1323,7 +1352,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-file-upload",
@@ -1369,7 +1399,8 @@
       "variants": [
         "Install Dropzone."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-file-uploading-progress-form",
@@ -1414,7 +1445,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-input",
@@ -1456,7 +1488,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-input-group",
@@ -1499,7 +1532,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-input-number",
@@ -1542,7 +1576,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-pin-input",
@@ -1585,7 +1620,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-radio",
@@ -1627,7 +1663,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-range-slider",
@@ -1670,7 +1707,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-select",
@@ -1712,7 +1750,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-strong-password",
@@ -1758,7 +1797,8 @@
       "variants": [
         "Requires JS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-switch",
@@ -1800,7 +1840,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-textarea",
@@ -1842,7 +1883,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-toggle-count",
@@ -1885,7 +1927,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-forms-toggle-password",
@@ -1928,7 +1971,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-layout-columns",
@@ -1970,7 +2014,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-layout-container",
@@ -2012,7 +2057,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-layout-dividers",
@@ -2054,7 +2100,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-layout-grid",
@@ -2096,7 +2143,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-layout-layout-splitter",
@@ -2138,7 +2186,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-media-carousel",
@@ -2180,7 +2229,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-media-devices",
@@ -2222,7 +2272,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-media-images",
@@ -2264,7 +2315,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-accordion",
@@ -2306,7 +2358,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-button-group",
@@ -2349,7 +2402,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-buttons",
@@ -2391,7 +2445,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-clipboard",
@@ -2436,7 +2491,8 @@
       "variants": [
         "Install Clipboard"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-collapse",
@@ -2478,7 +2534,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-confetti",
@@ -2520,7 +2577,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-copy-markup",
@@ -2563,7 +2621,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-custom-scrollbar",
@@ -2615,7 +2674,8 @@
         "Item 3-1",
         "Item 3-2"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-drag-and-drop",
@@ -2662,7 +2722,8 @@
       "variants": [
         "Install Sortable.js."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-legend-indicator",
@@ -2705,7 +2766,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-links",
@@ -2747,7 +2809,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-maps",
@@ -2794,7 +2857,8 @@
         "Add the Leaflet CSS",
         "${city}"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-marquee",
@@ -2836,7 +2900,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-navs",
@@ -2878,7 +2943,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-offcanvas",
@@ -2920,7 +2986,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-scrollspy",
@@ -2977,7 +3044,8 @@
         "Item 3-1",
         "Item 3-2"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-searchbox",
@@ -3019,7 +3087,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-sidebar",
@@ -3064,7 +3133,8 @@
       "variants": [
         "Requires JS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-text-editor",
@@ -3113,7 +3183,8 @@
         "Initialize TipTap",
         "Known issues"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-time-picker",
@@ -3156,7 +3227,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-tree-view",
@@ -3199,7 +3271,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-micro-interactions-typography",
@@ -3244,7 +3317,8 @@
       "variants": [
         "Heads up"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-navigation-breadcrumb",
@@ -3289,7 +3363,8 @@
       "variants": [
         "Requires JS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-navigation-chat-bubbles",
@@ -3332,7 +3407,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-navigation-context-menu",
@@ -3375,7 +3451,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-navigation-mega-menu",
@@ -3418,7 +3495,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-navigation-navbar",
@@ -3463,7 +3541,8 @@
       "variants": [
         "Requires JS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-navigation-pagination",
@@ -3505,7 +3584,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-navigation-stepper",
@@ -3550,7 +3630,8 @@
       "variants": [
         "Requires JS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-navigation-tabs",
@@ -3595,7 +3676,8 @@
       "variants": [
         "Require JS"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-overlay-dropdown",
@@ -3637,7 +3719,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-overlay-modal",
@@ -3684,7 +3767,8 @@
         "Be optimistic",
         "Be practical, with a wink"
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     },
     {
       "id": "preline-overlay-popover",
@@ -3726,7 +3810,8 @@
         "JS: load `node_modules/preline/dist/preline.js` at the end of the body.",
         "Copy the markup/code from the docs page (Tailwind, dark and JSX tabs available)."
       ],
-      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution."
+      "limits": "MIT + Preline Fair Use: free for commercial products, but do not build a competing UI library; Pro adds premium blocks/templates with no redistribution.",
+      "quality": 73
     }
   ]
 }

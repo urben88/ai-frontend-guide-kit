@@ -50,7 +50,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISignUpWithLeftBackground.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-blog-cards-primary",
@@ -87,7 +88,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBlogCardsPrimary.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-blog-cards-secondary",
@@ -124,7 +126,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBlogCardsSecondary.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-blog-section-with-posts-card",
@@ -163,7 +166,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBlogSectionWithPostsCard.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-integrations-card",
@@ -199,7 +203,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIIntegrationsCard.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-job-cards",
@@ -235,7 +240,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIJobCards.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-blocks-sections-section-header-with-navigations",
@@ -273,7 +279,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISectionHeaderWithNavigations.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-section-header-with-search-box",
@@ -312,7 +319,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISectionHeaderWithSearchBox.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-sign-up-with-google-provider",
@@ -351,7 +359,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISignUpWithGoogleProvider.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-team-members-card",
@@ -388,7 +397,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITeamMembersCard.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-team-section-with-info",
@@ -426,7 +436,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITeamSectionWithInfo.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-upload-file-card",
@@ -463,7 +474,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIUploadFileCard.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-blocks-sections-with-previous-and-next-link",
@@ -502,7 +514,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIWithPreviousAndNextLink.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-banner-centred",
@@ -538,7 +551,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBannerCentred.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-banner-centred-with-badge",
@@ -576,7 +590,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBannerCentredWithBadge.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-banner-centred-with-link",
@@ -614,7 +629,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBannerCentredWithLink.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-banner-with-link",
@@ -651,7 +667,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBannerWithLink.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-banner-with-underline-link",
@@ -689,7 +706,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBannerWithUnderlineLink.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-centred-cta",
@@ -724,7 +742,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUICentredCta.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-cta-centred-cta-with-two-links",
@@ -762,7 +781,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUICentredCtaWithTwoLinks.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-cta-with-blue-background",
@@ -799,7 +819,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUICtaWithBlueBackground.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-cta-with-image",
@@ -835,7 +856,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUICtaWithImage.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-cta-with-link-on-the-side",
@@ -874,7 +896,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUICtaWithLinkOnTheSide.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-dark-cta",
@@ -909,7 +932,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkCta.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-cta-dark-cta-with-link-on-the-side",
@@ -949,7 +973,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkCtaWithLinkOnTheSide.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-cta-primary-cta",
@@ -984,7 +1009,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPrimaryCta.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-cta-secondary-cta",
@@ -1019,7 +1045,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISecondaryCta.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-data-display-404-page-with-list-of-items",
@@ -1059,7 +1086,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUI404PageWithListOfItems.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-avatar-group-stacked",
@@ -1096,7 +1124,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAvatarGroupStacked.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-avatar-group-stacked-with-join-button",
@@ -1136,7 +1165,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAvatarGroupStackedWithJoinButton.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-avatar-group-stacked-with-text",
@@ -1175,7 +1205,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAvatarGroupStackedWithText.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-avatar-with-link-and-button",
@@ -1214,7 +1245,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAvatarWithLinkAndButton.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-avatars",
@@ -1249,7 +1281,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAvatars.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-data-display-avatars-with-info",
@@ -1286,7 +1319,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAvatarsWithInfo.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-avatars-with-notification",
@@ -1323,7 +1357,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAvatarsWithNotification.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-basic-stats",
@@ -1359,7 +1394,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBasicStats.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-data-display-basic-table",
@@ -1395,7 +1431,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBasicTable.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-data-display-dark-stats",
@@ -1431,7 +1468,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkStats.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-data-display-dark-stats-with-in-cards",
@@ -1470,7 +1508,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkStatsWithInCards.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-search-input-with-select-menu-and-avatars",
@@ -1511,7 +1550,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISearchInputWithSelectMenuAndAvatars.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-select-menu-with-avatars",
@@ -1549,7 +1589,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISelectMenuWithAvatars.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-stats-on-the-side",
@@ -1587,7 +1628,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIStatsOnTheSide.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-stats-with-image",
@@ -1624,7 +1666,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIStatsWithImage.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-stats-with-title-and-description",
@@ -1663,7 +1706,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIStatsWithTitleAndDescription.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-table-with-avatars",
@@ -1700,7 +1744,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITableWithAvatars.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-table-with-avatars-and-edit-delete",
@@ -1740,7 +1785,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITableWithAvatarsAndEditDelete.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-table-with-bordered-column",
@@ -1778,7 +1824,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITableWithBorderedColumn.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-table-with-checkbox",
@@ -1815,7 +1862,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITableWithCheckbox.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-table-with-edit-and-delete",
@@ -1854,7 +1902,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITableWithEditAndDelete.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-table-with-manage-button",
@@ -1892,7 +1941,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITableWithManageButton.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-team-section-with-avatars",
@@ -1930,7 +1980,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITeamSectionWithAvatars.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-team-section-with-centred-avatars",
@@ -1969,7 +2020,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITeamSectionWithCentredAvatars.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-data-display-team-with-large-avatars",
@@ -2007,7 +2059,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITeamWithLargeAvatars.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-faq-dark-faqs-with-divided-rows",
@@ -2046,7 +2099,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkFaqsWithDividedRows.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-faq-faqs-with-divided-rows",
@@ -2084,7 +2138,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFaqsWithDividedRows.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-faq-faqs-with-search-box",
@@ -2122,7 +2177,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFaqsWithSearchBox.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-faq-faqs-with-shadow",
@@ -2159,7 +2215,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFaqsWithShadow.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-faq-faqs-with-titles",
@@ -2196,7 +2253,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFaqsWithTitles.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-faq-primary-faqs",
@@ -2232,7 +2290,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPrimaryFaqs.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-faq-secondary-faqs",
@@ -2268,7 +2327,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISecondaryFaqs.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-features-basic-feature-section",
@@ -2305,7 +2365,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBasicFeatureSection.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-features-dark-feature-section",
@@ -2342,7 +2403,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkFeatureSection.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-features-divided-feature-section",
@@ -2379,7 +2441,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDividedFeatureSection.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-features-feature-section-with-cards",
@@ -2417,7 +2480,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFeatureSectionWithCards.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-features-feature-section-with-check-icons",
@@ -2456,7 +2520,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFeatureSectionWithCheckIcons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-features-feature-section-with-links",
@@ -2494,7 +2559,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFeatureSectionWithLinks.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-features-feature-section-with-three-columns",
@@ -2533,7 +2599,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFeatureSectionWithThreeColumns.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-feedback-alert-danger",
@@ -2569,7 +2636,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAlertDanger.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-feedback-alert-danger-with-description",
@@ -2607,7 +2675,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAlertDangerWithDescription.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-feedback-alert-danger-with-link",
@@ -2645,7 +2714,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAlertDangerWithLink.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-feedback-alert-info",
@@ -2681,7 +2751,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAlertInfo.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-feedback-alert-info-linear",
@@ -2718,7 +2789,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAlertInfoLinear.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-feedback-alert-info-with-link",
@@ -2756,7 +2828,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAlertInfoWithLink.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-feedback-alert-success",
@@ -2792,7 +2865,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAlertSuccess.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-feedback-alert-success-with-link",
@@ -2830,7 +2904,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAlertSuccessWithLink.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-feedback-alert-warning",
@@ -2866,7 +2941,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAlertWarning.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-feedback-alert-warning-with-border",
@@ -2904,7 +2980,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAlertWarningWithBorder.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-amount-input",
@@ -2940,7 +3017,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAmountInput.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-forms-amount-input-with-select-in-right",
@@ -2980,7 +3058,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIAmountInputWithSelectInRight.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-basic-login-form",
@@ -3017,7 +3096,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBasicLoginForm.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-basic-radio-group",
@@ -3054,7 +3134,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBasicRadioGroup.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-centered-contact-section",
@@ -3091,7 +3172,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUICenteredContactSection.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-color-picker-radio-group",
@@ -3129,7 +3211,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIColorPickerRadioGroup.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-contact-section-with-divided-columns",
@@ -3168,7 +3251,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIContactSectionWithDividedColumns.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-contact-section-with-four-columns",
@@ -3207,7 +3291,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIContactSectionWithFourColumns.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-contact-section-with-image",
@@ -3245,7 +3330,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIContactSectionWithImage.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-contact-section-with-info",
@@ -3283,7 +3369,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIContactSectionWithInfo.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-dark-contact-section",
@@ -3320,7 +3407,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkContactSection.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-default-select-menu",
@@ -3357,7 +3445,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDefaultSelectMenu.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-email-input",
@@ -3393,7 +3482,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIEmailInput.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-forms-job-cards-with-information",
@@ -3431,7 +3521,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIJobCardsWithInformation.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-login-with-google-provider",
@@ -3469,7 +3560,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUILoginWithGoogleProvider.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-login-with-grid-provider",
@@ -3507,7 +3599,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUILoginWithGridProvider.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-login-with-listed-provider",
@@ -3545,7 +3638,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUILoginWithListedProvider.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-newsletter-stacked",
@@ -3581,7 +3675,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUINewsletterStacked.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-newsletter-with-a-gradient-background",
@@ -3620,7 +3715,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUINewsletterWithAGradientBackground.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-newsletter-with-background",
@@ -3657,7 +3753,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUINewsletterWithBackground.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-newsletter-with-description",
@@ -3694,7 +3791,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUINewsletterWithDescription.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-password-input",
@@ -3730,7 +3828,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPasswordInput.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-payment-cards-radio-group",
@@ -3768,7 +3867,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPaymentCardsRadioGroup.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-phone-number-input",
@@ -3805,7 +3905,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPhoneNumberInput.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-primary-newsletter",
@@ -3841,7 +3942,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPrimaryNewsletter.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-primary-select-menu",
@@ -3878,7 +3980,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPrimarySelectMenu.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-search-input",
@@ -3914,7 +4017,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISearchInput.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-forms-search-input-with-select-menu",
@@ -3953,7 +4057,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISearchInputWithSelectMenu.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-secondary-newsletter",
@@ -3989,7 +4094,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISecondaryNewsletter.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-select-menu-with-icon",
@@ -4027,7 +4133,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISelectMenuWithIcon.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-select-menu-with-search-box",
@@ -4066,7 +4173,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISelectMenuWithSearchBox.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-select-menu-with-search-box2",
@@ -4105,7 +4213,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISelectMenuWithSearchBox2.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-sign-up-with-name-email-password-or-google",
@@ -4147,7 +4256,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISignUpWithNameEmailPasswordOrGoogle.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-status-select-menu",
@@ -4184,7 +4294,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIStatusSelectMenu.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-username-input",
@@ -4220,7 +4331,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIUsernameInput.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-verification-code-input",
@@ -4257,7 +4369,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIVerificationCodeInput.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-forms-website-url-input",
@@ -4294,7 +4407,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIWebsiteUrlInput.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-hero-dark-hero-section",
@@ -4330,7 +4444,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkHeroSection.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-hero-hero-section-with-bottom-image",
@@ -4368,7 +4483,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIHeroSectionWithBottomImage.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-hero-hero-section-with-gradient-background",
@@ -4406,7 +4522,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIHeroSectionWithGradientBackground.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-hero-hero-section-with-image",
@@ -4443,7 +4560,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIHeroSectionWithImage.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-hero-hero-section-with-video",
@@ -4480,7 +4598,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIHeroSectionWithVideo.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-hero-primary-hero-section",
@@ -4516,7 +4635,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPrimaryHeroSection.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-hero-secondary-hero-section",
@@ -4552,7 +4672,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISecondaryHeroSection.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-layout-404-page-with-image",
@@ -4590,7 +4711,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUI404PageWithImage.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-layout-basic404-page",
@@ -4626,7 +4748,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBasic404Page.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-layout-centered404-page-with-tow-links",
@@ -4665,7 +4788,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUICentered404PageWithTowLinks.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-layout-dark-footer",
@@ -4701,7 +4825,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkFooter.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-layout-footer-with-description-and-title",
@@ -4740,7 +4865,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFooterWithDescriptionAndTitle.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-layout-footer-with-download-links",
@@ -4778,7 +4904,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFooterWithDownloadLinks.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-layout-footer-with-newsletter",
@@ -4815,7 +4942,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFooterWithNewsletter.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-layout-primary-footer",
@@ -4851,7 +4979,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPrimaryFooter.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-layout-secondary-footer",
@@ -4887,7 +5016,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISecondaryFooter.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-media-feature-section-with-image",
@@ -4925,7 +5055,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIFeatureSectionWithImage.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-media-team-section-centred-with-large-images",
@@ -4965,7 +5096,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITeamSectionCentredWithLargeImages.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-media-team-section-with-vertical-images",
@@ -5004,7 +5136,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITeamSectionWithVerticalImages.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-buttons-with-icon-and-text",
@@ -5043,7 +5176,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIButtonsWithIconAndText.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-buttons-with-icons",
@@ -5080,7 +5214,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIButtonsWithIcons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-buttons-with-low-colors",
@@ -5118,7 +5253,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIButtonsWithLowColors.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-buttons-with-shadow",
@@ -5155,7 +5291,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIButtonsWithShadow.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-default-buttons-with-icons",
@@ -5193,7 +5330,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDefaultButtonsWithIcons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-disabled-buttons",
@@ -5229,7 +5367,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDisabledButtons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-primary-buttons",
@@ -5265,7 +5404,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPrimaryButtons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-rounded-buttons",
@@ -5301,7 +5441,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIRoundedButtons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-secondary-buttons",
@@ -5337,7 +5478,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISecondaryButtons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-section-header-with-buttons",
@@ -5375,7 +5517,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISectionHeaderWithButtons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-section-header-with-buttons-and-navigations",
@@ -5415,7 +5558,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISectionHeaderWithButtonsAndNavigations.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-micro-interactions-section-header-with-description-and-button",
@@ -5455,7 +5599,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISectionHeaderWithDescriptionAndButton.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-basic-steps",
@@ -5491,7 +5636,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBasicSteps.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-navigation-basic-tabs",
@@ -5527,7 +5673,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBasicTabs.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-navigation-navbar-with-advenced-dropdown",
@@ -5565,7 +5712,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUINavbarWithAdvencedDropdown.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-navbar-with-black-button",
@@ -5603,7 +5751,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUINavbarWithBlackButton.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-navbar-with-divided-items",
@@ -5641,7 +5790,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUINavbarWithDividedItems.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-navbar-with-search-box",
@@ -5679,7 +5829,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUINavbarWithSearchBox.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-navbar-with-submenu",
@@ -5716,7 +5867,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUINavbarWithSubmenu.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-pagination-stacked",
@@ -5752,7 +5904,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPaginationStacked.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-pagination-with-current-page-info",
@@ -5791,7 +5944,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPaginationWithCurrentPageInfo.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-pagination-with-previous-and-next-link",
@@ -5831,7 +5985,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPaginationWithPreviousAndNextLink.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-primary-navbar",
@@ -5867,7 +6022,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPrimaryNavbar.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-secondary-navbar",
@@ -5903,7 +6059,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISecondaryNavbar.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-sidebar-with-items-in-bottom",
@@ -5942,7 +6099,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISidebarWithItemsInBottom.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-sidebar-with-list-of-lessons",
@@ -5981,7 +6139,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISidebarWithListOfLessons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-sidebar-with-submenu",
@@ -6018,7 +6177,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISidebarWithSubmenu.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-sidebar-with-tooltip",
@@ -6055,7 +6215,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUISidebarWithTooltip.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-steps-with-chevrons",
@@ -6092,7 +6253,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIStepsWithChevrons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-steps-with-line",
@@ -6129,7 +6291,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIStepsWithLine.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-steps-with-titles-on-the-bottom",
@@ -6169,7 +6332,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIStepsWithTitlesOnTheBottom.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-steps-with-titles-on-the-side",
@@ -6209,7 +6373,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIStepsWithTitlesOnTheSide.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-table-with-tabs",
@@ -6246,7 +6411,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITableWithTabs.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-tabs-with-background-color",
@@ -6284,7 +6450,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITabsWithBackgroundColor.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-tabs-with-icons",
@@ -6321,7 +6488,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITabsWithIcons.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-tabs-without-underline",
@@ -6358,7 +6526,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITabsWithoutUnderline.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-navigation-vertical-tabs",
@@ -6394,7 +6563,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIVerticalTabs.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-navigation-vertical-tabs-without-line",
@@ -6432,7 +6602,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIVerticalTabsWithoutLine.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-overlay-modal-danger",
@@ -6468,7 +6639,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIModalDanger.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-overlay-modal-dialog",
@@ -6504,7 +6676,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIModalDialog.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-overlay-modal-success",
@@ -6540,7 +6713,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIModalSuccess.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 53
     },
     {
       "id": "floatui-overlay-modal-with-newsletter",
@@ -6577,7 +6751,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIModalWithNewsletter.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-overlay-modal-with-shareable-link",
@@ -6615,7 +6790,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIModalWithShareableLink.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-pricing-basic-pricing-section",
@@ -6651,7 +6827,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBasicPricingSection.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-pricing-dark-pricing-section-with-two-plans",
@@ -6690,7 +6867,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkPricingSectionWithTwoPlans.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-pricing-pricing-cards-radio-group",
@@ -6727,7 +6905,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPricingCardsRadioGroup.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-pricing-pricing-section-with-badge",
@@ -6764,7 +6943,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPricingSectionWithBadge.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-pricing-pricing-section-with-one-plan",
@@ -6802,7 +6982,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPricingSectionWithOnePlan.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-pricing-pricing-section-with-table",
@@ -6839,7 +7020,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPricingSectionWithTable.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-pricing-pricing-section-with-two-plans",
@@ -6877,7 +7059,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIPricingSectionWithTwoPlans.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-404-page-with-logo",
@@ -6915,7 +7098,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUI404PageWithLogo.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-dark-logo-grid",
@@ -6952,7 +7136,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDarkLogoGrid.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-divided-logo-grid",
@@ -6989,7 +7174,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIDividedLogoGrid.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-hero-section-with-logo-clouds",
@@ -7028,7 +7214,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIHeroSectionWithLogoClouds.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-logo-grid-with-header",
@@ -7066,7 +7253,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUILogoGridWithHeader.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-logo-grid-with-title",
@@ -7104,7 +7292,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUILogoGridWithTitle.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-logo-grid-with-tow-rows",
@@ -7143,7 +7332,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUILogoGridWithTowRows.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-testimonial-centered",
@@ -7179,7 +7369,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITestimonialCentered.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-testimonial-centered-with-logo",
@@ -7217,7 +7408,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITestimonialCenteredWithLogo.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-testimonial-grid",
@@ -7253,7 +7445,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITestimonialGrid.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-testimonial-with-background-color",
@@ -7291,7 +7484,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITestimonialWithBackgroundColor.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-testimonial-with-slider",
@@ -7328,7 +7522,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITestimonialWithSlider.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-testimonials-testimonial-with-three-column",
@@ -7366,7 +7561,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUITestimonialWithThreeColumn.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-text-basic-context-menu",
@@ -7403,7 +7599,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIBasicContextMenu.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     },
     {
       "id": "floatui-text-context-menu-with-submenu",
@@ -7441,7 +7638,8 @@
         "Source file: https://github.com/MarsX-dev/floatui/blob/main/previewsComponents/FUIContextMenuWithSubmenu.jsx"
       ],
       "limits": "Float UI license is not OSI: end products (incl. commercial/SaaS) allowed, but redistributing components/templates standalone is not.",
-      "extraction_note": "Category inferred from component name (repo has no machine-readable category field)."
+      "extraction_note": "Category inferred from component name (repo has no machine-readable category field).",
+      "quality": 58
     }
   ]
 }

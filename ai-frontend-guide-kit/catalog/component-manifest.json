@@ -2,28 +2,29 @@
   "schema_version": "1.0",
   "generated_at": "2026-10-04",
   "totals": {
-    "sources": 20,
-    "entries": 3603,
+    "sources": 25,
+    "entries": 3731,
     "categories": {
-      "micro-interactions": 840,
-      "forms": 478,
-      "data-display": 367,
-      "feedback": 291,
-      "ai-surfaces": 239,
-      "backgrounds-effects": 221,
-      "navigation": 220,
-      "text": 165,
-      "overlay": 139,
-      "blocks-sections": 127,
-      "media": 118,
-      "layout": 84,
-      "cta": 57,
+      "micro-interactions": 744,
+      "forms": 584,
+      "data-display": 461,
+      "feedback": 300,
+      "navigation": 249,
+      "ai-surfaces": 237,
+      "backgrounds-effects": 200,
+      "overlay": 163,
+      "text": 139,
+      "blocks-sections": 128,
+      "media": 111,
+      "layout": 108,
       "features": 53,
       "testimonials": 52,
-      "hero": 46,
-      "faq": 42,
-      "pricing": 38,
-      "design-system": 26
+      "hero": 48,
+      "cta": 45,
+      "pricing": 42,
+      "faq": 40,
+      "design-system": 26,
+      "template": 1
     }
   },
   "taxonomy": [
@@ -62,7 +63,7 @@
       "source_name": "21st.dev",
       "source_url": "https://21st.dev",
       "catalog_url": "https://21st.dev/community/components",
-      "entry_count": 812,
+      "entry_count": 785,
       "license_summary": "Varies per component (MIT frequent; some unknown)",
       "granularity": "curated: top 30 per tag across 40 tags",
       "file": "sources/21stdev.json"
@@ -102,10 +103,20 @@
       "source_name": "Animate UI",
       "source_url": "https://animate-ui.com",
       "catalog_url": "https://animate-ui.com/docs/components",
-      "entry_count": 573,
+      "entry_count": 414,
       "license_summary": "MIT + Commons Clause (use in products; no resale of the components)",
       "granularity": "complete (all registry:ui items)",
       "file": "sources/animateui.json"
+    },
+    {
+      "source_id": "baseui",
+      "source_name": "Base UI",
+      "source_url": "https://base-ui.com",
+      "catalog_url": "https://base-ui.com/react/overview/quick-start",
+      "entry_count": 38,
+      "license_summary": "MIT",
+      "granularity": "complete (components of @base-ui/react)",
+      "file": "sources/baseui.json"
     },
     {
       "source_id": "coss",
@@ -122,7 +133,7 @@
       "source_name": "cult/ui",
       "source_url": "https://www.cult-ui.com",
       "catalog_url": "https://www.cult-ui.com/docs/components",
-      "entry_count": 307,
+      "entry_count": 155,
       "license_summary": "MIT (open-source components); Pro blocks have a separate license",
       "granularity": "complete (registry:ui + registry:component)",
       "file": "sources/cultui.json"
@@ -183,7 +194,7 @@
       "source_url": "https://www.kibo-ui.com",
       "catalog_url": "https://www.kibo-ui.com/components",
       "entry_count": 40,
-      "license_summary": "Free and open source per site; SPDX license not published — verify before commercial use",
+      "license_summary": "MIT (verified from the shadcnblocks/kibo repo license.md)",
       "granularity": "complete (all registry:ui items)",
       "file": "sources/kiboui.json"
     },
@@ -196,6 +207,16 @@
       "license_summary": "MIT (components); Pro templates have a separate license",
       "granularity": "complete (all registry:ui items)",
       "file": "sources/magicui.json"
+    },
+    {
+      "source_id": "mantine",
+      "source_name": "Mantine",
+      "source_url": "https://mantine.dev",
+      "catalog_url": "https://mantine.dev/core/getting-started/",
+      "entry_count": 108,
+      "license_summary": "MIT",
+      "granularity": "complete (components of @mantine/core)",
+      "file": "sources/mantine.json"
     },
     {
       "source_id": "motionprimitives",
@@ -218,6 +239,16 @@
       "file": "sources/preline.json"
     },
     {
+      "source_id": "reactaria",
+      "source_name": "React Aria Components",
+      "source_url": "https://react-spectrum.adobe.com/react-aria/",
+      "catalog_url": "https://react-spectrum.adobe.com/react-aria/components.html",
+      "entry_count": 51,
+      "license_summary": "Apache-2.0",
+      "granularity": "complete (react-aria-components source files)",
+      "file": "sources/reactaria.json"
+    },
+    {
       "source_id": "reactbits",
       "source_name": "React Bits",
       "source_url": "https://reactbits.dev",
@@ -236,6 +267,26 @@
       "license_summary": "MIT",
       "granularity": "complete (registry:ui items)",
       "file": "sources/shadcn.json"
+    },
+    {
+      "source_id": "shadcnsvelte",
+      "source_name": "shadcn-svelte",
+      "source_url": "https://shadcn-svelte.com",
+      "catalog_url": "https://shadcn-svelte.com/docs/components",
+      "entry_count": 203,
+      "license_summary": "MIT",
+      "granularity": "complete (registry:ui + registry:block)",
+      "file": "sources/shadcnsvelte.json"
+    },
+    {
+      "source_id": "shadcnvue",
+      "source_name": "shadcn-vue",
+      "source_url": "https://www.shadcn-vue.com",
+      "catalog_url": "https://www.shadcn-vue.com/docs/components",
+      "entry_count": 66,
+      "license_summary": "MIT",
+      "granularity": "complete (registry:ui)",
+      "file": "sources/shadcnvue.json"
     },
     {
       "source_id": "tailblocks",

@@ -54,7 +54,7 @@ if (found.decision_hints?.length) {
   lines.push(`hints: ${found.decision_hints.join(' | ')}`);
 }
 lines.push('');
-lines.push(`license: ${found.license_type} | commercial: ${found.commercial_use} | free: ${found.free}`);
+lines.push(`license: ${found.license_type} | commercial: ${found.commercial_use} | free: ${found.free} | quality: ${found.quality ?? 'n/a'}`);
 if (found.limits) lines.push(`limits: ${found.limits}`);
 lines.push(`stack: ${(found.stack ?? []).join(', ')}`);
 if (found.dependencies?.length) lines.push(`dependencies: ${found.dependencies.join(', ')}`);

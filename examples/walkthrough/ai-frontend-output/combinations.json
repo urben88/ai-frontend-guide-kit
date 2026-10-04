@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "combinations": [
+    {
+      "name": "tidewatch-landing",
+      "created": "2026-10-04T18:29:58.709Z",
+      "note": "marketing landing for a utility alert service",
+      "style_tags": [
+        "minimal-functional"
+      ],
+      "decisions": [
+        {
+          "ts": "2026-10-04T18:29:54.880Z",
+          "project": "walkthrough",
+          "screen": "landing",
+          "block": "hero",
+          "need": "State coverage and the one action",
+          "decision": "adapt",
+          "style_tags": [
+            "minimal-functional"
+          ],
+          "notes": "own copy, no background effect",
+          "entry_id": "daisyui-hero-hero",
+          "name": "DaisyUI Hero",
+          "source": "DaisyUI",
+          "category": "hero",
+          "license_type": "MIT",
+          "commercial_use": true,
+          "install_command": "npm i -D daisyui@latest"
+        },
+        {
+          "ts": "2026-10-04T18:29:55.379Z",
+          "project": "walkthrough",
+          "screen": "landing",
+          "block": "announcement",
+          "need": "Single factual notice",
+          "decision": "reuse",
+          "style_tags": [],
+          "notes": "",
+          "entry_id": "hyperui-cta-marketing-announcements-1",
+          "name": "HyperUI Announcements 1 (marketing)",
+          "source": "HyperUI",
+          "category": "cta",
+          "license_type": "MIT",
+          "commercial_use": true,
+          "install_command": "https://www.hyperui.dev/components/marketing/announcements"
+        },
+        {
+          "ts": "2026-10-04T18:29:56.023Z",
+          "project": "walkthrough",
+          "screen": "landing",
+          "block": "plans",
+          "need": "Compare 3 plans honestly",
+          "decision": "adapt",
+          "style_tags": [],
+          "notes": "yearly total, cancel link",
+          "entry_id": "hyperui-pricing-marketing-pricing-1",
+          "name": "HyperUI Pricing 1 (marketing)",
+          "source": "HyperUI",
+          "category": "pricing",
+          "license_type": "MIT",
+          "commercial_use": true,
+          "install_command": "https://www.hyperui.dev/components/marketing/pricing"
+        },
+        {
+          "ts": "2026-10-04T18:29:56.694Z",
+          "project": "walkthrough",
+          "screen": "landing",
+          "block": "faq",
+          "need": "Remove last doubts",
+          "decision": "reuse",
+          "style_tags": [],
+          "notes": "",
+          "entry_id": "hyperui-faq-application-accordions-1",
+          "name": "HyperUI Accordions 1 (application)",
+          "source": "HyperUI",
+          "category": "faq",
+          "license_type": "MIT",
+          "commercial_use": true,
+          "install_command": "https://www.hyperui.dev/components/application/accordions"
+        },
+        {
+          "ts": "2026-10-04T18:29:57.501Z",
+          "project": "walkthrough",
+          "screen": "landing",
+          "block": "how-it-works",
+          "need": "Explain alerts in 3 steps",
+          "decision": "build",
+          "style_tags": [],
+          "notes": "custom build (no catalog entry)",
+          "name": "Ordered steps"
+        },
+        {
+          "ts": "2026-10-04T18:29:58.178Z",
+          "project": "walkthrough",
+          "screen": "landing",
+          "block": "signup",
+          "need": "One-field magic-link sign-up",
+          "decision": "build",
+          "style_tags": [],
+          "notes": "custom build (no catalog entry)",
+          "name": "Magic link form"
+        }
+      ]
+    }
+  ]
+}

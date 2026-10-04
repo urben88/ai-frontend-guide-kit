@@ -48,7 +48,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Chat bubble from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-backgrounds-effects-aura",
@@ -85,7 +86,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Aura from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-data-display-avatar",
@@ -122,7 +124,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Avatar from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-data-display-badge",
@@ -159,7 +162,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Badge from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-data-display-card",
@@ -196,7 +200,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Card from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-data-display-countdown",
@@ -233,7 +238,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Countdown from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-data-display-indicator",
@@ -270,7 +276,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Indicator from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-data-display-kbd",
@@ -307,7 +314,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Kbd from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-data-display-list",
@@ -344,7 +352,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for List from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-data-display-stat",
@@ -381,7 +390,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Stat from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-data-display-table",
@@ -418,7 +428,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Table from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-data-display-timeline",
@@ -455,7 +466,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Timeline from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-feedback-alert",
@@ -492,7 +504,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Alert from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-feedback-loading",
@@ -529,7 +542,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Loading from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-feedback-progress",
@@ -566,7 +580,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Progress from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-feedback-radial-progress",
@@ -604,7 +619,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Radial progress from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-feedback-skeleton",
@@ -641,7 +657,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Skeleton from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-feedback-status",
@@ -678,7 +695,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Status from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-feedback-toast",
@@ -715,7 +733,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Toast from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-feedback-tooltip",
@@ -752,7 +771,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Tooltip from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-calendar",
@@ -789,7 +809,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Calendar from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-checkbox",
@@ -826,7 +847,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Checkbox from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-fieldset",
@@ -863,7 +885,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Fieldset from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-file-input",
@@ -901,7 +924,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for File Input from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-filter",
@@ -938,7 +962,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Filter from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-input",
@@ -975,7 +1000,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Input from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-label",
@@ -1012,7 +1038,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Label from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-otp",
@@ -1049,7 +1076,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for OTP from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-radio",
@@ -1086,7 +1114,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Radio from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-range",
@@ -1123,7 +1152,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Range from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-rating",
@@ -1160,7 +1190,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Rating from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-select",
@@ -1197,7 +1228,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Select from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-textarea",
@@ -1234,7 +1266,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Textarea from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-toggle",
@@ -1271,7 +1304,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Toggle from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-forms-validator",
@@ -1308,7 +1342,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Validator from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-hero-hero",
@@ -1344,7 +1379,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Hero from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-layout-divider",
@@ -1381,7 +1417,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Divider from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-layout-footer",
@@ -1418,7 +1455,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Footer from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-layout-join",
@@ -1455,7 +1493,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Join from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-layout-mask",
@@ -1492,7 +1531,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Mask from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-layout-stack",
@@ -1529,7 +1569,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Stack from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-media-browser",
@@ -1567,7 +1608,8 @@
         "Copy the markup for Browser mockup from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
       ],
-      "extraction_note": "Slug not linked in current llms.txt; docs URL follows the official components index."
+      "extraction_note": "Slug not linked in current llms.txt; docs URL follows the official components index.",
+      "quality": 83
     },
     {
       "id": "daisyui-media-carousel",
@@ -1604,7 +1646,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Carousel from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-media-code",
@@ -1642,7 +1685,8 @@
         "Copy the markup for Code mockup from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
       ],
-      "extraction_note": "Slug not linked in current llms.txt; docs URL follows the official components index."
+      "extraction_note": "Slug not linked in current llms.txt; docs URL follows the official components index.",
+      "quality": 83
     },
     {
       "id": "daisyui-media-diff",
@@ -1679,7 +1723,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Diff from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-media-hover-gallery",
@@ -1717,7 +1762,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Hover Gallery from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-media-phone",
@@ -1755,7 +1801,8 @@
         "Copy the markup for Phone mockup from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
       ],
-      "extraction_note": "Slug not linked in current llms.txt; docs URL follows the official components index."
+      "extraction_note": "Slug not linked in current llms.txt; docs URL follows the official components index.",
+      "quality": 83
     },
     {
       "id": "daisyui-media-window",
@@ -1793,7 +1840,8 @@
         "Copy the markup for Window mockup from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
       ],
-      "extraction_note": "Slug not linked in current llms.txt; docs URL follows the official components index."
+      "extraction_note": "Slug not linked in current llms.txt; docs URL follows the official components index.",
+      "quality": 83
     },
     {
       "id": "daisyui-micro-interactions-accordion",
@@ -1830,7 +1878,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Accordion from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-micro-interactions-button",
@@ -1867,7 +1916,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Button from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-micro-interactions-collapse",
@@ -1904,7 +1954,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Collapse from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-micro-interactions-fab",
@@ -1941,7 +1992,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for FAB / Speed Dial from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-micro-interactions-hover-3d",
@@ -1979,7 +2031,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Hover 3D from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-micro-interactions-swap",
@@ -2016,7 +2069,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Swap from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-micro-interactions-theme-controller",
@@ -2054,7 +2108,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Theme Controller from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-navigation-breadcrumbs",
@@ -2091,7 +2146,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Breadcrumbs from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-navigation-dock",
@@ -2128,7 +2184,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Dock from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-navigation-link",
@@ -2165,7 +2222,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Link from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-navigation-megamenu",
@@ -2202,7 +2260,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Megamenu from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-navigation-menu",
@@ -2239,7 +2298,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Menu from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-navigation-navbar",
@@ -2276,7 +2336,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Navbar from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-navigation-pagination",
@@ -2313,7 +2374,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Pagination from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-navigation-steps",
@@ -2350,7 +2412,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Steps from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-navigation-tab",
@@ -2387,7 +2450,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Tab from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-overlay-drawer",
@@ -2424,7 +2488,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Drawer from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-overlay-dropdown",
@@ -2461,7 +2526,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Dropdown from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-overlay-modal",
@@ -2498,7 +2564,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Modal from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     },
     {
       "id": "daisyui-text-text-rotate",
@@ -2535,7 +2602,8 @@
         "Add `@import \"tailwindcss\";` and `@plugin \"daisyui\";` to your CSS file (Tailwind v4).",
         "Copy the markup for Text Rotate from the docs page (classes like .btn, .card, .modal…).",
         "Optional CDN: https://cdn.jsdelivr.net/npm/daisyui@5"
-      ]
+      ],
+      "quality": 83
     }
   ]
 }

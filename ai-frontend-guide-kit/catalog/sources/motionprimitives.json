@@ -50,7 +50,8 @@
       "install_command": "npx motion-primitives@latest add animated-background",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/animated-background"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-backgrounds-effects-border-trail",
@@ -89,7 +90,8 @@
       "install_command": "npx motion-primitives@latest add border-trail",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/border-trail"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-backgrounds-effects-glow-effect",
@@ -128,7 +130,8 @@
       "install_command": "npx motion-primitives@latest add glow-effect",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/glow-effect"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-backgrounds-effects-progressive-blur",
@@ -167,7 +170,8 @@
       "install_command": "npx motion-primitives@latest add progressive-blur",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/progressive-blur"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-backgrounds-effects-spotlight",
@@ -205,7 +209,8 @@
       "install_command": "npx motion-primitives@latest add spotlight",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/spotlight"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-feedback-scroll-progress",
@@ -244,7 +249,8 @@
       "install_command": "npx motion-primitives@latest add scroll-progress",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/scroll-progress"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-media-carousel",
@@ -282,7 +288,8 @@
       "install_command": "npx motion-primitives@latest add carousel",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/carousel"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-media-image-comparison",
@@ -321,7 +328,8 @@
       "install_command": "npx motion-primitives@latest add image-comparison",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/image-comparison"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-media-infinite-slider",
@@ -361,7 +369,8 @@
       "install_command": "npx motion-primitives@latest add infinite-slider",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/infinite-slider"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-micro-interactions-accordion",
@@ -399,7 +408,8 @@
       "install_command": "npx motion-primitives@latest add accordion",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/accordion"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-micro-interactions-animated-group",
@@ -438,7 +448,8 @@
       "install_command": "npx motion-primitives@latest add animated-group",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/animated-group"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-micro-interactions-cursor",
@@ -476,7 +487,8 @@
       "install_command": "npx motion-primitives@latest add cursor",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/cursor"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-micro-interactions-disclosure",
@@ -514,7 +526,8 @@
       "install_command": "npx motion-primitives@latest add disclosure",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/disclosure"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-micro-interactions-in-view",
@@ -553,7 +566,8 @@
       "install_command": "npx motion-primitives@latest add in-view",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/in-view"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-micro-interactions-magnetic",
@@ -591,7 +605,8 @@
       "install_command": "npx motion-primitives@latest add magnetic",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/magnetic"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-micro-interactions-tilt",
@@ -629,7 +644,8 @@
       "install_command": "npx motion-primitives@latest add tilt",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/tilt"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-micro-interactions-transition-panel",
@@ -668,7 +684,8 @@
       "install_command": "npx motion-primitives@latest add transition-panel",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/transition-panel"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-navigation-dock",
@@ -706,7 +723,8 @@
       "install_command": "npx motion-primitives@latest add dock",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/dock"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-navigation-toolbar-dynamic",
@@ -745,7 +763,8 @@
       "install_command": "npx motion-primitives@latest add toolbar-dynamic",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/toolbar-dynamic"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-navigation-toolbar-expandable",
@@ -785,7 +804,8 @@
       "install_command": "npx motion-primitives@latest add toolbar-expandable",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/toolbar-expandable"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-overlay-dialog",
@@ -823,7 +843,8 @@
       "install_command": "npx motion-primitives@latest add dialog",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/dialog"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-overlay-morphing-dialog",
@@ -862,7 +883,8 @@
       "install_command": "npx motion-primitives@latest add morphing-dialog",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/morphing-dialog"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-overlay-morphing-popover",
@@ -901,7 +923,8 @@
       "install_command": "npx motion-primitives@latest add morphing-popover",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/morphing-popover"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-text-animated-number",
@@ -940,7 +963,8 @@
       "install_command": "npx motion-primitives@latest add animated-number",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/animated-number"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-text-sliding-number",
@@ -980,7 +1004,8 @@
       "install_command": "npx motion-primitives@latest add sliding-number",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/sliding-number"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-text-spinning-text",
@@ -1018,7 +1043,8 @@
       "install_command": "npx motion-primitives@latest add spinning-text",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/spinning-text"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-text-text-effect",
@@ -1056,7 +1082,8 @@
       "install_command": "npx motion-primitives@latest add text-effect",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/text-effect"
-      ]
+      ],
+      "quality": 81
     },
     {
       "id": "motionprimitives-text-text-loop",
@@ -1094,7 +1121,8 @@
       "install_command": "npx motion-primitives@latest add text-loop",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/text-loop"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-text-text-morph",
@@ -1132,7 +1160,8 @@
       "install_command": "npx motion-primitives@latest add text-morph",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/text-morph"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-text-text-roll",
@@ -1170,7 +1199,8 @@
       "install_command": "npx motion-primitives@latest add text-roll",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/text-roll"
-      ]
+      ],
+      "quality": 81
     },
     {
       "id": "motionprimitives-text-text-scramble",
@@ -1208,7 +1238,8 @@
       "install_command": "npx motion-primitives@latest add text-scramble",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/text-scramble"
-      ]
+      ],
+      "quality": 86
     },
     {
       "id": "motionprimitives-text-text-shimmer",
@@ -1246,7 +1277,8 @@
       "install_command": "npx motion-primitives@latest add text-shimmer",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/text-shimmer"
-      ]
+      ],
+      "quality": 81
     },
     {
       "id": "motionprimitives-text-text-shimmer-wave",
@@ -1285,7 +1317,8 @@
       "install_command": "npx motion-primitives@latest add text-shimmer-wave",
       "manual_steps": [
         "Or copy the source from https://motion-primitives.com/docs/text-shimmer-wave"
-      ]
+      ],
+      "quality": 86
     }
   ]
 }

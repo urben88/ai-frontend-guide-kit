@@ -173,7 +173,7 @@ Practical checks run in a fresh Next.js 16 + Tailwind v4 + `--src-dir` project:
 - **Catalog:** https://www.kibo-ui.com/components (40 compound components: kanban, gantt, table, editor, AI blocks, calendar).
 - **Install:** `npx shadcn@latest add https://www.kibo-ui.com/r/<name>.json` or `npx kibo-ui add <name>`.
 - **Stack / Tailwind:** React + shadcn/ui + Tailwind.
-- **License / limits:** the site says "free and open source" but no SPDX license was found; entries are marked `unknown`. Confirm before client delivery.
+- **License / limits:** MIT (verified from the repository `license.md`).
 
 ## Animate UI
 
@@ -195,3 +195,28 @@ Practical checks run in a fresh Next.js 16 + Tailwind v4 + `--src-dir` project:
 - **Install:** `npx shadcn@latest add @react-bits/<Name>-TS-TW` (variants: `JS-CSS`, `JS-TW`, `TS-CSS`, `TS-TW`).
 - **Dependencies:** often `gsap`, `three`, `ogl` or `motion`; WebGL entries cost INP/LCP — see `reference-core-web-vitals.md`.
 - **License / limits:** MIT + Commons Clause — free in products; no resale of the components themselves.
+
+## shadcn-vue and shadcn-svelte
+
+- **Catalog:** https://www.shadcn-vue.com/docs/components (Vue, Reka UI) and https://shadcn-svelte.com/docs/components (Svelte, Bits UI, plus 147 blocks: dashboards, login, sidebars, calendars).
+- **Install:** `npx shadcn-vue@latest add <name>` / `npx shadcn-svelte@latest add <name>` (run `init` first).
+- **License / limits:** MIT. Use these instead of the React sources when the project is Vue or Svelte.
+
+## Mantine
+
+- **Catalog:** https://mantine.dev/core/getting-started/ (100+ components with hooks, forms, dates, charts, notifications packages).
+- **Install:** `npm i @mantine/core @mantine/hooks`, wrap the app in `MantineProvider`, import `@mantine/core/styles.css`.
+- **Stack:** React with its own theme and CSS variables (not Tailwind-first). Map your tokens into the Mantine theme.
+- **License / limits:** MIT.
+
+## Base UI
+
+- **Catalog:** https://base-ui.com/react/overview/quick-start (unstyled accessible primitives from the MUI team).
+- **Install:** `npm i @base-ui/react`; style with Tailwind or CSS.
+- **License / limits:** MIT.
+
+## React Aria Components
+
+- **Catalog:** https://react-spectrum.adobe.com/react-aria/components.html (accessible, unstyled; best i18n and keyboard behavior).
+- **Install:** `npm i react-aria-components`; Tailwind users add `tailwindcss-react-aria-components`.
+- **License / limits:** Apache-2.0.

@@ -1,5 +1,7 @@
 # 🎨 AI Frontend Guide Kit
 
+🌐 **English** · [Español](README.es.md)
+
 **Reuse-first UI catalog + guided workflow for AI agents building frontends.**
 This repository is both the 🏭 **factory** (extraction pipeline + catalog) and the 📦 **distributable kit** you drop into any frontend project.
 
@@ -23,10 +25,11 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 
 | | What | Details |
 |---|---|---|
-| 📚 | **Catalog** | 20 verified sources · 3,603 reusable entries · 20 categories · per-entry licenses and install commands |
+| 📚 | **Catalog** | 25 verified sources · 3,731 reusable entries · 20 categories · quality score, per-entry licenses and install commands · React, Vue and Svelte · offline `explorer.html` |
 | 🧭 | **Guided kit** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + 3-phase workflow in 10 short guides (00–10) + `find`/`get` query tools. Self-contained: no build, no npm dependencies |
 | 🧠 | **Agent skills** | `ai-frontend-guide` (workflow), `frontend-polish` (phase 3), `ux-map` (visual screen map) and 16 vendored UX skills (`userflow` + 15 `flow-*`, MIT) |
 | 💾 | **Selection memory** | `ai-frontend-output/`: append-only decision history, styles/components summary and reusable combinations |
+| 🛡️ | **Audits** | `audit-honesty` (deceptive patterns), `audit-a11y` (axe + WCAG 2.2), `audit-perf` (Lighthouse vs Core Web Vitals) in `ai-frontend-guide-kit/tools/` |
 | 🔒 | **Laya (optional)** | Local decision engine that ranks catalog candidates with calibrated probabilities — everything runs on your PC |
 
 ## 🔄 The three-phase workflow
@@ -78,6 +81,16 @@ npx ./ai-frontend-guide-kit-1.2.0.tgz     # run it in the destination project
 Then tell your agent:
 
 > *"Read `ai-frontend-guide-kit/AGENTS.md` and follow its workflow."*
+
+## 🔎 Finding components
+
+```bash
+node ai-frontend-guide-kit/tools/find.mjs --text "pricing toggle" --stack react --licensed --min-quality 70
+node ai-frontend-guide-kit/tools/find.mjs --category forms --stack vue            # Vue / Svelte ports included
+node ai-frontend-guide-kit/tools/find.mjs --source reactaria --category forms       # accessible primitives
+```
+
+Results are ranked by **quality** (license clarity, install effort, dependency weight, source maintenance) or by weighted text relevance; near-identical entries across sources are collapsed (`--all` shows them) and icons are hidden unless asked. Open `ai-frontend-guide-kit/catalog/explorer.html` for an offline, filterable catalog with preview links and copy-install buttons.
 
 ## 🛠️ What the installer does
 
@@ -134,12 +147,15 @@ El ranking de componentes acepta `--direction <id>` (la dirección elegida del b
 │   ├── AGENTS.md · README.md · VERIFICATION.md
 │   ├── guides/00..10         # experience direction + reuse-first UX/UI workflow (00 = router, 01 = direction, 02 = flows, 10 = iteration)
 │   ├── experience/           # archetypes, philosophies, styles, question bank, discovery loop, reference cards + experience-manifest.json
-│   ├── catalog/              # index + taxonomy + install-guides + 20 sources
-│   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp
+│   ├── catalog/              # index + taxonomy + install-guides + 25 sources + explorer.html + license-report.md
+│   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp · audit-honesty · audit-a11y · audit-perf
 ├── skills/                   # ai-frontend-guide + frontend-polish + 16 vendored UX flow skills (MIT)
 ├── manifest/                 # catalog source of truth (generated)
 ├── media/explainer/          # 🎬 hand-drawn explainer: index.html + render.mjs + video (ES/EN, GIF, poster)
-├── tools/                    # extraction/refresh/build/validate pipeline
+├── tools/                    # extraction/refresh/build/validate/quality/licenses pipeline
+├── tests/                    # node:test suite (find/get/install/memory/audits/walkthrough)
+├── examples/walkthrough/     # the three phases on a tiny project (also a regression fixture)
+├── .github/workflows/        # CI, monthly refresh PR, monthly link check
 ├── openspec/                 # change specs (OpenSpec)
 └── install.mjs               # one-command installer (bin)
 ```
@@ -152,8 +168,13 @@ node tools/build-index.mjs           # rebuild the light index
 node tools/build-kit.mjs             # re-sync catalog into ai-frontend-guide-kit/
 node tools/sync-ux-skills.mjs        # re-vendor the 16 UX skills (MIT); --check for updates
 node tools/validate.mjs              # schema + ID + index checks
-node tools/validate.mjs --urls 10    # sample links
-npm run validate                     # same as above
+node tools/validate.mjs --urls 100   # stratified link check (fails above 10% broken)
+node tools/quality.mjs               # recompute quality scores (also run by build-index)
+node tools/check-licenses.mjs        # compare declared licenses with repo LICENSE files (--apply upgrades unknown)
+node tools/audit-categories.mjs      # category sanity audit (--strict for CI)
+node tools/build-explorer.mjs        # regenerate catalog/explorer.html (also run by build-kit)
+npm test                             # test suite
+npm run verify                       # validate + build-kit + tests
 ```
 
 ## ⚖️ Licensing

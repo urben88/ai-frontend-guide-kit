@@ -43,7 +43,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Blog\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/blog/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-blog-b",
@@ -75,7 +76,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Blog\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/blog/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-blog-c",
@@ -107,7 +109,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Blog\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/blog/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-blog-d",
@@ -139,7 +142,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Blog\" block D, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/blog/light/d.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-blog-e",
@@ -171,7 +175,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Blog\" block E, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/blog/light/e.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-content-a",
@@ -203,7 +208,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Content\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/content/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-content-b",
@@ -235,7 +241,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Content\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/content/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-content-c",
@@ -267,7 +274,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Content\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/content/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-content-d",
@@ -299,7 +307,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Content\" block D, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/content/light/d.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-content-e",
@@ -331,7 +340,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Content\" block E, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/content/light/e.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-content-f",
@@ -363,7 +373,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Content\" block F, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/content/light/f.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-content-g",
@@ -395,7 +406,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Content\" block G, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/content/light/g.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-content-h",
@@ -427,7 +439,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Content\" block H, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/content/light/h.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-ecommerce-a",
@@ -459,7 +472,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Ecommerce\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/ecommerce/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-ecommerce-b",
@@ -491,7 +505,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Ecommerce\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/ecommerce/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-ecommerce-c",
@@ -523,7 +538,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Ecommerce\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/ecommerce/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-team-a",
@@ -555,7 +571,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Team\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/team/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-team-b",
@@ -587,7 +604,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Team\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/team/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-blocks-sections-team-c",
@@ -619,7 +637,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Team\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/team/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-cta-cta-a",
@@ -650,7 +669,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Cta\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/cta/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-cta-cta-b",
@@ -681,7 +701,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Cta\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/cta/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-cta-cta-c",
@@ -712,7 +733,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Cta\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/cta/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-cta-cta-d",
@@ -743,7 +765,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Cta\" block D, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/cta/light/d.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-data-display-statistic-a",
@@ -775,7 +798,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Statistic\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/statistic/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-data-display-statistic-b",
@@ -807,7 +831,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Statistic\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/statistic/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-data-display-statistic-c",
@@ -839,7 +864,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Statistic\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/statistic/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-feature-a",
@@ -871,7 +897,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Feature\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/feature/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-feature-b",
@@ -903,7 +930,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Feature\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/feature/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-feature-c",
@@ -935,7 +963,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Feature\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/feature/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-feature-d",
@@ -967,7 +996,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Feature\" block D, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/feature/light/d.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-feature-e",
@@ -999,7 +1029,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Feature\" block E, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/feature/light/e.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-feature-f",
@@ -1031,7 +1062,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Feature\" block F, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/feature/light/f.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-feature-g",
@@ -1063,7 +1095,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Feature\" block G, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/feature/light/g.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-feature-h",
@@ -1095,7 +1128,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Feature\" block H, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/feature/light/h.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-step-a",
@@ -1127,7 +1161,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Step\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/step/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-step-b",
@@ -1159,7 +1194,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Step\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/step/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-features-step-c",
@@ -1191,7 +1227,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Step\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/step/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-forms-contact-a",
@@ -1223,7 +1260,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Contact\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/contact/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-forms-contact-b",
@@ -1255,7 +1293,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Contact\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/contact/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-forms-contact-c",
@@ -1287,7 +1326,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Contact\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/contact/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-hero-hero-a",
@@ -1318,7 +1358,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Hero\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/hero/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-hero-hero-b",
@@ -1349,7 +1390,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Hero\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/hero/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-hero-hero-c",
@@ -1380,7 +1422,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Hero\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/hero/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-hero-hero-d",
@@ -1411,7 +1454,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Hero\" block D, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/hero/light/d.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-hero-hero-e",
@@ -1442,7 +1486,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Hero\" block E, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/hero/light/e.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-hero-hero-f",
@@ -1473,7 +1518,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Hero\" block F, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/hero/light/f.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-layout-footer-a",
@@ -1505,7 +1551,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Footer\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/footer/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-layout-footer-b",
@@ -1537,7 +1584,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Footer\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/footer/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-layout-footer-c",
@@ -1569,7 +1617,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Footer\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/footer/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-layout-footer-d",
@@ -1601,7 +1650,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Footer\" block D, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/footer/light/d.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-layout-footer-e",
@@ -1633,7 +1683,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Footer\" block E, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/footer/light/e.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-media-gallery-a",
@@ -1665,7 +1716,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Gallery\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/gallery/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-media-gallery-b",
@@ -1697,7 +1749,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Gallery\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/gallery/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-media-gallery-c",
@@ -1729,7 +1782,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Gallery\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/gallery/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-navigation-header-a",
@@ -1761,7 +1815,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Header\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/header/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-navigation-header-b",
@@ -1793,7 +1848,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Header\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/header/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-navigation-header-c",
@@ -1825,7 +1881,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Header\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/header/light/c.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-navigation-header-d",
@@ -1857,7 +1914,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Header\" block D, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/header/light/d.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-pricing-pricing-a",
@@ -1888,7 +1946,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Pricing\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/pricing/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-pricing-pricing-b",
@@ -1919,7 +1978,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Pricing\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/pricing/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-testimonials-testimonial-a",
@@ -1951,7 +2011,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Testimonial\" block A, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/testimonial/light/a.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-testimonials-testimonial-b",
@@ -1983,7 +2044,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Testimonial\" block B, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/testimonial/light/b.js"
-      ]
+      ],
+      "quality": 77
     },
     {
       "id": "tailblocks-testimonials-testimonial-c",
@@ -2015,7 +2077,8 @@
       "manual_steps": [
         "Open https://tailblocks.cc, pick \"Testimonial\" block C, choose colors/theme and click View Code.",
         "Or copy the raw JSX source from https://raw.githubusercontent.com/mertJF/tailblocks/master/src/blocks/testimonial/light/c.js"
-      ]
+      ],
+      "quality": 77
     }
   ]
 }

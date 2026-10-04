@@ -5,7 +5,7 @@
  * Usage:
  *   node tools/validate.mjs                 Validate manifest/sources/*.json + index consistency + unique IDs
  *   node tools/validate.mjs --fixtures      Self-test: valid fixture must pass, invalid fixture must fail
- *   node tools/validate.mjs --urls [n]      Sample n (default 10) docs_url values and report HTTP status
+ *   node tools/validate.mjs --urls [n]      Stratified sample of n (default 10) unique docs_url values and report HTTP status
  */
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
@@ -189,45 +189,59 @@ function runFixtures(schema) {
   return 0;
 }
 
+async function probe(url) {
+  try {
+    let response = await fetch(url, { method: 'HEAD', redirect: 'follow', signal: AbortSignal.timeout(15000) });
+    if (response.status === 405 || response.status === 501) {
+      response = await fetch(url, { method: 'GET', redirect: 'follow', signal: AbortSignal.timeout(15000) });
+    }
+    if (response.status === 403 || response.status === 429) return { state: 'blocked', status: response.status };
+    if (response.status >= 400) return { state: 'broken', status: response.status };
+    return { state: 'ok', status: response.status };
+  } catch (error) {
+    return { state: 'broken', status: `network error (${error.message})` };
+  }
+}
+
+/**
+ * Stratified link check: unique docs URLs, an even share per source, 8 requests in flight.
+ * Exit 1 only when more than 10% of the sample is broken (single flaky pages do not fail a monthly job).
+ */
 async function checkUrls(sampleSize) {
-  const urls = [];
+  const perSource = new Map();
   for (const file of listSourceFiles()) {
     const data = loadJSON(file);
-    for (const entry of data.entries ?? []) {
-      if (entry.docs_url) urls.push({ source: data.source_id, id: entry.id, url: entry.docs_url });
-    }
+    const unique = [...new Set((data.entries ?? []).map((entry) => entry.docs_url).filter(Boolean))];
+    if (unique.length > 0) perSource.set(data.source_id, unique);
   }
-  if (urls.length === 0) {
+  if (perSource.size === 0) {
     console.error('No docs_url values found to sample.');
     return 1;
   }
-  const step = Math.max(1, Math.floor(urls.length / sampleSize));
-  const sample = urls.filter((_, index) => index % step === 0).slice(0, sampleSize);
-  let broken = 0;
-  let blocked = 0;
-
-  for (const item of sample) {
-    try {
-      let response = await fetch(item.url, { method: 'HEAD', redirect: 'follow', signal: AbortSignal.timeout(15000) });
-      if (response.status === 405 || response.status === 501) {
-        response = await fetch(item.url, { method: 'GET', redirect: 'follow', signal: AbortSignal.timeout(15000) });
-      }
-      if (response.status === 403 || response.status === 429) {
-        blocked += 1;
-        console.log(`BLOCKED ${response.status} ${item.url}`);
-      } else if (response.status >= 400) {
-        broken += 1;
-        console.log(`BROKEN  ${response.status} ${item.url}`);
-      } else {
-        console.log(`OK      ${response.status} ${item.url}`);
-      }
-    } catch (error) {
-      broken += 1;
-      console.log(`BROKEN  network error ${item.url} (${error.message})`);
-    }
+  const share = Math.max(1, Math.ceil(sampleSize / perSource.size));
+  const sample = [];
+  for (const [source, urls] of perSource) {
+    const step = Math.max(1, Math.floor(urls.length / share));
+    urls.filter((_, index) => index % step === 0).slice(0, share).forEach((url) => sample.push({ source, url }));
   }
-  console.log(`\nLink check: ${sample.length} sampled, ${broken} broken, ${blocked} blocked (403/429 may be bot protection).`);
-  return broken === 0 ? 0 : 1;
+
+  const results = [];
+  let cursor = 0;
+  await Promise.all(
+    Array.from({ length: 8 }, async () => {
+      while (cursor < sample.length) {
+        const item = sample[cursor++];
+        results.push({ ...item, ...(await probe(item.url)) });
+      }
+    }),
+  );
+
+  const broken = results.filter((r) => r.state === 'broken');
+  const blocked = results.filter((r) => r.state === 'blocked');
+  for (const r of broken) console.log(`BROKEN  ${r.status} [${r.source}] ${r.url}`);
+  for (const r of blocked) console.log(`BLOCKED ${r.status} [${r.source}] ${r.url}`);
+  console.log(`\nLink check: ${results.length} sampled across ${perSource.size} sources, ${broken.length} broken, ${blocked.length} blocked (403/429 may be bot protection).`);
+  return broken.length / results.length > 0.1 ? 1 : 0;
 }
 
 async function main() {

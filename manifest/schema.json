@@ -19,7 +19,7 @@
       "additionalProperties": false,
       "properties": {
         "channel": {
-          "enum": ["registry-json", "docs-structured", "github-raw", "agent-research", "manual"]
+          "enum": ["registry-json", "docs-structured", "github-raw", "github-contents", "agent-research", "manual"]
         },
         "method": { "type": "string" },
         "evidence_url": { "type": "string", "format": "uri" },
@@ -80,7 +80,7 @@
         "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
         "name": { "type": "string", "minLength": 1 },
         "source": { "type": "string", "minLength": 1 },
-        "entry_type": { "enum": ["component", "block", "design-system"] },
+        "entry_type": { "enum": ["component", "block", "design-system", "icon"] },
         "category": { "$ref": "#/$defs/category" },
         "subcategory": { "type": "string" },
         "description": { "type": "string", "minLength": 10 },
@@ -104,6 +104,7 @@
         "free": { "type": "boolean" },
         "limits": { "type": "string" },
         "extraction_note": { "type": "string" },
+        "quality": { "type": "integer", "minimum": 0, "maximum": 100 },
         "verified_at": { "type": "string", "format": "date" }
       }
     }

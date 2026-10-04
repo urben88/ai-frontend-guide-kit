@@ -52,7 +52,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PromptBar"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-backgrounds-effects-acidsquares-ts-tw",
@@ -91,7 +92,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#AcidSquares"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-aurora-ts-tw",
@@ -130,7 +132,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Aurora"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-ballpit-ts-tw",
@@ -170,7 +173,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Ballpit"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-beams-ts-tw",
@@ -211,7 +215,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Beams"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 66
     },
     {
       "id": "reactbits-backgrounds-effects-chromagrid-ts-tw",
@@ -250,7 +255,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ChromaGrid"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-colorbends-ts-tw",
@@ -289,7 +295,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ColorBends"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-cursorgrid-ts-tw",
@@ -325,7 +332,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CursorGrid"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-backgrounds-effects-dither-ts-tw",
@@ -367,7 +375,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Dither"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 66
     },
     {
       "id": "reactbits-backgrounds-effects-ditherveil-ts-tw",
@@ -406,7 +415,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DitherVeil"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-dotgrid-ts-tw",
@@ -445,7 +455,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DotGrid"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-galaxy-ts-tw",
@@ -484,7 +495,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Galaxy"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-gradientwaves-ts-tw",
@@ -523,7 +535,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GradientWaves"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-griddistortion-ts-tw",
@@ -562,7 +575,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GridDistortion"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-gridmotion-ts-tw",
@@ -601,7 +615,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GridMotion"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-gridscan-ts-tw",
@@ -642,7 +657,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GridScan"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 66
     },
     {
       "id": "reactbits-backgrounds-effects-iridescence-ts-tw",
@@ -681,7 +697,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Iridescence"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-lanyard-ts-tw",
@@ -717,7 +734,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Lanyard"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-backgrounds-effects-lightning-ts-tw",
@@ -753,7 +771,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Lightning"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 72
     },
     {
       "id": "reactbits-backgrounds-effects-linewaves-ts-tw",
@@ -792,7 +811,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LineWaves"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-liquidchrome-ts-tw",
@@ -831,7 +851,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LiquidChrome"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-liquidether-ts-tw",
@@ -870,7 +891,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LiquidEther"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-noise-ts-tw",
@@ -906,7 +928,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Noise"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-backgrounds-effects-orb-ts-tw",
@@ -945,7 +968,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Orb"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-orbitimages-ts-tw",
@@ -984,7 +1008,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#OrbitImages"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-particles-ts-tw",
@@ -1023,7 +1048,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Particles"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-patternwaves-ts-tw",
@@ -1062,7 +1088,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PatternWaves"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-pixelblast-ts-tw",
@@ -1102,7 +1129,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PixelBlast"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-pixelcard-ts-tw",
@@ -1138,7 +1166,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PixelCard"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 72
     },
     {
       "id": "reactbits-backgrounds-effects-pixelsnow-ts-tw",
@@ -1177,7 +1206,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PixelSnow"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-pixelswap-ts-tw",
@@ -1213,7 +1243,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PixelSwap"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-backgrounds-effects-pixeltrail-ts-tw",
@@ -1254,7 +1285,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PixelTrail"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-backgrounds-effects-pixeltransition-ts-tw",
@@ -1293,7 +1325,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PixelTransition"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-plasma-ts-tw",
@@ -1332,7 +1365,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Plasma"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-plasmawave-ts-tw",
@@ -1371,7 +1405,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PlasmaWave"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-prism-ts-tw",
@@ -1410,7 +1445,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Prism"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-prismaticburst-ts-tw",
@@ -1449,7 +1485,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PrismaticBurst"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-ripplegrid-ts-tw",
@@ -1488,7 +1525,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#RippleGrid"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-shapegrid-ts-tw",
@@ -1524,7 +1562,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ShapeGrid"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-backgrounds-effects-shapewaves-ts-tw",
@@ -1562,7 +1601,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ShapeWaves"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-silk-ts-tw",
@@ -1602,7 +1642,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Silk"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-slicedwaves-ts-tw",
@@ -1641,7 +1682,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SlicedWaves"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-softaurora-ts-tw",
@@ -1680,7 +1722,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SoftAurora"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-backgrounds-effects-threads-ts-tw",
@@ -1719,7 +1762,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Threads"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-backgrounds-effects-waves-ts-tw",
@@ -1755,7 +1799,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Waves"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-backgrounds-effects-webthreads-ts-tw",
@@ -1794,7 +1839,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#WebThreads"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-data-display-animatedlist-ts-tw",
@@ -1833,7 +1879,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#AnimatedList"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-data-display-bouncecards-ts-tw",
@@ -1872,7 +1919,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#BounceCards"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-data-display-cardswap-ts-tw",
@@ -1911,7 +1959,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CardSwap"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-data-display-decaycard-ts-tw",
@@ -1950,7 +1999,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DecayCard"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-data-display-flipcard-ts-tw",
@@ -1989,7 +2039,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FlipCard"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-data-display-profilecard-ts-tw",
@@ -2025,7 +2076,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ProfileCard"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 72
     },
     {
       "id": "reactbits-data-display-reflectivecard-ts-tw",
@@ -2063,7 +2115,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ReflectiveCard"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-data-display-spotlightcard-ts-tw",
@@ -2099,7 +2152,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SpotlightCard"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-data-display-tiltedcard-ts-tw",
@@ -2138,7 +2192,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#TiltedCard"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-feedback-latticeloader-ts-tw",
@@ -2174,7 +2229,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LatticeLoader"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-feedback-statusmark-ts-tw",
@@ -2213,7 +2269,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#StatusMark"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-feedback-swipetoast-ts-tw",
@@ -2254,7 +2311,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SwipeToast"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-feedback-warmtooltip-ts-tw",
@@ -2294,7 +2352,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#WarmTooltip"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-forms-curvedinput-ts-tw",
@@ -2330,7 +2389,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CurvedInput"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-forms-dodgefield-ts-tw",
@@ -2369,7 +2429,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DodgeField"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-forms-dotfield-ts-tw",
@@ -2405,7 +2466,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DotField"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-forms-glideselect-ts-tw",
@@ -2444,7 +2506,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GlideSelect"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-forms-jellyradio-ts-tw",
@@ -2483,7 +2546,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#JellyRadio"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-forms-peekrating-ts-tw",
@@ -2522,7 +2586,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PeekRating"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-forms-scrubfield-ts-tw",
@@ -2561,7 +2626,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ScrubField"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-forms-squishswitch-ts-tw",
@@ -2600,7 +2666,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SquishSwitch"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-accordiongallery-ts-tw",
@@ -2639,7 +2706,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#AccordionGallery"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-carousel-ts-tw",
@@ -2679,7 +2747,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Carousel"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-circularcarousel-ts-tw",
@@ -2715,7 +2784,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CircularCarousel"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-media-circulargallery-ts-tw",
@@ -2754,7 +2824,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CircularGallery"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-media-depthcarousel-ts-tw",
@@ -2793,7 +2864,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DepthCarousel"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-domegallery-ts-tw",
@@ -2831,7 +2903,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DomeGallery"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-elasticslider-ts-tw",
@@ -2870,7 +2943,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ElasticSlider"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-flexcarousel-ts-tw",
@@ -2909,7 +2983,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FlexCarousel"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-folder-ts-tw",
@@ -2945,7 +3020,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Folder"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-media-folderfloat-ts-tw",
@@ -2983,7 +3059,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FolderFloat"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-imagetrail-ts-tw",
@@ -3022,7 +3099,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ImageTrail"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-media-masonry-ts-tw",
@@ -3061,7 +3139,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Masonry"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-modelviewer-ts-tw",
@@ -3102,7 +3181,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ModelViewer"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-media-morphslider-ts-tw",
@@ -3142,7 +3222,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#MorphSlider"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-scrollstack-ts-tw",
@@ -3180,7 +3261,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ScrollStack"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-stack-ts-tw",
@@ -3219,7 +3301,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Stack"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-media-wakeslider-ts-tw",
@@ -3258,7 +3341,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#WakeSlider"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-aeroshards-ts-tw",
@@ -3296,7 +3380,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#AeroShards"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-animatedcontent-ts-tw",
@@ -3335,7 +3420,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#AnimatedContent"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-antigravity-ts-tw",
@@ -3375,7 +3461,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Antigravity"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-balatro-ts-tw",
@@ -3414,7 +3501,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Balatro"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-belltoggle-ts-tw",
@@ -3455,7 +3543,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#BellToggle"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-micro-interactions-blobcursor-ts-tw",
@@ -3494,7 +3583,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#BlobCursor"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-borderglow-ts-tw",
@@ -3530,7 +3620,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#BorderGlow"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-callchip-ts-tw",
@@ -3569,7 +3660,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CallChip"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-clickspark-ts-tw",
@@ -3605,7 +3697,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ClickSpark"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 72
     },
     {
       "id": "reactbits-micro-interactions-codeslots-ts-tw",
@@ -3646,7 +3739,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CodeSlots"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-micro-interactions-cometdial-ts-tw",
@@ -3685,7 +3779,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CometDial"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-countup-ts-tw",
@@ -3724,7 +3819,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CountUp"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-crosshair-ts-tw",
@@ -3763,7 +3859,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Crosshair"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-crtwarp-ts-tw",
@@ -3802,7 +3899,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CRTWarp"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-cubes-ts-tw",
@@ -3841,7 +3939,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Cubes"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-curvedloop-ts-tw",
@@ -3877,7 +3976,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CurvedLoop"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-darkveil-ts-tw",
@@ -3916,7 +4016,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DarkVeil"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-driftwall-ts-tw",
@@ -3952,7 +4053,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DriftWall"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-elasticmesh-ts-tw",
@@ -3991,7 +4093,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ElasticMesh"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-electricborder-ts-tw",
@@ -4027,7 +4130,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ElectricBorder"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-electriclogo-ts-tw",
@@ -4066,7 +4170,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ElectricLogo"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-evileye-ts-tw",
@@ -4105,7 +4210,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#EvilEye"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-fadecontent-ts-tw",
@@ -4144,7 +4250,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FadeContent"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-faultyterminal-ts-tw",
@@ -4183,7 +4290,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FaultyTerminal"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-ferrofluid-ts-tw",
@@ -4222,7 +4330,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Ferrofluid"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-floatinglines-ts-tw",
@@ -4261,7 +4370,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FloatingLines"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-fluidglass-ts-tw",
@@ -4303,7 +4413,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FluidGlass"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-micro-interactions-flyingposters-ts-tw",
@@ -4342,7 +4453,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FlyingPosters"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-fusebutton-ts-tw",
@@ -4381,7 +4493,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FuseButton"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-ghostcursor-ts-tw",
@@ -4420,7 +4533,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GhostCursor"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-ghostfibers-ts-tw",
@@ -4459,7 +4573,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GhostFibers"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-glarehover-ts-tw",
@@ -4495,7 +4610,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GlareHover"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-glassicons-ts-tw",
@@ -4531,7 +4647,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GlassIcons"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 72
     },
     {
       "id": "reactbits-micro-interactions-glasssurface-ts-tw",
@@ -4567,7 +4684,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GlassSurface"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-glowcursor-ts-tw",
@@ -4606,7 +4724,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GlowCursor"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-gradientblinds-ts-tw",
@@ -4645,7 +4764,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GradientBlinds"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-gradualblur-ts-tw",
@@ -4681,7 +4801,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GradualBlur"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-grainient-ts-tw",
@@ -4720,7 +4841,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Grainient"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-halftonereveal-ts-tw",
@@ -4759,7 +4881,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#HalftoneReveal"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-holdbutton-ts-tw",
@@ -4795,7 +4918,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#HoldButton"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-infinitespiral-ts-tw",
@@ -4831,7 +4955,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#InfiniteSpiral"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-laserflow-ts-tw",
@@ -4870,7 +4995,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LaserFlow"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-lightfall-ts-tw",
@@ -4909,7 +5035,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Lightfall"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-lightpillar-ts-tw",
@@ -4948,7 +5075,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LightPillar"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-lightrays-ts-tw",
@@ -4987,7 +5115,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LightRays"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-lighttunnel-ts-tw",
@@ -5026,7 +5155,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LightTunnel"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-logoloop-ts-tw",
@@ -5062,7 +5192,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LogoLoop"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-magicbento-ts-tw",
@@ -5101,7 +5232,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#MagicBento"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-magicrings-ts-tw",
@@ -5140,7 +5272,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#MagicRings"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-magnet-ts-tw",
@@ -5176,7 +5309,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Magnet"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-magnetlines-ts-tw",
@@ -5212,7 +5346,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#MagnetLines"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 72
     },
     {
       "id": "reactbits-micro-interactions-maskedheading-ts-tw",
@@ -5251,7 +5386,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#MaskedHeading"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-metaballs-ts-tw",
@@ -5290,7 +5426,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#MetaBalls"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-metallicpaint-ts-tw",
@@ -5326,7 +5463,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#MetallicPaint"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-microslats-ts-tw",
@@ -5365,7 +5503,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#MicroSlats"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-moltenmetal-ts-tw",
@@ -5404,7 +5543,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#MoltenMetal"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-optionwheel-ts-tw",
@@ -5440,7 +5580,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#OptionWheel"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-papercrumple-ts-tw",
@@ -5479,7 +5620,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PaperCrumple"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-pulseheart-ts-tw",
@@ -5517,7 +5659,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PulseHeart"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-radar-ts-tw",
@@ -5556,7 +5699,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Radar"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-refineframe-ts-tw",
@@ -5595,7 +5739,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#RefineFrame"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-ribbons-ts-tw",
@@ -5634,7 +5779,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Ribbons"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-rippledistortion-ts-tw",
@@ -5673,7 +5819,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#RippleDistortion"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-rubbersegment-ts-tw",
@@ -5712,7 +5859,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#RubberSegment"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-scanner-ts-tw",
@@ -5751,7 +5899,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Scanner"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-scrollexpand-ts-tw",
@@ -5787,7 +5936,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ScrollExpand"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-scrollfloat-ts-tw",
@@ -5826,7 +5976,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ScrollFloat"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-scrollreveal-ts-tw",
@@ -5865,7 +6016,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ScrollReveal"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-scrollvelocity-ts-tw",
@@ -5904,7 +6056,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ScrollVelocity"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-shapeblur-ts-tw",
@@ -5943,7 +6096,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ShapeBlur"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-shredder-ts-tw",
@@ -5981,7 +6135,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Shredder"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-siderays-ts-tw",
@@ -6020,7 +6175,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SideRays"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-slidecommit-ts-tw",
@@ -6061,7 +6217,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SlideCommit"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-micro-interactions-slingbutton-ts-tw",
@@ -6102,7 +6259,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SlingButton"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-micro-interactions-sloshgauge-ts-tw",
@@ -6138,7 +6296,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SloshGauge"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-specularbutton-ts-tw",
@@ -6177,7 +6336,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SpecularButton"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-splashcursor-ts-tw",
@@ -6213,7 +6373,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SplashCursor"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-springcheck-ts-tw",
@@ -6253,7 +6414,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SpringCheck"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-starborder-ts-tw",
@@ -6289,7 +6451,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#StarBorder"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-micro-interactions-strands-ts-tw",
@@ -6328,7 +6491,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Strands"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-swarmcursor-ts-tw",
@@ -6367,7 +6531,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SwarmCursor"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-swiperow-ts-tw",
@@ -6408,7 +6573,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SwipeRow"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-micro-interactions-targetcursor-ts-tw",
@@ -6448,7 +6614,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#TargetCursor"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-tearticket-ts-tw",
@@ -6487,7 +6654,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#TearTicket"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-thoughtline-ts-tw",
@@ -6528,7 +6696,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ThoughtLine"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 71
     },
     {
       "id": "reactbits-micro-interactions-topography-ts-tw",
@@ -6567,7 +6736,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Topography"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-micro-interactions-truefocus-ts-tw",
@@ -6606,7 +6776,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#TrueFocus"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-variableproximity-ts-tw",
@@ -6645,7 +6816,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#VariableProximity"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-micro-interactions-voicepill-ts-tw",
@@ -6684,7 +6856,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#VoicePill"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-navigation-branchedmenu-ts-tw",
@@ -6723,7 +6896,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#BranchedMenu"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-navigation-bubblemenu-ts-tw",
@@ -6762,7 +6936,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#BubbleMenu"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-navigation-cardnav-ts-tw",
@@ -6802,7 +6977,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CardNav"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-navigation-dock-ts-tw",
@@ -6841,7 +7017,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Dock"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-navigation-flowingmenu-ts-tw",
@@ -6880,7 +7057,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FlowingMenu"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-navigation-gooeynav-ts-tw",
@@ -6916,7 +7094,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GooeyNav"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-navigation-infinitemenu-ts-tw",
@@ -6954,7 +7133,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#InfiniteMenu"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-navigation-linesidebar-ts-tw",
@@ -6990,7 +7170,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LineSidebar"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-navigation-pillnav-ts-tw",
@@ -7030,7 +7211,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#PillNav"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-navigation-staggeredmenu-ts-tw",
@@ -7069,7 +7251,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#StaggeredMenu"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-navigation-stepper-ts-tw",
@@ -7108,7 +7291,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Stepper"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-asciitext-ts-tw",
@@ -7147,7 +7331,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ASCIIText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-blurtext-ts-tw",
@@ -7186,7 +7371,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#BlurText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-circulartext-ts-tw",
@@ -7225,7 +7411,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#CircularText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-counter-ts-tw",
@@ -7264,7 +7451,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Counter"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-text-decryptedtext-ts-tw",
@@ -7303,7 +7491,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DecryptedText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-depthtext-ts-tw",
@@ -7339,7 +7528,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#DepthText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-text-echotext-ts-tw",
@@ -7375,7 +7565,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#EchoText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-text-fallingtext-ts-tw",
@@ -7413,7 +7604,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FallingText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-foldtext-ts-tw",
@@ -7452,7 +7644,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FoldText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-text-fuzzytext-ts-tw",
@@ -7488,7 +7681,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#FuzzyText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 72
     },
     {
       "id": "reactbits-text-glitchtext-ts-tw",
@@ -7524,7 +7718,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GlitchText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 72
     },
     {
       "id": "reactbits-text-gradienttext-ts-tw",
@@ -7563,7 +7758,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#GradientText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-hyperspeed-ts-tw",
@@ -7603,7 +7799,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Hyperspeed"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-letterglitch-ts-tw",
@@ -7639,7 +7836,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#LetterGlitch"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 72
     },
     {
       "id": "reactbits-text-particletext-ts-tw",
@@ -7675,7 +7873,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ParticleText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-text-rotatingtext-ts-tw",
@@ -7714,7 +7913,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#RotatingText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-scrambledtext-ts-tw",
@@ -7753,7 +7953,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ScrambledText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-shinytext-ts-tw",
@@ -7792,7 +7993,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#ShinyText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-shuffle-ts-tw",
@@ -7832,7 +8034,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#Shuffle"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-splitflaptext-ts-tw",
@@ -7868,7 +8071,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SplitFlapText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-text-splittext-ts-tw",
@@ -7908,7 +8112,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#SplitText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-stickerpeel-ts-tw",
@@ -7947,7 +8152,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#StickerPeel"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-stroketext-ts-tw",
@@ -7986,7 +8192,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#StrokeText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-techtext-ts-tw",
@@ -8022,7 +8229,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#TechText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-text-textcursor-ts-tw",
@@ -8061,7 +8269,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#TextCursor"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-textloop-ts-tw",
@@ -8100,7 +8309,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#TextLoop"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 69
     },
     {
       "id": "reactbits-text-textpressure-ts-tw",
@@ -8136,7 +8346,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#TextPressure"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 77
     },
     {
       "id": "reactbits-text-texttype-ts-tw",
@@ -8175,7 +8386,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#TextType"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     },
     {
       "id": "reactbits-text-warptext-ts-tw",
@@ -8214,7 +8426,8 @@
       "manual_steps": [
         "Or copy the source from https://reactbits.dev/get-started/index#WarpText"
       ],
-      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves."
+      "limits": "MIT + Commons Clause: free in apps, sites and products; do not resell the components themselves.",
+      "quality": 74
     }
   ]
 }

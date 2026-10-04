@@ -77,9 +77,11 @@ async function main() {
   const results = await mapLimit(TAGS, 5, fetchTag);
   const entries = [];
   for (const { tag, items } of results) {
-    const category = TAG_CATEGORY[tag] ?? 'blocks-sections';
+    const tagCategory = TAG_CATEGORY[tag] ?? 'blocks-sections';
     if (items.length === 0) console.log(`21stdev: tag "${tag}" returned no items`);
     for (const item of items) {
+      // Components are listed under several tags (heroes under 'cta', pricing under 'cta'): trust a clear name over the tag.
+      const category = /(^|[^a-z])hero([^a-z]|$)/i.test(item.name) ? 'hero' : /pricing/i.test(item.name) ? 'pricing' : tagCategory;
       const authorSlug = (item.pageUrl.match(/21st\.dev\/@([^/]+)/) ?? [])[1] ?? slugify(item.author);
       const license = KNOWN_MIT_AUTHORS.has(authorSlug) || KNOWN_MIT_AUTHORS.has(item.author) ? 'MIT' : 'unknown';
       entries.push(

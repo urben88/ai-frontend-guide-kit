@@ -29,6 +29,11 @@ const SOURCE_SCRIPTS = {
   animateui: ['extract/registry-extra.mjs', 'animateui'],
   cultui: ['extract/registry-extra.mjs', 'cultui'],
   reactbits: ['extract/registry-extra.mjs', 'reactbits'],
+  shadcnvue: ['extract/registry-frameworks.mjs', 'vue'],
+  shadcnsvelte: ['extract/registry-frameworks.mjs', 'svelte'],
+  mantine: ['extract/ui-libraries.mjs', 'mantine'],
+  baseui: ['extract/ui-libraries.mjs', 'baseui'],
+  reactaria: ['extract/ui-libraries.mjs', 'reactaria'],
 };
 
 function run(scriptRelativePath, extraArgs = []) {

@@ -8,6 +8,7 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, SOURCES_DIR, MANIFEST_DIR, TODAY } from './extract/lib.mjs';
+import { applyQuality } from './quality.mjs';
 
 function loadSources() {
   if (!existsSync(SOURCES_DIR)) throw new Error('manifest/sources/ does not exist');
@@ -18,6 +19,7 @@ function loadSources() {
 }
 
 function main() {
+  console.log(`quality: scored ${applyQuality()} entries`);
   const schema = JSON.parse(readFileSync(join(MANIFEST_DIR, 'schema.json'), 'utf8'));
   const taxonomy = schema.$defs.category.enum;
   const sources = loadSources();

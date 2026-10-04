@@ -140,5 +140,11 @@ Fresh `create-next-app` (Next.js 16.3.8, Tailwind v4, `--src-dir`) with shadcn/u
 - **Ref-only memory E2E**: `memory.mjs add --screen experience --block reference --decision adapt --ref "reference:stripe-dashboard"` and the documented `--decision adapt --ref "direction:exp-archetype-monitor"` both recorded without `--id` in a temp output dir; `SUMMARY.md` shows the ref in its column; `memory.mjs add --decision reuse` without id/ref still exits 1 with the updated message; `combo save discovery-test` snapshotted the 2 ref-only decisions. ✔
 - **Packaging**: `tools/build-kit.mjs` verifies **33 required assets** (adds `experience/DISCOVERY-LOOP.md`), experience manifest OK (106 entries, unique ids, required fields) and catalog coherent with `manifest/`; `node tools/validate.mjs` OK (16 sources, 2,470 entries); `openspec validate add-discovery-loop --strict` valid; `openspec validate --all` 8 passed / 0 failed. ✔
 
+## 2026-10-04 · Catalog growth, quality ranking, tests and CI
 
-
+- **Sources**: 25 files, 3,731 entries (adds Kibo UI, Animate UI, cult/ui, React Bits, shadcn-vue, shadcn-svelte, Mantine, Base UI, React Aria Components); demo/icon noise removed (Animate UI demos, cult/ui `-demo` items) after a link check found 404 docs pages. `node tools/validate.mjs` → OK.
+- **Licenses**: `tools/check-licenses.mjs` cross-checks each repo LICENSE; Kibo UI resolved to MIT; coss is an accepted divergence (components MIT, repo root AGPL). Report: `catalog/license-report.md`.
+- **Ranking**: every entry has `quality` (0-100); `find` ranks by quality/relevance, collapses cross-source duplicates and hides icons; `--source` bug fixed.
+- **Audits**: `audit-honesty`, `audit-a11y`, `audit-perf` added to the kit; `09-VERIFY` sections 4-6.
+- **Tests**: `npm test` → 23 passing (find/get/quality, installer idempotency, memory, audits, license classifier, experience manifest, walkthrough example). CI: `.github/workflows/ci.yml`; monthly `refresh.yml` (PR) and `links.yml`.
+- **Links**: stratified check (`validate --urls 176`) → 0 broken in new sources after fixes; remaining broken: 1 HyperUI page and 2 external DSR pages (upstream); 403s are bot protection (Uiverse, DSR).

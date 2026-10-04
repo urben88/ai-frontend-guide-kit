@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Schema, fixtures and index consistency
+        run: |
+          node tools/validate.mjs --fixtures
+          node tools/validate.mjs
+      - name: Category audit (strict)
+        run: node tools/audit-categories.mjs --strict
+      - name: Rebuild index and kit (catches generator regressions; staleness is checked by the tests)
+        run: |
+          node tools/build-index.mjs
+          node tools/build-kit.mjs
+      - name: Tests
+        run: npm test
+      - name: Package dry run
+        run: npm pack --dry-run

@@ -48,7 +48,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 37
     },
     {
       "id": "dsr-design-system-ant-design-x",
@@ -85,7 +86,8 @@
         "Figma kit: https://www.figma.com/community/file/1501193060829090060/ant-design-x-community-design-system-for-ai-products"
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-apps-sdk-ui",
@@ -123,7 +125,8 @@
         "Figma kit: https://www.figma.com/community/file/1560064615791108827/apps-in-chatgpt-components-templates"
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-atlassian-design-system",
@@ -159,7 +162,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-backbase-design-system",
@@ -195,7 +199,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-blade-design-system",
@@ -233,7 +238,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 37
     },
     {
       "id": "dsr-design-system-canvas-design-system",
@@ -269,7 +275,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-carbon-design-system",
@@ -305,7 +312,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-chakra-ui-pro",
@@ -344,7 +352,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-claude-ai-unofficial",
@@ -382,7 +391,8 @@
         "Figma kit: https://www.figma.com/community/file/1445575023384366559"
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-claude-mcp-apps",
@@ -422,7 +432,8 @@
         "Figma kit: https://www.figma.com/community/file/1597641111449594397/mcp-apps-for-claude"
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 37
     },
     {
       "id": "dsr-design-system-cloudscape-design-system",
@@ -459,7 +470,8 @@
         "Figma kit: https://www.figma.com/community/file/1585292872561164967/cds-component-library-2-0-3"
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-content-design-system",
@@ -495,7 +507,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-dialtone",
@@ -532,7 +545,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-ethos-design-system",
@@ -568,7 +582,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-fury-design-system",
@@ -605,7 +620,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 37
     },
     {
       "id": "dsr-design-system-geist-design-system",
@@ -642,7 +658,8 @@
         "Figma kit: https://www.figma.com/community/file/1555856339129556457/ai-elements-vercel"
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-gemini",
@@ -677,7 +694,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-horizon-design-system",
@@ -713,7 +731,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-lightning-design-system",
@@ -751,7 +770,8 @@
         "Figma kit: https://www.figma.com/community/file/1478970084463860424/slds-2-pattern-agentic-experiences"
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 37
     },
     {
       "id": "dsr-design-system-pajamas-design-system",
@@ -787,7 +807,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-patternfly-design-system",
@@ -823,7 +844,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-seeds-design-system",
@@ -861,7 +883,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 37
     },
     {
       "id": "dsr-design-system-shadcn-ui",
@@ -899,7 +922,8 @@
         "Figma kit: https://shadcnstudio.com/figma"
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-soul-design-system",
@@ -935,7 +959,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     },
     {
       "id": "dsr-design-system-vibe-design-system",
@@ -973,7 +998,8 @@
         "Look for a Figma kit or token export on the system site."
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
-      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit)."
+      "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
+      "quality": 32
     }
   ]
 }

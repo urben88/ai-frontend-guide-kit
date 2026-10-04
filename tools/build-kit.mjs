@@ -8,12 +8,13 @@
 import { cpSync, rmSync, mkdirSync, existsSync, readFileSync, statSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { ROOT, MANIFEST_DIR } from './extract/lib.mjs';
 
 const KIT_DIR = join(ROOT, 'ai-frontend-guide-kit');
 const CATALOG_DIR = join(KIT_DIR, 'catalog');
 
-const CATALOG_FILES = ['component-manifest.json', 'component-manifest.md', 'taxonomy.md', 'install-guides.md', 'schema.json'];
+const CATALOG_FILES = ['component-manifest.json', 'component-manifest.md', 'taxonomy.md', 'install-guides.md', 'schema.json', 'license-report.md'];
 const REQUIRED_KIT_FILES = [
   'AGENTS.md',
   'README.md',
@@ -44,10 +45,15 @@ const REQUIRED_KIT_FILES = [
   'tools/memory.mjs',
   'tools/context.mjs',
   'tools/excalidraw-mcp.mjs',
+  'tools/audit-honesty.mjs',
+  'tools/audit-a11y.mjs',
+  'tools/audit-perf.mjs',
   'catalog/component-manifest.json',
   'catalog/taxonomy.md',
   'catalog/install-guides.md',
   'catalog/schema.json',
+  'catalog/license-report.md',
+  'catalog/explorer.html',
 ];
 
 const FLOW_SKILLS = [
@@ -128,6 +134,11 @@ function main() {
     cpSync(join(MANIFEST_DIR, file), join(CATALOG_DIR, file));
   }
   cpSync(join(MANIFEST_DIR, 'sources'), join(CATALOG_DIR, 'sources'), { recursive: true });
+  const explorer = spawnSync(process.execPath, [join(ROOT, 'tools', 'build-explorer.mjs')], { stdio: 'inherit' });
+  if (explorer.status !== 0) {
+    console.error('Kit build FAILED. build-explorer.mjs errored.');
+    process.exit(1);
+  }
 
   const missing = REQUIRED_KIT_FILES.filter((file) => !existsSync(join(KIT_DIR, file)));
   if (missing.length > 0) {

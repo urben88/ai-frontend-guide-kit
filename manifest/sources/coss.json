@@ -44,7 +44,8 @@
       "registry_url": "https://coss.com/ui/r/avatar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/avatar",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-data-display-badge",
@@ -77,7 +78,8 @@
       "registry_url": "https://coss.com/ui/r/badge.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/badge",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-data-display-card",
@@ -110,7 +112,8 @@
       "registry_url": "https://coss.com/ui/r/card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/card",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-data-display-kbd",
@@ -143,7 +146,8 @@
       "registry_url": "https://coss.com/ui/r/kbd.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/kbd",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-data-display-table",
@@ -176,7 +180,8 @@
       "registry_url": "https://coss.com/ui/r/table.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/table",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-feedback-alert",
@@ -209,7 +214,8 @@
       "registry_url": "https://coss.com/ui/r/alert.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/alert",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-feedback-progress",
@@ -242,7 +248,8 @@
       "registry_url": "https://coss.com/ui/r/progress.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/progress",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-feedback-skeleton",
@@ -275,7 +282,8 @@
       "registry_url": "https://coss.com/ui/r/skeleton.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/skeleton",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-feedback-spinner",
@@ -308,7 +316,8 @@
       "registry_url": "https://coss.com/ui/r/spinner.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/spinner",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-feedback-toast",
@@ -341,7 +350,8 @@
       "registry_url": "https://coss.com/ui/r/toast.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/toast",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-feedback-tooltip",
@@ -374,7 +384,8 @@
       "registry_url": "https://coss.com/ui/r/tooltip.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/tooltip",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-calendar",
@@ -409,7 +420,8 @@
       "registry_url": "https://coss.com/ui/r/calendar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/calendar",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 87
     },
     {
       "id": "coss-forms-checkbox",
@@ -442,7 +454,8 @@
       "registry_url": "https://coss.com/ui/r/checkbox.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/checkbox",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-checkbox-group",
@@ -476,7 +489,8 @@
       "registry_url": "https://coss.com/ui/r/checkbox-group.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/checkbox-group",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-combobox",
@@ -509,7 +523,8 @@
       "registry_url": "https://coss.com/ui/r/combobox.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/combobox",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-field",
@@ -542,7 +557,8 @@
       "registry_url": "https://coss.com/ui/r/field.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/field",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-fieldset",
@@ -575,7 +591,8 @@
       "registry_url": "https://coss.com/ui/r/fieldset.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/fieldset",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-form",
@@ -608,7 +625,8 @@
       "registry_url": "https://coss.com/ui/r/form.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/form",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-input",
@@ -641,7 +659,8 @@
       "registry_url": "https://coss.com/ui/r/input.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/input",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-input-group",
@@ -675,7 +694,8 @@
       "registry_url": "https://coss.com/ui/r/input-group.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/input-group",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-label",
@@ -708,7 +728,8 @@
       "registry_url": "https://coss.com/ui/r/label.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/label",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-number-field",
@@ -742,7 +763,8 @@
       "registry_url": "https://coss.com/ui/r/number-field.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/number-field",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-otp-field",
@@ -776,7 +798,8 @@
       "registry_url": "https://coss.com/ui/r/otp-field.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/otp-field",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-radio-group",
@@ -810,7 +833,8 @@
       "registry_url": "https://coss.com/ui/r/radio-group.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/radio-group",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-select",
@@ -843,7 +867,8 @@
       "registry_url": "https://coss.com/ui/r/select.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/select",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-slider",
@@ -876,7 +901,8 @@
       "registry_url": "https://coss.com/ui/r/slider.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/slider",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-switch",
@@ -909,7 +935,8 @@
       "registry_url": "https://coss.com/ui/r/switch.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/switch",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-textarea",
@@ -942,7 +969,8 @@
       "registry_url": "https://coss.com/ui/r/textarea.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/textarea",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-toggle",
@@ -975,7 +1003,8 @@
       "registry_url": "https://coss.com/ui/r/toggle.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/toggle",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-forms-toggle-group",
@@ -1009,7 +1038,8 @@
       "registry_url": "https://coss.com/ui/r/toggle-group.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/toggle-group",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-layout-empty",
@@ -1042,7 +1072,8 @@
       "registry_url": "https://coss.com/ui/r/empty.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/empty",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-layout-scroll-area",
@@ -1076,7 +1107,8 @@
       "registry_url": "https://coss.com/ui/r/scroll-area.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/scroll-area",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-layout-separator",
@@ -1109,7 +1141,8 @@
       "registry_url": "https://coss.com/ui/r/separator.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/separator",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-micro-interactions-accordion",
@@ -1142,7 +1175,8 @@
       "registry_url": "https://coss.com/ui/r/accordion.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/accordion",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-micro-interactions-autocomplete",
@@ -1175,7 +1209,8 @@
       "registry_url": "https://coss.com/ui/r/autocomplete.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/autocomplete",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-micro-interactions-button",
@@ -1208,7 +1243,8 @@
       "registry_url": "https://coss.com/ui/r/button.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/button",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-micro-interactions-collapsible",
@@ -1241,7 +1277,8 @@
       "registry_url": "https://coss.com/ui/r/collapsible.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/collapsible",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-micro-interactions-fonts",
@@ -1274,7 +1311,8 @@
       "registry_url": "https://coss.com/ui/r/fonts.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/fonts",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-micro-interactions-frame",
@@ -1307,7 +1345,8 @@
       "registry_url": "https://coss.com/ui/r/frame.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/frame",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-micro-interactions-group",
@@ -1340,7 +1379,8 @@
       "registry_url": "https://coss.com/ui/r/group.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/group",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-micro-interactions-meter",
@@ -1373,7 +1413,8 @@
       "registry_url": "https://coss.com/ui/r/meter.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/meter",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-micro-interactions-preview-card",
@@ -1407,7 +1448,8 @@
       "registry_url": "https://coss.com/ui/r/preview-card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/preview-card",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-micro-interactions-toolbar",
@@ -1440,7 +1482,8 @@
       "registry_url": "https://coss.com/ui/r/toolbar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/toolbar",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-navigation-breadcrumb",
@@ -1473,7 +1516,8 @@
       "registry_url": "https://coss.com/ui/r/breadcrumb.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/breadcrumb",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-navigation-menu",
@@ -1506,7 +1550,8 @@
       "registry_url": "https://coss.com/ui/r/menu.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/menu",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-navigation-pagination",
@@ -1539,7 +1584,8 @@
       "registry_url": "https://coss.com/ui/r/pagination.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/pagination",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-navigation-sidebar",
@@ -1572,7 +1618,8 @@
       "registry_url": "https://coss.com/ui/r/sidebar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/sidebar",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-navigation-tabs",
@@ -1605,7 +1652,8 @@
       "registry_url": "https://coss.com/ui/r/tabs.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/tabs",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-overlay-alert-dialog",
@@ -1639,7 +1687,8 @@
       "registry_url": "https://coss.com/ui/r/alert-dialog.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/alert-dialog",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-overlay-command",
@@ -1672,7 +1721,8 @@
       "registry_url": "https://coss.com/ui/r/command.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/command",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-overlay-context-menu",
@@ -1706,7 +1756,8 @@
       "registry_url": "https://coss.com/ui/r/context-menu.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/context-menu",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-overlay-dialog",
@@ -1739,7 +1790,8 @@
       "registry_url": "https://coss.com/ui/r/dialog.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/dialog",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-overlay-drawer",
@@ -1772,7 +1824,8 @@
       "registry_url": "https://coss.com/ui/r/drawer.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/drawer",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-overlay-popover",
@@ -1805,7 +1858,8 @@
       "registry_url": "https://coss.com/ui/r/popover.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/popover",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "coss-overlay-sheet",
@@ -1838,7 +1892,8 @@
       "registry_url": "https://coss.com/ui/r/sheet.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add @coss/sheet",
-      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL."
+      "extraction_note": "MIT applies to the component directories (apps/ui, apps/origin); the rest of the coss repo is AGPL.",
+      "quality": 90
     },
     {
       "id": "origin-data-display-avatar",
@@ -1870,7 +1925,8 @@
       "registry_url": "https://coss.com/origin/r/avatar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/avatar.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-data-display-badge",
@@ -1902,7 +1958,8 @@
       "registry_url": "https://coss.com/origin/r/badge.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/badge.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-data-display-table",
@@ -1934,7 +1991,8 @@
       "registry_url": "https://coss.com/origin/r/table.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/table.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-data-display-timeline",
@@ -1966,7 +2024,8 @@
       "registry_url": "https://coss.com/origin/r/timeline.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/timeline.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-feedback-tooltip",
@@ -1998,7 +2057,8 @@
       "registry_url": "https://coss.com/origin/r/tooltip.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/tooltip.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-forms-calendar",
@@ -2030,7 +2090,8 @@
       "registry_url": "https://coss.com/origin/r/calendar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/calendar.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-forms-checkbox",
@@ -2062,7 +2123,8 @@
       "registry_url": "https://coss.com/origin/r/checkbox.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/checkbox.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-forms-input",
@@ -2094,7 +2156,8 @@
       "registry_url": "https://coss.com/origin/r/input.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/input.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-forms-select",
@@ -2126,7 +2189,8 @@
       "registry_url": "https://coss.com/origin/r/select.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/select.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-forms-slider",
@@ -2158,7 +2222,8 @@
       "registry_url": "https://coss.com/origin/r/slider.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/slider.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-forms-switch",
@@ -2190,7 +2255,8 @@
       "registry_url": "https://coss.com/origin/r/switch.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/switch.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-forms-textarea",
@@ -2222,7 +2288,8 @@
       "registry_url": "https://coss.com/origin/r/textarea.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/textarea.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-micro-interactions-accordion",
@@ -2254,7 +2321,8 @@
       "registry_url": "https://coss.com/origin/r/accordion.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/accordion.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-micro-interactions-button",
@@ -2286,7 +2354,8 @@
       "registry_url": "https://coss.com/origin/r/button.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/button.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-micro-interactions-tree",
@@ -2318,7 +2387,8 @@
       "registry_url": "https://coss.com/origin/r/tree.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/tree.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-navigation-breadcrumb",
@@ -2350,7 +2420,8 @@
       "registry_url": "https://coss.com/origin/r/breadcrumb.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/breadcrumb.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-navigation-pagination",
@@ -2382,7 +2453,8 @@
       "registry_url": "https://coss.com/origin/r/pagination.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/pagination.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-navigation-stepper",
@@ -2414,7 +2486,8 @@
       "registry_url": "https://coss.com/origin/r/stepper.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/stepper.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-navigation-tabs",
@@ -2446,7 +2519,8 @@
       "registry_url": "https://coss.com/origin/r/tabs.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/tabs.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-overlay-dialog",
@@ -2478,7 +2552,8 @@
       "registry_url": "https://coss.com/origin/r/dialog.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/dialog.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     },
     {
       "id": "origin-overlay-popover",
@@ -2510,7 +2585,8 @@
       "registry_url": "https://coss.com/origin/r/popover.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add https://coss.com/origin/r/popover.json",
-      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin"
+      "extraction_note": "Legacy Origin UI is a frozen snapshot superseded by coss ui; browse all variants at https://coss.com/origin",
+      "quality": 90
     }
   ]
 }

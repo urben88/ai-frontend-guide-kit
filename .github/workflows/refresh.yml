@@ -1,0 +1,45 @@
+name: Monthly catalog refresh
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Re-extract every source (network)
+        run: node tools/refresh.mjs
+      - name: Re-check licenses
+        run: node tools/check-licenses.mjs
+      - name: Rebuild index, quality scores and kit
+        run: |
+          node tools/build-index.mjs
+          node tools/build-kit.mjs
+      - name: Validate and test
+        run: |
+          node tools/validate.mjs
+          npm test
+      - name: Open a pull request with the diff
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/catalog-refresh
+          commit-message: 'chore: monthly catalog refresh'
+          title: 'chore: monthly catalog refresh'
+          body: |
+            Automated refresh of all catalog sources.
+
+            Review before merging:
+            - new / removed entries per source (`git diff --stat manifest/sources`)
+            - `manifest/license-report.md` for MISMATCH or unresolved rows
+            - license changes in sources that were MIT
+          labels: catalog

@@ -53,7 +53,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/code-block"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 87
     },
     {
       "id": "aicss-ai-surfaces-comparison-table",
@@ -95,7 +96,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/comparison-table"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 82
     },
     {
       "id": "aicss-ai-surfaces-data-table",
@@ -137,7 +139,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/data-table"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 82
     },
     {
       "id": "aicss-ai-surfaces-file-diff",
@@ -179,7 +182,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/file-diff"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 87
     },
     {
       "id": "aicss-ai-surfaces-inline-citations",
@@ -221,7 +225,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/inline-citations"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 82
     },
     {
       "id": "aicss-ai-surfaces-message-actions",
@@ -263,7 +268,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/message-actions"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 87
     },
     {
       "id": "aicss-ai-surfaces-orbs",
@@ -304,7 +310,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/orbs"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 87
     },
     {
       "id": "aicss-ai-surfaces-reasoning-effort",
@@ -346,7 +353,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/reasoning-effort"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 87
     },
     {
       "id": "aicss-ai-surfaces-secure-input",
@@ -388,7 +396,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/secure-input"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 87
     },
     {
       "id": "aicss-ai-surfaces-streaming-text",
@@ -430,7 +439,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/streaming-text"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 82
     },
     {
       "id": "aicss-ai-surfaces-text-response",
@@ -472,7 +482,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/text-response"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 87
     },
     {
       "id": "aicss-ai-surfaces-thinking-reasoning",
@@ -514,7 +525,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/thinking-reasoning"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 87
     },
     {
       "id": "aicss-ai-surfaces-thinking-state",
@@ -556,7 +568,8 @@
         "Or copy the React/Vue/Svelte code from https://www.aicss.dev/components/thinking-state"
       ],
       "limits": "The 5 Pro components ($89 Personal / $299 Enterprise, one-time) are excluded from this catalog; do not reconstruct their source.",
-      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt."
+      "extraction_note": "Indexed from llms.txt, the channel explicitly allowed for AI assistants; /r/ endpoints are disallowed for named AI bots in robots.txt.",
+      "quality": 87
     }
   ]
 }

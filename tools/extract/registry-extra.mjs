@@ -1,6 +1,6 @@
 /**
  * Extraction: registry-json channel, second batch of shadcn-compatible registries.
- * Sources: Kibo UI (free, license not stated), Animate UI (MIT + Commons Clause),
+ * Sources: Kibo UI (MIT), Animate UI (MIT + Commons Clause),
  *          cult/ui (MIT), React Bits (MIT + Commons Clause).
  *
  * Usage: node tools/extract/registry-extra.mjs [kibo|animateui|cultui|reactbits|all]
@@ -34,7 +34,7 @@ function mapItems(items, cfg) {
         id: `${cfg.prefix}-${category}-${slugify(item.name)}`,
         name: `${cfg.label} ${display}`,
         source: cfg.label,
-        entryType: item.type === 'registry:block' ? 'block' : 'component',
+        entryType: cfg.entryTypeOf?.(item) ?? (item.type === 'registry:block' ? 'block' : 'component'),
         category,
         description: truncate(item.description ?? `${display} from ${cfg.label}.`),
         useCase: USE_BY_CATEGORY[category],
@@ -79,14 +79,13 @@ async function kibo() {
       registryUrl: (n) => `https://www.kibo-ui.com/r/${n}.json`,
       stack: reactStack,
       install: (n) => `npx shadcn@latest add https://www.kibo-ui.com/r/${n}.json`,
-      licenseType: 'unknown',
-      limits: 'Site states "free and open source" but no SPDX license was found in the repo; confirm the license before shipping to clients.',
+      licenseType: 'MIT',
     },
     {
       sourceName: 'Kibo UI',
       sourceUrl: 'https://www.kibo-ui.com',
       catalogUrl: 'https://www.kibo-ui.com/components',
-      licenseSummary: 'Free and open source per site; SPDX license not published — verify before commercial use',
+      licenseSummary: 'MIT (verified from the shadcnblocks/kibo repo license.md)',
       granularity: 'complete (all registry:ui items)',
     },
   );
@@ -100,11 +99,17 @@ async function animateui() {
       prefix: 'animateui',
       label: 'Animate UI',
       types: new Set(['registry:ui']),
-      skip: /^(index|utils)$/,
+      skip: /^(index|utils|demo-)/,
       categoryOf: (item) => (/^icons-/.test(item.name) ? 'micro-interactions' : undefined),
+      entryTypeOf: (item) => (/^icons-/.test(item.name) ? 'icon' : undefined),
       fallback: 'micro-interactions',
       hints: ['Animated shadcn-style primitives (Radix/Base UI variants) built on Motion'],
-      docsUrl: (n) => `https://animate-ui.com/docs/components/${n}`,
+      docsUrl: (n) => {
+        // registry names are '<kind>-<group>-<name>' while docs paths are /docs/<kind>/<group>/<name>; icons share one page.
+        const m = n.match(/^(components|primitives)-([a-z]+)-(.+)$/);
+        if (m) return `https://animate-ui.com/docs/${m[1]}/${m[2]}/${m[3]}`;
+        return n.startsWith('icons-') ? 'https://animate-ui.com/docs/icons' : `https://animate-ui.com/docs/components/${n}`;
+      },
       registryUrl: (n) => `https://animate-ui.com/r/${n}.json`,
       stack: () => ['react', 'tailwind', 'motion'],
       install: (n) => `npx shadcn@latest add https://animate-ui.com/r/${n}.json`,
@@ -129,6 +134,7 @@ async function cultui() {
       prefix: 'cultui',
       label: 'cult/ui',
       types: new Set(['registry:ui', 'registry:component']),
+      skip: /-demo$/,
       fallback: 'micro-interactions',
       hints: ['Opinionated animated and AI-oriented components for shadcn projects'],
       docsUrl: (n) => `https://www.cult-ui.com/docs/components/${n}`,
