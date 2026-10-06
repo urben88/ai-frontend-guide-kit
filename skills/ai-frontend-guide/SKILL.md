@@ -41,6 +41,7 @@ Ask the user what they want before touching code and declare the route: new fron
 | 2 · Composition | `04-INVENTORY.md` … `07-ADAPT.md` | inventory, shortlist, reuse/adapt/build + install, adapted components |
 | 3 · Total polish | `frontend-polish` skill + `08-PHILOSOPHY.md`, `09-VERIFY.md` | audits + Playwright MCP loop + E2E/visual checks green |
 | Iterate | `10-ITERATE.md` | small changes and custom additions |
+| Visual feedback (optional, React) | `11-VISUAL-FEEDBACK.md` | the user clicks elements in the browser (Agentation MCP); the agent changes exactly those |
 
 ## Experience direction first (guide 01)
 
@@ -74,7 +75,7 @@ The UI inventory and memory `--screen/--block` names come from `UX-SPEC.md`.
 
 ## Total polish (phase 3)
 
-Before closing a screen, run the sibling skill `frontend-polish` when installed: external audits (`impeccable`, taste-skill, emilkowalski) if available, the Playwright MCP loop (states, console, accessibility, keyboard, reduced motion, responsive) and the closing `@playwright/test` regression of `09-VERIFY`. Fallback without tools: the distilled checklist of `08-PHILOSOPHY`.
+Before closing a screen, run the sibling skill `frontend-polish` when installed: external audits (`impeccable`, taste-skill, emilkowalski) if available, the Playwright MCP loop (states, console, accessibility, keyboard, reduced motion, responsive) and the closing `@playwright/test` regression of `09-VERIFY`. Fallback without tools: the distilled checklist of `08-PHILOSOPHY`. In React projects, offer the optional human round (the user points at elements with Agentation; see `11-VISUAL-FEEDBACK.md`, which holds the install message) during composition for fine tweaks or at the end of polish.
 
 ## Query the catalog (do this before writing components)
 

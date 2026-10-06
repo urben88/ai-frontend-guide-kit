@@ -30,6 +30,7 @@ const REQUIRED_KIT_FILES = [
   'guides/08-PHILOSOPHY.md',
   'guides/09-VERIFY.md',
   'guides/10-ITERATE.md',
+  'guides/11-VISUAL-FEEDBACK.md',
   'experience/EXPERIENCE-DIRECTION.md',
   'experience/QUESTION-BANK.md',
   'experience/SITE-ARCHETYPES.md',

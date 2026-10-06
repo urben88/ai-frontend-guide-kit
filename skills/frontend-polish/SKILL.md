@@ -1,6 +1,6 @@
 ---
 name: frontend-polish
-description: "Use when the user asks to polish, refine, QA or do a final visual review of frontend UI (\"pulir\", \"polish\", \"revisión final\", \"QA visual\", \"dejar impecable\", \"revisar el diseño\", \"dar el último pase\"). Runs the total polish loop: audits with the external design skills when installed (impeccable, taste-skill, emilkowalski), an interactive pass with Playwright MCP over states, console, accessibility, keyboard and reduced motion, exact fixes, and a closing @playwright/test regression. Works with fallbacks when those tools are missing."
+description: "Use when the user asks to polish, refine, QA or do a final visual review of frontend UI (\"pulir\", \"polish\", \"revisión final\", \"QA visual\", \"dejar impecable\", \"revisar el diseño\", \"dar el último pase\"). Runs the total polish loop: audits with the external design skills when installed (impeccable, taste-skill, emilkowalski), an interactive pass with Playwright MCP over states, console, accessibility, keyboard and reduced motion, exact fixes, a closing @playwright/test regression, and an optional human round where the user points at elements in the browser (Agentation MCP, React). Works with fallbacks when those tools are missing."
 ---
 
 # Frontend Polish — total finish pass
@@ -53,6 +53,10 @@ Close with `guides/09-VERIFY.md`:
 
 - `npx playwright test` — critical funnel E2E + visual snapshots for the polished states.
 - Red test = not done; fix the exact reported issue and re-run the full suite.
+
+## Step 3b — Human round with Agentation (optional)
+
+Offer it when the project is React and the user wants to point at specifics. If the `agentation` MCP tools are available, follow the agent loop of `guides/11-VISUAL-FEEDBACK.md` (watch → acknowledge → smallest change → re-check → resolve), then re-run the Step 3 gate. If they are not, give the user the install message from that guide (`npm install agentation -D`, `claude mcp add agentation -- npx -y agentation-mcp server`, `npx agentation-mcp doctor`, `<Agentation endpoint="http://localhost:4747" />` in dev only) and continue; never block the pass on it.
 
 ## Step 4 — Close
 

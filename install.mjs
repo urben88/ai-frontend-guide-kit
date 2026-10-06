@@ -113,6 +113,7 @@ What it does:
   5. Configures the Playwright + Excalidraw MCP servers for detected harnesses (.claude/ -> .mcp.json,
      opencode.json -> mcp.playwright + mcp.excalidraw); the Excalidraw server is the local,
      dependency-free one shipped in the kit (offline). Prints instructions otherwise (--no-mcp to skip).
+     It also prints the optional Agentation install message (point-and-change on React apps; not auto-installed).
   6. Checks Python/Laya; with --with-laya installs it and verifies.
 `);
 }
@@ -225,6 +226,14 @@ function mergeMissingServers(container, defs) {
   return missing;
 }
 
+function printAgentationHint() {
+  console.log('- Optional (React projects) — Agentation: click an element in the browser and tell the agent exactly what to change. Not installed automatically:');
+  console.log('    npm install agentation -D');
+  console.log('    claude mcp add agentation -- npx -y agentation-mcp server     (Windows fallback: ... -- cmd /c npx -y agentation-mcp server)');
+  console.log('    npx agentation-mcp doctor');
+  console.log('    mount <Agentation endpoint="http://localhost:4747" /> in the app root, development only. See guides/11-VISUAL-FEEDBACK.md');
+}
+
 function setupMcp(target) {
   let detected = false;
   let configured = false;
@@ -290,6 +299,7 @@ function setupMcp(target) {
   if (!detected) printMcpInstructions();
   if (!configured && detected) console.log('  Add the missing servers manually as shown above.');
   console.log('- Playwright MCP: install the browser once before the polish phase: npx playwright install chromium');
+  printAgentationHint();
 }
 
 function findPython() {

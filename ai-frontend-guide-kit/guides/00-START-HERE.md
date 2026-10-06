@@ -31,6 +31,7 @@ Phase 1 starts with the **experience direction** (`01`): adaptive questions guid
 | Small change to an existing UI | `10-ITERATE.md` (do not repeat the UX phase) |
 | Custom component / new feature | `10-ITERATE.md`: combinations → `find`/`get` → build with `08` → polish |
 | Polish only / visual QA | Phase 3: `frontend-polish` + `09-VERIFY` |
+| Specific visual tweaks the user wants to point at in the browser (React) | `11-VISUAL-FEEDBACK.md` (Agentation) |
 | UX only / redesign | Phase 1 (`02-UX-FLOWS`); no UI work |
 | Backend/logic only | Not this kit — skip it |
 
@@ -49,6 +50,7 @@ A small new project may compress **1 → 2 → 3** (tokens and philosophy can me
 | `impeccable` / taste-skill (if installed) | — | — | audit + polish |
 | Playwright MCP | reference discovery + extraction | render a block in isolation | visual/BUILD loop |
 | `@playwright/test` (guide 09) | — | — | regression gate |
+| Agentation MCP (guide 11, React, optional) | — | point-and-change on a rendered block | final human round |
 
 Load an external skill only when its description matches what you are doing; if it is not installed, use the distilled rules of `08-PHILOSOPHY.md` and say so.
 

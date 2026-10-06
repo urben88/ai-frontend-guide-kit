@@ -20,7 +20,7 @@ Este repositorio es a la vez la 🏭 **fábrica** (pipeline de extracción + cat
 | | Qué | Detalle |
 |---|---|---|
 | 📚 | **Catálogo** | 34 fuentes verificadas · 4.287 entradas reutilizables · 21 categorías · puntuación de calidad, licencia e instalación por entrada · React, Vue y Svelte · `explorer.html` sin conexión |
-| 🧭 | **Kit guiado** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + flujo de 3 fases en 10 guías cortas (00–10) + herramientas `find`/`get`. Autocontenido: sin build ni dependencias npm |
+| 🧭 | **Kit guiado** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + flujo de 3 fases en 11 guías cortas (00–11) + herramientas `find`/`get`. Autocontenido: sin build ni dependencias npm |
 | 🧠 | **Skills para agentes** | `ai-frontend-guide` (flujo), `frontend-polish` (fase 3), `ux-map` (mapa visual de pantallas) y 16 skills UX incluidas (`userflow` + 15 `flow-*`, MIT) |
 | 💾 | **Memoria de selección** | `ai-frontend-output/`: historial de decisiones (solo añade), resumen de estilos/componentes y combinaciones reutilizables |
 | 🛡️ | **Auditorías** | `audit-honesty` (patrones engañosos), `audit-a11y` (axe + WCAG 2.2), `audit-perf` (Lighthouse frente a Core Web Vitals) en `ai-frontend-guide-kit/tools/` |
@@ -92,6 +92,7 @@ Los resultados se ordenan por **calidad** (claridad de licencia, esfuerzo de ins
 3. 💾 Crea `ai-frontend-output/` (memoria de selección) si falta; nunca se borra en las actualizaciones.
 4. 🧩 Instala las **19 skills de este repo** en `.agents/skills/` (limpio: sin lockfile ni enlaces por todas partes) y, por defecto, las **16 skills de diseño externas** mediante su CLI. Si el proyecto tiene `.claude/`, enlaza las 19 en `.claude/skills/`.
 5. 🎭 Configura los servidores **Playwright + Excalidraw MCP** según el entorno detectado (`.mcp.json` para Claude Code, `opencode.json` para OpenCode) y crea la plantilla `ai-frontend-output/ux/ux-map.excalidraw`; si no, imprime los comandos exactos. Navegador una vez: `npx playwright install chromium`.
+   - 🖱️ **Opcional — Agentation** (clic en un elemento de tu app React y dile al agente exactamente qué cambiar; guía `11-VISUAL-FEEDBACK.md`). El instalador solo imprime el mensaje, no lo instala: `npm install agentation -D`, `claude mcp add agentation -- npx -y agentation-mcp server`, `npx agentation-mcp doctor` y monta `<Agentation endpoint="http://localhost:4747" />` solo en desarrollo.
 6. 🐍 Comprueba Python/Laya e imprime el siguiente paso exacto.
 
 > 💡 Las skills externas necesitan red; si fallan, la instalación continúa y el kit sigue funcionando con `find`/`get`.

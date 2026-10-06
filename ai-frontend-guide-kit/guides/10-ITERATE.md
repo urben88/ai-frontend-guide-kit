@@ -4,7 +4,7 @@ For requests that are **not** a new build: adjusting a block, adding a custom co
 
 ## The minimal loop
 
-1. **Locate.** Find the block in `ai-frontend-output/ux/UX-SPEC.md` (its `--screen`/`--block` names) and its code. If the repo has no UX-SPEC, use the screen/route names as they are.
+1. **Locate.** Find the block in `ai-frontend-output/ux/UX-SPEC.md` (its `--screen`/`--block` names) and its code. If the repo has no UX-SPEC, use the screen/route names as they are. In a React project where the user can click the element in the browser, use `11-VISUAL-FEEDBACK.md` (Agentation) instead of locating it from a text description.
 2. **Reuse first.** Check saved combinations (`node ai-frontend-guide-kit/tools/memory.mjs combo list`) and query the catalog (`find`/`get`). Facts — license, dependencies, install command — always come from `get`.
 3. **Decide.** reuse (install as-is) / adapt (tokens, props) / build (only if nothing fits or the license blocks you; follow `08-PHILOSOPHY.md`).
 4. **Apply.** Make the smallest change that satisfies the request; keep the design tokens and the interaction physics (springs, transform/opacity only, 1–2 high-impact effects per view).

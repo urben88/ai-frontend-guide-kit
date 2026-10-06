@@ -23,7 +23,7 @@ Requirements: none for reading the guides or catalog. The query tools need Node.
 ai-frontend-guide-kit/
 ├── AGENTS.md              # awareness layer: scope, golden rule, navigation
 ├── README.md              # this file (copy + integration instructions)
-├── guides/                # 00-START-HERE (router: intake + 3 phases) … 10-ITERATE (small changes)
+├── guides/                # 00-START-HERE (router: intake + 3 phases) … 10-ITERATE (small changes), 11-VISUAL-FEEDBACK (Agentation)
 ├── experience/            # direction layer: manifest, question bank, archetypes, philosophies,
 │                          # styles, reference protocol, discovery loop, experience-manifest.json, references/
 ├── catalog/

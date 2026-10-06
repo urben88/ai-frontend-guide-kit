@@ -7,7 +7,7 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 - A catalog of **4,287 reusable UI entries** from **34 verified sources** (updated 2026-10-04; ranked by a quality score, with Vue/Svelte ports and icon/illustration/kit resources under the `assets` category), organized in 21 categories.
 - An **experience direction layer** (`experience/`): archetypes, philosophies, styles with limits, an adaptive question bank, reference cards with saved ideas, an interactive discovery loop (`DISCOVERY-LOOP.md`) and a machine-readable `experience-manifest.json` for Laya.
 - Per-entry decision data: what it is, when to use it, where to find it, how to install it and its license constraints.
-- A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–10).
+- A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–11).
 - Two local query tools (`tools/find.mjs`, `tools/get.mjs`) that answer with minimal output, plus a local Excalidraw MCP server (`tools/excalidraw-mcp.mjs`, no dependencies) for the UX map.
 - A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses, plus a total-polish skill (`skills/frontend-polish/SKILL.md`) and a visual map skill (`skills/ux-map/SKILL.md`).
 
@@ -45,6 +45,7 @@ Before touching code, ask the user what they want and declare the route: new fro
 | 2 · Composition | `guides/04-INVENTORY.md` … `guides/07-ADAPT.md` (+ `08` while composing) | inventory, shortlist, reuse/adapt/build + install, adapted components |
 | 3 · Total polish | `frontend-polish` skill + `guides/08-PHILOSOPHY.md` + `guides/09-VERIFY.md` | external audits + Playwright MCP loop + E2E/visual checks green |
 | Iterate | `guides/10-ITERATE.md` | small changes and custom additions without repeating the UX phase |
+| Visual feedback (optional) | `guides/11-VISUAL-FEEDBACK.md` | the user points at elements in the browser (Agentation MCP) and the agent changes exactly those |
 
 ## Query examples
 
@@ -106,6 +107,8 @@ Gate: do not start the UI steps until `EXPERIENCE-BRIEF.md` has the chosen direc
 ## Total polish phase (`frontend-polish` + Playwright MCP)
 
 Before closing any screen, run the `frontend-polish` skill: external audits when installed (impeccable, taste-skill, emilkowalski), the Playwright MCP loop (a11y snapshot, states, console, keyboard, reduced motion, responsive) and the `@playwright/test` regression of `guides/09-VERIFY.md`. The installer configures Playwright MCP for detected harnesses; the browser installs once with `npx playwright install chromium`. Fallback: the checklist in `guides/08-PHILOSOPHY.md`.
+
+Optional human round (React projects): the user can click the elements to change with Agentation; the agent processes the annotations through its MCP (`guides/11-VISUAL-FEEDBACK.md`, which also holds the install message: `npm install agentation -D` + `claude mcp add agentation -- npx -y agentation-mcp server`). Offer it during composition for fine adjustments and at the end of polish; never require it.
 
 ## Selection memory (`ai-frontend-output/`)
 

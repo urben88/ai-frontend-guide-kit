@@ -86,6 +86,19 @@ test('installer is idempotent: second run adds nothing and keeps one AGENTS.md p
   assert.equal(agents.split('ai-frontend-guide-kit/AGENTS.md').length - 1, 1);
 });
 
+test('installer prints the Agentation message (not with --no-mcp) and ships guide 11', () => {
+  const withMcp = mkdtempSync(join(tmpdir(), 'kit-agentation-'));
+  const run = node([join(ROOT, 'install.mjs'), '--target', withMcp, '--no-skills']);
+  assert.equal(run.status, 0, run.stderr);
+  assert.match(run.stdout, /claude mcp add agentation -- npx -y agentation-mcp server/);
+  assert.ok(existsSync(join(withMcp, 'ai-frontend-guide-kit', 'guides', '11-VISUAL-FEEDBACK.md')));
+
+  const noMcp = mkdtempSync(join(tmpdir(), 'kit-agentation-'));
+  const skipped = node([join(ROOT, 'install.mjs'), '--target', noMcp, '--no-skills', '--no-mcp']);
+  assert.equal(skipped.status, 0, skipped.stderr);
+  assert.doesNotMatch(skipped.stdout, /agentation-mcp/);
+});
+
 test('memory tool records and lists a decision', () => {
   const target = mkdtempSync(join(tmpdir(), 'kit-mem-'));
   mkdirSync(join(target, 'out'));
