@@ -86,6 +86,73 @@ test('installer is idempotent: second run adds nothing and keeps one AGENTS.md p
   assert.equal(agents.split('ai-frontend-guide-kit/AGENTS.md').length - 1, 1);
 });
 
+const install = (target) => node([join(ROOT, 'install.mjs'), '--target', target, '--no-skills', '--no-mcp']);
+const count = (text, needle) => text.split(needle).length - 1;
+const MARK = '<!-- ai-frontend-guide-kit:start -->';
+
+test('installer routes every design request (EN + ES) to the kit', () => {
+  const target = mkdtempSync(join(tmpdir(), 'kit-route-'));
+  assert.equal(install(target).status, 0);
+  const agents = readFileSync(join(target, 'AGENTS.md'), 'utf8');
+  assert.equal(count(agents, MARK), 1);
+  for (const word of ['design', 'diseño', 'colores', 'tipografía', 'pantalla', 'landing']) {
+    assert.ok(agents.includes(word), `trigger "${word}" present`);
+  }
+  assert.match(agents, /impeccable/);
+  assert.ok(!existsSync(join(target, 'CLAUDE.md')), 'no CLAUDE.md created when absent');
+});
+
+test('installer upgrades the legacy unmarked block and keeps user content', () => {
+  const target = mkdtempSync(join(tmpdir(), 'kit-legacy-'));
+  writeFileSync(join(target, 'AGENTS.md'), '# Mine\n\nKeep me.\n\n## Frontend UI\nBefore creating UI components, follow `ai-frontend-guide-kit/AGENTS.md` (reuse-first workflow).\nold line\n\n## Other\nAlso keep me.\n');
+  assert.equal(install(target).status, 0);
+  const agents = readFileSync(join(target, 'AGENTS.md'), 'utf8');
+  assert.equal(count(agents, MARK), 1);
+  assert.equal(count(agents, '## Frontend UI\n'), 0);
+  assert.ok(!agents.includes('old line'));
+  assert.ok(agents.includes('Keep me.') && agents.includes('## Other\nAlso keep me.'));
+});
+
+test('installer upgrades a CRLF legacy block, keeps CRLF endings and is idempotent', () => {
+  const target = mkdtempSync(join(tmpdir(), 'kit-crlf-'));
+  writeFileSync(join(target, 'AGENTS.md'), '# Mine\r\n\r\n## Frontend UI\r\nBefore creating UI components, follow `ai-frontend-guide-kit/AGENTS.md`.\r\n\r\n## Other\r\nKeep.\r\n');
+  assert.equal(install(target).status, 0);
+  assert.equal(install(target).status, 0);
+  const agents = readFileSync(join(target, 'AGENTS.md'), 'utf8');
+  assert.equal(count(agents, MARK), 1);
+  assert.equal(count(agents, '## Frontend UI\r\n'), 0);
+  assert.equal(count(agents.replace(/\r\n/g, ''), '\n'), 0, 'no bare LF mixed into a CRLF file');
+  assert.ok(agents.includes('## Other\r\nKeep.'));
+});
+
+test('installer does not swallow user text after an orphan start marker', () => {
+  const target = mkdtempSync(join(tmpdir(), 'kit-orphan-'));
+  writeFileSync(join(target, 'AGENTS.md'), `# Mine\n\n${MARK}\nUser text.\n`);
+  assert.equal(install(target).status, 0);
+  assert.equal(install(target).status, 0);
+  assert.ok(readFileSync(join(target, 'AGENTS.md'), 'utf8').includes('User text.'));
+});
+
+test('installer adds the block to an existing CLAUDE.md (Claude Code ignores AGENTS.md then), idempotently', () => {
+  const target = mkdtempSync(join(tmpdir(), 'kit-claude-'));
+  writeFileSync(join(target, 'CLAUDE.md'), '# Claude rules\n\nUse tabs.\n');
+  mkdirSync(join(target, '.claude'));
+  writeFileSync(join(target, '.claude', 'CLAUDE.md'), '# Nested\n');
+  assert.equal(install(target).status, 0);
+  assert.equal(install(target).status, 0);
+  for (const file of ['CLAUDE.md', join('.claude', 'CLAUDE.md')]) {
+    const text = readFileSync(join(target, file), 'utf8');
+    assert.equal(count(text, MARK), 1, `${file} has one block`);
+    assert.ok(text.includes('diseño'));
+  }
+  assert.ok(readFileSync(join(target, 'CLAUDE.md'), 'utf8').startsWith('# Claude rules\n\nUse tabs.\n'));
+});
+
+test('ai-frontend-guide skill triggers on design talk in English and Spanish', () => {
+  const head = readFileSync(join(ROOT, 'skills', 'ai-frontend-guide', 'SKILL.md'), 'utf8').split('---')[1];
+  for (const word of ['diseño', 'colores', 'design', 'restyle']) assert.ok(head.includes(word), `skill trigger "${word}"`);
+});
+
 test('installer prints the Agentation message (not with --no-mcp) and ships guide 11', () => {
   const withMcp = mkdtempSync(join(tmpdir(), 'kit-agentation-'));
   const run = node([join(ROOT, 'install.mjs'), '--target', withMcp, '--no-skills']);

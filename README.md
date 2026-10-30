@@ -95,7 +95,7 @@ Results are ranked by **quality** (license clarity, install effort, dependency w
 ## 🛠️ What the installer does
 
 1. 📁 Copies `ai-frontend-guide-kit/` into the target project (removes the legacy `ai-frontend-guide/` if present).
-2. 📌 Adds the intake pointer to the project's `AGENTS.md` (ask first, then route through the three phases).
+2. 📌 Adds the **design routing block** to the project's `AGENTS.md` (and to `CLAUDE.md` / `.claude/CLAUDE.md` if they exist, because Claude Code then ignores `AGENTS.md`): any talk about design, UI or UX — in English or Spanish — goes through the kit first. The block is marked, so re-running the installer refreshes it without touching your own content.
 3. 💾 Creates `ai-frontend-output/` (selection memory) if missing — never removed on refresh.
 4. 🧩 Installs the **19 skills of this repo** into `.agents/skills/` (clean: no lockfile, no symlink sprawl) plus the **16 external design skills** via their CLI by default. If the project has `.claude/`, the 19 are linked into `.claude/skills/`.
 5. 🎭 Configures the **Playwright + Excalidraw MCP** servers per detected harness (`.mcp.json` for Claude Code, `opencode.json` for OpenCode) and creates the `ai-frontend-output/ux/ux-map.excalidraw` scaffold; otherwise prints the exact commands. Browser once: `npx playwright install chromium`.

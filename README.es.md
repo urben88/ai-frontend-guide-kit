@@ -88,7 +88,7 @@ Los resultados se ordenan por **calidad** (claridad de licencia, esfuerzo de ins
 ## 🛠️ Qué hace el instalador
 
 1. 📁 Copia `ai-frontend-guide-kit/` al proyecto de destino (elimina el antiguo `ai-frontend-guide/` si existe).
-2. 📌 Añade el puntero de entrada al `AGENTS.md` del proyecto (preguntar primero y luego recorrer las tres fases).
+2. 📌 Añade el **bloque de enrutado de diseño** al `AGENTS.md` del proyecto (y a `CLAUDE.md` / `.claude/CLAUDE.md` si existen, porque entonces Claude Code ignora `AGENTS.md`): cualquier conversación sobre diseño, UI o UX — en español o inglés — pasa primero por el kit. El bloque va marcado, así que reinstalar lo actualiza sin tocar tu contenido.
 3. 💾 Crea `ai-frontend-output/` (memoria de selección) si falta; nunca se borra en las actualizaciones.
 4. 🧩 Instala las **19 skills de este repo** en `.agents/skills/` (limpio: sin lockfile ni enlaces por todas partes) y, por defecto, las **16 skills de diseño externas** mediante su CLI. Si el proyecto tiene `.claude/`, enlaza las 19 en `.claude/skills/`.
 5. 🎭 Configura los servidores **Playwright + Excalidraw MCP** según el entorno detectado (`.mcp.json` para Claude Code, `opencode.json` para OpenCode) y crea la plantilla `ai-frontend-output/ux/ux-map.excalidraw`; si no, imprime los comandos exactos. Navegador una vez: `npx playwright install chromium`.

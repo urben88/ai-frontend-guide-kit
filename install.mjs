@@ -20,8 +20,18 @@ import { fileURLToPath } from 'node:url';
 const REPO_ROOT = dirname(fileURLToPath(import.meta.url));
 const KIT_SOURCE = join(REPO_ROOT, 'ai-frontend-guide-kit');
 
-const AGENTS_BLOCK = `## Frontend UI
-Before creating UI components, follow \`ai-frontend-guide-kit/AGENTS.md\` (reuse-first workflow).
+const BLOCK_START = '<!-- ai-frontend-guide-kit:start -->';
+const BLOCK_END = '<!-- ai-frontend-guide-kit:end -->';
+
+const AGENTS_BLOCK = `${BLOCK_START}
+## Frontend UI and design (ai-frontend-guide-kit)
+**Routing rule:** any request about design, UI or UX goes through \`ai-frontend-guide-kit/AGENTS.md\` first
+(the \`ai-frontend-guide\` skill), before proposing designs or writing UI code. Triggers include:
+design, redesign, restyle, UI, UX, look and feel, theme, colors, typography, fonts, spacing, layout, screen, page,
+landing, dashboard, component, form, animation, polish; diseño, rediseñar, estilo, aspecto, tema, colores,
+tipografía, fuentes, espaciado, maquetación, pantalla, página, landing, componente, formulario, animación, pulir.
+Do not design from scratch: reuse > adapt > build, using the catalog (\`node ai-frontend-guide-kit/tools/find.mjs\`).
+External design skills (impeccable, taste-skill, emilkowalski) run only inside phase 3 through \`frontend-polish\`.
 Ask the user first what they want (new frontend UX -> composition -> polish, a small change, a custom
 addition, or polish only) and enter the three-phase workflow at the right point before touching code.
 New frontends start with the experience direction (\`ai-frontend-guide-kit/guides/01-EXPERIENCE-DIRECTION.md\`
@@ -33,7 +43,37 @@ combinations from \`ai-frontend-output/\` before searching the catalog.
 Polish phase: use the \`frontend-polish\` skill with Playwright MCP (\`npx @playwright/mcp@latest\`).
 UX map: generate and maintain \`ai-frontend-output/ux/ux-map.excalidraw\` with the \`ux-map\` skill and the local Excalidraw MCP
 (\`node ai-frontend-guide-kit/tools/excalidraw-mcp.mjs --diagram ai-frontend-output/ux/ux-map.excalidraw\`, offline, no install).
+${BLOCK_END}
 `;
+
+// Pre-1.4 installs wrote an unmarked "## Frontend UI" section; it runs until the next "## " heading or EOF.
+const LEGACY_BLOCK = /^## Frontend UI\n[\s\S]*?(?=^## |(?![\s\S]))/m;
+
+/** Inserts or refreshes the kit block in an instruction file, never touching content outside it. */
+function upsertKitBlock(path, header) {
+  const original = existsSync(path) ? readFileSync(path, 'utf8') : null;
+  // Work on LF text and write back with the file's own line ending (Windows files are often CRLF).
+  const eol = original?.includes('\r\n') ? '\r\n' : '\n';
+  const current = original?.replace(/\r\n/g, '\n') ?? null;
+  const legacy = current?.match(LEGACY_BLOCK)?.[0];
+  const end = current?.indexOf(BLOCK_END) ?? -1;
+  // Nearest start before the end marker, so an orphan start earlier in the file never swallows user text.
+  const start = end === -1 ? -1 : current.lastIndexOf(BLOCK_START, end);
+  let next;
+  if (current === null) {
+    next = `${header}\n\n${AGENTS_BLOCK}`;
+  } else if (start !== -1) {
+    next = `${current.slice(0, start)}${AGENTS_BLOCK.trimEnd()}${current.slice(end + BLOCK_END.length)}`;
+  } else if (legacy?.includes('ai-frontend-guide-kit/AGENTS.md')) {
+    next = current.replace(legacy, `${AGENTS_BLOCK}\n`);
+  } else {
+    next = `${current.trimEnd()}\n\n${AGENTS_BLOCK}`;
+  }
+  next = next.replace(/\n/g, eol);
+  if (next === original) return 'unchanged';
+  writeFileSync(path, next, 'utf8');
+  return original === null ? 'created' : 'updated';
+}
 
 const OUTPUT_README = `# ai-frontend-output
 
@@ -103,7 +143,8 @@ Options:
 
 What it does:
   1. Copies ai-frontend-guide-kit/ (catalog + guides + tools) into the target.
-  2. Adds a pointer block to the target's AGENTS.md and removes the legacy ai-frontend-guide/ folder.
+  2. Adds (or refreshes) the marked design-routing block in the target's AGENTS.md, and in CLAUDE.md /
+     .claude/CLAUDE.md when present; removes the legacy ai-frontend-guide/ folder.
   3. Creates ai-frontend-output/ (selection memory) if missing; it is never removed on refresh.
      It also creates ai-frontend-output/ux/ux-map.excalidraw (Excalidraw scaffold) if missing.
   4. Installs skills into .agents/skills: copy mode copies the 19 kit skills (workflow + 16 UX flows +
@@ -383,18 +424,12 @@ function main() {
 
   ensureUxMap(target);
 
-  const agentsPath = join(target, 'AGENTS.md');
-  if (existsSync(agentsPath)) {
-    const current = readFileSync(agentsPath, 'utf8');
-    if (current.includes('ai-frontend-guide-kit/AGENTS.md')) {
-      console.log('- AGENTS.md already points to the kit');
-    } else {
-      writeFileSync(agentsPath, `${current.trimEnd()}\n\n${AGENTS_BLOCK}`, 'utf8');
-      console.log('- pointer added to existing AGENTS.md');
+  console.log(`- AGENTS.md: kit routing block ${upsertKitBlock(join(target, 'AGENTS.md'), '# Project agent instructions')}`);
+  // Claude Code reads CLAUDE.md instead of AGENTS.md when one exists, so the block goes there too.
+  for (const claudeMd of ['CLAUDE.md', join('.claude', 'CLAUDE.md')]) {
+    if (existsSync(join(target, claudeMd))) {
+      console.log(`- ${claudeMd}: kit routing block ${upsertKitBlock(join(target, claudeMd), '')}`);
     }
-  } else {
-    writeFileSync(agentsPath, `# Project agent instructions\n\n${AGENTS_BLOCK}`, 'utf8');
-    console.log('- AGENTS.md created with the kit pointer');
   }
 
   if (args.skills) {
