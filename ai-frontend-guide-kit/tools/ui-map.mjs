@@ -13,6 +13,7 @@
  *   node tools/ui-map.mjs have <name> [--dir <project-root>] [--json]
  *   node tools/ui-map.mjs types [--dir <project-root>] [--json]
  *   node tools/ui-map.mjs docs [--profile sprint|standard|long-term] [--dir <project-root>] [--json]
+ *   node tools/ui-map.mjs check [--profile sprint|standard|long-term] [--dir <project-root>] [--json]
  *
  * Project root: --dir, then AI_FRONTEND_PROJECT, then the folder that holds the kit.
  * Output folder: AI_FRONTEND_OUTPUT, else <project-root>/ai-frontend-output.
@@ -118,16 +119,19 @@ Usage:
   node tools/ui-map.mjs have <name>              does it exist? type aliases, close matches, catalog candidates, decision
   node tools/ui-map.mjs types                    coverage of catalog/component-types.json, unclassified components, possible duplicates
   node tools/ui-map.mjs docs                     documents the profile needs, and which are missing
+  node tools/ui-map.mjs check                    findings from the map plus the missing documents; exit 1 when one blocks
 
 Options:
   --dir <project-root>   project to scan (default: AI_FRONTEND_PROJECT, then the folder that holds the kit)
-  --profile <name>       docs only: ${PROFILE_NAMES.join('|')} (default: standard)
-  --json                 machine-readable output (build, impact, have, types, docs)
+  --profile <name>       docs and check: ${PROFILE_NAMES.join('|')} (default: standard)
+  --json                 machine-readable output (build, impact, have, types, docs, check)
   --help                 this text
 
 Roles: ${ROLES.join(', ')}.
 Output goes to ai-frontend-output/ (or AI_FRONTEND_OUTPUT). Project source is never modified.
-impact, have, types and docs rebuild the map first when it is missing or older than any scanned file.`;
+impact, have, types, docs and check rebuild the map first when it is missing or older than any scanned file.
+check lists every finding at every profile; the profile only decides which kinds block (sprint: none,
+standard: unresolved and missing documents, long-term: all of them).`;
 
 // ---------------------------------------------------------------- scanning
 
@@ -1045,6 +1049,18 @@ function runTypes(root, flags) {
   return 0;
 }
 
+/** Which document of a profile exists in this project; the generated map lives under the output folder. */
+function documentStatus(root, profile) {
+  const outDir = resolveOutputDir(root);
+  return documentsFor(profile).map((doc) => ({
+    path: doc.path,
+    purpose: doc.purpose,
+    structure: doc.structure,
+    generated: doc.generated === true,
+    missing: !existsSync(doc.generated ? join(outDir, 'UI-MAP.md') : join(root, doc.path)),
+  }));
+}
+
 function runDocs(root, flags) {
   const profile = flags.profile ?? 'standard';
   if (!PROFILES[profile]) {
@@ -1052,14 +1068,7 @@ function runDocs(root, flags) {
     console.error(USAGE);
     return 2;
   }
-  const outDir = resolveOutputDir(root);
-  const documents = documentsFor(profile).map((doc) => ({
-    path: doc.path,
-    purpose: doc.purpose,
-    structure: doc.structure,
-    generated: doc.generated === true,
-    missing: !existsSync(doc.generated ? join(outDir, 'UI-MAP.md') : join(root, doc.path)),
-  }));
+  const documents = documentStatus(root, profile);
   const missing = documents.filter((doc) => doc.missing).length;
   if (flags.json) {
     console.log(JSON.stringify({ profile, what: PROFILES[profile].what, documents, missing }, null, 2));
@@ -1070,6 +1079,60 @@ function runDocs(root, flags) {
   console.log(`Structure of each one: ${DOCUMENTS[0].structure}; folder map: guides/12-ARCHITECTURE.md.`);
   if (missing > 0) console.log(`Next: write the missing ones, or accept a smaller profile (${PROFILE_NAMES.join(', ')}).`);
   return 0;
+}
+
+/** Which finding kinds block at each profile. The profile sets the rigor; the finding list never changes. */
+const BLOCKING_KINDS = {
+  sprint: [],
+  standard: ['unresolved', 'missing-doc'],
+  'long-term': ['unresolved', 'duplicate-type', 'stray', 'ownerless-role', 'missing-doc'],
+};
+
+/** Every finding `check` reports: what the map knows plus the documents the profile is missing. */
+function checkFindings(root, map, profile) {
+  const findings = [];
+  for (const u of map.unresolved) findings.push({ kind: 'unresolved', detail: `${u.file}:${u.line} ${u.specifier} ${u.reason}` });
+  const data = loadTypes();
+  // A broken catalog only drops the duplicate-type review; the rest of the gate still runs.
+  if (data) {
+    for (const duplicate of typeReport(map, data).duplicates) {
+      findings.push({ kind: 'duplicate-type', detail: `${duplicate.type}: ${duplicate.components.join(', ')}` });
+    }
+  }
+  for (const role of ROLES) {
+    const strays = map.strays.filter((s) => s.role === role);
+    if (strays.length === 0) continue;
+    const sample = strays.slice(0, 5).map((s) => `${s.file}:${s.line}`).join(', ') + (strays.length > 5 ? `, +${strays.length - 5} more` : '');
+    findings.push({ kind: 'stray', detail: `${role}: ${strays.length} stray(s) — ${sample}` });
+    if (map.roles[role].owners.length === 0) findings.push({ kind: 'ownerless-role', detail: `${role}: no owner, ${strays.length} stray(s) — ${sample}` });
+  }
+  for (const doc of documentStatus(root, profile)) {
+    if (doc.missing) findings.push({ kind: 'missing-doc', detail: `${doc.path}${doc.generated ? ' (generated)' : ''}` });
+  }
+  const blockingKinds = new Set(BLOCKING_KINDS[profile]);
+  return findings.map((finding) => ({ ...finding, blocking: blockingKinds.has(finding.kind) }));
+}
+
+function runCheck(root, flags) {
+  const profile = flags.profile ?? 'standard';
+  if (!PROFILES[profile]) {
+    console.error(`ui-map: unknown profile "${profile}" (valid: ${PROFILE_NAMES.join(', ')})\n`);
+    console.error(USAGE);
+    return 2;
+  }
+  const { map } = loadMap(root);
+  const findings = checkFindings(root, map, profile);
+  const blocking = findings.filter((finding) => finding.blocking).length;
+  const exit = blocking > 0 ? 1 : 0;
+  if (flags.json) {
+    console.log(JSON.stringify({ profile, findings, counts: { findings: findings.length, blocking }, exit }, null, 2));
+    return exit;
+  }
+  console.log(`check (profile: ${profile}) — ${findings.length} findings, ${blocking} blocking`);
+  for (const finding of findings) console.log(`  ${finding.blocking ? 'blocking' : 'advisory'} ${finding.kind} — ${finding.detail}`);
+  if (blocking > 0) console.log(`Next: fix the blocking findings above (they are what this profile treats as required), or move to a smaller profile (${PROFILE_NAMES.join(', ')}).`);
+  else console.log(`Next: nothing blocks at this profile (${PROFILES[profile].what}); the advisory findings above stay visible, so keep them in mind.`);
+  return exit;
 }
 
 function runBuild(root, flags) {
@@ -1099,12 +1162,12 @@ function main() {
     console.log(USAGE);
     return 0;
   }
-  if (!['build', 'impact', 'have', 'types', 'docs'].includes(command)) {
+  if (!['build', 'impact', 'have', 'types', 'docs', 'check'].includes(command)) {
     console.error(`ui-map: unknown command "${command}"\n`);
     console.error(USAGE);
     return 2;
   }
-  if (['build', 'types', 'docs'].includes(command) && flags._.length > 1) {
+  if (['build', 'types', 'docs', 'check'].includes(command) && flags._.length > 1) {
     console.error(`ui-map: ${command} takes no arguments (got "${flags._.slice(1).join(' ')}")\n`);
     console.error(USAGE);
     return 2;
@@ -1115,6 +1178,7 @@ function main() {
     if (command === 'impact') return runImpact(root, flags);
     if (command === 'types') return runTypes(root, flags);
     if (command === 'docs') return runDocs(root, flags);
+    if (command === 'check') return runCheck(root, flags);
     return runHave(root, flags);
   } catch (error) {
     console.error(`ui-map: ${error.message}`);

@@ -123,11 +123,13 @@ node tools/ui-map.mjs impact loading        # before changing UI: owner, users, 
 node tools/ui-map.mjs have "data table"     # before creating: exists? type alias, close match, catalog candidates
 node tools/ui-map.mjs types                 # coverage of catalog/component-types.json, unclassified, possible duplicates
 node tools/ui-map.mjs docs                  # documents the profile needs, and which are missing (guides/13-CONTEXT-DOCS.md)
+node tools/ui-map.mjs check                 # profile gate: findings from the map + missing documents; exit 1 when one blocks
 node tools/ui-map.mjs build                 # refresh by hand (impact/have rebuild when stale)
 ```
 
 Read `UI-MAP.md` instead of exploring. Change every owner, user and stray that `impact` lists; none may be left out. Unresolved imports are never assumed fine.
 `have` also resolves the canonical component types and their aliases (`modal` finds a `Dialog`); `types` and `docs` are read-only reports, and `docs --profile sprint|standard|long-term` sets how many context documents the project owes.
+`check` is the gate: it lists every finding (unresolved imports, duplicate component types, strays, ownerless roles, missing documents) and the profile only decides which kinds block — `sprint` blocks nothing, `standard` (default) blocks unresolved imports and missing documents, `long-term` blocks all of them; it exits 1 when at least one blocking finding exists. Stack combinations per project type live in `experience/STACK-RECIPES.md`.
 
 ## Selection memory (`ai-frontend-output/`)
 

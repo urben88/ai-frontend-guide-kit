@@ -37,7 +37,7 @@ ai-frontend-guide-kit/
 │   └── sources/*.json            # 34 source files (4,287 entries), explorer.html, license-report.md
 └── tools/
     ├── context.mjs        # repo context for the UX phase (REPO-CONTEXT.md)
-    ├── ui-map.mjs         # always-on frontend map: build, impact <role|component>, have <name>, types, docs
+    ├── ui-map.mjs         # always-on frontend map: build, impact <role|component>, have <name>, types, docs, check
     ├── find.mjs           # filtered catalog search (short output)
     ├── get.mjs            # full decision card for one entry
     ├── memory.mjs         # selection memory: history, summary, combinations

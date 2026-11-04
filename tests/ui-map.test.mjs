@@ -545,3 +545,182 @@ test('ui-map docs lists the documents of each profile and which are missing', ()
   assert.match(bad.stderr, /enterprise/);
   assert.match(bad.stderr, /sprint, standard, long-term/);
 });
+
+// ---- profile gate and stack recipes (S6 recipes, S7)
+
+const CONTEXT_FILES = ['README.md', 'DESIGN.md', 'PRODUCT.md', 'UX-SPEC.md', 'ARCHITECTURE.md', 'docs/DECISIONS.md', 'docs/CONTRIBUTING.md', 'docs/ACCESSIBILITY.md', 'docs/PERFORMANCE.md'];
+const writeDocs = (dir, files = CONTEXT_FILES) => {
+  for (const file of files) {
+    const folder = join(dir, ...file.split('/').slice(0, -1));
+    if (folder !== dir) mkdirSync(folder, { recursive: true });
+    writeFileSync(join(dir, file), `# ${file}\n`);
+  }
+};
+const findingsOf = (dir, profile) => {
+  const run = uiMap(dir, 'check', '--json', ...(profile ? ['--profile', profile] : []));
+  return { status: run.status, stderr: run.stderr, report: JSON.parse(run.stdout) };
+};
+
+test('check lists every finding and the profile only decides which of them block', () => {
+  const dir = fixture();
+  const sprint = uiMap(dir, 'check', '--profile', 'sprint');
+  assert.equal(sprint.status, 0, sprint.stderr);
+  assert.match(sprint.stdout.split('\n')[0], /^check \(profile: sprint\) — \d+ findings, 0 blocking$/);
+  assert.match(sprint.stdout, /^\s+advisory unresolved — src\/pages\/about\.tsx:\d+ \.\/Ghost not found$/m);
+  assert.match(sprint.stdout, /^\s+advisory missing-doc — README\.md$/m);
+  assert.match(sprint.stdout, /^\s+advisory stray — loading: /m);
+  assert.match(sprint.stdout, /^Next: /m);
+
+  const standard = uiMap(dir, 'check');
+  assert.equal(standard.status, 1);
+  assert.match(standard.stdout.split('\n')[0], /^check \(profile: standard\) — \d+ findings, \d+ blocking$/);
+  assert.match(standard.stdout, /^\s+blocking unresolved — /m);
+  assert.match(standard.stdout, /^\s+blocking missing-doc — UX-SPEC\.md$/m);
+  assert.match(standard.stdout, /^\s+advisory stray — /m, 'a stray does not block at standard');
+  assert.match(standard.stdout, /^Next: /m);
+
+  const longTerm = uiMap(dir, 'check', '--profile', 'long-term');
+  assert.equal(longTerm.status, 1);
+  assert.match(longTerm.stdout, /^\s+blocking stray — /m);
+  assert.match(longTerm.stdout, /^\s+blocking missing-doc — docs\/DECISIONS\.md$/m);
+
+  const counts = (text) => text.split('\n')[0].match(/(\d+) findings, (\d+) blocking/).slice(1).map(Number);
+  const mapKinds = (text) => text.split('\n')
+    .filter((line) => /^\s+(blocking|advisory) /.test(line))
+    .map((line) => line.trim().split(' ')[1])
+    .filter((kind) => kind !== 'missing-doc');
+  assert.deepEqual(mapKinds(sprint.stdout), mapKinds(standard.stdout), 'the profile never changes the map findings');
+  assert.deepEqual(mapKinds(standard.stdout), mapKinds(longTerm.stdout));
+  assert.equal(counts(sprint.stdout)[1], 0);
+  assert.ok(counts(longTerm.stdout)[1] > counts(standard.stdout)[1], 'long-term blocks more than standard');
+  assert.ok(counts(standard.stdout)[1] > counts(sprint.stdout)[1], 'standard blocks more than sprint');
+});
+
+test('check exits 0 on a complete project, 1 on a missing document and on a duplicate component type', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ui-map-check-clean-'));
+  writeSource(dir, 'src/components/ui/Button.tsx', 'Button');
+  writeDocs(dir, ['README.md', 'DESIGN.md', 'PRODUCT.md', 'UX-SPEC.md', 'ARCHITECTURE.md']);
+  const standard = uiMap(dir, 'check');
+  assert.equal(standard.status, 0, standard.stdout + standard.stderr);
+  assert.match(standard.stdout.split('\n')[0], /^check \(profile: standard\) — 0 findings, 0 blocking$/);
+  assert.match(standard.stdout, /^Next: /m);
+
+  const strict = uiMap(dir, 'check', '--profile', 'long-term');
+  assert.equal(strict.status, 1, 'long-term blocks the documents standard does not need');
+  assert.match(strict.stdout, /^\s+blocking missing-doc — docs\/DECISIONS\.md$/m);
+
+  writeDocs(dir, ['docs/DECISIONS.md', 'docs/CONTRIBUTING.md', 'docs/ACCESSIBILITY.md', 'docs/PERFORMANCE.md']);
+  assert.equal(uiMap(dir, 'check', '--profile', 'long-term').status, 0);
+
+  writeSource(dir, 'src/components/ui/Dialog.tsx', 'Dialog');
+  writeSource(dir, 'src/components/ui/Modal.tsx', 'Modal');
+  const duplicate = findingsOf(dir, 'long-term');
+  assert.equal(duplicate.status, 1);
+  const duplicateType = duplicate.report.findings.find((f) => f.kind === 'duplicate-type');
+  assert.ok(duplicateType, 'duplicate component type reported');
+  assert.equal(duplicateType.blocking, true);
+  assert.match(duplicateType.detail, /^Dialog: Dialog \(src\/components\/ui\/Dialog\.tsx\), Modal \(src\/components\/ui\/Modal\.tsx\)$/);
+  assert.equal(findingsOf(dir, 'standard').status, 0, 'the same duplicate is advisory at standard');
+});
+
+test('long-term blocks an ownerless role with strays; standard lists it as advisory', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ui-map-check-stray-'));
+  writeDocs(dir);
+  writeSource(dir, 'src/components/ui/Button.tsx', 'Button');
+  assert.equal(uiMap(dir, 'check', '--profile', 'long-term').status, 0);
+  writeFileSync(join(dir, 'src/components/Panel.tsx'), 'export const Panel = () => <div className="animate-pulse" />;\n');
+
+  const strict = findingsOf(dir, 'long-term');
+  assert.equal(strict.status, 1);
+  const stray = strict.report.findings.find((f) => f.kind === 'stray');
+  const ownerless = strict.report.findings.find((f) => f.kind === 'ownerless-role');
+  assert.ok(stray && stray.blocking, 'strays block at long-term');
+  assert.match(stray.detail, /^loading: 1 stray\(s\) — src\/components\/Panel\.tsx:1$/);
+  assert.ok(ownerless && ownerless.blocking, 'a role with no owner and a stray blocks at long-term');
+  assert.match(ownerless.detail, /^loading: no owner, 1 stray\(s\)/);
+  const lax = findingsOf(dir, 'standard');
+  assert.equal(lax.status, 0);
+  assert.equal(lax.report.counts.findings, strict.report.counts.findings, 'same findings, different rigor');
+  assert.ok(lax.report.findings.filter((f) => f.blocking).length < strict.report.counts.blocking);
+});
+
+test('check --json reports profile, per-finding kind and blocking, counts and exit', () => {
+  const dir = fixture();
+  const run = uiMap(dir, 'check', '--json');
+  assert.equal(run.status, 1);
+  const report = JSON.parse(run.stdout);
+  assert.equal(report.profile, 'standard');
+  assert.equal(report.exit, 1);
+  assert.equal(report.counts.findings, report.findings.length);
+  assert.equal(report.counts.blocking, report.findings.filter((f) => f.blocking).length);
+  for (const finding of report.findings) {
+    assert.ok(['unresolved', 'duplicate-type', 'stray', 'ownerless-role', 'missing-doc'].includes(finding.kind), finding.kind);
+    assert.equal(typeof finding.blocking, 'boolean');
+    assert.ok(finding.detail.length > 0);
+  }
+  assert.ok(report.findings.some((f) => f.kind === 'unresolved' && /^src\/pages\/about\.tsx:\d+ \.\/Ghost not found$/.test(f.detail)));
+  assert.ok(report.findings.some((f) => f.kind === 'missing-doc' && f.detail === 'PRODUCT.md'));
+  assert.ok(!report.findings.some((f) => f.kind === 'missing-doc' && f.detail.startsWith('ai-frontend-output/')), 'the generated map counts as present after the load');
+
+  const sprint = findingsOf(dir, 'sprint');
+  assert.equal(sprint.status, 0);
+  assert.equal(sprint.report.exit, 0);
+  assert.equal(sprint.report.profile, 'sprint');
+  const withoutDocs = (report) => report.findings.filter((f) => f.kind !== 'missing-doc').map((f) => `${f.kind} ${f.detail}`);
+  assert.deepEqual(withoutDocs(sprint.report), withoutDocs(report), 'the profile never changes the map findings');
+  assert.ok(sprint.report.counts.findings < report.counts.findings, 'sprint owes fewer documents');
+  assert.equal(sprint.report.counts.blocking, 0);
+
+  const help = node([TOOL, '--help']);
+  assert.match(help.stdout, /ui-map\.mjs check/);
+  assert.match(help.stdout, /docs and check: sprint\|standard\|long-term/);
+});
+
+test('check rejects an unknown profile and any positional argument', () => {
+  const dir = fixture();
+  const bad = uiMap(dir, 'check', '--profile', 'enterprise');
+  assert.equal(bad.status, 2);
+  assert.match(bad.stderr, /enterprise/);
+  assert.match(bad.stderr, /sprint, standard, long-term/);
+  const extra = decoyRun(['check', 'all', '--dir', dir]);
+  assert.equal(extra.run.status, 2);
+  assert.match(extra.run.stderr, /all/);
+  assert.ok(!extra.wrote, 'nothing written outside the project');
+  assert.ok(!existsSync(out(dir, 'ui-map.json')), 'nothing written to the project either');
+});
+
+test('every place that documents the map also documents check', () => {
+  const read = (...parts) => readFileSync(join(ROOT, ...parts), 'utf8');
+  const mentionsCheck = (...parts) => read(...parts).split('\n')
+    .filter((line) => line.includes('ui-map'))
+    .some((line) => line.includes('check'));
+  assert.ok(read('ai-frontend-guide-kit', 'AGENTS.md').includes('ui-map.mjs check'));
+  assert.ok(read('skills', 'ai-frontend-guide', 'SKILL.md').includes('ui-map.mjs check'));
+  assert.ok(read('ai-frontend-guide-kit', 'README.md').split('\n').some((line) => line.includes('ui-map.mjs') && line.includes('check')));
+  for (const file of [
+    ['ai-frontend-guide-kit', 'guides', '00-START-HERE.md'],
+    ['ai-frontend-guide-kit', 'HELP.md'],
+    ['ai-frontend-guide-kit', 'HELP.es.md'],
+  ]) assert.ok(mentionsCheck(...file), `${file.join('/')} names check in its ui-map line`);
+  assert.match(read('ai-frontend-guide-kit', 'guides', '13-CONTEXT-DOCS.md'), /experience\/STACK-RECIPES\.md/);
+  assert.match(read('tools', 'build-kit.mjs'), /'experience\/STACK-RECIPES\.md'/);
+});
+
+test('experience/STACK-RECIPES.md combines six project types with source, date and evidence level', () => {
+  const text = readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'experience', 'STACK-RECIPES.md'), 'utf8');
+  assert.ok(text.split('\n').length <= 120, `${text.split('\n').length} lines`);
+  const recipes = text.split(/^## /m).slice(1);
+  assert.ok(recipes.length >= 6, `${recipes.length} recipes`);
+  for (const recipe of recipes) {
+    const title = recipe.split('\n')[0];
+    for (const label of ['Source:', 'Checked:', 'Evidence:']) assert.ok(recipe.includes(label), `${title} carries ${label}`);
+    assert.ok(recipe.includes('Architecture:'), `${title} names the architecture mode`);
+    assert.match(recipe, /Documents:/, `${title} names the documents`);
+  }
+  assert.doesNotMatch(text, /\bbest\b/i);
+  assert.match(text, /not measured|no survey|documented combination/i);
+  const lowered = text.toLowerCase();
+  for (const type of ['saas dashboard', 'marketing landing page', 'e-commerce', 'documentation site', 'internal tool', 'pwa']) {
+    assert.ok(lowered.includes(type), `covers ${type}`);
+  }
+});

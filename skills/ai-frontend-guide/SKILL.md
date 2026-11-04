@@ -45,7 +45,7 @@ Ask the user what they want before touching code and declare the route: new fron
 
 ## Frontend map (always on)
 
-The installer keeps `ai-frontend-output/UI-MAP.md` (plus `ui-map.json`, `ui-history.jsonl`) up to date. Read it instead of exploring the repo. Before changing UI run `node ai-frontend-guide-kit/tools/ui-map.mjs impact <role|component>`; before creating run `node ai-frontend-guide-kit/tools/ui-map.mjs have <name>`. Existing violations are recorded, never changed unless the user asks (`guides/08-PHILOSOPHY.md`, Separation).
+The installer keeps `ai-frontend-output/UI-MAP.md` (plus `ui-map.json`, `ui-history.jsonl`) up to date. Read it instead of exploring the repo. Before changing UI run `node ai-frontend-guide-kit/tools/ui-map.mjs impact <role|component>`; before creating run `node ai-frontend-guide-kit/tools/ui-map.mjs have <name>`; to see what the profile treats as required run `node ai-frontend-guide-kit/tools/ui-map.mjs check --profile sprint|standard|long-term`. Existing violations are recorded, never changed unless the user asks (`guides/08-PHILOSOPHY.md`, Separation).
 
 ## Experience direction first (guide 01)
 

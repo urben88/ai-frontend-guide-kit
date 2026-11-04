@@ -36,7 +36,7 @@ Run them from the project root. Every tool prints one screen, not a dump.
 | Tool | Answers |
 |---|---|
 | `tools/context.mjs` | What is this repository? Stack, routes/screens, docs, previous UX artifacts → `ai-frontend-output/ux/REPO-CONTEXT.md` |
-| `tools/ui-map.mjs` | `build` writes the map; `impact <role|component>` lists owner, users, routes, strays and unresolved imports; `have <name>` answers whether a component already exists, with type aliases, close matches and catalog candidates; `types` reports coverage of the canonical component types, unclassified components and possible duplicates; `docs` lists the documents the profile needs and which are missing |
+| `tools/ui-map.mjs` | `build` writes the map; `impact <role|component>` lists owner, users, routes, strays and unresolved imports; `have <name>` answers whether a component already exists, with type aliases, close matches and catalog candidates; `types` reports coverage of the canonical component types, unclassified components and possible duplicates; `docs` lists the documents the profile needs and which are missing; `check` lists every finding (unresolved imports, duplicate types, strays, ownerless roles, missing documents) and exits 1 when the profile treats one as blocking (`sprint` nothing, `standard` unresolved + missing documents, `long-term` all) |
 | `tools/find.mjs` | Which catalog entries fit a category, stack, text or commercial use |
 | `tools/get.mjs` | The full record of one entry: what it is, when to use it, install, license limits |
 | `tools/memory.mjs` | `add`, `list`, `summary`, `combo save\|list\|show\|apply` — the reusable decision history |

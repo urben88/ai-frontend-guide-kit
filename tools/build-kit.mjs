@@ -35,6 +35,7 @@ const REQUIRED_KIT_FILES = [
   'experience/EXPERIENCE-DIRECTION.md',
   'experience/QUESTION-BANK.md',
   'experience/SITE-ARCHETYPES.md',
+  'experience/STACK-RECIPES.md',
   'experience/UX-PHILOSOPHIES.md',
   'experience/STYLE-DIRECTIONS.md',
   'experience/REFERENCE-PROTOCOL.md',
