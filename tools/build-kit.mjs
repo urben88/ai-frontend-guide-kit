@@ -49,6 +49,7 @@ const REQUIRED_KIT_FILES = [
   'tools/memory.mjs',
   'tools/context.mjs',
   'tools/ui-map.mjs',
+  'tools/flow.mjs',
   'tools/excalidraw-mcp.mjs',
   'tools/audit-honesty.mjs',
   'tools/audit-a11y.mjs',

@@ -1,7 +1,7 @@
 # design-flow-guardrails
 
 Objective: in projects with the kit installed, every design conversation follows the step-by-step flow, chosen components and libraries are stored per project, and the agent can explain which flows and skills exist.
-Branch: `feat/design-flow-guardrails` (to create from `main`) · Delivery: ask-on-risk · Runner: `node --test` (`npm test`), full check `npm run verify`.
+Branch: `feat/design-flow-guardrails` (from `feat/frontend-context-map`, stacked) · Delivery: ask-on-risk · Runner: `node --test` (`npm test`), full check `npm run verify`.
 
 ## Specs
 
@@ -27,7 +27,7 @@ Assumption: enforcement is a checked state plus instructions; an agent cannot be
 
 | ID | Specs | Route | Status | Commit |
 |---|---|---|---|---|
-| T1 | S1, S4 | inline | pending | — |
+| T1 | S1, S4 | inline | done | see L8 |
 | T2 | S5 | inline | pending | — |
 | T3 | S3 | inline | pending | — |
 | T4 | S2 | inline | pending | — |
@@ -47,3 +47,6 @@ T6: generated `catalog/digest.md` (top 5 per category, one line each, ~5k tokens
 - **L4 (2026-10-30, user verbatim):** "¿Existe algún sistema para poder de alguna manera entender bien cuál es el componente que debe elegir? [...] lo que se le llama un manifiesto que tenga todos los componentes pero que no consuma mucho memoria, mucho contexto, que esté optimizado y que entonces el agente sepa todos los componentes globales y sus características y que pueda escoger el propio agente." Finding: `catalog/component-manifest.json` (15 KB) indexes sources/categories, not components; entries (6.1 MB) are reached via `find`/`get` (<1 KB each). → S6/T6.
 - **L5 (2026-10-30, user verbatim):** "Además, Kirby también tenga herramientas o skills a la hora de buscar componentes en estas páginas. Es decir, que le sea más sencillo y ocupe menos. Bueno, tengo el enlace de esta página, voy a ver qué componentes gratuitos puedo sacar de aquí y cómo se instala." ("Kirby" read as a dictation error for "the AI/agent".) → S7/T7. Link not yet provided.
 - **Next:** commit prior work, create branch, start T1 (RED tests first).
+- **L6 (2026-11-04, user verbatim):** "comienza" — answer to: branch from `feat/frontend-context-map` (recommended: T4 overlaps its history and both touch the installer) or wait for its PR. Branch created stacked on it.
+- **L7 (T1 design):** `tools/flow.mjs` with `status | start <route> | next | done <step> [--evidence] | reset`; state in `ai-frontend-output/flow-state.json`. Routes follow the casuistics of `guides/00-START-HERE.md`; a step is done only when it is the current one and its artifact exists (or, for a step without a file, `--evidence` is given).
+- **L8 (T1 evidence, 2026-11-04):** S1 and S4 covered. RED: `tests/flow.test.mjs` 0/10 (no `flow.mjs`); GREEN 10/10; `npm run verify` exit 0, 85/85 tests, 46 required assets (`tools/flow.mjs` added to `build-kit`). `HELP.md` and `HELP.es.md` describe the tool (the coverage test failed until they did). Routing block, `AGENTS.md`, router and skill wiring are T5. Limit: artifacts are checked for existence and non-empty content, not for their sections.
