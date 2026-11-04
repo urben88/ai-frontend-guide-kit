@@ -36,9 +36,9 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 
 | Phase | What happens | You get |
 |---|---|---|
-| **1 · 🧠 UX & theory** | Experience direction (`experience/` + Laya for questions/direction), interactive discovery loop (example sites, likes, screenshots, component combinations), then proven flows (`userflow` + `flow-*`) and design tokens | `EXPERIENCE-BRIEF.md` · `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `DESIGN.md` + theme |
-| **2 · 🧩 Composition** | Inventory → catalog search → reuse/adapt/build decision → install | Components adapted to your tokens |
-| **3 · ✨ Total polish** | External audits (`impeccable`, taste-skill, emilkowalski) + Playwright MCP loop + `@playwright/test` regression | A screen ready to ship |
+| **1 · 🧠 UX & theory** | Experience direction (`experience/` + Laya for questions/direction), interactive discovery loop (example sites, likes, screenshots, component combinations), `landing-page-design` for landing pages, then proven flows (`userflow` + `flow-*`) and design tokens | `EXPERIENCE-BRIEF.md` · `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `DESIGN.md` + theme |
+| **2 · 🧩 Composition** | Inventory → catalog search → reuse/adapt/build decision → install. Only what the catalog cannot provide is built, with `hallmark` or `design-taste-frontend` | Components adapted to your tokens |
+| **3 · ✨ Total polish** | External audits (`impeccable`, `hallmark`, emilkowalski) + Playwright MCP loop + `@playwright/test` regression | A screen ready to ship |
 
 > 🔀 The phases are **entry points, not a strict pipeline**: the agent asks what you want — new frontend, small change, custom addition, polish only, UX only — and enters exactly where it fits.
 
@@ -65,7 +65,7 @@ npx github:urben88/ai-frontend-guide-kit
 | Flag | Effect |
 |---|---|
 | `--no-skills` | kit + docs only, no skills at all |
-| `--no-design-skills` | skip the 3 external design skills (impeccable/taste-skill/emilkowalski) |
+| `--no-design-skills` | skip the 5 external design skill repos (impeccable/taste-skill/emilkowalski/hallmark/landing-page-design) |
 | `--no-mcp` | skip the Playwright + Excalidraw MCP configuration |
 | `--with-laya` | also install/update Laya |
 | `--target <dir>` | install into another folder |
@@ -97,7 +97,7 @@ Results are ranked by **quality** (license clarity, install effort, dependency w
 1. 📁 Copies `ai-frontend-guide-kit/` into the target project (removes the legacy `ai-frontend-guide/` if present).
 2. 📌 Adds the **design routing block** to the project's `AGENTS.md` (and to `CLAUDE.md` / `.claude/CLAUDE.md` if they exist, because Claude Code then ignores `AGENTS.md`): any talk about design, UI or UX — in English or Spanish — goes through the kit first. The block is marked, so re-running the installer refreshes it without touching your own content.
 3. 💾 Creates `ai-frontend-output/` (selection memory) if missing — never removed on refresh.
-4. 🧩 Installs the **19 skills of this repo** into `.agents/skills/` (clean: no lockfile, no symlink sprawl) plus the **16 external design skills** via their CLI by default. If the project has `.claude/`, the 19 are linked into `.claude/skills/`.
+4. 🧩 Installs the **19 skills of this repo** into `.agents/skills/` (clean: no lockfile, no symlink sprawl) plus the **5 external design skill repos** via their CLI by default; the routing block gives each one its step in the flow. If the project has `.claude/`, the 19 are linked into `.claude/skills/`.
 5. 🎭 Configures the **Playwright + Excalidraw MCP** servers per detected harness (`.mcp.json` for Claude Code, `opencode.json` for OpenCode) and creates the `ai-frontend-output/ux/ux-map.excalidraw` scaffold; otherwise prints the exact commands. Browser once: `npx playwright install chromium`.
    - 🖱️ **Optional — Agentation** (click an element in your React app and tell the agent exactly what to change; guide `11-VISUAL-FEEDBACK.md`). The installer only prints the message, it does not install it: `npm install agentation -D`, `claude mcp add agentation -- npx -y agentation-mcp server`, `npx agentation-mcp doctor`, and mount `<Agentation endpoint="http://localhost:4747" />` in dev only.
 6. 🐍 Checks Python/Laya and prints the exact next step.

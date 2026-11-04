@@ -24,6 +24,7 @@ Follow `experience/QUESTION-BANK.md`:
   ```
   Otherwise follow phase order. Ask 1 question with 2–4 options + free text; record the answer in the brief (in progress) and continue. 10–18 answered questions is normally enough.
 - **Laya consent:** ask once per project/session; record `laya_consent: granted` (or `declined/revoked`) in the brief and use `--confirmed` afterwards. No Python/Laya → keep going deterministically.
+- **Landing or marketing page:** if `landing-page-design` is installed, use its intake topics (offer, primary action, audience, objections, traffic source, proof) inside these rounds, and its page outline, layout type and copy rules in steps 2–3. Write the results into the brief.
 
 ## Step 2 — Classify the experience
 
@@ -51,7 +52,7 @@ Follow `experience/DISCOVERY-LOOP.md` (phase A) between the IA and the three dir
 
 ## Step 5 — Three directions
 
-Generate **safe**, **differentiated** and **experimental**, differing in structure (archetype, navigation, journey, composition or narrative) — never three recolors. For each: what it changes, key patterns, what it sacrifices, main risk, when not to use. Apply the purpose and convergence tests and the anti-generic list of `experience/STYLE-DIRECTIONS.md`.
+Generate **safe**, **differentiated** and **experimental**, differing in structure (archetype, navigation, journey, composition or narrative) — never three recolors. For each: what it changes, key patterns, what it sacrifices, main risk, when not to use. Apply the purpose and convergence tests and the anti-generic list of `experience/STYLE-DIRECTIONS.md`. Optional: if `hallmark` (new pages and sites) or `design-taste-frontend` (app screens, existing pages) is installed, use the themes or directions it deals as raw material, without building anything; a theme alone is not a direction.
 
 ## Step 6 — Write `ai-frontend-output/ux/EXPERIENCE-BRIEF.md`
 

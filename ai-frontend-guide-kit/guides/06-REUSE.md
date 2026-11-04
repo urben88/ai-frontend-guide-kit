@@ -20,6 +20,8 @@ Need from inventory
 
 Record the path taken and one sentence of reasoning per row. "I liked it" is not a reason; "matches hero intent, MIT, reacts to scroll like the anchor requires" is.
 
+**On BUILD CUSTOM:** if installed, load `hallmark` (new page or section) or `design-taste-frontend` (app screen) and build only that row, inside the project's tokens. See "External design skills by step" in `00-START-HERE.md`. Without them, follow `08-PHILOSOPHY.md`.
+
 ## Install by method (use the `install_command` from `get`)
 
 ```bash

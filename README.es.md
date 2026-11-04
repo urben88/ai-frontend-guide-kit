@@ -30,9 +30,9 @@ Este repositorio es a la vez la 🏭 **fábrica** (pipeline de extracción + cat
 
 | Fase | Qué ocurre | Resultado |
 |---|---|---|
-| **1 · 🧠 UX y teoría** | Dirección de experiencia (`experience/` + Laya para preguntas y dirección), bucle de descubrimiento interactivo (sitios de ejemplo, "me gusta", capturas, combinaciones de componentes), flujos probados (`userflow` + `flow-*`) y tokens de diseño | `EXPERIENCE-BRIEF.md` · `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `DESIGN.md` + tema |
-| **2 · 🧩 Composición** | Inventario → búsqueda en el catálogo → decisión reutilizar/adaptar/construir → instalación | Componentes adaptados a tus tokens |
-| **3 · ✨ Pulido total** | Auditorías externas (`impeccable`, taste-skill, emilkowalski) + bucle con Playwright MCP + regresión con `@playwright/test` + auditorías de accesibilidad, rendimiento y honestidad | Una pantalla lista para publicar |
+| **1 · 🧠 UX y teoría** | Dirección de experiencia (`experience/` + Laya para preguntas y dirección), bucle de descubrimiento interactivo (sitios de ejemplo, "me gusta", capturas, combinaciones de componentes), `landing-page-design` para landings, flujos probados (`userflow` + `flow-*`) y tokens de diseño | `EXPERIENCE-BRIEF.md` · `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `DESIGN.md` + tema |
+| **2 · 🧩 Composición** | Inventario → búsqueda en el catálogo → decisión reutilizar/adaptar/construir → instalación. Solo se crea lo que el catálogo no tiene, con `hallmark` o `design-taste-frontend` | Componentes adaptados a tus tokens |
+| **3 · ✨ Pulido total** | Auditorías externas (`impeccable`, `hallmark`, emilkowalski) + bucle con Playwright MCP + regresión con `@playwright/test` + auditorías de accesibilidad, rendimiento y honestidad | Una pantalla lista para publicar |
 
 > 🔀 Las fases son **puntos de entrada, no una tubería rígida**: el agente pregunta qué quieres (frontend nuevo, cambio pequeño, adición a medida, solo pulido, solo UX) y entra justo donde encaja.
 
@@ -58,7 +58,7 @@ npx github:urben88/ai-frontend-guide-kit
 | Opción | Efecto |
 |---|---|
 | `--no-skills` | solo kit y documentación, sin skills |
-| `--no-design-skills` | omite las 3 skills externas (impeccable/taste-skill/emilkowalski) |
+| `--no-design-skills` | omite los 5 repos de skills externas (impeccable/taste-skill/emilkowalski/hallmark/landing-page-design) |
 | `--no-mcp` | omite la configuración de los MCP Playwright y Excalidraw |
 | `--with-laya` | instala/actualiza también Laya |
 | `--target <dir>` | instala en otra carpeta |

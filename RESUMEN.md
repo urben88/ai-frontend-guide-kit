@@ -44,6 +44,7 @@ flowchart LR
 | **Mapa UX** | Diagrama Excalidraw de pantallas, offline | `kit/tools/excalidraw-mcp.mjs` + skill `ux-map` |
 | **Ranking con Laya** (opcional) | Ordena preguntas, dirección de experiencia y candidatos con IA local | `kit/tools/laya_select.py` |
 | **Skills de agente** | Flujo guiado, pulido final, mapa UX y 16 flujos UX (`flow-*`) | `skills/` (copiadas a `.agents/skills/`) |
+| **Skills externas de diseño** | Cada una en su paso: `landing-page-design` (fase 1, solo landings), `hallmark` y `design-taste-frontend` (crean solo en la fase 2, si el catálogo no basta; `design-taste-frontend` también en un rediseño visual acordado; en la fase 1 solo dan ideas; `hallmark` también audita en la fase 3), `emilkowalski` (fases 2-3), `impeccable` (fase 3) | `install.mjs` (`npx skills add`, `--no-design-skills` las omite); reparto en `kit/guides/00-START-HERE.md` |
 
 `kit/` = `ai-frontend-guide-kit/`.
 

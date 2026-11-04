@@ -1,6 +1,6 @@
 ---
 name: frontend-polish
-description: "Use when the user asks to polish, refine, QA or do a final visual review of frontend UI (\"pulir\", \"polish\", \"revisión final\", \"QA visual\", \"dejar impecable\", \"revisar el diseño\", \"dar el último pase\"). Runs the total polish loop: audits with the external design skills when installed (impeccable, taste-skill, emilkowalski), an interactive pass with Playwright MCP over states, console, accessibility, keyboard and reduced motion, exact fixes, a closing @playwright/test regression, and an optional human round where the user points at elements in the browser (Agentation MCP, React). Works with fallbacks when those tools are missing."
+description: "Use when the user asks to polish, refine, QA or do a final visual review of frontend UI (\"pulir\", \"polish\", \"revisión final\", \"QA visual\", \"dejar impecable\", \"revisar el diseño\", \"dar el último pase\"). Runs the total polish loop: audits with the external design skills when installed (impeccable, hallmark, emilkowalski, plus the checks of design-taste-frontend on a screen it built), an interactive pass with Playwright MCP over states, console, accessibility, keyboard and reduced motion, exact fixes, a closing @playwright/test regression, and an optional human round where the user points at elements in the browser (Agentation MCP, React). Works with fallbacks when those tools are missing."
 ---
 
 # Frontend Polish — total finish pass
@@ -24,12 +24,17 @@ Phase 3 of the `ai-frontend-guide-kit` workflow. Goal: a screen that survives sc
 
 Skills are opt-in by their own descriptions; load them when present, never assume slash commands:
 
-- **`impeccable`** (if installed): run its `audit` workflow on the screen, then its `polish` workflow. Treat its findings as the primary craft checklist.
-- **`design-taste-frontend`** / taste-skill (if installed): hierarchy, density and proportion review.
+- **`impeccable`** (if installed): the primary craft checklist. Run its `critique` workflow on the screen (scored UX review), then `audit` (accessibility, performance, theming, responsive), then `polish`. Also run `npx impeccable detect <dir-or-url>`: deterministic rules, no LLM.
+- **`hallmark`** (if installed): second opinion, report only, for pages and sites. It audits only when named, so say "use hallmark to audit <path>", and run `node <skill-dir>/scripts/sloplint.mjs <path> --render`. Static checks run without a browser; browser checks need `puppeteer-core` and Chrome.
+- **`design-taste-frontend`** (if installed): only when it built or redesigned this screen. Its lint and browser inspection must be green. It is a page builder, not a review pass: do not start it here on a screen it did not build.
 - **emilkowalski** (if installed): `review-animations` (or `improve-animations`) when the screen has motion; `emil-design-eng` for interaction physics.
 - If none are installed, use the distilled checklist in `guides/08-PHILOSOPHY.md` (anti-generic rules, springs, effect budget).
 
-Record every accepted finding with its fix; do not apply an external suggestion that contradicts `PRODUCT.md`, tokens or the license rules.
+If a check of an installed skill cannot run (older Node, no browser, offline), say which one and continue with the others; never report it as passed. Taste's checks need Node 22+ and Chrome, Edge or Chromium.
+
+Impeccable's `bolder` and `quieter` workflows change the design direction. If the critique says the screen is too safe or too loud, tell the user and run them only if the user agrees.
+
+Merge duplicate findings across skills. Record every accepted finding with its fix; do not apply an external suggestion that contradicts `PRODUCT.md`, tokens or the license rules.
 
 ## Step 2 — Playwright MCP pass (the loop)
 

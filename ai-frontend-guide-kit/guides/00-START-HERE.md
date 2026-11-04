@@ -33,6 +33,7 @@ Phase 1 starts with the **experience direction** (`01`): adaptive questions guid
 | Polish only / visual QA | Phase 3: `frontend-polish` + `09-VERIFY` |
 | Specific visual tweaks the user wants to point at in the browser (React) | `11-VISUAL-FEEDBACK.md` (Agentation) |
 | UX only / redesign | Phase 1 (`02-UX-FLOWS`); no UI work |
+| Visual redesign of an existing screen (keep flows, content and wiring) | Agree it with the user, then `design-taste-frontend` redesign mode → phase 3 |
 | Backend/logic only | Not this kit — skip it |
 
 A small new project may compress **1 → 2 → 3** (tokens and philosophy can merge), but never build before checking memory + catalog.
@@ -46,13 +47,36 @@ A small new project may compress **1 → 2 → 3** (tokens and philosophy can me
 | `userflow` + `flow-*` skills | yes | — | optional flow audit |
 | `ux-map` skill + local Excalidraw MCP | direction-aware screen/navigation map | — | flow audit visual |
 | Catalog + `find`/`get` + selection memory + Laya (`fit`) | — | yes | — |
+| `landing-page-design` (if installed, landing pages only) | intake, page outline, copy | — | — |
+| `hallmark` (if installed) | raw material for the directions | only when the decision is `build` | report-only audit |
+| `design-taste-frontend` (if installed) | raw material for the directions | only when the decision is `build`, or an agreed visual redesign | its checks, on a screen it built |
 | `emilkowalski` skills (if installed) | — | interactions | review/improve animations |
-| `impeccable` / taste-skill (if installed) | — | — | audit + polish |
+| `impeccable` (if installed) | — | — | critique, audit, polish, `detect` |
 | Playwright MCP | reference discovery + extraction | render a block in isolation | visual/BUILD loop |
 | `@playwright/test` (guide 09) | — | — | regression gate |
 | Agentation MCP (guide 11, React, optional) | — | point-and-change on a rendered block | final human round |
 
-Load an external skill only when its description matches what you are doing; if it is not installed, use the distilled rules of `08-PHILOSOPHY.md` and say so.
+## External design skills by step
+
+The kit flow comes first. Some of these skills describe themselves as covering almost any UI request, and that does not make them the entry point: load each one only at its step. If one is not installed, use the distilled rules of `08-PHILOSOPHY.md` and say so.
+
+| Step | Skill | Use it for | Limits |
+|---|---|---|---|
+| Phase 1, guide `01` steps 1–3, landing or marketing pages only | `landing-page-design` | Intake topics (offer, audience, objections, proof), page outline, layout type, conversion copy | Merge its questions into the kit's rounds and skip what is already known. The brief and `DESIGN.md` override its visual rules and its Tailwind, Framer Motion and icon defaults. |
+| Phase 1, guide `01` step 5 (optional) | `hallmark` or `design-taste-frontend` | Raw material for the three directions | They only propose themes here and build nothing; the three directions must still differ in structure. |
+| Phase 2, guide `06`, new page or section with decision `build` | `hallmark` | Building what the catalog could not provide | Only after `05-FIND` for that block. Keep the blocks already reused. A root `DESIGN.md` locks its design system. |
+| Phase 2, guide `06`, app screen with decision `build`, or an agreed visual redesign | `design-taste-frontend` | Building or redesigning inside the project's stack | Same limits. Keep brand values. Needs Node 22+ and Chrome, Edge or Chromium. |
+| Phases 2–3 | `emilkowalski` | Interactions and animation review | Keep the effect budget of `08-PHILOSOPHY.md`. |
+| Phase 3, through `frontend-polish` | `impeccable` | Critique, audit, polish and the `detect` check | `bolder` and `quieter` change the direction: run them only when the user asks. |
+| Phase 3, through `frontend-polish` | `hallmark` | Second-opinion audit of pages and sites | Report only: name it to trigger the audit, and do not let it rebuild the screen. |
+| Phase 3, through `frontend-polish`, only on a screen it built | `design-taste-frontend` | Its lint and browser inspection | No new build or redesign here. |
+
+Rules for all of them:
+
+- Record what they build as usual: `memory.mjs add ... --decision build --notes "skill:<name>"`.
+- If a skill's advice contradicts `PRODUCT.md`, `DESIGN.md`, the brief or the license rules, the kit's files win.
+- If a skill wants to create `PRODUCT.md` or `DESIGN.md` (for example `/impeccable init`), point it to the kit's existing files; never overwrite them.
+- Pictures they bring in keep their own licenses: keep the credits they ask for.
 
 ## Token discipline (mandatory)
 

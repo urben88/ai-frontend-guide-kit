@@ -13,7 +13,7 @@ Self-contained guided kit for building frontend UX/UI with a reuse-first workflo
 Before creating UI components, follow `ai-frontend-guide-kit/AGENTS.md` (reuse-first workflow).
 ```
 
-Prefer the installer (`npm i -D github:urben88/ai-frontend-guide-kit` + `npx ai-frontend-guide-kit`): it copies this folder, creates `ai-frontend-output/`, patches `AGENTS.md`, installs the 19 skills of the repo cleanly into `.agents/skills/` (plus `.claude/skills/` when a `.claude/` folder exists), installs the 3 external design skills via their CLI (`--no-design-skills` to skip) and configures the Playwright + Excalidraw MCP servers for detected harnesses (`--no-mcp` to skip).
+Prefer the installer (`npm i -D github:urben88/ai-frontend-guide-kit` + `npx ai-frontend-guide-kit`): it copies this folder, creates `ai-frontend-output/`, patches `AGENTS.md`, installs the 19 skills of the repo cleanly into `.agents/skills/` (plus `.claude/skills/` when a `.claude/` folder exists), installs the 5 external design skill repos via their CLI (`--no-design-skills` to skip) and configures the Playwright + Excalidraw MCP servers for detected harnesses (`--no-mcp` to skip).
 
 Requirements: none for reading the guides or catalog. The query tools need Node.js ≥ 18; no npm packages are required.
 
@@ -62,7 +62,7 @@ The `ux-map` skill draws the living map (one node per screen or section with its
 
 ## Total polish phase (`frontend-polish` + Playwright MCP)
 
-The kit workflow ends with phase 3, run by the sibling `frontend-polish` skill: external audits when installed (`impeccable`, taste-skill, emilkowalski), an interactive Playwright MCP loop (a11y snapshot, states hover/focus/loading/empty/error, console, keyboard, reduced motion, responsive) and the `@playwright/test` regression of `09-VERIFY`. Without those tools, it falls back to the distilled checklist of `08-PHILOSOPHY`. Browse installs once with `npx playwright install chromium`.
+The kit workflow ends with phase 3, run by the sibling `frontend-polish` skill: external audits when installed (`impeccable`, `hallmark`, emilkowalski), an interactive Playwright MCP loop (a11y snapshot, states hover/focus/loading/empty/error, console, keyboard, reduced motion, responsive) and the `@playwright/test` regression of `09-VERIFY`. Without those tools, it falls back to the distilled checklist of `08-PHILOSOPHY`. Browse installs once with `npx playwright install chromium`.
 
 ## Selection memory (`ai-frontend-output/`)
 

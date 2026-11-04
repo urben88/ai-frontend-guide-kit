@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, existsSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, dirname } from 'node:path';
+import { delimiter, join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
@@ -100,6 +100,57 @@ test('installer routes every design request (EN + ES) to the kit', () => {
   }
   assert.match(agents, /impeccable/);
   assert.ok(!existsSync(join(target, 'CLAUDE.md')), 'no CLAUDE.md created when absent');
+});
+
+test('installer fetches the 5 external design skill repos, and only landing-page-design from elayadesign', () => {
+  const target = mkdtempSync(join(tmpdir(), 'kit-design-skills-'));
+  const stub = mkdtempSync(join(tmpdir(), 'kit-npx-stub-'));
+  const log = join(stub, 'npx.log');
+  writeFileSync(join(stub, 'npx'), '#!/bin/sh\necho "$@" >> "$NPX_LOG"\n', { mode: 0o755 });
+  writeFileSync(join(stub, 'npx.cmd'), '@echo %*>> "%NPX_LOG%"\r\n');
+  const pathKey = Object.keys(process.env).find((key) => key.toUpperCase() === 'PATH');
+  const env = { ...process.env, NPX_LOG: log, [pathKey]: `${stub}${delimiter}${process.env[pathKey]}` };
+
+  const run = node([join(ROOT, 'install.mjs'), '--target', target, '--no-mcp'], { env });
+  assert.equal(run.status, 0, run.stderr);
+  const calls = readFileSync(log, 'utf8');
+  for (const expected of [
+    'skills add https://github.com/pbakaus/impeccable --skill impeccable',
+    'skills add https://github.com/Leonxlnx/taste-skill --skill design-taste-frontend',
+    'skills add https://github.com/emilkowalski/skills',
+    'skills add https://github.com/nutlope/hallmark --skill hallmark',
+    'skills add https://github.com/elayadesign/ai-design-skills --skill landing-page-design',
+  ]) {
+    assert.ok(calls.includes(expected), `missing call: ${expected}`);
+  }
+  assert.equal(calls.trim().split(/\r?\n/).length, 5);
+
+  writeFileSync(log, '');
+  const skipped = mkdtempSync(join(tmpdir(), 'kit-no-design-skills-'));
+  const noDesign = node([join(ROOT, 'install.mjs'), '--target', skipped, '--no-mcp', '--no-design-skills'], { env });
+  assert.equal(noDesign.status, 0, noDesign.stderr);
+  assert.equal(readFileSync(log, 'utf8'), '');
+});
+
+test('routing block and guide 00 place each external design skill at its flow step', () => {
+  const target = mkdtempSync(join(tmpdir(), 'kit-skill-steps-'));
+  assert.equal(install(target).status, 0);
+  const agents = readFileSync(join(target, 'AGENTS.md'), 'utf8');
+  const guide = readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'guides', '00-START-HERE.md'), 'utf8');
+  for (const skill of ['landing-page-design', 'hallmark', 'design-taste-frontend', 'impeccable', 'emilkowalski']) {
+    assert.ok(agents.includes(skill), `routing block names ${skill}`);
+    assert.ok(guide.includes(skill), `guide 00 names ${skill}`);
+  }
+  assert.ok(!agents.includes('run only inside phase 3'), 'stale phase 3 only rule removed');
+  assert.ok(!guide.includes('only when its description matches'), 'stale load rule removed');
+});
+
+test('installer help counts 5 external design skill repos', () => {
+  const help = node([join(ROOT, 'install.mjs'), '--help']);
+  assert.equal(help.status, 0);
+  assert.match(help.stdout, /5 external design skill repos/);
+  assert.match(help.stdout, /hallmark/);
+  assert.match(help.stdout, /landing-page-design/);
 });
 
 test('installer upgrades the legacy unmarked block and keeps user content', () => {

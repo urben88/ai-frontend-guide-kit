@@ -31,7 +31,11 @@ design, redesign, restyle, UI, UX, look and feel, theme, colors, typography, fon
 landing, dashboard, component, form, animation, polish; diseño, rediseñar, estilo, aspecto, tema, colores,
 tipografía, fuentes, espaciado, maquetación, pantalla, página, landing, componente, formulario, animación, pulir.
 Do not design from scratch: reuse > adapt > build, using the catalog (\`node ai-frontend-guide-kit/tools/find.mjs\`).
-External design skills (impeccable, taste-skill, emilkowalski) run only inside phase 3 through \`frontend-polish\`.
+External design skills never act as the entry point, even when their description matches: each runs only at its step
+(\`ai-frontend-guide-kit/guides/00-START-HERE.md\`): landing-page-design in phase 1 (landing pages only); hallmark and
+design-taste-frontend build only in phase 2, after a catalog search ends in build (design-taste-frontend also for an
+agreed visual redesign); both may give raw material for the directions in phase 1 without building; hallmark gives a report-only audit in phase 3;
+emilkowalski in phases 2-3; impeccable in phase 3 through \`frontend-polish\`.
 Ask the user first what they want (new frontend UX -> composition -> polish, a small change, a custom
 addition, or polish only) and enter the three-phase workflow at the right point before touching code.
 New frontends start with the experience direction (\`ai-frontend-guide-kit/guides/01-EXPERIENCE-DIRECTION.md\`
@@ -90,19 +94,20 @@ Recommended: commit this folder with the project (it is project history, not bui
 
 const KIT_SKILLS_DIR = join(REPO_ROOT, 'skills');
 
-// CLI mode (--skills-mode cli): the previous full flow, lockfile + multi-agent links.
-const CLI_SKILL_REPOS = [
-  ['https://github.com/pbakaus/impeccable', '--skill', 'impeccable'],
-  ['https://github.com/Leonxlnx/taste-skill', '--skill', 'design-taste-frontend'],
-  ['https://github.com/emilkowalski/skills', null],
-  ['https://github.com/urben88/ai-frontend-guide-kit', null],
-];
-
-// Optional external design skills in copy mode (--design-skills).
+// External design skills, installed by default in both modes (--no-design-skills skips them in copy mode).
 const DESIGN_SKILL_REPOS = [
   ['https://github.com/pbakaus/impeccable', '--skill', 'impeccable'],
   ['https://github.com/Leonxlnx/taste-skill', '--skill', 'design-taste-frontend'],
   ['https://github.com/emilkowalski/skills', null],
+  ['https://github.com/nutlope/hallmark', '--skill', 'hallmark'],
+  // Only this skill: the repo also ships figma-designer, which the kit flow does not use.
+  ['https://github.com/elayadesign/ai-design-skills', '--skill', 'landing-page-design'],
+];
+
+// CLI mode (--skills-mode cli): the previous full flow, lockfile + multi-agent links.
+const CLI_SKILL_REPOS = [
+  ...DESIGN_SKILL_REPOS,
+  ['https://github.com/urben88/ai-frontend-guide-kit', null],
 ];
 
 function parseArgs(argv) {
@@ -136,7 +141,8 @@ Options:
   --no-skills           skip installing skills entirely
   --skills-mode <mode>  copy (default): copy the 19 kit skills to .agents/skills (clean, no lockfile)
                         cli: use "npx skills add" (lockfile + multi-agent links, includes design skills)
-  --no-design-skills    skip the 3 external design skills (impeccable/taste-skill/emilkowalski; need network)
+  --no-design-skills    skip the 5 external design skill repos (impeccable/taste-skill/emilkowalski/hallmark/
+                        landing-page-design; need network)
   --no-mcp              skip the Playwright + Excalidraw MCP configuration
   --with-laya           install/update Laya with pip (heavy: pulls torch on first install)
   --help                show this help
@@ -149,7 +155,7 @@ What it does:
      It also creates ai-frontend-output/ux/ux-map.excalidraw (Excalidraw scaffold) if missing.
   4. Installs skills into .agents/skills: copy mode copies the 19 kit skills (workflow + 16 UX flows +
      frontend-polish + ux-map); if the project has a .claude/ folder, they are also linked into .claude/skills
-     (junction/symlink, fallback to copy). The 3 external design skills also install by default via
+     (junction/symlink, fallback to copy). The 5 external design skill repos also install by default via
      the CLI (use --no-design-skills to skip them).
   5. Configures the Playwright + Excalidraw MCP servers for detected harnesses (.claude/ -> .mcp.json,
      opencode.json -> mcp.playwright + mcp.excalidraw); the Excalidraw server is the local,
@@ -439,7 +445,7 @@ function main() {
       const { names, copied } = installSkillsCopy(target);
       console.log(`- ${copied} skills copied to .agents/skills/ (clean: no lockfile, no symlinks)`);
       if (args.designSkills) {
-        runCliSkills(target, DESIGN_SKILL_REPOS, 'external design skills (impeccable + taste-skill + emilkowalski)');
+        runCliSkills(target, DESIGN_SKILL_REPOS, 'external design skills (impeccable + taste-skill + emilkowalski + hallmark + landing-page-design)');
       } else {
         console.log('- external design skills skipped (--no-design-skills)');
       }

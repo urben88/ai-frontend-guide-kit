@@ -17,11 +17,11 @@ El repositorio SHALL ofrecer un único comando (`node install.mjs`) que copie el
 - **THEN** el instalador continúa, informa del fallo y el kit sigue siendo funcional con `find`/`get`
 
 ### Requirement: Skills installation
-El instalador SHALL instalar por defecto las 19 skills del kit en `<destino>/.agents/skills/` (copia limpia en modo copy), las tres skills externas de diseño (`pbakaus/impeccable`, `Leonxlnx/taste-skill`, `emilkowalski/skills`, 16 skills) mediante `npx skills add`, y SHALL permitir omitir las externas con `--no-design-skills` o todas con `--no-skills`. Si una instalación externa falla (sin red o sin npx), el instalador SHALL continuar, informar del fallo y dejar el kit funcional con `find`/`get`.
+El instalador SHALL instalar por defecto las 19 skills del kit en `<destino>/.agents/skills/` (copia limpia en modo copy), los cinco repos de skills externas de diseño (`pbakaus/impeccable`, `Leonxlnx/taste-skill`, `emilkowalski/skills`, `nutlope/hallmark` y solo `landing-page-design` de `elayadesign/ai-design-skills`) mediante `npx skills add`, y SHALL permitir omitir las externas con `--no-design-skills` o todas con `--no-skills`. Si una instalación externa falla (sin red o sin npx), el instalador SHALL continuar, informar del fallo y dejar el kit funcional con `find`/`get`.
 
 #### Scenario: Skills por defecto
 - **WHEN** se ejecuta el instalador sin banderas
-- **THEN** las 19 skills del kit quedan en `.agents/skills/` y se ejecutan los comandos `npx skills add` de las tres skills externas, reportando el resultado de cada una
+- **THEN** las 19 skills del kit quedan en `.agents/skills/` y se ejecutan los comandos `npx skills add` de los cinco repos de skills externas, reportando el resultado de cada una
 
 #### Scenario: Skill propia incluida
 - **WHEN** termina la instalación de skills
@@ -115,12 +115,12 @@ El instalador SHALL crear `<destino>/ai-frontend-output/` con un `README.md` exp
 
 ### Requirement: UX skills distribution
 
-El instalador SHALL instalar las 19 skills de este repositorio (workflow `ai-frontend-guide`, 16 UX vendorizadas, `frontend-polish` y `ux-map`) y, por defecto, las tres skills de diseño externas; SHALL permitir omitir las externas con `--no-design-skills` y todas con `--no-skills`. El empaquetado (`tools/build-kit.mjs`) SHALL verificar la presencia de las skills vendorizadas, de `frontend-polish`, de `ux-map` y de sus archivos de origen/licencia en el repositorio.
+El instalador SHALL instalar las 19 skills de este repositorio (workflow `ai-frontend-guide`, 16 UX vendorizadas, `frontend-polish` y `ux-map`) y, por defecto, los cinco repos de skills de diseño externas; SHALL permitir omitir las externas con `--no-design-skills` y todas con `--no-skills`. El empaquetado (`tools/build-kit.mjs`) SHALL verificar la presencia de las skills vendorizadas, de `frontend-polish`, de `ux-map` y de sus archivos de origen/licencia en el repositorio.
 
 #### Scenario: Instalación completa
 
 - **WHEN** se ejecuta el instalador sin `--no-skills`
-- **THEN** quedan instaladas las 19 skills del kit y las tres externas (salvo `--no-design-skills`)
+- **THEN** quedan instaladas las 19 skills del kit y las de los cinco repos externos (salvo `--no-design-skills`)
 
 #### Scenario: Empaquetado verificado
 
@@ -144,7 +144,7 @@ El paquete SHALL poder instalarse como dependencia de `package.json` (`npm i -D 
 - **THEN** el tarball incluye `install.mjs`, `ai-frontend-guide-kit/`, `skills/` y `README.md`, y el bin resuelve desde `node_modules`
 
 ### Requirement: Clean skills copy mode
-Por defecto (`--skills-mode copy`) el instalador SHALL copiar las 19 skills del paquete (workflow + 16 UX + pulido + mapa visual) a `<destino>/.agents/skills/`, de forma idempotente, SIN crear `skills-lock.json` ni symlinks para esas skills y sin tocar skills ajenas al kit. Además, en modo copy instalará por defecto las tres skills externas mediante `npx skills add` (sus artefactos propios, como lockfile o enlaces, los gestiona el CLI), salvo `--no-design-skills`. `--skills-mode cli` SHALL conservar el flujo anterior (CLI `skills` completo con lockfile y enlaces multiagente) y `--no-skills` SHALL omitir toda instalación de skills.
+Por defecto (`--skills-mode copy`) el instalador SHALL copiar las 19 skills del paquete (workflow + 16 UX + pulido + mapa visual) a `<destino>/.agents/skills/`, de forma idempotente, SIN crear `skills-lock.json` ni symlinks para esas skills y sin tocar skills ajenas al kit. Además, en modo copy instalará por defecto los cinco repos de skills externas mediante `npx skills add` (sus artefactos propios, como lockfile o enlaces, los gestiona el CLI), salvo `--no-design-skills`. `--skills-mode cli` SHALL conservar el flujo anterior (CLI `skills` completo con lockfile y enlaces multiagente) y `--no-skills` SHALL omitir toda instalación de skills.
 
 #### Scenario: Instalación limpia
 - **WHEN** se ejecuta el setup en modo copy con `--no-design-skills` sobre un proyecto sin skills previas
@@ -156,11 +156,11 @@ Por defecto (`--skills-mode copy`) el instalador SHALL copiar las 19 skills del 
 
 #### Scenario: Modo CLI
 - **WHEN** se ejecuta con `--skills-mode cli`
-- **THEN** se usa `npx skills add` para las 19 skills del kit y las tres externas (lockfile y enlaces multiagente incluidos)
+- **THEN** se usa `npx skills add` para las 19 skills del kit y los cinco repos externos (lockfile y enlaces multiagente incluidos)
 
 #### Scenario: Skills externas de diseño
 - **WHEN** se ejecuta el setup sin `--no-design-skills`
-- **THEN** impeccable, taste-skill y emilkowalski se instalan vía `npx skills add` (requiere red) además de las 19 skills del kit
+- **THEN** impeccable, taste-skill, emilkowalski, hallmark y landing-page-design se instalan vía `npx skills add` (requiere red) además de las 19 skills del kit
 
 ### Requirement: Claude Code linking
 Si el proyecto destino contiene un directorio `.claude/`, el instalador SHALL enlazar las 19 skills en `.claude/skills/<nombre>` (junction en Windows, symlink en POSIX) y SHALL recurrir a copia si el sistema no permite enlaces. Si no existe `.claude/`, NO SHALL crear ese directorio.

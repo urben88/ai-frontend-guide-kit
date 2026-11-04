@@ -48,7 +48,7 @@ Capture the states that carry the design intent: hover, focus, loading, empty an
 npx playwright test
 ```
 
-- If the `impeccable` skill is installed: `/impeccable audit <screen>` and `/impeccable polish <screen>` before closing each screen.
+- If the `impeccable` skill is installed: `/impeccable critique <screen>`, `/impeccable audit <screen>` and `/impeccable polish <screen>` before closing each screen, plus `npx impeccable detect <dir-or-url>` (deterministic, no LLM).
 - Failures: fix the exact reported issue, then re-run the full suite. No screen is done with a red test.
 
 ## 4. Automated accessibility (WCAG 2.2)

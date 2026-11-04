@@ -106,7 +106,9 @@ Gate: do not start the UI steps until `EXPERIENCE-BRIEF.md` has the chosen direc
 
 ## Total polish phase (`frontend-polish` + Playwright MCP)
 
-Before closing any screen, run the `frontend-polish` skill: external audits when installed (impeccable, taste-skill, emilkowalski), the Playwright MCP loop (a11y snapshot, states, console, keyboard, reduced motion, responsive) and the `@playwright/test` regression of `guides/09-VERIFY.md`. The installer configures Playwright MCP for detected harnesses; the browser installs once with `npx playwright install chromium`. Fallback: the checklist in `guides/08-PHILOSOPHY.md`.
+External design skills run only at the step `guides/00-START-HERE.md` gives them: `landing-page-design` in phase 1 (landing pages only), `hallmark` and `design-taste-frontend` build only in phase 2, for decision `build` (`design-taste-frontend` also for an agreed visual redesign); both may give raw material for the directions in phase 1 without building; `hallmark` gives a report-only audit in phase 3; `emilkowalski` in phases 2–3; `impeccable` in phase 3.
+
+Before closing any screen, run the `frontend-polish` skill: external audits when installed (impeccable, hallmark, emilkowalski, plus the checks of design-taste-frontend when it built the screen), the Playwright MCP loop (a11y snapshot, states, console, keyboard, reduced motion, responsive) and the `@playwright/test` regression of `guides/09-VERIFY.md`. The installer configures Playwright MCP for detected harnesses; the browser installs once with `npx playwright install chromium`. Fallback: the checklist in `guides/08-PHILOSOPHY.md`.
 
 Optional human round (React projects): the user can click the elements to change with Agentation; the agent processes the annotations through its MCP (`guides/11-VISUAL-FEEDBACK.md`, which also holds the install message: `npm install agentation -D` + `claude mcp add agentation -- npx -y agentation-mcp server`). Offer it during composition for fine adjustments and at the end of polish; never require it.
 
