@@ -8,6 +8,9 @@
  *
  * Usage:
  *   node tools/context.mjs [--dir <project-root>] [--json]
+ *
+ * UI libraries come from package.json and components.json: covered (a catalog source is built on it),
+ * compatible (catalog entries depend on it) or to research (not in the catalog: use its own docs).
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
@@ -166,6 +169,101 @@ function detectFramework(root, files) {
   return { framework, bmad, specDriven, storyCount: stories.length, evidence };
 }
 
+// The package a catalog source is built from. Only sources present in catalog/sources/ are reported.
+const PRIMARY_PACKAGES = {
+  '@mui/material': 'mui',
+  antd: 'antd',
+  '@chakra-ui/react': 'chakra',
+  '@mantine/core': 'mantine',
+  '@headlessui/react': 'headlessui',
+  '@headlessui/vue': 'headlessui',
+  flowbite: 'flowbite',
+  'flowbite-react': 'flowbite',
+  preline: 'preline',
+  daisyui: 'daisyui',
+  'radix-ui': 'radix',
+  'react-aria-components': 'reactaria',
+  '@base-ui/react': 'baseui',
+  '@base-ui-components/react': 'baseui',
+  'reka-ui': 'shadcnvue',
+  'bits-ui': 'shadcnsvelte',
+};
+const UI_WORDS = new Set(['ui', 'component', 'components', 'icon', 'icons', 'headless', 'primitives', 'motion', 'animation', 'chart', 'charts',
+  'carousel', 'toast', 'sonner', 'vaul', 'cmdk', 'vuetify', 'quasar', 'primevue', 'primereact', 'tamagui', 'nextui', 'heroui', 'kobalte',
+  'gsap', 'lottie', 'swiper', 'styled', 'emotion', 'daisyui', 'element-plus', 'shadcn']);
+
+function packageName(dep) {
+  const parts = dep.split('/');
+  const base = dep.startsWith('@') ? parts.slice(0, 2).join('/') : parts[0];
+  const at = base.indexOf('@', 1);
+  return at === -1 ? base : base.slice(0, at);
+}
+
+function catalogSources() {
+  const dir = join(KIT_DIR, 'catalog', 'sources');
+  const ids = new Set();
+  const usedBy = new Map();
+  if (!existsSync(dir)) return { ids, usedBy };
+  for (const file of readdirSync(dir).filter((name) => name.endsWith('.json'))) {
+    const source = JSON.parse(readFileSync(join(dir, file), 'utf8'));
+    ids.add(source.source_id);
+    for (const entry of source.entries ?? []) {
+      for (const dep of entry.dependencies ?? []) {
+        const name = packageName(dep);
+        if (!usedBy.has(name)) usedBy.set(name, new Map());
+        const counts = usedBy.get(name);
+        counts.set(source.source_id, (counts.get(source.source_id) ?? 0) + 1);
+      }
+    }
+  }
+  return { ids, usedBy };
+}
+
+const looksLikeUi = (name) => name.replace(/^@/, '').split(/[/.-]/).some((word) => UI_WORDS.has(word)) || UI_WORDS.has(name);
+
+function detectLibraries(root) {
+  const libraries = { covered: [], compatible: [], toResearch: [] };
+  const manifestPath = join(root, 'package.json');
+  const shadcnPath = join(root, 'components.json');
+  if (!existsSync(manifestPath) && !existsSync(shadcnPath)) return libraries;
+  const { ids, usedBy } = catalogSources();
+  if (existsSync(manifestPath)) {
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    const deps = Object.keys({ ...(manifest.dependencies ?? {}), ...(manifest.devDependencies ?? {}) }).sort();
+    for (const name of deps) {
+      if (name.startsWith('@types/')) continue;
+      const primary = PRIMARY_PACKAGES[name] ?? (name.startsWith('@radix-ui/') ? 'radix' : null);
+      if (primary && ids.has(primary)) {
+        libraries.covered.push({ package: name, sources: [primary], via: 'package.json' });
+      } else if (usedBy.has(name)) {
+        if (!looksLikeUi(name)) continue;
+        const sources = [...usedBy.get(name).entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 4).map(([id]) => id);
+        libraries.compatible.push({ package: name, sources });
+      } else if (looksLikeUi(name)) {
+        libraries.toResearch.push(name);
+      }
+    }
+  }
+  if (existsSync(shadcnPath)) {
+    let config = {};
+    try {
+      config = JSON.parse(readFileSync(shadcnPath, 'utf8'));
+    } catch {
+      config = {};
+    }
+    const schema = String(config.$schema ?? '');
+    const flavor = schema.includes('shadcn-vue') ? 'shadcnvue' : schema.includes('shadcn-svelte') ? 'shadcnsvelte' : 'shadcn';
+    if (ids.has(flavor)) libraries.covered.push({ package: 'components.json', sources: [flavor], via: 'components.json' });
+    for (const registry of Object.keys(config.registries ?? {}).sort()) {
+      const id = registry.replace(/^@/, '');
+      if (ids.has(id)) libraries.covered.push({ package: registry, sources: [id], via: 'components.json registry' });
+      else libraries.toResearch.push(registry);
+    }
+  }
+  libraries.toResearch.sort();
+  return libraries;
+}
+
 function main() {
   const flags = parseArgs(process.argv.slice(2));
   const projectRoot = resolveProjectRoot(flags);
@@ -176,6 +274,7 @@ function main() {
   const specs = findSpecs(projectRoot);
   const ux = findUxArtifacts(projectRoot);
   const framework = detectFramework(projectRoot, files);
+  const libraries = detectLibraries(projectRoot);
 
   const evidence = [];
   if (routes.length > 0) evidence.push(`${routes.length} route(s)/screen(s) detected`);
@@ -202,6 +301,7 @@ function main() {
     specDriven: framework.specDriven,
     storyCount: framework.storyCount,
     frameworkEvidence: framework.evidence,
+    libraries,
     suggestedPath: uxPresent ? 'existing UX: ask the user — Summarize (as-is) or Radical redesign (UX only)' : 'no UX detected: design from scratch with userflow',
   };
 
@@ -240,6 +340,20 @@ function main() {
     lines.push('');
     if (specs.specs.length > 0) lines.push(`- Capabilities: ${specs.specs.map((s) => `\`${s}\``).join(', ')}`);
     if (specs.activeChanges.length > 0) lines.push(`- Active changes: ${specs.activeChanges.map((s) => `\`${s}\``).join(', ')}`);
+    lines.push('');
+  }
+  if (libraries.covered.length + libraries.compatible.length + libraries.toResearch.length > 0) {
+    lines.push('## UI libraries');
+    lines.push('');
+    if (libraries.covered.length > 0) {
+      lines.push(`- Covered by the catalog: ${libraries.covered.map((lib) => `\`${lib.package}\` → \`${lib.sources[0]}\` (\`node tools/find.mjs --source ${lib.sources[0]}\`)`).join(', ')}`);
+    }
+    if (libraries.compatible.length > 0) {
+      lines.push(`- Used by catalog sources (compatible picks): ${libraries.compatible.map((lib) => `\`${lib.package}\` (${lib.sources.map((id) => `\`${id}\``).join(', ')})`).join(', ')}`);
+    }
+    if (libraries.toResearch.length > 0) {
+      lines.push(`- To research (not in the catalog): ${libraries.toResearch.map((name) => `\`${name}\``).join(', ')} — use each library's own documentation for its components and install steps, and prefer it before adding another library.`);
+    }
     lines.push('');
   }
   if (Object.keys(ux.artifacts).length > 0) {
