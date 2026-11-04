@@ -85,7 +85,7 @@ node ai-frontend-guide-kit/tools/flow.mjs start new       # declarar la ruta
 node ai-frontend-guide-kit/tools/flow.mjs done intake     # rechaza un paso saltado o un artefacto que falta
 ```
 
-Todas las rutas y pasos, con sus skills: `ai-frontend-guide-kit/guides/FLOWS.md`. `context.mjs` también lista las librerías de UI del proyecto (cubiertas por el catálogo, compatibles o por investigar) y `memory.mjs lib sync` las registra.
+Todas las rutas y pasos, con sus skills: `ai-frontend-guide-kit/guides/FLOWS.md`. `context.mjs` también lista las librerías de UI del proyecto (cubiertas por el catálogo, compatibles o por investigar) y `memory.mjs lib sync` las registra. Con la URL de una web de componentes, `scout.mjs <url> --fetch` dice si el catálogo ya la tiene y, si no, resume esa página.
 
 ## 🔎 Buscar componentes
 

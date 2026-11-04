@@ -6,6 +6,10 @@ Purpose: map each inventory row to a short list of concrete catalog entries, wit
 
 Read `catalog/digest.md` once: the 5 best entries per category (at most 2 per source), with license, quality and stack, in about 2.5k tokens. It tells you which sources and ids to query; `find` and `get` give the detail.
 
+## A site the user links
+
+When the user gives the URL of a component site, run `node tools/scout.mjs <url>` before opening it. If it is a catalog source, query it with `find --source <id>`. If not, `scout <url> --fetch` reads only that page and prints its components, install commands and license and paid hints; add `--record` to keep it in the project's libraries as `research`. Its components stay provisional until the license is verified on the origin page.
+
 ## Query basics
 
 ```bash

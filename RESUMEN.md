@@ -38,6 +38,7 @@ flowchart LR
 | **Instalador** | Copia el kit, añade el bloque que manda toda conversación de diseño al kit (`AGENTS.md` y `CLAUDE.md` si existe; se actualiza al reinstalar), instala skills y MCP | `install.mjs` (flags `--no-skills`, `--no-mcp`, `--with-laya`, `--target`); siempre genera el mapa del frontend |
 | **Panorama del catálogo** | Las 5 mejores entradas por categoría (máximo 2 por fuente), una línea cada una, en unos 2,5k tokens | `tools/build-digest.mjs` → `kit/catalog/digest.md` (lo genera `build-kit`) |
 | **Búsqueda** | Filtra por texto, categoría, stack, licencia y calidad | `kit/tools/find.mjs` |
+| **Explorar una web de componentes** | Dada una URL: dice si ya es una fuente del catálogo; si no, lee solo esa página y resume componentes, instalación y pistas de licencia y de pago; puede guardarla como librería por investigar | `kit/tools/scout.mjs <url> [--fetch] [--record]` |
 | **Ficha de componente** | Tarjeta completa con cómo instalarlo | `kit/tools/get.mjs <id>` |
 | **Flujo de diseño** | Guarda la ruta y el paso actual por proyecto y no deja saltar pasos ni cerrar uno sin su artefacto; lista todas las rutas, pasos y skills | `kit/tools/flow.mjs` → `ai-frontend-output/flow-state.json`, `kit/guides/FLOWS.md` |
 | **Contexto del proyecto** | Resume stack, rutas, specs y librerías de UI del proyecto destino (cubiertas, compatibles o por investigar) | `kit/tools/context.mjs` → `REPO-CONTEXT.md` |

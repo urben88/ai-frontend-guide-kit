@@ -101,7 +101,7 @@ node ai-frontend-guide-kit/tools/flow.mjs start new       # declare the route
 node ai-frontend-guide-kit/tools/flow.mjs done intake     # refuses a skipped step or a missing artifact
 ```
 
-All routes and steps, with their skills: `ai-frontend-guide-kit/guides/FLOWS.md`. `context.mjs` also lists the project's UI libraries (covered by the catalog, compatible, or to research) and `memory.mjs lib sync` records them.
+All routes and steps, with their skills: `ai-frontend-guide-kit/guides/FLOWS.md`. `context.mjs` also lists the project's UI libraries (covered by the catalog, compatible, or to research) and `memory.mjs lib sync` records them. Given a component site URL, `scout.mjs <url> --fetch` says whether the catalog already has it and, if not, summarizes that one page.
 
 ## 🔎 Finding components
 

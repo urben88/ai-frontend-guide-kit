@@ -37,6 +37,8 @@ node ai-frontend-guide-kit/tools/flow.mjs next            # current step: guide,
 node ai-frontend-guide-kit/tools/flow.mjs done <step>     # refuses a skipped step or a missing artifact (--evidence for steps without a file)
 ```
 
+When the user links a component site, run `node ai-frontend-guide-kit/tools/scout.mjs <url>` (add `--fetch` for an unknown site, `--record` to keep it) instead of reading the whole site; start from `ai-frontend-guide-kit/catalog/digest.md` for an overview of the catalog.
+
 Never skip a step: when `done` refuses, produce the missing artifact first. Every route, step and skill is listed in `ai-frontend-guide-kit/guides/FLOWS.md`; when the user asks which flows exist, answer from it and recommend the route that fits.
 
 ## Start here
