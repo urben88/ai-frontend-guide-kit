@@ -28,7 +28,7 @@ Assumption: enforcement is a checked state plus instructions; an agent cannot be
 | ID | Specs | Route | Status | Commit |
 |---|---|---|---|---|
 | T1 | S1, S4 | inline | done | see L8 |
-| T2 | S5 | inline | pending | — |
+| T2 | S5 | inline | done | see L9 |
 | T3 | S3 | inline | pending | — |
 | T4 | S2 | inline | pending | — |
 | T5 | S1–S5 docs (routing block, AGENTS.md, skill, READMEs, RESUMEN.md) | inline | pending | — |
@@ -50,3 +50,4 @@ T6: generated `catalog/digest.md` (top 5 per category, one line each, ~5k tokens
 - **L6 (2026-11-04, user verbatim):** "comienza" — answer to: branch from `feat/frontend-context-map` (recommended: T4 overlaps its history and both touch the installer) or wait for its PR. Branch created stacked on it.
 - **L7 (T1 design):** `tools/flow.mjs` with `status | start <route> | next | done <step> [--evidence] | reset`; state in `ai-frontend-output/flow-state.json`. Routes follow the casuistics of `guides/00-START-HERE.md`; a step is done only when it is the current one and its artifact exists (or, for a step without a file, `--evidence` is given).
 - **L8 (T1 evidence, 2026-11-04):** S1 and S4 covered. RED: `tests/flow.test.mjs` 0/10 (no `flow.mjs`); GREEN 10/10; `npm run verify` exit 0, 85/85 tests, 46 required assets (`tools/flow.mjs` added to `build-kit`). `HELP.md` and `HELP.es.md` describe the tool (the coverage test failed until they did). Routing block, `AGENTS.md`, router and skill wiring are T5. Limit: artifacts are checked for existence and non-empty content, not for their sections.
+- **L9 (T2 evidence, 2026-11-04):** S5 covered (one source; the links from `AGENTS.md`, router, skill and routing block are T5). `flow.mjs list` prints every route and step with guide, skill, tools and output; `guides/FLOWS.md` is that output, and a test fails when they differ. RED 1 new test, GREEN `tests/flow.test.mjs` 11/11, `npm run verify` 86/86 with 47 required assets.

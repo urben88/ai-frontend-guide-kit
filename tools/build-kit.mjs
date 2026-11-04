@@ -32,6 +32,7 @@ const REQUIRED_KIT_FILES = [
   'guides/10-ITERATE.md',
   'guides/11-VISUAL-FEEDBACK.md',
   'guides/12-ARCHITECTURE.md',
+  'guides/FLOWS.md',
   'guides/13-CONTEXT-DOCS.md',
   'experience/EXPERIENCE-DIRECTION.md',
   'experience/QUESTION-BANK.md',

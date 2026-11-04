@@ -168,3 +168,16 @@ test('unknown routes, steps and options exit 2 and write nothing', () => {
   assert.equal(step.status, 2);
   assert.match(step.stderr, /unknown step "nope"/);
 });
+
+test('list prints every route and step with its guide, skill and output, and guides/FLOWS.md is that same text', () => {
+  const run = spawnSync(process.execPath, [TOOL, 'list'], { encoding: 'utf8', env: cleanEnv() });
+  assert.equal(run.status, 0, run.stderr);
+  for (const route of ['new', 'direction', 'ux', 'iterate', 'polish', 'redesign', 'visual-feedback', 'architecture']) {
+    assert.match(run.stdout, new RegExp(`^### \`${route}\``, 'm'));
+  }
+  for (const text of ['guides/01-EXPERIENCE-DIRECTION.md', 'userflow + flow-*', 'frontend-polish', 'ai-frontend-output/ux/UX-SPEC.md']) {
+    assert.ok(run.stdout.includes(text), `list misses ${text}`);
+  }
+  const flows = readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'guides', 'FLOWS.md'), 'utf8').replace(/\r\n/g, '\n');
+  assert.equal(flows, run.stdout, 'guides/FLOWS.md is out of date: regenerate it with node tools/flow.mjs list > guides/FLOWS.md');
+});
