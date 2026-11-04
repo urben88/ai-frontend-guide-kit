@@ -28,7 +28,7 @@ Branch: `feat/frontend-context-map` (from `feat/external-design-skills`) · Deli
 
 | ID | Specs | Route | Status | Commit |
 |---|---|---|---|---|
-| T1 | S1, S2, S3 (`build`, `have`, `impact`, history, installer, philosophy) | delegated: context backstop | done | the commit `feat(ui-map): ...` that holds this row (hash in the report; no amend) |
+| T1 | S1, S2, S3 (`build`, `have`, `impact`, history, installer, philosophy) | delegated: context backstop | done | `3127f85` |
 | T2 | S4 (`HELP.md`, `HELP.es.md`, routing, test) | delegated: context backstop | pending | — |
 | T3 | S5, S6 docs part, S8 (types, `types`, `docs`, guide 13, memory field) | delegated: context backstop | pending | — |
 | T4 | S6 recipes, S7 (`check`, profiles, `STACK-RECIPES.md`) | delegated: context backstop | pending | — |

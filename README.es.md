@@ -93,7 +93,8 @@ Los resultados se ordenan por **calidad** (claridad de licencia, esfuerzo de ins
 4. 🧩 Instala las **19 skills de este repo** en `.agents/skills/` (limpio: sin lockfile ni enlaces por todas partes) y, por defecto, las **16 skills de diseño externas** mediante su CLI. Si el proyecto tiene `.claude/`, enlaza las 19 en `.claude/skills/`.
 5. 🎭 Configura los servidores **Playwright + Excalidraw MCP** según el entorno detectado (`.mcp.json` para Claude Code, `opencode.json` para OpenCode) y crea la plantilla `ai-frontend-output/ux/ux-map.excalidraw`; si no, imprime los comandos exactos. Navegador una vez: `npx playwright install chromium`.
    - 🖱️ **Opcional — Agentation** (clic en un elemento de tu app React y dile al agente exactamente qué cambiar; guía `11-VISUAL-FEEDBACK.md`). El instalador solo imprime el mensaje, no lo instala: `npm install agentation -D`, `claude mcp add agentation -- npx -y agentation-mcp server`, `npx agentation-mcp doctor` y monta `<Agentation endpoint="http://localhost:4747" />` solo en desarrollo.
-6. 🐍 Comprueba Python/Laya e imprime el siguiente paso exacto.
+6. 🗺️ Escanea el proyecto con `ui-map` (siempre) y escribe el mapa del frontend bajo `ai-frontend-output/` (si el escaneo falla, solo avisa).
+7. 🐍 Comprueba Python/Laya e imprime el siguiente paso exacto.
 
 > 💡 Las skills externas necesitan red; si fallan, la instalación continúa y el kit sigue funcionando con `find`/`get`.
 
