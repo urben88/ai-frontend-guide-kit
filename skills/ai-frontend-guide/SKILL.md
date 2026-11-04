@@ -16,7 +16,7 @@ When this kit is installed, the project contains:
 - `ai-frontend-guide-kit/experience/` — direction knowledge: `EXPERIENCE-DIRECTION.md`, `QUESTION-BANK.md`, `SITE-ARCHETYPES.md`, `UX-PHILOSOPHIES.md`, `STYLE-DIRECTIONS.md`, `REFERENCE-PROTOCOL.md`, `DISCOVERY-LOOP.md`, `experience-manifest.json` and `references/` (saved idea cards).
 - `ai-frontend-guide-kit/catalog/` — 4,287 reusable entries from 34 verified sources (licenses, install commands, links), plus a light index.
 - `ai-frontend-guide-kit/tools/` — `find.mjs`, `get.mjs`, `laya_select.py` and `excalidraw-mcp.mjs` (local, dependency-free Excalidraw MCP).
-- Sibling skills (when installed): `frontend-polish` (total polish phase), `ux-map` (visual screen map) and the external design skills, each at its step of the flow: `landing-page-design` (phase 1, landing pages only), `hallmark` and `design-taste-frontend` (build only in phase 2, for decision `build`, and `design-taste-frontend` also for an agreed visual redesign; raw material without building in phase 1; `hallmark` also gives a report-only audit in phase 3), `emilkowalski` (phases 2–3), `impeccable` (phase 3). Details in `guides/00-START-HERE.md`, "External design skills by step".
+- Sibling skills (when installed): `frontend-polish` (total polish phase), `frontend-refactor` (FSD structure, only on explicit request), `ux-map` (visual screen map) and the external design skills, each at its step of the flow: `landing-page-design` (phase 1, landing pages only), `hallmark` and `design-taste-frontend` (build only in phase 2, for decision `build`, and `design-taste-frontend` also for an agreed visual redesign; raw material without building in phase 1; `hallmark` also gives a report-only audit in phase 3), `emilkowalski` (phases 2–3), `impeccable` (phase 3). Details in `guides/00-START-HERE.md`, "External design skills by step".
 
 If the folder is missing, install it with:
 
@@ -46,6 +46,10 @@ Ask the user what they want before touching code and declare the route: new fron
 ## Frontend map (always on)
 
 The installer keeps `ai-frontend-output/UI-MAP.md` (plus `ui-map.json`, `ui-history.jsonl`) up to date. Read it instead of exploring the repo. Before changing UI run `node ai-frontend-guide-kit/tools/ui-map.mjs impact <role|component>`; before creating run `node ai-frontend-guide-kit/tools/ui-map.mjs have <name>`; to see what the profile treats as required run `node ai-frontend-guide-kit/tools/ui-map.mjs check --profile sprint|standard|long-term`. Existing violations are recorded, never changed unless the user asks (`guides/08-PHILOSOPHY.md`, Separation).
+
+## Architecture (FSD only on request)
+
+The folder structure is a separate decision (`guides/12-ARCHITECTURE.md`): `map` is the default and only records folder roles in `ai-frontend-output/architecture.json`; `fsd-new` (a new project) and `fsd-refactor` (an existing one) run **only when the user asks**, through the sibling `frontend-refactor` skill, one approved slice at a time. Never apply FSD unasked, never silently, not even on a greenfield repo, and never rename FSD layers onto the kit's roles or component types.
 
 ## Experience direction first (guide 01)
 

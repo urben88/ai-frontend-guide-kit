@@ -15,7 +15,7 @@ It is not a component library and not a framework: it never copies third-party c
 | **Always on** | The installer scans the project and keeps a map of the frontend: components, who uses them, routes, visual roles, strays and unresolved imports. Every later `build` records components added or removed. | `ai-frontend-output/` only |
 | **Always on** | Every design decision is recorded and reusable across sessions and projects. | `ai-frontend-output/selections.jsonl`, `combinations.json` |
 | **Only when you ask** | The three-phase design workflow (experience direction → composition → polish) and the audits inside it. | the files of each step |
-| **Only when you ask** | Architecture work: Folder-Sliced-by-Responsibility structure (FSD), refactoring, or adapting an existing repo to it. Never imposed, never silent, never on a project that did not ask. | `ai-frontend-output/architecture.json` + the change you approved |
+| **Only when you ask** | Architecture work: Feature-Sliced Design (FSD) structure, refactoring, or adapting an existing repo to it. Never imposed, never silent, never on a project that did not ask. | `ai-frontend-output/architecture.json` + the change you approved |
 
 The map never edits, moves or renames project source. Existing violations of the separation philosophy are recorded, not changed.
 
@@ -55,6 +55,7 @@ Skills are optional accelerators. The kit's files always win over a skill's defa
 |---|---|
 | `ai-frontend-guide` | The router every design, UI or UX request goes through |
 | `frontend-polish` | Phase 3: external audits + Playwright MCP loop + regression |
+| `frontend-refactor` | Only on explicit request: maps folders to FSD roles and refactors one slice at a time, checking `ui-map build` and `check` after each one |
 | `ux-map` | The screen/navigation map in `ai-frontend-output/ux/ux-map.excalidraw` |
 | `userflow` | Dispatcher for the UX flow skills; also `userflow audit` for one surface |
 | `flow-onboarding` | First-run, activation and setup patterns |

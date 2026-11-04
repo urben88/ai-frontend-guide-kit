@@ -148,7 +148,7 @@ Usage:
 Options:
   --target <dir>        install into <dir> (default: current directory)
   --no-skills           skip installing skills entirely
-  --skills-mode <mode>  copy (default): copy the 19 kit skills to .agents/skills (clean, no lockfile)
+  --skills-mode <mode>  copy (default): copy the 20 kit skills to .agents/skills (clean, no lockfile)
                         cli: use "npx skills add" (lockfile + multi-agent links, includes design skills)
   --no-design-skills    skip the 5 external design skill repos (impeccable/taste-skill/emilkowalski/hallmark/
                         landing-page-design; need network)
@@ -162,10 +162,10 @@ What it does:
      .claude/CLAUDE.md when present; removes the legacy ai-frontend-guide/ folder.
   3. Creates ai-frontend-output/ (selection memory) if missing; it is never removed on refresh.
      It also creates ai-frontend-output/ux/ux-map.excalidraw (Excalidraw scaffold) if missing.
-  4. Installs skills into .agents/skills: copy mode copies the 19 kit skills (workflow + 16 UX flows +
-     frontend-polish + ux-map); if the project has a .claude/ folder, they are also linked into .claude/skills
-     (junction/symlink, fallback to copy). The 5 external design skill repos also install by default via
-     the CLI (use --no-design-skills to skip them).
+  4. Installs skills into .agents/skills: copy mode copies the 20 kit skills (workflow + 16 UX flows +
+     frontend-polish + ux-map + frontend-refactor); if the project has a .claude/ folder, they are also
+     linked into .claude/skills (junction/symlink, fallback to copy). The 5 external design skill repos also
+     install by default via the CLI (use --no-design-skills to skip them).
   5. Configures the Playwright + Excalidraw MCP servers for detected harnesses (.claude/ -> .mcp.json,
      opencode.json -> mcp.playwright + mcp.excalidraw); the Excalidraw server is the local,
      dependency-free one shipped in the kit (offline). Prints instructions otherwise (--no-mcp to skip).

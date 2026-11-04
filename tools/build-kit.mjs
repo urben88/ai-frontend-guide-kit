@@ -31,6 +31,7 @@ const REQUIRED_KIT_FILES = [
   'guides/09-VERIFY.md',
   'guides/10-ITERATE.md',
   'guides/11-VISUAL-FEEDBACK.md',
+  'guides/12-ARCHITECTURE.md',
   'guides/13-CONTEXT-DOCS.md',
   'experience/EXPERIENCE-DIRECTION.md',
   'experience/QUESTION-BANK.md',
@@ -85,6 +86,7 @@ const REQUIRED_REPO_FILES = [
   'skills/UX-SKILLS-LICENSE',
   'skills/ai-frontend-guide/SKILL.md',
   'skills/frontend-polish/SKILL.md',
+  'skills/frontend-refactor/SKILL.md',
   'skills/ux-map/SKILL.md',
   'skills/userflow/SKILL.md',
   'skills/userflow/report-template.html',
@@ -175,7 +177,7 @@ function main() {
   console.log(`kit: ${REQUIRED_KIT_FILES.length} required assets present, ${sourceFiles.length} source files synced`);
   console.log(`kit: experience manifest OK (${experienceEntries} entries, unique ids, required fields)`);
   console.log(`kit: ${FLOW_SKILLS.length + 1} UX skills vendored (userflow + ${FLOW_SKILLS.length} flow-*) with license + origin pin`);
-  console.log('kit: 19 repo skills verified (ai-frontend-guide + frontend-polish + ux-map + 16 UX)');
+  console.log('kit: 20 repo skills verified (ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + userflow + 15 UX flow skills)');
   console.log(`kit: catalog coherent with manifest: ${coherent ? 'yes' : 'NO'}`);
   console.log(`kit: total size ${(totalBytes / 1024 / 1024).toFixed(2)} MB at ${relative(ROOT, KIT_DIR)}`);
   if (!coherent) process.exit(1);

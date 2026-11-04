@@ -55,6 +55,7 @@ Las skills son aceleradores opcionales. Los archivos del kit siempre ganan sobre
 |---|---|
 | `ai-frontend-guide` | El router por el que pasa todo pedido de diseño, UI o UX |
 | `frontend-polish` | Fase 3: auditorías externas + loop de Playwright MCP + regresión |
+| `frontend-refactor` | Solo si lo pedís explícitamente: mapea las carpetas a los roles de FSD y refactoriza una slice por vez, corriendo `ui-map build` y `check` después de cada una |
 | `ux-map` | El mapa de pantallas y navegación en `ai-frontend-output/ux/ux-map.excalidraw` |
 | `userflow` | Dispatcher de las skills de flujo; también `userflow audit` para una pantalla |
 | `flow-onboarding` | Primera vez, activación y configuración inicial |

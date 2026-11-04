@@ -20,8 +20,8 @@ Este repositorio es a la vez la 🏭 **fábrica** (pipeline de extracción + cat
 | | Qué | Detalle |
 |---|---|---|
 | 📚 | **Catálogo** | 34 fuentes verificadas · 4.287 entradas reutilizables · 21 categorías · puntuación de calidad, licencia e instalación por entrada · React, Vue y Svelte · `explorer.html` sin conexión |
-| 🧭 | **Kit guiado** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + flujo de 3 fases en 11 guías cortas (00–11) + herramientas `find`/`get`. Autocontenido: sin build ni dependencias npm |
-| 🧠 | **Skills para agentes** | `ai-frontend-guide` (flujo), `frontend-polish` (fase 3), `ux-map` (mapa visual de pantallas) y 16 skills UX incluidas (`userflow` + 15 `flow-*`, MIT) |
+| 🧭 | **Kit guiado** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + flujo de 3 fases en guías cortas (00–13) + herramientas `find`/`get`. Autocontenido: sin build ni dependencias npm |
+| 🧠 | **Skills para agentes** | `ai-frontend-guide` (flujo), `frontend-polish` (fase 3), `frontend-refactor` (FSD, solo a pedido), `ux-map` (mapa visual de pantallas) y 16 skills UX incluidas (`userflow` + 15 `flow-*`, MIT) |
 | 💾 | **Memoria de selección** | `ai-frontend-output/`: historial de decisiones (solo añade), resumen de estilos/componentes y combinaciones reutilizables |
 | 🛡️ | **Auditorías** | `audit-honesty` (patrones engañosos), `audit-a11y` (axe + WCAG 2.2), `audit-perf` (Lighthouse frente a Core Web Vitals) en `ai-frontend-guide-kit/tools/` |
 | 🔒 | **Laya (opcional)** | Motor de decisión local que ordena candidatos del catálogo con probabilidades calibradas; todo se ejecuta en tu PC |
@@ -90,7 +90,7 @@ Los resultados se ordenan por **calidad** (claridad de licencia, esfuerzo de ins
 1. 📁 Copia `ai-frontend-guide-kit/` al proyecto de destino (elimina el antiguo `ai-frontend-guide/` si existe).
 2. 📌 Añade el **bloque de enrutado de diseño** al `AGENTS.md` del proyecto (y a `CLAUDE.md` / `.claude/CLAUDE.md` si existen, porque entonces Claude Code ignora `AGENTS.md`): cualquier conversación sobre diseño, UI o UX — en español o inglés — pasa primero por el kit. El bloque va marcado, así que reinstalar lo actualiza sin tocar tu contenido.
 3. 💾 Crea `ai-frontend-output/` (memoria de selección) si falta; nunca se borra en las actualizaciones.
-4. 🧩 Instala las **19 skills de este repo** en `.agents/skills/` (limpio: sin lockfile ni enlaces por todas partes) y, por defecto, las **16 skills de diseño externas** mediante su CLI. Si el proyecto tiene `.claude/`, enlaza las 19 en `.claude/skills/`.
+4. 🧩 Instala las **20 skills de este repo** en `.agents/skills/` (limpio: sin lockfile ni enlaces por todas partes) y, por defecto, las **16 skills de diseño externas** mediante su CLI. Si el proyecto tiene `.claude/`, enlaza las 20 en `.claude/skills/`.
 5. 🎭 Configura los servidores **Playwright + Excalidraw MCP** según el entorno detectado (`.mcp.json` para Claude Code, `opencode.json` para OpenCode) y crea la plantilla `ai-frontend-output/ux/ux-map.excalidraw`; si no, imprime los comandos exactos. Navegador una vez: `npx playwright install chromium`.
    - 🖱️ **Opcional — Agentation** (clic en un elemento de tu app React y dile al agente exactamente qué cambiar; guía `11-VISUAL-FEEDBACK.md`). El instalador solo imprime el mensaje, no lo instala: `npm install agentation -D`, `claude mcp add agentation -- npx -y agentation-mcp server`, `npx agentation-mcp doctor` y monta `<Agentation endpoint="http://localhost:4747" />` solo en desarrollo.
 6. 🗺️ Escanea el proyecto con `ui-map` (siempre) y escribe el mapa del frontend bajo `ai-frontend-output/` (si el escaneo falla, solo avisa).
@@ -153,7 +153,7 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # vis
 │   ├── experience/           # arquetipos, filosofías, estilos, banco de preguntas, bucle de descubrimiento, fichas de referencia + experience-manifest.json
 │   ├── catalog/              # índice + taxonomía + guías de instalación + 34 fuentes + explorer.html + license-report.md
 │   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp · audit-honesty · audit-a11y · audit-perf
-├── skills/                   # ai-frontend-guide + frontend-polish + 16 skills UX incluidas (MIT)
+├── skills/                   # ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + 16 skills UX incluidas (MIT)
 ├── manifest/                 # fuente de verdad del catálogo (generado)
 ├── media/explainer/          # 🎬 explainer dibujado a mano (ES/EN, GIF, póster)
 ├── tools/                    # pipeline de extracción/refresco/build/validación/calidad/licencias

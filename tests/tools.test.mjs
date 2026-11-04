@@ -273,3 +273,54 @@ test('memory tool records and lists a decision', () => {
   assert.equal(list.status, 0, list.stderr);
   assert.match(list.stdout, /hero/);
 });
+
+const skillDirs = () =>
+  readdirSync(join(ROOT, 'skills'), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort();
+
+test('guide 12 names the three architecture modes, the adapters and the Steiger limit', () => {
+  const guide = readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'guides', '12-ARCHITECTURE.md'), 'utf8');
+  for (const word of ['`map`', '`fsd-new`', '`fsd-refactor`', 'Next.js', 'Nuxt', 'Steiger']) {
+    assert.ok(guide.includes(word), `guide 12 names ${word}`);
+  }
+  const lines = guide.replace(/\r\n/g, '\n').trimEnd().split('\n').length;
+  assert.ok(lines <= 125, `guide 12 has ${lines} lines (cap 125)`);
+});
+
+test('frontend-refactor skill runs only on request and cites the FSD migration guide', () => {
+  const skill = readFileSync(join(ROOT, 'skills', 'frontend-refactor', 'SKILL.md'), 'utf8');
+  const head = skill.split('---')[1] ?? '';
+  assert.match(head, /^name: frontend-refactor$/m);
+  assert.match(head, /description:[\s\S]*only on explicit request/, 'the description says it runs only on request');
+  assert.ok(skill.includes('ai-frontend-output/architecture.json'), 'names the artifact');
+  assert.ok(skill.includes('https://feature-sliced.design/docs/guides/migration/from-custom'), 'cites the official migration guide');
+});
+
+test('installer copies every kit skill and no skill count contradicts skills/', () => {
+  const skills = skillDirs();
+  assert.equal(skills.length, 20, `skills/ has ${skills.length} directories`);
+  assert.ok(skills.includes('frontend-refactor'), 'frontend-refactor is a kit skill');
+
+  const target = mkdtempSync(join(tmpdir(), 'kit-skill-count-'));
+  const run = node([join(ROOT, 'install.mjs'), '--target', target, '--no-mcp', '--no-design-skills']);
+  assert.equal(run.status, 0, run.stderr);
+  const installed = readdirSync(join(target, '.agents', 'skills'), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort();
+  assert.deepEqual(installed, skills, 'every kit skill is copied into .agents/skills');
+
+  const claims = [
+    ['install.mjs', /(\d+) kit skills/g],
+    ['README.md', /(\d+) skills of this repo/g],
+    ['README.es.md', /(\d+) skills de este repo/g],
+    ['RESUMEN.md', /(\d+) skills propias/g],
+  ];
+  for (const [file, pattern] of claims) {
+    const found = [...readFileSync(join(ROOT, file), 'utf8').matchAll(pattern)].map((match) => Number(match[1]));
+    assert.ok(found.length > 0, `${file} states a skill count`);
+    for (const claimed of found) assert.equal(claimed, skills.length, `${file} claims ${claimed} skills`);
+  }
+});

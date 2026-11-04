@@ -7,9 +7,9 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 - A catalog of **4,287 reusable UI entries** from **34 verified sources** (updated 2026-10-04; ranked by a quality score, with Vue/Svelte ports and icon/illustration/kit resources under the `assets` category), organized in 21 categories.
 - An **experience direction layer** (`experience/`): archetypes, philosophies, styles with limits, an adaptive question bank, reference cards with saved ideas, an interactive discovery loop (`DISCOVERY-LOOP.md`) and a machine-readable `experience-manifest.json` for Laya.
 - Per-entry decision data: what it is, when to use it, where to find it, how to install it and its license constraints.
-- A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–11).
+- A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–13).
 - Two local query tools (`tools/find.mjs`, `tools/get.mjs`) that answer with minimal output, a frontend map of the project (`tools/ui-map.mjs`, always on, no dependencies), plus a local Excalidraw MCP server (`tools/excalidraw-mcp.mjs`, no dependencies) for the UX map.
-- A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses, plus a total-polish skill (`skills/frontend-polish/SKILL.md`) and a visual map skill (`skills/ux-map/SKILL.md`).
+- A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses, plus a total-polish skill (`skills/frontend-polish/SKILL.md`), a visual map skill (`skills/ux-map/SKILL.md`) and an FSD refactor skill (`skills/frontend-refactor/SKILL.md`, only on explicit request).
 - `HELP.md` and `HELP.es.md`: the plain-language explanation of what this kit is, what runs always and what only on request, its tools and skills, what you can ask for and ready-to-copy prompts. When someone asks what the kit does or how to use it, answer from those files instead of exploring the folders.
 
 ## Golden rule
@@ -130,6 +130,8 @@ node tools/ui-map.mjs build                 # refresh by hand (impact/have rebui
 Read `UI-MAP.md` instead of exploring. Change every owner, user and stray that `impact` lists; none may be left out. Unresolved imports are never assumed fine.
 `have` also resolves the canonical component types and their aliases (`modal` finds a `Dialog`); `types` and `docs` are read-only reports, and `docs --profile sprint|standard|long-term` sets how many context documents the project owes.
 `check` is the gate: it lists every finding (unresolved imports, duplicate component types, strays, ownerless roles, missing documents) and the profile only decides which kinds block — `sprint` blocks nothing, `standard` (default) blocks unresolved imports and missing documents, `long-term` blocks all of them; it exits 1 when at least one blocking finding exists. Stack combinations per project type live in `experience/STACK-RECIPES.md`.
+
+The folder structure is a separate decision: `map` (the default) only records folder roles, and FSD is applied only when the user asks for it (`guides/12-ARCHITECTURE.md`, skill `frontend-refactor`).
 
 ## Selection memory (`ai-frontend-output/`)
 

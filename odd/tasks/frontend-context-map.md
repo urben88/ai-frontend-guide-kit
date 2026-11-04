@@ -28,13 +28,13 @@ Branch: `feat/frontend-context-map` (from `feat/external-design-skills`) · Deli
 
 | ID | Specs | Route | Status | Commit |
 |---|---|---|---|---|
-| T1 | S1, S2, S3 (`build`, `have`, `impact`, history, installer, philosophy) | delegated: context backstop | done | `3127f85` |
-| T2 | S4 (`HELP.md`, `HELP.es.md`, routing, test) | delegated: context backstop | pending | — |
-| T3 | S5, S6 docs part, S8 (types, `types`, `docs`, guide 13, memory field) | delegated: context backstop | pending | — |
-| T4 | S6 recipes, S7 (`check`, profiles, `STACK-RECIPES.md`) | delegated: context backstop | pending | — |
-| T5 | S9 (guide 12, adapters, `architecture.json`, skill) | delegated: context backstop | pending | — |
+| T1 | S1, S2, S3 (`build`, `have`, `impact`, history, installer, philosophy) | delegated: context backstop | done | `3127f85` + `1f92169` |
+| T2 | S4 (`HELP.md`, `HELP.es.md`, routing, test) | delegated: context backstop | done | `af88458` |
+| T3 | S5, S6 docs part, S8 (types, `types`, `docs`, guide 13, memory field) | delegated: context backstop | done | `9d36808` |
+| T4 | S6 recipes, S7 (`check`, profiles, `STACK-RECIPES.md`) | delegated: worker (T4) | done | `15aba15` |
+| T5 | S9 (guide 12, adapters, `architecture.json`, skill) | delegated: worker (T5) | done | see L12 |
 
-Risk: T1 touches the installer (item 5), own commit and independent verifier. Forecast: above 400 changed lines; slices are the task commits.
+Risk: T1, T2 and T5 touch the installer (items 3 and 5); T3 and T4 extend the `ui-map` CLI (item 3 for the command surface). T1 and T2 had their own commits and an independent verifier; T3-T5 are separate commits per task. Forecast: above 400 changed lines; slices are the task commits.
 
 ## Log
 
@@ -47,3 +47,8 @@ Risk: T1 touches the installer (item 5), own commit and independent verifier. Fo
 - **L7 (T1 evidence, 2026-11-04):** S1-S3 covered. RED: 16/16 tests of `tests/ui-map.test.mjs` failed before `ui-map.mjs` existed; GREEN: 16/16 after. `node --test tests/ui-map.test.mjs` exit 0; `npm run verify` exit 0 (52 tests). Differential vs 5577efa for `memory.mjs add|list|summary|combo list`, `find.mjs`, `get.mjs`: same stdout, stderr and exit code except the output-dir path and timestamps, plus the intended new README lines. Limits: components in `.ts`/`.js` without JSX are not detected; tsconfig `extends` is not followed; roles come from name and path signals, so an unusual name gets no role.
 - **L8 (T1 correction, verifier B1-B3, A1-A2):** strict `parseArgs` (`--dir=<path>`, unknown option or missing value exit 2 with nothing written, extra positionals rejected), `have` on a close match lists catalog candidates, `UI-MAP.md` has a `## Components` section (cap 300). RED 6/6 new tests, then GREEN: `node --test tests/ui-map.test.mjs` exit 0 (22 pass), `npm run verify` exit 0 (58 pass). Evidence commit: see the correction commit after `3127f85`/`a6bbbc0`.
 - **Next:** T2.
+- **L9 (T2 evidence, 2026-11-04):** S4 covered. RED: `tests/tools.test.mjs` 17 pass / 2 fail (neither `HELP.md` nor the routing block existed); GREEN after the two help files plus the routing line: 19/19, `npm test` 60/60. The coverage test enumerates `tools/*.mjs|*.py` and every `skills/*` directory, so a new tool or skill fails until both help files name it. Commit `af88458`.
+- **L10 (T3 evidence, 2026-11-04):** S5, S6 (documents part), S8 covered. RED: 4 new `tests/ui-map.test.mjs` tests plus the memory-type test failed on the missing command, catalog and flag; GREEN: `tests/ui-map.test.mjs` 26/26, `tests/tools.test.mjs` 20/20, `npm run verify` 65/65. `manifest/component-types.json` is the source of truth (93 types, aliases, usual layer, canonical catalog category) because `build-kit` wipes `catalog/`: it now ships through `CATALOG_FILES`. Two corrections found by the tests: the `long-term` key needs quotes, and type matching must be stricter than `matchName` (`Thing` was being guessed into Tooltip by edit distance), so `matchTypeSurface` requires the surface or all its words. `docs` detects existing files, including the generated `UI-MAP.md`. Commit `9d36808`.
+- **L11 (T4 evidence, 2026-11-04):** S6 recipes and S7 covered by a delegated worker. RED 7/7 new tests (no `check` command, no recipe file, docs not wired), GREEN `tests/ui-map.test.mjs` 33/33, `tests/tools.test.mjs` 20/20, `npm run verify` 72/72; the worker's differential run over `build`, `impact`, `have`, `types`, `docs` and an unknown command showed identical stdout, stderr and exit codes, with only the intended new `USAGE` lines. `check` reports every finding and lets the profile decide only what blocks: sprint nothing, standard unresolved + missing documents, long-term all. Commit `15aba15`.
+- **L12 (T5 evidence, 2026-11-04):** S9 covered by a delegated worker. `guides/12-ARCHITECTURE.md` (111 lines) fixes the three modes, the philosophy-first rule, the framework adapters with their official URLs, the kit proposals named as such, and the `architecture.json` schema; `skills/frontend-refactor/SKILL.md` is the 20th skill and runs only on explicit request. RED 3/3 new tests (missing guide, missing skill, `skills/` 19 !== 20), GREEN `tests/tools.test.mjs` 23/23, `tests/summary.test.mjs` 1/1, `tests/ui-map.test.mjs` 33/33, `npm run verify` 75/75 with 45 required assets and 20 skills. Every "N skills" claim is now checked against the real number of directories.
+- **Limits carried:** classification and roles read names and paths only; tsconfig `extends` is not followed; Astro's FSD folder contract is documented but not verified here; `check` degrades silently on duplicate types when the type catalog is missing.

@@ -1,7 +1,7 @@
 # Resumen de la aplicación (fuente de verdad)
 
 > **Qué es:** catálogo de componentes UI reutilizables + kit guiado para que agentes de IA construyan frontends reutilizando antes de crear.
-> **Versión:** 1.3.0 · **Cifras:** 34 fuentes · 4287 entradas · 21 categorías · 19 skills propias
+> **Versión:** 1.3.0 · **Cifras:** 34 fuentes · 4287 entradas · 21 categorías · 20 skills propias
 >
 > 🔁 **Mantenlo al día:** actualiza este archivo en el mismo commit que añada, quite o cambie una funcionalidad.
 > `npm test` falla si las cifras de arriba no coinciden con `manifest/component-manifest.json`.
@@ -44,7 +44,7 @@ flowchart LR
 | **Auditorías de pantalla** | Patrones engañosos, accesibilidad (axe/WCAG 2.2), rendimiento (Lighthouse) | `kit/tools/audit-honesty.mjs`, `audit-a11y.mjs`, `audit-perf.mjs` |
 | **Mapa UX** | Diagrama Excalidraw de pantallas, offline | `kit/tools/excalidraw-mcp.mjs` + skill `ux-map` |
 | **Ranking con Laya** (opcional) | Ordena preguntas, dirección de experiencia y candidatos con IA local | `kit/tools/laya_select.py` |
-| **Skills de agente** | Flujo guiado, pulido final, mapa UX y 16 flujos UX (`flow-*`) | `skills/` (copiadas a `.agents/skills/`) |
+| **Skills de agente** | Flujo guiado, pulido final, refactor FSD (solo a pedido), mapa UX y 16 flujos UX (`flow-*`) | `skills/` (copiadas a `.agents/skills/`) |
 | **Skills externas de diseño** | Cada una en su paso: `landing-page-design` (fase 1, solo landings), `hallmark` y `design-taste-frontend` (crean solo en la fase 2, si el catálogo no basta; `design-taste-frontend` también en un rediseño visual acordado; en la fase 1 solo dan ideas; `hallmark` también audita en la fase 3), `emilkowalski` (fases 2-3), `impeccable` (fase 3) | `install.mjs` (`npx skills add`, `--no-design-skills` las omite); reparto en `kit/guides/00-START-HERE.md` |
 
 `kit/` = `ai-frontend-guide-kit/`.
