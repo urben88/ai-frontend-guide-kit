@@ -15,7 +15,7 @@ When this kit is installed, the project contains:
 - `ai-frontend-guide-kit/guides/00…10` — the guided workflow (router + direction + three phases + iteration).
 - `ai-frontend-guide-kit/experience/` — direction knowledge: `EXPERIENCE-DIRECTION.md`, `QUESTION-BANK.md`, `SITE-ARCHETYPES.md`, `UX-PHILOSOPHIES.md`, `STYLE-DIRECTIONS.md`, `REFERENCE-PROTOCOL.md`, `DISCOVERY-LOOP.md`, `experience-manifest.json` and `references/` (saved idea cards).
 - `ai-frontend-guide-kit/catalog/` — 4,287 reusable entries from 34 verified sources (licenses, install commands, links), plus a light index.
-- `ai-frontend-guide-kit/tools/` — `find.mjs`, `get.mjs`, `laya_select.py` and `excalidraw-mcp.mjs` (local, dependency-free Excalidraw MCP).
+- `ai-frontend-guide-kit/tools/` — `flow.mjs` (the route and step of this project), `context.mjs` (stack, screens and UI libraries), `find.mjs`, `get.mjs`, `memory.mjs` (decisions and libraries), `ui-map.mjs`, `laya_select.py` and `excalidraw-mcp.mjs` (local, dependency-free Excalidraw MCP).
 - Sibling skills (when installed): `frontend-polish` (total polish phase), `frontend-refactor` (FSD structure, only on explicit request), `ux-map` (visual screen map) and the external design skills, each at its step of the flow: `landing-page-design` (phase 1, landing pages only), `hallmark` and `design-taste-frontend` (build only in phase 2, for decision `build`, and `design-taste-frontend` also for an agreed visual redesign; raw material without building in phase 1; `hallmark` also gives a report-only audit in phase 3), `emilkowalski` (phases 2–3), `impeccable` (phase 3). Details in `guides/00-START-HERE.md`, "External design skills by step".
 
 If the folder is missing, install it with:
@@ -27,6 +27,17 @@ npx github:urben88/ai-frontend-guide-kit
 ## Route first (intake)
 
 Ask the user what they want before touching code and declare the route: new frontend (phases 1→2→3), direction only (`01-EXPERIENCE-DIRECTION.md`), small change or custom addition (`10-ITERATE.md`), polish only (phase 3), UX only (`02-UX-FLOWS.md`). The phases are entry points, not a fixed pipeline.
+
+The route lives in the project, so everyone who talks about the design follows the same step:
+
+```bash
+node ai-frontend-guide-kit/tools/flow.mjs status          # kit installed? active route and step, what is recorded
+node ai-frontend-guide-kit/tools/flow.mjs start <route>   # new | direction | ux | iterate | polish | redesign | visual-feedback | architecture
+node ai-frontend-guide-kit/tools/flow.mjs next            # current step: guide, skill, tools, output
+node ai-frontend-guide-kit/tools/flow.mjs done <step>     # refuses a skipped step or a missing artifact (--evidence for steps without a file)
+```
+
+Never skip a step: when `done` refuses, produce the missing artifact first. Every route, step and skill is listed in `ai-frontend-guide-kit/guides/FLOWS.md`; when the user asks which flows exist, answer from it and recommend the route that fits.
 
 ## Start here
 

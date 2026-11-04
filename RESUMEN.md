@@ -38,9 +38,10 @@ flowchart LR
 | **Instalador** | Copia el kit, añade el bloque que manda toda conversación de diseño al kit (`AGENTS.md` y `CLAUDE.md` si existe; se actualiza al reinstalar), instala skills y MCP | `install.mjs` (flags `--no-skills`, `--no-mcp`, `--with-laya`, `--target`); siempre genera el mapa del frontend |
 | **Búsqueda** | Filtra por texto, categoría, stack, licencia y calidad | `kit/tools/find.mjs` |
 | **Ficha de componente** | Tarjeta completa con cómo instalarlo | `kit/tools/get.mjs <id>` |
-| **Contexto del proyecto** | Resume stack, rutas y specs del proyecto destino | `kit/tools/context.mjs` → `REPO-CONTEXT.md` |
+| **Flujo de diseño** | Guarda la ruta y el paso actual por proyecto y no deja saltar pasos ni cerrar uno sin su artefacto; lista todas las rutas, pasos y skills | `kit/tools/flow.mjs` → `ai-frontend-output/flow-state.json`, `kit/guides/FLOWS.md` |
+| **Contexto del proyecto** | Resume stack, rutas, specs y librerías de UI del proyecto destino (cubiertas, compatibles o por investigar) | `kit/tools/context.mjs` → `REPO-CONTEXT.md` |
 | **Mapa del frontend** (siempre activo) | Escanea el proyecto destino: componentes, quién los usa, rutas, roles visuales, desvíos e imports sin resolver; historial de altas y bajas; `impact` (qué cambiar) y `have` (¿ya existe?). Nunca toca el código | `kit/tools/ui-map.mjs` → `ai-frontend-output/ui-map.json`, `UI-MAP.md`, `ui-history.jsonl` |
-| **Memoria de selección** | Historial de decisiones y combinaciones reutilizables | `kit/tools/memory.mjs` → `ai-frontend-output/` |
+| **Memoria de selección** | Historial de decisiones, combinaciones reutilizables y librerías en uso o por investigar | `kit/tools/memory.mjs` → `ai-frontend-output/` |
 | **Auditorías de pantalla** | Patrones engañosos, accesibilidad (axe/WCAG 2.2), rendimiento (Lighthouse) | `kit/tools/audit-honesty.mjs`, `audit-a11y.mjs`, `audit-perf.mjs` |
 | **Mapa UX** | Diagrama Excalidraw de pantallas, offline | `kit/tools/excalidraw-mcp.mjs` + skill `ux-map` |
 | **Ranking con Laya** (opcional) | Ordena preguntas, dirección de experiencia y candidatos con IA local | `kit/tools/laya_select.py` |

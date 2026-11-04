@@ -75,6 +75,18 @@ Después dile a tu agente:
 
 > *"Lee `ai-frontend-guide-kit/AGENTS.md` y sigue su flujo."*
 
+## 🧭 Flujo de diseño (guardado por proyecto)
+
+Cada conversación de diseño sigue una ruta, paso a paso. La ruta y su paso actual viven en `ai-frontend-output/flow-state.json` (versiónalo), así todo el mundo sigue en el mismo paso.
+
+```bash
+node ai-frontend-guide-kit/tools/flow.mjs status          # ¿kit instalado? ruta y paso activos, qué hay registrado
+node ai-frontend-guide-kit/tools/flow.mjs start new       # declarar la ruta
+node ai-frontend-guide-kit/tools/flow.mjs done intake     # rechaza un paso saltado o un artefacto que falta
+```
+
+Todas las rutas y pasos, con sus skills: `ai-frontend-guide-kit/guides/FLOWS.md`. `context.mjs` también lista las librerías de UI del proyecto (cubiertas por el catálogo, compatibles o por investigar) y `memory.mjs lib sync` las registra.
+
 ## 🔎 Buscar componentes
 
 ```bash

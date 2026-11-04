@@ -6,9 +6,10 @@ You are about to build or change frontend UX/UI. This workflow exists so you **r
 
 Before touching code, ask the user what they want and route explicitly:
 
-1. **What are we doing?** New frontend · direction only · small change · custom addition · polish only · UX only/redesign.
-2. **What exists?** Run `node tools/context.mjs` and read `ai-frontend-output/ux/REPO-CONTEXT.md` (stack, screens, `ux_present`), and read `ai-frontend-output/UI-MAP.md` (components, roles, routes), instead of exploring the repo.
-3. **Declare the route** in one line (e.g. *"Route: phase 2 only — adapt the hero, then polish"*) before reading any guide.
+0. **Where are we?** Run `node tools/flow.mjs status`. If a route is active, continue at its current step (`node tools/flow.mjs next`) instead of starting over.
+1. **What are we doing?** New frontend · direction only · small change · custom addition · polish only · UX only/redesign. Every route and its steps: `guides/FLOWS.md`.
+2. **What exists?** Run `node tools/context.mjs` and read `ai-frontend-output/ux/REPO-CONTEXT.md` (stack, screens, `ux_present`, UI libraries), and read `ai-frontend-output/UI-MAP.md` (components, roles, routes), instead of exploring the repo. Record the libraries with `node tools/memory.mjs lib sync`; for a library under "To research", use its own documentation for components and install steps.
+3. **Declare the route** in one line (e.g. *"Route: phase 2 only — adapt the hero, then polish"*) and record it with `node tools/flow.mjs start <route>` before reading any guide. Close each step with `node tools/flow.mjs done <step>`; it refuses a skipped step or a missing artifact, so produce the artifact instead of working around it.
 
 The phases are **entry points, not a fixed pipeline**: enter where the request points and never run a phase the user did not ask for.
 

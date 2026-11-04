@@ -36,6 +36,18 @@ Never load all `catalog/sources/*.json` files into context. Never read `install-
 
 Before touching code, ask the user what they want and declare the route: new frontend (phases 1→2→3), direction only (`guides/01-EXPERIENCE-DIRECTION.md`), small change or custom addition (`guides/10-ITERATE.md`), polish only (phase 3), UX only (`guides/02-UX-FLOWS.md`). **The phases are entry points, not a fixed pipeline** — never run a phase the user did not ask for.
 
+The route is kept per project in `ai-frontend-output/flow-state.json` (commit it), so every person and agent that talks about the design continues at the same step. **Never skip a step.**
+
+```bash
+node tools/flow.mjs status          # kit installed? active route and step, decisions and libraries recorded
+node tools/flow.mjs list            # every route and step with its guide, skill, tools and output (= guides/FLOWS.md)
+node tools/flow.mjs start <route>   # new | direction | ux | iterate | polish | redesign | visual-feedback | architecture
+node tools/flow.mjs next            # the current step
+node tools/flow.mjs done <step>     # refuses a skipped step or a missing artifact; steps without a file need --evidence "..."
+```
+
+When someone asks which flows exist, answer from `guides/FLOWS.md` and recommend the route that fits the request.
+
 ## Workflow map (three phases)
 
 | Phase | Guide | Output |
@@ -152,6 +164,7 @@ Rules:
 - Record every decision with `add` right after choosing (facts come from the catalog).
 - References, likes and directions can be recorded without `--id` using `--ref` (e.g. `--ref "reference:<slug>"`).
 - `ai-frontend-output/SUMMARY.md` is the generated summary of styles and components extracted.
+- UI libraries: `node tools/memory.mjs lib sync` imports the ones `context.mjs` detects (covered by the catalog, compatible, or to research) into `libraries.json`; `lib add <name> --status using|research` records one by hand and `lib list` shows them. For a library to research, use its own documentation; prefer a library the project already uses before adding another.
 
 ## License discipline
 

@@ -38,6 +38,10 @@ agreed visual redesign); both may give raw material for the directions in phase 
 emilkowalski in phases 2-3; impeccable in phase 3 through \`frontend-polish\`.
 Ask the user first what they want (new frontend UX -> composition -> polish, a small change, a custom
 addition, or polish only) and enter the three-phase workflow at the right point before touching code.
+Design flow (never skip a step): start every design conversation with \`node ai-frontend-guide-kit/tools/flow.mjs status\`,
+declare the route with \`flow.mjs start <route>\`, follow \`flow.mjs next\` and close each step with \`flow.mjs done <step>\`,
+which refuses a skipped step or a missing artifact. Routes, steps and their skills: \`ai-frontend-guide-kit/guides/FLOWS.md\`;
+on "qué flujos existen" or "which flows exist", answer from that file.
 New frontends start with the experience direction (\`ai-frontend-guide-kit/guides/01-EXPERIENCE-DIRECTION.md\`
 -> \`ai-frontend-output/ux/EXPERIENCE-BRIEF.md\`) before flows, tokens or components.
 Optional accelerator: \`python ai-frontend-guide-kit/tools/laya_select.py --check\` (local Laya decision engine;

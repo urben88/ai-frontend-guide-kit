@@ -91,6 +91,18 @@ node ai-frontend-guide-kit/tools/ui-map.mjs impact loading      # what must chan
 node ai-frontend-guide-kit/tools/ui-map.mjs have "data table"   # check before creating
 ```
 
+## 🧭 Design flow (kept per project)
+
+Every design conversation follows one route, step by step. The route and its current step live in `ai-frontend-output/flow-state.json` (commit it), so everyone continues at the same step.
+
+```bash
+node ai-frontend-guide-kit/tools/flow.mjs status          # kit installed? active route and step, what is recorded
+node ai-frontend-guide-kit/tools/flow.mjs start new       # declare the route
+node ai-frontend-guide-kit/tools/flow.mjs done intake     # refuses a skipped step or a missing artifact
+```
+
+All routes and steps, with their skills: `ai-frontend-guide-kit/guides/FLOWS.md`. `context.mjs` also lists the project's UI libraries (covered by the catalog, compatible, or to research) and `memory.mjs lib sync` records them.
+
 ## 🔎 Finding components
 
 ```bash
