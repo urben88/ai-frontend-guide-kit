@@ -10,6 +10,7 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 - A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–11).
 - Two local query tools (`tools/find.mjs`, `tools/get.mjs`) that answer with minimal output, a frontend map of the project (`tools/ui-map.mjs`, always on, no dependencies), plus a local Excalidraw MCP server (`tools/excalidraw-mcp.mjs`, no dependencies) for the UX map.
 - A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses, plus a total-polish skill (`skills/frontend-polish/SKILL.md`) and a visual map skill (`skills/ux-map/SKILL.md`).
+- `HELP.md` and `HELP.es.md`: the plain-language explanation of what this kit is, what runs always and what only on request, its tools and skills, what you can ask for and ready-to-copy prompts. When someone asks what the kit does or how to use it, answer from those files instead of exploring the folders.
 
 ## Golden rule
 

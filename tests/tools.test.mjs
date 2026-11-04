@@ -145,6 +145,32 @@ test('routing block and guide 00 place each external design skill at its flow st
   assert.ok(!guide.includes('only when its description matches'), 'stale load rule removed');
 });
 
+test('HELP.md and HELP.es.md name every kit tool and every skill', () => {
+  const kit = join(ROOT, 'ai-frontend-guide-kit');
+  const tools = readdirSync(join(kit, 'tools'), { withFileTypes: true })
+    .filter((entry) => entry.isFile() && /\.(mjs|py)$/.test(entry.name))
+    .map((entry) => entry.name);
+  const skills = readdirSync(join(ROOT, 'skills'), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
+  assert.ok(tools.length >= 10, `found ${tools.length} tools`);
+  assert.ok(skills.length >= 19, `found ${skills.length} skills`);
+  for (const file of ['HELP.md', 'HELP.es.md']) {
+    const help = readFileSync(join(kit, file), 'utf8');
+    for (const name of [...tools, ...skills]) assert.ok(help.includes(name), `${file} names ${name}`);
+  }
+});
+
+test('the routing block sends a request to explain the tool to HELP.md', () => {
+  const target = mkdtempSync(join(tmpdir(), 'kit-help-route-'));
+  assert.equal(install(target).status, 0);
+  const agents = readFileSync(join(target, 'AGENTS.md'), 'utf8');
+  assert.match(agents, /ai-frontend-guide-kit\/HELP\.md/);
+  assert.match(agents, /resumen de esta herramienta/);
+  const kitAgents = readFileSync(join(target, 'ai-frontend-guide-kit', 'AGENTS.md'), 'utf8');
+  assert.match(kitAgents, /HELP\.md/);
+});
+
 test('installer help counts 5 external design skill repos', () => {
   const help = node([join(ROOT, 'install.mjs'), '--help']);
   assert.equal(help.status, 0);

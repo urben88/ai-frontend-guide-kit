@@ -46,6 +46,9 @@ Selection memory: record every decision with \`node ai-frontend-guide-kit/tools/
 combinations from \`ai-frontend-output/\` before searching the catalog.
 Frontend map: before changing UI run \`node ai-frontend-guide-kit/tools/ui-map.mjs impact <role|component>\`, before creating a
 component run \`node ai-frontend-guide-kit/tools/ui-map.mjs have <name>\`, and read \`ai-frontend-output/UI-MAP.md\` instead of exploring the repo.
+Explaining the kit: on "what is this", "qué puedo pedirle", "dame un resumen de esta herramienta" or "explain this tool",
+read \`ai-frontend-guide-kit/HELP.md\` (Spanish: \`HELP.es.md\`) and answer from it in plain language; never explore
+the folders to explain the kit.
 Polish phase: use the \`frontend-polish\` skill with Playwright MCP (\`npx @playwright/mcp@latest\`).
 UX map: generate and maintain \`ai-frontend-output/ux/ux-map.excalidraw\` with the \`ux-map\` skill and the local Excalidraw MCP
 (\`node ai-frontend-guide-kit/tools/excalidraw-mcp.mjs --diagram ai-frontend-output/ux/ux-map.excalidraw\`, offline, no install).
