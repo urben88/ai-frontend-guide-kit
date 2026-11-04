@@ -47,7 +47,7 @@ A small new project may compress **1 → 2 → 3** (tokens and philosophy can me
 | `userflow` + `flow-*` skills | yes | — | optional flow audit |
 | `ux-map` skill + local Excalidraw MCP | direction-aware screen/navigation map | — | flow audit visual |
 | Catalog + `find`/`get` + selection memory + Laya (`fit`) | — | yes | — |
-| `ui-map` (`impact`, `have`; map always on) | — | `have` before searching or creating | `impact` to locate and to confirm no stray remains |
+| `ui-map` (`impact`, `have`, `types`, `docs`; map always on) | — | `have` before searching or creating; `types` for the component vocabulary | `impact` to locate and to confirm no stray remains; `docs` to check the context documents |
 | `landing-page-design` (if installed, landing pages only) | intake, page outline, copy | — | — |
 | `hallmark` (if installed) | raw material for the directions | only when the decision is `build` | report-only audit |
 | `design-taste-frontend` (if installed) | raw material for the directions | only when the decision is `build`, or an agreed visual redesign | its checks, on a screen it built |

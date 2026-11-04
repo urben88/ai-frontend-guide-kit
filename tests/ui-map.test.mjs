@@ -426,3 +426,122 @@ test('UI-MAP.md lists every component sorted by path, capped at 300 lines, byte-
   assert.equal(bigLines.filter((l) => l.includes('Item')).length, 300);
   assert.match(bigMd, /20 more components omitted.*ui-map\.json/);
 });
+
+// ---- component types, context documents and profiles (S5, S6, S7, S8)
+
+const typesCatalog = () => JSON.parse(readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'catalog', 'component-types.json'), 'utf8'));
+const taxonomyCategories = () => {
+  const md = readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'catalog', 'taxonomy.md'), 'utf8');
+  const table = md.split('## Canonical categories')[1].split(/\n## /)[0];
+  return [...table.matchAll(/^\|\s*`([a-z-]+)`\s*\|/gm)].map((m) => m[1]);
+};
+const writeSource = (dir, rel, name) => {
+  mkdirSync(join(dir, rel.split('/').slice(0, -1).join('/')), { recursive: true });
+  writeFileSync(join(dir, rel), `export function ${name}() {\n  return <div />;\n}\n`);
+};
+
+test('component-types.json names and aliases are unique, with known categories, layers and no copied descriptions', () => {
+  const catalog = typesCatalog();
+  const categories = new Set(taxonomyCategories());
+  assert.ok(categories.size >= 20, `parsed ${categories.size} categories from taxonomy.md`);
+  const layers = new Set(Object.keys(catalog.layers));
+  assert.deepEqual([...layers].sort(), ['entities', 'features', 'pages', 'shared', 'widgets']);
+  assert.ok(catalog.types.length >= 45, `${catalog.types.length} types`);
+  const claimed = new Map();
+  for (const type of catalog.types) {
+    assert.match(type.name, /^[A-Z][A-Za-z]*$/, `${type.name} is PascalCase`);
+    assert.ok(categories.has(type.category), `${type.name} category ${type.category} is canonical`);
+    assert.ok(layers.has(type.layer), `${type.name} layer ${type.layer} is known`);
+    assert.ok(Array.isArray(type.aliases) && type.aliases.length > 0, `${type.name} has aliases`);
+    assert.equal(type.description, undefined, `${type.name} carries no copied description`);
+    for (const surface of [type.name, ...type.aliases]) {
+      const key = surface.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const owner = claimed.get(key);
+      assert.ok(!owner || owner === type.name, `"${surface}" is claimed by both ${owner} and ${type.name}`);
+      claimed.set(key, type.name);
+    }
+  }
+  assert.equal(catalog.sources['open-ui-matrix'].url, 'https://open-ui.org/research/component-matrix/');
+  assert.equal(catalog.sources['component-gallery'].url, 'https://component.gallery/components/');
+  assert.match(catalog.limits.join(' '), /name and (file )?path/);
+});
+
+test('ui-map types reports coverage, the most specific type, unclassified components and duplicates', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ui-map-types-'));
+  writeSource(dir, 'src/components/ui/Button.tsx', 'Button');
+  writeSource(dir, 'src/components/ui/Dialog.tsx', 'Dialog');
+  writeSource(dir, 'src/components/ui/Modal.tsx', 'Modal');
+  writeSource(dir, 'src/components/ui/Card.tsx', 'Card');
+  writeSource(dir, 'src/components/ProductCard.tsx', 'ProductCard');
+  writeSource(dir, 'src/components/Thing.tsx', 'Thing');
+  const json = uiMap(dir, 'types', '--json');
+  assert.equal(json.status, 0, json.stderr);
+  const report = JSON.parse(json.stdout);
+  assert.ok(report.coverage.present >= 3 && report.coverage.total === typesCatalog().types.length);
+  const byType = new Map(report.types.map((t) => [t.name, t.components.map((c) => c.name)]));
+  assert.deepEqual(byType.get('Button'), ['Button']);
+  assert.deepEqual(byType.get('Dialog'), ['Dialog', 'Modal']);
+  assert.deepEqual(byType.get('Card'), ['Card'], 'ProductCard is not collapsed into Card');
+  assert.deepEqual(byType.get('ProductCard'), ['ProductCard']);
+  assert.deepEqual(report.unclassified.map((c) => c.name), ['Thing']);
+  assert.deepEqual(report.duplicates.map((d) => d.type), ['Dialog']);
+  assert.match(report.limit, /name and (file )?path/);
+
+  const text = uiMap(dir, 'types');
+  assert.equal(text.status, 0, text.stderr);
+  assert.match(text.stdout, /types: \d+ of \d+ present/);
+  assert.match(text.stdout, /unclassified \(1\): Thing/);
+  assert.match(text.stdout, /possible duplicates \(by name or alias, review only\) \(1\):/);
+  assert.match(text.stdout, /Dialog: Dialog \(src\/components\/ui\/Dialog\.tsx\), Modal \(src\/components\/ui\/Modal\.tsx\)/);
+  assert.match(text.stdout, /Limit:/);
+});
+
+test('have resolves a component through the type aliases', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ui-map-have-alias-'));
+  writeSource(dir, 'src/components/ui/Dialog.tsx', 'Dialog');
+  const run = uiMap(dir, 'have', 'modal');
+  assert.equal(run.status, 0, run.stderr);
+  assert.match(run.stdout, /exists/);
+  assert.match(run.stdout, /Dialog — src\/components\/ui\/Dialog\.tsx/);
+  assert.match(run.stdout, /reuse src\/components\/ui\/Dialog\.tsx/);
+});
+
+test('ui-map docs lists the documents of each profile and which are missing', () => {
+  const fromTypes = (() => {
+    const dir = mkdtempSync(join(tmpdir(), 'ui-map-docs-'));
+    writeSource(dir, 'src/components/ui/Button.tsx', 'Button');
+    return dir;
+  })();
+  const readJson = (dir, ...args) => {
+    const run = uiMap(dir, 'docs', '--json', ...args);
+    assert.equal(run.status, 0, run.stderr);
+    return JSON.parse(run.stdout);
+  };
+  const standard = readJson(fromTypes);
+  assert.equal(standard.profile, 'standard');
+  assert.ok(standard.documents.filter((d) => d.missing).length >= 3, 'a fresh project misses most documents');
+  for (const doc of standard.documents) {
+    assert.ok(doc.purpose.length > 10, `${doc.path} has a purpose`);
+    assert.match(doc.structure, /guides\/13-CONTEXT-DOCS\.md/, `${doc.path} points at the structure`);
+  }
+  const sprint = readJson(fromTypes, '--profile', 'sprint');
+  const longTerm = readJson(fromTypes, '--profile', 'long-term');
+  const paths = (report) => report.documents.map((d) => d.path);
+  for (const path of paths(sprint)) assert.ok(paths(standard).includes(path), `sprint ${path} is also standard`);
+  assert.ok(paths(standard).length > paths(sprint).length && paths(longTerm).length > paths(standard).length);
+
+  writeFileSync(join(fromTypes, 'README.md'), '# Project\n');
+  writeFileSync(join(fromTypes, 'DESIGN.md'), '# Design\n');
+  assert.equal(uiMap(fromTypes, 'build').status, 0);
+  const partial = readJson(fromTypes);
+  assert.deepEqual(partial.documents.filter((d) => !d.missing).map((d) => d.path).sort(), ['DESIGN.md', 'README.md', 'ai-frontend-output/UI-MAP.md']);
+
+  const text = uiMap(fromTypes, 'docs');
+  assert.equal(text.status, 0, text.stderr);
+  assert.match(text.stdout, /docs \(profile: standard\)/);
+  assert.match(text.stdout, /missing/);
+  const bad = uiMap(fromTypes, 'docs', '--profile', 'enterprise');
+  assert.equal(bad.status, 2);
+  assert.match(bad.stderr, /enterprise/);
+  assert.match(bad.stderr, /sprint, standard, long-term/);
+});

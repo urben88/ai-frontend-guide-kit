@@ -243,6 +243,25 @@ test('installer prints the Agentation message (not with --no-mcp) and ships guid
   assert.doesNotMatch(skipped.stdout, /agentation-mcp/);
 });
 
+test('memory tool records the optional component type and warns on an unknown one', () => {
+  const target = mkdtempSync(join(tmpdir(), 'kit-mem-type-'));
+  const env = { ...process.env, AI_FRONTEND_OUTPUT: join(target, 'out') };
+  const memory = join(ROOT, 'ai-frontend-guide-kit', 'tools', 'memory.mjs');
+  const add = node([memory, 'add', '--screen', 'home', '--block', 'orders', '--need', 'order table', '--decision', 'reuse', '--id', 'shadcn-data-display-table', '--type', 'table'], { env });
+  assert.equal(add.status, 0, add.stderr);
+  const typed = JSON.parse(readFileSync(join(target, 'out', 'selections.jsonl'), 'utf8').trim().split('\n')[0]);
+  assert.equal(typed.component_type.name, 'Table', 'the canonical name is recorded');
+  assert.equal(typed.component_type.layer, 'shared');
+  const unknown = node([memory, 'add', '--screen', 'home', '--block', 'x', '--need', 'n', '--decision', 'reuse', '--id', 'shadcn-data-display-table', '--type', 'widgeto'], { env });
+  assert.equal(unknown.status, 0, 'an unknown type still records the decision');
+  assert.match(unknown.stderr + unknown.stdout, /widgeto/);
+  const list = node([memory, 'list', '--json'], { env });
+  assert.equal(list.status, 0, list.stderr);
+  assert.ok(JSON.parse(list.stdout).decisions.some((row) => row.component_type?.name === 'Table'));
+  const legacy = node([memory, 'add', '--screen', 'home', '--block', 'y', '--need', 'n', '--decision', 'reuse', '--id', 'shadcn-data-display-table'], { env });
+  assert.equal(legacy.status, 0, 'a record without a type stays valid');
+});
+
 test('memory tool records and lists a decision', () => {
   const target = mkdtempSync(join(tmpdir(), 'kit-mem-'));
   mkdirSync(join(target, 'out'));

@@ -11,6 +11,8 @@
  *   node tools/ui-map.mjs build [--dir <project-root>] [--json]
  *   node tools/ui-map.mjs impact <role|component> [--dir <project-root>] [--json]
  *   node tools/ui-map.mjs have <name> [--dir <project-root>] [--json]
+ *   node tools/ui-map.mjs types [--dir <project-root>] [--json]
+ *   node tools/ui-map.mjs docs [--profile sprint|standard|long-term] [--dir <project-root>] [--json]
  *
  * Project root: --dir, then AI_FRONTEND_PROJECT, then the folder that holds the kit.
  * Output folder: AI_FRONTEND_OUTPUT, else <project-root>/ai-frontend-output.
@@ -30,6 +32,43 @@ const FILE_COMPONENT_EXT = ['.vue', '.svelte', '.astro'];
 const ROLES = ['layout', 'loading', 'empty', 'error', 'feedback', 'overlay', 'navigation', 'form'];
 const MAX_ROUTES = 200;
 
+// ---------------------------------------------------------------- context documents and profiles (S6, S7)
+
+/** The documents each profile needs. `structure` names where the guide describes how to write it. */
+const DOCUMENTS = [
+  { path: 'README.md', profiles: ['sprint', 'standard', 'long-term'], purpose: 'what the project is, how to run it and where things live', structure: 'guides/13-CONTEXT-DOCS.md' },
+  { path: 'DESIGN.md', profiles: ['sprint', 'standard', 'long-term'], purpose: 'tokens, type scale, spacing, component rules and the anti-generic list the UI follows', structure: 'guides/13-CONTEXT-DOCS.md' },
+  { path: 'PRODUCT.md', profiles: ['standard', 'long-term'], purpose: 'users, problem, scope and success measures the UI answers to', structure: 'guides/13-CONTEXT-DOCS.md' },
+  { path: 'UX-SPEC.md', profiles: ['standard', 'long-term'], purpose: 'screens, flows, states (empty/loading/error) and navigation', structure: 'guides/13-CONTEXT-DOCS.md' },
+  { path: 'ARCHITECTURE.md', profiles: ['standard', 'long-term'], purpose: 'folder map, module boundaries, data flow and where a new component belongs', structure: 'guides/13-CONTEXT-DOCS.md' },
+  { path: 'ai-frontend-output/UI-MAP.md', profiles: ['standard', 'long-term'], generated: true, purpose: 'the generated frontend map: components, users, routes, roles, strays', structure: 'guides/13-CONTEXT-DOCS.md' },
+  { path: 'docs/DECISIONS.md', profiles: ['long-term'], purpose: 'one entry per durable decision, with the alternative it replaced', structure: 'guides/13-CONTEXT-DOCS.md' },
+  { path: 'docs/CONTRIBUTING.md', profiles: ['long-term'], purpose: 'how to add a component, a screen or a dependency without breaking the structure', structure: 'guides/13-CONTEXT-DOCS.md' },
+  { path: 'docs/ACCESSIBILITY.md', profiles: ['long-term'], purpose: 'the accessibility bar of the project and how it is checked', structure: 'guides/13-CONTEXT-DOCS.md' },
+  { path: 'docs/PERFORMANCE.md', profiles: ['long-term'], purpose: 'the performance budget and how it is measured', structure: 'guides/13-CONTEXT-DOCS.md' },
+];
+
+const PROFILES = {
+  sprint: {
+    name: 'sprint',
+    what: 'a short-lived or fast project: the smallest set of documents that still guides an agent, never asked at install time',
+  },
+  standard: {
+    name: 'standard',
+    what: 'the default: enough context to change a feature without re-reading the repository',
+  },
+  'long-term': {
+    name: 'long-term',
+    what: 'a large, long-lived or critical project: the standard set plus the history, the contribution rules and the quality bars',
+  },
+};
+const PROFILE_NAMES = Object.keys(PROFILES);
+
+function documentsFor(profile) {
+  const name = profile ?? 'standard';
+  return DOCUMENTS.filter((doc) => doc.profiles.includes(name));
+}
+
 // ---------------------------------------------------------------- arguments and paths
 
 /** Strict parsing: unknown options and missing values are errors (flags.error), never silently ignored. */
@@ -44,6 +83,13 @@ function parseArgs(argv) {
       if (!value || (eq === -1 && value.startsWith('--'))) flags.error = 'option --dir needs a value (--dir <path> or --dir=<path>)';
       else {
         flags.dir = value;
+        if (eq === -1) i += 1;
+      }
+    } else if (name === '--profile') {
+      const value = eq === -1 ? argv[i + 1] : token.slice(eq + 1);
+      if (!value || (eq === -1 && value.startsWith('--'))) flags.error = 'option --profile needs a value (--profile sprint|standard|long-term)';
+      else {
+        flags.profile = value;
         if (eq === -1) i += 1;
       }
     } else if (eq === -1 && token === '--json') flags.json = true;
@@ -67,18 +113,21 @@ function resolveOutputDir(root) {
 const USAGE = `ui-map — always-on map of the project's frontend
 
 Usage:
-  node tools/ui-map.mjs build                  scan the project and write ui-map.json, UI-MAP.md and ui-history.jsonl
+  node tools/ui-map.mjs build                    scan the project and write ui-map.json, UI-MAP.md and ui-history.jsonl
   node tools/ui-map.mjs impact <role|component>  owner, users, routes, strays and unresolved imports
-  node tools/ui-map.mjs have <name>            does it exist? close matches, catalog candidates, decision
+  node tools/ui-map.mjs have <name>              does it exist? type aliases, close matches, catalog candidates, decision
+  node tools/ui-map.mjs types                    coverage of catalog/component-types.json, unclassified components, possible duplicates
+  node tools/ui-map.mjs docs                     documents the profile needs, and which are missing
 
 Options:
   --dir <project-root>   project to scan (default: AI_FRONTEND_PROJECT, then the folder that holds the kit)
-  --json                 machine-readable output (build, impact, have)
+  --profile <name>       docs only: ${PROFILE_NAMES.join('|')} (default: standard)
+  --json                 machine-readable output (build, impact, have, types, docs)
   --help                 this text
 
 Roles: ${ROLES.join(', ')}.
 Output goes to ai-frontend-output/ (or AI_FRONTEND_OUTPUT). Project source is never modified.
-impact and have rebuild the map first when it is missing or older than any scanned file.`;
+impact, have, types and docs rebuild the map first when it is missing or older than any scanned file.`;
 
 // ---------------------------------------------------------------- scanning
 
@@ -709,7 +758,7 @@ function loadMap(root) {
   return { map: JSON.parse(readFileSync(join(outDir, 'ui-map.json'), 'utf8')) };
 }
 
-// ---------------------------------------------------------------- name matching (T3 extends this with aliases)
+// ---------------------------------------------------------------- name matching (types extend it with aliases)
 
 const squash = (value) => String(value).toLowerCase().replace(/[^a-z0-9]/g, '');
 
@@ -744,6 +793,76 @@ export function matchName(query, candidate) {
   if (q.length >= 4 && (c.includes(q) || q.includes(c))) return 'close';
   if (q.length >= 4 && editDistance(q, c) <= 2) return 'close';
   return null;
+}
+
+// ---------------------------------------------------------------- component types (S5)
+
+const TYPES_LIMIT = 'classification reads the component name and file path only; an unusual name stays unclassified and two components under one type are reported for review, never merged';
+
+/** Loads catalog/component-types.json; a missing or broken file degrades the command, it never throws. */
+export function loadTypes(kitDir = KIT_DIR) {
+  try {
+    const data = JSON.parse(readFileSync(join(kitDir, 'catalog', 'component-types.json'), 'utf8'));
+    return Array.isArray(data.types) && data.types.length > 0 ? data : null;
+  } catch {
+    return null;
+  }
+}
+
+const surfacesOf = (type) => [type.name, ...(type.aliases ?? [])];
+
+/**
+ * Stricter than matchName: a type matches a name only when the name spells the surface or contains every word of it
+ * (ProductCard → card, HeavyChart → chart), so "Thing" is never guessed into Tooltip through its edit distance.
+ */
+function matchTypeSurface(name, surface) {
+  const q = squash(name);
+  const c = squash(surface);
+  if (!q || !c) return null;
+  if (q === c) return 'exact';
+  const nameWords = splitWords(name).map(singular);
+  const surfaceWords = splitWords(surface).map(singular);
+  if (surfaceWords.length === 0 || nameWords.length === 0) return null;
+  return surfaceWords.every((word) => nameWords.includes(word)) ? 'close' : null;
+}
+
+/**
+ * The most specific type for a component name: an exact match beats a close one, then the longest surface wins,
+ * so ProductCard resolves to product-card and never collapses into card.
+ */
+export function classifyComponent(name, types) {
+  let best = null;
+  for (const type of types) {
+    for (const surface of surfacesOf(type)) {
+      const kind = matchTypeSurface(name, surface);
+      if (!kind) continue;
+      const score = [kind === 'exact' ? 2 : 1, squash(surface).length];
+      if (!best || score[0] > best.score[0] || (score[0] === best.score[0] && score[1] > best.score[1])) best = { type, score, surface };
+    }
+  }
+  return best === null ? null : { name: best.type.name, layer: best.type.layer, category: best.type.category, surface: best.surface };
+}
+
+/** Groups the mapped components by type: coverage, unclassified components and possible duplicates. */
+function typeReport(map, data) {
+  const groups = new Map();
+  const unclassified = [];
+  for (const component of map.components) {
+    const hit = classifyComponent(component.name, data.types);
+    if (!hit) {
+      unclassified.push({ name: component.name, file: component.file, line: component.line });
+      continue;
+    }
+    if (!groups.has(hit.name)) groups.set(hit.name, []);
+    groups.get(hit.name).push({ name: component.name, file: component.file, line: component.line });
+  }
+  const present = [...groups].map(([name, components]) => {
+    const type = data.types.find((entry) => entry.name === name);
+    return { name, layer: type.layer, category: type.category, components };
+  }).sort((a, b) => byText(a.name, b.name));
+  const duplicates = present.filter((type) => type.components.length > 1)
+    .map((type) => ({ type: type.name, components: type.components.map((c) => `${c.name} (${c.file})`) }));
+  return { coverage: { present: present.length, total: data.types.length }, types: present, unclassified, duplicates, limit: TYPES_LIMIT };
 }
 
 // ---------------------------------------------------------------- commands
@@ -848,34 +967,108 @@ function runHave(root, flags) {
     return 2;
   }
   const { map } = loadMap(root);
+  const data = loadTypes();
   const exact = map.components.filter((c) => matchName(query, c.name) === 'exact');
   const close = map.components.filter((c) => matchName(query, c.name) === 'close');
+  // The query itself may name a type instead of a component: "modal" finds a Dialog through the aliases.
+  const queryType = data ? classifyComponent(query, data.types) : null;
+  const ofType = queryType ? map.components.filter((c) => classifyComponent(c.name, data.types)?.name === queryType.name) : [];
   let status = 'not-found';
   let decision = `search the catalog before creating (node ai-frontend-guide-kit/tools/find.mjs --text "${query}")`;
+  let matches = [];
   if (exact.length > 0) {
     status = 'exists';
+    matches = exact;
     decision = `reuse ${exact[0].file}`;
   } else if (close.length > 0) {
     status = 'close';
     decision = 'check the close match(es) before creating';
+  } else if (ofType.length > 0) {
+    status = 'exists';
+    matches = ofType;
+    decision = `reuse ${ofType[0].file}`;
   }
+  const typeHint = queryType ? queryType.name : null;
   const catalog = status === 'exists' ? [] : catalogCandidates(query);
   if (flags.json) {
-    console.log(JSON.stringify({ query, status, matches: exact.map(summarizeComponent), close: close.map(summarizeComponent), catalog, decision: `Decision: ${decision}` }, null, 2));
+    console.log(JSON.stringify({
+      query,
+      status,
+      type: typeHint,
+      matches: matches.map(summarizeComponent),
+      close: close.map(summarizeComponent),
+      catalog,
+      decision: `Decision: ${decision}`,
+    }, null, 2));
     return 0;
   }
   if (status === 'exists') {
-    console.log(`have "${query}": exists`);
-    for (const c of exact) console.log(`  - ${c.name} — ${c.file}:${c.line} — used by ${c.usage} file(s)`);
+    console.log(`have "${query}": exists${exact.length > 0 ? '' : ` (component type ${typeHint})`}`);
+    for (const c of matches) console.log(`  - ${c.name} — ${c.file}:${c.line} — used by ${c.usage} file(s)`);
   } else if (status === 'close') {
     console.log(`have "${query}": no exact match, close matches:`);
     for (const c of close.slice(0, 5)) console.log(`  - ${c.name} — ${c.file}:${c.line} — used by ${c.usage} file(s)`);
     printCandidates(catalog);
   } else {
-    console.log(`have "${query}": not found in the project`);
+    console.log(`have "${query}": not found in the project${typeHint ? ` (no component of type ${typeHint})` : ''}`);
     printCandidates(catalog);
   }
   console.log(`Decision: ${decision}.`);
+  return 0;
+}
+
+function runTypes(root, flags) {
+  const data = loadTypes();
+  if (!data) {
+    console.error('ui-map: catalog/component-types.json is missing or invalid; run node tools/build-kit.mjs');
+    return 2;
+  }
+  const { map } = loadMap(root);
+  const report = typeReport(map, data);
+  if (flags.json) {
+    console.log(JSON.stringify(report, null, 2));
+    return 0;
+  }
+  console.log(`types: ${report.coverage.present} of ${report.coverage.total} present`);
+  for (const type of report.types) {
+    const who = type.components.map((c) => `${c.name} (${c.file})`).join(', ');
+    console.log(`  ${type.name} [${type.layer}/${type.category}] — ${who}`);
+  }
+  if (report.unclassified.length === 0) console.log('unclassified (0): none');
+  else console.log(`unclassified (${report.unclassified.length}): ${report.unclassified.map((c) => c.name).join(', ')}`);
+  if (report.duplicates.length === 0) console.log('possible duplicates: none');
+  else {
+    console.log(`possible duplicates (by name or alias, review only) (${report.duplicates.length}):`);
+    for (const duplicate of report.duplicates) console.log(`  ${duplicate.type}: ${duplicate.components.join(', ')}`);
+  }
+  console.log(`Limit: ${report.limit}.`);
+  return 0;
+}
+
+function runDocs(root, flags) {
+  const profile = flags.profile ?? 'standard';
+  if (!PROFILES[profile]) {
+    console.error(`ui-map: unknown profile "${profile}" (valid: ${PROFILE_NAMES.join(', ')})\n`);
+    console.error(USAGE);
+    return 2;
+  }
+  const outDir = resolveOutputDir(root);
+  const documents = documentsFor(profile).map((doc) => ({
+    path: doc.path,
+    purpose: doc.purpose,
+    structure: doc.structure,
+    generated: doc.generated === true,
+    missing: !existsSync(doc.generated ? join(outDir, 'UI-MAP.md') : join(root, doc.path)),
+  }));
+  const missing = documents.filter((doc) => doc.missing).length;
+  if (flags.json) {
+    console.log(JSON.stringify({ profile, what: PROFILES[profile].what, documents, missing }, null, 2));
+    return 0;
+  }
+  console.log(`docs (profile: ${profile}) — ${documents.length} documents, ${missing} missing`);
+  for (const doc of documents) console.log(`  ${doc.missing ? 'missing' : 'ok     '} ${doc.path}${doc.generated ? ' (generated)' : ''} — ${doc.purpose}`);
+  console.log(`Structure of each one: ${DOCUMENTS[0].structure}; folder map: guides/12-ARCHITECTURE.md.`);
+  if (missing > 0) console.log(`Next: write the missing ones, or accept a smaller profile (${PROFILE_NAMES.join(', ')}).`);
   return 0;
 }
 
@@ -906,13 +1099,13 @@ function main() {
     console.log(USAGE);
     return 0;
   }
-  if (!['build', 'impact', 'have'].includes(command)) {
+  if (!['build', 'impact', 'have', 'types', 'docs'].includes(command)) {
     console.error(`ui-map: unknown command "${command}"\n`);
     console.error(USAGE);
     return 2;
   }
-  if (command === 'build' && flags._.length > 1) {
-    console.error(`ui-map: build takes no arguments (got "${flags._.slice(1).join(' ')}")\n`);
+  if (['build', 'types', 'docs'].includes(command) && flags._.length > 1) {
+    console.error(`ui-map: ${command} takes no arguments (got "${flags._.slice(1).join(' ')}")\n`);
     console.error(USAGE);
     return 2;
   }
@@ -920,6 +1113,8 @@ function main() {
   try {
     if (command === 'build') return runBuild(root, flags);
     if (command === 'impact') return runImpact(root, flags);
+    if (command === 'types') return runTypes(root, flags);
+    if (command === 'docs') return runDocs(root, flags);
     return runHave(root, flags);
   } catch (error) {
     console.error(`ui-map: ${error.message}`);

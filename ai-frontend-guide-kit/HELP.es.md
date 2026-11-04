@@ -36,7 +36,7 @@ Se corren desde la raíz del proyecto. Cada una imprime una pantalla, no un volc
 | Herramienta | Qué responde |
 |---|---|
 | `tools/context.mjs` | ¿Qué es este repositorio? Stack, rutas/pantallas, documentos, artefactos de UX previos → `ai-frontend-output/ux/REPO-CONTEXT.md` |
-| `tools/ui-map.mjs` | `build` escribe el mapa; `impact <rol\|componente>` lista dueño, usuarios, rutas, strays e imports sin resolver; `have <nombre>` responde si el componente ya existe, con coincidencias cercanas y candidatos del catálogo |
+| `tools/ui-map.mjs` | `build` escribe el mapa; `impact <rol|componente>` lista dueño, usuarios, rutas, strays e imports sin resolver; `have <nombre>` responde si el componente ya existe, con alias de tipo, coincidencias cercanas y candidatos del catálogo; `types` informa cobertura de los tipos canónicos, componentes sin clasificar y posibles duplicados; `docs` lista los documentos que pide el perfil y cuáles faltan |
 | `tools/find.mjs` | Qué entradas del catálogo encajan por categoría, stack, texto o uso comercial |
 | `tools/get.mjs` | La ficha completa de una entrada: qué es, cuándo usarla, instalación, límites de licencia |
 | `tools/memory.mjs` | `add`, `list`, `summary`, `combo save\|list\|show\|apply` — el historial reutilizable de decisiones |

@@ -11,7 +11,7 @@
  *   SUMMARY.md          generated summary (regenerated on every mutation)
  *
  * Usage:
- *   node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> [--style a,b] [--ref "spec:<capability>|story:<id>"] [--notes "..."]
+ *   node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> [--style a,b] [--ref "spec:<capability>|story:<id>"] [--type <component-type>] [--notes "..."]
  *   node tools/memory.mjs add --screen experience --block reference --need "..." --decision adapt --ref "reference:<slug>" [--notes "..."]
  *   node tools/memory.mjs add --screen landing --block custom-x --need "..." --decision build --name "Custom marquee"
  *   node tools/memory.mjs list [--screen landing] [--limit 15] [--json]
@@ -88,6 +88,36 @@ function loadCatalog() {
   return entries;
 }
 
+/** catalog/component-types.json, written by the kit: canonical names, aliases, layer and catalog category. */
+function loadComponentTypes() {
+  try {
+    const data = JSON.parse(readFileSync(join(KIT_DIR, 'catalog', 'component-types.json'), 'utf8'));
+    return Array.isArray(data.types) ? data.types : null;
+  } catch {
+    return null;
+  }
+}
+
+const squashType = (value) => String(value).toLowerCase().replace(/[^a-z0-9]/g, '');
+
+/** Resolves a --type value by canonical name or alias; an unknown value is recorded as written, with a warning. */
+function resolveComponentType(query) {
+  const types = loadComponentTypes();
+  if (!types) return { name: query, known: false };
+  const key = squashType(query);
+  const hit = types.find((type) => [type.name, ...(type.aliases ?? [])].some((surface) => squashType(surface) === key));
+  if (hit) return { name: hit.name, layer: hit.layer, category: hit.category, known: true };
+  const close = types
+    .filter((type) => [type.name, ...(type.aliases ?? [])].some((surface) => {
+      const value = squashType(surface);
+      return value.length >= 4 && (value.includes(key) || key.includes(value));
+    }))
+    .slice(0, 3)
+    .map((type) => type.name);
+  console.warn(`memory: component type "${query}" is not in catalog/component-types.json; recorded as written${close.length > 0 ? ` (close: ${close.join(', ')})` : ''}`);
+  return { name: query, known: false };
+}
+
 function readHistory(outputDir) {
   const file = join(outputDir, 'selections.jsonl');
   if (!existsSync(file)) return [];
@@ -134,10 +164,10 @@ function regenerateSummary(outputDir) {
   lines.push('');
   lines.push('## Latest decision per screen/block');
   lines.push('');
-  lines.push('| Screen | Block | Decision | Component | Source | License | Ref |');
-  lines.push('|---|---|---|---|---|---|---|');
+  lines.push('| Screen | Block | Decision | Component | Type | Source | License | Ref |');
+  lines.push('|---|---|---|---|---|---|---|---|');
   for (const record of latest.sort((a, b) => `${a.screen}/${a.block}`.localeCompare(`${b.screen}/${b.block}`))) {
-    lines.push(`| ${record.screen} | ${record.block} | ${record.decision} | ${record.entry_id ?? record.name ?? '—'} | ${record.source ?? '—'} | ${record.license_type ?? '—'} | ${record.ref ?? '—'} |`);
+    lines.push(`| ${record.screen} | ${record.block} | ${record.decision} | ${record.entry_id ?? record.name ?? '—'} | ${record.component_type?.name ?? '—'} | ${record.source ?? '—'} | ${record.license_type ?? '—'} | ${record.ref ?? '—'} |`);
   }
   lines.push('');
   if (Object.keys(styleCounts).length > 0) {
@@ -187,6 +217,7 @@ function commandAdd(args, outputDir, catalog) {
     notes: flags.notes ?? '',
   };
   if (flags.ref) record.ref = flags.ref;
+  if (flags.type) record.component_type = resolveComponentType(flags.type);
 
   if (flags.id) {
     const entry = catalog.get(flags.id);

@@ -120,11 +120,14 @@ The installer scans the project and keeps `ui-map.json`, `UI-MAP.md` and `ui-his
 
 ```bash
 node tools/ui-map.mjs impact loading        # before changing UI: owner, users, routes, strays, unresolved
-node tools/ui-map.mjs have "data table"     # before creating: exists? close match? catalog candidates
+node tools/ui-map.mjs have "data table"     # before creating: exists? type alias, close match, catalog candidates
+node tools/ui-map.mjs types                 # coverage of catalog/component-types.json, unclassified, possible duplicates
+node tools/ui-map.mjs docs                  # documents the profile needs, and which are missing (guides/13-CONTEXT-DOCS.md)
 node tools/ui-map.mjs build                 # refresh by hand (impact/have rebuild when stale)
 ```
 
 Read `UI-MAP.md` instead of exploring. Change every owner, user and stray that `impact` lists; none may be left out. Unresolved imports are never assumed fine.
+`have` also resolves the canonical component types and their aliases (`modal` finds a `Dialog`); `types` and `docs` are read-only reports, and `docs --profile sprint|standard|long-term` sets how many context documents the project owes.
 
 ## Selection memory (`ai-frontend-output/`)
 
@@ -132,7 +135,7 @@ Every decision is recorded and reusable. The folder lives next to the kit and **
 
 ```bash
 node tools/memory.mjs combo list        # check saved combinations BEFORE searching
-node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> --style gradient,dark
+node tools/memory.mjs add --screen landing --block orders --need "order table" --decision reuse --id <entry-id> --type table
 node tools/memory.mjs add --screen experience --block direction --need "..." --decision adapt --ref "direction:<id>"
 node tools/memory.mjs list              # recent decisions
 node tools/memory.mjs combo save saas-landing-v1 --note "..."   # snapshot for reuse

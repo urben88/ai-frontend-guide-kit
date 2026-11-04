@@ -24,7 +24,7 @@ ai-frontend-guide-kit/
 ├── AGENTS.md              # awareness layer: scope, golden rule, navigation
 ├── HELP.md · HELP.es.md    # plain-language "what this is and what you can ask" (answer a kit summary from here)
 ├── README.md              # this file (copy + integration instructions)
-├── guides/                # 00-START-HERE (router: intake + 3 phases) … 10-ITERATE (small changes), 11-VISUAL-FEEDBACK (Agentation)
+├── guides/                # 00-START-HERE (router: intake + 3 phases) … 10-ITERATE (small changes), 11-VISUAL-FEEDBACK (Agentation), 13-CONTEXT-DOCS (which documents a project owes)
 ├── experience/            # direction layer: manifest, question bank, archetypes, philosophies,
 │                          # styles, reference protocol, discovery loop, experience-manifest.json, references/
 ├── catalog/
@@ -33,10 +33,11 @@ ai-frontend-guide-kit/
 │   ├── taxonomy.md               # category definitions + source mappings
 │   ├── install-guides.md         # install/code retrieval per source
 │   ├── schema.json               # entry schema
+│   ├── component-types.json      # canonical component types: aliases, usual layer, catalog category
 │   └── sources/*.json            # 34 source files (4,287 entries), explorer.html, license-report.md
 └── tools/
     ├── context.mjs        # repo context for the UX phase (REPO-CONTEXT.md)
-    ├── ui-map.mjs         # always-on frontend map: build, impact <role|component>, have <name>
+    ├── ui-map.mjs         # always-on frontend map: build, impact <role|component>, have <name>, types, docs
     ├── find.mjs           # filtered catalog search (short output)
     ├── get.mjs            # full decision card for one entry
     ├── memory.mjs         # selection memory: history, summary, combinations

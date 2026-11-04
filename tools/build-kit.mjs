@@ -14,7 +14,7 @@ import { ROOT, MANIFEST_DIR } from './extract/lib.mjs';
 const KIT_DIR = join(ROOT, 'ai-frontend-guide-kit');
 const CATALOG_DIR = join(KIT_DIR, 'catalog');
 
-const CATALOG_FILES = ['component-manifest.json', 'component-manifest.md', 'taxonomy.md', 'install-guides.md', 'schema.json', 'license-report.md'];
+const CATALOG_FILES = ['component-manifest.json', 'component-manifest.md', 'taxonomy.md', 'install-guides.md', 'schema.json', 'license-report.md', 'component-types.json'];
 const REQUIRED_KIT_FILES = [
   'AGENTS.md',
   'README.md',
@@ -31,6 +31,7 @@ const REQUIRED_KIT_FILES = [
   'guides/09-VERIFY.md',
   'guides/10-ITERATE.md',
   'guides/11-VISUAL-FEEDBACK.md',
+  'guides/13-CONTEXT-DOCS.md',
   'experience/EXPERIENCE-DIRECTION.md',
   'experience/QUESTION-BANK.md',
   'experience/SITE-ARCHETYPES.md',
@@ -52,6 +53,8 @@ const REQUIRED_KIT_FILES = [
   'tools/audit-perf.mjs',
   'catalog/component-manifest.json',
   'catalog/taxonomy.md',
+  'catalog/component-types.json',
+  'catalog/component-types.json',
   'catalog/install-guides.md',
   'catalog/schema.json',
   'catalog/license-report.md',
