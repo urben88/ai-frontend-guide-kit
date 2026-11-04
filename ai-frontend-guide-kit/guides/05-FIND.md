@@ -2,6 +2,10 @@
 
 Purpose: map each inventory row to a short list of concrete catalog entries, with reasons.
 
+## Overview first
+
+Read `catalog/digest.md` once: the 5 best entries per category (at most 2 per source), with license, quality and stack, in about 2.5k tokens. It tells you which sources and ids to query; `find` and `get` give the detail.
+
 ## Query basics
 
 ```bash

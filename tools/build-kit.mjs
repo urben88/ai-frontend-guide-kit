@@ -56,6 +56,7 @@ const REQUIRED_KIT_FILES = [
   'tools/audit-a11y.mjs',
   'tools/audit-perf.mjs',
   'catalog/component-manifest.json',
+  'catalog/digest.md',
   'catalog/taxonomy.md',
   'catalog/component-types.json',
   'catalog/component-types.json',
@@ -147,6 +148,12 @@ function main() {
   const explorer = spawnSync(process.execPath, [join(ROOT, 'tools', 'build-explorer.mjs')], { stdio: 'inherit' });
   if (explorer.status !== 0) {
     console.error('Kit build FAILED. build-explorer.mjs errored.');
+    process.exit(1);
+  }
+
+  const digest = spawnSync(process.execPath, [join(ROOT, 'tools', 'build-digest.mjs')], { stdio: 'inherit' });
+  if (digest.status !== 0) {
+    console.error('Kit build FAILED. build-digest.mjs errored.');
     process.exit(1);
   }
 
