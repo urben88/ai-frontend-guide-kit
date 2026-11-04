@@ -5,7 +5,7 @@
 **Catálogo de UI "reutilizar primero" + flujo guiado para agentes de IA que construyen frontends.**
 Este repositorio es a la vez la 🏭 **fábrica** (pipeline de extracción + catálogo) y el 📦 **kit distribuible** que se copia a cualquier proyecto frontend.
 
-## 🎬 Presentación — 55 segundos
+## 🎬 Presentación — 64 segundos
 
 <p align="center">
   <a href="media/explainer/video/ai-frontend-guide-kit-es.mp4">

@@ -41,7 +41,7 @@ const Q = new URLSearchParams(location.search);
 const LANG = Q.get('lang') === 'en' ? 'en' : 'es';
 const RENDER = Q.get('render') === '1';
 const FIXED_T = Q.has('t') ? parseFloat(Q.get('t')) : null;
-const FPS = 30, TOTAL = 55, FADE = 0.45;
+const FPS = 30, TOTAL = 64, FADE = 0.45;
 
 const INK='#26221c', ACCENT='#e8590c', BLUE='#2f6fed', GREEN='#2f9e44', GREY='#8a8378', RED='#d64545';
 const OPTS = { stroke:INK, strokeWidth:3, roughness:1.75, bowing:1.25 };
@@ -53,7 +53,8 @@ es:{
   s3:{ title:'Descubre ideas contigo', bubble:'¿Cuál te gusta más?', shot:'captura', ref:'gusta: hero grande', avoid:'evitar: pop-ups', saved:'guardado' },
   s4:{ title:'Elige la dirección', dirs:['Segura','Diferenciada','Experimental'], subs:['familiar','con carácter','atrevida'], chips:['Arquetipo','Filosofía','Journey','IA'], laya:'Laya · ranking local · privado' },
   s5:{ title:'Tres fases, a demanda', a:['UX y flujos','16 skills'], b:['Composición','find · get'], c:['Pulido','Playwright'] },
-  s6:{ title:'Recuerda cada decisión', next:'siguiente proyecto', reuse:'reutiliza', lic:'licencias al día' },
+  s8:{ title:'Conoce tu proyecto', skip:'flow.mjs · sin saltarse pasos', have:'✓ ya existe → reutiliza', now:'ahora' },
+  s6:{ title:'Recuerda cada decisión', next:'siguiente proyecto', reuse:'reutiliza', lic:'licencias al día', libs:'librerías de UI en uso' },
   s7:{ cta:'Reutiliza antes de crear' }
 },
 en:{
@@ -62,7 +63,8 @@ en:{
   s3:{ title:'Discover ideas together', bubble:'Which one do you like?', shot:'screenshot', ref:'liked: big hero', avoid:'avoid: pop-ups', saved:'saved' },
   s4:{ title:'Pick the direction', dirs:['Safe','Differentiated','Experimental'], subs:['familiar','with character','bold'], chips:['Archetype','Philosophy','Journey','IA'], laya:'Laya · local ranking · private' },
   s5:{ title:'Three phases, on demand', a:['UX & flows','16 skills'], b:['Composition','find · get'], c:['Polish','Playwright'] },
-  s6:{ title:'Remember every decision', next:'next project', reuse:'reuse', lic:'licenses up to date' },
+  s8:{ title:'Knows your project', skip:'flow.mjs · no skipped steps', have:'✓ already there → reuse it', now:'now' },
+  s6:{ title:'Remember every decision', next:'next project', reuse:'reuse', lic:'licenses up to date', libs:'UI libraries in use' },
   s7:{ cta:'Reuse before you build' }
 }
 }[LANG];
@@ -345,7 +347,7 @@ function scene(start,dur,{camX=0,camY=0}={}){
     mag.style.transform='translate('+(x-magPath[0][0])+'px,'+(y-magPath[0][1])+'px)';
   }});
 
-  const cards=[[330,220,S.s2.f1,'16'],[500,220,S.s2.f2, S.s2.f2==='componentes'?'2.470':'2,470'],[670,220,S.s2.f3,'20']];
+  const cards=[[330,220,S.s2.f1,'34'],[500,220,S.s2.f2, S.s2.f2==='componentes'?'4.287':'4,287'],[670,220,S.s2.f3,'21']];
   const nums=[];
   cards.forEach((c,i)=>{
     ink(rect(s.svg,170,c[0],430,120),6.45+i*0.3,0.7);
@@ -354,8 +356,8 @@ function scene(start,dur,{camX=0,camY=0}={}){
     popIn(T(s.cam,200,c[0]+78,c[2],{css:{fontSize:'32px',color:GREY}}),6.85+i*0.3,0.4);
   });
   customs.push({t0:7.15,t1:8.25,fn:(p)=>{
-    nums[1].textContent=(S.s2.f2==='componentes'?'2.470':'2,470');
-    const n=Math.round(2470*eOut(p));
+    nums[1].textContent=(S.s2.f2==='componentes'?'4.287':'4,287');
+    const n=Math.round(4287*eOut(p));
     const str=String(n).replace(/\B(?=(\d{3})+(?!\d))/g, S.s2.f2==='componentes'?'.':',');
     nums[1].textContent=str;
   }});
@@ -543,8 +545,67 @@ function scene(start,dur,{camX=0,camY=0}={}){
   sparkSvg(s.svg,1750,700,13); sparkSvg(s.svg,220,700,11);
 })();
 
-/* ============================== SCENE 6 ============================== */
+/* ============================== SCENE 6 · FLOW + UI MAP ============================== */
 (function(){
+  const s=scene(38.5,9,{camX:-16,camY:8});
+  blob(s.cam,500,620,360,'#2f9e44',0.045); blob(s.cam,1400,500,380,'#2f6fed',0.05);
+
+  popIn(T(s.cam,150,84,S.s8.title,{cls:'hand',css:{fontSize:'92px'}}),38.65,0.6);
+  ink(rcurve(s.svg,[[152,214],[400,206],[660,214],[880,208]],{stroke:ACCENT,strokeWidth:7,roughness:2}),39.3,0.7);
+
+  const steps=['intake','direction','ux','tokens','compose','polish'];
+  ink(line(s.svg,220,300,220,775,{strokeWidth:2.5,stroke:GREY}),38.9,0.9);
+  steps.forEach((name,i)=>{
+    const y=300+i*95;
+    const cur=i===3;
+    ink(circ(s.svg,220,y,52,{seed:161+i,fill:'#f8f4ea',fillStyle:'solid',stroke:cur?ACCENT:INK,strokeWidth:cur?5:3}),39.0+i*0.15,0.45);
+    popIn(T(s.cam,268,y-28,name,{cls:'hand',css:{fontSize:'48px',color:cur?ACCENT:(i>3?GREY:INK)}}),39.1+i*0.15,0.4,'left');
+    if(i<3) ink(checkSvg(s.svg,220,y,30,{stroke:GREEN,strokeWidth:4}),39.6+i*0.22,0.35);
+  });
+  popIn(T(s.cam,470,560,'← '+S.s8.now,{css:{fontSize:'34px',color:ACCENT}}),40.4,0.4,'left');
+
+  ink(rcurve(s.svg,[[420,600],[560,690],[470,775]],{stroke:RED,strokeWidth:5,roughness:1.6}),41.0,0.6);
+  ink(line(s.svg,470,775,500,752,{stroke:RED,strokeWidth:5}),41.5,0.2);
+  ink(line(s.svg,470,775,505,785,{stroke:RED,strokeWidth:5}),41.5,0.2);
+  ink(xmark(s.svg,560,690,32,{stroke:RED,strokeWidth:6}),41.8,0.4);
+  popIn(T(s.cam,160,860,S.s8.skip,{cls:'hand',css:{fontSize:'48px',color:RED}}),42.0,0.45);
+
+  const N={app:[1320,360],hdr:[1040,560],card:[1320,590],btn:[1600,560]};
+  ink(line(s.svg,1320,400,1070,525,{strokeWidth:2.5}),42.6,0.35);
+  ink(line(s.svg,1320,400,1320,545,{strokeWidth:2.5}),42.7,0.35);
+  ink(line(s.svg,1320,400,1570,525,{strokeWidth:2.5}),42.8,0.35);
+  [['app','App',150],['hdr','Header',190],['card','Card',170],['btn','Button',190]].forEach((n,i)=>{
+    const [x,y]=N[n[0]];
+    ink(ell(s.svg,x,y,n[2],80,{seed:171+i,fill:'#f8f4ea',fillStyle:'solid'}),42.4+i*0.2,0.45);
+    popIn(T(s.cam,x-n[2]/2,y-26,n[1],{cls:'hand',css:{fontSize:'42px',textAlign:'center',width:n[2]+'px'}}),42.5+i*0.2,0.35,'pop');
+  });
+  popIn(T(s.cam,1560,300,'UI-MAP.md',{cls:'hand',css:{fontSize:'40px',color:GREY}}),42.9,0.4);
+
+  ink(rect(s.svg,920,700,840,100,{seed:181}),43.3,0.6);
+  const cmd=T(s.cam,960,726,'',{cls:'hand',css:{fontSize:'44px',lineHeight:'1'}});
+  popIn(cmd,43.5,0.3);
+  const CMD_HAVE='$ ui-map have Button';
+  customs.push({t0:43.6,t1:44.6,fn:(p)=>{ cmd.textContent=CMD_HAVE.slice(0,Math.round(p*CMD_HAVE.length)); }});
+
+  ink(ell(s.svg,1600,560,230,112,{stroke:GREEN,strokeWidth:5,seed:191}),44.8,0.5);
+  sparkHTML(s.cam,1700,470,30,GREEN,45.0);
+  popIn(T(s.cam,940,840,S.s8.have,{cls:'hand',css:{fontSize:'54px',color:GREEN}}),45.1,0.45,'pop');
+  popIn(T(s.cam,1420,940,'impact · have · check',{css:{fontSize:'36px',color:GREY}}),45.6,0.45);
+  sparkSvg(s.svg,1800,800,13); sparkSvg(s.svg,860,300,12);
+})();
+
+/* Scenes after the new one keep their original timings and are moved later as a block. */
+function shifted(dt,fn){
+  const a=anims.length,h=hAnims.length,c=customs.length,sc=scenes.length;
+  fn();
+  anims.slice(a).forEach(x=>{ x.t0+=dt; });
+  hAnims.slice(h).forEach(x=>{ x.t0+=dt; });
+  customs.slice(c).forEach(x=>{ x.t0+=dt; x.t1+=dt; });
+  scenes.slice(sc).forEach(x=>{ x.start+=dt; });
+}
+
+/* ============================== SCENE 7 · MEMORY ============================== */
+shifted(9,function(){
   const s=scene(38.5,8,{camX:18,camY:10});
   blob(s.cam,700,700,380,'#2f6fed',0.05); blob(s.cam,1500,500,320,'#e8590c',0.045);
 
@@ -588,11 +649,14 @@ function scene(start,dur,{camX=0,camY=0}={}){
   shieldSvg(sh,760,740,140,160); checkSvg(sh,760,740,66);
   ink(sh,45.0,0.8);
   popIn(T(s.cam,620,950,String(S.s6.lic),{cls:'hand',css:{fontSize:'50px',color:GREEN}}),45.3,0.5);
+  ink(rect(s.svg,1420,430,420,170,{seed:125,stroke:BLUE}),45.6,0.6);
+  popIn(T(s.cam,1450,456,'React · shadcn/ui',{cls:'hand',css:{fontSize:'50px',color:BLUE}}),45.8,0.45,'pop');
+  popIn(T(s.cam,1450,526,String(S.s6.libs),{css:{fontSize:'32px',color:GREY}}),46.0,0.4);
   sparkSvg(s.svg,900,380,13); sparkSvg(s.svg,1650,900,14);
-})();
+});
 
-/* ============================== SCENE 7 ============================== */
-(function(){
+/* ============================== SCENE 8 · CTA ============================== */
+shifted(9,function(){
   const s=scene(46.5,8.5,{camX:-14,camY:-8});
   blob(s.cam,960,500,420,'#e8590c',0.05); blob(s.cam,300,800,300,'#2f6fed',0.04);
 
@@ -630,7 +694,7 @@ function scene(start,dur,{camX=0,camY=0}={}){
   sparkHTML(s.cam,1560,520,34,ACCENT,53.8);
   sparkHTML(s.cam,1500,940,28,BLUE,54.0);
   sparkSvg(s.svg,700,180,15); sparkSvg(s.svg,1300,980,13);
-})();
+});
 
 /* ============================== RENDER ENGINE ============================== */
 function renderAt(t){

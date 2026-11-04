@@ -5,7 +5,7 @@
 **Reuse-first UI catalog + guided workflow for AI agents building frontends.**
 This repository is both the 🏭 **factory** (extraction pipeline + catalog) and the 📦 **distributable kit** you drop into any frontend project.
 
-## 🎬 Presentation — 55 seconds
+## 🎬 Presentation — 64 seconds
 
 <p align="center">
   <a href="media/explainer/video/ai-frontend-guide-kit-es.mp4">
