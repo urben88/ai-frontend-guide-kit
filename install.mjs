@@ -90,6 +90,8 @@ Selection memory of the AI Frontend Guide kit. Created by the installer and pres
 
 - \`selections.jsonl\` — append-only history of component decisions.
 - \`combinations.json\` — named, reusable combinations of decisions.
+- \`libraries.json\` — UI libraries in use and to research (\`memory.mjs lib add|list|sync\`).
+- \`flow-state.json\` — the declared design route and its current step (\`flow.mjs status|start|next|done\`); commit it so everyone shares the step.
 - \`SUMMARY.md\` — generated summary of styles and components extracted.
 - \`ui-map.json\` and \`UI-MAP.md\` — map of the frontend (components, users, routes, roles, strays); read \`UI-MAP.md\` instead of exploring.
 - \`ui-history.jsonl\` — append-only history of components added and removed between builds.

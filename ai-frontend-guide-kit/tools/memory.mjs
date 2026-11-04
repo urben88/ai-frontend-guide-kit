@@ -8,6 +8,7 @@
  * Storage (default `<kit>/../ai-frontend-output/`, override with --dir or AI_FRONTEND_OUTPUT):
  *   selections.jsonl    append-only history (one JSON per line)
  *   combinations.json   named reusable combinations
+ *   libraries.json      UI libraries in use and to research (one record per library)
  *   SUMMARY.md          generated summary (regenerated on every mutation)
  *
  * Usage:
@@ -20,9 +21,13 @@
  *   node tools/memory.mjs combo list [--json]
  *   node tools/memory.mjs combo show <name> [--json]
  *   node tools/memory.mjs combo apply <name>
+ *   node tools/memory.mjs lib add <package|registry> --status using|research [--source <catalog-source>] [--notes "..."]
+ *   node tools/memory.mjs lib list [--status using|research] [--json]
+ *   node tools/memory.mjs lib sync [--root <project>]     import the UI libraries context.mjs detects; never overwrites a recorded one
  */
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -37,6 +42,8 @@ Selection memory of the AI Frontend Guide kit. Created by the installer and pres
 
 - \`selections.jsonl\` — append-only history of component decisions.
 - \`combinations.json\` — named, reusable combinations of decisions.
+- \`libraries.json\` — UI libraries in use and to research (\`memory.mjs lib add|list|sync\`).
+- \`flow-state.json\` — the declared design route and its current step (\`flow.mjs status|start|next|done\`); commit it so everyone shares the step.
 - \`SUMMARY.md\` — generated summary of styles and components extracted.
 - \`ui-map.json\` and \`UI-MAP.md\` — map of the frontend (components, users, routes, roles, strays); read \`UI-MAP.md\` instead of exploring.
 - \`ui-history.jsonl\` — append-only history of components added and removed between builds.
@@ -180,6 +187,21 @@ function regenerateSummary(outputDir) {
     lines.push('## Sources used');
     lines.push('');
     lines.push(Object.entries(sourceCounts).sort((a, b) => b[1] - a[1]).map(([source, count]) => `${source} (${count})`).join(' · '));
+    lines.push('');
+  }
+  const libraries = readLibraries(outputDir).libraries;
+  const inUse = libraries.filter((lib) => lib.status === 'using');
+  const toResearch = libraries.filter((lib) => lib.status === 'research');
+  if (inUse.length > 0) {
+    lines.push('## Libraries in use');
+    lines.push('');
+    for (const lib of inUse) lines.push(`- \`${lib.name}\`${lib.source ? ` (catalog source \`${lib.source}\`)` : ''}${lib.notes ? ` — ${lib.notes}` : ''}`);
+    lines.push('');
+  }
+  if (toResearch.length > 0) {
+    lines.push('## To research');
+    lines.push('');
+    for (const lib of toResearch) lines.push(`- \`${lib.name}\`${lib.notes ? ` — ${lib.notes}` : ''}`);
     lines.push('');
   }
   if (combinations.combinations.length > 0) {
@@ -335,6 +357,79 @@ function commandCombo(args, outputDir, catalog) {
   fail('Usage: memory.mjs combo <save|list|show|apply> [...]');
 }
 
+const LIB_STATUSES = ['using', 'research'];
+
+function readLibraries(outputDir) {
+  const file = join(outputDir, 'libraries.json');
+  if (!existsSync(file)) return { version: 1, libraries: [] };
+  return JSON.parse(readFileSync(file, 'utf8'));
+}
+
+function writeLibraries(outputDir, data) {
+  data.libraries.sort((a, b) => a.name.localeCompare(b.name));
+  writeFileSync(join(outputDir, 'libraries.json'), `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+}
+
+function commandLib(args, outputDir) {
+  const [, action, name] = args._;
+  const { flags } = args;
+  const data = readLibraries(outputDir);
+
+  if (action === 'add') {
+    if (!name) fail('Usage: memory.mjs lib add <package|registry> --status using|research [--source <catalog-source>] [--notes "..."]');
+    if (!LIB_STATUSES.includes(flags.status)) fail(`--status must be one of: ${LIB_STATUSES.join(', ')}`);
+    const record = { name, status: flags.status, source: flags.source ?? null, notes: flags.notes ?? '', updated: new Date().toISOString() };
+    const index = data.libraries.findIndex((lib) => lib.name === name);
+    if (index >= 0) data.libraries[index] = { ...data.libraries[index], ...record, source: record.source ?? data.libraries[index].source, notes: record.notes || data.libraries[index].notes };
+    else data.libraries.push(record);
+    writeLibraries(outputDir, data);
+    regenerateSummary(outputDir);
+    console.log(`library ${index >= 0 ? 'updated' : 'recorded'}: ${name} (${flags.status})`);
+    return;
+  }
+
+  if (action === 'list') {
+    const rows = flags.status ? data.libraries.filter((lib) => lib.status === flags.status) : data.libraries;
+    if (flags.json) {
+      console.log(JSON.stringify({ libraries: rows }, null, 2));
+      return;
+    }
+    if (rows.length === 0) {
+      console.log('No libraries recorded yet. Use: memory.mjs lib sync (from package.json) or lib add <name> --status using|research');
+      return;
+    }
+    for (const lib of rows) console.log(`${lib.status.padEnd(8)} | ${lib.name} | ${lib.source ?? '—'} | ${lib.notes || ''}`);
+    return;
+  }
+
+  if (action === 'sync') {
+    const root = flags.root ? resolve(flags.root) : dirname(outputDir);
+    const run = spawnSync(process.execPath, [join(__dirname, 'context.mjs'), '--dir', root, '--json'], { encoding: 'utf8' });
+    if (run.status !== 0) fail(`lib sync: context.mjs failed: ${run.stderr.trim()}`);
+    const { libraries } = JSON.parse(run.stdout);
+    const known = new Set(data.libraries.map((lib) => lib.name));
+    const now = new Date().toISOString();
+    const detected = [
+      ...libraries.covered.map((lib) => ({ name: lib.package, status: 'using', source: lib.sources[0], notes: `detected in ${lib.via}` })),
+      ...libraries.compatible.map((lib) => ({ name: lib.package, status: 'using', source: null, notes: `used by catalog sources: ${lib.sources.join(', ')}` })),
+      ...libraries.toResearch.map((lib) => ({ name: lib, status: 'research', source: null, notes: 'not in the catalog: read its own docs' })),
+    ];
+    let added = 0;
+    for (const lib of detected) {
+      if (known.has(lib.name)) continue;
+      data.libraries.push({ ...lib, updated: now });
+      known.add(lib.name);
+      added += 1;
+    }
+    writeLibraries(outputDir, data);
+    regenerateSummary(outputDir);
+    console.log(`lib sync: ${added} added, ${detected.length - added} already recorded (${root})`);
+    return;
+  }
+
+  fail('Usage: memory.mjs lib <add|list|sync> [...]');
+}
+
 function fail(message) {
   console.error(message);
   process.exit(1);
@@ -345,7 +440,7 @@ function main() {
   const [command] = args._;
   if (!command || args.flags.help) {
     console.log('memory — selection memory for the AI Frontend Guide kit');
-    console.log('Commands: add | list | summary | combo save|list|show|apply  (see script header for flags)');
+    console.log('Commands: add | list | summary | combo save|list|show|apply | lib add|list|sync  (see script header for flags)');
     return;
   }
   const outputDir = resolveOutputDir(args.flags);
@@ -359,7 +454,8 @@ function main() {
     return;
   }
   if (command === 'combo') return commandCombo(args, outputDir, loadCatalog());
-  fail(`Unknown command "${command}". Use add, list, summary or combo.`);
+  if (command === 'lib') return commandLib(args, outputDir);
+  fail(`Unknown command "${command}". Use add, list, summary, combo or lib.`);
 }
 
 main();

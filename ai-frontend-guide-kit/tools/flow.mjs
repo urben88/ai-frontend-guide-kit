@@ -218,6 +218,17 @@ function countCombos(file) {
   }
 }
 
+function countLibraries(file) {
+  const counts = { using: 0, research: 0 };
+  if (!existsSync(file)) return counts;
+  try {
+    for (const lib of JSON.parse(readFileSync(file, 'utf8')).libraries ?? []) if (lib.status in counts) counts[lib.status] += 1;
+  } catch {
+    return counts;
+  }
+  return counts;
+}
+
 function status(p, flags) {
   const kitInstalled = existsSync(join(p.root, KIT_NAME, 'AGENTS.md'));
   const state = readState(p);
@@ -229,6 +240,7 @@ function status(p, flags) {
     recorded: {
       decisions: countLines(join(p.out, 'selections.jsonl')),
       combinations: countCombos(join(p.out, 'combinations.json')),
+      libraries: countLibraries(join(p.out, 'libraries.json')),
       'REPO-CONTEXT.md': existsSync(join(p.out, 'ux', 'REPO-CONTEXT.md')),
       'UI-MAP.md': existsSync(join(p.out, 'UI-MAP.md')),
       'EXPERIENCE-BRIEF.md': existsSync(join(p.out, 'ux', 'EXPERIENCE-BRIEF.md')),
@@ -241,6 +253,7 @@ function status(p, flags) {
   else if (!step) lines.push(`Flow: ${state.route} · complete`);
   else lines.push(`Flow: ${state.route} · step ${report.flow.position}/${report.flow.total} · ${step.id}`);
   lines.push(`Decisions recorded: ${report.recorded.decisions} · combinations: ${report.recorded.combinations}`);
+  lines.push(`Libraries: ${report.recorded.libraries.using} in use · ${report.recorded.libraries.research} to research`);
   for (const name of ['REPO-CONTEXT.md', 'UI-MAP.md', 'EXPERIENCE-BRIEF.md', 'UX-SPEC.md']) lines.push(`${name}: ${report.recorded[name] ? 'yes' : 'no'}`);
   if (step) lines.push('', describeStep(step.id));
   console.log(lines.join('\n'));

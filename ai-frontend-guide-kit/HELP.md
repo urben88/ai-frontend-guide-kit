@@ -40,7 +40,7 @@ Run them from the project root. Every tool prints one screen, not a dump.
 | `tools/find.mjs` | Which catalog entries fit a category, stack, text or commercial use |
 | `tools/get.mjs` | The full record of one entry: what it is, when to use it, install, license limits |
 | `tools/flow.mjs` | `list` prints every route and step (the text of `guides/FLOWS.md`); `status` says whether the kit is installed, the active route and step, and what the project has recorded; `start <route>` declares the route; `next` prints the current step with its guide, skill and output; `done <step>` refuses a skipped step or a missing artifact (steps without a file need `--evidence`); `reset` drops the route. State: `ai-frontend-output/flow-state.json`, committed with the project |
-| `tools/memory.mjs` | `add`, `list`, `summary`, `combo save\|list\|show\|apply` — the reusable decision history |
+| `tools/memory.mjs` | `add`, `list`, `summary`, `combo save\|list\|show\|apply` — the reusable decision history; `lib add\|list\|sync` keeps the UI libraries the project uses and the ones to research (`sync` imports what `context.mjs` detects) |
 | `tools/excalidraw-mcp.mjs` | Local, offline Excalidraw MCP server for the screen/navigation map |
 | `tools/laya_select.py` | Optional local decision engine: ranks questions, directions and components (`--check`, `--install`) |
 | `tools/audit-a11y.mjs` | WCAG 2.x A/AA check of one or more URLs through axe-core + Playwright |

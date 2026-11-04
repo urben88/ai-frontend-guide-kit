@@ -40,7 +40,7 @@ Se corren desde la raíz del proyecto. Cada una imprime una pantalla, no un volc
 | `tools/find.mjs` | Qué entradas del catálogo encajan por categoría, stack, texto o uso comercial |
 | `tools/get.mjs` | La ficha completa de una entrada: qué es, cuándo usarla, instalación, límites de licencia |
 | `tools/flow.mjs` | `list` muestra todas las rutas y pasos (el texto de `guides/FLOWS.md`); `status` dice si el kit está instalado, la ruta y el paso activos y lo que el proyecto tiene registrado; `start <ruta>` declara la ruta; `next` muestra el paso actual con su guía, skill y salida; `done <paso>` rechaza un paso saltado o un artefacto que falta (los pasos sin archivo piden `--evidence`); `reset` quita la ruta. Estado: `ai-frontend-output/flow-state.json`, que se versiona con el proyecto |
-| `tools/memory.mjs` | `add`, `list`, `summary`, `combo save\|list\|show\|apply` — el historial reutilizable de decisiones |
+| `tools/memory.mjs` | `add`, `list`, `summary`, `combo save\|list\|show\|apply` — el historial reutilizable de decisiones; `lib add\|list\|sync` guarda las librerías de UI que usa el proyecto y las que hay que investigar (`sync` importa lo que detecta `context.mjs`) |
 | `tools/excalidraw-mcp.mjs` | Servidor MCP local de Excalidraw, offline, para el mapa de pantallas y navegación |
 | `tools/laya_select.py` | Motor de decisión local opcional: ordena preguntas, direcciones y componentes (`--check`, `--install`) |
 | `tools/audit-a11y.mjs` | Chequeo WCAG 2.x A/AA de una o más URLs con axe-core + Playwright |

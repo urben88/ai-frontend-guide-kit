@@ -51,9 +51,11 @@ test('status reports what the project has recorded', () => {
   const dir = project();
   put(dir, 'selections.jsonl', '{"a":1}\n{"a":2}\n');
   put(dir, 'UI-MAP.md');
+  put(dir, 'libraries.json', JSON.stringify({ version: 1, libraries: [{ name: 'a', status: 'using' }, { name: 'b', status: 'research' }, { name: 'c', status: 'research' }] }));
   const run = flow(dir, 'status');
   assert.equal(run.status, 0, run.stderr);
   assert.match(run.stdout, /Decisions recorded: 2/);
+  assert.match(run.stdout, /Libraries: 1 in use · 2 to research/);
   assert.match(run.stdout, /UI-MAP\.md: yes/);
   assert.match(run.stdout, /REPO-CONTEXT\.md: no/);
 });
