@@ -4,6 +4,8 @@ Purpose: decide per inventory row and execute the installation with a documented
 
 ## Decision tree
 
+First run `node tools/ui-map.mjs have "<need>"`: an existing project component beats any catalog entry (reuse > extend or compose > adapt > create).
+
 ```
 Need from inventory
    │

@@ -23,6 +23,10 @@ For every screen in `PRODUCT.md`:
 | Dashboard | KPI row | data-display | must | 4 metrics, count-up |
 | Signup | Form | forms | must | email + password, validation |
 
+## Check what the project already has
+
+In a project with code, run `node tools/ui-map.mjs have "<need>"` for each row before searching the catalog or creating anything: it says whether the component exists (path, usage), lists close matches and gives catalog candidates. Mark the row `reuse existing` when it exists.
+
 ## Reflection questions (answer before step 04)
 
 - Which blocks are **structural** (layout, navigation) vs **expressive** (hero, effects)?

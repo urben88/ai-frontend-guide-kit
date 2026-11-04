@@ -230,3 +230,18 @@ El instalador SHALL configurar el servidor MCP local de Excalidraw (servidor pro
 #### Scenario: Omitir MCP
 - **WHEN** se ejecuta con `--no-mcp`
 - **THEN** no se detecta ni se escribe ninguna configuración de Playwright ni de Excalidraw
+
+### Requirement: Frontend map always generated
+El instalador SHALL ejecutar siempre `node <kit>/tools/ui-map.mjs build` con el destino como proyecto, justo después de crear el scaffold del mapa UX y sin ninguna opción para omitirlo. SHALL escribir únicamente bajo `<destino>/ai-frontend-output/` (`ui-map.json`, `UI-MAP.md`, `ui-history.jsonl`), NO SHALL editar, mover ni renombrar ningún archivo fuente del proyecto y SHALL conservar el historial al reinstalar (solo se añade una línea si cambian los componentes). Si el escaneo falla, SHALL imprimir un aviso y continuar la instalación. El bloque de enrutado marcado SHALL indicar ejecutar `ui-map impact` antes de cambiar la UI, `ui-map have` antes de crear y leer `ai-frontend-output/UI-MAP.md` en lugar de explorar; `--help` y el README de `ai-frontend-output/` (en el instalador y en `memory.mjs`) SHALL describirlo. `tools/ui-map.mjs` SHALL estar en los activos requeridos del build del kit.
+
+#### Scenario: Mapa generado sin tocar el código
+- **WHEN** se instala en un proyecto con código frontend
+- **THEN** existen `ui-map.json`, `UI-MAP.md` y `ui-history.jsonl` bajo `ai-frontend-output/` y ningún archivo fuente original cambia
+
+#### Scenario: Escaneo fallido
+- **WHEN** el escaneo falla (por ejemplo, `ui-map.json` es una carpeta)
+- **THEN** el instalador avisa, no escribe historial y completa el resto de la instalación
+
+#### Scenario: Reinstalación
+- **WHEN** se reinstala sin cambios en los componentes
+- **THEN** `ui-history.jsonl` queda idéntico; si se añadió o quitó un componente, se añade una sola línea

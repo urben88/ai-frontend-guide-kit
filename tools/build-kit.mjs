@@ -45,6 +45,7 @@ const REQUIRED_KIT_FILES = [
   'tools/laya_select.py',
   'tools/memory.mjs',
   'tools/context.mjs',
+  'tools/ui-map.mjs',
   'tools/excalidraw-mcp.mjs',
   'tools/audit-honesty.mjs',
   'tools/audit-a11y.mjs',

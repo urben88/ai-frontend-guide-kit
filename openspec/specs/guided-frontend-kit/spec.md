@@ -245,3 +245,18 @@ En el paso de búsqueda (guía 05), el agente SHALL presentar combinaciones de c
 
 - **WHEN** el usuario acepta o modifica una combinación
 - **THEN** cada decisión queda en memoria y la combinación final puede guardarse con `combo save`
+
+### Requirement: Frontend map and check before creating
+El kit SHALL incluir `tools/ui-map.mjs` (sin dependencias) con tres comandos y `--json`. `build` SHALL escanear `.tsx .jsx .ts .js .vue .svelte .astro` (sin `node_modules`, el propio kit, `ai-frontend-output`, tests ni stories) y escribir `ai-frontend-output/ui-map.json` y un `UI-MAP.md` corto, sin marcas de tiempo, de modo que una segunda ejecución sea idéntica byte a byte. SHALL detectar componentes, el grafo de imports (rutas relativas, alias de `tsconfig.json`/`jsconfig.json`, barriles `index`), rutas, un rol visual por componente (`layout`, `loading`, `empty`, `error`, `feedback`, `overlay`, `navigation`, `form`) y los desvíos (implementaciones ad hoc de un rol fuera de su componente) con archivo y línea. Los imports dinámicos o no resolubles SHALL listarse como `unresolved` y nunca darse por buenos. `build` SHALL añadir a `ui-history.jsonl` una línea con marca de tiempo y los componentes añadidos y quitados, solo si algo cambió. `impact <rol|componente>` SHALL mostrar dueño, usuarios, rutas, desvíos y no resueltos (nombre desconocido: lo dice, sugiere nombres cercanos y sale con 1). `have <nombre>` SHALL responder si existe (ruta y usos), coincidencias cercanas o hasta 3 candidatos del catálogo, y terminar con una decisión (reutilizar, revisar la coincidencia, buscar en el catálogo antes de crear), siempre con salida 0. `impact` y `have` SHALL reconstruir el mapa si falta o hay un archivo más nuevo. Las guías 04, 06 y 10 SHALL usar `have` e `impact`; la guía 08 SHALL incluir "Separation (always)", que aplica solo al código nuevo: las violaciones existentes se registran, no se cambian salvo petición del usuario.
+
+#### Scenario: Cambiar todas las cargas
+- **WHEN** el usuario pide cambiar los componentes de carga y el agente ejecuta `impact loading`
+- **THEN** ve el dueño, los usuarios, las rutas, los desvíos y los imports sin resolver, y al terminar vuelve a ejecutarlo para confirmar que no queda ningún desvío en el alcance
+
+#### Scenario: Comprobar antes de crear
+- **WHEN** el agente va a crear una tabla de datos y ejecuta `have "data table"`
+- **THEN** recibe que `DataTable` existe con su ruta y sus usos, o coincidencias cercanas, o candidatos del catálogo si no hay nada
+
+#### Scenario: Proyecto sin frontend
+- **WHEN** se ejecuta `build` en un proyecto sin código frontend
+- **THEN** se escribe un mapa vacío y válido y el comando termina con 0

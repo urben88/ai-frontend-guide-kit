@@ -7,7 +7,7 @@ You are about to build or change frontend UX/UI. This workflow exists so you **r
 Before touching code, ask the user what they want and route explicitly:
 
 1. **What are we doing?** New frontend · direction only · small change · custom addition · polish only · UX only/redesign.
-2. **What exists?** Run `node tools/context.mjs` and read `ai-frontend-output/ux/REPO-CONTEXT.md` (stack, screens, `ux_present`) instead of exploring the repo.
+2. **What exists?** Run `node tools/context.mjs` and read `ai-frontend-output/ux/REPO-CONTEXT.md` (stack, screens, `ux_present`), and read `ai-frontend-output/UI-MAP.md` (components, roles, routes), instead of exploring the repo.
 3. **Declare the route** in one line (e.g. *"Route: phase 2 only — adapt the hero, then polish"*) before reading any guide.
 
 The phases are **entry points, not a fixed pipeline**: enter where the request points and never run a phase the user did not ask for.
@@ -47,6 +47,7 @@ A small new project may compress **1 → 2 → 3** (tokens and philosophy can me
 | `userflow` + `flow-*` skills | yes | — | optional flow audit |
 | `ux-map` skill + local Excalidraw MCP | direction-aware screen/navigation map | — | flow audit visual |
 | Catalog + `find`/`get` + selection memory + Laya (`fit`) | — | yes | — |
+| `ui-map` (`impact`, `have`; map always on) | — | `have` before searching or creating | `impact` to locate and to confirm no stray remains |
 | `landing-page-design` (if installed, landing pages only) | intake, page outline, copy | — | — |
 | `hallmark` (if installed) | raw material for the directions | only when the decision is `build` | report-only audit |
 | `design-taste-frontend` (if installed) | raw material for the directions | only when the decision is `build`, or an agreed visual redesign | its checks, on a screen it built |

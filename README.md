@@ -82,6 +82,15 @@ Then tell your agent:
 
 > *"Read `ai-frontend-guide-kit/AGENTS.md` and follow its workflow."*
 
+## 🗺️ Frontend map (always on)
+
+The installer scans the project and keeps `ai-frontend-output/UI-MAP.md`, `ui-map.json` and `ui-history.jsonl` (components, users, routes, visual roles, strays, unresolved imports, history of components added and removed). It never edits your source.
+
+```bash
+node ai-frontend-guide-kit/tools/ui-map.mjs impact loading      # what must change: owner, users, routes, strays
+node ai-frontend-guide-kit/tools/ui-map.mjs have "data table"   # check before creating
+```
+
 ## 🔎 Finding components
 
 ```bash
@@ -100,7 +109,8 @@ Results are ranked by **quality** (license clarity, install effort, dependency w
 4. 🧩 Installs the **19 skills of this repo** into `.agents/skills/` (clean: no lockfile, no symlink sprawl) plus the **5 external design skill repos** via their CLI by default; the routing block gives each one its step in the flow. If the project has `.claude/`, the 19 are linked into `.claude/skills/`.
 5. 🎭 Configures the **Playwright + Excalidraw MCP** servers per detected harness (`.mcp.json` for Claude Code, `opencode.json` for OpenCode) and creates the `ai-frontend-output/ux/ux-map.excalidraw` scaffold; otherwise prints the exact commands. Browser once: `npx playwright install chromium`.
    - 🖱️ **Optional — Agentation** (click an element in your React app and tell the agent exactly what to change; guide `11-VISUAL-FEEDBACK.md`). The installer only prints the message, it does not install it: `npm install agentation -D`, `claude mcp add agentation -- npx -y agentation-mcp server`, `npx agentation-mcp doctor`, and mount `<Agentation endpoint="http://localhost:4747" />` in dev only.
-6. 🐍 Checks Python/Laya and prints the exact next step.
+6. 🗺️ Scans the project with `ui-map` (always) and writes the frontend map under `ai-frontend-output/` (a failed scan only warns).
+7. 🐍 Checks Python/Laya and prints the exact next step.
 
 > 💡 External skills need network; if they fail the install continues and the kit still works with `find`/`get`.
 

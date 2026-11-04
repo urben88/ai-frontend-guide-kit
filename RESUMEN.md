@@ -35,10 +35,11 @@ flowchart LR
 | **Licencias** | Contrasta la licencia declarada con el LICENSE del repo | `tools/check-licenses.mjs` → `license-report.md` |
 | **Auditoría de categorías** | Detecta entradas mal clasificadas (falla si >3 %) | `tools/audit-categories.mjs --strict` |
 | **Kit portable** | Sincroniza catálogo al kit y genera explorador offline | `tools/build-kit.mjs`, `tools/build-explorer.mjs` |
-| **Instalador** | Copia el kit, añade el bloque que manda toda conversación de diseño al kit (`AGENTS.md` y `CLAUDE.md` si existe; se actualiza al reinstalar), instala skills y MCP | `install.mjs` (flags `--no-skills`, `--no-mcp`, `--with-laya`, `--target`) |
+| **Instalador** | Copia el kit, añade el bloque que manda toda conversación de diseño al kit (`AGENTS.md` y `CLAUDE.md` si existe; se actualiza al reinstalar), instala skills y MCP | `install.mjs` (flags `--no-skills`, `--no-mcp`, `--with-laya`, `--target`); siempre genera el mapa del frontend |
 | **Búsqueda** | Filtra por texto, categoría, stack, licencia y calidad | `kit/tools/find.mjs` |
 | **Ficha de componente** | Tarjeta completa con cómo instalarlo | `kit/tools/get.mjs <id>` |
 | **Contexto del proyecto** | Resume stack, rutas y specs del proyecto destino | `kit/tools/context.mjs` → `REPO-CONTEXT.md` |
+| **Mapa del frontend** (siempre activo) | Escanea el proyecto destino: componentes, quién los usa, rutas, roles visuales, desvíos e imports sin resolver; historial de altas y bajas; `impact` (qué cambiar) y `have` (¿ya existe?). Nunca toca el código | `kit/tools/ui-map.mjs` → `ai-frontend-output/ui-map.json`, `UI-MAP.md`, `ui-history.jsonl` |
 | **Memoria de selección** | Historial de decisiones y combinaciones reutilizables | `kit/tools/memory.mjs` → `ai-frontend-output/` |
 | **Auditorías de pantalla** | Patrones engañosos, accesibilidad (axe/WCAG 2.2), rendimiento (Lighthouse) | `kit/tools/audit-honesty.mjs`, `audit-a11y.mjs`, `audit-perf.mjs` |
 | **Mapa UX** | Diagrama Excalidraw de pantallas, offline | `kit/tools/excalidraw-mcp.mjs` + skill `ux-map` |

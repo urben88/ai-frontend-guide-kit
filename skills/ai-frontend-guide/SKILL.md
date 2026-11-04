@@ -43,6 +43,10 @@ Ask the user what they want before touching code and declare the route: new fron
 | Iterate | `10-ITERATE.md` | small changes and custom additions |
 | Visual feedback (optional, React) | `11-VISUAL-FEEDBACK.md` | the user clicks elements in the browser (Agentation MCP); the agent changes exactly those |
 
+## Frontend map (always on)
+
+The installer keeps `ai-frontend-output/UI-MAP.md` (plus `ui-map.json`, `ui-history.jsonl`) up to date. Read it instead of exploring the repo. Before changing UI run `node ai-frontend-guide-kit/tools/ui-map.mjs impact <role|component>`; before creating run `node ai-frontend-guide-kit/tools/ui-map.mjs have <name>`. Existing violations are recorded, never changed unless the user asks (`guides/08-PHILOSOPHY.md`, Separation).
+
 ## Experience direction first (guide 01)
 
 For a new frontend or redesign, run the direction phase before any UI:

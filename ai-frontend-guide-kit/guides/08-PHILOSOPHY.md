@@ -2,6 +2,16 @@
 
 Distilled rules from `impeccable` (anti-generic + audit), `taste-skill` (hierarchy, density) and `emilkowalski` (springs, micro-feedback). Apply these when adapting components and when building custom.
 
+## Separation (always)
+
+These rules apply to **new code**. Existing violations are recorded by the map (`ui-map` strays), never changed unless the user asks.
+
+- One responsibility per component.
+- One owner per visual role (loading, empty, error, layout...): reuse the owner, do not write a second one.
+- UI apart from logic: data fetching and state outside presentational components.
+- No duplicates: run `node tools/ui-map.mjs have "<name>"` before creating.
+- Order of preference: reuse > extend or compose > adapt > create.
+
 ## Hierarchy and density (taste)
 
 - One primary action per screen; secondary actions are visually quieter.

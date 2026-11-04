@@ -28,7 +28,7 @@ Branch: `feat/frontend-context-map` (from `feat/external-design-skills`) · Deli
 
 | ID | Specs | Route | Status | Commit |
 |---|---|---|---|---|
-| T1 | S1, S2, S3 (`build`, `have`, `impact`, history, installer, philosophy) | delegated: context backstop | pending | — |
+| T1 | S1, S2, S3 (`build`, `have`, `impact`, history, installer, philosophy) | delegated: context backstop | done | the commit `feat(ui-map): ...` that holds this row (hash in the report; no amend) |
 | T2 | S4 (`HELP.md`, `HELP.es.md`, routing, test) | delegated: context backstop | pending | — |
 | T3 | S5, S6 docs part, S8 (types, `types`, `docs`, guide 13, memory field) | delegated: context backstop | pending | — |
 | T4 | S6 recipes, S7 (`check`, profiles, `STACK-RECIPES.md`) | delegated: context backstop | pending | — |
@@ -44,4 +44,5 @@ Risk: T1 touches the installer (item 5), own commit and independent verifier. Fo
 - **L4 (user verbatim):** "Además, quiero que esta arquitectura de FSD solo la integre si yo se la pido. Pero la parte de, por ejemplo, tener un historial o un contexto, quiero que esto lo implanta siempre, que lo genere siempre en la arquitectura de un proyecto ya hecho. Esta parte de cambiarlo y refactorizar, quiero que sea si él me lo pide explícitamente. Pero la parte de mantener una separación, la filosofía de mantener una separación, un archivo con el historial de todo lo que hay para guiar mejor la ley, eso lo tiene que hacer siempre. además que yo si digo dame un resumen de esta arquitectura o de este archivo no de arquitectura sino quiero un resumen de esta herramienta que ya tenga de forma estructurada y listo un prompt el cual comentar es decir vale funciona de esta manera puedes hacerlo otro tienes estas herramientas quiero un archivo de explicación y de posibilidades que puedes hacer de manera sencilla y clara"
 - **L5 (user verbatim):** "Apruebo y continúo con el plan. Aplícalo."
 - **L6 (research):** No single standard covers this. FSD layers app, pages, widgets, features, entities, shared; not all required. Official sources: https://feature-sliced.design/docs/get-started/overview , /docs/guides/migration/from-custom , /docs/guides/tech/with-nextjs , /docs/guides/tech/with-nuxtjs ; repo `feature-sliced/documentation` holds `with-astro` and `with-sveltekit`. Steiger is the official linter, in beta. Names: https://component.gallery/components/ (60 types, no license shown), https://open-ui.org/research/component-matrix/ . Stack combinations: only vendor blogs found so far, no survey data.
-- **Next:** T1.
+- **L7 (T1 evidence, 2026-11-04):** S1-S3 covered. RED: 16/16 tests of `tests/ui-map.test.mjs` failed before `ui-map.mjs` existed; GREEN: 16/16 after. `node --test tests/ui-map.test.mjs` exit 0; `npm run verify` exit 0 (52 tests). Differential vs 5577efa for `memory.mjs add|list|summary|combo list`, `find.mjs`, `get.mjs`: same stdout, stderr and exit code except the output-dir path and timestamps, plus the intended new README lines. Limits: components in `.ts`/`.js` without JSX are not detected; tsconfig `extends` is not followed; roles come from name and path signals, so an unusual name gets no role.
+- **Next:** T2.

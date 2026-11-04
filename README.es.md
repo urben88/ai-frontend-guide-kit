@@ -97,6 +97,15 @@ Los resultados se ordenan por **calidad** (claridad de licencia, esfuerzo de ins
 
 > 💡 Las skills externas necesitan red; si fallan, la instalación continúa y el kit sigue funcionando con `find`/`get`.
 
+## 🗺️ Mapa del frontend (siempre activo)
+
+El instalador escanea el proyecto y mantiene `ai-frontend-output/UI-MAP.md`, `ui-map.json` y `ui-history.jsonl` (componentes, quién los usa, rutas, roles visuales, desvíos, imports sin resolver e historial de componentes añadidos y quitados). Nunca edita tu código.
+
+```bash
+node ai-frontend-guide-kit/tools/ui-map.mjs impact loading      # qué hay que cambiar: dueño, usuarios, rutas, desvíos
+node ai-frontend-guide-kit/tools/ui-map.mjs have "data table"   # comprobar antes de crear
+```
+
 ## 💾 Memoria de selección (`ai-frontend-output/`)
 
 Cada decisión de componente queda registrada: cada proyecto conserva un historial auditable y combinaciones reutilizables.
