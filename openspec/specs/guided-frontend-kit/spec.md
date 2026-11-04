@@ -260,3 +260,7 @@ El kit SHALL incluir `tools/ui-map.mjs` (sin dependencias) con tres comandos y `
 #### Scenario: Proyecto sin frontend
 - **WHEN** se ejecuta `build` en un proyecto sin código frontend
 - **THEN** se escribe un mapa vacío y válido y el comando termina con 0
+
+#### Scenario: Argumentos inválidos
+- **WHEN** se pasa una opción desconocida, `--dir` sin valor o argumentos sobrantes (por ejemplo `build foo`)
+- **THEN** `ui-map` imprime el error con el nombre de la opción y el uso, sale con 2 y no escribe nada; `--dir=<ruta>` se acepta igual que `--dir <ruta>`

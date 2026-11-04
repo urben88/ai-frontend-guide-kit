@@ -329,3 +329,100 @@ test('the kit ships ui-map and every doc lists it', () => {
     assert.ok(read('ai-frontend-guide-kit', 'guides', guide).split('\n').length <= 125, `${guide} stays within ~120 lines`);
   }
 });
+
+// ---- correction batch: argument parsing, close-match candidates, full component list
+
+const decoyRun = (args) => {
+  const decoy = mkdtempSync(join(tmpdir(), 'ui-map-decoy-'));
+  const run = node([TOOL, ...args], { env: { ...cleanEnv(), AI_FRONTEND_PROJECT: decoy } });
+  return { run, decoy, wrote: existsSync(join(decoy, 'ai-frontend-output')) };
+};
+
+test('--dir=<path> is accepted for valued options', () => {
+  const dir = fixture();
+  const { run, wrote } = decoyRun(['build', `--dir=${dir}`]);
+  assert.equal(run.status, 0, run.stderr);
+  assert.ok(existsSync(out(dir, 'ui-map.json')), 'written to the given project');
+  assert.ok(!wrote, 'the default root is untouched');
+  assert.ok(readMap(dir).components.some((c) => c.name === 'Skeleton'));
+});
+
+test('an unknown option names itself, exits 2 and writes nothing', () => {
+  const dir = fixture();
+  for (const command of [['build'], ['impact', 'loading'], ['have', 'Skeleton']]) {
+    const { run, wrote } = decoyRun([...command, '--jsno', '--dir', dir]);
+    assert.equal(run.status, 2, command.join(' '));
+    assert.match(run.stderr, /--jsno/);
+    assert.ok(!wrote);
+    assert.ok(!existsSync(out(dir, 'ui-map.json')), 'nothing written to the project');
+  }
+  const equals = decoyRun(['build', '--json=1', '--dir', dir]);
+  assert.equal(equals.run.status, 2);
+  assert.match(equals.run.stderr, /--json=1/);
+});
+
+test('--dir without a value exits 2 and writes nothing', () => {
+  for (const args of [['build', '--dir'], ['build', '--dir', '--json'], ['build', '--dir=']]) {
+    const { run, wrote } = decoyRun(args);
+    assert.equal(run.status, 2, args.join(' '));
+    assert.match(run.stderr, /--dir/);
+    assert.ok(!wrote, 'no fallback to the default root');
+  }
+});
+
+test('extra positional arguments exit 2; impact and have need a name', () => {
+  const dir = fixture();
+  const extra = decoyRun(['build', 'foo', '--dir', dir]);
+  assert.equal(extra.run.status, 2);
+  assert.match(extra.run.stderr, /foo/);
+  assert.match(extra.run.stderr, /Usage/);
+  assert.ok(!existsSync(out(dir, 'ui-map.json')));
+  for (const command of ['impact', 'have']) {
+    const { run, wrote } = decoyRun([command, '--dir', dir]);
+    assert.equal(run.status, 2, command);
+    assert.match(run.stderr, /Usage/);
+    assert.ok(!wrote);
+    assert.ok(!existsSync(out(dir, 'ui-map.json')));
+  }
+  assert.equal(node([TOOL, '--help', '--dir', dir]).status, 0, 'valid flags still work');
+});
+
+test('have on a close match also lists up to 3 catalog candidates and still exits 0', () => {
+  const dir = fixture();
+  const close = uiMap(dir, 'have', 'table');
+  assert.equal(close.status, 0, close.stderr);
+  assert.match(close.stdout, /DataTable/);
+  assert.match(close.stdout, /Candidates \(catalog\)/);
+  assert.match(close.stdout, /Decision: check the close match/);
+  const json = JSON.parse(uiMap(dir, 'have', 'table', '--json').stdout);
+  assert.equal(json.status, 'close');
+  assert.ok(json.catalog.length >= 1 && json.catalog.length <= 3);
+  const exists = JSON.parse(uiMap(dir, 'have', 'Skeleton', '--json').stdout);
+  assert.deepEqual(exists.catalog, [], 'an exact match needs no catalog candidates');
+});
+
+test('UI-MAP.md lists every component sorted by path, capped at 300 lines, byte-identical on rebuild', () => {
+  const dir = fixture();
+  assert.equal(uiMap(dir, 'build').status, 0);
+  const md = readFileSync(out(dir, 'UI-MAP.md'), 'utf8');
+  const section = md.split('## Components')[1]?.split(/\n## /)[0];
+  assert.ok(section, 'has a Components section');
+  const lines = section.split('\n').filter((line) => line.startsWith('- '));
+  const map = readMap(dir);
+  assert.equal(lines.length, map.components.length);
+  assert.ok(lines.some((l) => l.includes('Skeleton') && l.includes('src/components/ui/Skeleton.tsx') && /used by 2/.test(l) && l.includes('loading')));
+  assert.ok(lines.some((l) => l.includes('DataTable') && /used by 1/.test(l)));
+  const paths = lines.map((l) => l.match(/`([^`]+)`/)[1]);
+  assert.deepEqual(paths, [...paths].sort(), 'sorted by path');
+  assert.equal(uiMap(dir, 'build').status, 0);
+  assert.equal(readFileSync(out(dir, 'UI-MAP.md'), 'utf8'), md);
+
+  const big = mkdtempSync(join(tmpdir(), 'ui-map-big-'));
+  mkdirSync(join(big, 'src'));
+  for (let i = 0; i < 320; i += 1) writeFileSync(join(big, 'src', `Item${String(i).padStart(3, '0')}.tsx`), `export const Item${String(i).padStart(3, '0')} = () => <i />;\n`);
+  assert.equal(uiMap(big, 'build').status, 0);
+  const bigMd = readFileSync(out(big, 'UI-MAP.md'), 'utf8');
+  const bigLines = bigMd.split('## Components')[1].split(/\n## /)[0].split('\n').filter((line) => line.startsWith('- '));
+  assert.equal(bigLines.filter((l) => l.includes('Item')).length, 300);
+  assert.match(bigMd, /20 more components omitted.*ui-map\.json/);
+});

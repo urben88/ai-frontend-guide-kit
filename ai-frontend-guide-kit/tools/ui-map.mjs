@@ -32,13 +32,23 @@ const MAX_ROUTES = 200;
 
 // ---------------------------------------------------------------- arguments and paths
 
+/** Strict parsing: unknown options and missing values are errors (flags.error), never silently ignored. */
 function parseArgs(argv) {
   const flags = { _: [] };
-  for (let i = 0; i < argv.length; i += 1) {
+  for (let i = 0; i < argv.length && !flags.error; i += 1) {
     const token = argv[i];
-    if (token === '--json') flags.json = true;
-    else if (token === '--help' || token === '-h') flags.help = true;
-    else if (token === '--dir') flags.dir = argv[++i];
+    const eq = token.startsWith('--') ? token.indexOf('=') : -1;
+    const name = eq === -1 ? token : token.slice(0, eq);
+    if (name === '--dir') {
+      const value = eq === -1 ? argv[i + 1] : token.slice(eq + 1);
+      if (!value || (eq === -1 && value.startsWith('--'))) flags.error = 'option --dir needs a value (--dir <path> or --dir=<path>)';
+      else {
+        flags.dir = value;
+        if (eq === -1) i += 1;
+      }
+    } else if (eq === -1 && token === '--json') flags.json = true;
+    else if (eq === -1 && (token === '--help' || token === '-h')) flags.help = true;
+    else if (token.startsWith('-') && token.length > 1) flags.error = `unknown option "${token}"`;
     else flags._.push(token);
   }
   return flags;
@@ -590,6 +600,14 @@ function renderMarkdown(map) {
     for (const s of strayList) lines.push(`- ${s.role}: \`${s.file}:${s.line}\` ${s.signal}`);
     if (map.strays.length > strayList.length) lines.push(`- ... +${map.strays.length - strayList.length} more in ui-map.json`);
   }
+  const MAX_LISTED = 300;
+  lines.push('');
+  lines.push(`## Components (${map.components.length})`);
+  lines.push('');
+  for (const x of map.components.slice(0, MAX_LISTED)) {
+    lines.push(`- ${x.name} — \`${x.file}\` — used by ${x.usage} — ${x.roles.length > 0 ? x.roles.join('/') : 'no role'}`);
+  }
+  if (map.components.length > MAX_LISTED) lines.push(`- ... ${map.components.length - MAX_LISTED} more components omitted; see ui-map.json`);
   const top = [...map.components].filter((x) => x.usage > 0).sort((a, b) => b.usage - a.usage || byText(a.name, b.name)).slice(0, 10);
   if (top.length > 0) {
     lines.push('');
@@ -813,6 +831,15 @@ function catalogCandidates(query) {
   return [];
 }
 
+function printCandidates(catalog) {
+  if (catalog.length === 0) {
+    console.log('Candidates (catalog): none found');
+    return;
+  }
+  console.log('Candidates (catalog):');
+  for (const e of catalog) console.log(`  - ${e.id} | ${e.name} | ${e.category} | q${e.quality ?? '-'}`);
+}
+
 function runHave(root, flags) {
   const query = flags._.slice(1).join(' ').trim();
   if (!query) {
@@ -832,7 +859,7 @@ function runHave(root, flags) {
     status = 'close';
     decision = 'check the close match(es) before creating';
   }
-  const catalog = status === 'not-found' ? catalogCandidates(query) : [];
+  const catalog = status === 'exists' ? [] : catalogCandidates(query);
   if (flags.json) {
     console.log(JSON.stringify({ query, status, matches: exact.map(summarizeComponent), close: close.map(summarizeComponent), catalog, decision: `Decision: ${decision}` }, null, 2));
     return 0;
@@ -843,14 +870,10 @@ function runHave(root, flags) {
   } else if (status === 'close') {
     console.log(`have "${query}": no exact match, close matches:`);
     for (const c of close.slice(0, 5)) console.log(`  - ${c.name} — ${c.file}:${c.line} — used by ${c.usage} file(s)`);
+    printCandidates(catalog);
   } else {
     console.log(`have "${query}": not found in the project`);
-    if (catalog.length > 0) {
-      console.log('Candidates (catalog):');
-      for (const e of catalog) console.log(`  - ${e.id} | ${e.name} | ${e.category} | q${e.quality ?? '-'}`);
-    } else {
-      console.log('Candidates (catalog): none found');
-    }
+    printCandidates(catalog);
   }
   console.log(`Decision: ${decision}.`);
   return 0;
@@ -873,6 +896,11 @@ function runBuild(root, flags) {
 
 function main() {
   const flags = parseArgs(process.argv.slice(2));
+  if (flags.error) {
+    console.error(`ui-map: ${flags.error}\n`);
+    console.error(USAGE);
+    return 2;
+  }
   const command = flags._[0];
   if (flags.help || command === undefined) {
     console.log(USAGE);
@@ -880,6 +908,11 @@ function main() {
   }
   if (!['build', 'impact', 'have'].includes(command)) {
     console.error(`ui-map: unknown command "${command}"\n`);
+    console.error(USAGE);
+    return 2;
+  }
+  if (command === 'build' && flags._.length > 1) {
+    console.error(`ui-map: build takes no arguments (got "${flags._.slice(1).join(' ')}")\n`);
     console.error(USAGE);
     return 2;
   }
