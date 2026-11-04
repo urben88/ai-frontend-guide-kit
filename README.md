@@ -28,7 +28,8 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 | 📚 | **Catalog** | 34 verified sources · 4,287 reusable entries · 21 categories · quality score, per-entry licenses and install commands · React, Vue and Svelte · offline `explorer.html` |
 | 🧭 | **Guided kit** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + 3-phase workflow in short guides (00–13) + `find`/`get` query tools. Self-contained: no build, no npm dependencies |
 | 🧠 | **Agent skills** | `ai-frontend-guide` (workflow), `frontend-polish` (phase 3), `frontend-refactor` (FSD, only on request), `ux-map` (visual screen map) and 16 vendored UX skills (`userflow` + 15 `flow-*`, MIT) |
-| 💾 | **Selection memory** | `ai-frontend-output/`: append-only decision history, styles/components summary and reusable combinations |
+| 🧭 | **Design flow** | `flow.mjs` keeps the route and current step per project and refuses skipped steps; `guides/FLOWS.md` lists every route |
+| 💾 | **Selection memory** | `ai-frontend-output/`: append-only decision history, styles/components summary, reusable combinations and the UI libraries in use or to research |
 | 🛡️ | **Audits** | `audit-honesty` (deceptive patterns), `audit-a11y` (axe + WCAG 2.2), `audit-perf` (Lighthouse vs Core Web Vitals) in `ai-frontend-guide-kit/tools/` |
 | 🔒 | **Laya (optional)** | Local decision engine that ranks catalog candidates with calibrated probabilities — everything runs on your PC |
 
@@ -91,17 +92,57 @@ node ai-frontend-guide-kit/tools/ui-map.mjs impact loading      # what must chan
 node ai-frontend-guide-kit/tools/ui-map.mjs have "data table"   # check before creating
 ```
 
-## 🧭 Design flow (kept per project)
+## 🧭 Design flow: one route, no skipped steps
 
-Every design conversation follows one route, step by step. The route and its current step live in `ai-frontend-output/flow-state.json` (commit it), so everyone continues at the same step.
+**In one sentence:** the kit remembers, inside your project, which design route you are on and which step comes next, and it does not let the agent jump ahead.
 
-```bash
-node ai-frontend-guide-kit/tools/flow.mjs status          # kit installed? active route and step, what is recorded
-node ai-frontend-guide-kit/tools/flow.mjs start new       # declare the route
-node ai-frontend-guide-kit/tools/flow.mjs done intake     # refuses a skipped step or a missing artifact
+Why it matters: when several people (or several chats) work on the design, each one used to start from scratch or skip the boring parts. Now the route is a file in the project (`ai-frontend-output/flow-state.json`), so everyone continues at the same step.
+
+| Command | What it does |
+|---|---|
+| `flow.mjs status` | Is the kit installed? Which route and step are active? What has been recorded? |
+| `flow.mjs list` | Every route and its steps, with the guide and skill for each (same text as `guides/FLOWS.md`) |
+| `flow.mjs start <route>` | Declares the route: `new`, `direction`, `ux`, `iterate`, `polish`, `redesign`, `visual-feedback`, `architecture` |
+| `flow.mjs next` | Shows the current step: which guide to read, which skill to use, which file to produce |
+| `flow.mjs done <step>` | Closes the step only if it is the current one **and** its file exists |
+
+Three more helpers keep the agent's context small:
+
+- **Project libraries:** `context.mjs` lists the UI libraries the project already uses (in the catalog, compatible, or to research) and `memory.mjs lib sync` saves them, so the agent reuses them instead of adding new ones.
+- **Catalog digest:** `catalog/digest.md` gives the 5 best entries per category in about 2,500 tokens, a quick overview before searching.
+- **Site scout:** paste the URL of a component site and `scout.mjs <url>` tells you whether the catalog already has it; with `--fetch` it summarizes that one page (components, install command, license hints).
+
+## 💬 Example: "I want a landing page for my app"
+
+You only talk to your agent. Behind the scenes it uses the kit like this:
+
+```text
+1. The agent checks where the project is
+   $ node ai-frontend-guide-kit/tools/flow.mjs status
+   Kit: installed
+   Flow: none (declare the route with: node tools/flow.mjs start <route>)
+
+2. It declares the route for a new frontend
+   $ node ai-frontend-guide-kit/tools/flow.mjs start new
+   Steps: intake → direction → ux → tokens → compose → polish
+   Next step: intake — ask what we are doing, read the project context, declare the route
+
+3. It tries to jump to the visual direction... and the kit says no
+   $ node ai-frontend-guide-kit/tools/flow.mjs done direction
+   flow: step "direction" is not the current step (current: intake); steps are never skipped
+
+4. It does the intake properly (project context + frontend map), then closes the step
+   $ node ai-frontend-guide-kit/tools/context.mjs
+   $ node ai-frontend-guide-kit/tools/flow.mjs done intake
+   Next step: direction — questions, archetype, philosophy, journey, three directions
+
+5. You share a site you like: https://magicui.design/docs/components/marquee
+   $ node ai-frontend-guide-kit/tools/scout.mjs https://magicui.design/docs/components/marquee
+   In the catalog: `magicui` (Magic UI, 78 entries, MIT ...)
+   Query it instead of reading the site: node tools/find.mjs --source magicui
 ```
 
-All routes and steps, with their skills: `ai-frontend-guide-kit/guides/FLOWS.md`. `context.mjs` also lists the project's UI libraries (covered by the catalog, compatible, or to research) and `memory.mjs lib sync` records them. Given a component site URL, `scout.mjs <url> --fetch` says whether the catalog already has it and, if not, summarizes that one page.
+It goes on like this, step by step, until `polish`. If you come back tomorrow, or a teammate opens another chat, `flow.mjs status` shows exactly where you left off.
 
 ## 🔎 Finding components
 
