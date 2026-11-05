@@ -92,13 +92,13 @@ node ai-frontend-guide-kit/tools/ui-map.mjs impact loading      # what must chan
 node ai-frontend-guide-kit/tools/ui-map.mjs have "data table"   # check before creating
 ```
 
-## 🧩 Pieces: a shared Lego library
+## 🧩 Pieces: your own Lego blocks
 
-Reusable components (micro to large, with variants as props) live in one library shared by all your projects (`~/.ai-frontend-guide-kit/pieces/`). Each project keeps only its personality and usage in `ai-frontend-output/pieces.json`. The agent searches before it builds (own piece, new variant, catalog, new piece), polishes the same piece when you ask for changes, and records use, versions and likes on its own. Files are the source of truth; a SQLite FTS5 index with SHA-256 hashes keeps it fast as it grows (without `node:sqlite` it scans the files).
+Reusable components (micro to large, with variants as props) stay **in your project, where its architecture already keeps them** (for example `src/components/`). The kit never copies or stores component code: it only keeps metadata, history and an index in `ai-frontend-output/pieces/`, plus a small global index in `~/.ai-frontend-guide-kit/` with references to your registered projects, so you can reuse a piece from another project (`pieces adopt` copies its file into the current one). Every piece records where it came from (generated, catalog, internet or another project) and whether you chose it, modified it or traced it. The agent searches before it builds (own piece, new variant, other project, catalog, new piece), polishes the same piece when you ask for changes, and records use, versions and likes on its own. A SQLite FTS5 index with SHA-256 hashes keeps it fast as it grows (without `node:sqlite` it scans the registries).
 
 ```bash
 node ai-frontend-guide-kit/tools/pieces.mjs find "pricing table"   # before creating
-node ai-frontend-guide-kit/tools/pieces.mjs list --liked           # what you like, ranked
+node ai-frontend-guide-kit/tools/pieces.mjs list --origin catalog  # what came from the catalog
 ```
 
 ## 🧭 Design flow: one route, no skipped steps

@@ -76,13 +76,13 @@ Después dile a tu agente:
 
 > *"Lee `ai-frontend-guide-kit/AGENTS.md` y sigue su flujo."*
 
-## 🧩 Piezas: una biblioteca Lego compartida
+## 🧩 Piezas: tus propios bloques Lego
 
-Los componentes reutilizables (de micro a grande, con variantes como props) viven en una sola biblioteca compartida por todos tus proyectos (`~/.ai-frontend-guide-kit/pieces/`). Cada proyecto guarda solo su personalidad y su uso en `ai-frontend-output/pieces.json`. El agente busca antes de construir (pieza propia, nueva variante, catálogo, pieza nueva), pule la misma pieza cuando pides cambios y registra uso, versiones y "me gusta" por su cuenta. Los ficheros son la fuente de verdad; un índice SQLite FTS5 con hashes SHA-256 lo mantiene rápido al crecer (sin `node:sqlite` lee los ficheros).
+Los componentes reutilizables (de micro a grande, con variantes como props) se quedan **en tu proyecto, donde su arquitectura ya los guarda** (por ejemplo `src/components/`). El kit nunca copia ni guarda código de componentes: solo guarda metadatos, historial e índice en `ai-frontend-output/pieces/`, más un índice global pequeño en `~/.ai-frontend-guide-kit/` con referencias a tus proyectos registrados, para reutilizar una pieza de otro proyecto (`pieces adopt` copia su archivo al actual). Cada pieza guarda de dónde viene (generada, catálogo, internet u otro proyecto) y si la elegiste, la modificaste o la calcaste. El agente busca antes de construir (pieza propia, nueva variante, otro proyecto, catálogo, pieza nueva), pule la misma pieza cuando pides cambios y registra uso, versiones y "me gusta" por su cuenta. Un índice SQLite FTS5 con hashes SHA-256 lo mantiene rápido al crecer (sin `node:sqlite` lee los registros).
 
 ```bash
 node ai-frontend-guide-kit/tools/pieces.mjs find "pricing table"   # antes de crear
-node ai-frontend-guide-kit/tools/pieces.mjs list --liked           # lo que te gusta, ordenado
+node ai-frontend-guide-kit/tools/pieces.mjs list --origin catalog  # lo que vino del catálogo
 ```
 
 ## 🧭 Flujo de diseño: una ruta y ningún paso saltado

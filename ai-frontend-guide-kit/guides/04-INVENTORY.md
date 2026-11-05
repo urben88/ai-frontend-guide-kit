@@ -25,7 +25,7 @@ For every screen in `PRODUCT.md`:
 
 ## Check what the project already has
 
-In a project with code, run `node tools/ui-map.mjs have "<need>"` for each row before searching the catalog or creating anything: it says whether the component exists (path, usage), lists close matches and gives catalog candidates. Mark the row `reuse existing` when it exists. Then run `node tools/pieces.mjs find "<need>"`: your own pieces come first (a close one gets a new variant or version, not a copy), the catalog second, a new piece last. Record each piece you place with `pieces use`.
+In a project with code, run `node tools/ui-map.mjs have "<need>"` for each row before searching the catalog or creating anything: it says whether the component exists (path, usage), lists close matches and gives catalog candidates. Mark the row `reuse existing` when it exists. Then run `node tools/pieces.mjs find "<need>"`: your own pieces come first (a close one gets a new variant or version, not a copy), then pieces of your other projects (`pieces adopt` copies the file into this project), the catalog next, a new piece last. Components stay in the project's own folders; the kit stores no code. Record each piece you place with `pieces use`, and a catalog component that landed with `get.mjs <id> --landed <path>`.
 
 ## Reflection questions (answer before step 04)
 

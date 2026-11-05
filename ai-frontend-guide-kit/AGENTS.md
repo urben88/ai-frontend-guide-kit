@@ -146,21 +146,23 @@ Read `UI-MAP.md` instead of exploring. Change every owner, user and stray that `
 
 The folder structure is a separate decision: `map` (the default) only records folder roles, and FSD is applied only when the user asks for it (`guides/12-ARCHITECTURE.md`, skill `frontend-refactor`).
 
-## Pieces (shared library of reusable components)
+## Pieces (the project's own reusable components)
 
-Pieces (shared library, `node tools/pieces.mjs`): before creating any component run `pieces find "<need>"`; the order is own piece, new variant of a close piece, kit catalog, and only then a new piece (`add` refuses otherwise unless `--new --reason "..."`). A polish request ("más espaciado", "more image") becomes `pieces version <name>` or a new variant, never a new piece. Without waiting to be asked, record `pieces use` when a piece goes into the project, `version` when the user adjusts it, `like`/`dislike` when they react, and `note` for any remark about it. The project keeps only its personality in `ai-frontend-output/pieces.json` (`pieces personality set <key> <value>`).
+Pieces (`node tools/pieces.mjs`) are the project's own components, registered where its architecture already keeps them (for example `src/components/`); the kit never copies or stores component code, only metadata, history and an index. Before creating any component run `pieces find "<need>"`: your own piece, a new variant of a close piece, a piece of another registered project (`pieces adopt` copies its file into this project), the kit catalog, and only then a new piece (`add` refuses otherwise unless `--new --reason "..."`). A polish request ("más espaciado", "more image") means editing the component file and then `pieces version <name>`, or a new variant, never a new piece. Without waiting to be asked, record `pieces use` when a piece goes into the project, `version` after the user adjusts it, `like`/`dislike` when they react, and `note` for any remark. Say where a component came from: `node tools/get.mjs <id> --landed <path>` registers a catalog component that landed in the project (origin `catalog:<id>`); for one from the internet use `pieces add ... --origin internet:<url>`; set `--relation` to `chosen` (used as is), `modified` (adapted) or `copied` (traced from a reference). The project keeps only its personality and usage in `ai-frontend-output/pieces/` (`pieces personality set <key> <value>`).
 
 ```bash
-node tools/pieces.mjs find "pricing table"                 # before creating: own piece > variant > catalog > new
-node tools/pieces.mjs add pricing-table --level medium --file <src> --variants monthly,annual   # only after find
-node tools/pieces.mjs use pricing-table --variant annual   # record use (also in ai-frontend-output/pieces.json)
-node tools/pieces.mjs version pricing-table --file <src> --note "more spacing"   # polish = new version
+node tools/pieces.mjs find "pricing table"                 # before creating: own piece > variant > other project > catalog > new
+node tools/pieces.mjs adopt pricing-table --from other-site   # copy another project's piece into this project's component folder
+node tools/pieces.mjs add pricing-table --level medium --file src/components/PricingTable.tsx --variants monthly,annual   # only after find
+node tools/get.mjs <entry-id> --landed src/components/Marquee.tsx   # a catalog component that landed: registered with its origin
+node tools/pieces.mjs use pricing-table --variant annual   # record use
+node tools/pieces.mjs version pricing-table --note "more spacing"   # after editing the file: records its SHA-256 (and git commit)
 node tools/pieces.mjs like pricing-table --note "love the spacing"   # or dislike / note
 node tools/pieces.mjs show pricing-table                   # latest state first, then history
-node tools/pieces.mjs list --liked                         # what the user likes, ranked
+node tools/pieces.mjs list --origin catalog                # what came from the catalog / internet / another project / generated
 ```
 
-The library lives in `~/.ai-frontend-guide-kit/pieces/` (override with `AI_FRONTEND_PIECES` or `--lib`); files are the source of truth, `index.db` (SQLite + FTS5, SHA-256 hashes) is rebuilt with `pieces index` and falls back to scanning files on Node older than 22.13. `memory add --decision build` needs a prior `pieces find`, and `flow done compose|iterate` needs every build registered as a piece.
+Per project the kit keeps `ai-frontend-output/pieces/` (`pieces.json` registry with personality and usage, `history.jsonl`, `index.db`). A global index at `~/.ai-frontend-guide-kit/` (override with `AI_FRONTEND_PIECES` or `--global`) holds only references to the registered projects (project, path, hash, metadata, likes) so `find` also sees pieces of your other projects. The index is SQLite + FTS5 with SHA-256 hashes (`pieces index` rebuilds it); on Node older than 22.13 the registries are scanned instead. `memory add --decision build` needs a prior `pieces find`, and `flow done compose|iterate` needs every build registered as a piece.
 
 ## Selection memory (`ai-frontend-output/`)
 

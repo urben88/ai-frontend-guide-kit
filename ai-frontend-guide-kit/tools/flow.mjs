@@ -152,7 +152,7 @@ Usage:
   node tools/flow.mjs next
   node tools/flow.mjs done <step> [--evidence "..."]
   node tools/flow.mjs reset
-  compose and iterate also refuse while a build decision has no piece registered in the shared library (node tools/pieces.mjs add).
+  compose and iterate also refuse while a build decision has no piece registered in this project (node tools/pieces.mjs add).
 Options: --dir <project>, --json
 `;
 
@@ -305,7 +305,7 @@ function next(p) {
   console.log(describeStep(step.id));
 }
 
-/** S5: every `build` decision in selections.jsonl must resolve to a piece in the shared library. */
+/** S5: every `build` decision in selections.jsonl must resolve to a piece registered in this project. */
 function unregisteredBuilds(p) {
   const file = join(p.out, 'selections.jsonl');
   if (!existsSync(file)) return [];
