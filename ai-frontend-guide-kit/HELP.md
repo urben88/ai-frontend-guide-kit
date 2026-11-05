@@ -13,6 +13,7 @@ It is not a component library and not a framework: it never copies third-party c
 | | What happens | Where it writes |
 |---|---|---|
 | **Always on** | The installer scans the project and keeps a map of the frontend: components, who uses them, routes, visual roles, strays and unresolved imports. Every later `build` records components added or removed. | `ai-frontend-output/` only |
+| **Always on** | `node install.mjs init` (or `update`) puts a short block in `AGENTS.md`, `CLAUDE.md` and the other agent documents the project has, so every agent reads `INDEX.md` and runs the flow before any frontend or design work. It never skips a step. | those documents, inside the kit's markers only |
 | **Always on** | Every design decision is recorded and reusable across sessions and projects. | `ai-frontend-output/selections.jsonl`, `combinations.json` |
 | **Only when you ask** | The three-phase design workflow (experience direction → composition → polish) and the audits inside it. | the files of each step |
 | **Only when you ask** | Architecture work: Feature-Sliced Design (FSD) structure, refactoring, or adapting an existing repo to it. Never imposed, never silent, never on a project that did not ask. | `ai-frontend-output/architecture.json` + the change you approved |

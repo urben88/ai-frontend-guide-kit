@@ -99,7 +99,7 @@ test('installer routes every design request (EN + ES) to the kit', () => {
     assert.ok(agents.includes(word), `trigger "${word}" present`);
   }
   assert.match(agents, /impeccable/);
-  assert.ok(!existsSync(join(target, 'CLAUDE.md')), 'no CLAUDE.md created when absent');
+  assert.equal(count(readFileSync(join(target, 'CLAUDE.md'), 'utf8'), MARK), 1, 'CLAUDE.md is created with the block (Claude Code does not read AGENTS.md)');
 });
 
 test('installer fetches the 5 external design skill repos, and only landing-page-design from elayadesign', () => {
@@ -222,7 +222,8 @@ test('installer adds the block to an existing CLAUDE.md (Claude Code ignores AGE
     assert.equal(count(text, MARK), 1, `${file} has one block`);
     assert.ok(text.includes('diseño'));
   }
-  assert.ok(readFileSync(join(target, 'CLAUDE.md'), 'utf8').startsWith('# Claude rules\n\nUse tabs.\n'));
+  const claude = readFileSync(join(target, 'CLAUDE.md'), 'utf8');
+  assert.ok(claude.startsWith('# Claude rules\n') && claude.endsWith('Use tabs.\n'),'the block goes below the title; the user text stays intact');
 });
 
 test('ai-frontend-guide skill triggers on design talk in English and Spanish', () => {

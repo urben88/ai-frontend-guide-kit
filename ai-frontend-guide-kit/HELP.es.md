@@ -13,6 +13,7 @@ No es una librería de componentes ni un framework: nunca copia código de terce
 | | Qué pasa | Dónde escribe |
 |---|---|---|
 | **Siempre** | El instalador escanea el proyecto y mantiene un mapa del frontend: componentes, quién los usa, rutas, rol visual, strays e imports sin resolver. Cada `build` posterior anota qué componentes se agregaron o se fueron. | solo en `ai-frontend-output/` |
+| **Siempre** | `node install.mjs init` (o `update`) pone un bloque corto en `AGENTS.md`, `CLAUDE.md` y los demás documentos de agente que tenga el proyecto, para que todo agente lea `INDEX.md` y ejecute el flujo antes de cualquier trabajo de frontend o diseño. Nunca se salta un paso. | esos documentos, solo entre las marcas del kit |
 | **Siempre** | Cada decisión de diseño queda registrada y es reutilizable entre sesiones y proyectos. | `ai-frontend-output/selections.jsonl`, `combinations.json` |
 | **Solo cuando lo pedís** | El flujo de tres fases (dirección de experiencia → composición → pulido) y las auditorías que incluye. | los archivos de cada paso |
 | **Solo cuando lo pedís** | Trabajo de arquitectura: estructura FSD, refactor o adaptación de un repo existente. Nunca impuesto, nunca silencioso, nunca en un proyecto que no lo pidió. | `ai-frontend-output/architecture.json` + el cambio que aprobaste |

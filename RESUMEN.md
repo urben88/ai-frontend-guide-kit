@@ -35,7 +35,7 @@ flowchart LR
 | **Licencias** | Contrasta la licencia declarada con el LICENSE del repo | `tools/check-licenses.mjs` → `license-report.md` |
 | **Auditoría de categorías** | Detecta entradas mal clasificadas (falla si >3 %) | `tools/audit-categories.mjs --strict` |
 | **Kit portable** | Sincroniza catálogo al kit y genera explorador offline | `tools/build-kit.mjs`, `tools/build-explorer.mjs` |
-| **Instalador** | Copia el kit, añade el bloque que manda toda conversación de diseño al kit (`AGENTS.md` y `CLAUDE.md` si existe; se actualiza al reinstalar), instala skills y MCP | `install.mjs` (flags `--no-skills`, `--no-mcp`, `--with-laya`, `--target`); siempre genera el mapa del frontend |
+| **Instalador** | Copia el kit, añade el bloque que manda toda conversación de diseño al kit (`AGENTS.md` y `CLAUDE.md`, que se crea si falta, y los demás documentos de agente que ya existan; `init` y `update` lo refrescan sin tocar tu contenido), instala skills y MCP | `install.mjs` (flags `--no-skills`, `--no-mcp`, `--with-laya`, `--target`); siempre genera el mapa del frontend |
 | **Panorama del catálogo** | Las 5 mejores entradas por categoría (máximo 2 por fuente), una línea cada una, en unos 2,5k tokens | `tools/build-digest.mjs` → `kit/catalog/digest.md` (lo genera `build-kit`) |
 | **Búsqueda** | Filtra por texto, categoría, stack, licencia y calidad | `kit/tools/find.mjs` |
 | **Explorar una web de componentes** | Dada una URL: dice si ya es una fuente del catálogo; si no, lee solo esa página y resume componentes, instalación y pistas de licencia y de pago; puede guardarla como librería por investigar | `kit/tools/scout.mjs <url> [--fetch] [--record]` |

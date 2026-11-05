@@ -24,48 +24,40 @@ const BLOCK_START = '<!-- ai-frontend-guide-kit:start -->';
 const BLOCK_END = '<!-- ai-frontend-guide-kit:end -->';
 
 const AGENTS_BLOCK = `${BLOCK_START}
-## Frontend UI and design (ai-frontend-guide-kit)
-**Routing rule:** any request about design, UI or UX goes through \`ai-frontend-guide-kit/AGENTS.md\` first
-(the \`ai-frontend-guide\` skill), before proposing designs or writing UI code. Triggers include:
-design, redesign, restyle, UI, UX, look and feel, theme, colors, typography, fonts, spacing, layout, screen, page,
-landing, dashboard, component, form, animation, polish; diseño, rediseñar, estilo, aspecto, tema, colores,
-tipografía, fuentes, espaciado, maquetación, pantalla, página, landing, componente, formulario, animación, pulir.
-Do not design from scratch: reuse > adapt > build, using the catalog (\`node ai-frontend-guide-kit/tools/find.mjs\`).
-External design skills never act as the entry point, even when their description matches: each runs only at its step
-(\`ai-frontend-guide-kit/guides/00-START-HERE.md\`): landing-page-design in phase 1 (landing pages only); hallmark and
-design-taste-frontend build only in phase 2, after a catalog search ends in build (design-taste-frontend also for an
-agreed visual redesign); both may give raw material for the directions in phase 1 without building; hallmark gives a report-only audit in phase 3;
-emilkowalski in phases 2-3; impeccable in phase 3 through \`frontend-polish\`.
-Ask the user first what they want (new frontend UX -> composition -> polish, a small change, a custom
-addition, or polish only) and enter the three-phase workflow at the right point before touching code.
-Design flow (never skip a step): start every design conversation with \`node ai-frontend-guide-kit/tools/flow.mjs status\`,
-declare the route with \`flow.mjs start <route>\`, follow \`flow.mjs next\` and close each step with \`flow.mjs done <step>\`,
-which refuses a skipped step or a missing artifact. Routes, steps and their skills: \`ai-frontend-guide-kit/guides/FLOWS.md\`;
-on "qué flujos existen" or "which flows exist", answer from that file.
-New frontends start with the experience direction (\`ai-frontend-guide-kit/guides/01-EXPERIENCE-DIRECTION.md\`
--> \`ai-frontend-output/ux/EXPERIENCE-BRIEF.md\`) before flows, tokens or components.
-Optional accelerator: \`python ai-frontend-guide-kit/tools/laya_select.py --check\` (local Laya decision engine;
-ask the user once per session before ranking questions, direction or components).
-Selection memory: record every decision with \`node ai-frontend-guide-kit/tools/memory.mjs add ...\` and reuse saved
-combinations from \`ai-frontend-output/\` before searching the catalog.
-Frontend map: before changing UI run \`node ai-frontend-guide-kit/tools/ui-map.mjs impact <role|component>\`, before creating a
-component run \`node ai-frontend-guide-kit/tools/ui-map.mjs have <name>\`, and read \`ai-frontend-output/UI-MAP.md\` instead of exploring the repo.
-Pieces: components stay in the project's own folders (the kit never stores component code). Before creating a component run
-\`node ai-frontend-guide-kit/tools/pieces.mjs find "<need>"\` (own piece, new variant, a piece of another project via \`pieces adopt\`, the catalog, then a new piece);
-polishing ("more spacing") is a new version or variant of the same piece. Record on your own, without being asked, every \`use\`, \`version\`,
-\`like\`/\`dislike\` and \`note\` when the user uses, adjusts or reacts to a piece, and register what lands from the catalog with
-\`get.mjs <id> --landed <path>\` (origin and chosen/modified/copied are kept).
-Explaining the kit: on "what is this", "qué puedo pedirle", "dame un resumen de esta herramienta" or "explain this tool",
-read \`ai-frontend-guide-kit/HELP.md\` (Spanish: \`HELP.es.md\`) and answer from it in plain language; never explore
-the folders to explain the kit.
-Polish phase: use the \`frontend-polish\` skill with Playwright MCP (\`npx @playwright/mcp@latest\`).
-UX map: generate and maintain \`ai-frontend-output/ux/ux-map.excalidraw\` with the \`ux-map\` skill and the local Excalidraw MCP
-(\`node ai-frontend-guide-kit/tools/excalidraw-mcp.mjs --diagram ai-frontend-output/ux/ux-map.excalidraw\`, offline, no install).
+## Frontend, UI and design: always this flow (ai-frontend-guide-kit)
+**Mandatory.** Any request about frontend, UI, UX, design, a screen, page, component, style or polish, however small,
+starts like this, before any file is read or edited:
+1. Read \`ai-frontend-guide-kit/INDEX.md\`.
+2. Run \`node ai-frontend-guide-kit/tools/flow.mjs status\`, declare the route with \`flow.mjs start <route>\` (a small change
+   is route \`iterate\`), follow \`flow.mjs next\` and close each step with \`flow.mjs done <step>\`, which refuses a skipped step.
+The flow is never skipped. Routes: \`ai-frontend-guide-kit/guides/FLOWS.md\`; full rules: \`ai-frontend-guide-kit/AGENTS.md\`.
+Triggers: design, redesign, restyle, UI, UX, look and feel, theme, colors, typography, fonts, spacing, layout, screen, page,
+landing, dashboard, component, form, animation, polish; diseño, rediseñar, estilo, aspecto, tema, colores, tipografía,
+fuentes, espaciado, maquetación, pantalla, página, landing, componente, formulario, animación, pulir.
+Reuse before building: \`node ai-frontend-guide-kit/tools/pieces.mjs find "<need>"\` before any component, and
+\`node ai-frontend-guide-kit/tools/ui-map.mjs impact <role|component>\` / \`ui-map.mjs have <name>\` before changing UI
+(read \`ai-frontend-output/UI-MAP.md\`, do not explore the repo). Record every decision with \`tools/memory.mjs add\`, and every
+piece use, version and reaction with \`tools/pieces.mjs\`.
+External design skills never start the work; each runs only at its step (\`guides/00-START-HERE.md\`): landing-page-design in phase 1
+(landing pages), hallmark and design-taste-frontend only to build in phase 2, emilkowalski in phases 2-3, impeccable in phase 3
+through \`frontend-polish\` (Playwright MCP). UX map: skill \`ux-map\`.
+On "what is this", "qué puedo pedirle", "dame un resumen de esta herramienta": read \`ai-frontend-guide-kit/HELP.md\`
+(Spanish: \`HELP.es.md\`) and answer from it; never explore the folders to explain the kit.
 ${BLOCK_END}
 `;
 
 // Pre-1.4 installs wrote an unmarked "## Frontend UI" section; it runs until the next "## " heading or EOF.
 const LEGACY_BLOCK = /^## Frontend UI\n[\s\S]*?(?=^## |(?![\s\S]))/m;
+
+/** Puts the block at the top of a file that does not have it yet: below a leading frontmatter and H1 title, if any. */
+function insertAtTop(current) {
+  let end = current.match(/^---\n[\s\S]*?\n---\n/)?.[0].length ?? 0;
+  end += current.slice(end).match(/^(?:[ \t]*\n)*# [^\n]*(?:\n|$)/)?.[0].length ?? 0;
+  let head = current.slice(0, end);
+  const tail = current.slice(end);
+  if (head && !head.endsWith('\n')) head += '\n';
+  return `${head}${head ? '\n' : ''}${AGENTS_BLOCK}${tail && !tail.startsWith('\n') ? '\n' : ''}${tail}`;
+}
 
 /** Inserts or refreshes the kit block in an instruction file, never touching content outside it. */
 function upsertKitBlock(path, header) {
@@ -85,7 +77,7 @@ function upsertKitBlock(path, header) {
   } else if (legacy?.includes('ai-frontend-guide-kit/AGENTS.md')) {
     next = current.replace(legacy, `${AGENTS_BLOCK}\n`);
   } else {
-    next = `${current.trimEnd()}\n\n${AGENTS_BLOCK}`;
+    next = insertAtTop(current);
   }
   next = next.replace(/\n/g, eol);
   if (next === original) return 'unchanged';
@@ -131,7 +123,7 @@ const CLI_SKILL_REPOS = [
 ];
 
 function parseArgs(argv) {
-  const args = { target: process.cwd(), skills: true, skillsMode: 'copy', designSkills: true, mcp: true, laya: false, help: false };
+  const args = { command: null, target: process.cwd(), skills: true, skillsMode: 'copy', designSkills: true, mcp: true, laya: false, help: false };
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i];
     if (token === '--help' || token === '-h') args.help = true;
@@ -142,6 +134,7 @@ function parseArgs(argv) {
     else if (token === '--skills-mode') args.skillsMode = argv[++i];
     else if (token === '--with-laya') args.laya = true;
     else if (token === '--target') args.target = argv[++i];
+    else if (token === 'init' || token === 'update') args.command = token;
   }
   if (!['copy', 'cli'].includes(args.skillsMode)) {
     console.error(`Invalid --skills-mode "${args.skillsMode}". Use "copy" (default) or "cli".`);
@@ -154,7 +147,11 @@ function printHelp() {
   console.log(`AI Frontend Guide installer
 
 Usage:
-  node install.mjs [options]
+  node install.mjs [init | update] [options]
+
+Commands:
+  init, update          the same run: refresh the kit, the guiding documents and the project scan
+                        (with neither, the installer does the same; the command only names the intent)
 
 Options:
   --target <dir>        install into <dir> (default: current directory)
@@ -169,8 +166,12 @@ Options:
 
 What it does:
   1. Copies ai-frontend-guide-kit/ (catalog + guides + tools) into the target.
-  2. Adds (or refreshes) the marked design-routing block in the target's AGENTS.md, and in CLAUDE.md /
-     .claude/CLAUDE.md when present; removes the legacy ai-frontend-guide/ folder.
+  2. Adds (or refreshes) the marked design-routing block, which tells every agent to read
+     ai-frontend-guide-kit/INDEX.md and run the flow first. Always in AGENTS.md and CLAUDE.md (created when
+     missing); only when already present in .claude/CLAUDE.md, GEMINI.md, .github/copilot-instructions.md,
+     .cursorrules and .windsurfrules; and in .cursor/rules/ai-frontend-guide-kit.mdc (alwaysApply) when .cursor/
+     exists. A new block goes at the top, below a leading title; an existing one is refreshed in place and
+     nothing outside the markers changes. Removes the legacy ai-frontend-guide/ folder.
   3. Creates ai-frontend-output/ (selection memory) if missing; it is never removed on refresh.
      It also creates ai-frontend-output/ux/ux-map.excalidraw (Excalidraw scaffold) if missing.
   4. Installs skills into .agents/skills: copy mode copies the 20 kit skills (workflow + 16 UX flows +
@@ -428,6 +429,25 @@ function buildUiMap(target, kitDest) {
   console.warn(`  ! ui-map: scan failed (${reason}); continuing. Retry later: node ai-frontend-guide-kit/tools/ui-map.mjs build`);
 }
 
+const CURSOR_RULE = join('.cursor', 'rules', 'ai-frontend-guide-kit.mdc');
+const CURSOR_HEADER = '---\ndescription: Always follow the ai-frontend-guide-kit flow for any frontend, UI, UX or design work\nalwaysApply: true\n---';
+
+// Always written (created when missing): Claude Code reads CLAUDE.md, not AGENTS.md. The rest only when already there.
+const ALWAYS_DOCS = [['AGENTS.md', '# Project agent instructions'], ['CLAUDE.md', '# Project instructions for Claude Code']];
+const PRESENT_DOCS = [join('.claude', 'CLAUDE.md'), 'GEMINI.md', join('.github', 'copilot-instructions.md'), '.cursorrules', '.windsurfrules'];
+
+/** Refreshes the kit block in every agent instruction document the project uses (init, update and a bare run alike). */
+function updateAgentDocuments(target) {
+  const files = [...ALWAYS_DOCS, ...PRESENT_DOCS.filter((file) => existsSync(join(target, file))).map((file) => [file, ''])];
+  if (existsSync(join(target, '.cursor'))) {
+    mkdirSync(join(target, '.cursor', 'rules'), { recursive: true });
+    files.push([CURSOR_RULE, CURSOR_HEADER]);
+  }
+  for (const [file, header] of files) {
+    console.log(`- ${file}: kit routing block ${upsertKitBlock(join(target, file), header)}`);
+  }
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
@@ -469,13 +489,7 @@ function main() {
   ensureUxMap(target);
   buildUiMap(target, kitDest);
 
-  console.log(`- AGENTS.md: kit routing block ${upsertKitBlock(join(target, 'AGENTS.md'), '# Project agent instructions')}`);
-  // Claude Code reads CLAUDE.md instead of AGENTS.md when one exists, so the block goes there too.
-  for (const claudeMd of ['CLAUDE.md', join('.claude', 'CLAUDE.md')]) {
-    if (existsSync(join(target, claudeMd))) {
-      console.log(`- ${claudeMd}: kit routing block ${upsertKitBlock(join(target, claudeMd), '')}`);
-    }
-  }
+  updateAgentDocuments(target);
 
   if (args.skills) {
     if (args.skillsMode === 'cli') {
@@ -523,7 +537,7 @@ function main() {
 
   console.log(`
 Done. Next steps for the agent:
-  1. Read ai-frontend-guide-kit/AGENTS.md and ask the user what they want before routing:
+  1. Read ai-frontend-guide-kit/INDEX.md, then AGENTS.md, and ask the user what they want before routing:
      a new frontend (UX -> composition -> polish), a small change, a custom addition,
      or polish only. Phases are entry points, not a fixed pipeline.
   2. Phase 1 (UX/teoria): node ai-frontend-guide-kit/tools/context.mjs, then follow
