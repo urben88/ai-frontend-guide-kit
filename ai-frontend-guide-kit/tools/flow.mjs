@@ -318,7 +318,7 @@ function unregisteredBuilds(p) {
       continue;
     }
     if (record?.decision !== 'build') continue;
-    if (!registeredPiece(record.name, record.block)) missing.push(`${record.block} ("${record.name ?? record.block}")`);
+    if (!registeredPiece(record.name, record.block, p.out)) missing.push(`${record.block} ("${record.name ?? record.block}")`);
   }
   return [...new Set(missing)];
 }
