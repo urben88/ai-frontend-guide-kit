@@ -20,6 +20,7 @@
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { registeredPiece } from './pieces.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -63,7 +64,7 @@ const STEPS = {
     title: 'Composition: inventory, find, reuse/adapt/build, record every decision',
     guide: 'guides/04-INVENTORY.md … guides/07-ADAPT.md (+ guides/08-PHILOSOPHY.md)',
     skill: 'ai-frontend-guide (hallmark / design-taste-frontend only for decision build)',
-    tool: 'node tools/ui-map.mjs have; node tools/find.mjs; node tools/get.mjs; node tools/memory.mjs add',
+    tool: 'node tools/pieces.mjs find; node tools/ui-map.mjs have; node tools/find.mjs; node tools/get.mjs; node tools/memory.mjs add',
     output: 'ai-frontend-output/selections.jsonl',
     artifacts: [['out:selections.jsonl']],
   },
@@ -71,7 +72,7 @@ const STEPS = {
     title: 'Iterate: a small change or custom addition without repeating the UX phase',
     guide: 'guides/10-ITERATE.md',
     skill: 'ai-frontend-guide',
-    tool: 'node tools/ui-map.mjs impact; node tools/memory.mjs add',
+    tool: 'node tools/pieces.mjs find; node tools/ui-map.mjs impact; node tools/memory.mjs add',
     output: 'the change, with its decision recorded',
     artifacts: null,
   },
@@ -303,6 +304,24 @@ function next(p) {
   console.log(describeStep(step.id));
 }
 
+/** S5: every `build` decision in selections.jsonl must resolve to a piece in the shared library. */
+function unregisteredBuilds(p) {
+  const file = join(p.out, 'selections.jsonl');
+  if (!existsSync(file)) return [];
+  const missing = [];
+  for (const line of readFileSync(file, 'utf8').split('\n')) {
+    let record;
+    try {
+      record = JSON.parse(line);
+    } catch {
+      continue;
+    }
+    if (record?.decision !== 'build') continue;
+    if (!registeredPiece(record.name, record.block)) missing.push(`${record.block} ("${record.name ?? record.block}")`);
+  }
+  return [...new Set(missing)];
+}
+
 function done(p, id, flags) {
   const state = readState(p);
   if (!state) throw new Refusal('no active flow; declare the route with: node tools/flow.mjs start <route>');
@@ -311,6 +330,12 @@ function done(p, id, flags) {
   const step = current(state);
   if (!step) throw new Refusal(`route "${state.route}" is already complete`);
   if (step.id !== id) throw new Refusal(`step "${id}" is not the current step (current: ${step.id}); steps are never skipped`);
+  if (id === 'compose' || id === 'iterate') {
+    const unregistered = unregisteredBuilds(p);
+    if (unregistered.length) {
+      throw new Refusal(`step "${id}" cannot be marked done: build decision(s) with no registered piece: ${unregistered.join(', ')}. Register each with: node tools/pieces.mjs add <name> --level micro|small|medium|large --file <src> (after node tools/pieces.mjs find "<need>")`);
+    }
+  }
   if (STEPS[id].artifacts) {
     const missing = missingArtifacts(p, id);
     if (missing.length) throw new Refusal(`step "${id}" cannot be marked done: missing ${missing.join(', ')}`);

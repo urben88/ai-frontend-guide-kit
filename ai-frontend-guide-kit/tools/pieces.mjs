@@ -514,6 +514,27 @@ function recordFind(root, need) {
   saveProject(root, project);
 }
 
+// ---------------------------------------------------------------- guards other tools reuse (S5)
+
+/** The needs `find` ran for in the project whose output folder is outputDir. */
+export function readFinds(outputDir) {
+  const data = readJsonFile(join(outputDir, 'pieces.json'), {});
+  return Array.isArray(data.finds) ? data.finds : [];
+}
+
+/** True when a `find` was recorded for this need (same words, or one contains the other's words). */
+export function findRan(outputDir, need) {
+  return readFinds(outputDir).some((entry) => matchName(entry.need, need) !== null);
+}
+
+/** The registered library piece that a build's name or block resolves to (same matcher as add and find), or null. */
+export function registeredPiece(name, block, lib = resolveLibrary({})) {
+  for (const piece of pieceNames(lib)) {
+    if ((name && matchName(name, piece)) || (block && matchName(block, piece))) return piece;
+  }
+  return null;
+}
+
 async function runFind(lib, root, flags) {
   const need = flags._.slice(1).join(' ').trim();
   if (!need) throw usageError('find needs the need you are looking for: pieces.mjs find "pricing table"');

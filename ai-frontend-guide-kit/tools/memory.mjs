@@ -29,6 +29,7 @@ import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, write
 import { basename, dirname, join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { findRan } from './pieces.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -227,6 +228,9 @@ function commandAdd(args, outputDir, catalog) {
     if (!flags[required]) fail(`Missing --${required}. See usage in the script header.`);
   }
   if (!DECISIONS.has(flags.decision)) fail(`--decision must be one of: ${[...DECISIONS].join(', ')}`);
+  if (flags.decision === 'build' && !findRan(outputDir, flags.need)) {
+    fail(`A build is the last conclusion: no "pieces find" ran for "${flags.need}" in this project. Run: node tools/pieces.mjs find "${flags.need}" (own pieces, variants and the catalog come first), then record the build.`);
+  }
 
   const record = {
     ts: new Date().toISOString(),

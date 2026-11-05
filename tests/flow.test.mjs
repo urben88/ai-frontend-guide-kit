@@ -192,3 +192,94 @@ test('AGENTS.md, the router, the skill and the installer routing block point to 
     assert.ok(text.includes('flow.mjs done'), `${rel} does not tell the agent to close steps with flow.mjs done`);
   }
 });
+
+// ---------------------------------------------------------------- pieces guard (S5)
+
+const PIECES = join(ROOT, 'ai-frontend-guide-kit', 'tools', 'pieces.mjs');
+const MEMORY = join(ROOT, 'ai-frontend-guide-kit', 'tools', 'memory.mjs');
+const piecesEnv = (lib) => ({ ...cleanEnv(), AI_FRONTEND_PIECES: lib });
+const iterateProject = () => {
+  const dir = project();
+  const lib = join(mkdtempSync(join(tmpdir(), 'flow-lib-')), 'lib');
+  flow(dir, 'start', 'iterate');
+  put(dir, 'ux/REPO-CONTEXT.md');
+  put(dir, 'UI-MAP.md');
+  assert.equal(flow(dir, 'done', 'intake').status, 0);
+  return { dir, lib };
+};
+const flowIn = (ctx, ...args) => spawnSync(process.execPath, [TOOL, ...args, '--dir', ctx.dir], { encoding: 'utf8', env: piecesEnv(ctx.lib) });
+const memoryIn = (ctx, ...args) => spawnSync(process.execPath, [MEMORY, ...args, '--dir', out(ctx.dir, '')], { encoding: 'utf8', env: piecesEnv(ctx.lib) });
+const piecesIn = (ctx, ...args) => spawnSync(process.execPath, [PIECES, ...args, '--dir', ctx.dir], { encoding: 'utf8', env: piecesEnv(ctx.lib) });
+const build = (ctx, block, name) => {
+  const find = piecesIn(ctx, 'find', name);
+  assert.equal(find.status, 0, find.stderr);
+  const run = memoryIn(ctx, 'add', '--screen', 'landing', '--block', block, '--need', name, '--decision', 'build', '--name', name);
+  assert.equal(run.status, 0, run.stderr);
+};
+
+test('compose and iterate list pieces find as their first tool (S5)', () => {
+  const run = flow(project(), 'list');
+  assert.equal(run.status, 0, run.stderr);
+  for (const step of ['compose', 'iterate']) {
+    const row = run.stdout.split('\n').find((line) => /^\| \d+ \|/.test(line) && line.includes(`\`${step}\``));
+    assert.match(row, /\| node tools\/pieces\.mjs find; /, step);
+  }
+});
+
+test('done iterate refuses while a build decision has no registered piece, and passes once it is registered (S5)', () => {
+  const ctx = iterateProject();
+  build(ctx, 'pricing', 'pricing table');
+  const before = raw(ctx.dir);
+  const refused = flowIn(ctx, 'done', 'iterate', '--evidence', 'built');
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /no registered piece: pricing \("pricing table"\)/);
+  assert.equal(raw(ctx.dir), before);
+  const file = join(ctx.dir, 'PricingTable.tsx');
+  writeFileSync(file, 'export const P = () => <table />;\n');
+  const added = piecesIn(ctx, 'add', 'pricing-table', '--level', 'medium', '--file', file);
+  assert.equal(added.status, 0, added.stderr);
+  const ok = flowIn(ctx, 'done', 'iterate', '--evidence', 'built');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.equal(state(ctx.dir).steps[1].status, 'done');
+});
+
+test('compose gets the same guard through the new route (S5)', () => {
+  const dir = project();
+  const lib = join(mkdtempSync(join(tmpdir(), 'flow-lib-')), 'lib');
+  const ctx = { dir, lib };
+  flowIn(ctx, 'start', 'new');
+  for (const step of ['intake', 'direction', 'ux', 'tokens']) {
+    for (const file of ['ux/REPO-CONTEXT.md', 'UI-MAP.md', 'ux/EXPERIENCE-BRIEF.md', 'ux/UX-SPEC.md', 'ux/ux-map.excalidraw', 'DESIGN.md']) put(dir, file);
+    const done = flowIn(ctx, 'done', step);
+    assert.equal(done.status, 0, `${step}: ${done.stderr}`);
+  }
+  build(ctx, 'hero', 'hero banner');
+  const refused = flowIn(ctx, 'done', 'compose');
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /step "compose".*no registered piece: hero \("hero banner"\)/);
+});
+
+test('reuse and adapt decisions keep their current behavior without any piece (S5)', () => {
+  const ctx = iterateProject();
+  const reuse = memoryIn(ctx, 'add', '--screen', 'landing', '--block', 'faq', '--need', 'faq list', '--decision', 'reuse', '--id', 'magicui-micro-interactions-marquee');
+  const adapt = memoryIn(ctx, 'add', '--screen', 'landing', '--block', 'ref', '--need', 'ref', '--decision', 'adapt', '--ref', 'reference:site');
+  assert.equal(reuse.status, 0, reuse.stderr);
+  assert.equal(adapt.status, 0, adapt.stderr);
+  const ok = flowIn(ctx, 'done', 'iterate', '--evidence', 'reused');
+  assert.equal(ok.status, 0, ok.stderr);
+});
+
+test('memory add --decision build refuses without a pieces find for the need, and records after it (S5)', () => {
+  const ctx = iterateProject();
+  const args = ['add', '--screen', 'landing', '--block', 'pricing', '--need', 'pricing table', '--decision', 'build', '--name', 'Pricing table'];
+  const refused = memoryIn(ctx, ...args);
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /pieces\.mjs find "pricing table"/);
+  assert.equal(existsSync(out(ctx.dir, 'selections.jsonl')), false);
+  assert.equal(piecesIn(ctx, 'find', 'testimonial carousel').status, 0);
+  assert.equal(memoryIn(ctx, ...args).status, 1);
+  assert.equal(piecesIn(ctx, 'find', 'pricing table').status, 0);
+  const ok = memoryIn(ctx, ...args);
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.match(readFileSync(out(ctx.dir, 'selections.jsonl'), 'utf8'), /"decision":"build"/);
+});
