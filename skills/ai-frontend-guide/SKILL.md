@@ -60,6 +60,10 @@ Never skip a step: when `done` refuses, produce the missing artifact first. Ever
 
 The installer keeps `ai-frontend-output/UI-MAP.md` (plus `ui-map.json`, `ui-history.jsonl`) up to date. Read it instead of exploring the repo. Before changing UI run `node ai-frontend-guide-kit/tools/ui-map.mjs impact <role|component>`; before creating run `node ai-frontend-guide-kit/tools/ui-map.mjs have <name>`; to see what the profile treats as required run `node ai-frontend-guide-kit/tools/ui-map.mjs check --profile sprint|standard|long-term`. Existing violations are recorded, never changed unless the user asks (`guides/08-PHILOSOPHY.md`, Separation).
 
+## Pieces (shared library)
+
+Pieces (shared library, `node tools/pieces.mjs`): before creating any component run `pieces find "<need>"`; the order is own piece, new variant of a close piece, kit catalog, and only then a new piece (`add` refuses otherwise unless `--new --reason "..."`). A polish request ("más espaciado", "more image") becomes `pieces version <name>` or a new variant, never a new piece. Without waiting to be asked, record `pieces use` when a piece goes into the project, `version` when the user adjusts it, `like`/`dislike` when they react, and `note` for any remark about it. The project keeps only its personality in `ai-frontend-output/pieces.json` (`pieces personality set <key> <value>`).
+
 ## Architecture (FSD only on request)
 
 The folder structure is a separate decision (`guides/12-ARCHITECTURE.md`): `map` is the default and only records folder roles in `ai-frontend-output/architecture.json`; `fsd-new` (a new project) and `fsd-refactor` (an existing one) run **only when the user asks**, through the sibling `frontend-refactor` skill, one approved slice at a time. Never apply FSD unasked, never silently, not even on a greenfield repo, and never rename FSD layers onto the kit's roles or component types.

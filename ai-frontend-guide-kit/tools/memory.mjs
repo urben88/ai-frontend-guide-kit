@@ -15,6 +15,7 @@
  *   node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> [--style a,b] [--ref "spec:<capability>|story:<id>"] [--type <component-type>] [--notes "..."]
  *   node tools/memory.mjs add --screen experience --block reference --need "..." --decision adapt --ref "reference:<slug>" [--notes "..."]
  *   node tools/memory.mjs add --screen landing --block custom-x --need "..." --decision build --name "Custom marquee"
+ *     (build is the last conclusion: refused unless `node tools/pieces.mjs find "<need>"` ran for that need in this project)
  *   node tools/memory.mjs list [--screen landing] [--limit 15] [--json]
  *   node tools/memory.mjs summary
  *   node tools/memory.mjs combo save <name> [--all] [--note "..."]

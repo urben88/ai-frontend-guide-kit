@@ -50,6 +50,9 @@ Selection memory: record every decision with \`node ai-frontend-guide-kit/tools/
 combinations from \`ai-frontend-output/\` before searching the catalog.
 Frontend map: before changing UI run \`node ai-frontend-guide-kit/tools/ui-map.mjs impact <role|component>\`, before creating a
 component run \`node ai-frontend-guide-kit/tools/ui-map.mjs have <name>\`, and read \`ai-frontend-output/UI-MAP.md\` instead of exploring the repo.
+Pieces: before creating a component run \`node ai-frontend-guide-kit/tools/pieces.mjs find "<need>"\` (own piece, then a new variant, then the catalog, then a new piece);
+polishing ("more spacing") is a new version or variant of the same piece. Record on your own, without being asked, every \`use\`, \`version\`,
+\`like\`/\`dislike\` and \`note\` when the user uses, adjusts or reacts to a piece.
 Explaining the kit: on "what is this", "qué puedo pedirle", "dame un resumen de esta herramienta" or "explain this tool",
 read \`ai-frontend-guide-kit/HELP.md\` (Spanish: \`HELP.es.md\`) and answer from it in plain language; never explore
 the folders to explain the kit.

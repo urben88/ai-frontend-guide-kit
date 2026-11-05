@@ -25,7 +25,7 @@ For every screen in `PRODUCT.md`:
 
 ## Check what the project already has
 
-In a project with code, run `node tools/ui-map.mjs have "<need>"` for each row before searching the catalog or creating anything: it says whether the component exists (path, usage), lists close matches and gives catalog candidates. Mark the row `reuse existing` when it exists.
+In a project with code, run `node tools/ui-map.mjs have "<need>"` for each row before searching the catalog or creating anything: it says whether the component exists (path, usage), lists close matches and gives catalog candidates. Mark the row `reuse existing` when it exists. Then run `node tools/pieces.mjs find "<need>"`: your own pieces come first (a close one gets a new variant or version, not a copy), the catalog second, a new piece last. Record each piece you place with `pieces use`.
 
 ## Reflection questions (answer before step 04)
 

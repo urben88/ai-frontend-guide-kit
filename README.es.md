@@ -76,6 +76,15 @@ Después dile a tu agente:
 
 > *"Lee `ai-frontend-guide-kit/AGENTS.md` y sigue su flujo."*
 
+## 🧩 Piezas: una biblioteca Lego compartida
+
+Los componentes reutilizables (de micro a grande, con variantes como props) viven en una sola biblioteca compartida por todos tus proyectos (`~/.ai-frontend-guide-kit/pieces/`). Cada proyecto guarda solo su personalidad y su uso en `ai-frontend-output/pieces.json`. El agente busca antes de construir (pieza propia, nueva variante, catálogo, pieza nueva), pule la misma pieza cuando pides cambios y registra uso, versiones y "me gusta" por su cuenta. Los ficheros son la fuente de verdad; un índice SQLite FTS5 con hashes SHA-256 lo mantiene rápido al crecer (sin `node:sqlite` lee los ficheros).
+
+```bash
+node ai-frontend-guide-kit/tools/pieces.mjs find "pricing table"   # antes de crear
+node ai-frontend-guide-kit/tools/pieces.mjs list --liked           # lo que te gusta, ordenado
+```
+
 ## 🧭 Flujo de diseño: una ruta y ningún paso saltado
 
 **En una frase:** el kit recuerda, dentro de tu proyecto, en qué ruta de diseño estás y cuál es el siguiente paso, y no deja que el agente se adelante.

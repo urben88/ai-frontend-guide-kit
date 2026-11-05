@@ -92,6 +92,15 @@ node ai-frontend-guide-kit/tools/ui-map.mjs impact loading      # what must chan
 node ai-frontend-guide-kit/tools/ui-map.mjs have "data table"   # check before creating
 ```
 
+## 🧩 Pieces: a shared Lego library
+
+Reusable components (micro to large, with variants as props) live in one library shared by all your projects (`~/.ai-frontend-guide-kit/pieces/`). Each project keeps only its personality and usage in `ai-frontend-output/pieces.json`. The agent searches before it builds (own piece, new variant, catalog, new piece), polishes the same piece when you ask for changes, and records use, versions and likes on its own. Files are the source of truth; a SQLite FTS5 index with SHA-256 hashes keeps it fast as it grows (without `node:sqlite` it scans the files).
+
+```bash
+node ai-frontend-guide-kit/tools/pieces.mjs find "pricing table"   # before creating
+node ai-frontend-guide-kit/tools/pieces.mjs list --liked           # what you like, ranked
+```
+
 ## 🧭 Design flow: one route, no skipped steps
 
 **In one sentence:** the kit remembers, inside your project, which design route you are on and which step comes next, and it does not let the agent jump ahead.

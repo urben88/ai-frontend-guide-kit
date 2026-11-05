@@ -152,6 +152,7 @@ Usage:
   node tools/flow.mjs next
   node tools/flow.mjs done <step> [--evidence "..."]
   node tools/flow.mjs reset
+  compose and iterate also refuse while a build decision has no piece registered in the shared library (node tools/pieces.mjs add).
 Options: --dir <project>, --json
 `;
 
