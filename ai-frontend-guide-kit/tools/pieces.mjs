@@ -19,18 +19,19 @@ import { createHash } from 'node:crypto';
 import { homedir } from 'node:os';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { catalogCandidates, matchName } from './ui-map.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
 
 const LEVELS = ['micro', 'small', 'medium', 'large'];
-const COMMANDS = ['add', 'version', 'use', 'like', 'dislike', 'note', 'show', 'list', 'index', 'personality'];
+const COMMANDS = ['add', 'version', 'use', 'like', 'dislike', 'note', 'show', 'list', 'index', 'find', 'personality'];
 const NAME_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
 // ---------------------------------------------------------------- arguments and paths
 
-const VALUE_OPTIONS = new Set(['dir', 'lib', 'level', 'file', 'summary', 'variants', 'contexts', 'composed-of', 'license', 'reason', 'version', 'variant', 'note', 'text']);
-const BOOLEAN_OPTIONS = new Set(['json', 'help', 'liked']);
+const VALUE_OPTIONS = new Set(['dir', 'lib', 'level', 'file', 'summary', 'variants', 'contexts', 'composed-of', 'license', 'reason', 'version', 'variant', 'note', 'text', 'need']);
+const BOOLEAN_OPTIONS = new Set(['json', 'help', 'liked', 'new']);
 
 /** Strict parsing: unknown options and missing values are errors (flags.error), never silently ignored. */
 function parseArgs(argv) {
@@ -82,7 +83,10 @@ const USAGE = `pieces — shared library of reusable UI pieces (micro, small, me
 Usage:
   node tools/pieces.mjs add <name> --level micro|small|medium|large --file <src>
         [--summary "..."] [--variants a,b] [--contexts x,y] [--composed-of p1,p2] [--license MIT]
-                                               register a new piece (version 1)
+        [--need "the need you searched"] [--new --reason "why no existing piece fits"]
+                                               register a new piece (version 1). Refused unless "find" ran for this
+                                               need in this project and no exact, close or same-structure piece exists;
+                                               --new --reason overrides that, and the reason is kept on record
   node tools/pieces.mjs version <name> --file <src> [--note "..."] [--variants a,b] [--contexts x,y]
                                                save a polished version; identical content is never stored twice
   node tools/pieces.mjs use <name> [--version N] [--variant v]
@@ -93,6 +97,9 @@ Usage:
   node tools/pieces.mjs show <name>            latest state first, then the history
   node tools/pieces.mjs list [--level micro|small|medium|large] [--liked] [--text "words"]
                                                ranked: liked and most used first, disliked last
+  node tools/pieces.mjs find <need> [--file <src>]
+                                               search order: own piece > new variant of a close piece > kit catalog >
+                                               new piece. Records that it ran; --file also flags a same-structure piece
   node tools/pieces.mjs index                  rebuild/refresh <lib>/index.db (SQLite + FTS5); only changed pieces are read again
   node tools/pieces.mjs personality set <key> <value>
   node tools/pieces.mjs personality show       this project's settings (spacing, image weight, ...)
@@ -481,6 +488,86 @@ async function rankedPieces(lib, { text, level, liked } = {}) {
     .map(({ row }) => row);
 }
 
+/** Pieces (latest matching version) whose source has the same structural hash. */
+async function structuralDuplicates(lib, hash) {
+  const db = await freshIndex(lib);
+  if (db) {
+    try {
+      return db.prepare('SELECT piece, MAX(n) AS version FROM versions WHERE structural = ? GROUP BY piece ORDER BY piece').all(hash).map((row) => ({ piece: row.piece, version: Number(row.version) }));
+    } finally {
+      db.close();
+    }
+  }
+  const found = [];
+  for (const name of pieceNames(lib)) {
+    const matching = (loadPiece(lib, name)?.versions ?? []).filter((version) => version.structural === hash);
+    if (matching.length > 0) found.push({ piece: name, version: Math.max(...matching.map((version) => version.n)) });
+  }
+  return found;
+}
+
+const FIND_KEEP = 200;
+
+function recordFind(root, need) {
+  const project = loadProject(root);
+  project.finds = [...project.finds, { need, ts: now() }].slice(-FIND_KEEP);
+  saveProject(root, project);
+}
+
+async function runFind(lib, root, flags) {
+  const need = flags._.slice(1).join(' ').trim();
+  if (!need) throw usageError('find needs the need you are looking for: pieces.mjs find "pricing table"');
+  const terms = queryTerms(need);
+  const own = (await rankedPieces(lib, { text: need })).map((row) => {
+    const byName = matchName(need, row.name);
+    const matched = matchedTerms(row, terms);
+    const match = byName ?? (terms.length >= 2 && matched === terms.length ? 'text' : 'related');
+    return { name: row.name, level: row.level, latest: row.latest, summary: row.summary, variants: row.variants, likes: row.likes, dislikes: row.dislikes, uses: row.uses, match };
+  });
+  const order = { exact: 0, close: 1, text: 1, related: 2 };
+  own.sort((a, b) => order[a.match] - order[b.match]);
+  const exact = own.find((piece) => piece.match === 'exact');
+  const close = own.find((piece) => piece.match === 'close' || piece.match === 'text');
+  let status = 'new';
+  let catalog = [];
+  let decision = 'nothing fits in the library or the catalog: this is a new piece. Build it as a real component with variants as props, then register it with: pieces.mjs add <name> --level micro|small|medium|large --file <src>';
+  if (exact) {
+    status = 'reuse';
+    decision = `reuse ${exact.name} (v${exact.latest}); record it with: pieces.mjs use ${exact.name}`;
+  } else if (close) {
+    status = 'variant';
+    decision = `a close piece exists: make a new variant or version of ${close.name} instead of a new piece (pieces.mjs version ${close.name} --file <src> [--variants <v>])`;
+  } else {
+    catalog = catalogCandidates(need);
+    if (catalog.length > 0) {
+      status = 'catalog';
+      decision = 'no own piece fits: adapt a catalog candidate (node tools/get.mjs <id>), then register the result with pieces.mjs add';
+    }
+  }
+  let nearDuplicates = [];
+  if (flags.file) {
+    const { text } = readSource(flags.file);
+    nearDuplicates = await structuralDuplicates(lib, structuralHash(text));
+  }
+  recordFind(root, need);
+  if (flags.json) {
+    console.log(JSON.stringify({ need, status, own, catalog, nearDuplicates, decision: `Decision: ${decision}` }, null, 2));
+    return 0;
+  }
+  console.log(`find "${need}": ${status}`);
+  if (own.length > 0) {
+    console.log('Own pieces:');
+    for (const piece of own.slice(0, 5)) console.log(`  - ${piece.name} [${piece.level}] v${piece.latest} (${piece.match}) +${piece.likes} -${piece.dislikes} used ${piece.uses}${piece.summary ? ` — ${piece.summary}` : ''}`);
+  }
+  if (catalog.length > 0) {
+    console.log('Candidates (catalog):');
+    for (const entry of catalog) console.log(`  - ${entry.id} | ${entry.name} | ${entry.category} | q${entry.quality ?? '-'}`);
+  }
+  for (const duplicate of nearDuplicates) console.log(`Warning: near-duplicate of ${duplicate.piece} v${duplicate.version} (same structure as the file given)`);
+  console.log(`Decision: ${decision}.`);
+  return 0;
+}
+
 async function runIndex(lib, root, flags) {
   if (flags._.length > 1) throw usageError(`index takes no arguments (got "${flags._.slice(1).join(' ')}")`);
   const db = await openIndex(lib);
@@ -555,6 +642,26 @@ function versionEntry(n, text, ext, note) {
 
 // ---------------------------------------------------------------- commands
 
+/** S3: a new piece is the last conclusion. Refuses without a find for the need or when an own piece already fits. */
+async function checkReuse(lib, root, name, text, flags) {
+  const need = flags.need ?? name.replace(/-/g, ' ');
+  const finds = loadProject(root).finds;
+  const searched = finds.some((entry) => (flags.need ? matchName(entry.need, flags.need) === 'exact' : matchName(entry.need, name) !== null));
+  const override = 'or, if none fits, say why: --new --reason "..."';
+  if (!searched) {
+    throw new Fail(`no find ran for "${need}" in this project. Search before creating: node tools/pieces.mjs find "${need}" (${flags.need ? 'then add with the same --need' : 'it must be about this piece'}); ${override}`);
+  }
+  for (const other of pieceNames(lib)) {
+    const match = matchName(name, other);
+    if (!match) continue;
+    throw new Fail(`"${name}" is ${match === 'exact' ? 'the same as' : 'close to'} "${other}". Reuse it (pieces.mjs use ${other}) or polish it (pieces.mjs version ${other} --file <src> [--variants <v>]); ${override}`);
+  }
+  const duplicate = (await structuralDuplicates(lib, structuralHash(text)))[0];
+  if (duplicate) {
+    throw new Fail(`the file has the same structure as "${duplicate.piece}" v${duplicate.version} (names, texts and comments aside). Reuse it (pieces.mjs use ${duplicate.piece}), add a variant (pieces.mjs version ${duplicate.piece} --file <src> --variants <v>); ${override}`);
+  }
+}
+
 async function runAdd(lib, root, flags) {
   const name = nameArg(flags, 'add');
   if (!flags.level) throw usageError('add needs --level micro|small|medium|large');
@@ -562,6 +669,9 @@ async function runAdd(lib, root, flags) {
   if (!flags.file) throw usageError('add needs --file <source file>');
   if (loadPiece(lib, name)) throw new Fail(`piece "${name}" already exists; save a polished version with: pieces.mjs version ${name} --file <src>`);
   const { text, ext } = readSource(flags.file);
+  if (flags.new && !flags.reason) throw usageError('--new needs --reason "why no existing piece fits"');
+  if (flags.reason && !flags.new) throw usageError('--reason only goes with --new');
+  if (!flags.new) await checkReuse(lib, root, name, text, flags);
   const entry = versionEntry(1, text, ext, null);
   const piece = {
     name,
@@ -572,13 +682,14 @@ async function runAdd(lib, root, flags) {
     composedOf: listOption(flags['composed-of']),
     license: flags.license ?? null,
     created: entry.ts,
+    ...(flags.new ? { newReason: flags.reason } : {}),
     latest: 1,
     versions: [entry],
   };
   mkdirSync(pieceDir(lib, name), { recursive: true });
   writeFileSync(join(pieceDir(lib, name), versionFile(entry)), text, 'utf8');
   writeJson(piecePath(lib, name), piece);
-  appendHistory(lib, { type: 'add', piece: name, version: 1, level, project: root });
+  appendHistory(lib, { type: 'add', piece: name, version: 1, level, ...(flags.new ? { reason: flags.reason } : {}), project: root });
   await afterMutation(lib);
   emit(flags, { action: 'add', piece: name, level, version: 1, file: join(pieceDir(lib, name), versionFile(entry)) },
     `pieces: added "${name}" (${level}) v1 — ${join(pieceDir(lib, name), versionFile(entry))}`);
@@ -777,6 +888,7 @@ async function main() {
     if (command === 'show') return await runShow(lib, root, flags);
     if (command === 'list') return await runList(lib, root, flags);
     if (command === 'index') return await runIndex(lib, root, flags);
+    if (command === 'find') return await runFind(lib, root, flags);
     return await runPersonality(lib, root, flags);
   } catch (error) {
     console.error(`pieces: ${error.message}`);

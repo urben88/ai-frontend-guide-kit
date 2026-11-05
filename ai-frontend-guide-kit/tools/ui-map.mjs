@@ -938,7 +938,7 @@ function runImpact(root, flags) {
   return 0;
 }
 
-function catalogCandidates(query) {
+export function catalogCandidates(query) {
   const catalogDir = process.env.KIT_CATALOG_DIR ?? join(KIT_DIR, 'catalog');
   if (!existsSync(join(catalogDir, 'sources'))) return [];
   const entries = loadEntries();

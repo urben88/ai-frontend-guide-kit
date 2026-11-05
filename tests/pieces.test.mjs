@@ -32,8 +32,10 @@ const sandbox = () => {
     return path;
   };
   const env = baseEnv({ AI_FRONTEND_PIECES: lib });
-  const run = (...args) => spawnSync(process.execPath, [TOOL, ...args, '--dir', project], { encoding: 'utf8', env });
-  return { base, lib, project, write, env, run };
+  // raw runs the command as given; run seeds `add` past the reuse guard (the guard itself is tested with raw).
+  const raw = (...args) => spawnSync(process.execPath, [TOOL, ...args, '--dir', project], { encoding: 'utf8', env });
+  const run = (...args) => (args[0] === 'add' && !args.includes('--new') ? raw(...args, '--new', '--reason', 'test seed') : raw(...args));
+  return { base, lib, project, write, env, run, raw };
 };
 const history = (lib) => {
   const path = join(lib, 'history.jsonl');
@@ -263,11 +265,11 @@ test('the library defaults to ~/.ai-frontend-guide-kit/pieces and --lib override
   mkdirSync(home);
   const env = baseEnv({ HOME: home, USERPROFILE: home });
   const file = s.write('Badge.tsx', BADGE);
-  const run = spawnSync(process.execPath, [TOOL, 'add', 'badge', '--level', 'micro', '--file', file, '--dir', s.project], { encoding: 'utf8', env });
+  const run = spawnSync(process.execPath, [TOOL, 'add', 'badge', '--level', 'micro', '--file', file, '--new', '--reason', 'test seed', '--dir', s.project], { encoding: 'utf8', env });
   assert.equal(run.status, 0, run.stderr);
   assert.ok(existsSync(join(home, '.ai-frontend-guide-kit', 'pieces', 'badge', 'piece.json')));
   const flagLib = join(s.base, 'flag-lib');
-  const viaFlag = spawnSync(process.execPath, [TOOL, 'add', 'badge', '--level', 'micro', '--file', file, '--lib', flagLib, '--dir', s.project], { encoding: 'utf8', env: baseEnv({ AI_FRONTEND_PIECES: join(s.base, 'env-lib') }) });
+  const viaFlag = spawnSync(process.execPath, [TOOL, 'add', 'badge', '--level', 'micro', '--file', file, '--new', '--reason', 'test seed', '--lib', flagLib, '--dir', s.project], { encoding: 'utf8', env: baseEnv({ AI_FRONTEND_PIECES: join(s.base, 'env-lib') }) });
   assert.equal(viaFlag.status, 0, viaFlag.stderr);
   assert.ok(existsSync(join(flagLib, 'badge', 'piece.json')));
   assert.equal(existsSync(join(s.base, 'env-lib')), false);
@@ -453,4 +455,150 @@ test('the sqlite and the file-scan engines rank identically (S6)', { skip: !sqli
   for (const extra of [[], ['--text', 'stripe'], ['--text', 'hero banner'], ['--liked'], ['--level', 'micro']]) {
     assert.deepEqual(rank(a, ...extra), rank(b, ...extra), extra.join(' '));
   }
+});
+
+// ---------------------------------------------------------------- find and the reuse guard (S3)
+
+const find = (s, need, ...extra) => s.raw('find', need, '--json', ...extra);
+const decision = (run) => JSON.parse(run.stdout);
+const heroSeed = (s) => s.run('add', 'hero-banner', '--level', 'large', '--file', s.write('Hero.tsx', BANNER), '--summary', 'Full width hero with a headline', '--variants', 'calm');
+
+test('find on an empty library ends in "new piece" and records that it ran in the project (S3)', () => {
+  const s = sandbox();
+  const run = find(s, 'zzqx frobnicator');
+  assert.equal(run.status, 0, run.stderr);
+  const result = decision(run);
+  assert.equal(result.status, 'new');
+  assert.deepEqual(result.own, []);
+  assert.deepEqual(result.catalog, []);
+  assert.match(result.decision, /new piece/);
+  const finds = projectState(s.project).finds;
+  assert.equal(finds.length, 1);
+  assert.equal(finds[0].need, 'zzqx frobnicator');
+  assert.ok(Date.parse(finds[0].ts) > 0);
+  const text = s.raw('find', 'zzqx', 'frobnicator');
+  assert.match(text.stdout, /Decision: .*new piece/);
+  assert.equal(s.raw('find').status, 2);
+});
+
+test('find prefers an exact own piece, then a new variant of a close one (S3)', () => {
+  const s = sandbox();
+  heroSeed(s);
+  const exact = decision(find(s, 'Hero Banner'));
+  assert.equal(exact.status, 'reuse');
+  assert.equal(exact.own[0].name, 'hero-banner');
+  assert.equal(exact.own[0].match, 'exact');
+  assert.match(exact.decision, /reuse hero-banner/);
+  const close = decision(find(s, 'banner'));
+  assert.equal(close.status, 'variant');
+  assert.equal(close.own[0].name, 'hero-banner');
+  assert.match(close.decision, /new variant or version of hero-banner/);
+  const byText = decision(find(s, 'headline hero'));
+  assert.equal(byText.status, 'variant');
+  assert.equal(byText.own[0].name, 'hero-banner');
+  // own pieces win: the catalog is not even consulted when an own piece fits
+  assert.deepEqual(decision(find(s, 'hero banner')).catalog, []);
+});
+
+test('find falls back to the kit catalog, and only then to a new piece (S3)', () => {
+  const s = sandbox();
+  heroSeed(s);
+  const result = decision(find(s, 'marquee'));
+  assert.equal(result.status, 'catalog');
+  assert.deepEqual(result.own, []);
+  assert.ok(result.catalog.length > 0);
+  assert.ok(result.catalog[0].id);
+  assert.match(result.decision, /catalog/);
+  const text = s.raw('find', 'marquee');
+  assert.match(text.stdout, /Candidates \(catalog\)/);
+});
+
+test('find --file flags a near-duplicate by structural hash (S7, S3)', () => {
+  const s = sandbox();
+  heroSeed(s);
+  const result = decision(find(s, 'zzqx stripe', '--file', s.write('Stripe.tsx', BANNER_RENAMED)));
+  assert.equal(result.nearDuplicates.length, 1);
+  assert.equal(result.nearDuplicates[0].piece, 'hero-banner');
+  assert.equal(result.nearDuplicates[0].version, 1);
+  const text = s.raw('find', 'zzqx stripe', '--file', join(s.base, 'src', 'Stripe.tsx'));
+  assert.match(text.stdout, /near-duplicate.*hero-banner v1/);
+  assert.deepEqual(decision(find(s, 'zzqx badge', '--file', s.write('Badge.tsx', BADGE))).nearDuplicates, []);
+});
+
+test('add refuses when find did not run for the need, and nothing is written (S3)', () => {
+  const s = sandbox();
+  const file = s.write('Table.tsx', BADGE);
+  const refused = s.raw('add', 'pricing-table', '--level', 'medium', '--file', file);
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /pieces\.mjs find "pricing table"/);
+  assert.equal(existsSync(join(s.lib, 'pricing-table')), false);
+  assert.equal(history(s.lib).length, 0);
+  // a find for another need does not count
+  find(s, 'testimonial carousel');
+  assert.equal(s.raw('add', 'pricing-table', '--level', 'medium', '--file', file).status, 1);
+  // after find for that need, add works
+  find(s, 'pricing table');
+  const ok = s.raw('add', 'pricing-table', '--level', 'medium', '--file', file);
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.ok(existsSync(join(s.lib, 'pricing-table', 'piece.json')));
+});
+
+test('add --need accepts a searched need that differs from the piece name; find is per project (S3)', () => {
+  const s = sandbox();
+  const file = s.write('Table.tsx', BADGE);
+  find(s, 'plans comparison grid');
+  assert.equal(s.raw('add', 'pricing-table', '--level', 'medium', '--file', file).status, 1);
+  const ok = s.raw('add', 'pricing-table', '--level', 'medium', '--file', file, '--need', 'plans comparison grid');
+  assert.equal(ok.status, 0, ok.stderr);
+  const other = join(s.base, 'other-project');
+  mkdirSync(other);
+  const elsewhere = spawnSync(process.execPath, [TOOL, 'add', 'plan-card', '--level', 'small', '--file', file, '--need', 'plans comparison grid', '--dir', other], { encoding: 'utf8', env: s.env });
+  assert.equal(elsewhere.status, 1);
+  assert.match(elsewhere.stderr, /find/);
+});
+
+test('add refuses a name that matches an own piece, naming it, unless --new --reason (S3)', () => {
+  const s = sandbox();
+  heroSeed(s);
+  const file = s.write('Wide.tsx', BADGE);
+  find(s, 'hero banner wide');
+  const refused = s.raw('add', 'hero-banner-wide', '--level', 'large', '--file', file);
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /close to "hero-banner"/);
+  assert.match(refused.stderr, /version hero-banner/);
+  assert.equal(existsSync(join(s.lib, 'hero-banner-wide')), false);
+  const noReason = s.raw('add', 'hero-banner-wide', '--level', 'large', '--file', file, '--new');
+  assert.equal(noReason.status, 2);
+  assert.match(noReason.stderr, /--reason/);
+  const lonelyReason = s.raw('add', 'hero-banner-wide', '--level', 'large', '--file', file, '--reason', 'x');
+  assert.equal(lonelyReason.status, 2);
+  const forced = s.raw('add', 'hero-banner-wide', '--level', 'large', '--file', file, '--new', '--reason', 'needs a different layout engine');
+  assert.equal(forced.status, 0, forced.stderr);
+  assert.equal(readJson(join(s.lib, 'hero-banner-wide', 'piece.json')).newReason, 'needs a different layout engine');
+  const event = history(s.lib).filter((e) => e.type === 'add').pop();
+  assert.equal(event.reason, 'needs a different layout engine');
+});
+
+test('add refuses a structural duplicate of an own piece, naming it (S3, S7)', () => {
+  const s = sandbox();
+  heroSeed(s);
+  find(s, 'top stripe');
+  const file = s.write('Stripe.tsx', BANNER_RENAMED);
+  const refused = s.raw('add', 'top-stripe', '--level', 'large', '--file', file);
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /same structure as "hero-banner" v1/);
+  assert.equal(existsSync(join(s.lib, 'top-stripe')), false);
+  const forced = s.raw('add', 'top-stripe', '--level', 'large', '--file', file, '--new', '--reason', 'different brand, same skeleton on purpose');
+  assert.equal(forced.status, 0, forced.stderr);
+});
+
+test('find and the guard work without node:sqlite too (S3, S6)', () => {
+  const s = sandbox();
+  s.env.AI_FRONTEND_PIECES_NO_SQLITE = '1';
+  heroSeed(s);
+  assert.equal(decision(find(s, 'banner')).status, 'variant');
+  find(s, 'hero banner wide');
+  const refused = s.raw('add', 'hero-banner-wide', '--level', 'large', '--file', s.write('Wide.tsx', BADGE));
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /close to "hero-banner"/);
 });
