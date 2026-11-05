@@ -18,8 +18,8 @@ Branch: `feat/flow-always` (from `feat/pieces`) · Delivery: the user asked to p
 
 | ID | Specs | Route | Status | Evidence |
 |----|-------|-------|--------|----------|
-| T1 | S1, S2, S3, S4 — index, routing block, `init`/`update` targets, gaps, tests, docs | delegated (resolutor, context backstop) | pending | |
-| T2 | Independent check of the installer change (Risk item 5) | delegated (analista) | pending | |
+| T1 | S1, S2, S3, S4 — index, routing block, `init`/`update` targets, gaps, tests, docs | delegated (resolutor, context backstop) | done | 4f525dc, e6deb98, 9fe67e4 |
+| T2 | Independent check of the installer change (Risk item 5) | delegated (analista) | done | S1–S4 PASS, see L5 |
 | T3 | L1 delivery: fast-forward `main` and push | inline | pending | |
 
 ## Log
@@ -27,3 +27,5 @@ Branch: `feat/flow-always` (from `feat/pieces`) · Delivery: the user asked to p
 - **L1 (2026-11-05, original request):** "Pues quiero mejorar el flujo, es decir, quiero crear una especie de índice global para que la gente siempre use esta herramienta, que esté obligado a usar siempre esta herramienta. Quiero que lo uses siempre, que siga siempre este flujo cuando hable de frontend, cuando sea crear diseño, que use este flujo. Entonces quiero que optimices y mejores el flujo para que lo pueda leer siempre el agente activo en el repositorio donde se encuentra esta herramienta. Entonces tiene que hacer modificaciones. Cuando, por ejemplo, haga un init o un update, quiero que cambie partes de documentos que guían a la gente, en este caso de Cloud o Agents o cualquier agente, para que use y esté más obligado a usar esta herramienta siempre y que nunca se lo salta. Entonces quiero esos cambios para guiar. Cuando termines, quiero que lo subas todo a main."
 - **L2 (scope):** "la gente" is read as "el agente" (dictation). "Todo" is read as `feat/pieces` plus this branch. `docs/explainer-update` stays out because it was listed as a separate decision. The parent's question about items 3 (old `build` decisions) and 4 (PascalCase piece names) was not answered, so both stay as they are and are reported as open.
 - **L3 (limit):** instruction documents guide an agent but cannot force it. Only the flow and memory refusals are enforced by code. Report this at close.
+- **L4 (T1 done):** 4f525dc (S4), e6deb98 (S1), 9fe67e4 (S2, S3). `npm test` 171/171 (parent spot check reproduced). Differential against 56b6f47: only the expected installer lines, the `Index:` line in `flow status` and help text changed. One unexplained single failure in `npm run verify` (`find --source`, "Unexpected end of JSON input"), not reproduced on rerun.
+- **L5 (T2 done):** independent verifier: S1–S4 PASS, no blockers. Not probed live: the `compose` branch of the changed-piece refusal (code at `flow.mjs:340`) and the network-dependent default install. Risk: item 5 (installer writes marked blocks into agent instruction files of host repositories).
