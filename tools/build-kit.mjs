@@ -52,6 +52,7 @@ const REQUIRED_KIT_FILES = [
   'tools/ui-map.mjs',
   'tools/flow.mjs',
   'tools/scout.mjs',
+  'tools/pieces.mjs',
   'tools/excalidraw-mcp.mjs',
   'tools/audit-honesty.mjs',
   'tools/audit-a11y.mjs',
