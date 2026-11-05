@@ -230,10 +230,23 @@ function readJsonFile(path, fallback) {
   }
 }
 
+const INDEX_IGNORE = ['index.db', 'index.db-wal', 'index.db-shm', 'index.db.broken'].map((name) => `${name}\n`).join('');
+
+/** Keeps the rebuildable SQLite index out of git: writes pieces/.gitignore once. The project's own .gitignore is never touched. */
+function ignoreIndex(dir) {
+  const path = join(dir, '.gitignore');
+  if (existsSync(path)) return;
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(path, INDEX_IGNORE, 'utf8');
+}
+
 const emptyRegistry = () => ({ version: 2, pieces: {}, used: {}, settings: {}, finds: [] });
 const registryAt = (path) => ({ ...emptyRegistry(), ...readJsonFile(path, {}) });
 const loadRegistry = (ctx) => registryAt(ctx.registry);
-const saveRegistry = (ctx, registry) => writeJson(ctx.registry, registry);
+const saveRegistry = (ctx, registry) => {
+  ignoreIndex(ctx.dir);
+  writeJson(ctx.registry, registry);
+};
 
 function requirePiece(registry, name) {
   const piece = registry.pieces[name];
@@ -243,7 +256,7 @@ function requirePiece(registry, name) {
 
 /** One JSON object per line, appended with a single write so concurrent writers never interleave. */
 function appendHistory(ctx, event) {
-  mkdirSync(ctx.dir, { recursive: true });
+  ignoreIndex(ctx.dir);
   appendFileSync(ctx.history, `${JSON.stringify({ ts: now(), ...event })}\n`, 'utf8');
 }
 
@@ -298,6 +311,8 @@ function gitInfo(root, rels) {
   const dirty = spawnSync('git', ['-C', root, 'status', '--porcelain', '--', ...rels], { encoding: 'utf8' });
   return { commit: head.stdout.trim(), ...(dirty.status === 0 && dirty.stdout.trim() ? { dirty: true } : {}) };
 }
+
+const combinedHash = (texts) => (texts.length === 1 ? sha256(texts[0]) : sha256(texts.map(sha256).join('\n')));
 
 /** The current state of a piece's files: content hashes (never the content) and the git commit when there is one. */
 function snapshot(ctx, rels) {
@@ -443,6 +458,11 @@ async function openDb(path) {
     }
   }
   return null;
+}
+
+async function openProjectDb(ctx) {
+  ignoreIndex(ctx.dir);
+  return openDb(ctx.index);
 }
 
 const asText = (json) => JSON.parse(json).join(' ');
@@ -605,7 +625,7 @@ function pushGlobal(gdb, pdb, ctx) {
 /** Project index synced, then the global references pushed. Returns null (and says so) without node:sqlite. */
 async function refreshAll(ctx) {
   registerProject(ctx);
-  const pdb = await openDb(ctx.index);
+  const pdb = await openProjectDb(ctx);
   if (!pdb) {
     sayFallback();
     return null;
@@ -721,7 +741,7 @@ function matchedTerms(row, terms) {
  * registries are scanned without node:sqlite). Unranked: see rankRows.
  */
 async function loadRows(ctx, { others = false, text } = {}) {
-  const pdb = await openDb(ctx.index);
+  const pdb = await openProjectDb(ctx);
   if (!pdb) {
     sayFallback();
     const own = registryRows({ root: ctx.root, name: ctx.name, out: ctx.out }, ctx.root);
@@ -760,7 +780,7 @@ function rankRows(rows, { text, level, liked, origin } = {}) {
 /** Pieces (latest matching version) whose source has the same structural hash, in this project and in the others. */
 async function structuralDuplicates(ctx, hash) {
   const found = [];
-  const pdb = await openDb(ctx.index);
+  const pdb = await openProjectDb(ctx);
   if (!pdb) {
     sayFallback();
     for (const item of [{ root: ctx.root, name: ctx.name, out: ctx.out }, ...registeredProjects(ctx)]) {
@@ -810,6 +830,23 @@ export function findRan(outputDir, need) {
 export function registeredPiece(name, block, outputDir) {
   const pieces = Object.keys(readJsonFile(join(outputDir, 'pieces', 'pieces.json'), {}).pieces ?? {});
   return pieces.find((piece) => (name && matchName(name, piece)) || (block && matchName(block, piece))) ?? null;
+}
+
+/** Pieces of the project (root, output folder) whose real file changed since the last recorded version. A missing file is not "changed". */
+export function changedPieces(root, outputDir) {
+  const pieces = Object.values(readJsonFile(join(outputDir, 'pieces', 'pieces.json'), {}).pieces ?? {});
+  const changed = [];
+  for (const piece of pieces) {
+    const latest = piece.versions?.at(-1);
+    if (!latest) continue;
+    try {
+      const texts = piece.files.map((file) => normalizeNewlines(readProjectFile(root, file)));
+      if (combinedHash(texts) !== latest.sha256) changed.push({ name: piece.name, version: latest.n });
+    } catch {
+      // moved or deleted: `show` reports it, the guard does not
+    }
+  }
+  return changed;
 }
 
 // ---------------------------------------------------------------- creating pieces

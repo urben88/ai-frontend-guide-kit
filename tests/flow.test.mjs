@@ -283,3 +283,50 @@ test('memory add --decision build refuses without a pieces find for the need, an
   assert.equal(ok.status, 0, ok.stderr);
   assert.match(readFileSync(out(ctx.dir, 'selections.jsonl'), 'utf8'), /"decision":"build"/);
 });
+
+// ---------------------------------------------------------------- changed pieces guard (flow-always S4b)
+
+const registerPiece = (ctx, name = 'pricing-table', file = 'PricingTable.tsx') => {
+  const path = join(ctx.dir, file);
+  writeFileSync(path, 'export const P = () => <table />;\n');
+  const added = piecesIn(ctx, 'add', name, '--level', 'medium', '--file', file, '--new', '--reason', 'test seed');
+  assert.equal(added.status, 0, added.stderr);
+  return path;
+};
+
+test('done iterate refuses while a registered piece changed since its last version, and passes after pieces version (flow-always S4b)', () => {
+  const ctx = iterateProject();
+  const path = registerPiece(ctx);
+  assert.equal(flowIn(ctx, 'done', 'iterate', '--evidence', 'built').status, 0, 'an unchanged piece does not block');
+  const again = iterateProject();
+  const file = registerPiece(again);
+  writeFileSync(file, 'export const P = () => <table className="roomy" />;\n');
+  const before = raw(again.dir);
+  const refused = flowIn(again, 'done', 'iterate', '--evidence', 'built');
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /step "iterate" cannot be marked done/);
+  assert.match(refused.stderr, /pricing-table/);
+  assert.match(refused.stderr, /node tools\/pieces\.mjs version pricing-table/);
+  assert.equal(raw(again.dir), before, 'a refusal changes nothing');
+  assert.equal(piecesIn(again, 'version', 'pricing-table', '--note', 'roomier').status, 0);
+  const ok = flowIn(again, 'done', 'iterate', '--evidence', 'built');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.ok(path);
+});
+
+test('done compose refuses a changed piece too (flow-always S4b)', () => {
+  const dir = project();
+  const lib = join(mkdtempSync(join(tmpdir(), 'flow-lib-')), 'lib');
+  const ctx = { dir, lib };
+  flowIn(ctx, 'start', 'new');
+  for (const step of ['intake', 'direction', 'ux', 'tokens']) {
+    for (const file of ['ux/REPO-CONTEXT.md', 'UI-MAP.md', 'ux/EXPERIENCE-BRIEF.md', 'ux/UX-SPEC.md', 'ux/ux-map.excalidraw', 'DESIGN.md']) put(dir, file);
+    assert.equal(flowIn(ctx, 'done', step).status, 0);
+  }
+  put(dir, 'selections.jsonl', '{"decision":"reuse"}\n');
+  const file = registerPiece(ctx);
+  writeFileSync(file, 'export const P = () => <table className="x" />;\n');
+  const refused = flowIn(ctx, 'done', 'compose');
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /step "compose".*pricing-table.*pieces\.mjs version pricing-table/s);
+});

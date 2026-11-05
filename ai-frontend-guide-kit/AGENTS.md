@@ -162,7 +162,7 @@ node tools/pieces.mjs show pricing-table                   # latest state first,
 node tools/pieces.mjs list --origin catalog                # what came from the catalog / internet / another project / generated
 ```
 
-Per project the kit keeps `ai-frontend-output/pieces/` (`pieces.json` registry with personality and usage, `history.jsonl`, `index.db`). A global index at `~/.ai-frontend-guide-kit/` (override with `AI_FRONTEND_PIECES` or `--global`) holds only references to the registered projects (project, path, hash, metadata, likes) so `find` also sees pieces of your other projects. The index is SQLite + FTS5 with SHA-256 hashes (`pieces index` rebuilds it); on Node older than 22.13 the registries are scanned instead. `memory add --decision build` needs a prior `pieces find`, and `flow done compose|iterate` needs every build registered as a piece.
+Per project the kit keeps `ai-frontend-output/pieces/` (`pieces.json` registry with personality and usage, `history.jsonl`, `index.db`, kept out of git by its own `.gitignore`). A global index at `~/.ai-frontend-guide-kit/` (override with `AI_FRONTEND_PIECES` or `--global`) holds only references to the registered projects (project, path, hash, metadata, likes) so `find` also sees pieces of your other projects. The index is SQLite + FTS5 with SHA-256 hashes (`pieces index` rebuilds it); on Node older than 22.13 the registries are scanned instead. `memory add --decision build` needs a prior `pieces find`, and `flow done compose|iterate` needs every build registered as a piece and every registered piece recorded after its last edit (`pieces version`).
 
 ## Selection memory (`ai-frontend-output/`)
 

@@ -118,7 +118,7 @@ test('the kit never stores component code: neither the project output nor the gl
   assert.deepEqual(holdsMarker(s.global), []);
   assert.deepEqual(holdsMarker(join(s.root, 'ai-frontend-output')), []);
   assert.equal(holdsMarker(join(s.root, 'src')).length, 1, 'the code stays in the project component folder');
-  const allowedOut = new Set(['pieces.json', 'history.jsonl', 'index.db']);
+  const allowedOut = new Set(['pieces.json', 'history.jsonl', 'index.db', '.gitignore']);
   for (const file of filesUnder(s.out)) assert.ok(allowedOut.has(file.slice(s.out.length + 1)), `unexpected file in the project output: ${file}`);
   const allowedGlobal = new Set(['index.db', 'projects.json']);
   for (const file of filesUnder(s.global)) assert.ok(allowedGlobal.has(file.slice(s.global.length + 1)), `unexpected file in the global dir: ${file}`);
@@ -960,4 +960,34 @@ test('get.mjs without --landed prints the same card and registers nothing (S8)',
   assert.equal(existsSync(s.global), false);
   assert.equal(JSON.parse(get(s, ENTRY, '--json').stdout).id, ENTRY);
   assert.equal(get(s, 'does-not-exist').status, 1);
+});
+
+// ---------------------------------------------------------------- index.db stays out of git (flow-always S4a)
+
+test('the pieces folder ignores index.db and its wal/shm files, and the project .gitignore is not touched', () => {
+  const p = sandbox();
+  assert.equal(spawnSync('git', ['init', '-q', p.root], { encoding: 'utf8' }).status, 0);
+  p.write('Card.tsx', BANNER);
+  const added = p.run('add', 'card', '--level', 'small', '--file', rel('Card.tsx'));
+  assert.equal(added.status, 0, added.stderr);
+  assert.equal(p.run('index').status, 0);
+  const ignore = readFileSync(join(p.out, '.gitignore'), 'utf8');
+  for (const name of ['index.db', 'index.db-wal', 'index.db-shm']) assert.ok(ignore.split('\n').includes(name), `${name} is listed`);
+  assert.equal(existsSync(join(p.root, '.gitignore')), false, 'the project .gitignore is not created');
+  for (const name of ['index.db', 'index.db-wal', 'index.db-shm']) {
+    const check = spawnSync('git', ['-C', p.root, 'check-ignore', '-q', `ai-frontend-output/pieces/${name}`], { encoding: 'utf8' });
+    assert.equal(check.status, 0, `${name} is ignored by git`);
+  }
+  const listed = spawnSync('git', ['-C', p.root, 'status', '--porcelain', '-uall'], { encoding: 'utf8' }).stdout;
+  assert.ok(!listed.includes('index.db'), listed);
+  assert.ok(listed.includes('pieces.json'), 'the registry stays visible to git');
+});
+
+test('an existing pieces/.gitignore is kept as the user left it', () => {
+  const p = sandbox();
+  mkdirSync(p.out, { recursive: true });
+  writeFileSync(join(p.out, '.gitignore'), 'custom\n');
+  p.write('Card.tsx', BANNER);
+  assert.equal(p.run('add', 'card', '--level', 'small', '--file', rel('Card.tsx')).status, 0);
+  assert.equal(readFileSync(join(p.out, '.gitignore'), 'utf8'), 'custom\n');
 });

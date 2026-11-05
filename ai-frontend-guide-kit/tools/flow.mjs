@@ -20,7 +20,7 @@
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { registeredPiece } from './pieces.mjs';
+import { changedPieces, registeredPiece } from './pieces.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -152,7 +152,8 @@ Usage:
   node tools/flow.mjs next
   node tools/flow.mjs done <step> [--evidence "..."]
   node tools/flow.mjs reset
-  compose and iterate also refuse while a build decision has no piece registered in this project (node tools/pieces.mjs add).
+  compose and iterate also refuse while a build decision has no piece registered in this project (node tools/pieces.mjs add)
+  or a registered piece changed since its last version (node tools/pieces.mjs version <name>).
 Options: --dir <project>, --json
 `;
 
@@ -305,7 +306,7 @@ function next(p) {
   console.log(describeStep(step.id));
 }
 
-/** S5: every `build` decision in selections.jsonl must resolve to a piece registered in this project. */
+/** Every `build` decision in selections.jsonl must resolve to a piece registered in this project. */
 function unregisteredBuilds(p) {
   const file = join(p.out, 'selections.jsonl');
   if (!existsSync(file)) return [];
@@ -335,6 +336,10 @@ function done(p, id, flags) {
     const unregistered = unregisteredBuilds(p);
     if (unregistered.length) {
       throw new Refusal(`step "${id}" cannot be marked done: build decision(s) with no registered piece: ${unregistered.join(', ')}. Register each with: node tools/pieces.mjs add <name> --level micro|small|medium|large --file <src> (after node tools/pieces.mjs find "<need>")`);
+    }
+    const changed = changedPieces(p.root, p.out);
+    if (changed.length) {
+      throw new Refusal(`step "${id}" cannot be marked done: piece(s) changed since their last recorded version: ${changed.map((piece) => `${piece.name} (v${piece.version})`).join(', ')}. Record each with: ${changed.map((piece) => `node tools/pieces.mjs version ${piece.name}`).join('; ')}`);
     }
   }
   if (STEPS[id].artifacts) {
