@@ -24,13 +24,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
 
 const LEVELS = ['micro', 'small', 'medium', 'large'];
-const COMMANDS = ['add', 'version', 'use', 'like', 'dislike', 'note', 'show', 'list', 'personality'];
+const COMMANDS = ['add', 'version', 'use', 'like', 'dislike', 'note', 'show', 'list', 'index', 'personality'];
 const NAME_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
 // ---------------------------------------------------------------- arguments and paths
 
-const VALUE_OPTIONS = new Set(['dir', 'lib', 'level', 'file', 'summary', 'variants', 'contexts', 'composed-of', 'license', 'reason', 'version', 'variant', 'note']);
-const BOOLEAN_OPTIONS = new Set(['json', 'help']);
+const VALUE_OPTIONS = new Set(['dir', 'lib', 'level', 'file', 'summary', 'variants', 'contexts', 'composed-of', 'license', 'reason', 'version', 'variant', 'note', 'text']);
+const BOOLEAN_OPTIONS = new Set(['json', 'help', 'liked']);
 
 /** Strict parsing: unknown options and missing values are errors (flags.error), never silently ignored. */
 function parseArgs(argv) {
@@ -91,7 +91,9 @@ Usage:
   node tools/pieces.mjs dislike <name> [--version N] [--note "..."]
   node tools/pieces.mjs note <name> "text"     free note about the piece
   node tools/pieces.mjs show <name>            latest state first, then the history
-  node tools/pieces.mjs list [--level micro|small|medium|large]
+  node tools/pieces.mjs list [--level micro|small|medium|large] [--liked] [--text "words"]
+                                               ranked: liked and most used first, disliked last
+  node tools/pieces.mjs index                  rebuild/refresh <lib>/index.db (SQLite + FTS5); only changed pieces are read again
   node tools/pieces.mjs personality set <key> <value>
   node tools/pieces.mjs personality show       this project's settings (spacing, image weight, ...)
 
@@ -102,6 +104,8 @@ Options:
   --help                 this text
 
 Names are kebab-case. A variant is a prop of the same piece, never a copy. The library history is append-only.
+Every command that changes the library refreshes index.db. Without node:sqlite (Node older than 22.13) the files are
+scanned instead and one notice is printed; the results are the same.
 The project keeps only its usage and personality in ai-frontend-output/pieces.json (or AI_FRONTEND_OUTPUT).`;
 
 // ---------------------------------------------------------------- errors and output
@@ -230,8 +234,271 @@ function statsFrom(events) {
 const emptyStats = () => ({ likes: 0, dislikes: 0, uses: 0, projects: new Set() });
 const publicStats = (stats) => ({ likes: stats.likes, dislikes: stats.dislikes, uses: stats.uses, projects: stats.projects.size });
 
-/** Called after every command that changes the library; the index (see pieces index) hooks in here. */
-function afterMutation() {}
+// ---------------------------------------------------------------- index (S6, S7): SQLite + FTS5 through node:sqlite
+
+const SQLITE_NOTICE = 'pieces: node:sqlite is unavailable (needs Node 22.13+); scanning the library files instead (no index.db)';
+let sqliteModule; // undefined: not tried yet · null: unavailable
+let noticePrinted = false;
+
+/** Loads node:sqlite once, silently. AI_FRONTEND_PIECES_NO_SQLITE=1 forces the file-scan fallback (used by the tests). */
+async function loadSqlite() {
+  if (sqliteModule !== undefined) return sqliteModule;
+  if (process.env.AI_FRONTEND_PIECES_NO_SQLITE === '1') {
+    sqliteModule = null;
+    return null;
+  }
+  const emitWarning = process.emitWarning;
+  process.emitWarning = (warning, ...rest) => (String(warning?.message ?? warning).includes('SQLite') ? undefined : emitWarning.call(process, warning, ...rest));
+  try {
+    sqliteModule = await import('node:sqlite');
+  } catch {
+    sqliteModule = null;
+  } finally {
+    process.emitWarning = emitWarning;
+  }
+  return sqliteModule;
+}
+
+function sayFallback() {
+  if (noticePrinted) return;
+  noticePrinted = true;
+  console.error(SQLITE_NOTICE);
+}
+
+const indexPath = (lib) => join(lib, 'index.db');
+const SCHEMA = `
+CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE IF NOT EXISTS pieces(name TEXT PRIMARY KEY, level TEXT, summary TEXT, variants TEXT, contexts TEXT, composed_of TEXT, license TEXT, latest INTEGER, piece_hash TEXT);
+CREATE TABLE IF NOT EXISTS versions(piece TEXT, n INTEGER, sha256 TEXT, structural TEXT, PRIMARY KEY(piece, n));
+CREATE INDEX IF NOT EXISTS versions_structural ON versions(structural);
+CREATE INDEX IF NOT EXISTS versions_sha256 ON versions(sha256);
+CREATE TABLE IF NOT EXISTS stats(piece TEXT PRIMARY KEY, likes INTEGER NOT NULL DEFAULT 0, dislikes INTEGER NOT NULL DEFAULT 0, uses INTEGER NOT NULL DEFAULT 0, last_used TEXT);
+CREATE VIRTUAL TABLE IF NOT EXISTS pieces_fts USING fts5(name, summary, variants, contexts, composed_of);
+`;
+
+/** Opens index.db and creates the schema; null when node:sqlite or FTS5 is missing. A corrupt file is replaced. */
+async function openIndex(lib) {
+  const sqlite = await loadSqlite();
+  if (!sqlite) return null;
+  mkdirSync(lib, { recursive: true });
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    let db;
+    try {
+      db = new sqlite.DatabaseSync(indexPath(lib));
+      db.exec('PRAGMA busy_timeout = 5000');
+      db.exec(SCHEMA);
+      return db;
+    } catch (error) {
+      try {
+        db?.close();
+      } catch {
+        // already closed
+      }
+      if (/fts5|no such module/i.test(String(error.message))) return null;
+      if (attempt === 1 || /locked|busy/i.test(String(error.message))) throw error;
+      renameSync(indexPath(lib), `${indexPath(lib)}.broken`);
+    }
+  }
+  return null;
+}
+
+const asText = (list) => list.join(' ');
+
+function upsertPiece(db, piece, hash) {
+  db.prepare('DELETE FROM pieces WHERE name = ?').run(piece.name);
+  db.prepare('DELETE FROM versions WHERE piece = ?').run(piece.name);
+  db.prepare('DELETE FROM pieces_fts WHERE name = ?').run(piece.name);
+  db.prepare('INSERT INTO pieces(name, level, summary, variants, contexts, composed_of, license, latest, piece_hash) VALUES (?,?,?,?,?,?,?,?,?)')
+    .run(piece.name, piece.level, piece.summary ?? '', JSON.stringify(piece.variants ?? []), JSON.stringify(piece.contexts ?? []), JSON.stringify(piece.composedOf ?? []), piece.license ?? null, piece.latest, hash);
+  for (const version of piece.versions ?? []) {
+    db.prepare('INSERT INTO versions(piece, n, sha256, structural) VALUES (?,?,?,?)').run(piece.name, version.n, version.sha256, version.structural);
+  }
+  db.prepare('INSERT INTO pieces_fts(name, summary, variants, contexts, composed_of) VALUES (?,?,?,?,?)')
+    .run(piece.name, piece.summary ?? '', asText(piece.variants ?? []), asText(piece.contexts ?? []), asText(piece.composedOf ?? []));
+}
+
+function removePiece(db, name) {
+  db.prepare('DELETE FROM pieces WHERE name = ?').run(name);
+  db.prepare('DELETE FROM versions WHERE piece = ?').run(name);
+  db.prepare('DELETE FROM pieces_fts WHERE name = ?').run(name);
+}
+
+/** Folds the history lines past the stored offset into stats; a shorter file starts over. Returns the events consumed. */
+function indexHistory(db, lib) {
+  const stored = db.prepare("SELECT value FROM meta WHERE key = 'history_bytes'").get();
+  let offset = stored ? Number(stored.value) : 0;
+  const path = historyPath(lib);
+  const buffer = existsSync(path) ? readFileSync(path) : Buffer.alloc(0);
+  if (buffer.length < offset) {
+    db.exec('DELETE FROM stats');
+    offset = 0;
+  }
+  const end = buffer.lastIndexOf(10) + 1; // only complete lines
+  let events = 0;
+  if (end > offset) {
+    for (const line of buffer.subarray(offset, end).toString('utf8').split('\n')) {
+      if (!line.trim()) continue;
+      let event;
+      try {
+        event = JSON.parse(line);
+      } catch {
+        continue;
+      }
+      events += 1;
+      if (!event.piece || !['like', 'dislike', 'use'].includes(event.type)) continue;
+      db.prepare('INSERT OR IGNORE INTO stats(piece) VALUES (?)').run(event.piece);
+      const column = event.type === 'like' ? 'likes' : event.type === 'dislike' ? 'dislikes' : 'uses';
+      db.prepare(`UPDATE stats SET ${column} = ${column} + 1${event.type === 'use' ? ', last_used = ?' : ''} WHERE piece = ?`)
+        .run(...(event.type === 'use' ? [event.ts ?? now(), event.piece] : [event.piece]));
+    }
+  }
+  db.prepare("INSERT OR REPLACE INTO meta(key, value) VALUES ('history_bytes', ?)").run(String(Math.max(offset, end)));
+  return events;
+}
+
+/** Brings index.db up to date: only pieces whose piece.json hash changed, and only the new history lines. */
+function syncIndex(db, lib) {
+  const known = new Map(db.prepare('SELECT name, piece_hash FROM pieces').all().map((row) => [row.name, row.piece_hash]));
+  const names = pieceNames(lib);
+  const result = { pieces: names.length, changed: 0, unchanged: 0, removed: 0, events: 0 };
+  db.exec('BEGIN IMMEDIATE');
+  try {
+    for (const name of names) {
+      const raw = readFileSync(piecePath(lib, name), 'utf8');
+      const hash = sha256(raw);
+      if (known.get(name) === hash) {
+        result.unchanged += 1;
+        continue;
+      }
+      const piece = readJsonFile(piecePath(lib, name), null);
+      if (!piece) continue;
+      upsertPiece(db, piece, hash);
+      result.changed += 1;
+    }
+    for (const name of known.keys()) {
+      if (names.includes(name)) continue;
+      removePiece(db, name);
+      result.removed += 1;
+    }
+    result.events = indexHistory(db, lib);
+    db.exec('COMMIT');
+  } catch (error) {
+    db.exec('ROLLBACK');
+    throw error;
+  }
+  return result;
+}
+
+/** Index refresh used by the commands that search: sqlite when available, null for the file-scan fallback. */
+async function freshIndex(lib) {
+  const db = await openIndex(lib);
+  if (!db) {
+    sayFallback();
+    return null;
+  }
+  try {
+    syncIndex(db, lib);
+  } catch (error) {
+    db.close();
+    throw error;
+  }
+  return db;
+}
+
+/** Called after every command that changes the library. A locked or broken index never fails the command itself. */
+async function afterMutation(lib) {
+  let db;
+  try {
+    db = await openIndex(lib);
+    if (!db) {
+      sayFallback();
+      return;
+    }
+    syncIndex(db, lib);
+  } catch (error) {
+    console.error(`pieces: index not refreshed (${error.message}); run: pieces.mjs index`);
+  } finally {
+    db?.close();
+  }
+}
+
+const tasteScore = (stats) => stats.likes * 3 + stats.uses - stats.dislikes * 4;
+const singularWord = (word) => (word.length > 3 && word.endsWith('s') && !word.endsWith('ss') ? word.slice(0, -1) : word);
+const wordsOf = (text) => String(text).toLowerCase().match(/[a-z0-9]+/g) ?? [];
+/** Each query word also matches its singular, as a word prefix. */
+const queryTerms = (text) => [...new Set(wordsOf(text))].map((word) => [...new Set([word, singularWord(word)])]);
+
+function summaryRow(piece, stats) {
+  return {
+    name: piece.name,
+    level: piece.level,
+    latest: piece.latest,
+    summary: piece.summary ?? '',
+    variants: piece.variants ?? [],
+    contexts: piece.contexts ?? [],
+    composedOf: piece.composedOf ?? [],
+    license: piece.license ?? null,
+    likes: stats.likes,
+    dislikes: stats.dislikes,
+    uses: stats.uses,
+  };
+}
+
+/** How many query words appear (as word prefixes) in the piece's searchable text. */
+function matchedTerms(row, terms) {
+  const words = wordsOf([row.name, row.summary, ...row.variants, ...row.contexts, ...row.composedOf].join(' '));
+  return terms.filter((forms) => forms.some((form) => words.some((word) => word.startsWith(form)))).length;
+}
+
+/**
+ * Pieces for list and find: filtered by level / liked / text, ranked by matched words, then taste
+ * (likes and uses up, dislikes down), then name. Both engines produce the same order.
+ */
+async function rankedPieces(lib, { text, level, liked } = {}) {
+  const db = await freshIndex(lib);
+  let rows;
+  if (db) {
+    try {
+      const pieces = db.prepare('SELECT p.*, COALESCE(s.likes, 0) AS likes, COALESCE(s.dislikes, 0) AS dislikes, COALESCE(s.uses, 0) AS uses FROM pieces p LEFT JOIN stats s ON s.piece = p.name').all();
+      rows = pieces.map((p) => summaryRow({ name: p.name, level: p.level, latest: p.latest, summary: p.summary, variants: JSON.parse(p.variants), contexts: JSON.parse(p.contexts), composedOf: JSON.parse(p.composed_of), license: p.license }, p));
+      if (text && queryTerms(text).length > 0) {
+        const match = queryTerms(text).flat().map((form) => `"${form}"*`).join(' OR ');
+        const hits = new Set(db.prepare('SELECT name FROM pieces_fts WHERE pieces_fts MATCH ?').all(match).map((r) => r.name));
+        rows = rows.filter((row) => hits.has(row.name) || matchedTerms(row, queryTerms(text)) > 0);
+      }
+    } finally {
+      db.close();
+    }
+  } else {
+    const stats = statsFrom(readHistory(lib));
+    rows = pieceNames(lib).map((name) => loadPiece(lib, name)).filter(Boolean).map((piece) => summaryRow(piece, stats.get(piece.name) ?? emptyStats()));
+  }
+  const terms = text ? queryTerms(text) : [];
+  const scored = rows.map((row) => ({ row, matched: terms.length > 0 ? matchedTerms(row, terms) : 0 }));
+  return scored
+    .filter(({ row, matched }) => (!level || row.level === level) && (!liked || row.likes > row.dislikes) && (terms.length === 0 || matched > 0))
+    .sort((a, b) => b.matched - a.matched || tasteScore(b.row) - tasteScore(a.row) || (a.row.name < b.row.name ? -1 : 1))
+    .map(({ row }) => row);
+}
+
+async function runIndex(lib, root, flags) {
+  if (flags._.length > 1) throw usageError(`index takes no arguments (got "${flags._.slice(1).join(' ')}")`);
+  const db = await openIndex(lib);
+  if (!db) {
+    sayFallback();
+    const count = pieceNames(lib).length;
+    emit(flags, { engine: 'files', pieces: count, changed: 0, unchanged: count, removed: 0, events: 0 }, `index: no index.db without node:sqlite; ${count} piece(s) are read from the files on demand`);
+    return 0;
+  }
+  try {
+    const result = syncIndex(db, lib);
+    emit(flags, { engine: 'sqlite', index: indexPath(lib), ...result },
+      `index: sqlite — ${result.pieces} piece(s) (${result.changed} changed, ${result.unchanged} unchanged, ${result.removed} removed), ${result.events} new history event(s) — ${indexPath(lib)}`);
+  } finally {
+    db.close();
+  }
+  return 0;
+}
 
 // ---------------------------------------------------------------- project file (S2)
 
@@ -288,7 +555,7 @@ function versionEntry(n, text, ext, note) {
 
 // ---------------------------------------------------------------- commands
 
-function runAdd(lib, root, flags) {
+async function runAdd(lib, root, flags) {
   const name = nameArg(flags, 'add');
   if (!flags.level) throw usageError('add needs --level micro|small|medium|large');
   const level = levelOption(flags.level);
@@ -312,13 +579,13 @@ function runAdd(lib, root, flags) {
   writeFileSync(join(pieceDir(lib, name), versionFile(entry)), text, 'utf8');
   writeJson(piecePath(lib, name), piece);
   appendHistory(lib, { type: 'add', piece: name, version: 1, level, project: root });
-  afterMutation(lib);
+  await afterMutation(lib);
   emit(flags, { action: 'add', piece: name, level, version: 1, file: join(pieceDir(lib, name), versionFile(entry)) },
     `pieces: added "${name}" (${level}) v1 — ${join(pieceDir(lib, name), versionFile(entry))}`);
   return 0;
 }
 
-function runVersion(lib, root, flags) {
+async function runVersion(lib, root, flags) {
   const name = nameArg(flags, 'version');
   if (!flags.file) throw usageError('version needs --file <source file>');
   const piece = requirePiece(lib, name);
@@ -337,7 +604,7 @@ function runVersion(lib, root, flags) {
       Object.assign(piece, metadata);
       writeJson(piecePath(lib, name), piece);
       appendHistory(lib, { type: 'note', piece: name, note: `metadata updated: ${Object.keys(metadata).join(', ')}`, project: root });
-      afterMutation(lib);
+      await afterMutation(lib);
     }
     emit(flags, { action: 'version', piece: name, created: false, equals: same.n, metadataUpdated: metadataChanged },
       `pieces: "${name}" unchanged: identical to v${same.n}${metadataChanged ? ' (variants/contexts/summary updated)' : ''}`);
@@ -349,13 +616,13 @@ function runVersion(lib, root, flags) {
   writeFileSync(join(pieceDir(lib, name), versionFile(candidate)), text, 'utf8');
   writeJson(piecePath(lib, name), piece);
   appendHistory(lib, { type: 'version', piece: name, version: candidate.n, sha256: candidate.sha256, ...(flags.note ? { note: flags.note } : {}), project: root });
-  afterMutation(lib);
+  await afterMutation(lib);
   emit(flags, { action: 'version', piece: name, created: true, version: candidate.n, sha256: candidate.sha256 },
     `pieces: "${name}" v${candidate.n} saved (sha256 ${shortHash(candidate.sha256)})`);
   return 0;
 }
 
-function runUse(lib, root, flags) {
+async function runUse(lib, root, flags) {
   const name = nameArg(flags, 'use');
   const piece = requirePiece(lib, name);
   const version = versionOption(flags) ?? piece.latest;
@@ -367,13 +634,13 @@ function runUse(lib, root, flags) {
   project.pieces[name] = { version, ...(flags.variant ? { variant: flags.variant } : {}), ts: now() };
   saveProject(root, project);
   appendHistory(lib, { type: 'use', piece: name, version, ...(flags.variant ? { variant: flags.variant } : {}), project: root });
-  afterMutation(lib);
+  await afterMutation(lib);
   emit(flags, { action: 'use', piece: name, version, variant: flags.variant ?? null },
     `pieces: using "${name}" v${version}${flags.variant ? ` (variant ${flags.variant})` : ''} — recorded in ${projectFile(root)}`);
   return 0;
 }
 
-function runFeedback(lib, root, flags, type) {
+async function runFeedback(lib, root, flags, type) {
   const name = nameArg(flags, type);
   const piece = requirePiece(lib, name);
   const version = versionOption(flags) ?? piece.latest;
@@ -386,19 +653,19 @@ function runFeedback(lib, root, flags, type) {
   } catch {
     // another writer holds the file
   }
-  afterMutation(lib);
+  await afterMutation(lib);
   emit(flags, { action: type, piece: name, version, ...publicStats(stats) },
     `pieces: ${type}d "${name}" v${version} (likes ${stats.likes}, dislikes ${stats.dislikes})`);
   return 0;
 }
 
-function runNote(lib, root, flags) {
+async function runNote(lib, root, flags) {
   const name = nameArg(flags, 'note');
   requirePiece(lib, name);
   const text = flags._.slice(2).join(' ').trim() || flags.note;
   if (!text) throw usageError('note needs the text: pieces.mjs note <name> "text"');
   appendHistory(lib, { type: 'note', piece: name, note: text, project: root });
-  afterMutation(lib);
+  await afterMutation(lib);
   emit(flags, { action: 'note', piece: name, note: text }, `pieces: noted "${name}"`);
   return 0;
 }
@@ -414,7 +681,7 @@ function describeEvent(event) {
   return parts.join(' ');
 }
 
-function runShow(lib, root, flags) {
+async function runShow(lib, root, flags) {
   const name = nameArg(flags, 'show');
   const piece = requirePiece(lib, name);
   const events = readHistory(lib).filter((event) => event.piece === name).reverse();
@@ -439,20 +706,16 @@ function runShow(lib, root, flags) {
   return 0;
 }
 
-function runList(lib, root, flags) {
+async function runList(lib, root, flags) {
   if (flags._.length > 1) throw usageError(`list takes no arguments (got "${flags._.slice(1).join(' ')}")`);
   if (flags.level) levelOption(flags.level);
-  const stats = statsFrom(readHistory(lib));
-  const pieces = pieceNames(lib)
-    .map((name) => loadPiece(lib, name))
-    .filter((piece) => piece && (!flags.level || piece.level === flags.level))
-    .map((piece) => ({ name: piece.name, level: piece.level, latest: piece.latest, summary: piece.summary, variants: piece.variants, ...publicStats(stats.get(piece.name) ?? emptyStats()) }));
+  const pieces = await rankedPieces(lib, { text: flags.text, level: flags.level, liked: flags.liked });
   if (flags.json) {
     console.log(JSON.stringify({ lib, pieces }, null, 2));
     return 0;
   }
   if (pieces.length === 0) {
-    console.log(`pieces: no pieces${flags.level ? ` at level ${flags.level}` : ''} in ${lib}`);
+    console.log(`pieces: no pieces${flags.level ? ` at level ${flags.level}` : ''}${flags.text ? ` matching "${flags.text}"` : ''} in ${lib}`);
     return 0;
   }
   const width = Math.max(...pieces.map((piece) => piece.name.length));
@@ -462,7 +725,7 @@ function runList(lib, root, flags) {
   return 0;
 }
 
-function runPersonality(lib, root, flags) {
+async function runPersonality(lib, root, flags) {
   const action = flags._[1];
   if (action === 'show') {
     if (flags._.length > 2) throw usageError('personality show takes no arguments');
@@ -486,7 +749,7 @@ function runPersonality(lib, root, flags) {
   throw usageError('personality needs "set <key> <value>" or "show"');
 }
 
-function main() {
+async function main() {
   const flags = parseArgs(process.argv.slice(2));
   if (flags.error) {
     console.error(`pieces: ${flags.error}\n`);
@@ -506,14 +769,15 @@ function main() {
   const lib = resolveLibrary(flags);
   const root = resolveProjectRoot(flags);
   try {
-    if (command === 'add') return runAdd(lib, root, flags);
-    if (command === 'version') return runVersion(lib, root, flags);
-    if (command === 'use') return runUse(lib, root, flags);
-    if (command === 'like' || command === 'dislike') return runFeedback(lib, root, flags, command);
-    if (command === 'note') return runNote(lib, root, flags);
-    if (command === 'show') return runShow(lib, root, flags);
-    if (command === 'list') return runList(lib, root, flags);
-    return runPersonality(lib, root, flags);
+    if (command === 'add') return await runAdd(lib, root, flags);
+    if (command === 'version') return await runVersion(lib, root, flags);
+    if (command === 'use') return await runUse(lib, root, flags);
+    if (command === 'like' || command === 'dislike') return await runFeedback(lib, root, flags, command);
+    if (command === 'note') return await runNote(lib, root, flags);
+    if (command === 'show') return await runShow(lib, root, flags);
+    if (command === 'list') return await runList(lib, root, flags);
+    if (command === 'index') return await runIndex(lib, root, flags);
+    return await runPersonality(lib, root, flags);
   } catch (error) {
     console.error(`pieces: ${error.message}`);
     if (error.code === 2) console.error(`\n${USAGE}`);
@@ -521,4 +785,4 @@ function main() {
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) process.exitCode = main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) process.exitCode = await main();
