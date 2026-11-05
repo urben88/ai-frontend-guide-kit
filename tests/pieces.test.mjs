@@ -820,3 +820,144 @@ test('adopt works from the registries without node:sqlite (S2, S6)', () => {
   assert.equal(run.status, 0, run.stderr);
   assert.equal(registry(s).pieces['hero-banner'].origin, 'project:site-a:src/components/Hero.tsx');
 });
+
+// ---------------------------------------------------------------- provenance (S8)
+
+test('add records origin, relation and license, and show prints them (S8)', () => {
+  const s = sandbox();
+  const run = s.run('add', 'shiny-text', '--level', 'micro', '--file', s.write('Shiny.tsx', BADGE), '--origin', 'catalog:magicui-text-animated-shiny-text', '--relation', 'modified', '--license', 'MIT');
+  assert.equal(run.status, 0, run.stderr);
+  assert.match(run.stdout, /\[catalog:magicui-text-animated-shiny-text, modified\]/);
+  const piece = registry(s).pieces['shiny-text'];
+  assert.equal(piece.origin, 'catalog:magicui-text-animated-shiny-text');
+  assert.equal(piece.relation, 'modified');
+  assert.equal(piece.license, 'MIT');
+  assert.equal(history(s)[0].origin, 'catalog:magicui-text-animated-shiny-text');
+  assert.match(s.run('show', 'shiny-text').stdout, /origin: catalog:magicui-text-animated-shiny-text · relation: modified · license: MIT/);
+  assert.match(s.run('list').stdout, /catalog:magicui-text-animated-shiny-text\/modified/);
+  const internet = s.run('add', 'fancy-card', '--level', 'small', '--file', s.write('Card.tsx', BANNER), '--origin', 'internet:https://example.com/card', '--relation', 'copied');
+  assert.equal(internet.status, 0, internet.stderr);
+  assert.equal(registry(s).pieces['fancy-card'].relation, 'copied');
+  const defaults = s.run('add', 'plain-badge', '--level', 'micro', '--file', s.write('Plain.tsx', SECRET_FILE));
+  assert.equal(defaults.status, 0, defaults.stderr);
+  assert.equal(registry(s).pieces['plain-badge'].origin, 'generated');
+  assert.equal(registry(s).pieces['plain-badge'].relation, 'chosen');
+});
+
+test('add rejects an unknown origin or relation without writing (S8)', () => {
+  const s = sandbox();
+  const file = s.write('X.tsx', BADGE);
+  for (const origin of ['somewhere', 'catalog:', 'internet:ftp-nope', 'project:onlyname']) {
+    const run = s.run('add', 'x-piece', '--level', 'micro', '--file', file, '--origin', origin);
+    assert.equal(run.status, 2, origin);
+    assert.match(run.stderr, /--origin must be/);
+  }
+  const relation = s.run('add', 'x-piece', '--level', 'micro', '--file', file, '--relation', 'stolen');
+  assert.equal(relation.status, 2);
+  assert.match(relation.stderr, /--relation must be/);
+  assert.equal(existsSync(join(s.out, 'pieces.json')), false);
+});
+
+test('later edits keep the origin and an adapted external piece becomes modified (S8)', () => {
+  const s = sandbox();
+  const file = s.write('Shiny.tsx', BADGE);
+  s.run('add', 'shiny-text', '--level', 'micro', '--file', file, '--origin', 'catalog:some-entry');
+  writeFileSync(file, `${BADGE}export const X = 1;\n`);
+  const run = s.run('version', 'shiny-text', '--note', 'tweaked');
+  assert.equal(run.status, 0, run.stderr);
+  const piece = registry(s).pieces['shiny-text'];
+  assert.equal(piece.origin, 'catalog:some-entry');
+  assert.equal(piece.relation, 'modified');
+  // an own generated piece stays chosen, and an explicit relation wins
+  const own = s.write('Own.tsx', SECRET_FILE);
+  s.run('add', 'own-piece', '--level', 'micro', '--file', own);
+  writeFileSync(own, `${SECRET_FILE}export const Y = 2;\n`);
+  s.run('version', 'own-piece');
+  assert.equal(registry(s).pieces['own-piece'].relation, 'chosen');
+  writeFileSync(file, `${BADGE}export const X = 2;\n`);
+  assert.equal(s.run('version', 'shiny-text', '--relation', 'copied').status, 0);
+  assert.equal(registry(s).pieces['shiny-text'].relation, 'copied');
+  assert.equal(s.run('version', 'shiny-text', '--relation', 'bogus').status, 2);
+});
+
+test('list --origin filters by catalog, internet, project or generated (S8)', () => {
+  const { s } = withDonor();
+  s.run('add', 'own-gen', '--level', 'micro', '--file', s.write('Gen.tsx', SECRET_FILE));
+  s.run('add', 'from-catalog', '--level', 'micro', '--file', s.write('Cat.tsx', BADGE), '--origin', 'catalog:abc');
+  s.run('add', 'from-web', '--level', 'small', '--file', s.write('Web.tsx', BANNER_RENAMED), '--origin', 'internet:https://example.com/x');
+  assert.equal(s.raw('adopt', 'hero-banner').status, 0);
+  const names = (origin) => jsonOf(s.run('list', '--origin', origin, '--json')).pieces.map((p) => p.name);
+  assert.deepEqual(names('generated'), ['own-gen']);
+  assert.deepEqual(names('catalog'), ['from-catalog']);
+  assert.deepEqual(names('internet'), ['from-web']);
+  assert.deepEqual(names('project'), ['hero-banner']);
+  assert.match(s.run('list', '--origin', 'catalog').stdout, /from-catalog/);
+  assert.doesNotMatch(s.run('list', '--origin', 'catalog').stdout, /own-gen/);
+  const bad = s.run('list', '--origin', 'elsewhere');
+  assert.equal(bad.status, 2);
+  assert.match(bad.stderr, /--origin filter must be/);
+  const none = s.run('list', '--origin', 'internet', '--level', 'micro');
+  assert.match(none.stdout, /no pieces.*origin internet/);
+});
+
+// ---------------------------------------------------------------- get.mjs registers what lands in the project (S8)
+
+const get = (s, ...args) => spawnSync(process.execPath, [GET, ...args], { encoding: 'utf8', env: s.env });
+const ENTRY = 'magicui-text-animated-shiny-text';
+const withIndex = (s, fn) => {
+  if (sqlite) withDb(join(s.global, 'index.db'), fn);
+};
+
+test('get.mjs --landed registers the component that landed, with origin catalog:<id> and the catalog license (S8)', () => {
+  const s = sandbox();
+  const entry = JSON.parse(get(s, ENTRY, '--json').stdout);
+  s.write('ShinyText.tsx', SECRET_FILE);
+  const run = get(s, ENTRY, '--landed', rel('ShinyText.tsx'), '--dir', s.root);
+  assert.equal(run.status, 0, run.stderr);
+  assert.match(run.stdout, new RegExp(`# ${entry.name}`), 'the decision card is still printed');
+  assert.match(run.stdout, /registered piece "shiny-text" \(small\) — catalog:magicui-text-animated-shiny-text, chosen/);
+  const piece = registry(s).pieces['shiny-text'];
+  assert.equal(piece.origin, `catalog:${ENTRY}`);
+  assert.equal(piece.relation, 'chosen');
+  assert.equal(piece.license, entry.license_type);
+  assert.deepEqual(piece.files, [rel('ShinyText.tsx')]);
+  assert.equal(piece.versions[0].sha256, sha(SECRET_FILE));
+  assert.equal(history(s)[0].origin, `catalog:${ENTRY}`);
+  assert.deepEqual(holdsMarker(s.out), []);
+  assert.deepEqual(holdsMarker(s.global), []);
+  withIndex(s, (db) => assert.equal(db.prepare('SELECT origin FROM refs WHERE name = ?').get('shiny-text').origin, `catalog:${ENTRY}`));
+});
+
+test('get.mjs --landed honors --name, --level, --relation and --json, and fails cleanly (S8)', () => {
+  const s = sandbox();
+  s.write('Whatever.tsx', SECRET_FILE);
+  const run = get(s, ENTRY, '--landed', rel('Whatever.tsx'), '--name', 'glow-text', '--level', 'micro', '--relation', 'modified', '--dir', s.root, '--json');
+  assert.equal(run.status, 0, run.stderr);
+  const out = JSON.parse(run.stdout);
+  assert.equal(out.entry.id, ENTRY);
+  assert.equal(out.piece.name, 'glow-text');
+  assert.equal(registry(s).pieces['glow-text'].level, 'micro');
+  assert.equal(registry(s).pieces['glow-text'].relation, 'modified');
+  const missing = get(s, ENTRY, '--landed', rel('Nope.tsx'), '--dir', s.root);
+  assert.equal(missing.status, 1);
+  assert.match(missing.stderr, /not found/);
+  const outside = get(s, ENTRY, '--landed', s.outside('Away.tsx', BADGE), '--dir', s.root);
+  assert.equal(outside.status, 1);
+  assert.match(outside.stderr, /outside the project/);
+  const again = get(s, ENTRY, '--landed', rel('Whatever.tsx'), '--dir', s.root);
+  assert.equal(again.status, 1);
+  assert.match(again.stderr, /already registered as piece "glow-text"/);
+  assert.deepEqual(Object.keys(registry(s).pieces), ['glow-text']);
+});
+
+test('get.mjs without --landed prints the same card and registers nothing (S8)', () => {
+  const s = sandbox();
+  const run = get(s, ENTRY);
+  assert.equal(run.status, 0, run.stderr);
+  assert.match(run.stdout, /^# /);
+  assert.match(run.stdout, /install:/);
+  assert.equal(existsSync(join(s.root, 'ai-frontend-output')), false);
+  assert.equal(existsSync(s.global), false);
+  assert.equal(JSON.parse(get(s, ENTRY, '--json').stdout).id, ENTRY);
+  assert.equal(get(s, 'does-not-exist').status, 1);
+});
