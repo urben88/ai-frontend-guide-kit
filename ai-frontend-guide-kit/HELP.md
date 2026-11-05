@@ -96,7 +96,7 @@ Read ai-frontend-guide-kit/HELP.md and tell me what this kit can do for my proje
 ```
 
 ```
-Run the kit intake: read ai-frontend-guide-kit/AGENTS.md, run tools/context.mjs and read UI-MAP.md, then declare the route in one line before touching any code.
+Run the kit intake: read ai-frontend-guide-kit/INDEX.md and ai-frontend-guide-kit/AGENTS.md, run tools/context.mjs and read UI-MAP.md, then declare the route in one line before touching any code.
 ```
 
 ```

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -329,4 +329,35 @@ test('done compose refuses a changed piece too (flow-always S4b)', () => {
   const refused = flowIn(ctx, 'done', 'compose');
   assert.equal(refused.status, 1);
   assert.match(refused.stderr, /step "compose".*pricing-table.*pieces\.mjs version pricing-table/s);
+});
+
+// ---------------------------------------------------------------- global index (flow-always S1)
+
+const INDEX = join(ROOT, 'ai-frontend-guide-kit', 'INDEX.md');
+
+test('INDEX.md is short and names every route of flow list and every tool of tools/ (flow-always S1)', () => {
+  assert.ok(existsSync(INDEX), 'ai-frontend-guide-kit/INDEX.md exists');
+  const text = readFileSync(INDEX, 'utf8').replace(/\r\n/g, '\n');
+  const lines = text.trimEnd().split('\n').length;
+  assert.ok(lines < 80, `INDEX.md has ${lines} lines; the limit is 79`);
+  const listed = spawnSync(process.execPath, [TOOL, 'list'], { encoding: 'utf8', env: cleanEnv() }).stdout;
+  const routes = [...listed.matchAll(/^### `([^`]+)`/gm)].map((match) => match[1]);
+  assert.ok(routes.length >= 8, `found ${routes.length} routes`);
+  for (const route of routes) assert.ok(text.includes(`\`${route}\``), `INDEX.md misses the route ${route}`);
+  const tools = readdirSync(join(ROOT, 'ai-frontend-guide-kit', 'tools'), { withFileTypes: true })
+    .filter((entry) => entry.isFile() && /\.(mjs|py)$/.test(entry.name))
+    .map((entry) => entry.name);
+  assert.ok(tools.length >= 10, `found ${tools.length} tools`);
+  for (const tool of tools) assert.ok(text.includes(tool), `INDEX.md misses the tool ${tool}`);
+  assert.ok(text.includes('flow.mjs status') && text.includes('pieces.mjs find'), 'names the mandatory first command and pieces find');
+  assert.ok(text.includes('guides/FLOWS.md') && text.includes('HELP.md'), 'says where the guides are');
+});
+
+test('flow status names INDEX.md, with and without an active route (flow-always S1)', () => {
+  const dir = project();
+  assert.match(flow(dir, 'status').stdout, /Index: ai-frontend-guide-kit\/INDEX\.md/);
+  flow(dir, 'start', 'iterate');
+  assert.match(flow(dir, 'status').stdout, /Index: ai-frontend-guide-kit\/INDEX\.md/);
+  const json = JSON.parse(flow(dir, 'status', '--json').stdout);
+  assert.equal(json.index, 'ai-frontend-guide-kit/INDEX.md');
 });

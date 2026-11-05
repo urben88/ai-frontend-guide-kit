@@ -25,6 +25,7 @@ import { changedPieces, registeredPiece } from './pieces.mjs';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
 const KIT_NAME = 'ai-frontend-guide-kit';
+const INDEX_FILE = `${KIT_NAME}/INDEX.md`;
 
 // Each artifact is a list of alternatives; `out:` is relative to ai-frontend-output/, `root:` to the project.
 const STEPS = {
@@ -239,6 +240,7 @@ function status(p, flags) {
   const report = {
     project: p.root,
     kit: kitInstalled ? 'installed' : 'not installed',
+    index: INDEX_FILE,
     flow: state ? { route: state.route, complete: !step, step: step ? step.id : null, position: step ? state.steps.indexOf(step) + 1 : state.steps.length, total: state.steps.length } : null,
     recorded: {
       decisions: countLines(join(p.out, 'selections.jsonl')),
@@ -251,7 +253,7 @@ function status(p, flags) {
     },
   };
   if (flags.json) return console.log(JSON.stringify(report, null, 2));
-  const lines = [`Project: ${p.root}`, `Kit: ${report.kit}${kitInstalled ? '' : ` (no ${KIT_NAME}/AGENTS.md here; run the installer to use the flow)`}`];
+  const lines = [`Project: ${p.root}`, `Kit: ${report.kit}${kitInstalled ? '' : ` (no ${KIT_NAME}/AGENTS.md here; run the installer to use the flow)`}`, `Index: ${INDEX_FILE} (read it first)`];
   if (!state) lines.push('Flow: none (declare the route with: node tools/flow.mjs start <route>)');
   else if (!step) lines.push(`Flow: ${state.route} · complete`);
   else lines.push(`Flow: ${state.route} · step ${report.flow.position}/${report.flow.total} · ${step.id}`);

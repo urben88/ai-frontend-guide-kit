@@ -11,7 +11,8 @@ Reusable-first UI workflow for AI agents. The point: **search what already exist
 
 When this kit is installed, the project contains:
 
-- `ai-frontend-guide-kit/AGENTS.md` — awareness layer (read this first).
+- `ai-frontend-guide-kit/INDEX.md` — the global index, read this first (when the flow applies, the first command, the routes, the tool for each job).
+- `ai-frontend-guide-kit/AGENTS.md` — awareness layer.
 - `ai-frontend-guide-kit/guides/00…10` — the guided workflow (router + direction + three phases + iteration).
 - `ai-frontend-guide-kit/experience/` — direction knowledge: `EXPERIENCE-DIRECTION.md`, `QUESTION-BANK.md`, `SITE-ARCHETYPES.md`, `UX-PHILOSOPHIES.md`, `STYLE-DIRECTIONS.md`, `REFERENCE-PROTOCOL.md`, `DISCOVERY-LOOP.md`, `experience-manifest.json` and `references/` (saved idea cards).
 - `ai-frontend-guide-kit/catalog/` — 4,287 reusable entries from 34 verified sources (licenses, install commands, links), plus a light index.

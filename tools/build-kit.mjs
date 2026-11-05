@@ -17,6 +17,7 @@ const CATALOG_DIR = join(KIT_DIR, 'catalog');
 const CATALOG_FILES = ['component-manifest.json', 'component-manifest.md', 'taxonomy.md', 'install-guides.md', 'schema.json', 'license-report.md', 'component-types.json'];
 const REQUIRED_KIT_FILES = [
   'AGENTS.md',
+  'INDEX.md',
   'README.md',
   'guides/00-START-HERE.md',
   'guides/01-EXPERIENCE-DIRECTION.md',

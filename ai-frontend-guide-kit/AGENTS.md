@@ -1,5 +1,7 @@
 # AI Frontend Guide
 
+**Read `INDEX.md` first: it is the single entry point (when the flow applies, the first command, the routes and the tool for each job).**
+
 This folder is a **guided, self-contained kit** for agents (and humans) that build frontend UX/UI. Its purpose: **reuse what already exists before creating anything from scratch** — and decide the experience direction before choosing visuals.
 
 ## What you have here

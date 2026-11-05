@@ -96,7 +96,7 @@ Leé ai-frontend-guide-kit/HELP.es.md y contame qué puede hacer este kit por mi
 ```
 
 ```
-Hacé el intake del kit: leé ai-frontend-guide-kit/AGENTS.md, corré tools/context.mjs y leé UI-MAP.md, y recién después declarame la ruta en una línea antes de tocar código.
+Hacé el intake del kit: leé ai-frontend-guide-kit/INDEX.md y ai-frontend-guide-kit/AGENTS.md, corré tools/context.mjs y leé UI-MAP.md, y recién después declarame la ruta en una línea antes de tocar código.
 ```
 
 ```
