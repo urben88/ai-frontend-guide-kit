@@ -19,7 +19,7 @@ Este repositorio es a la vez la 🏭 **fábrica** (pipeline de extracción + cat
 
 | | Qué | Detalle |
 |---|---|---|
-| 📚 | **Catálogo** | 32 fuentes verificadas · 4.189 entradas reutilizables · 21 categorías · puntuación de calidad, licencia e instalación por entrada · React, Vue y Svelte · `explorer.html` sin conexión |
+| 📚 | **Catálogo** | 33 fuentes verificadas · 5.480 entradas reutilizables · 21 categorías · puntuación de calidad, licencia e instalación por entrada · React, Vue y Svelte · `explorer.html` sin conexión |
 | 🧭 | **Kit guiado** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + flujo de 3 fases en guías cortas (00–13) + herramientas `find`/`get`. Autocontenido: sin build ni dependencias npm |
 | 🧠 | **Skills para agentes** | `ai-frontend-guide` (flujo), `frontend-polish` (fase 3), `frontend-refactor` (FSD, solo a pedido), `ux-map` (mapa visual de pantallas) y 16 skills UX incluidas (`userflow` + 15 `flow-*`, MIT) |
 | 🧭 | **Flujo de diseño** | `flow.mjs` guarda la ruta y el paso actual de cada proyecto y no deja saltar pasos; `guides/FLOWS.md` lista todas las rutas |
@@ -213,7 +213,7 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # vis
 │   ├── AGENTS.md · README.md · VERIFICATION.md
 │   ├── guides/00..10         # dirección de experiencia + flujo UX/UI "reutilizar primero"
 │   ├── experience/           # arquetipos, filosofías, estilos, banco de preguntas, bucle de descubrimiento, fichas de referencia + experience-manifest.json
-│   ├── catalog/              # índice + taxonomía + guías de instalación + 32 fuentes + explorer.html + license-report.md
+│   ├── catalog/              # índice + taxonomía + guías de instalación + 33 fuentes + explorer.html + license-report.md
 │   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp · audit-honesty · audit-a11y · audit-perf
 ├── skills/                   # ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + 16 skills UX incluidas (MIT)
 ├── manifest/                 # fuente de verdad del catálogo (generado)

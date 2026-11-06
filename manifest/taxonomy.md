@@ -66,6 +66,9 @@ Application and Marketing categories map per component type (accordions→`faq`;
 ### motion-primitives
 Core: accordion→`micro-interactions`; animated background→`backgrounds-effects`; animated group→`micro-interactions`; border trail→`backgrounds-effects`; carousel→`media`; cursor→`micro-interactions`; dialog→`overlay`; disclosure→`micro-interactions`; in view→`micro-interactions`; infinite slider→`media`; transition panel→`micro-interactions`. Text Effects→`text`. Number Effects→`text`. Interactive Elements: dock→`navigation`; glow effect→`backgrounds-effects`; image comparison→`media`; scroll progress→`feedback`; spotlight→`backgrounds-effects`; spinning text→`text`; tilt→`micro-interactions`. Toolbars→`navigation`. Advanced Effects: magnetic→`micro-interactions`; morphing dialog/popover→`overlay`; progressive blur→`backgrounds-effects`.
 
+### reui
+Examples map by component page: data-grid/table/chart/timeline/gantt/kanban/event-calendar/code-block/file-type/icon-tile/icon-stack/card/avatar/badge→`data-display`; filters/input/select/combobox/calendar/date-selector/time-picker/autocomplete/cascader/color-picker/emoji-picker/phone-input/number-field/rating/signature-pad/file-upload→`forms`; stepper/tree/scrollspy/breadcrumb/pagination/tabs/sidebar→`navigation`; frame→`layout`; trace/message/bubble/attachment→`ai-surfaces`; sortable→`micro-interactions`; other shadcn names follow the shadcn mapping.
+
 ### agentskit
 Collections: AI Elements→`ai-surfaces`; Generated results & runtime controls→`ai-surfaces`; Voice→`ai-surfaces`; App examples→`blocks-sections`; source collections (Beautiful UI, beUI, Blocks.so, BoardUI, Libraries.dev, Prompt Kit, ElevenLabs, LiveKit, OrbKit, v0.1 compatibility)→map per component type using the same rules as above, defaulting to `ai-surfaces` when the component is an agent interaction surface.
 

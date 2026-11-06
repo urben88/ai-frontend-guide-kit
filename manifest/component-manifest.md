@@ -1,6 +1,6 @@
 # Component Manifest
 
-Light index of 4189 reusable UI entries across 32 sources. Generated 2026-11-06.
+Light index of 5480 reusable UI entries across 33 sources. Generated 2026-11-06.
 
 **Rule:** consult this catalog before writing any component from scratch. Filter with `find`, inspect with `get`, then follow `guides/06-REUSE.md`.
 
@@ -35,6 +35,7 @@ Light index of 4189 reusable UI entries across 32 sources. Generated 2026-11-06.
 | React Aria Components | 51 | Apache-2.0 | complete (react-aria-components source files) | `sources/reactaria.json` |
 | React Bits | 213 | MIT + Commons Clause (use in products; no resale of the components) | complete (one entry per component, TS + Tailwind variant) | `sources/reactbits.json` |
 | Curated resources | 10 | Per resource: icon sets MIT/ISC, illustrations with custom terms, paid kits proprietary. See each entry. | curated: icon sets, illustrations, design-tool libraries and paid UI kits (reference level) | `sources/resources.json` |
+| ReUI | 1291 | MIT (free examples and primitives); Pro blocks, icons and templates need a paid license and are not indexed | every free example (c-*) plus the top-level ReUI primitives; Pro blocks (meta.group) and hooks excluded | `sources/reui.json` |
 | shadcn/ui | 160 | MIT | complete (registry:ui items + official registry:block items) | `sources/shadcn.json` |
 | shadcn-svelte | 203 | MIT | complete (registry:ui + registry:block) | `sources/shadcnsvelte.json` |
 | shadcn-vue | 66 | MIT | complete (registry:ui) | `sources/shadcnvue.json` |
@@ -45,18 +46,18 @@ Light index of 4189 reusable UI entries across 32 sources. Generated 2026-11-06.
 
 | Category | Entries |
 |---|---|
-| micro-interactions | 759 |
-| forms | 687 |
-| data-display | 644 |
-| feedback | 322 |
-| navigation | 290 |
-| ai-surfaces | 238 |
-| overlay | 200 |
+| forms | 1127 |
+| data-display | 921 |
+| micro-interactions | 907 |
+| feedback | 410 |
+| navigation | 399 |
+| ai-surfaces | 299 |
+| overlay | 288 |
+| layout | 209 |
 | backgrounds-effects | 194 |
 | text | 143 |
-| layout | 140 |
 | blocks-sections | 130 |
-| media | 118 |
+| media | 129 |
 | features | 53 |
 | testimonials | 53 |
 | cta | 48 |

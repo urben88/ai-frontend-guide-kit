@@ -16,6 +16,7 @@ const SOURCE_SCRIPTS = {
   shadcn: ['extract/registry.mjs', 'shadcn'],
   coss: ['extract/registry.mjs', 'coss'],
   motionprimitives: ['extract/registry.mjs', 'motion'],
+  reui: ['extract/registry.mjs', 'reui'],
   tailblocks: ['extract/github-raw.mjs', 'tailblocks'],
   hyperui: ['extract/github-raw.mjs', 'hyperui'],
   floatui: ['extract/github-raw.mjs', 'floatui'],

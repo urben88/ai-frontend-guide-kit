@@ -131,3 +131,21 @@ test('assets category holds icon sets and illustrations with license evidence', 
   for (const expected of ['Lucide Icons', 'Heroicons', 'Tabler Icons', 'Phosphor Icons', 'unDraw', 'Storyset']) assert.ok(names.includes(expected), expected);
   assert.ok(results.every((r) => (r.manual_steps ?? []).some((s) => s.startsWith('License evidence:'))));
 });
+
+test('reui indexes the free MIT examples and primitives and leaves Pro blocks out', () => {
+  const doc = JSON.parse(readFileSync(join(ROOT, 'manifest', 'sources', 'reui.json'), 'utf8'));
+  assert.ok(doc.entries.length >= 1200, `reui has ${doc.entries.length} entries`);
+  for (const e of doc.entries) {
+    assert.equal(e.license_type, 'MIT', e.id);
+    assert.equal(e.free, true, e.id);
+    assert.match(e.install_command, /^npx shadcn@latest add @reui\/[a-z0-9-]+$/, e.id);
+    assert.match(e.docs_url, /^https:\/\/reui\.io\/(components|docs)\//, e.id);
+  }
+  // Pro blocks (agent-activity-*, data-grid-editing-*, ...) need a license and must not be indexed.
+  assert.ok(doc.entries.every((e) => !/@reui\/(agent-activity|data-grid-editing|app-shell)-\d/.test(e.install_command)));
+  assert.ok(doc.entries.some((e) => e.install_command === 'npx shadcn@latest add @reui/data-grid'), 'primitive data-grid');
+  const run = spawnSync(process.execPath, [join(KIT, 'tools', 'find.mjs'), '--text', 'data grid', '--source', 'reui', '--limit', '3', '--json'], { encoding: 'utf8' });
+  assert.equal(run.status, 0, run.stderr);
+  const json = JSON.parse(run.stdout);
+  assert.ok(json.results.length > 0 && json.results.every((r) => r.id.startsWith('reui-')));
+});

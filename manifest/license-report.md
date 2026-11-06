@@ -31,6 +31,7 @@ Generated 2026-11-06 by `node tools/check-licenses.mjs`. Declared = license_type
 | reactaria | adobe/react-spectrum | Apache-2.0 | Apache-2.0 | match |
 | reactbits | DavidHDev/react-bits | custom | MIT + Commons Clause | match |
 | resources | - | proprietary, MIT, custom | per-entry | verify each entry |
+| reui | keenthemes/reui | MIT | MIT | match |
 | shadcn | shadcn-ui/ui | MIT | MIT | match |
 | shadcnsvelte | huntabyte/shadcn-svelte | MIT | MIT | match |
 | shadcnvue | unovue/shadcn-vue | MIT | MIT | match |

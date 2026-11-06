@@ -117,6 +117,15 @@ Per-source instructions: prerequisites, exact install commands, how to get the c
 - **Stack / Tailwind:** React/Next.js + Tailwind + Motion.
 - **License / limits:** MIT (core). Pro sections/templates are a separate paid product.
 
+## ReUI
+
+- **Catalog:** https://reui.io/components (1,264 free examples on 87 component pages, plus 27 ReUI primitives such as Data Grid, Filters, Frame, Stepper, Kanban and Gantt).
+- **Install:** `npx shadcn@latest add @reui/<name>` (the `@reui` namespace is in the shadcn registry directory); examples are named `c-<component>-<n>`, for example `npx shadcn@latest add @reui/c-data-grid-1`.
+- **Get the code:** the CLI writes the example and pulls the shadcn/ui and ReUI components it uses; each page also shows the code.
+- **Dependencies:** per example (for example `@tanstack/react-table` for data grids); listed on each entry.
+- **Stack / Tailwind:** React/Next.js + Tailwind, shadcn/ui CSS variables.
+- **License / limits:** MIT for the free examples and primitives. The 678 Pro blocks, icons and templates need a paid license (HTTP 401 from the registry) and are not indexed.
+
 ## Agents Kit
 
 - **Catalog:** https://agents-ui.github.io/agents-kit/components (224 registry blocks)

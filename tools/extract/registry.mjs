@@ -2,9 +2,9 @@
  * Extraction: registry-json channel (shadcn-compatible registries).
  * Sources: Magic UI (MIT), Aceternity UI (free tier, proprietary),
  *          shadcn/ui (MIT), coss ui + legacy Origin UI (MIT components),
- *          Motion Primitives (MIT core).
+ *          Motion Primitives (MIT core), ReUI (MIT free tier).
  *
- * Usage: node tools/extract/registry.mjs [magicui|aceternity|shadcn|coss|motion|all]
+ * Usage: node tools/extract/registry.mjs [magicui|aceternity|shadcn|coss|motion|reui|all]
  */
 import {
   fetchJSON,
@@ -499,9 +499,151 @@ async function extractMotionPrimitives() {
   );
 }
 
+// ReUI component pages whose slug is not a shadcn/ui component name.
+const REUI_CATEGORY = {
+  autocomplete: 'forms',
+  cascader: 'forms',
+  'code-block': 'data-display',
+  'color-picker': 'forms',
+  'data-grid': 'data-display',
+  'date-selector': 'forms',
+  'emoji-picker': 'forms',
+  'event-calendar': 'data-display',
+  'file-type': 'data-display',
+  'file-upload': 'forms',
+  filters: 'forms',
+  frame: 'layout',
+  gantt: 'data-display',
+  'icon-stack': 'data-display',
+  'icon-tile': 'data-display',
+  kanban: 'data-display',
+  'number-field': 'forms',
+  'phone-input': 'forms',
+  rating: 'forms',
+  scrollspy: 'navigation',
+  'signature-pad': 'forms',
+  sortable: 'micro-interactions',
+  stepper: 'navigation',
+  'time-picker': 'forms',
+  timeline: 'data-display',
+  trace: 'ai-surfaces',
+  tree: 'navigation',
+};
+
+const reuiCategory = (slug) => REUI_CATEGORY[slug] ?? shadcnCategory(slug);
+const words = (text) => slugify(text).split('-').filter((w) => w.length > 2);
+
+async function extractReUI() {
+  const { data } = await fetchJSON('https://reui.io/r/registry.json');
+  const items = data.items ?? [];
+  // Component pages listed on the catalog index; any other /components/<slug> URL is a catch-all 200.
+  const index = (await fetchText('https://reui.io/components')).text;
+  const pages = new Set([...index.matchAll(/href="\/components\/([a-z0-9-]+)"/g)].map((m) => m[1]));
+  if (pages.size < 50) throw new Error(`reui: only ${pages.size} component pages found on https://reui.io/components`);
+  const docsFor = (slug) => (pages.has(slug) ? `https://reui.io/components/${slug}` : 'https://reui.io/components');
+  const deps = (item) => [...new Set((item.dependencies ?? []).filter((d) => d !== 'cn'))];
+  const install = (name) => `npx shadcn@latest add @reui/${name}`;
+  const entries = [];
+
+  // Pro blocks carry meta.group (ai-agents, application, data-grid, ...) and need a license (HTTP 401): skip them.
+  const pro = items.filter((item) => item.type === 'registry:block' && item.meta?.group);
+  const examples = items.filter((item) => item.type === 'registry:block' && !item.meta?.group && /^c-/.test(item.name));
+  for (const item of examples) {
+    const slug = item.name.replace(/^c-/, '').replace(/-\d+$/, '');
+    const category = reuiCategory(slug);
+    const label = item.meta?.label ?? titleCase(item.name);
+    const uses = (item.registryDependencies ?? []).map((d) => d.replace(/^@reui\//, ''));
+    entries.push(
+      buildEntry({
+        id: `reui-${category}-${slugify(item.name.replace(/^c-/, ''))}`,
+        name: `ReUI ${titleCase(slug)}: ${label}`,
+        source: 'ReUI',
+        entryType: 'component',
+        category,
+        description: truncate(item.description || item.title || `${label} ${titleCase(slug)} example from ReUI.`),
+        useCase: USE_BY_CATEGORY[category],
+        decisionHints: [
+          'Ready shadcn/ui composition in a real context: install it and adapt the data and copy',
+          ...(uses.length > 0 ? [`Pulls ${uses.join(', ')}`] : []),
+        ],
+        searchTags: [...new Set(['reui', 'shadcn', 'example', ...slug.split('-'), ...words(label), ...words(item.title ?? ''), ...uses])],
+        docsUrl: docsFor(slug),
+        registryUrl: `https://reui.io/r/${item.name}.json`,
+        stack: ['react', 'tailwind'],
+        dependencies: deps(item),
+        installMethod: 'shadcn-cli',
+        installCommand: install(item.name),
+        licenseType: 'MIT',
+        commercialUse: true,
+        free: true,
+      }),
+    );
+  }
+
+  // Top-level ReUI primitives; sub-modules such as data-grid-table or cascader-lib come in with their parent.
+  const uiItems = items.filter((item) => item.type === 'registry:ui');
+  const uiNames = new Set(uiItems.map((item) => item.name));
+  const isPart = (name) => [...uiNames].some((other) => other !== name && name.startsWith(`${other}-`));
+  const primitives = uiItems.filter((item) => !isPart(item.name));
+  for (const item of primitives) {
+    const category = reuiCategory(item.name);
+    const display = item.title || titleCase(item.name);
+    const parts = uiItems.filter((other) => other.name.startsWith(`${item.name}-`)).map((other) => other.name);
+    entries.push(
+      buildEntry({
+        id: `reui-${category}-${slugify(item.name)}-primitive`,
+        name: `ReUI ${display}`,
+        source: 'ReUI',
+        entryType: 'component',
+        category,
+        description: truncate(item.description || `${display} primitive from ReUI, a free shadcn/ui-compatible component (MIT) with many ready examples.`),
+        useCase: USE_BY_CATEGORY[category],
+        decisionHints: ['Base primitive: prefer one of its ReUI examples when it already matches the screen'],
+        searchTags: [...new Set(['reui', 'shadcn', 'primitive', ...item.name.split('-'), ...parts.flatMap((p) => p.split('-'))])],
+        docsUrl: docsFor(item.name),
+        registryUrl: `https://reui.io/r/${item.name}.json`,
+        stack: ['react', 'tailwind'],
+        dependencies: deps(item),
+        installMethod: 'shadcn-cli',
+        installCommand: install(item.name),
+        variants: parts,
+        licenseType: 'MIT',
+        commercialUse: true,
+        free: true,
+      }),
+    );
+  }
+
+  // Control probe: a Pro block must answer 401; a free example must answer 200.
+  const [proProbe, freeProbe] = await Promise.all([
+    pro[0] ? fetchText(`https://reui.io/r/${pro[0].name}.json`, { timeout: 15000, retries: 1 }).then((r) => r.status, () => 'error') : 'none',
+    examples[0] ? fetchText(`https://reui.io/r/${examples[0].name}.json`, { timeout: 15000, retries: 1 }).then((r) => r.status, () => 'error') : 'none',
+  ]);
+  console.log(`reui: ${examples.length} free examples + ${primitives.length} primitives kept, ${pro.length} Pro blocks skipped (control probes: Pro ${proProbe}, free ${freeProbe})`);
+
+  return writeSource(
+    'reui',
+    {
+      sourceName: 'ReUI',
+      sourceUrl: 'https://reui.io',
+      catalogUrl: 'https://reui.io/components',
+      licenseSummary: 'MIT (free examples and primitives); Pro blocks, icons and templates need a paid license and are not indexed',
+      granularity: 'every free example (c-*) plus the top-level ReUI primitives; Pro blocks (meta.group) and hooks excluded',
+      extraction: {
+        channel: 'registry-json',
+        method: 'Node script downloading the public shadcn registry; Pro blocks detected by meta.group and confirmed by an HTTP 401 control probe',
+        evidence_url: 'https://reui.io/r/registry.json',
+        note: 'Pricing page: 1,264 free examples under MIT; 678 Pro blocks behind a license (https://reui.io/pricing).',
+      },
+    },
+    entries,
+  );
+}
+
 const target = process.argv[2] ?? 'all';
 if (target === 'all' || target === 'magicui') await extractMagicUI();
 if (target === 'all' || target === 'aceternity') await extractAceternity();
 if (target === 'all' || target === 'shadcn') await extractShadcn();
 if (target === 'all' || target === 'coss') await extractCoss();
 if (target === 'all' || target === 'motion') await extractMotionPrimitives();
+if (target === 'all' || target === 'reui') await extractReUI();

@@ -18,6 +18,7 @@ const REPOS = {
   shadcn: ['shadcn-ui/ui'],
   magicui: ['magicuidesign/magicui'],
   motionprimitives: ['ibelick/motion-primitives'],
+  reui: ['keenthemes/reui'],
   hyperui: ['markmead/hyperui'],
   daisyui: ['saadeghi/daisyui'],
   preline: ['htmlstreamofficial/preline'],
