@@ -34,6 +34,8 @@ const REPOS = {
   antd: ['ant-design/ant-design'],
   radix: ['radix-ui/primitives'],
   headlessui: ['tailwindlabs/headlessui'],
+  flowbitereact: ['themesberg/flowbite-react'],
+  tabler: ['tabler/tabler'],
   mantineui: ['mantinedev/ui.mantine.dev'],
   kiboui: ['haydenbleasel/kibo-ui', 'kibo-ui/kibo', 'shadcnblocks/kibo', 'haydenbleasel/kibo'],
   shadcnvue: ['unovue/shadcn-vue'],

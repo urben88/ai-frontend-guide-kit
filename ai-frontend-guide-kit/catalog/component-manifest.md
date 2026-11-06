@@ -1,6 +1,6 @@
 # Component Manifest
 
-Light index of 7156 reusable UI entries across 36 sources. Generated 2026-11-06.
+Light index of 7358 reusable UI entries across 39 sources. Generated 2026-11-06.
 
 **Rule:** consult this catalog before writing any component from scratch. Filter with `find`, inspect with `get`, then follow `guides/06-REUSE.md`.
 
@@ -23,8 +23,10 @@ Light index of 7156 reusable UI entries across 36 sources. Generated 2026-11-06.
 | DaisyUI | 68 | MIT (library); templates/charts/Figma assets sold separately | complete (68 components) | `sources/daisyui.json` |
 | Design Systems Repo | 26 | Directory has no declared content license; each indexed system keeps its own | complete (26 design systems) | `sources/dsr.json` |
 | Float UI | 198 | Custom Float UI license (not MIT/OSI; commercial end products allowed) | complete (192 components) | `sources/floatui.json` |
+| Flowbite React | 37 | MIT (open-source components); Flowbite Pro blocks and templates are paid | one entry per docs page of flowbite-react (components, forms, typography) | `sources/flowbitereact.json` |
 | Headless UI | 16 | MIT | public components of @headlessui/react (docs URLs verified) | `sources/headlessui.json` |
 | HyperUI | 266 | MIT | curated: top 5 per category (540 total in source) | `sources/hyperui.json` |
+| IndoUI | 39 | Custom free license: copy, modify and use in personal or commercial projects (not OSI) | one entry per component page of the sitemap (each page holds several variants) | `sources/indoui.json` |
 | Kibo UI | 40 | MIT (verified from the shadcnblocks/kibo repo license.md) | complete (all registry:ui items) | `sources/kiboui.json` |
 | Magic UI | 78 | MIT (components); Pro templates have a separate license | complete (all registry:ui items) | `sources/magicui.json` |
 | Mantine | 108 | MIT | complete (components of @mantine/core) | `sources/mantine.json` |
@@ -41,6 +43,7 @@ Light index of 7156 reusable UI entries across 36 sources. Generated 2026-11-06.
 | Shadcn Space | 647 | MIT (free blocks and components); Pro blocks, pages and templates are paid and not indexed | every free registry:block and registry:component item (isPro false) | `sources/shadcnspace.json` |
 | shadcn-svelte | 203 | MIT | complete (registry:ui + registry:block) | `sources/shadcnsvelte.json` |
 | shadcn-vue | 66 | MIT | complete (registry:ui) | `sources/shadcnvue.json` |
+| Tabler | 126 | MIT | one entry per page of the Tabler preview (dashboards, layouts, forms, components); preview URLs verified | `sources/tabler.json` |
 | Tailblocks | 63 | MIT | complete (all 63 free blocks) | `sources/tailblocks.json` |
 | Uiable | 948 | MIT (Community tier); Pro blocks, templates and dashboards are paid and not indexed | every registry:ui and registry:block item of the public Community registry (themes excluded) | `sources/uiable.json` |
 | Uiverse | 300 | MIT (all community elements; author copyright notices apply) | curated: top 30 per category across 10 categories (~4.268 elements upstream) | `sources/uiverse.json` |
@@ -49,27 +52,27 @@ Light index of 7156 reusable UI entries across 36 sources. Generated 2026-11-06.
 
 | Category | Entries |
 |---|---|
-| forms | 1533 |
-| data-display | 1186 |
-| micro-interactions | 1066 |
-| feedback | 578 |
-| navigation | 571 |
-| overlay | 396 |
+| forms | 1568 |
+| data-display | 1232 |
+| micro-interactions | 1077 |
+| feedback | 589 |
+| navigation | 586 |
+| overlay | 406 |
 | ai-surfaces | 366 |
-| layout | 318 |
+| layout | 349 |
 | backgrounds-effects | 221 |
-| blocks-sections | 180 |
-| text | 169 |
-| media | 162 |
-| features | 81 |
-| testimonials | 70 |
-| hero | 62 |
-| cta | 60 |
-| pricing | 52 |
-| faq | 48 |
+| blocks-sections | 186 |
+| media | 177 |
+| text | 171 |
+| features | 83 |
+| testimonials | 72 |
+| hero | 64 |
+| cta | 63 |
+| pricing | 58 |
+| faq | 50 |
 | design-system | 28 |
 | assets | 7 |
-| template | 2 |
+| template | 5 |
 
 ## How to query
 

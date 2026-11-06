@@ -72,6 +72,9 @@ Examples map by component page: data-grid/table/chart/timeline/gantt/kanban/even
 ### shadcnspace, blocksso, uiable
 Section and screen names first: hero→`hero`; pricing/compare/coupon→`pricing`; testimonial/clientele/logo cloud→`testimonials`; faq→`faq`; cta/newsletter/waitlist/download→`cta`; feature/bento/integration/process/services→`features`; chat/message/attachment→`ai-surfaces`; form layouts and auth screens→`forms`; dashboard shell/layout/footer/empty/error pages→`layout`; navbar/topbar/sidebar/tabs→`navigation`; dialogs/sheets/command menus→`overlay`; tables/charts/stats/widgets/timelines/product screens/code blocks→`data-display`; gallery/carousel/marquee→`media`. Component variants follow the same keywords.
 
+### flowbitereact, tabler, indoui
+Flowbite React: docs pages by component type (sidebar/mega-menu→`navigation`; footer/hr→`layout`; blockquote/list→`text`; floating-label/rating→`forms`). Tabler: `layout-*`/error/typography→`layout`; `dashboard-*`→`template`; auth and form pages→`forms`; charts/tables/cards/lists→`data-display`; maps/gallery→`media`; icon, flag and illustration showcases are not indexed. IndoUI: page name keywords (hero/headers→`hero`; cards/badge→`data-display`; footers/404→`layout`).
+
 ### agentskit
 Collections: AI Elements→`ai-surfaces`; Generated results & runtime controls→`ai-surfaces`; Voice→`ai-surfaces`; App examples→`blocks-sections`; source collections (Beautiful UI, beUI, Blocks.so, BoardUI, Libraries.dev, Prompt Kit, ElevenLabs, LiveKit, OrbKit, v0.1 compatibility)→map per component type using the same rules as above, defaulting to `ai-surfaces` when the component is an agent interaction surface.
 

@@ -43,6 +43,9 @@ const SOURCE_SCRIPTS = {
   antd: ['extract/ui-libraries.mjs', 'antd'],
   radix: ['extract/ui-libraries.mjs', 'radix'],
   headlessui: ['extract/ui-libraries.mjs', 'headlessui'],
+  flowbitereact: ['extract/ui-libraries.mjs', 'flowbitereact'],
+  tabler: ['extract/ui-libraries.mjs', 'tabler'],
+  indoui: ['extract/indoui.mjs'],
   mantineui: ['extract/ui-libraries.mjs', 'mantineui'],
   resources: ['extract/resources.mjs'],
 };

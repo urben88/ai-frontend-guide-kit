@@ -19,8 +19,10 @@ Generated 2026-11-06 by `node tools/check-licenses.mjs`. Declared = license_type
 | daisyui | saadeghi/daisyui | MIT | MIT | match |
 | dsr | - | unknown | per-entry | verify each entry |
 | floatui | - | custom | per-entry | verify each entry |
+| flowbitereact | themesberg/flowbite-react | MIT | MIT | match |
 | headlessui | tailwindlabs/headlessui | MIT | MIT | match |
 | hyperui | markmead/hyperui | MIT | MIT | match |
+| indoui | - | custom | per-entry | verify each entry |
 | kiboui | shadcnblocks/kibo | MIT | MIT | match |
 | magicui | magicuidesign/magicui | MIT | MIT | match |
 | mantine | mantinedev/mantine | MIT | MIT | match |
@@ -37,6 +39,7 @@ Generated 2026-11-06 by `node tools/check-licenses.mjs`. Declared = license_type
 | shadcnspace | shadcnspace/shadcnspace | MIT | MIT | match |
 | shadcnsvelte | huntabyte/shadcn-svelte | MIT | MIT | match |
 | shadcnvue | unovue/shadcn-vue | MIT | MIT | match |
+| tabler | tabler/tabler | MIT | MIT | match |
 | tailblocks | mertJF/tailblocks | MIT | MIT | match |
 | uiable | codedthemes/uiable | MIT | MIT | match |
 | uiverse | uiverse-io/galaxy | MIT | MIT | match |

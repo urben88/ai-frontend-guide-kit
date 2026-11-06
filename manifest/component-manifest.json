@@ -2,30 +2,30 @@
   "schema_version": "1.0",
   "generated_at": "2026-11-06",
   "totals": {
-    "sources": 36,
-    "entries": 7156,
+    "sources": 39,
+    "entries": 7358,
     "categories": {
-      "forms": 1533,
-      "data-display": 1186,
-      "micro-interactions": 1066,
-      "feedback": 578,
-      "navigation": 571,
-      "overlay": 396,
+      "forms": 1568,
+      "data-display": 1232,
+      "micro-interactions": 1077,
+      "feedback": 589,
+      "navigation": 586,
+      "overlay": 406,
       "ai-surfaces": 366,
-      "layout": 318,
+      "layout": 349,
       "backgrounds-effects": 221,
-      "blocks-sections": 180,
-      "text": 169,
-      "media": 162,
-      "features": 81,
-      "testimonials": 70,
-      "hero": 62,
-      "cta": 60,
-      "pricing": 52,
-      "faq": 48,
+      "blocks-sections": 186,
+      "media": 177,
+      "text": 171,
+      "features": 83,
+      "testimonials": 72,
+      "hero": 64,
+      "cta": 63,
+      "pricing": 58,
+      "faq": 50,
       "design-system": 28,
       "assets": 7,
-      "template": 2
+      "template": 5
     }
   },
   "taxonomy": [
@@ -211,6 +211,16 @@
       "file": "sources/floatui.json"
     },
     {
+      "source_id": "flowbitereact",
+      "source_name": "Flowbite React",
+      "source_url": "https://flowbite-react.com",
+      "catalog_url": "https://flowbite-react.com/docs/getting-started/introduction",
+      "entry_count": 37,
+      "license_summary": "MIT (open-source components); Flowbite Pro blocks and templates are paid",
+      "granularity": "one entry per docs page of flowbite-react (components, forms, typography)",
+      "file": "sources/flowbitereact.json"
+    },
+    {
       "source_id": "headlessui",
       "source_name": "Headless UI",
       "source_url": "https://headlessui.com",
@@ -229,6 +239,16 @@
       "license_summary": "MIT",
       "granularity": "curated: top 5 per category (540 total in source)",
       "file": "sources/hyperui.json"
+    },
+    {
+      "source_id": "indoui",
+      "source_name": "IndoUI",
+      "source_url": "https://www.indoui.com",
+      "catalog_url": "https://www.indoui.com/components",
+      "entry_count": 39,
+      "license_summary": "Custom free license: copy, modify and use in personal or commercial projects (not OSI)",
+      "granularity": "one entry per component page of the sitemap (each page holds several variants)",
+      "file": "sources/indoui.json"
     },
     {
       "source_id": "kiboui",
@@ -389,6 +409,16 @@
       "license_summary": "MIT",
       "granularity": "complete (registry:ui)",
       "file": "sources/shadcnvue.json"
+    },
+    {
+      "source_id": "tabler",
+      "source_name": "Tabler",
+      "source_url": "https://tabler.io",
+      "catalog_url": "https://preview.tabler.io",
+      "entry_count": 126,
+      "license_summary": "MIT",
+      "granularity": "one entry per page of the Tabler preview (dashboards, layouts, forms, components); preview URLs verified",
+      "file": "sources/tabler.json"
     },
     {
       "source_id": "tailblocks",

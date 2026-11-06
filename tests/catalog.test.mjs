@@ -104,7 +104,7 @@ test('get prints an entry with quality, and fails clearly for a missing id', () 
 });
 
 test('find CLI --json returns structured results for the new sources', () => {
-  for (const source of ['reactbits', 'arcui', 'mui', 'chakra', 'antd', 'radix', 'headlessui', 'mantineui', 'cultui', 'kiboui', 'animateui', 'shadcnvue', 'shadcnsvelte']) {
+  for (const source of ['reactbits', 'arcui', 'mui', 'chakra', 'antd', 'radix', 'headlessui', 'flowbitereact', 'tabler', 'indoui', 'mantineui', 'cultui', 'kiboui', 'animateui', 'shadcnvue', 'shadcnsvelte']) {
     const run = spawnSync(process.execPath, [join(KIT, 'tools', 'find.mjs'), '--source', source, '--limit', '2', '--json'], { encoding: 'utf8' });
     assert.equal(run.status, 0, source);
     const json = JSON.parse(run.stdout);

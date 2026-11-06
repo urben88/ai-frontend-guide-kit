@@ -177,6 +177,7 @@ const PRIMARY_PACKAGES = {
   '@mantine/core': 'mantine',
   '@headlessui/react': 'headlessui',
   '@headlessui/vue': 'headlessui',
+  'flowbite-react': 'flowbitereact',
   preline: 'preline',
   daisyui: 'daisyui',
   'radix-ui': 'radix',

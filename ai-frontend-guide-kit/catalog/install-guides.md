@@ -144,6 +144,25 @@ Per-source instructions: prerequisites, exact install commands, how to get the c
 - **Install:** `npx shadcn@latest add @uiable/<name>`.
 - **License / limits:** Community tier is MIT. Pro blocks, templates and dashboards are paid and are not in the public registry (HTTP 401).
 
+## Flowbite React
+
+- **Catalog:** https://flowbite-react.com/docs/getting-started/introduction (37 docs pages: components, forms, typography).
+- **Install:** `npm i flowbite-react`, then `npx flowbite-react@latest init` to wire the Tailwind plugin.
+- **License / limits:** MIT. Flowbite Pro blocks and templates are paid and are not indexed.
+
+## Tabler
+
+- **Catalog:** https://preview.tabler.io (126 pages: dashboards, layouts, forms, data views, components).
+- **Install:** `npm i @tabler/core`; open the preview page and copy its HTML.
+- **Stack:** plain HTML + Bootstrap 5, with dark mode and RTL; a good fit for admin dashboards outside React + Tailwind.
+- **License / limits:** MIT.
+
+## IndoUI
+
+- **Catalog:** https://www.indoui.com/components (39 pages, each with several React + Tailwind variants).
+- **Install:** none; copy-paste from the page.
+- **License / limits:** custom free terms: copy, modify and use in personal or commercial projects, as-is (https://www.indoui.com/terms). Not an OSI license.
+
 ## Agents Kit
 
 - **Catalog:** https://agents-ui.github.io/agents-kit/components (224 registry blocks)

@@ -1,10 +1,10 @@
 /**
  * Extraction: component libraries distributed as npm packages (not copy-paste registries).
  * Sources: Mantine, Base UI, React Aria Components, Material UI, Chakra UI, Ant Design, Radix Primitives,
- *          Headless UI, Mantine UI (page-section categories).
+ *          Headless UI, Flowbite React, Tabler, Mantine UI (page-section categories).
  * Component lists come from the public GitHub directory listing of each package.
  *
- * Usage: node tools/extract/ui-libraries.mjs [mantine|baseui|reactaria|mui|chakra|antd|radix|headlessui|mantineui|all]
+ * Usage: node tools/extract/ui-libraries.mjs [mantine|baseui|reactaria|mui|chakra|antd|radix|headlessui|flowbitereact|tabler|mantineui|all]
  */
 import { fetchJSON, fetchText, mapLimit, buildEntry, writeSource, slugify, titleCase, categoryFromKeywords, USE_BY_CATEGORY } from './lib.mjs';
 
@@ -32,7 +32,7 @@ async function listDir(repo, path) {
 }
 
 function entryFor(cfg, name, slug) {
-  const category = categoryFromKeywords(slug, RULES, 'data-display');
+  const category = cfg.category?.[slug] ?? categoryFromKeywords(slug, RULES, 'data-display');
   const display = titleCase(slug);
   return buildEntry({
     id: `${cfg.prefix}-${category}-${slugify(slug)}`,
@@ -189,6 +189,51 @@ async function headlessui() {
   return simple(cfg, names.map((name) => ({ name, slug: name })), { sourceName: cfg.label, sourceUrl: 'https://headlessui.com', catalogUrl: 'https://headlessui.com/react/menu', licenseSummary: 'MIT', granularity: 'public components of @headlessui/react (docs URLs verified)', extraction: { channel: 'github-contents', method: 'Component list from the headlessui package with docs URL verification', evidence_url: 'https://github.com/tailwindlabs/headlessui/tree/main/packages/@headlessui-react/src/components' } });
 }
 
+async function flowbitereact() {
+  const cfg = {
+    prefix: 'flowbitereact', label: 'Flowbite React', pkg: 'flowbite-react', license: 'MIT', stack: ['react', 'tailwind'],
+    blurb: 'a React + Tailwind CSS component with a typed theme you can override per component.',
+    hints: ['Run npx flowbite-react@latest init to wire the Tailwind plugin', 'Flowbite Pro blocks and templates are paid and are not indexed'],
+    install: 'npm i flowbite-react (then npx flowbite-react@latest init)',
+    docsUrl: (name, slug) => `https://flowbite-react.com/docs/${name}/${slug}`,
+    category: { sidebar: 'navigation', 'mega-menu': 'navigation', footer: 'layout', hr: 'layout', blockquote: 'text', list: 'text', 'floating-label': 'forms', rating: 'forms', banner: 'feedback', clipboard: 'micro-interactions' },
+  };
+  // The docs site rate-limits scripted requests, so routes come from its MDX content folders in the repo.
+  const sections = ['components', 'forms', 'typography'];
+  const items = [];
+  for (const section of sections) {
+    const files = (await listDir('themesberg/flowbite-react', `apps/web/content/docs/${section}`)).filter((i) => i.type === 'file' && /.mdx$/.test(i.name));
+    items.push(...files.map((file) => ({ name: section, slug: file.name.replace(/.mdx$/, '') })));
+  }
+  const entries = items.map(({ name, slug }) => entryFor(cfg, name, slug));
+  return writeSource(cfg.prefix, { sourceName: cfg.label, sourceUrl: 'https://flowbite-react.com', catalogUrl: 'https://flowbite-react.com/docs/getting-started/introduction', licenseSummary: 'MIT (open-source components); Flowbite Pro blocks and templates are paid', granularity: 'one entry per docs page of flowbite-react (components, forms, typography)', extraction: { channel: 'github-contents', method: 'Directory listing of apps/web/content/docs (components, forms, typography)', evidence_url: 'https://github.com/themesberg/flowbite-react/tree/main/apps/web/content/docs' } }, entries);
+}
+
+// Tabler preview pages map to categories by name; the generic keyword rules miss most of them.
+const TABLER_RULES = [
+  [/^layout-/, 'layout'], [/^dashboard-|^index$/, 'template'], [/sign-in|sign-up|forgot-password|2-step|auth-lock|form-|wizard|datepicker|colorpicker|dropzone|number-input|password-strength|segmented-control|signatures|stars-rating|switch-icons|wysiwyg|tags/, 'forms'],
+  [/error-|^empty$|trial-ended|page-loader|placeholder|^shape$|^prose$|^typography$|^markdown$/, 'layout'], [/pricing|billing|pay$|settings-plan/, 'pricing'], [/^faq$/, 'faq'],
+  [/chart|sparkline|datagrid|datatables|tables|invoice|activity|logs|uptime|users|tasks|cards|card-|lists|avatars|badges|legend|steps|tracking|profile|job-listing|search-results|changelog|widgets|fullcalendar|signal/, 'data-display'],
+  [/map|gallery|photogrid|lightbox|carousel|inline-player|mockup-browser|music|image-labels/, 'media'],
+  [/chat|email/, 'blocks-sections'], [/navigation|nav-overflow|pagination|tabs|scroll-spy|tour|onboarding/, 'navigation'], [/modals|offcanvas|dropdowns|cookie-banner/, 'overlay'],
+  [/alerts|toasts|progress/, 'feedback'], [/buttons|accordion|clipboard|confetti|sortable|text-shimmer|hover-gallery/, 'micro-interactions'], [/text-features/, 'features'],
+];
+
+async function tabler() {
+  const SKIP = /^(robots.txt|sitemap.xml|license|terms-of-service|blank|screenshot|all-elements|icons|icon-lists|flags|illustrations|payment-providers|social-icons|colors|patterns)$/;
+  const files = (await listDir('tabler/tabler', 'preview/pages')).filter((i) => i.type === 'file' && /.astro$/.test(i.name));
+  const slugs = files.map((f) => f.name.replace(/.astro$/, '')).filter((slug) => !SKIP.test(slug));
+  const cfg = {
+    prefix: 'tabler', label: 'Tabler', pkg: '@tabler/core', license: 'MIT', stack: ['html', 'bootstrap'],
+    blurb: 'a free HTML + Bootstrap 5 dashboard page or component from the Tabler UI kit, with dark mode and RTL.',
+    hints: ['Plain HTML on Bootstrap 5: best for admin dashboards that are not on React + Tailwind', 'Open the preview page and copy its markup; Tabler Icons are a separate MIT set'],
+    install: 'npm i @tabler/core',
+    docsUrl: (name, slug) => `https://preview.tabler.io/${slug}.html`,
+    category: Object.fromEntries(slugs.map((slug) => [slug, categoryFromKeywords(slug, TABLER_RULES, 'blocks-sections')])),
+  };
+  return simple(cfg, slugs.map((slug) => ({ name: slug, slug })), { sourceName: cfg.label, sourceUrl: 'https://tabler.io', catalogUrl: 'https://preview.tabler.io', licenseSummary: 'MIT', granularity: 'one entry per page of the Tabler preview (dashboards, layouts, forms, components); preview URLs verified', extraction: { channel: 'github-contents', method: 'Directory listing of preview/pages with preview URL verification', evidence_url: 'https://github.com/tabler/tabler/tree/dev/preview/pages' } });
+}
+
 async function mantineui() {
   const text = (await fetchText('https://raw.githubusercontent.com/mantinedev/ui.mantine.dev/master/data/categories.ts')).text;
   const categories = [...text.matchAll(/slug:\s*'([^']+)',\s*name:\s*(?:'([^']+)'|"([^"]+)")/g)].map((m) => ({ slug: m[1], name: m[2] ?? m[3] }));
@@ -228,4 +273,6 @@ if (target === 'all' || target === 'chakra') await chakra();
 if (target === 'all' || target === 'antd') await antd();
 if (target === 'all' || target === 'radix') await radix();
 if (target === 'all' || target === 'headlessui') await headlessui();
+if (target === 'all' || target === 'flowbitereact') await flowbitereact();
+if (target === 'all' || target === 'tabler') await tabler();
 if (target === 'all' || target === 'mantineui') await mantineui();
