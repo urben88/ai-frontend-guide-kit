@@ -1,0 +1,3437 @@
+{
+  "schema_version": "1.0",
+  "source_id": "blocksso",
+  "source_name": "blocks.so",
+  "source_url": "https://blocks.so",
+  "catalog_url": "https://blocks.so",
+  "license_summary": "MIT",
+  "granularity": "complete (every registry:block item)",
+  "extraction": {
+    "channel": "registry-json",
+    "method": "Node script downloading the public shadcn registry",
+    "evidence_url": "https://blocks.so/r/registry.json"
+  },
+  "generated_at": "2026-11-06",
+  "entries": [
+    {
+      "id": "blocksso-ai-surfaces-chat-01",
+      "name": "blocks.so Chat Basic",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "ai-surfaces",
+      "description": "Chat Basic: Chat block from blocks.so.",
+      "use_case": "Build agent and AI conversation interfaces (chat, thinking, tools, streaming).",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "chat",
+        "basic",
+        "bubble",
+        "button",
+        "dropdown-menu",
+        "input-group",
+        "message",
+        "message-scroller",
+        "textarea",
+        "ai-surfaces",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/chat/chat-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls bubble, button, dropdown-menu, input-group, message, message-scroller, textarea"
+      ],
+      "registry_url": "https://blocks.so/r/chat-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/chat-01",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-ai-surfaces-chat-02",
+      "name": "blocks.so Chat with Model Menu",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "ai-surfaces",
+      "description": "A chat with model menu block.",
+      "use_case": "Build agent and AI conversation interfaces (chat, thinking, tools, streaming).",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "chat",
+        "with",
+        "model",
+        "menu",
+        "bubble",
+        "button",
+        "dropdown-menu",
+        "input-group",
+        "message",
+        "message-scroller",
+        "textarea",
+        "ai-surfaces",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/chat/chat-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls bubble, button, dropdown-menu, input-group, message, message-scroller, textarea"
+      ],
+      "registry_url": "https://blocks.so/r/chat-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/chat-02",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-ai-surfaces-chat-03",
+      "name": "blocks.so Chat Application",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "ai-surfaces",
+      "description": "Chat Application: Chat block from blocks.so.",
+      "use_case": "Build agent and AI conversation interfaces (chat, thinking, tools, streaming).",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "chat",
+        "application",
+        "avatar",
+        "button",
+        "collapsible",
+        "command",
+        "dropdown-menu",
+        "kbd",
+        "message-scroller",
+        "sidebar",
+        "textarea",
+        "ai-surfaces",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/chat/chat-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, button, collapsible, command, dropdown-menu, kbd, message-scroller, sidebar, textarea"
+      ],
+      "registry_url": "https://blocks.so/r/chat-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/chat-03",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-ai-01",
+      "name": "blocks.so AI Chat with Voice Input",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "A ai chat with voice input block.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "ai",
+        "chat",
+        "with",
+        "voice",
+        "input",
+        "button",
+        "dropdown-menu",
+        "textarea",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/ai/ai-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, dropdown-menu, textarea"
+      ],
+      "registry_url": "https://blocks.so/r/ai-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/ai-01",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-ai-02",
+      "name": "blocks.so AI Chat with Model Selection",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "A ai chat with model selection block.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "ai",
+        "chat",
+        "with",
+        "model",
+        "selection",
+        "button",
+        "select",
+        "textarea",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/ai/ai-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, select, textarea"
+      ],
+      "registry_url": "https://blocks.so/r/ai-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/ai-02",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-ai-03",
+      "name": "blocks.so AI Chat Compact Interface",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "A ai chat compact interface block.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "ai",
+        "chat",
+        "compact",
+        "interface",
+        "button",
+        "dropdown-menu",
+        "textarea",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/ai/ai-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, dropdown-menu, textarea"
+      ],
+      "registry_url": "https://blocks.so/r/ai-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/ai-03",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-ai-04",
+      "name": "blocks.so AI Chat with File Attachments",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "A ai chat with file attachments block.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "ai",
+        "chat",
+        "with",
+        "file",
+        "attachments",
+        "badge",
+        "button",
+        "dropdown-menu",
+        "label",
+        "switch",
+        "textarea",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/ai/ai-04",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls badge, button, dropdown-menu, label, switch, textarea"
+      ],
+      "registry_url": "https://blocks.so/r/ai-04.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/ai-04",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-ai-05",
+      "name": "blocks.so AI Elements Chat",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "AI Elements Chat: Ai block from blocks.so.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "ai",
+        "elements",
+        "chat",
+        "button",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/ai/ai-05",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react",
+        "ai"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button"
+      ],
+      "registry_url": "https://blocks.so/r/ai-05.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/ai-05",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-onboarding-01",
+      "name": "blocks.so Onboarding",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "Onboarding: Onboarding block from blocks.so.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "onboarding",
+        "button",
+        "collapsible",
+        "dropdown-menu",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/onboarding/onboarding-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, collapsible, dropdown-menu"
+      ],
+      "registry_url": "https://blocks.so/r/onboarding-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/onboarding-01",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-onboarding-02",
+      "name": "blocks.so Onboarding Workspace Setup",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "A onboarding workspace setup block.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "onboarding",
+        "workspace",
+        "setup",
+        "button",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/onboarding/onboarding-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button"
+      ],
+      "registry_url": "https://blocks.so/r/onboarding-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/onboarding-02",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-onboarding-03",
+      "name": "blocks.so Onboarding Steps with Progress",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "A onboarding steps with progress block.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "onboarding",
+        "steps",
+        "with",
+        "progress",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/onboarding/onboarding-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls progress"
+      ],
+      "registry_url": "https://blocks.so/r/onboarding-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/onboarding-03",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-onboarding-04",
+      "name": "blocks.so Onboarding Accordion",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "A onboarding accordion block.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "onboarding",
+        "accordion",
+        "button",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/onboarding/onboarding-04",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls accordion, button"
+      ],
+      "registry_url": "https://blocks.so/r/onboarding-04.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/onboarding-04",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-onboarding-05",
+      "name": "blocks.so Onboarding Activity Feed",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "A onboarding activity feed block.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "onboarding",
+        "activity",
+        "feed",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/onboarding/onboarding-05",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy"
+      ],
+      "registry_url": "https://blocks.so/r/onboarding-05.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/onboarding-05",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-blocks-sections-onboarding-06",
+      "name": "blocks.so Onboarding Timeline",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "A onboarding timeline block.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "onboarding",
+        "timeline",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/onboarding/onboarding-06",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy"
+      ],
+      "registry_url": "https://blocks.so/r/onboarding-06.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/onboarding-06",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-blocks-sections-onboarding-07",
+      "name": "blocks.so Onboarding Deploy Pipeline",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "blocks-sections",
+      "description": "A onboarding deploy pipeline block.",
+      "use_case": "Compose complete page sections that combine several components.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "onboarding",
+        "deploy",
+        "pipeline",
+        "accordion",
+        "button",
+        "progress",
+        "blocks-sections",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/onboarding/onboarding-07",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls accordion, button, progress"
+      ],
+      "registry_url": "https://blocks.so/r/onboarding-07.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/onboarding-07",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-grid-list-01",
+      "name": "blocks.so Grid List with Dropdown",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A grid list with dropdown block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "grid",
+        "list",
+        "with",
+        "dropdown",
+        "grid-list",
+        "button",
+        "card",
+        "dropdown-menu",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/grid-list/grid-list-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, dropdown-menu"
+      ],
+      "registry_url": "https://blocks.so/r/grid-list-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/grid-list-01",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-grid-list-02",
+      "name": "blocks.so Grid List with Links",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A grid list with links block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "grid",
+        "list",
+        "with",
+        "links",
+        "grid-list",
+        "avatar",
+        "card",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/grid-list/grid-list-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, card"
+      ],
+      "registry_url": "https://blocks.so/r/grid-list-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/grid-list-02",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-data-display-grid-list-03",
+      "name": "blocks.so Grid List with Icons",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A grid list with icons block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "grid",
+        "list",
+        "with",
+        "icons",
+        "grid-list",
+        "card",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/grid-list/grid-list-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls card"
+      ],
+      "registry_url": "https://blocks.so/r/grid-list-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/grid-list-03",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-stats-01",
+      "name": "blocks.so Stats with Trending",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with trending block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "trending",
+        "card",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls card"
+      ],
+      "registry_url": "https://blocks.so/r/stats-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-01",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-data-display-stats-02",
+      "name": "blocks.so Stats with Borders",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with borders block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "borders",
+        "badge",
+        "card",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls badge, card"
+      ],
+      "registry_url": "https://blocks.so/r/stats-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-02",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-stats-03",
+      "name": "blocks.so Stats with Card Layout",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with card layout block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "card",
+        "layout",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls card"
+      ],
+      "registry_url": "https://blocks.so/r/stats-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-03",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-data-display-stats-04",
+      "name": "blocks.so Stats with Badges",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with badges block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "badges",
+        "badge",
+        "card",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-04",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls badge, card"
+      ],
+      "registry_url": "https://blocks.so/r/stats-04.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-04",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-stats-05",
+      "name": "blocks.so Stats with Links",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "Stats with Links: Stats block from blocks.so.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "links",
+        "card",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-05",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls card"
+      ],
+      "registry_url": "https://blocks.so/r/stats-05.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-05",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-data-display-stats-06",
+      "name": "blocks.so Stats with Status",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with status block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "status",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-06",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy"
+      ],
+      "registry_url": "https://blocks.so/r/stats-06.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-06",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-stats-07",
+      "name": "blocks.so Stats with Circular Progress",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with circular progress block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "circular",
+        "progress",
+        "card",
+        "chart",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-07",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "recharts"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls card, chart"
+      ],
+      "registry_url": "https://blocks.so/r/stats-07.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-07",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-stats-08",
+      "name": "blocks.so Stats with Circular Progress and Links",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with circular progress and links block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "circular",
+        "progress",
+        "and",
+        "links",
+        "card",
+        "chart",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-08",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "recharts"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls card, chart"
+      ],
+      "registry_url": "https://blocks.so/r/stats-08.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-08",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-stats-09",
+      "name": "blocks.so Stats with Progress",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with progress block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "progress",
+        "card",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-09",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls card, progress"
+      ],
+      "registry_url": "https://blocks.so/r/stats-09.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-09",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-data-display-stats-10",
+      "name": "blocks.so Stats with Area Chart",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with area chart block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "area",
+        "chart",
+        "card",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-10",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "recharts"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls card, chart"
+      ],
+      "registry_url": "https://blocks.so/r/stats-10.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-10",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-stats-11",
+      "name": "blocks.so Stats Dashboard with Progress Bars",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats dashboard with progress bars block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "dashboard",
+        "with",
+        "progress",
+        "bars",
+        "button",
+        "card",
+        "dialog",
+        "input",
+        "label",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-11",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, dialog, input, label"
+      ],
+      "registry_url": "https://blocks.so/r/stats-11.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-11",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-stats-12",
+      "name": "blocks.so Stats Usage Dashboard",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats usage dashboard block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "usage",
+        "dashboard",
+        "button",
+        "card",
+        "chart",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-12",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "recharts"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, chart"
+      ],
+      "registry_url": "https://blocks.so/r/stats-12.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-12",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-stats-13",
+      "name": "blocks.so Stats with Segmented Progress",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with segmented progress block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "segmented",
+        "progress",
+        "card",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-13",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls card"
+      ],
+      "registry_url": "https://blocks.so/r/stats-13.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-13",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-data-display-stats-14",
+      "name": "blocks.so Stats with Usage Breakdown",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with usage breakdown block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "usage",
+        "breakdown",
+        "badge",
+        "card",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-14",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls badge, card"
+      ],
+      "registry_url": "https://blocks.so/r/stats-14.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-14",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-data-display-stats-15",
+      "name": "blocks.so Stats with Value Breakdown",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A stats with value breakdown block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "stats",
+        "with",
+        "value",
+        "breakdown",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/stats/stats-15",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy"
+      ],
+      "registry_url": "https://blocks.so/r/stats-15.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/stats-15",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-data-display-table-01",
+      "name": "blocks.so Table with Accordion",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A table with accordion block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "tables",
+        "table",
+        "with",
+        "accordion",
+        "button",
+        "collapsible",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/tables/table-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, collapsible, table"
+      ],
+      "registry_url": "https://blocks.so/r/table-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/table-01",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-table-02",
+      "name": "blocks.so Table with Actions",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A table with actions block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "tables",
+        "table",
+        "with",
+        "actions",
+        "badge",
+        "button",
+        "tooltip",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/tables/table-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls badge, button, table, tooltip"
+      ],
+      "registry_url": "https://blocks.so/r/table-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/table-02",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-data-display-table-03",
+      "name": "blocks.so Table with Filters",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A table with filters block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "tables",
+        "table",
+        "with",
+        "filters",
+        "badge",
+        "select",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/tables/table-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls badge, select, table"
+      ],
+      "registry_url": "https://blocks.so/r/table-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/table-03",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-data-display-table-04",
+      "name": "blocks.so Table with Grouped Rows",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "A table with grouped rows block.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "tables",
+        "table",
+        "with",
+        "grouped",
+        "rows",
+        "avatar",
+        "badge",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/tables/table-04",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, badge, table"
+      ],
+      "registry_url": "https://blocks.so/r/table-04.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/table-04",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-data-display-table-05",
+      "name": "blocks.so Data Table",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "data-display",
+      "description": "Data Table: Tables block from blocks.so.",
+      "use_case": "Show structured information such as tables, stats and timelines.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "tables",
+        "data",
+        "table",
+        "badge",
+        "button",
+        "checkbox",
+        "dropdown-menu",
+        "input",
+        "select",
+        "data-display",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/tables/table-05",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tanstack/react-table",
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls badge, button, checkbox, dropdown-menu, input, select, table"
+      ],
+      "registry_url": "https://blocks.so/r/table-05.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/table-05",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-forms-file-upload-01",
+      "name": "blocks.so File Upload with Preview",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A file upload with preview block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "file",
+        "upload",
+        "with",
+        "preview",
+        "file-upload",
+        "button",
+        "card",
+        "input",
+        "label",
+        "select",
+        "tooltip",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/file-upload/file-upload-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, input, label, select, tooltip"
+      ],
+      "registry_url": "https://blocks.so/r/file-upload-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/file-upload-01",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-forms-file-upload-02",
+      "name": "blocks.so File Upload Simple",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A file upload simple block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "file",
+        "upload",
+        "simple",
+        "file-upload",
+        "button",
+        "card",
+        "input",
+        "label",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/file-upload/file-upload-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, input, label"
+      ],
+      "registry_url": "https://blocks.so/r/file-upload-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/file-upload-02",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-file-upload-03",
+      "name": "blocks.so File Upload Multi-File Dropzone",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A file upload multi-file dropzone block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "file",
+        "upload",
+        "multi",
+        "dropzone",
+        "file-upload",
+        "button",
+        "card",
+        "input",
+        "label",
+        "select",
+        "separator",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/file-upload/file-upload-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "react-dropzone"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, input, label, select, separator"
+      ],
+      "registry_url": "https://blocks.so/r/file-upload-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/file-upload-03",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-forms-file-upload-04",
+      "name": "blocks.so File Upload Drag & Drop",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A file upload drag & drop block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "file",
+        "upload",
+        "drag",
+        "drop",
+        "file-upload",
+        "button",
+        "card",
+        "progress",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/file-upload/file-upload-04",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "sonner"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, progress"
+      ],
+      "registry_url": "https://blocks.so/r/file-upload-04.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/file-upload-04",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-forms-file-upload-05",
+      "name": "blocks.so File Upload with Progress",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A file upload with progress block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "file",
+        "upload",
+        "with",
+        "progress",
+        "file-upload",
+        "button",
+        "label",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/file-upload/file-upload-05",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, label"
+      ],
+      "registry_url": "https://blocks.so/r/file-upload-05.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/file-upload-05",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-forms-file-upload-06",
+      "name": "blocks.so File Upload with Status Sections",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A file upload with status sections block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "file",
+        "upload",
+        "with",
+        "status",
+        "sections",
+        "file-upload",
+        "button",
+        "card",
+        "progress",
+        "separator",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/file-upload/file-upload-06",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, progress, separator"
+      ],
+      "registry_url": "https://blocks.so/r/file-upload-06.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/file-upload-06",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-forms-form-layout-01",
+      "name": "blocks.so Form with Workspace Fields",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A form with workspace fields block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "form",
+        "layout",
+        "with",
+        "workspace",
+        "fields",
+        "form-layout",
+        "button",
+        "field",
+        "input",
+        "separator",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/form-layout/form-layout-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, field, input, separator"
+      ],
+      "registry_url": "https://blocks.so/r/form-layout-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/form-layout-01",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-form-layout-02",
+      "name": "blocks.so Form with Side Labels",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A form with side labels block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "form",
+        "layout",
+        "with",
+        "side",
+        "labels",
+        "form-layout",
+        "button",
+        "field",
+        "input",
+        "radio-group",
+        "select",
+        "separator",
+        "textarea",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/form-layout/form-layout-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, field, input, radio-group, select, separator, textarea"
+      ],
+      "registry_url": "https://blocks.so/r/form-layout-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/form-layout-02",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-form-layout-03",
+      "name": "blocks.so Form with Checkbox Settings",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A form with checkbox settings block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "form",
+        "layout",
+        "with",
+        "checkbox",
+        "settings",
+        "form-layout",
+        "button",
+        "field",
+        "input",
+        "select",
+        "separator",
+        "textarea",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/form-layout/form-layout-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, checkbox, field, input, select, separator, textarea"
+      ],
+      "registry_url": "https://blocks.so/r/form-layout-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/form-layout-03",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-form-layout-04",
+      "name": "blocks.so Form with Package Selection",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A form with package selection block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "form",
+        "layout",
+        "with",
+        "package",
+        "selection",
+        "form-layout",
+        "button",
+        "field",
+        "input",
+        "radio-group",
+        "select",
+        "separator",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/form-layout/form-layout-04",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, field, input, radio-group, select, separator"
+      ],
+      "registry_url": "https://blocks.so/r/form-layout-04.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/form-layout-04",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-form-layout-05",
+      "name": "blocks.so Form with Plan Selection",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A form with plan selection block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "form",
+        "layout",
+        "with",
+        "plan",
+        "selection",
+        "form-layout",
+        "badge",
+        "button",
+        "card",
+        "field",
+        "input",
+        "radio-group",
+        "select",
+        "separator",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/form-layout/form-layout-05",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls badge, button, card, field, input, radio-group, select, separator"
+      ],
+      "registry_url": "https://blocks.so/r/form-layout-05.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/form-layout-05",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-forms-login-01",
+      "name": "blocks.so Login with Email and Google",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A login with email and google block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "login",
+        "with",
+        "email",
+        "and",
+        "google",
+        "button",
+        "input",
+        "label",
+        "separator",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/login/login-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, input, label, separator"
+      ],
+      "registry_url": "https://blocks.so/r/login-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/login-01",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-login-02",
+      "name": "blocks.so Login with Email, Password and Google",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A login with email, password and google block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "login",
+        "with",
+        "email",
+        "password",
+        "and",
+        "google",
+        "button",
+        "input",
+        "label",
+        "separator",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/login/login-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, input, label, separator"
+      ],
+      "registry_url": "https://blocks.so/r/login-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/login-02",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-login-03",
+      "name": "blocks.so Login with Email and Password",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A login with email and password block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "login",
+        "with",
+        "email",
+        "and",
+        "password",
+        "button",
+        "input",
+        "label",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/login/login-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, input, label"
+      ],
+      "registry_url": "https://blocks.so/r/login-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/login-03",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-login-04",
+      "name": "blocks.so Login with Social Buttons",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A login with social buttons block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "login",
+        "with",
+        "social",
+        "buttons",
+        "button",
+        "input",
+        "label",
+        "separator",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/login/login-04",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, input, label, separator"
+      ],
+      "registry_url": "https://blocks.so/r/login-04.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/login-04",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-login-05",
+      "name": "blocks.so Login Card Signup Form",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A login card signup form block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "login",
+        "card",
+        "signup",
+        "form",
+        "button",
+        "checkbox",
+        "input",
+        "label",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/login/login-05",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, checkbox, input, label"
+      ],
+      "registry_url": "https://blocks.so/r/login-05.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/login-05",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-login-06",
+      "name": "blocks.so Login with Magic Link and SSO",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A login with magic link and sso block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "login",
+        "with",
+        "magic",
+        "link",
+        "and",
+        "sso",
+        "button",
+        "card",
+        "input",
+        "separator",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/login/login-06",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, input, separator"
+      ],
+      "registry_url": "https://blocks.so/r/login-06.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/login-06",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-forms-login-07",
+      "name": "blocks.so Login Full Page with Icons",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A login full page with icons block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "login",
+        "full",
+        "page",
+        "with",
+        "icons",
+        "button",
+        "checkbox",
+        "input",
+        "label",
+        "separator",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/login/login-07",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, checkbox, input, label, separator"
+      ],
+      "registry_url": "https://blocks.so/r/login-07.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/login-07",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-forms-login-08",
+      "name": "blocks.so Login with SSO",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "Login with SSO: Login block from blocks.so.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "login",
+        "with",
+        "sso",
+        "button",
+        "card",
+        "checkbox",
+        "input",
+        "label",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/login/login-08",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, checkbox, input, label"
+      ],
+      "registry_url": "https://blocks.so/r/login-08.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/login-08",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-forms-login-09",
+      "name": "blocks.so Login Signup with Role Selection",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "forms",
+      "description": "A login signup with role selection block.",
+      "use_case": "Capture user input with accessible, validated controls.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "login",
+        "signup",
+        "with",
+        "role",
+        "selection",
+        "button",
+        "card",
+        "checkbox",
+        "input",
+        "label",
+        "select",
+        "forms",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/login/login-09",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, card, checkbox, input, label, select"
+      ],
+      "registry_url": "https://blocks.so/r/login-09.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/login-09",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-layout-dashboard-01",
+      "name": "blocks.so Dashboard with Revenue and Customers",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "layout",
+      "description": "A dashboard with revenue and customers block.",
+      "use_case": "Structure the page: dividers, footers, headers and empty states.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dashboard",
+        "with",
+        "revenue",
+        "and",
+        "customers",
+        "avatar",
+        "button",
+        "chart",
+        "dialog",
+        "dropdown-menu",
+        "field",
+        "input",
+        "input-group",
+        "popover",
+        "progress",
+        "separator",
+        "sidebar",
+        "table",
+        "toggle-group",
+        "layout",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dashboard/dashboard-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "date-fns",
+        "lucide-react",
+        "recharts"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, button, chart, dialog, dropdown-menu, field, input, input-group, popover, progress, separator, sidebar, table, toggle-group"
+      ],
+      "registry_url": "https://blocks.so/r/dashboard-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dashboard-01",
+      "quality": 80
+    },
+    {
+      "id": "blocksso-navigation-command-menu-01",
+      "name": "blocks.so Command Menu with Groups",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "navigation",
+      "description": "A command menu with groups block.",
+      "use_case": "Build site and app navigation structures that stay clear at any depth.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "command",
+        "menu",
+        "with",
+        "groups",
+        "command-menu",
+        "button",
+        "kbd",
+        "navigation",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/command-menu/command-menu-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, command, kbd"
+      ],
+      "registry_url": "https://blocks.so/r/command-menu-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/command-menu-01",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-navigation-command-menu-02",
+      "name": "blocks.so Command Menu with Keyboard Shortcuts",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "navigation",
+      "description": "A command menu with keyboard shortcuts block.",
+      "use_case": "Build site and app navigation structures that stay clear at any depth.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "command",
+        "menu",
+        "with",
+        "keyboard",
+        "shortcuts",
+        "command-menu",
+        "button",
+        "dialog",
+        "kbd",
+        "navigation",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/command-menu/command-menu-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, command, dialog, kbd"
+      ],
+      "registry_url": "https://blocks.so/r/command-menu-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/command-menu-02",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-navigation-command-menu-03",
+      "name": "blocks.so Command Menu with Documentation Search",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "navigation",
+      "description": "A command menu with documentation search block.",
+      "use_case": "Build site and app navigation structures that stay clear at any depth.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "command",
+        "menu",
+        "with",
+        "documentation",
+        "search",
+        "command-menu",
+        "button",
+        "dialog",
+        "kbd",
+        "navigation",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/command-menu/command-menu-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, command, dialog, kbd"
+      ],
+      "registry_url": "https://blocks.so/r/command-menu-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/command-menu-03",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-navigation-command-menu-04",
+      "name": "blocks.so Command Menu with Global Search",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "navigation",
+      "description": "A command menu with global search block.",
+      "use_case": "Build site and app navigation structures that stay clear at any depth.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "command",
+        "menu",
+        "with",
+        "global",
+        "search",
+        "command-menu",
+        "button",
+        "navigation",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/command-menu/command-menu-04",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react",
+        "cmdk"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, command"
+      ],
+      "registry_url": "https://blocks.so/r/command-menu-04.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/command-menu-04",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-navigation-sidebar-01",
+      "name": "blocks.so Sidebar Collapsible Sections",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "navigation",
+      "description": "A sidebar collapsible sections block.",
+      "use_case": "Build site and app navigation structures that stay clear at any depth.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "sidebar",
+        "collapsible",
+        "sections",
+        "avatar",
+        "button",
+        "command",
+        "dropdown-menu",
+        "tooltip",
+        "navigation",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/sidebar/sidebar-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react",
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, button, collapsible, command, dropdown-menu, sidebar, tooltip"
+      ],
+      "registry_url": "https://blocks.so/r/sidebar-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/sidebar-01",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-navigation-sidebar-02",
+      "name": "blocks.so Sidebar Dashboard Inset",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "navigation",
+      "description": "A sidebar dashboard inset block.",
+      "use_case": "Build site and app navigation structures that stay clear at any depth.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "sidebar",
+        "dashboard",
+        "inset",
+        "avatar",
+        "button",
+        "collapsible",
+        "dropdown-menu",
+        "navigation",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/sidebar/sidebar-02",
+      "stack": [
+        "react",
+        "tailwind",
+        "motion"
+      ],
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, button, collapsible, dropdown-menu, sidebar"
+      ],
+      "registry_url": "https://blocks.so/r/sidebar-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/sidebar-02",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-navigation-sidebar-03",
+      "name": "blocks.so Sidebar Dashboard Floating",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "navigation",
+      "description": "A sidebar dashboard floating block.",
+      "use_case": "Build site and app navigation structures that stay clear at any depth.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "sidebar",
+        "dashboard",
+        "floating",
+        "avatar",
+        "button",
+        "collapsible",
+        "dropdown-menu",
+        "navigation",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/sidebar/sidebar-03",
+      "stack": [
+        "react",
+        "tailwind",
+        "motion"
+      ],
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, button, collapsible, dropdown-menu, sidebar"
+      ],
+      "registry_url": "https://blocks.so/r/sidebar-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/sidebar-03",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-navigation-sidebar-04",
+      "name": "blocks.so Sidebar Double-Sided Mail",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "navigation",
+      "description": "A sidebar double-sided mail block.",
+      "use_case": "Build site and app navigation structures that stay clear at any depth.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "sidebar",
+        "double",
+        "sided",
+        "mail",
+        "avatar",
+        "dropdown-menu",
+        "navigation",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/sidebar/sidebar-04",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react",
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, dropdown-menu, sidebar"
+      ],
+      "registry_url": "https://blocks.so/r/sidebar-04.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/sidebar-04",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-navigation-sidebar-05",
+      "name": "blocks.so Sidebar Double-Sided",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "navigation",
+      "description": "A sidebar double-sided block.",
+      "use_case": "Build site and app navigation structures that stay clear at any depth.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "sidebar",
+        "double",
+        "sided",
+        "avatar",
+        "dropdown-menu",
+        "navigation",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/sidebar/sidebar-05",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react",
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, dropdown-menu, sidebar"
+      ],
+      "registry_url": "https://blocks.so/r/sidebar-05.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/sidebar-05",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-navigation-sidebar-06",
+      "name": "blocks.so Sidebar Replacement",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "navigation",
+      "description": "A sidebar replacement block.",
+      "use_case": "Build site and app navigation structures that stay clear at any depth.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "sidebar",
+        "replacement",
+        "avatar",
+        "dropdown-menu",
+        "navigation",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/sidebar/sidebar-06",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "@tabler/icons-react",
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, dropdown-menu, sidebar"
+      ],
+      "registry_url": "https://blocks.so/r/sidebar-06.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/sidebar-06",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-overlay-dialog-01",
+      "name": "blocks.so Dialog Confirmation",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog confirmation block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "confirmation",
+        "button",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-01",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, dialog"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-01.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-01",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-overlay-dialog-02",
+      "name": "blocks.so Dialog with Warning Icon",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog with warning icon block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "with",
+        "warning",
+        "icon",
+        "button",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-02",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, dialog"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-02.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-02",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-overlay-dialog-03",
+      "name": "blocks.so Dialog with Input Field",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog with input field block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "with",
+        "input",
+        "field",
+        "button",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-03",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, dialog"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-03.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-03",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-overlay-dialog-04",
+      "name": "blocks.so Dialog with Two Buttons",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog with two buttons block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "with",
+        "two",
+        "buttons",
+        "button",
+        "input",
+        "label",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-04",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, dialog, input, label"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-04.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-04",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-overlay-dialog-05",
+      "name": "blocks.so Dialog with Password Confirmation",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog with password confirmation block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "with",
+        "password",
+        "confirmation",
+        "alert-dialog",
+        "button",
+        "input",
+        "label",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-05",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls alert-dialog, button, input, label"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-05.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-05",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-overlay-dialog-06",
+      "name": "blocks.so Dialog with Privacy Toggle",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog with privacy toggle block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "with",
+        "privacy",
+        "toggle",
+        "button",
+        "input",
+        "label",
+        "switch",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-06",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, dialog, input, label, switch"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-06.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-06",
+      "quality": 86
+    },
+    {
+      "id": "blocksso-overlay-dialog-07",
+      "name": "blocks.so Dialog with Member List",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog with member list block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "with",
+        "member",
+        "list",
+        "alert-dialog",
+        "button",
+        "input",
+        "label",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-07",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls alert-dialog, button, input, label"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-07.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-07",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-overlay-dialog-08",
+      "name": "blocks.so Dialog with Email and Password Fields",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog with email and password fields block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "with",
+        "email",
+        "and",
+        "password",
+        "fields",
+        "avatar",
+        "badge",
+        "button",
+        "input",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-08",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, badge, button, dialog, input"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-08.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-08",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-overlay-dialog-09",
+      "name": "blocks.so Dialog with Link Share and Toggles",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog with link share and toggles block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "with",
+        "link",
+        "share",
+        "and",
+        "toggles",
+        "button",
+        "input",
+        "label",
+        "switch",
+        "tooltip",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-09",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, dialog, input, label, switch, tooltip"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-09.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-09",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-overlay-dialog-10",
+      "name": "blocks.so Dialog with Calendar and Time Picker",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog with calendar and time picker block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "with",
+        "calendar",
+        "and",
+        "time",
+        "picker",
+        "button",
+        "input",
+        "label",
+        "popover",
+        "select",
+        "textarea",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-10",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "date-fns",
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, calendar, dialog, input, label, popover, select, textarea"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-10.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-10",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-overlay-dialog-11",
+      "name": "blocks.so Dialog Multi-Step Wizard",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog multi-step wizard block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "multi",
+        "step",
+        "wizard",
+        "button",
+        "label",
+        "select",
+        "separator",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-11",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls button, dialog, label, select, separator"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-11.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-11",
+      "quality": 83
+    },
+    {
+      "id": "blocksso-overlay-dialog-12",
+      "name": "blocks.so Dialog with Avatar Upload",
+      "source": "blocks.so",
+      "entry_type": "block",
+      "category": "overlay",
+      "description": "A dialog with avatar upload block.",
+      "use_case": "Present dialogs, drawers and popovers without leaving the page.",
+      "search_tags": [
+        "blocksso",
+        "shadcn",
+        "dialogs",
+        "dialog",
+        "with",
+        "avatar",
+        "upload",
+        "button",
+        "input",
+        "label",
+        "overlay",
+        "blocks.so"
+      ],
+      "docs_url": "https://blocks.so/dialogs/dialog-12",
+      "stack": [
+        "react",
+        "tailwind"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "license_type": "MIT",
+      "commercial_use": true,
+      "free": true,
+      "verified_at": "2026-11-06",
+      "decision_hints": [
+        "Ready application block built on shadcn/ui: install it and adapt the data and copy",
+        "Pulls avatar, button, dialog, input, label"
+      ],
+      "registry_url": "https://blocks.so/r/dialog-12.json",
+      "install_method": "shadcn-cli",
+      "install_command": "npx shadcn@latest add @blocks-so/dialog-12",
+      "quality": 83
+    }
+  ]
+}

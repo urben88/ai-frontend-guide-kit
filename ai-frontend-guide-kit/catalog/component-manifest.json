@@ -2,27 +2,27 @@
   "schema_version": "1.0",
   "generated_at": "2026-11-06",
   "totals": {
-    "sources": 33,
-    "entries": 5480,
+    "sources": 36,
+    "entries": 7156,
     "categories": {
-      "forms": 1127,
-      "data-display": 921,
-      "micro-interactions": 907,
-      "feedback": 410,
-      "navigation": 399,
-      "ai-surfaces": 299,
-      "overlay": 288,
-      "layout": 209,
-      "backgrounds-effects": 194,
-      "text": 143,
-      "blocks-sections": 130,
-      "media": 129,
-      "features": 53,
-      "testimonials": 53,
-      "cta": 48,
-      "hero": 47,
-      "pricing": 44,
-      "faq": 42,
+      "forms": 1533,
+      "data-display": 1186,
+      "micro-interactions": 1066,
+      "feedback": 578,
+      "navigation": 571,
+      "overlay": 396,
+      "ai-surfaces": 366,
+      "layout": 318,
+      "backgrounds-effects": 221,
+      "blocks-sections": 180,
+      "text": 169,
+      "media": 162,
+      "features": 81,
+      "testimonials": 70,
+      "hero": 62,
+      "cta": 60,
+      "pricing": 52,
+      "faq": 48,
       "design-system": 28,
       "assets": 7,
       "template": 2
@@ -139,6 +139,16 @@
       "license_summary": "MIT",
       "granularity": "complete (components of @base-ui/react)",
       "file": "sources/baseui.json"
+    },
+    {
+      "source_id": "blocksso",
+      "source_name": "blocks.so",
+      "source_url": "https://blocks.so",
+      "catalog_url": "https://blocks.so",
+      "entry_count": 81,
+      "license_summary": "MIT",
+      "granularity": "complete (every registry:block item)",
+      "file": "sources/blocksso.json"
     },
     {
       "source_id": "chakra",
@@ -351,6 +361,16 @@
       "file": "sources/shadcn.json"
     },
     {
+      "source_id": "shadcnspace",
+      "source_name": "Shadcn Space",
+      "source_url": "https://shadcnspace.com",
+      "catalog_url": "https://shadcnspace.com/components",
+      "entry_count": 647,
+      "license_summary": "MIT (free blocks and components); Pro blocks, pages and templates are paid and not indexed",
+      "granularity": "every free registry:block and registry:component item (isPro false)",
+      "file": "sources/shadcnspace.json"
+    },
+    {
       "source_id": "shadcnsvelte",
       "source_name": "shadcn-svelte",
       "source_url": "https://shadcn-svelte.com",
@@ -379,6 +399,16 @@
       "license_summary": "MIT",
       "granularity": "complete (all 63 free blocks)",
       "file": "sources/tailblocks.json"
+    },
+    {
+      "source_id": "uiable",
+      "source_name": "Uiable",
+      "source_url": "https://uiable.com",
+      "catalog_url": "https://uiable.com/components",
+      "entry_count": 948,
+      "license_summary": "MIT (Community tier); Pro blocks, templates and dashboards are paid and not indexed",
+      "granularity": "every registry:ui and registry:block item of the public Community registry (themes excluded)",
+      "file": "sources/uiable.json"
     },
     {
       "source_id": "uiverse",

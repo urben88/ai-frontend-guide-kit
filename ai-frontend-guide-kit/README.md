@@ -34,7 +34,7 @@ ai-frontend-guide-kit/
 │   ├── install-guides.md         # install/code retrieval per source
 │   ├── schema.json               # entry schema
 │   ├── component-types.json      # canonical component types: aliases, usual layer, catalog category
-│   └── sources/*.json            # 33 source files (5,480 entries), explorer.html, license-report.md
+│   └── sources/*.json            # 36 source files (7,156 entries), explorer.html, license-report.md
 └── tools/
     ├── context.mjs        # repo context for the UX phase (REPO-CONTEXT.md)
     ├── ui-map.mjs         # always-on frontend map: build, impact <role|component>, have <name>, types, docs, check

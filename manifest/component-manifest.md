@@ -1,6 +1,6 @@
 # Component Manifest
 
-Light index of 5480 reusable UI entries across 33 sources. Generated 2026-11-06.
+Light index of 7156 reusable UI entries across 36 sources. Generated 2026-11-06.
 
 **Rule:** consult this catalog before writing any component from scratch. Filter with `find`, inspect with `get`, then follow `guides/06-REUSE.md`.
 
@@ -16,6 +16,7 @@ Light index of 5480 reusable UI entries across 33 sources. Generated 2026-11-06.
 | Ant Design | 68 | MIT | components of antd (docs URLs verified) | `sources/antd.json` |
 | Arc UI | 127 | MIT (free source; Pro components have additional restrictions and are not indexed) | complete (registry:ui + registry:block, all marked free) | `sources/arcui.json` |
 | Base UI | 38 | MIT | complete (components of @base-ui/react) | `sources/baseui.json` |
+| blocks.so | 81 | MIT | complete (every registry:block item) | `sources/blocksso.json` |
 | Chakra UI | 82 | MIT | components of @chakra-ui/react v3 (docs URLs verified) | `sources/chakra.json` |
 | coss ui / Origin UI | 76 | MIT for component directories (apps/ui and apps/origin); AGPL elsewhere in the repo | coss ui complete; legacy Origin indexed at base-component level (30 categories, ~604 variants upstream) | `sources/coss.json` |
 | cult/ui | 155 | MIT (open-source components); Pro blocks have a separate license | complete (registry:ui + registry:component) | `sources/cultui.json` |
@@ -37,33 +38,35 @@ Light index of 5480 reusable UI entries across 33 sources. Generated 2026-11-06.
 | Curated resources | 10 | Per resource: icon sets MIT/ISC, illustrations with custom terms, paid kits proprietary. See each entry. | curated: icon sets, illustrations, design-tool libraries and paid UI kits (reference level) | `sources/resources.json` |
 | ReUI | 1291 | MIT (free examples and primitives); Pro blocks, icons and templates need a paid license and are not indexed | every free example (c-*) plus the top-level ReUI primitives; Pro blocks (meta.group) and hooks excluded | `sources/reui.json` |
 | shadcn/ui | 160 | MIT | complete (registry:ui items + official registry:block items) | `sources/shadcn.json` |
+| Shadcn Space | 647 | MIT (free blocks and components); Pro blocks, pages and templates are paid and not indexed | every free registry:block and registry:component item (isPro false) | `sources/shadcnspace.json` |
 | shadcn-svelte | 203 | MIT | complete (registry:ui + registry:block) | `sources/shadcnsvelte.json` |
 | shadcn-vue | 66 | MIT | complete (registry:ui) | `sources/shadcnvue.json` |
 | Tailblocks | 63 | MIT | complete (all 63 free blocks) | `sources/tailblocks.json` |
+| Uiable | 948 | MIT (Community tier); Pro blocks, templates and dashboards are paid and not indexed | every registry:ui and registry:block item of the public Community registry (themes excluded) | `sources/uiable.json` |
 | Uiverse | 300 | MIT (all community elements; author copyright notices apply) | curated: top 30 per category across 10 categories (~4.268 elements upstream) | `sources/uiverse.json` |
 
 ## Categories
 
 | Category | Entries |
 |---|---|
-| forms | 1127 |
-| data-display | 921 |
-| micro-interactions | 907 |
-| feedback | 410 |
-| navigation | 399 |
-| ai-surfaces | 299 |
-| overlay | 288 |
-| layout | 209 |
-| backgrounds-effects | 194 |
-| text | 143 |
-| blocks-sections | 130 |
-| media | 129 |
-| features | 53 |
-| testimonials | 53 |
-| cta | 48 |
-| hero | 47 |
-| pricing | 44 |
-| faq | 42 |
+| forms | 1533 |
+| data-display | 1186 |
+| micro-interactions | 1066 |
+| feedback | 578 |
+| navigation | 571 |
+| overlay | 396 |
+| ai-surfaces | 366 |
+| layout | 318 |
+| backgrounds-effects | 221 |
+| blocks-sections | 180 |
+| text | 169 |
+| media | 162 |
+| features | 81 |
+| testimonials | 70 |
+| hero | 62 |
+| cta | 60 |
+| pricing | 52 |
+| faq | 48 |
 | design-system | 28 |
 | assets | 7 |
 | template | 2 |

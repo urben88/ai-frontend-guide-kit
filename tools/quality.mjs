@@ -12,7 +12,7 @@ import { SOURCES_DIR } from './extract/lib.mjs';
 
 // Maintenance / reliability tier of the source (0-20).
 const SOURCE_TIER = {
-  shadcn: 20, reui: 20, shadcnvue: 18, shadcnsvelte: 18, magicui: 18, coss: 18, motionprimitives: 17,
+  shadcn: 20, reui: 20, shadcnspace: 18, uiable: 17, blocksso: 16, shadcnvue: 18, shadcnsvelte: 18, magicui: 18, coss: 18, motionprimitives: 17,
   daisyui: 16, aceternity: 16, hyperui: 15, preline: 15, kiboui: 15, cultui: 14, animateui: 14,
   reactbits: 14, arcui: 14, mui: 18, chakra: 17, antd: 17, radix: 19, headlessui: 17, mantineui: 15, resources: 12, mantine: 18, baseui: 17, reactaria: 18, aicss: 12, tailblocks: 10, floatui: 12, agentskit: 12, uiverse: 8, '21stdev': 8, dsr: 10,
 };

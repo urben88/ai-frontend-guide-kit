@@ -149,3 +149,26 @@ test('reui indexes the free MIT examples and primitives and leaves Pro blocks ou
   const json = JSON.parse(run.stdout);
   assert.ok(json.results.length > 0 && json.results.every((r) => r.id.startsWith('reui-')));
 });
+
+test('shadcnspace, blocksso and uiable index only their free registry items', () => {
+  const expectations = {
+    shadcnspace: { min: 500, install: /^npx shadcn@latest add @shadcn-space\/[a-z0-9-]+$/, docs: /^https:\/\/shadcnspace\.com\// },
+    blocksso: { min: 60, install: /^npx shadcn@latest add @blocks-so\/[a-z0-9-]+$/, docs: /^https:\/\/blocks\.so\// },
+    uiable: { min: 700, install: /^npx shadcn@latest add @uiable\/[A-Za-z0-9-]+$/, docs: /^https:\/\/uiable\.com\// },
+  };
+  for (const [id, want] of Object.entries(expectations)) {
+    const doc = JSON.parse(readFileSync(join(ROOT, 'manifest', 'sources', `${id}.json`), 'utf8'));
+    assert.ok(doc.entries.length >= want.min, `${id} has ${doc.entries.length} entries`);
+    for (const e of doc.entries) {
+      assert.equal(e.license_type, 'MIT', e.id);
+      assert.equal(e.free, true, e.id);
+      assert.ok(e.id.startsWith(`${id}-`), e.id);
+      assert.match(e.install_command, want.install, e.id);
+      assert.match(e.docs_url, want.docs, e.id);
+    }
+  }
+  // Shadcn Space marks Pro items with meta.isPro; hero-04 is Pro and must stay out, hero-01 is free.
+  const space = JSON.parse(readFileSync(join(ROOT, 'manifest', 'sources', 'shadcnspace.json'), 'utf8'));
+  assert.ok(space.entries.every((e) => e.install_command !== 'npx shadcn@latest add @shadcn-space/hero-04'));
+  assert.ok(space.entries.some((e) => e.install_command === 'npx shadcn@latest add @shadcn-space/hero-01'));
+});

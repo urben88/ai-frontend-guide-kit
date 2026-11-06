@@ -69,6 +69,9 @@ Core: accordion→`micro-interactions`; animated background→`backgrounds-effec
 ### reui
 Examples map by component page: data-grid/table/chart/timeline/gantt/kanban/event-calendar/code-block/file-type/icon-tile/icon-stack/card/avatar/badge→`data-display`; filters/input/select/combobox/calendar/date-selector/time-picker/autocomplete/cascader/color-picker/emoji-picker/phone-input/number-field/rating/signature-pad/file-upload→`forms`; stepper/tree/scrollspy/breadcrumb/pagination/tabs/sidebar→`navigation`; frame→`layout`; trace/message/bubble/attachment→`ai-surfaces`; sortable→`micro-interactions`; other shadcn names follow the shadcn mapping.
 
+### shadcnspace, blocksso, uiable
+Section and screen names first: hero→`hero`; pricing/compare/coupon→`pricing`; testimonial/clientele/logo cloud→`testimonials`; faq→`faq`; cta/newsletter/waitlist/download→`cta`; feature/bento/integration/process/services→`features`; chat/message/attachment→`ai-surfaces`; form layouts and auth screens→`forms`; dashboard shell/layout/footer/empty/error pages→`layout`; navbar/topbar/sidebar/tabs→`navigation`; dialogs/sheets/command menus→`overlay`; tables/charts/stats/widgets/timelines/product screens/code blocks→`data-display`; gallery/carousel/marquee→`media`. Component variants follow the same keywords.
+
 ### agentskit
 Collections: AI Elements→`ai-surfaces`; Generated results & runtime controls→`ai-surfaces`; Voice→`ai-surfaces`; App examples→`blocks-sections`; source collections (Beautiful UI, beUI, Blocks.so, BoardUI, Libraries.dev, Prompt Kit, ElevenLabs, LiveKit, OrbKit, v0.1 compatibility)→map per component type using the same rules as above, defaulting to `ai-surfaces` when the component is an agent interaction surface.
 

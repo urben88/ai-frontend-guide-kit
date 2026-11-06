@@ -126,6 +126,24 @@ Per-source instructions: prerequisites, exact install commands, how to get the c
 - **Stack / Tailwind:** React/Next.js + Tailwind, shadcn/ui CSS variables.
 - **License / limits:** MIT for the free examples and primitives. The 678 Pro blocks, icons and templates need a paid license (HTTP 401 from the registry) and are not indexed.
 
+## Shadcn Space
+
+- **Catalog:** https://shadcnspace.com/components and https://shadcnspace.com/blocks (647 free items: 569 components and 78 blocks).
+- **Install:** `npx shadcn@latest add @shadcn-space/<name>` (for example `@shadcn-space/apple-dock-01`).
+- **License / limits:** MIT for free items. Items flagged `isPro` in the registry (478 blocks, 44 components, 29 pages) need a paid license and are not indexed.
+
+## blocks.so
+
+- **Catalog:** https://blocks.so (81 application blocks: stats, dialogs, login, file upload, onboarding, sidebars, tables, AI chat).
+- **Install:** `npx shadcn@latest add @blocks-so/<name>` (for example `@blocks-so/stats-01`).
+- **License / limits:** MIT.
+
+## Uiable
+
+- **Catalog:** https://uiable.com/components and https://uiable.com/blocks (Community tier: 797 component variants and 151 blocks on Base UI + shadcn/ui).
+- **Install:** `npx shadcn@latest add @uiable/<name>`.
+- **License / limits:** Community tier is MIT. Pro blocks, templates and dashboards are paid and are not in the public registry (HTTP 401).
+
 ## Agents Kit
 
 - **Catalog:** https://agents-ui.github.io/agents-kit/components (224 registry blocks)

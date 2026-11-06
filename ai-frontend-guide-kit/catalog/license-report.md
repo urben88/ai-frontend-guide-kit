@@ -12,6 +12,7 @@ Generated 2026-11-06 by `node tools/check-licenses.mjs`. Declared = license_type
 | antd | ant-design/ant-design | MIT | MIT | match |
 | arcui | kuratlielia/arc-library | MIT | MIT | match |
 | baseui | mui/base-ui | MIT | MIT | match |
+| blocksso | ephraimduncan/blocks | MIT | MIT | match |
 | chakra | chakra-ui/chakra-ui | MIT | MIT | match |
 | coss | cosscom/coss | MIT | AGPL-3.0 | accepted: indexed component dirs are MIT; repo root is AGPL |
 | cultui | nolly-studio/cult-ui | MIT | MIT | match |
@@ -33,9 +34,11 @@ Generated 2026-11-06 by `node tools/check-licenses.mjs`. Declared = license_type
 | resources | - | proprietary, MIT, custom | per-entry | verify each entry |
 | reui | keenthemes/reui | MIT | MIT | match |
 | shadcn | shadcn-ui/ui | MIT | MIT | match |
+| shadcnspace | shadcnspace/shadcnspace | MIT | MIT | match |
 | shadcnsvelte | huntabyte/shadcn-svelte | MIT | MIT | match |
 | shadcnvue | unovue/shadcn-vue | MIT | MIT | match |
 | tailblocks | mertJF/tailblocks | MIT | MIT | match |
+| uiable | codedthemes/uiable | MIT | MIT | match |
 | uiverse | uiverse-io/galaxy | MIT | MIT | match |
 
 MISMATCH or unresolved rows need a manual look before shipping to a client. `per-entry` sources (21st.dev, DSR) keep each author's license.
