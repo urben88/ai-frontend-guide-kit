@@ -291,46 +291,6 @@
       "quality": 59
     },
     {
-      "id": "resources-blocks-sections-flowbite-blocks",
-      "name": "Flowbite Blocks",
-      "source": "Curated resources",
-      "entry_type": "block",
-      "category": "blocks-sections",
-      "description": "Tailwind CSS sections for marketing, application, e-commerce and publisher pages (hero, pricing, contact, dashboards); a free subset under MIT and a larger Pro collection.",
-      "use_case": "Compose complete page sections that combine several components.",
-      "search_tags": [
-        "flowbite",
-        "blocks",
-        "sections",
-        "tailwind",
-        "hero",
-        "pricing",
-        "blocks-sections",
-        "curated-resources"
-      ],
-      "docs_url": "https://flowbite.com/blocks/",
-      "stack": [
-        "html",
-        "tailwind"
-      ],
-      "dependencies": [],
-      "license_type": "MIT",
-      "commercial_use": true,
-      "free": true,
-      "verified_at": "2026-10-04",
-      "decision_hints": [
-        "Pair with the Flowbite component source (`--source flowbite`)"
-      ],
-      "install_method": "copy-paste",
-      "manual_steps": [
-        "Docs: https://flowbite.com/blocks/",
-        "License evidence: https://flowbite.com/pro/"
-      ],
-      "limits": "Only the free blocks are MIT; the full collection (Pro, with Figma files) is paid and not indexed. Check the block page for the Pro badge.",
-      "extraction_note": "Hand-curated on 2026-10-04: license facts checked against the linked evidence; no machine-readable registry exists.",
-      "quality": 79
-    },
-    {
       "id": "resources-blocks-sections-tailwind-plus",
       "name": "Tailwind Plus (UI Blocks, Templates, Catalyst)",
       "source": "Curated resources",
@@ -379,7 +339,7 @@
       "source": "Curated resources",
       "entry_type": "design-system",
       "category": "design-system",
-      "description": "Community-published Figma files: UI kits, design systems, icon libraries and templates (for example the free edition of the Flowbite design system).",
+      "description": "Community-published Figma files: UI kits, design systems, icon libraries and templates.",
       "use_case": "Reference a full design system for tokens, components and theming guidance.",
       "search_tags": [
         "figma",

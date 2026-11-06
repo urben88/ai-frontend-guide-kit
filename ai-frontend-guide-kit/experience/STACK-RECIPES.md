@@ -52,7 +52,7 @@ How to use a recipe: pick the project type, confirm the stack with the user, the
 
 - Stack: Vite + React + TypeScript + Tailwind CSS + shadcn/ui, or the company's existing design system (`antd`, `mui`, `mantine`) when one already exists.
 - Architecture: `map`, and reuse the existing design system instead of adding a second one; `fsd` only on request.
-- Component sources: whichever design system the company already uses (`antd`, `mui`, `mantine`, `flowbite`), then `shadcn` (forms, data-display) for gaps, `uiverse` for small controls (`micro-interactions`).
+- Component sources: whichever design system the company already uses (`antd`, `mui`, `mantine`), then `shadcn` (forms, data-display) for gaps, `uiverse` for small controls (`micro-interactions`).
 - Documents: `sprint` — `README.md`, `DESIGN.md`; `standard` adds `PRODUCT.md`, `UX-SPEC.md`, `ARCHITECTURE.md`, `UI-MAP.md`; `long-term` when the tool outlives the team that built it.
 - Check: `node ai-frontend-guide-kit/tools/ui-map.mjs check --profile sprint` for a throwaway tool, `standard` once others depend on it.
 - Source: Vite documentation (https://vite.dev/guide/) and the chosen design system's own documentation.

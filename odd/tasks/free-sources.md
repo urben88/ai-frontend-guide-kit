@@ -13,7 +13,7 @@ Branch: `feat/free-sources` (from main 7713a6a). Delivery: ask-on-risk. Test run
 
 ## Tasks
 
-- [ ] T1 (S3) Remove hover and flowbite (HTML) sources: extractor entries, refresh map, docs, counts, tests. Route: inline.
+- [x] T1 (S3) Remove hover and flowbite (HTML) sources: extractor entries, refresh map, docs, counts, tests. Route: inline. Commit: see L8.
 - [ ] T2 (S1, S2) ReUI source via `tools/extract/registry.mjs` (shadcn registry format); categories, tags, descriptions good enough to search. Route: inline.
 - [ ] T3 (S1) Remaining six sources (shadcnspace, blocks.so, uiable, indoui, tabler, flowbite-react): research each data shape, one extractor or registry entry each. Route: decide after T2 (parallel writers only if units are independent and large).
 - [ ] T4 (S4) Source tier/ranking by free catalog size in quality score and `find.mjs` ordering; tests. Route: inline.
@@ -29,3 +29,4 @@ Branch: `feat/free-sources` (from main 7713a6a). Delivery: ask-on-risk. Test run
 - L5 (2026-11-06, user): "ReUI como galería principal: tiene muchos ejemplos de componentes en contextos reales, especialmente tablas y dashboards. shadcn/ui oficial como base del sistema de diseño. Shadcn Space o Shadcn Blocks cuando necesites un bloque ya montado: por ejemplo, una tabla con filtros, un formulario de alta, un modal de confirmación o un dashboard." Folded into S4 as role order.
 - L6 (2026-11-06, user): "Quizás solo las que no sean muy relevantes.Y no ofrezcan muchas opciones porque creo que si la mayoría son de pago pon... de poco me sirve." Evidence (web check): hover free=basic only, proprietary; flowbite 56 free types vs 450+ Pro; Shadcn Blocks 2,467+ Pro vs ~169 free; Shadcn Space 556+ blocks, Pro seen only on 3 templates.
 - L7 (2026-11-06, user, confirming removal of hover and flowbite, no Shadcn Blocks): "si y mejora la manera en la que esta herramienta inyecta o le dice a la gente de manera más agresiva que busquen estos componentes y primero tire de donde buscar estos componentes y usarlos". Next: T1.
+- L8 (2026-11-06) T1 done: removed hover (extractor + source), flowbite (extractor fn + source, license map, quality tier, context package map, test list) and the mostly-paid Flowbite Blocks entry in `resources`; docs and counts now 32 sources, 4,189 entries. `npm run verify`: 171/171 pass. Next: T2 (ReUI).

@@ -35,7 +35,7 @@ npx shadcn@latest add "https://ui.aceternity.com/registry/3d-card.json"
 npm i preline @tailwindcss/forms
 npx motion-primitives@latest add text-effect
 
-# copy-paste (daisyui, uiverse, tailblocks, hyperui, floatui, hover)
+# copy-paste (daisyui, uiverse, tailblocks, hyperui, floatui)
 #   → open docs_url, copy markup, paste into the project
 ```
 

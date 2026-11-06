@@ -57,9 +57,6 @@ coss ui primitives follow shadcn conventions (same mapping). Legacy Origin UI ca
 ### floatui
 Marketing: banners→`cta`; cta sections→`cta`; team→`blocks-sections`; contact→`forms`; footers→`layout`; logo grid→`testimonials`; 404 pages→`layout`; heroes→`hero`; faqs→`faq`; feature sections→`features`; pricing→`pricing`; testimonials→`testimonials`; stats→`data-display`; newsletters→`forms`. Application: inputs→`forms`; tables→`data-display`; paginations→`navigation`; cards→`data-display`; alerts→`feedback`; section headers→`layout`; steps→`navigation`; buttons→`micro-interactions`; tabs→`navigation`; navbars→`navigation`; select menus→`forms`; modals→`overlay`; avatars→`data-display`; authentication→`forms`; sidebars→`navigation`; radio groups→`forms`; context menus→`overlay`.
 
-### hover
-buttons→`micro-interactions`; cards→`data-display`; carousels→`media`; countdown→`data-display`; dropdown menus→`navigation`; grids→`features`; inputs→`forms`; links→`navigation`; loaders→`feedback`; modals→`overlay`; navbars & menus→`navigation`; notifications→`feedback`; other→`backgrounds-effects`/`text`/`micro-interactions` (per component); progress→`feedback`; tabs→`navigation`; tables→`data-display`; text→`text`; toggles→`micro-interactions`; sections: faq→`faq`; forms→`forms`; heros→`hero`; features→`features`; pricing→`pricing`; sign in→`forms`; stats→`data-display`; testimonials→`testimonials`; 3d→`backgrounds-effects`; kanban→`data-display`.
-
 ### tailblocks
 Blog→`blocks-sections`; Contact→`forms`; Content→`blocks-sections`; CTA→`cta`; Ecommerce→`blocks-sections`; Feature→`features`; Footer→`layout`; Gallery→`media`; Header→`navigation`; Hero→`hero`; Pricing→`pricing`; Statistic→`data-display`; Step→`features`; Team→`blocks-sections`; Testimonial→`testimonials`.
 

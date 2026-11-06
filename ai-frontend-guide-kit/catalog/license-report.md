@@ -1,6 +1,6 @@
 # License report
 
-Generated 2026-10-04 by `node tools/check-licenses.mjs`. Declared = license_type values in `manifest/sources/<id>.json`; detected = repo LICENSE file.
+Generated 2026-11-06 by `node tools/check-licenses.mjs`. Declared = license_type values in `manifest/sources/<id>.json`; detected = repo LICENSE file.
 
 | Source | Repo | Declared | Detected | Status |
 |---|---|---|---|---|
@@ -18,9 +18,7 @@ Generated 2026-10-04 by `node tools/check-licenses.mjs`. Declared = license_type
 | daisyui | saadeghi/daisyui | MIT | MIT | match |
 | dsr | - | unknown | per-entry | verify each entry |
 | floatui | - | custom | per-entry | verify each entry |
-| flowbite | themesberg/flowbite | MIT | MIT | match |
 | headlessui | tailwindlabs/headlessui | MIT | MIT | match |
-| hover | - | proprietary | per-entry | verify each entry |
 | hyperui | markmead/hyperui | MIT | MIT | match |
 | kiboui | shadcnblocks/kibo | MIT | MIT | match |
 | magicui | magicuidesign/magicui | MIT | MIT | match |

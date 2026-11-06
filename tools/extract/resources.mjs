@@ -59,7 +59,7 @@ const R = [
   // ---- Design-tool libraries ----
   {
     id: 'figma-community', name: 'Figma Community', type: 'design-system', category: 'design-system', docs: 'https://www.figma.com/community',
-    desc: 'Community-published Figma files: UI kits, design systems, icon libraries and templates (for example the free edition of the Flowbite design system).',
+    desc: 'Community-published Figma files: UI kits, design systems, icon libraries and templates.',
     tags: ['figma', 'ui-kit', 'design-system', 'templates', 'community'], stack: ['figma'],
     install: undefined, method: 'reference', license: 'custom', commercial: 'conditional', free: true,
     limits: 'Free community files are published under CC BY 4.0 (commercial use allowed, credit the creator); paid files use the Community Paid Resource License. The license is per file: always check the file page.',
@@ -89,14 +89,6 @@ const R = [
     install: 'npx untitledui@latest add button', method: 'npm', license: 'MIT', commercial: true, free: true,
     limits: 'Free components are MIT. PRO (from $349) adds more components, 250+ page examples and Figma sync and requires `npx untitledui@latest login`; PRO code is not MIT.',
     hints: ['Check each component page for the Free/PRO badge before adopting', 'Closest drop-in alternative to shadcn/ui with a stronger visual system'], evidence: 'https://www.untitledui.com/react/docs/cli',
-  },
-  {
-    id: 'flowbite-blocks', name: 'Flowbite Blocks', type: 'block', category: 'blocks-sections', docs: 'https://flowbite.com/blocks/',
-    desc: 'Tailwind CSS sections for marketing, application, e-commerce and publisher pages (hero, pricing, contact, dashboards); a free subset under MIT and a larger Pro collection.',
-    tags: ['flowbite', 'blocks', 'sections', 'tailwind', 'hero', 'pricing'], stack: ['html', 'tailwind'],
-    install: undefined, method: 'copy-paste', license: 'MIT', commercial: true, free: true,
-    limits: 'Only the free blocks are MIT; the full collection (Pro, with Figma files) is paid and not indexed. Check the block page for the Pro badge.',
-    hints: ['Pair with the Flowbite component source (`--source flowbite`)'], evidence: 'https://flowbite.com/pro/',
   },
 ];
 

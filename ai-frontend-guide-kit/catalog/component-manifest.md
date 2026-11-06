@@ -1,6 +1,6 @@
 # Component Manifest
 
-Light index of 4287 reusable UI entries across 34 sources. Generated 2026-10-04.
+Light index of 4189 reusable UI entries across 32 sources. Generated 2026-11-06.
 
 **Rule:** consult this catalog before writing any component from scratch. Filter with `find`, inspect with `get`, then follow `guides/06-REUSE.md`.
 
@@ -22,9 +22,7 @@ Light index of 4287 reusable UI entries across 34 sources. Generated 2026-10-04.
 | DaisyUI | 68 | MIT (library); templates/charts/Figma assets sold separately | complete (68 components) | `sources/daisyui.json` |
 | Design Systems Repo | 26 | Directory has no declared content license; each indexed system keeps its own | complete (26 design systems) | `sources/dsr.json` |
 | Float UI | 198 | Custom Float UI license (not MIT/OSI; commercial end products allowed) | complete (192 components) | `sources/floatui.json` |
-| Flowbite | 44 | MIT (open-source components); Flowbite Pro blocks/templates and part of Flowbite Blocks are paid | components of the open-source Flowbite docs (docs URLs verified) | `sources/flowbite.json` |
 | Headless UI | 16 | MIT | public components of @headlessui/react (docs URLs verified) | `sources/headlessui.json` |
-| Hover.dev | 53 | Proprietary custom license (free tier commercially usable, no attribution) | complete free set only (58 free of 153; paid requires Pro) | `sources/hover.json` |
 | HyperUI | 266 | MIT | curated: top 5 per category (540 total in source) | `sources/hyperui.json` |
 | Kibo UI | 40 | MIT (verified from the shadcnblocks/kibo repo license.md) | complete (all registry:ui items) | `sources/kiboui.json` |
 | Magic UI | 78 | MIT (components); Pro templates have a separate license | complete (all registry:ui items) | `sources/magicui.json` |
@@ -36,7 +34,7 @@ Light index of 4287 reusable UI entries across 34 sources. Generated 2026-10-04.
 | Radix Primitives | 30 | MIT | public primitives of Radix (docs URLs verified) | `sources/radix.json` |
 | React Aria Components | 51 | Apache-2.0 | complete (react-aria-components source files) | `sources/reactaria.json` |
 | React Bits | 213 | MIT + Commons Clause (use in products; no resale of the components) | complete (one entry per component, TS + Tailwind variant) | `sources/reactbits.json` |
-| Curated resources | 11 | Per resource: icon sets MIT/ISC, illustrations with custom terms, paid kits proprietary. See each entry. | curated: icon sets, illustrations, design-tool libraries and paid UI kits (reference level) | `sources/resources.json` |
+| Curated resources | 10 | Per resource: icon sets MIT/ISC, illustrations with custom terms, paid kits proprietary. See each entry. | curated: icon sets, illustrations, design-tool libraries and paid UI kits (reference level) | `sources/resources.json` |
 | shadcn/ui | 160 | MIT | complete (registry:ui items + official registry:block items) | `sources/shadcn.json` |
 | shadcn-svelte | 203 | MIT | complete (registry:ui + registry:block) | `sources/shadcnsvelte.json` |
 | shadcn-vue | 66 | MIT | complete (registry:ui) | `sources/shadcnvue.json` |
@@ -47,22 +45,22 @@ Light index of 4287 reusable UI entries across 34 sources. Generated 2026-10-04.
 
 | Category | Entries |
 |---|---|
-| micro-interactions | 780 |
-| forms | 689 |
-| data-display | 671 |
-| feedback | 330 |
-| navigation | 303 |
+| micro-interactions | 759 |
+| forms | 687 |
+| data-display | 644 |
+| feedback | 322 |
+| navigation | 290 |
 | ai-surfaces | 238 |
-| overlay | 208 |
-| backgrounds-effects | 200 |
-| text | 147 |
+| overlay | 200 |
+| backgrounds-effects | 194 |
+| text | 143 |
 | layout | 140 |
-| blocks-sections | 131 |
-| media | 122 |
-| features | 54 |
+| blocks-sections | 130 |
+| media | 118 |
+| features | 53 |
 | testimonials | 53 |
-| hero | 50 |
 | cta | 48 |
+| hero | 47 |
 | pricing | 44 |
 | faq | 42 |
 | design-system | 28 |

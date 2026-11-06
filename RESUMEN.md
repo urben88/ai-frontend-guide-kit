@@ -1,7 +1,7 @@
 # Resumen de la aplicación (fuente de verdad)
 
 > **Qué es:** catálogo de componentes UI reutilizables + kit guiado para que agentes de IA construyan frontends reutilizando antes de crear.
-> **Versión:** 1.3.0 · **Cifras:** 34 fuentes · 4287 entradas · 21 categorías · 20 skills propias
+> **Versión:** 1.3.0 · **Cifras:** 32 fuentes · 4189 entradas · 21 categorías · 20 skills propias
 >
 > 🔁 **Mantenlo al día:** actualiza este archivo en el mismo commit que añada, quite o cambie una funcionalidad.
 > `npm test` falla si las cifras de arriba no coinciden con `manifest/component-manifest.json`.

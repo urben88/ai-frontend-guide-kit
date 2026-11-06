@@ -1,10 +1,10 @@
 /**
  * Extraction: component libraries distributed as npm packages (not copy-paste registries).
  * Sources: Mantine, Base UI, React Aria Components, Material UI, Chakra UI, Ant Design, Radix Primitives,
- *          Headless UI, Flowbite, Mantine UI (page-section categories).
+ *          Headless UI, Mantine UI (page-section categories).
  * Component lists come from the public GitHub directory listing of each package.
  *
- * Usage: node tools/extract/ui-libraries.mjs [mantine|baseui|reactaria|mui|chakra|antd|radix|headlessui|flowbite|mantineui|all]
+ * Usage: node tools/extract/ui-libraries.mjs [mantine|baseui|reactaria|mui|chakra|antd|radix|headlessui|mantineui|all]
  */
 import { fetchJSON, fetchText, mapLimit, buildEntry, writeSource, slugify, titleCase, categoryFromKeywords, USE_BY_CATEGORY } from './lib.mjs';
 
@@ -189,18 +189,6 @@ async function headlessui() {
   return simple(cfg, names.map((name) => ({ name, slug: name })), { sourceName: cfg.label, sourceUrl: 'https://headlessui.com', catalogUrl: 'https://headlessui.com/react/menu', licenseSummary: 'MIT', granularity: 'public components of @headlessui/react (docs URLs verified)', extraction: { channel: 'github-contents', method: 'Component list from the headlessui package with docs URL verification', evidence_url: 'https://github.com/tailwindlabs/headlessui/tree/main/packages/@headlessui-react/src/components' } });
 }
 
-async function flowbite() {
-  const cfg = {
-    prefix: 'flowbite', label: 'Flowbite', pkg: 'flowbite', license: 'MIT', stack: ['html', 'tailwind'],
-    blurb: 'a Tailwind CSS component with ready HTML plus optional JavaScript behavior.',
-    hints: ['Plain HTML + Tailwind classes; framework wrappers exist (React, Svelte, Vue)', 'Flowbite Pro blocks and templates are paid and are not indexed'],
-    install: 'npm i flowbite (add the plugin in your Tailwind config)',
-    docsUrl: (name, slug) => `https://flowbite.com/docs/components/${slug}/`,
-  };
-  const files = (await listDir('themesberg/flowbite', 'content/components')).filter((i) => i.type === 'file' && /\.md$/.test(i.name));
-  return simple(cfg, files.map((f) => ({ name: f.name, slug: f.name.replace(/\.md$/, '') })), { sourceName: cfg.label, sourceUrl: 'https://flowbite.com', catalogUrl: 'https://flowbite.com/docs/getting-started/introduction/', licenseSummary: 'MIT (open-source components); Flowbite Pro blocks/templates and part of Flowbite Blocks are paid', granularity: 'components of the open-source Flowbite docs (docs URLs verified)', extraction: { channel: 'github-contents', method: 'Directory listing of content/components with docs URL verification', evidence_url: 'https://github.com/themesberg/flowbite/tree/main/content/components' } });
-}
-
 async function mantineui() {
   const text = (await fetchText('https://raw.githubusercontent.com/mantinedev/ui.mantine.dev/master/data/categories.ts')).text;
   const categories = [...text.matchAll(/slug:\s*'([^']+)',\s*name:\s*(?:'([^']+)'|"([^"]+)")/g)].map((m) => ({ slug: m[1], name: m[2] ?? m[3] }));
@@ -240,5 +228,4 @@ if (target === 'all' || target === 'chakra') await chakra();
 if (target === 'all' || target === 'antd') await antd();
 if (target === 'all' || target === 'radix') await radix();
 if (target === 'all' || target === 'headlessui') await headlessui();
-if (target === 'all' || target === 'flowbite') await flowbite();
 if (target === 'all' || target === 'mantineui') await mantineui();

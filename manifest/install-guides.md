@@ -90,15 +90,6 @@ Per-source instructions: prerequisites, exact install commands, how to get the c
 - **Stack / Tailwind:** React/Next.js + Tailwind (Vue/Svelte claimed on-site, not verified live).
 - **License / limits:** custom Float UI license (not OSI): commercial end products allowed; redistributing components/templates standalone or as starter kits/themes is not.
 
-## Hover.dev
-
-- **Catalog:** https://www.hover.dev/components (58 free of 153)
-- **Install:** none; copy-paste.
-- **Get the code:** free components show **VIEWCODE** inline on the category page; paid components require Hover Pro (one-time $49).
-- **Dependencies:** framer-motion/Motion; some components use @react-three/fiber or anime.js.
-- **Stack / Tailwind:** React + Tailwind + Motion.
-- **License / limits:** proprietary custom license (not MIT). Free and paid components usable commercially, no attribution; no repackaging as a competing service.
-
 ## Tailblocks
 
 - **Catalog:** https://tailblocks.cc (63 blocks in 15 categories)
@@ -260,12 +251,6 @@ Practical checks run in a fresh Next.js 16 + Tailwind v4 + `--src-dir` project:
 - **Install:** `npm i @headlessui/react` (a Vue package, `@headlessui/vue`, also exists). Unstyled, Tailwind-friendly.
 - **License / limits:** MIT.
 
-## Flowbite
-
-- **Catalog:** https://flowbite.com/docs/getting-started/introduction/
-- **Install:** `npm i flowbite`, add the plugin to the Tailwind config and import `flowbite/dist/flowbite.min.js` for interactive parts. Plain HTML + Tailwind; framework wrappers exist.
-- **License / limits:** MIT for the open-source components. Flowbite Pro and most of Flowbite Blocks are paid (see the `resources` source entry).
-
 ## Mantine UI
 
 - **Catalog:** https://ui.mantine.dev (about 120 copy-paste sections on Mantine, one catalog entry per category).
@@ -282,5 +267,5 @@ Practical checks run in a fresh Next.js 16 + Tailwind v4 + `--src-dir` project:
 - **Icon sets:** Lucide (ISC), Heroicons (MIT), Tabler Icons (MIT), Phosphor Icons (MIT): install via npm (`lucide-react`, `@heroicons/react`, `@tabler/icons-react`, `@phosphor-icons/react`). Use one set per project.
 - **Illustrations:** unDraw (free, no attribution, no redistribution or AI training), Storyset (free with attribution; Flaticon Premium removes it).
 - **Design-tool libraries:** Figma Community (free files are CC BY 4.0, per-file license), Canva (Content License Agreement; check branded and people/logo content).
-- **Paid or partly paid:** Tailwind Plus (paid one-time license), Untitled UI React (free MIT tier + PRO), Flowbite Blocks (free subset + Pro). Only reference entries exist: the kit never stores their code.
+- **Paid or partly paid:** Tailwind Plus (paid one-time license), Untitled UI React (free MIT tier + PRO). Only reference entries exist: the kit never stores their code.
 - Each entry links the license evidence page in `manual_steps`; re-verify before client delivery because terms and prices change.

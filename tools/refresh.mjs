@@ -24,7 +24,6 @@ const SOURCE_SCRIPTS = {
   dsr: ['extract/dsr.mjs'],
   uiverse: ['extract/uiverse.mjs'],
   '21stdev': ['extract/twentyfirst.mjs'],
-  hover: ['extract/hover.mjs'],
   kiboui: ['extract/registry-extra.mjs', 'kibo'],
   animateui: ['extract/registry-extra.mjs', 'animateui'],
   cultui: ['extract/registry-extra.mjs', 'cultui'],
@@ -40,7 +39,6 @@ const SOURCE_SCRIPTS = {
   antd: ['extract/ui-libraries.mjs', 'antd'],
   radix: ['extract/ui-libraries.mjs', 'radix'],
   headlessui: ['extract/ui-libraries.mjs', 'headlessui'],
-  flowbite: ['extract/ui-libraries.mjs', 'flowbite'],
   mantineui: ['extract/ui-libraries.mjs', 'mantineui'],
   resources: ['extract/resources.mjs'],
 };
