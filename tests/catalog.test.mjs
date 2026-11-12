@@ -28,10 +28,12 @@ test('parseArgs handles flags, values and --json', () => {
   assert.equal(args.json, true);
 });
 
-test('relevance requires every word and weights name over description', () => {
+test('relevance needs at least half of the words and weights name over description', () => {
   const e = entry();
   assert.ok(relevance(e, 'hero landing') > 0);
-  assert.equal(relevance(e, 'hero pricing'), 0);
+  assert.ok(relevance(e, 'hero pricing') > 0); // one of two words is enough now
+  assert.equal(relevance(e, 'pricing table pagination'), 0); // none matches
+  assert.equal(relevance(e, 'hero pricing table pagination'), 0); // 1 of 4 is below half
   assert.ok(relevance(e, 'demo') > relevance(e, 'headline'));
 });
 

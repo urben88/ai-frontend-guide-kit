@@ -15,13 +15,14 @@ When the user gives the URL of a component site, run `node tools/scout.mjs <url>
 ```bash
 node tools/find.mjs --category hero --commercial          # must-have filter for client work
 node tools/find.mjs --category forms --stack react
+node tools/find.mjs "pricing card with toggle" --limit 8      # a positional query works like --text
 node tools/find.mjs --text marquee --limit 8
 node tools/find.mjs --source magicui --category backgrounds-effects
 node tools/find.mjs --text "pricing toggle" --stack react --licensed --min-quality 70   # ranked by quality / relevance
 node tools/get.mjs <entry-id>                             # full card: install, license, deps
 ```
 
-Filters: `--category`, `--stack`, `--license`, `--commercial`, `--free`, `--source`, `--type`, `--text`, `--limit` (default 12), `--json`.
+Filters: `--category`, `--stack`, `--license`, `--commercial`, `--free`, `--source`, `--type`, `--text` (or a positional query), `--limit` (default 12), `--json`.
 
 ## Rank with Laya (recommended, local)
 
@@ -91,7 +92,7 @@ Next: `06-REUSE.md` decides reuse vs adapt vs build and installs.
 ## Ranking, duplicates and the explorer
 
 - Results are ranked by `quality` (0-100: license clarity, install effort, dependency count, source maintenance tier). Use `--min-quality 70` for safer picks and `--licensed` to drop entries with an unknown license.
-- `--text` is word-based: every word must match; name hits weigh more than tags, category and description. `--sort relevance|quality|name` overrides the order.
+- `--text` (or a positional query) is word-based: stopwords such as "with" are ignored and at least half of the words must match. Sources with a large free catalog come first (ReUI, then shadcn/ui, then Shadcn Space), then other licensed sources, then unknown-license ones; inside each group, more matched words rank higher and name hits weigh more than tags, category and description. `--sort relevance|quality|name` overrides the order.
 - The same component often exists in several sources. `find` collapses entries with the same name, category and framework and says how many it hid; `--all` shows every copy. Icons are hidden unless `--type icon` or `--all`.
 - Other frameworks: `--stack vue` and `--stack svelte` return shadcn-vue / shadcn-svelte; `--stack headless` returns unstyled primitives (Base UI, React Aria Components) for projects that own all visuals.
 - `catalog/explorer.html` is an offline explorer with the same filters, preview links and copy-install buttons: open it when the user wants to browse instead of describe.

@@ -49,7 +49,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 37
+      "quality": 22
     },
     {
       "id": "dsr-design-system-ant-design-x",
@@ -87,7 +87,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-apps-sdk-ui",
@@ -126,7 +126,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-atlassian-design-system",
@@ -163,7 +163,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-backbase-design-system",
@@ -200,7 +200,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-blade-design-system",
@@ -239,7 +239,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 37
+      "quality": 22
     },
     {
       "id": "dsr-design-system-canvas-design-system",
@@ -276,7 +276,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-carbon-design-system",
@@ -313,7 +313,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-chakra-ui-pro",
@@ -353,7 +353,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-claude-ai-unofficial",
@@ -392,7 +392,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-claude-mcp-apps",
@@ -433,7 +433,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 37
+      "quality": 22
     },
     {
       "id": "dsr-design-system-cloudscape-design-system",
@@ -471,7 +471,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-content-design-system",
@@ -508,7 +508,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-dialtone",
@@ -546,7 +546,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-ethos-design-system",
@@ -583,7 +583,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-fury-design-system",
@@ -621,7 +621,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 37
+      "quality": 22
     },
     {
       "id": "dsr-design-system-geist-design-system",
@@ -659,7 +659,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-gemini",
@@ -695,7 +695,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-horizon-design-system",
@@ -732,7 +732,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-lightning-design-system",
@@ -771,7 +771,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 37
+      "quality": 22
     },
     {
       "id": "dsr-design-system-pajamas-design-system",
@@ -808,7 +808,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-patternfly-design-system",
@@ -845,7 +845,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-seeds-design-system",
@@ -884,7 +884,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 37
+      "quality": 22
     },
     {
       "id": "dsr-design-system-shadcn-ui",
@@ -923,7 +923,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-soul-design-system",
@@ -960,7 +960,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     },
     {
       "id": "dsr-design-system-vibe-design-system",
@@ -999,7 +999,7 @@
       ],
       "limits": "The directory does not expose licenses; each design system keeps its own license.",
       "extraction_note": "Metadata only (name, company, links, badges); no component code stored. Credit designsystemsrepo.ai (Shift+R, non-profit).",
-      "quality": 32
+      "quality": 17
     }
   ]
 }

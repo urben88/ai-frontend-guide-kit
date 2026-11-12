@@ -45,7 +45,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/attachment.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add attachment",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-ai-surfaces-bubble",
@@ -79,7 +79,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/bubble.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add bubble",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-ai-surfaces-marker",
@@ -113,7 +113,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/marker.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add marker",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-ai-surfaces-message",
@@ -147,7 +147,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/message.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add message",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-ai-surfaces-message-scroller",
@@ -182,7 +182,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/message-scroller.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add message-scroller",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-ai-surfaces-questionnaire",
@@ -216,7 +216,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/questionnaire.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add questionnaire",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-data-display-avatar",
@@ -250,7 +250,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/avatar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add avatar",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-data-display-badge",
@@ -284,7 +284,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/badge.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add badge",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-data-display-card",
@@ -318,7 +318,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add card",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-data-display-chart",
@@ -352,7 +352,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/chart.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-data-display-chart-area-axes",
@@ -387,7 +387,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-area-axes.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-area-axes",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-area-default",
@@ -422,7 +422,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-area-default.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-area-default",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-area-gradient",
@@ -457,7 +457,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-area-gradient.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-area-gradient",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-area-icons",
@@ -492,7 +492,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-area-icons.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-area-icons",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-area-interactive",
@@ -527,7 +527,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-area-interactive.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-area-interactive",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-area-legend",
@@ -562,7 +562,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-area-legend.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-area-legend",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-area-linear",
@@ -597,7 +597,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-area-linear.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-area-linear",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-area-stacked",
@@ -632,7 +632,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-area-stacked.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-area-stacked",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-area-stacked-expand",
@@ -668,7 +668,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-area-stacked-expand.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-area-stacked-expand",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-area-step",
@@ -703,7 +703,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-area-step.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-area-step",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-bar-active",
@@ -738,7 +738,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-bar-active.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-bar-active",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-bar-default",
@@ -773,7 +773,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-bar-default.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-bar-default",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-bar-horizontal",
@@ -808,7 +808,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-bar-horizontal.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-bar-horizontal",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-bar-interactive",
@@ -843,7 +843,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-bar-interactive.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-bar-interactive",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-bar-label",
@@ -878,7 +878,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-bar-label.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-bar-label",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-bar-label-custom",
@@ -914,7 +914,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-bar-label-custom.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-bar-label-custom",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-bar-mixed",
@@ -949,7 +949,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-bar-mixed.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-bar-mixed",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-bar-multiple",
@@ -984,7 +984,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-bar-multiple.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-bar-multiple",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-bar-negative",
@@ -1019,7 +1019,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-bar-negative.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-bar-negative",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-bar-stacked",
@@ -1054,7 +1054,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-bar-stacked.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-bar-stacked",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-line-default",
@@ -1089,7 +1089,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-line-default.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-line-default",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-line-dots",
@@ -1124,7 +1124,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-line-dots.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-line-dots",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-line-dots-colors",
@@ -1160,7 +1160,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-line-dots-colors.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-line-dots-colors",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-line-dots-custom",
@@ -1196,7 +1196,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-line-dots-custom.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-line-dots-custom",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-line-interactive",
@@ -1231,7 +1231,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-line-interactive.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-line-interactive",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-line-label",
@@ -1266,7 +1266,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-line-label.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-line-label",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-line-label-custom",
@@ -1302,7 +1302,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-line-label-custom.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-line-label-custom",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-line-linear",
@@ -1337,7 +1337,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-line-linear.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-line-linear",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-line-multiple",
@@ -1372,7 +1372,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-line-multiple.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-line-multiple",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-line-step",
@@ -1407,7 +1407,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-line-step.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-line-step",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-donut",
@@ -1442,7 +1442,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-donut.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-donut",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-donut-active",
@@ -1478,7 +1478,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-donut-active.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-donut-active",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-donut-text",
@@ -1514,7 +1514,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-donut-text.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-donut-text",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-interactive",
@@ -1549,7 +1549,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-interactive.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-interactive",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-label",
@@ -1584,7 +1584,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-label.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-label",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-label-custom",
@@ -1620,7 +1620,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-label-custom.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-label-custom",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-label-list",
@@ -1656,7 +1656,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-label-list.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-label-list",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-legend",
@@ -1691,7 +1691,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-legend.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-legend",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-separator-none",
@@ -1727,7 +1727,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-separator-none.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-separator-none",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-simple",
@@ -1762,7 +1762,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-simple.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-simple",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-pie-stacked",
@@ -1797,7 +1797,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-pie-stacked.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-pie-stacked",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-default",
@@ -1832,7 +1832,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-default.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-default",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-dots",
@@ -1867,7 +1867,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-dots.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-dots",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-grid-circle",
@@ -1903,7 +1903,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-grid-circle.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-grid-circle",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-grid-circle-fill",
@@ -1940,7 +1940,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-grid-circle-fill.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-grid-circle-fill",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-grid-circle-no-lines",
@@ -1978,7 +1978,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-grid-circle-no-lines.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-grid-circle-no-lines",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-grid-custom",
@@ -2014,7 +2014,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-grid-custom.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-grid-custom",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-grid-fill",
@@ -2050,7 +2050,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-grid-fill.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-grid-fill",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-grid-none",
@@ -2086,7 +2086,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-grid-none.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-grid-none",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-icons",
@@ -2121,7 +2121,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-icons.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-icons",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-label-custom",
@@ -2157,7 +2157,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-label-custom.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-label-custom",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-legend",
@@ -2192,7 +2192,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-legend.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-legend",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-lines-only",
@@ -2228,7 +2228,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-lines-only.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-lines-only",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-multiple",
@@ -2263,7 +2263,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-multiple.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-multiple",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radar-radius",
@@ -2298,7 +2298,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radar-radius.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radar-radius",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radial-grid",
@@ -2333,7 +2333,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radial-grid.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radial-grid",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radial-label",
@@ -2368,7 +2368,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radial-label.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radial-label",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radial-shape",
@@ -2403,7 +2403,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radial-shape.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radial-shape",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radial-simple",
@@ -2438,7 +2438,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radial-simple.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radial-simple",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radial-stacked",
@@ -2473,7 +2473,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radial-stacked.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radial-stacked",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-radial-text",
@@ -2508,7 +2508,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-radial-text.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-radial-text",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-tooltip-advanced",
@@ -2543,7 +2543,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-tooltip-advanced.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-tooltip-advanced",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-tooltip-default",
@@ -2578,7 +2578,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-tooltip-default.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-tooltip-default",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-tooltip-formatter",
@@ -2613,7 +2613,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-tooltip-formatter.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-tooltip-formatter",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-tooltip-icons",
@@ -2648,7 +2648,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-tooltip-icons.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-tooltip-icons",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-tooltip-indicator-line",
@@ -2684,7 +2684,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-tooltip-indicator-line.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-tooltip-indicator-line",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-tooltip-indicator-none",
@@ -2720,7 +2720,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-tooltip-indicator-none.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-tooltip-indicator-none",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-tooltip-label-custom",
@@ -2756,7 +2756,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-tooltip-label-custom.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-tooltip-label-custom",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-tooltip-label-formatter",
@@ -2792,7 +2792,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-tooltip-label-formatter.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-tooltip-label-formatter",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-chart-tooltip-label-none",
@@ -2828,7 +2828,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/chart-tooltip-label-none.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add chart-tooltip-label-none",
-      "quality": 95
+      "quality": 99
     },
     {
       "id": "shadcn-data-display-item",
@@ -2862,7 +2862,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/item.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add item",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-data-display-kbd",
@@ -2896,7 +2896,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/kbd.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add kbd",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-data-display-table",
@@ -2930,7 +2930,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/table.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add table",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-feedback-alert",
@@ -2964,7 +2964,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/alert.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add alert",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-feedback-progress",
@@ -2998,7 +2998,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/progress.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add progress",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-feedback-skeleton",
@@ -3032,7 +3032,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/skeleton.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add skeleton",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-feedback-sonner",
@@ -3066,7 +3066,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/sonner.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sonner",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-feedback-spinner",
@@ -3100,7 +3100,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/spinner.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add spinner",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-feedback-toast",
@@ -3134,7 +3134,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/toast.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add toast",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-feedback-tooltip",
@@ -3168,7 +3168,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/tooltip.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add tooltip",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-calendar",
@@ -3202,7 +3202,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/calendar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add calendar",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-checkbox",
@@ -3236,7 +3236,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/checkbox.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add checkbox",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-combobox",
@@ -3270,7 +3270,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/combobox.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add combobox",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-field",
@@ -3304,7 +3304,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/field.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add field",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-form",
@@ -3338,7 +3338,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/form.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add form",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-input",
@@ -3372,7 +3372,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/input.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add input",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-input-group",
@@ -3407,7 +3407,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/input-group.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add input-group",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-input-otp",
@@ -3442,7 +3442,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/input-otp.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add input-otp",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-label",
@@ -3476,7 +3476,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/label.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add label",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-login-01",
@@ -3512,7 +3512,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/login-01.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add login-01",
-      "quality": 87
+      "quality": 91
     },
     {
       "id": "shadcn-forms-login-02",
@@ -3548,7 +3548,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/login-02.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add login-02",
-      "quality": 87
+      "quality": 91
     },
     {
       "id": "shadcn-forms-login-03",
@@ -3584,7 +3584,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/login-03.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add login-03",
-      "quality": 87
+      "quality": 91
     },
     {
       "id": "shadcn-forms-login-04",
@@ -3620,7 +3620,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/login-04.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add login-04",
-      "quality": 87
+      "quality": 91
     },
     {
       "id": "shadcn-forms-login-05",
@@ -3656,7 +3656,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/login-05.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add login-05",
-      "quality": 87
+      "quality": 91
     },
     {
       "id": "shadcn-forms-native-select",
@@ -3691,7 +3691,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/native-select.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add native-select",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-radio-group",
@@ -3726,7 +3726,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/radio-group.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add radio-group",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-select",
@@ -3760,7 +3760,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/select.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add select",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-signup-01",
@@ -3794,7 +3794,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/signup-01.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add signup-01",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-forms-signup-02",
@@ -3830,7 +3830,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/signup-02.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add signup-02",
-      "quality": 87
+      "quality": 91
     },
     {
       "id": "shadcn-forms-signup-03",
@@ -3866,7 +3866,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/signup-03.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add signup-03",
-      "quality": 87
+      "quality": 91
     },
     {
       "id": "shadcn-forms-signup-04",
@@ -3902,7 +3902,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/signup-04.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add signup-04",
-      "quality": 87
+      "quality": 91
     },
     {
       "id": "shadcn-forms-signup-05",
@@ -3938,7 +3938,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/signup-05.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add signup-05",
-      "quality": 87
+      "quality": 91
     },
     {
       "id": "shadcn-forms-slider",
@@ -3972,7 +3972,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/slider.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add slider",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-switch",
@@ -4006,7 +4006,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/switch.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add switch",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-textarea",
@@ -4040,7 +4040,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/textarea.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add textarea",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-toggle",
@@ -4074,7 +4074,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/toggle.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add toggle",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-forms-toggle-group",
@@ -4109,7 +4109,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/toggle-group.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add toggle-group",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-layout-aspect-ratio",
@@ -4144,7 +4144,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/aspect-ratio.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add aspect-ratio",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-layout-empty",
@@ -4178,7 +4178,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/empty.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add empty",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-layout-resizable",
@@ -4212,7 +4212,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/resizable.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add resizable",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-layout-scroll-area",
@@ -4247,7 +4247,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/scroll-area.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add scroll-area",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-layout-separator",
@@ -4281,7 +4281,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/separator.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add separator",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-media-carousel",
@@ -4315,7 +4315,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/carousel.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add carousel",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-micro-interactions-accordion",
@@ -4349,7 +4349,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/accordion.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add accordion",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-micro-interactions-button",
@@ -4383,7 +4383,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/button.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add button",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-micro-interactions-button-group",
@@ -4418,7 +4418,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/button-group.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add button-group",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-micro-interactions-collapsible",
@@ -4452,7 +4452,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/collapsible.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add collapsible",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-micro-interactions-direction",
@@ -4486,7 +4486,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/direction.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add direction",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-navigation-breadcrumb",
@@ -4520,7 +4520,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/breadcrumb.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add breadcrumb",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-navigation-menubar",
@@ -4554,7 +4554,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/menubar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add menubar",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-navigation-navigation-menu",
@@ -4588,7 +4588,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/navigation-menu.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add navigation-menu",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-navigation-pagination",
@@ -4622,7 +4622,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/pagination.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add pagination",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-navigation-sidebar",
@@ -4656,7 +4656,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/sidebar.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-navigation-sidebar-01",
@@ -4690,7 +4690,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-01.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-01",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-02",
@@ -4724,7 +4724,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-02.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-02",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-03",
@@ -4758,7 +4758,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-03.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-03",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-04",
@@ -4792,7 +4792,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-04.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-04",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-05",
@@ -4826,7 +4826,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-05.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-05",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-06",
@@ -4860,7 +4860,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-06.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-06",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-07",
@@ -4894,7 +4894,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-07.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-07",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-08",
@@ -4928,7 +4928,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-08.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-08",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-09",
@@ -4962,7 +4962,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-09.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-09",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-10",
@@ -4996,7 +4996,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-10.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-10",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-11",
@@ -5030,7 +5030,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-11.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-11",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-12",
@@ -5064,7 +5064,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-12.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-12",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-13",
@@ -5098,7 +5098,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-13.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-13",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-14",
@@ -5132,7 +5132,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-14.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-14",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-15",
@@ -5166,7 +5166,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-15.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-15",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-sidebar-16",
@@ -5200,7 +5200,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/sidebar-16.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sidebar-16",
-      "quality": 90
+      "quality": 94
     },
     {
       "id": "shadcn-navigation-tabs",
@@ -5234,7 +5234,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/tabs.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add tabs",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-overlay-alert-dialog",
@@ -5269,7 +5269,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/alert-dialog.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add alert-dialog",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-overlay-command",
@@ -5303,7 +5303,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/command.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add command",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-overlay-context-menu",
@@ -5338,7 +5338,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/context-menu.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add context-menu",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-overlay-dialog",
@@ -5372,7 +5372,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/dialog.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add dialog",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-overlay-drawer",
@@ -5406,7 +5406,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/drawer.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add drawer",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-overlay-dropdown-menu",
@@ -5441,7 +5441,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/dropdown-menu.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add dropdown-menu",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-overlay-hover-card",
@@ -5476,7 +5476,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/hover-card.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add hover-card",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-overlay-popover",
@@ -5510,7 +5510,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/popover.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add popover",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-overlay-sheet",
@@ -5544,7 +5544,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/base-nova/sheet.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add sheet",
-      "quality": 92
+      "quality": 96
     },
     {
       "id": "shadcn-template-dashboard-01",
@@ -5586,7 +5586,7 @@
       "registry_url": "https://ui.shadcn.com/r/styles/new-york-v4/dashboard-01.json",
       "install_method": "shadcn-cli",
       "install_command": "npx shadcn@latest add dashboard-01",
-      "quality": 80
+      "quality": 84
     }
   ]
 }

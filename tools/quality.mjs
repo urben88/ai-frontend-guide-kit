@@ -17,6 +17,12 @@ const SOURCE_TIER = {
   reactbits: 14, arcui: 14, mui: 18, chakra: 17, antd: 17, radix: 19, headlessui: 17, flowbitereact: 16, tabler: 15, indoui: 10, mantineui: 15, resources: 12, mantine: 18, baseui: 17, reactaria: 18, aicss: 12, tailblocks: 10, floatui: 12, agentskit: 12, uiverse: 8, '21stdev': 8, dsr: 10,
 };
 
+// Free-catalog size tier (S4). Sources with a large free catalog rank first, strictly, in this order:
+// ReUI, then shadcn/ui, then Shadcn Space. find.mjs mirrors this order for text search (it ships standalone in the kit).
+export const FREE_CATALOG_TIER = ['reui', 'shadcn', 'shadcnspace'];
+const FREE_CATALOG_BONUS = [6, 4, 2];
+const UNKNOWN_LICENSE_PENALTY = 15;
+
 const LICENSE_POINTS = { MIT: 30, 'Apache-2.0': 30, custom: 18, proprietary: 12, unknown: 4, 'non-commercial': 0 };
 const INSTALL_POINTS = { 'shadcn-cli': 20, npm: 20, 'copy-paste': 12, cdn: 10, reference: 4 };
 
@@ -31,6 +37,9 @@ export function scoreEntry(entry, sourceId) {
   const deps = (entry.dependencies ?? []).length;
   score += deps === 0 ? 10 : deps <= 2 ? 7 : deps <= 4 ? 4 : 0;
   score += SOURCE_TIER[sourceId] ?? 10;
+  const tier = FREE_CATALOG_TIER.indexOf(sourceId);
+  if (tier >= 0) score += FREE_CATALOG_BONUS[tier];
+  if (entry.license_type === 'unknown') score -= UNKNOWN_LICENSE_PENALTY;
   if (entry.entry_type === 'icon') score -= 20;
   return Math.max(0, Math.min(100, Math.round(score)));
 }

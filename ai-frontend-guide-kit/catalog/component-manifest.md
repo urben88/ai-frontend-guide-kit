@@ -1,6 +1,6 @@
 # Component Manifest
 
-Light index of 7358 reusable UI entries across 39 sources. Generated 2026-11-06.
+Light index of 7358 reusable UI entries across 39 sources. Generated 2026-11-12.
 
 **Rule:** consult this catalog before writing any component from scratch. Filter with `find`, inspect with `get`, then follow `guides/06-REUSE.md`.
 
