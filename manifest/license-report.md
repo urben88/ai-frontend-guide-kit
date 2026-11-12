@@ -1,6 +1,6 @@
 # License report
 
-Generated 2026-11-06 by `node tools/check-licenses.mjs`. Declared = license_type values in `manifest/sources/<id>.json`; detected = repo LICENSE file.
+Generated 2026-11-12 by `node tools/check-licenses.mjs`. Declared = license_type values in `manifest/sources/<id>.json`; detected = repo LICENSE file.
 
 | Source | Repo | Declared | Detected | Status |
 |---|---|---|---|---|
