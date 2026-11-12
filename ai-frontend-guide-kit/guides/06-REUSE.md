@@ -20,6 +20,8 @@ Need from inventory
    └─ No entry → search with broader filters → still none → BUILD CUSTOM
 ```
 
+**Search before build.** BUILD CUSTOM is allowed only after `node ai-frontend-guide-kit/tools/find.mjs "<need>"` (and `get`) found nothing that fits, and the reason is stated: what was searched and why each close result was rejected. Prefer ReUI, then shadcn/ui, then Shadcn Space results; skipping one needs a reason. `memory.mjs add --decision build` without a prior search is a defect.
+
 Record the path taken and one sentence of reasoning per row. "I liked it" is not a reason; "matches hero intent, MIT, reacts to scroll like the anchor requires" is.
 
 **On BUILD CUSTOM:** if installed, load `hallmark` (new page or section) or `design-taste-frontend` (app screen) and build only that row, inside the project's tokens. See "External design skills by step" in `00-START-HERE.md`. Without them, follow `08-PHILOSOPHY.md`.

@@ -15,7 +15,7 @@ When this kit is installed, the project contains:
 - `ai-frontend-guide-kit/AGENTS.md` — awareness layer.
 - `ai-frontend-guide-kit/guides/00…10` — the guided workflow (router + direction + three phases + iteration).
 - `ai-frontend-guide-kit/experience/` — direction knowledge: `EXPERIENCE-DIRECTION.md`, `QUESTION-BANK.md`, `SITE-ARCHETYPES.md`, `UX-PHILOSOPHIES.md`, `STYLE-DIRECTIONS.md`, `REFERENCE-PROTOCOL.md`, `DISCOVERY-LOOP.md`, `experience-manifest.json` and `references/` (saved idea cards).
-- `ai-frontend-guide-kit/catalog/` — 4,287 reusable entries from 34 verified sources (licenses, install commands, links), plus a light index.
+- `ai-frontend-guide-kit/catalog/` — 7,358 reusable entries from 39 verified sources (licenses, install commands, links), plus a light index.
 - `ai-frontend-guide-kit/tools/` — `flow.mjs` (the route and step of this project), `context.mjs` (stack, screens and UI libraries), `find.mjs`, `get.mjs`, `memory.mjs` (decisions and libraries), `ui-map.mjs`, `laya_select.py` and `excalidraw-mcp.mjs` (local, dependency-free Excalidraw MCP).
 - Sibling skills (when installed): `frontend-polish` (total polish phase), `frontend-refactor` (FSD structure, only on explicit request), `ux-map` (visual screen map) and the external design skills, each at its step of the flow: `landing-page-design` (phase 1, landing pages only), `hallmark` and `design-taste-frontend` (build only in phase 2, for decision `build`, and `design-taste-frontend` also for an agreed visual redesign; raw material without building in phase 1; `hallmark` also gives a report-only audit in phase 3), `emilkowalski` (phases 2–3), `impeccable` (phase 3). Details in `guides/00-START-HERE.md`, "External design skills by step".
 
@@ -103,17 +103,20 @@ The UI inventory and memory `--screen/--block` names come from `UX-SPEC.md`.
 
 Before closing a screen, run the sibling skill `frontend-polish` when installed: external audits (`impeccable`, `hallmark`, emilkowalski, plus the checks of `design-taste-frontend` when it built the screen) if available, the Playwright MCP loop (states, console, accessibility, keyboard, reduced motion, responsive) and the closing `@playwright/test` regression of `09-VERIFY`. Fallback without tools: the distilled checklist of `08-PHILOSOPHY`. In React projects, offer the optional human round (the user points at elements with Agentation; see `11-VISUAL-FEEDBACK.md`, which holds the install message) during composition for fine tweaks or at the end of polish.
 
-## Query the catalog (do this before writing components)
+## Query the catalog (mandatory first step before writing any component)
+
+Before writing any component, section, form or animation, search the catalog and use what it finds:
 
 ```bash
-node ai-frontend-guide-kit/tools/find.mjs --category hero --stack react --commercial
-node ai-frontend-guide-kit/tools/find.mjs --text marquee --limit 8
-node ai-frontend-guide-kit/tools/get.mjs <entry-id>   # license, deps, install command
+node ai-frontend-guide-kit/tools/find.mjs "<need>"        # e.g. "pricing card", "login form", "data table"
+node ai-frontend-guide-kit/tools/get.mjs <id>              # license, deps, install command; then install it
+node ai-frontend-guide-kit/tools/find.mjs --category hero --stack react --commercial   # filters when the need is a category
 ```
 
 Rules:
 
-- **Reuse → adapt → build.** Create custom only when nothing fits or the license blocks you.
+- **Search first, in source order: ReUI, then shadcn/ui, then Shadcn Space.** `find` ranks them that way; pick from the top and say why if you skip one.
+- **Reuse → adapt → build.** Build new only after a search found nothing that fits (or the license blocks you), and state that reason. A search that was never run is not a reason.
 - Licenses are facts: check `license_type` / `commercial_use` in `get` before using anything.
   Never use `non-commercial` entries in commercial work; verify `unknown` ones on their page.
 - Before closing a selection, present 2–3 **combinations** with rationale and `get` facts; web-discovered components stay `provisional` until their license is verified (`experience/DISCOVERY-LOOP.md`, phase B).

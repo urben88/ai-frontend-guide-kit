@@ -6,7 +6,7 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 
 ## What you have here
 
-- A catalog of **4,287 reusable UI entries** from **34 verified sources** (updated 2026-10-04; ranked by a quality score, with Vue/Svelte ports and icon/illustration/kit resources under the `assets` category), organized in 21 categories.
+- A catalog of **7,358 reusable UI entries** from **39 verified sources** (updated 2026-11-12; ranked by a quality score, with Vue/Svelte ports and icon/illustration/kit resources under the `assets` category), organized in 21 categories.
 - An **experience direction layer** (`experience/`): archetypes, philosophies, styles with limits, an adaptive question bank, reference cards with saved ideas, an interactive discovery loop (`DISCOVERY-LOOP.md`) and a machine-readable `experience-manifest.json` for Laya.
 - Per-entry decision data: what it is, when to use it, where to find it, how to install it and its license constraints.
 - A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–13).
@@ -19,7 +19,7 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 > **Before writing any component, form, section or animation from scratch: search this catalog.**
 > **Before choosing colors or components: choose the experience direction.**
 
-Only if nothing fits (or the license blocks you), build custom — and follow `guides/08-PHILOSOPHY.md`.
+Search with `node tools/find.mjs "<need>"` then `node tools/get.mjs <id>`, in source order: ReUI, shadcn/ui, Shadcn Space. Only if that search found nothing that fits (or the license blocks you), build custom, stating the reason — and follow `guides/08-PHILOSOPHY.md`.
 
 ## How to use (token-efficient layers)
 

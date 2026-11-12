@@ -149,3 +149,14 @@ test('the block is short, imperative and names the index, the first command and 
   assert.match(block, /never skipped/i);
   assert.ok(!/optional/i.test(block), 'no optional path around the flow');
 });
+
+test('the block makes the catalog search the mandatory first step, in source order (T5)', () => {
+  const target = project();
+  assert.equal(run(target, 'init').status, 0);
+  const block = blockOf(read(target, 'AGENTS.md'));
+  assert.match(block, /Catalog first/);
+  assert.ok(block.includes('node ai-frontend-guide-kit/tools/find.mjs "<need>"'));
+  assert.ok(block.includes('tools/get.mjs <id>'));
+  assert.ok(block.indexOf('ReUI') < block.indexOf('shadcn/ui') && block.indexOf('shadcn/ui') < block.indexOf('Shadcn Space'));
+  assert.match(block, /only after a search found nothing/);
+});

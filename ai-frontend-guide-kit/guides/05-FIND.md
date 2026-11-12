@@ -2,6 +2,19 @@
 
 Purpose: map each inventory row to a short list of concrete catalog entries, with reasons.
 
+## Mandatory first step
+
+Searching the catalog comes before writing any component, section, form or animation. No exceptions, not even for a "simple" one:
+
+```bash
+node ai-frontend-guide-kit/tools/find.mjs "<need>"      # e.g. "pricing card", "login form", "data table"
+node ai-frontend-guide-kit/tools/get.mjs <id>            # license, dependencies, install command
+```
+
+- Read the results in source order: **ReUI** first (main gallery: tables, dashboards, real-context examples), then **shadcn/ui** (design-system base), then **Shadcn Space** (ready-made blocks). `find` already ranks them that way; other sources follow, unknown-license ones last.
+- Pick from the top of the list. Moving past a ReUI, shadcn/ui or Shadcn Space result needs a reason (license, stack, the design direction).
+- Zero fitting results: search again with other words or a `--category` (at least two searches), and only then build. Record `--decision build` with the searches you tried as the reason.
+
 ## Overview first
 
 Read `catalog/digest.md` once: the 5 best entries per category (at most 2 per source), with license, quality and stack, in about 2.5k tokens. It tells you which sources and ids to query; `find` and `get` give the detail.
