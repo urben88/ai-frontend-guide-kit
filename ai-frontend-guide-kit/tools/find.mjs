@@ -94,10 +94,14 @@ export function sourceGroup(entry) {
   return tier < SOURCE_ORDER.length ? 0 : tier === SOURCE_ORDER.length ? 1 : 2;
 }
 
+// Whole-word match, singular/plural tolerant ("table" matches "tables", "forms" matches "form"); "sortable" does not match "table".
+const singular = (word) => (word.length > 3 && word.endsWith('s') ? word.slice(0, -1) : word);
+const hasWord = (text, term) => words(text).some((word) => singular(word) === singular(term));
+
 // Matched words and weighted score. Words are matched independently; stopwords are ignored.
 export function matchInfo(entry, query) {
   const terms = queryTerms(query);
-  if (terms.length === 0) return { matched: 0, strong: 0, needed: 1, score: 0 };
+  if (terms.length === 0) return { matched: 0, strong: 0, categoryHits: 0, needed: 1, score: 0 };
   const name = String(entry.name).toLowerCase();
   const tags = (entry.search_tags ?? []).join(' ').toLowerCase();
   const category = String(entry.category).toLowerCase();
@@ -105,14 +109,16 @@ export function matchInfo(entry, query) {
   const source = String(entry.source).toLowerCase();
   let score = 0;
   let matched = 0;
-  let strong = 0; // words found in the name or category (tags and descriptions list dependencies and are noisier)
+  let strong = 0; // words found as whole words in the name or category (tags and descriptions list dependencies and are noisier)
+  let categoryHits = 0; // words equal to the category: the entry IS that kind of component, not just named like it
   for (const term of terms) {
     const hit = (name.includes(term) ? 5 : 0) + (tags.includes(term) ? 3 : 0) + (category.includes(term) ? 2 : 0) + (source.includes(term) ? 1 : 0) + (description.includes(term) ? 1 : 0);
     if (hit > 0) matched += 1;
-    if (name.includes(term) || category.includes(term)) strong += 1;
+    if (hasWord(name, term) || hasWord(category, term)) strong += 1;
+    if (hasWord(category, term)) categoryHits += 1;
     score += hit;
   }
-  return { matched, strong, needed: Math.ceil(terms.length / 2), score };
+  return { matched, strong, categoryHits, needed: Math.ceil(terms.length / 2), score };
 }
 
 // Weighted relevance (name > tags > category > description). 0 when too few words match (at least half of them are required).
@@ -156,10 +162,11 @@ export function search(entries, args) {
   if (args.source && args._exactSource === undefined) args = { ...args, _exactSource: entries.some((entry) => entry.id.startsWith(`${args.source}-`)) };
   const filtered = entries.filter((entry) => matches(entry, args));
   const sort = args.sort ?? (args.text ? 'relevance' : 'quality');
-  const info = new Map(filtered.map((entry) => [entry, args.text ? matchInfo(entry, args.text) : { matched: 0, strong: 0, score: 0 }]));
+  const info = new Map(filtered.map((entry) => [entry, args.text ? matchInfo(entry, args.text) : { matched: 0, strong: 0, categoryHits: 0, score: 0 }]));
   const compare = {
-    // Big free sources first (S4), then more matched words, then the role order, then weighted relevance, then quality.
-    relevance: (a, b) => sourceGroup(a) - sourceGroup(b) || info.get(b).matched + info.get(b).strong - info.get(a).matched - info.get(a).strong || sourceTier(a) - sourceTier(b) || info.get(b).score - info.get(a).score || (b.quality ?? 0) - (a.quality ?? 0) || a.id.localeCompare(b.id),
+    // Big free sources first (S4), then more matched words, then entries whose category is a query word (a pricing block beats a form that only mentions pricing),
+    // then the role order, then weighted relevance, then quality.
+    relevance: (a, b) => sourceGroup(a) - sourceGroup(b) || info.get(b).matched + info.get(b).strong - info.get(a).matched - info.get(a).strong || info.get(b).categoryHits - info.get(a).categoryHits || sourceTier(a) - sourceTier(b) || info.get(b).score - info.get(a).score || (b.quality ?? 0) - (a.quality ?? 0) || a.id.localeCompare(b.id),
     quality: (a, b) => (b.quality ?? 0) - (a.quality ?? 0) || a.id.localeCompare(b.id),
     name: (a, b) => a.name.localeCompare(b.name),
   }[sort] ?? ((a, b) => a.id.localeCompare(b.id));

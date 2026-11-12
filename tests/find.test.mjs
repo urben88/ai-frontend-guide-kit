@@ -118,3 +118,26 @@ test('--text still filters out entries that match no word', () => {
   assert.equal(out.status, 0);
   assert.match(out.stdout, /0 matches/);
 });
+
+// S4/S5: an entry whose category is a query word beats entries that only mention it in the name
+test('pricing blocks rank above forms or cards that only mention pricing', () => {
+  const top = ids(run('pricing card', '--limit', '3').stdout);
+  const categories = JSON.parse(run('pricing card', '--limit', '2', '--json').stdout).results.map((r) => r.category);
+  assert.deepEqual(categories, ['pricing', 'pricing']);
+  assert.ok(top.every((id) => /^(reui|shadcn|shadcnspace)-/.test(id)));
+});
+
+test('login form returns login forms and data table returns tables first', () => {
+  const login = JSON.parse(run('login form', '--limit', '5', '--json').stdout).results;
+  assert.ok(login.every((r) => r.category === 'forms' && /login/i.test(r.name)), login.map((r) => r.name).join(', '));
+  const tables = JSON.parse(run('data table', '--limit', '5', '--json').stdout).results;
+  assert.ok(tables.slice(0, 5).filter((r) => /table/i.test(r.name)).length >= 4, tables.map((r) => r.name).join(', '));
+});
+
+test('category match outranks a name-only match, and source order breaks ties', () => {
+  const nameOnly = entry({ id: 'reui-forms-a', source: 'ReUI', name: 'Pricing Tiers', category: 'forms', description: '' });
+  const byCategory = entry({ id: 'shadcnspace-pricing-a', source: 'Shadcn Space', name: 'Plan grid', category: 'pricing', description: '' });
+  const sameStrength = entry({ id: 'reui-pricing-a', source: 'ReUI', name: 'Plans', category: 'pricing', description: '' });
+  const out = search([nameOnly, byCategory, sameStrength], { text: 'pricing' });
+  assert.deepEqual(out.results.map((r) => r.id), ['reui-pricing-a', 'shadcnspace-pricing-a', 'reui-forms-a']);
+});
