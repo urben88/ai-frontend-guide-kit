@@ -36,7 +36,7 @@ landing, dashboard, component, form, animation, polish; diseño, rediseñar, est
 fuentes, espaciado, maquetación, pantalla, página, landing, componente, formulario, animación, pulir.
 Catalog first, no exceptions: before writing ANY component, section, form or animation, search the catalog and use what it finds:
 \`node ai-frontend-guide-kit/tools/find.mjs "<need>"\`, then \`node ai-frontend-guide-kit/tools/get.mjs <id>\`, then install it.
-Results come in source order: ReUI, shadcn/ui, Shadcn Space. Build new code only after a search found nothing that fits, and say
+Results put the big free sources first (ReUI, shadcn/ui, Shadcn Space), best match on top. Build new code only after a search found nothing that fits, and say
 so with the reason. Also \`tools/pieces.mjs find "<need>"\` (own pieces) and \`tools/ui-map.mjs have <name>\` before creating,
 \`ui-map.mjs impact <role|component>\` before changing UI (read \`ai-frontend-output/UI-MAP.md\`, do not explore the repo).
 Record every decision with \`tools/memory.mjs add\`, and every piece use, version and reaction with \`tools/pieces.mjs\`.

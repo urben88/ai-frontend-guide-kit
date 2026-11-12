@@ -19,7 +19,7 @@
     },
     "kit-catalog": {
       "path": "catalog/sources/*.json",
-      "used_for": "each category is the one where the matching catalog entries concentrate (4,287 entries)"
+      "used_for": "each category is the one where the matching catalog entries concentrate (7,358 entries)"
     }
   },
   "layers": {
