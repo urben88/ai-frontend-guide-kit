@@ -6,9 +6,13 @@
  * empty list means the gate passes. `ctx` carries what a gate may need from the project:
  *   ctx.read(ref)     the text of another file ("out:ux/UX-SPEC.md", "root:PRODUCT.md"), or null
  *   ctx.ownProduct    true when the repository has its own product document (no PRODUCT.md)
+ *   ctx.run(tool, args)  the command line of a kit tool, in the one path form of the project
+ * A gate may also carry `also(ctx)`: problems about another file, already prefixed with that file's name.
  * It also holds the text-level helpers that `flow scaffold` and `flow report` use, so the template
  * a reader fills and the gate that reads it stay together.
  */
+
+import { validateTokens } from './tokens.mjs';
 
 const norm = (text) => text.toLowerCase().replace(/\s+/g, ' ').trim();
 
@@ -30,9 +34,9 @@ export function sections(text) {
 
 const HTML_TAG = /^<\/?(br|b|i|em|strong|code|kbd|a|p|span|div|img|ul|ol|li|sup|sub)\b[^<>]*\/?>$|^<(https?:|mailto:)/i;
 
-/** The template tokens (`<…>`, `<id>`) still in a text, ignoring code spans and HTML tags. */
+/** The template tokens (`<…>`, `<id>`) still in a text, ignoring code spans, HTML tags and HTML comments. */
 export function tokensIn(text) {
-  const plain = text.replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '');
+  const plain = text.replace(/<!--[\s\S]*?-->/g, '').replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '');
   return [...new Set((plain.match(/<[^<>\s][^<>\n]*>/g) ?? []).filter((token) => !HTML_TAG.test(token)))];
 }
 
@@ -198,6 +202,20 @@ function design(text) {
   return problems;
 }
 
+/** design-tokens.json, next to DESIGN.md: it exists, every value parses, references resolve and every declared contrast pair passes. */
+function tokensFile(ctx) {
+  const text = ctx.read('root:design-tokens.json');
+  const run = ctx.run ?? ((tool, args) => `node tools/${tool} ${args}`);
+  if (text === null) return [`design-tokens.json: the file is missing; write it with: ${run('tokens.mjs', 'init --primary <hex>')} (then check, css and doc)`];
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    return ['design-tokens.json: the file is not valid JSON'];
+  }
+  return validateTokens(data).problems.map((problem) => `design-tokens.json: ${problem}`);
+}
+
 /** The rows of the inventory with the cells a check needs; `where` names a row the way a reader finds it. */
 function inventoryRows(text) {
   const { header, rows } = table(text);
@@ -257,7 +275,7 @@ export const GATES = {
   'ux.product': { files: ['root:PRODUCT.md'], check: product, when: (ctx) => !ctx.ownProduct },
   'ux.spec': { files: ['out:ux/UX-SPEC.md'], check: spec },
   'ux.map': { files: ['out:ux/ux-map.excalidraw'], check: map },
-  tokens: { files: ['root:DESIGN.md', 'out:DESIGN.md'], check: design },
+  tokens: { files: ['root:DESIGN.md', 'out:DESIGN.md'], check: design, also: tokensFile },
   'compose.inventory': { files: INVENTORY_FILE, check: inventory },
   'compose.find': { files: INVENTORY_FILE, check: inventoryColumn('candidates', 'no candidates; write up to 3, or the words of the two searches that found nothing') },
   'compose.decide': { files: INVENTORY_FILE, check: inventoryColumn('decision', 'no decision; write reuse, adapt or build') },

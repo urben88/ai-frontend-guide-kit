@@ -70,8 +70,8 @@ const STEPS = {
     title: 'Tokens: palette, type, spacing, radius and motion from the visual brief',
     guide: 'guides/03-TOKENS.md',
     skill: 'impeccable (if installed)',
-    tool: 'Figma MCP (optional)',
-    output: 'DESIGN.md + Tailwind v4 theme',
+    tool: 'node tools/tokens.mjs (init, check, css, doc); Figma MCP (optional)',
+    output: 'design-tokens.json + DESIGN.md + Tailwind v4 theme',
     artifacts: [['root:DESIGN.md', 'out:DESIGN.md']],
   },
   compose: {
@@ -272,6 +272,7 @@ function environment(p) {
     hasProduct: existsSync(join(p.root, 'PRODUCT.md')),
     hasBrief: existsSync(join(p.out, 'ux', 'EXPERIENCE-BRIEF.md')),
     hasMap: existsSync(join(p.out, 'ux', 'ux-map.excalidraw')),
+    dark: /navigation_model\s*:\s*`?console/i.test(readText(join(p.out, 'ux', 'EXPERIENCE-BRIEF.md'))),
   };
 }
 
@@ -452,6 +453,7 @@ function unregisteredBuilds(p) {
 function gateContext(p) {
   return {
     ownProduct: hasOwnProductDoc(environment(p)),
+    run: environment(p).run,
     read: (ref) => {
       const { abs } = artifactPath(p, ref);
       return existsSync(abs) ? readFileSync(abs, 'utf8') : null;
@@ -465,7 +467,7 @@ function gateProblems(p, stepId, part, ctx) {
   if (!gate || (gate.when && !gate.when(ctx))) return [];
   const ref = gate.files.find((candidate) => ctx.read(candidate) !== null);
   if (!ref) return [];
-  return gate.check(ctx.read(ref), ctx).map((problem) => `${artifactPath(p, ref).shown}: ${problem}`);
+  return [...gate.check(ctx.read(ref), ctx).map((problem) => `${artifactPath(p, ref).shown}: ${problem}`), ...(gate.also ? gate.also(ctx) : [])];
 }
 
 /** Refuses with the numbered list of problems; a missing section points at the scaffold command. */

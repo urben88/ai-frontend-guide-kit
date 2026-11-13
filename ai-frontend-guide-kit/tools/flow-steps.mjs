@@ -11,6 +11,7 @@
  *   env.dep(name)        is that package a dependency? env.laya       did the user grant Laya?
  *   env.uxPresent        true | false | null (no context scan yet)
  *   env.framework        the spec framework the scan detected ('' when none)
+ *   env.dark             true when the brief's navigation_model is console (a dashboard or tool: dark tokens from day one)
  *   env.hasProduct       does PRODUCT.md exist?   env.hasBrief  does EXPERIENCE-BRIEF.md exist?   env.hasMap  does ux-map.excalidraw exist?
  *
  * A part may also carry `report`: the fixed checklist of a step that closes with free evidence
@@ -339,42 +340,21 @@ export const PARTS = {
     id: null,
     title: 'fix the visual system',
     build: (env) => ({
-      goal: 'Fix color, type, spacing, radius and motion before choosing components, so every piece inherits this identity.',
+      goal: 'Fix color, type, spacing, radius and motion before choosing components, so every piece inherits this identity. You choose a few values; the tool computes the rest.',
       steps: [
         env.mcp('figma')
-          ? 'The Figma MCP is configured: ask the user for the Figma file URL, inspect it and extract palette, type scale, radii and spacing.'
-          : `No Figma here: derive the tokens from the Visual brief section of ${BRIEF} and from PRODUCT.md.`,
+          ? 'The Figma MCP is configured: ask the user for the Figma file URL, inspect it and extract the colors, fonts, radius and spacing. They go into the flags of the init command below; for extra tokens edit design-tokens.json by hand. Never write them straight into CSS.'
+          : `No Figma here: choose the values from the Visual brief section of ${BRIEF} and from PRODUCT.md.`,
         `For a system-level reference: ${env.run('find.mjs', '--type design-system')} and then ${env.run('get.mjs', '<id>')}`,
-        'Write DESIGN.md in the project root from the template below, and add the rows accent, muted, border and a neutral ramp to the Color table.',
-        'Write the same values as a Tailwind v4 @theme block in the global CSS. Names are semantic (--color-primary, --color-surface), never palette names.',
-        'Check the contrast of body text on its background: it must be 4.5:1 or more. Change the color until it is.',
+        'Choose: primary, accent and neutral color (hex); display and body font; radius (none, small, medium, large); density (compact, regular, spacious); type ratio (1.2, 1.25, 1.333); motion (calm, snappy, playful).',
+        `Run: ${env.run('tokens.mjs', `init --primary <hex> --accent <hex> --neutral <hex> --font-display <name> --font-body <name> --radius <…> --density <…> --type-ratio <…> --motion <…>${env.dark ? ' --dark' : ''}`)}`,
+        `Check the tokens. Every line it prints is a contrast failure or a wrong value: change the flag and run init again with --force, or edit that value in design-tokens.json, until it prints none. Run: ${env.run('tokens.mjs', 'check')}`,
+        `Write the Tailwind v4 theme, then import that file from the global CSS, after the tailwindcss import. Names are semantic (--color-primary, --color-surface). Run: ${env.run('tokens.mjs', 'css --out ai-frontend-output/theme.css')}`,
+        `Write the token tables of DESIGN.md. Run: ${env.run('tokens.mjs', 'doc')}`,
+        'Replace the <…> line under Visual intent in DESIGN.md with one paragraph you can quote when choosing components.',
         env.skill('impeccable') && 'Load the skill impeccable and follow its guidelines for the token choices.',
       ],
-      template: {
-        file: 'DESIGN.md',
-        lines: [
-          '# Design',
-          '## Visual intent',
-          '<one paragraph you can quote when choosing components>',
-          '## Color',
-          '| Token | Value | Use |',
-          '|---|---|---|',
-          '| --color-primary | <…> | <…> |',
-          '| --color-surface | <…> | <…> |',
-          '| --color-text | <…> | <…> |',
-          '## Type',
-          'display: <font> · body: <font> · scale: <sizes>',
-          '## Spacing',
-          'scale: 4, 8, 12, 16, 24, 32, 48, 64',
-          '## Radius',
-          '<one value, or small / medium / large>',
-          '## Motion',
-          '<calm | snappy | playful> · <durations and easing>',
-          '## Contrast',
-          'body text on surface: <ratio>',
-        ],
-      },
-      done: ['DESIGN.md has every section filled and the measured contrast is 4.5:1 or more.', 'The global CSS has the @theme block with the same values.'],
+      done: ['design-tokens.json exists and the check command prints no failure (body text is 4.5:1 or more on its surface).', 'DESIGN.md has every section filled, with the token tables and a Visual intent paragraph.', 'The global CSS gets the @theme block from the css command.'],
       reference: env.kit('guides/03-TOKENS.md'),
     }),
   }],

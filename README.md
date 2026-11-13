@@ -37,7 +37,7 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 
 | Phase | What happens | You get |
 |---|---|---|
-| **1 · 🧠 UX & theory** | Experience direction (`experience/` + Laya for questions/direction), interactive discovery loop (example sites, likes, screenshots, component combinations), `landing-page-design` for landing pages, then proven flows (`userflow` + `flow-*`) and design tokens | `EXPERIENCE-BRIEF.md` · `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `DESIGN.md` + theme |
+| **1 · 🧠 UX & theory** | Experience direction (`experience/` + Laya for questions/direction), interactive discovery loop (example sites, likes, screenshots, component combinations), `landing-page-design` for landing pages, then proven flows (`userflow` + `flow-*`) and design tokens (`tools/tokens.mjs`: you choose a few values, the tool computes the scales and the contrast) | `EXPERIENCE-BRIEF.md` · `PRODUCT.md` · `UX-SPEC.md` · `flow-report.html` · `ux-map.excalidraw` · `design-tokens.json` · `DESIGN.md` + theme |
 | **2 · 🧩 Composition** | Inventory → catalog search → reuse/adapt/build decision → install. Only what the catalog cannot provide is built, with `hallmark` or `design-taste-frontend` | Components adapted to your tokens |
 | **3 · ✨ Total polish** | External audits (`impeccable`, `hallmark`, emilkowalski) + Playwright MCP loop + `@playwright/test` regression | A screen ready to ship |
 

@@ -10,7 +10,7 @@ This folder is a **guided, self-contained kit** for agents (and humans) that bui
 - An **experience direction layer** (`experience/`): archetypes, philosophies, styles with limits, an adaptive question bank, reference cards with saved ideas, an interactive discovery loop (`DISCOVERY-LOOP.md`) and a machine-readable `experience-manifest.json` for Laya.
 - Per-entry decision data: what it is, when to use it, where to find it, how to install it and its license constraints.
 - A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–13).
-- Two local query tools (`tools/find.mjs`, `tools/get.mjs`) that answer with minimal output, a frontend map of the project (`tools/ui-map.mjs`, always on, no dependencies), plus a local Excalidraw MCP server (`tools/excalidraw-mcp.mjs`, no dependencies) for the UX map.
+- Two local query tools (`tools/find.mjs`, `tools/get.mjs`) that answer with minimal output, a frontend map of the project (`tools/ui-map.mjs`, always on, no dependencies), design tokens as data with computed contrast and CSS (`tools/tokens.mjs`), plus a local Excalidraw MCP server (`tools/excalidraw-mcp.mjs`, no dependencies) for the UX map.
 - A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses, plus a total-polish skill (`skills/frontend-polish/SKILL.md`), a visual map skill (`skills/ux-map/SKILL.md`) and an FSD refactor skill (`skills/frontend-refactor/SKILL.md`, only on explicit request).
 - `HELP.md` and `HELP.es.md`: the plain-language explanation of what this kit is, what runs always and what only on request, its tools and skills, what you can ask for and ready-to-copy prompts. When someone asks what the kit does or how to use it, answer from those files instead of exploring the folders.
 
@@ -60,7 +60,7 @@ When someone asks which flows exist, answer from `guides/FLOWS.md` and recommend
 | 0 · Intake | `guides/00-START-HERE.md` | route declared + flow map |
 | 1 · UX & theory | `guides/01-EXPERIENCE-DIRECTION.md` | `EXPERIENCE-BRIEF.md` (archetype, philosophy, journey, IA, 3 directions, visual brief) |
 | 1 · UX & theory | `guides/02-UX-FLOWS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw` (4 paths) |
-| 1 · UX & theory | `guides/03-TOKENS.md` | `DESIGN.md` + Tailwind v4 theme from the visual brief (Figma MCP or fallback) |
+| 1 · UX & theory | `guides/03-TOKENS.md` | `design-tokens.json` + `DESIGN.md` + Tailwind v4 theme from the visual brief (`tools/tokens.mjs`; Figma MCP values go into its flags) |
 | 2 · Composition | `guides/04-INVENTORY.md` … `guides/07-ADAPT.md` (+ `08` while composing) | inventory, shortlist, reuse/adapt/build + install, adapted components |
 | 3 · Total polish | `frontend-polish` skill + `guides/08-PHILOSOPHY.md` + `guides/09-VERIFY.md` | external audits + Playwright MCP loop + E2E/visual checks green |
 | Iterate | `guides/10-ITERATE.md` | small changes and custom additions without repeating the UX phase |

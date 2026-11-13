@@ -41,6 +41,7 @@ Every step, with its guide, skill, tools and output: `ai-frontend-guide-kit/guid
 |---|---|
 | Declare, follow and close the flow; `next` prints the whole instruction of the current micro-step | `flow.mjs` (texts: `flow-steps.mjs`; content checks: `flow-gates.mjs`) |
 | Read the project context | `context.mjs` |
+| Fix the design tokens: you choose a few values, the tool computes ramps, contrast, the CSS theme and the DESIGN.md tables | `tokens.mjs` (`init`, `check`, `css`, `doc`, `contrast`) |
 | Map the frontend, find owners, users and strays | `ui-map.mjs` (`build`, `impact`, `have`, `check`) |
 | Before creating a component: own piece, variant, other project, catalog | `pieces.mjs find "<need>"` |
 | Register, use, version and rate the project's pieces | `pieces.mjs` (`add`, `use`, `version`, `like`, `note`) |

@@ -8,6 +8,7 @@ import { spawnSync } from 'node:child_process';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const TOOL = join(ROOT, 'ai-frontend-guide-kit', 'tools', 'flow.mjs');
+const TOKENS_TOOL = join(ROOT, 'ai-frontend-guide-kit', 'tools', 'tokens.mjs');
 
 const cleanEnv = () => {
   const env = { ...process.env };
@@ -100,6 +101,8 @@ const put = (dir, rel, text = VALID[rel] ?? 'x\n') => {
   mkdirSync(dirname(out(dir, rel)), { recursive: true });
   writeFileSync(out(dir, rel), text);
 };
+/** The design-tokens.json the tokens step needs, written by the tokens tool the way a reader would. */
+const putTokens = (dir, ...args) => assert.equal(spawnSync(process.execPath, [TOKENS_TOOL, 'init', '--primary', '#8a4b08', '--force', ...args, '--dir', dir], { encoding: 'utf8' }).status, 0);
 /** `flow report <step>`, then every line marked [x] with a result: what a finished report looks like. */
 const fillReport = (dir, step) => {
   assert.equal(flow(dir, 'report', step).status, 0, `report ${step}`);
@@ -329,6 +332,7 @@ test('compose gets the same guard through the new route (S5)', () => {
   flowIn(ctx, 'start', 'new');
   for (const step of ['intake', 'direction', 'ux', 'tokens']) {
     for (const file of ['ux/REPO-CONTEXT.md', 'UI-MAP.md', 'ux/EXPERIENCE-BRIEF.md', 'ux/UX-SPEC.md', 'ux/ux-map.excalidraw', 'DESIGN.md']) put(dir, file);
+    putTokens(dir);
     writeFileSync(join(dir, 'PRODUCT.md'), VALID_PRODUCT);
     const done = flowIn(ctx, 'done', step);
     assert.equal(done.status, 0, `${step}: ${done.stderr}`);
@@ -401,6 +405,7 @@ test('done compose refuses a changed piece too (flow-always S4b)', () => {
   flowIn(ctx, 'start', 'new');
   for (const step of ['intake', 'direction', 'ux', 'tokens']) {
     for (const file of ['ux/REPO-CONTEXT.md', 'UI-MAP.md', 'ux/EXPERIENCE-BRIEF.md', 'ux/UX-SPEC.md', 'ux/ux-map.excalidraw', 'DESIGN.md']) put(dir, file);
+    putTokens(dir);
     writeFileSync(join(dir, 'PRODUCT.md'), VALID_PRODUCT);
     assert.equal(flowIn(ctx, 'done', step).status, 0);
   }
@@ -475,7 +480,6 @@ const COMPLETE = {
   'direction.journey': (text) => fill(text).replace('|---|---|---|---|---|---|\n', `$&${'| a | b | c | d | e | f |\n'.repeat(3)}`),
   'direction.directions': (text) => fill(text).replace(/### ok: ok\n[\s\S]*$/, '### safe: A\nchanges: a\n### differentiated: B\nchanges: b\n### experimental: C\nchanges: c\n'),
   'ux.spec': (text) => fill(text).replace('|---|---|---|---|---|---|---|\n', '$&| Home | ok | ok | ok | ok | ok | G1, O1 |\n'),
-  tokens: (text) => fill(text.replace('<ratio>', '7:1')),
   'compose.find': (text) => text.replace('| must | ok | | |', '| must | ok | magicui-x | |'),
   'compose.decide': (text) => text.replace('| must | ok | magicui-x | |', '| must | ok | magicui-x | reuse |'),
 };
@@ -489,6 +493,10 @@ const complete = (dir, homeDir, info) => {
   } else if (id === 'compose.find' || id === 'compose.decide') {
     const file = out(dir, 'INVENTORY.md');
     writeFileSync(file, COMPLETE[id](readFileSync(file, 'utf8')));
+  } else if (id === 'tokens') {
+    putTokens(dir);
+    assert.equal(spawnSync(process.execPath, [TOKENS_TOOL, 'doc', '--dir', dir], { encoding: 'utf8' }).status, 0, 'tokens: doc');
+    writeFileSync(join(dir, 'DESIGN.md'), fill(readFileSync(join(dir, 'DESIGN.md'), 'utf8')));
   } else provide(dir, info.artifacts);
   if (info.report) {
     assert.equal(guided(dir, homeDir, 'report', info.step).status, 0, `${id}: report`);
@@ -863,6 +871,7 @@ test('tokens, inventory and architecture check their content, and compose.find a
   put(dir, 'DESIGN.md', VALID_DESIGN.replace('| --color-primary | #8a4b08 | buttons |\n', '| --color-primary | <…> | <…> |\n'));
   assert.match(refusal(guided(dir, homeDir, 'done', 'tokens'), dir, before), /section "Color" still has a template token/);
   put(dir, 'DESIGN.md');
+  putTokens(dir);
   assert.equal(guided(dir, homeDir, 'done', 'tokens').status, 0);
 
   const compose = project();
@@ -1023,4 +1032,64 @@ test('the usage text and guides/FLOWS.md name scaffold, report and the content g
   const flows = readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'guides', 'FLOWS.md'), 'utf8');
   assert.match(flows, /scaffold/);
   assert.match(flows, /flow\.mjs report/);
+});
+
+// ---------------------------------------------------------------- machine-readable tokens (weak-model-design S4)
+
+test('the tokens gate needs design-tokens.json: present, valid and with no contrast failure (S4)', () => {
+  const homeDir = home();
+  const dir = project();
+  stateAt(dir, 'tokens');
+  put(dir, 'DESIGN.md');
+  const before = raw(dir);
+  const missing = refusal(guided(dir, homeDir, 'done', 'tokens'), dir, before);
+  assert.match(missing, /design-tokens\.json: the file is missing; write it with: node [^\n]*tools\/tokens\.mjs init/);
+
+  writeFileSync(join(dir, 'design-tokens.json'), '{not json');
+  assert.match(refusal(guided(dir, homeDir, 'done', 'tokens'), dir, before), /design-tokens\.json: the file is not valid JSON/);
+
+  putTokens(dir);
+  const data = JSON.parse(readFileSync(join(dir, 'design-tokens.json'), 'utf8'));
+  data.color.text.$value = '#9a9a9a';
+  writeFileSync(join(dir, 'design-tokens.json'), JSON.stringify(data));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'tokens'), dir, before), /design-tokens\.json: color\.text on color\.surface: \d\.\d{1,2}:1, needs 4\.5:1/);
+
+  data.color.primary.$value = 'blue';
+  writeFileSync(join(dir, 'design-tokens.json'), JSON.stringify(data));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'tokens'), dir, before), /design-tokens\.json: color\.primary: "blue" is not a hex color/);
+
+  putTokens(dir);
+  const ok = guided(dir, homeDir, 'done', 'tokens');
+  assert.equal(ok.status, 0, ok.stderr);
+});
+
+test('a state without gates and a DESIGN.md without design-tokens.json keeps closing the tokens step (previous behavior, S4)', () => {
+  const homeDir = home();
+  const dir = project();
+  stateAt(dir, 'tokens', {}, 0);
+  put(dir, 'DESIGN.md', 'x\n');
+  assert.equal(existsSync(join(dir, 'design-tokens.json')), false);
+  const ok = guided(dir, homeDir, 'done', 'tokens');
+  assert.equal(ok.status, 0, ok.stderr);
+});
+
+test('the tokens instruction tells the reader to choose a few values and run init, check, css and doc, within 48 lines (S4)', () => {
+  const homeDir = home();
+  const dir = project();
+  stateAt(dir, 'tokens');
+  const text = guided(dir, homeDir, 'next').stdout;
+  for (const command of ['tokens.mjs init --primary', 'tokens.mjs check', 'tokens.mjs css --out', 'tokens.mjs doc']) assert.ok(text.includes(command), command);
+  assert.doesNotMatch(text, /--dark/, 'no dark tokens unless the brief asks for a console');
+  assert.doesNotMatch(text, /node tools\//);
+  assert.match(text, /No Figma here/);
+  assert.ok(text.trimEnd().split('\n').length <= 48, `${text.trimEnd().split('\n').length} lines`);
+
+  writeFileSync(join(dir, '.mcp.json'), JSON.stringify({ mcpServers: { figma: { command: 'x' } } }));
+  put(dir, BRIEF, VALID_BRIEF.replace('navigation_model: catalog', 'navigation_model: console'));
+  const withFigma = guided(dir, homeDir, 'next').stdout;
+  assert.match(withFigma, /Figma MCP is configured/);
+  assert.match(withFigma, /flags of the init command/);
+  assert.match(withFigma, /tokens\.mjs init [^\n]*--dark/);
+  assert.ok(withFigma.trimEnd().split('\n').length <= 48);
+  assert.equal(JSON.parse(guided(dir, homeDir, 'next', '--json').stdout).template, null);
 });
