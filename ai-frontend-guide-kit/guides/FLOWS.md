@@ -28,7 +28,7 @@ New frontend or major build (phases 1 → 2 → 3)
 | 3 | `ux` | guides/02-UX-FLOWS.md | userflow + flow-*, ux-map | node tools/excalidraw-mcp.mjs | ai-frontend-output/ux/UX-SPEC.md + ai-frontend-output/ux/ux-map.excalidraw |
 | 4 | `tokens` | guides/03-TOKENS.md | impeccable (if installed) | node tools/tokens.mjs (init, check, css, doc); Figma MCP (optional) | design-tokens.json + DESIGN.md + Tailwind v4 theme |
 | 5 | `compose` | guides/04-INVENTORY.md … guides/07-ADAPT.md (+ guides/08-PHILOSOPHY.md) | ai-frontend-guide (hallmark / design-taste-frontend only for decision build) | node tools/pieces.mjs find; node tools/ui-map.mjs have; node tools/find.mjs; node tools/get.mjs; node tools/memory.mjs add | ai-frontend-output/selections.jsonl |
-| 6 | `polish` | guides/08-PHILOSOPHY.md + guides/09-VERIFY.md | frontend-polish | Playwright MCP, @playwright/test, node tools/ui-map.mjs check | checks green (optional ai-frontend-output/polish-report.md) (`--evidence`) |
+| 6 | `polish` | guides/08-PHILOSOPHY.md + guides/09-VERIFY.md | frontend-polish | node tools/audit-design.mjs, Playwright MCP, @playwright/test, node tools/ui-map.mjs check | checks green (optional ai-frontend-output/polish-report.md) (`--evidence`) |
 
 ### `direction`
 
@@ -56,7 +56,7 @@ Small change or custom component
 |---|---|---|---|---|---|
 | 1 | `intake` | guides/00-START-HERE.md | ai-frontend-guide | node tools/context.mjs; node tools/ui-map.mjs build | ai-frontend-output/ux/REPO-CONTEXT.md + ai-frontend-output/UI-MAP.md |
 | 2 | `iterate` | guides/10-ITERATE.md | ai-frontend-guide | node tools/pieces.mjs find; node tools/ui-map.mjs impact; node tools/memory.mjs add | the change, with its decision recorded (`--evidence`) |
-| 3 | `polish` | guides/08-PHILOSOPHY.md + guides/09-VERIFY.md | frontend-polish | Playwright MCP, @playwright/test, node tools/ui-map.mjs check | checks green (optional ai-frontend-output/polish-report.md) (`--evidence`) |
+| 3 | `polish` | guides/08-PHILOSOPHY.md + guides/09-VERIFY.md | frontend-polish | node tools/audit-design.mjs, Playwright MCP, @playwright/test, node tools/ui-map.mjs check | checks green (optional ai-frontend-output/polish-report.md) (`--evidence`) |
 
 ### `polish`
 
@@ -65,7 +65,7 @@ Polish only or visual QA
 | # | Step | Guide | Skill | Tools | Output |
 |---|---|---|---|---|---|
 | 1 | `intake` | guides/00-START-HERE.md | ai-frontend-guide | node tools/context.mjs; node tools/ui-map.mjs build | ai-frontend-output/ux/REPO-CONTEXT.md + ai-frontend-output/UI-MAP.md |
-| 2 | `polish` | guides/08-PHILOSOPHY.md + guides/09-VERIFY.md | frontend-polish | Playwright MCP, @playwright/test, node tools/ui-map.mjs check | checks green (optional ai-frontend-output/polish-report.md) (`--evidence`) |
+| 2 | `polish` | guides/08-PHILOSOPHY.md + guides/09-VERIFY.md | frontend-polish | node tools/audit-design.mjs, Playwright MCP, @playwright/test, node tools/ui-map.mjs check | checks green (optional ai-frontend-output/polish-report.md) (`--evidence`) |
 
 ### `redesign`
 
@@ -75,7 +75,7 @@ Visual redesign of an existing screen
 |---|---|---|---|---|---|
 | 1 | `intake` | guides/00-START-HERE.md | ai-frontend-guide | node tools/context.mjs; node tools/ui-map.mjs build | ai-frontend-output/ux/REPO-CONTEXT.md + ai-frontend-output/UI-MAP.md |
 | 2 | `redesign` | guides/00-START-HERE.md (external design skills by step) | design-taste-frontend (redesign mode) | node tools/ui-map.mjs impact | the redesigned screen (`--evidence`) |
-| 3 | `polish` | guides/08-PHILOSOPHY.md + guides/09-VERIFY.md | frontend-polish | Playwright MCP, @playwright/test, node tools/ui-map.mjs check | checks green (optional ai-frontend-output/polish-report.md) (`--evidence`) |
+| 3 | `polish` | guides/08-PHILOSOPHY.md + guides/09-VERIFY.md | frontend-polish | node tools/audit-design.mjs, Playwright MCP, @playwright/test, node tools/ui-map.mjs check | checks green (optional ai-frontend-output/polish-report.md) (`--evidence`) |
 
 ### `visual-feedback`
 

@@ -42,7 +42,7 @@ These rules apply to **new code**. Existing violations are recorded by the map (
 - No default purples/blue gradients, no generic glassmorphism wallpaper, no stock "AI look".
 - The design must express the `PRODUCT.md` personality; if you can swap the logo and it fits any competitor, iterate.
 - Contrast is non-negotiable: body text ≥ 4.5:1, large text ≥ 3:1.
-- Audit continuously: at the end of each screen, run the `impeccable` audit if installed (`/impeccable audit <screen>`), otherwise self-review with the checklist below.
+- Audit continuously: at the end of each screen, run the `impeccable` audit if installed (`/impeccable audit <screen>`), and always run `node ai-frontend-guide-kit/tools/audit-design.mjs --report`.
 
 ## Combination limits
 
@@ -50,13 +50,14 @@ These rules apply to **new code**. Existing violations are recorded by the map (
 - Effects must not compete: one animated background per view, one text effect per section.
 - If a component needs a library only for one detail, consider a lighter alternative from the catalog.
 
-## Self-review checklist
+## Measured by the tool, not by you
 
-- [ ] Primary action unmistakable at first glance.
-- [ ] Spacing follows the scale; no random values.
-- [ ] Animations use springs and run on transform/opacity.
-- [ ] Reduced motion respected.
-- [ ] Nothing "default-looking" survived (colors, fonts, radii all from tokens).
-- [ ] The effect budget is respected.
+Spacing from the scale, text sizes, colors and radii from the tokens, one primary action, motion that animates transform and opacity, a visible focus, reduced motion, heading order and contrast are measured by `node ai-frontend-guide-kit/tools/audit-design.mjs --report` (add `--url <page>` for the rendered checks). Fix its numbered list from the top; do not review these by eye.
+
+## Only you can judge
+
+- [ ] One focal point: the eye lands on one thing first.
+- [ ] Nothing default-looking survived: the page could not be swapped to another brand.
+- [ ] The effect budget is respected (1–2 high-impact effects per view).
 
 Next: `09-VERIFY.md` proves it.

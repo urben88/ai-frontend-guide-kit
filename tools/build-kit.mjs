@@ -59,6 +59,7 @@ const REQUIRED_KIT_FILES = [
   'tools/pieces.mjs',
   'tools/excalidraw-mcp.mjs',
   'tools/audit-honesty.mjs',
+  'tools/audit-design.mjs',
   'tools/audit-a11y.mjs',
   'tools/audit-perf.mjs',
   'catalog/component-manifest.json',

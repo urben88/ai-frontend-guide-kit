@@ -24,7 +24,7 @@ Este repositorio es a la vez la 🏭 **fábrica** (pipeline de extracción + cat
 | 🧠 | **Skills para agentes** | `ai-frontend-guide` (flujo), `frontend-polish` (fase 3), `frontend-refactor` (FSD, solo a pedido), `ux-map` (mapa visual de pantallas) y 16 skills UX incluidas (`userflow` + 15 `flow-*`, MIT) |
 | 🧭 | **Flujo de diseño** | `flow.mjs` guarda la ruta y el paso actual de cada proyecto y no deja saltar pasos; `guides/FLOWS.md` lista todas las rutas |
 | 💾 | **Memoria de selección** | `ai-frontend-output/`: historial de decisiones (solo añade), resumen de estilos/componentes, combinaciones reutilizables y librerías de UI en uso o por investigar |
-| 🛡️ | **Auditorías** | `audit-honesty` (patrones engañosos), `audit-a11y` (axe + WCAG 2.2), `audit-perf` (Lighthouse frente a Core Web Vitals) en `ai-frontend-guide-kit/tools/` |
+| 🛡️ | **Auditorías** | `audit-design` (tokens, espaciado, contraste, layout), `audit-honesty` (patrones engañosos), `audit-a11y` (axe + WCAG 2.2), `audit-perf` (Lighthouse frente a Core Web Vitals) en `ai-frontend-guide-kit/tools/` |
 | 🔒 | **Laya (opcional)** | Motor de decisión local que ordena candidatos del catálogo con probabilidades calibradas; todo se ejecuta en tu PC |
 
 ## 🔄 El flujo de tres fases
@@ -189,6 +189,7 @@ La carpeta contiene `selections.jsonl` (historial), `combinations.json` (conjunt
 ## 🛡️ Auditorías (fase 3)
 
 ```bash
+node ai-frontend-guide-kit/tools/audit-design.mjs --report                # diseño: lista numerada de arreglos (--url <página> para el render)
 node ai-frontend-guide-kit/tools/audit-honesty.mjs src --strict      # escaneo estático de patrones engañosos
 node ai-frontend-guide-kit/tools/audit-a11y.mjs http://localhost:3000 # axe-core con WCAG 2.2 (requiere @axe-core/playwright)
 node ai-frontend-guide-kit/tools/audit-perf.mjs http://localhost:3000 # Lighthouse: LCP ≤ 2,5 s, CLS ≤ 0,1, TBT ≤ 200 ms
@@ -216,7 +217,7 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # vis
 │   ├── guides/00..10         # dirección de experiencia + flujo UX/UI "reutilizar primero"
 │   ├── experience/           # arquetipos, filosofías, estilos, banco de preguntas, bucle de descubrimiento, fichas de referencia + experience-manifest.json
 │   ├── catalog/              # índice + taxonomía + guías de instalación + 39 fuentes + explorer.html + license-report.md
-│   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp · audit-honesty · audit-a11y · audit-perf
+│   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp · audit-design · audit-honesty · audit-a11y · audit-perf
 ├── skills/                   # ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + 16 skills UX incluidas (MIT)
 ├── manifest/                 # fuente de verdad del catálogo (generado)
 ├── media/explainer/          # 🎬 explainer dibujado a mano (ES/EN, GIF, póster)

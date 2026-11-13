@@ -109,6 +109,8 @@ const fillReport = (dir, step) => {
   const file = out(dir, `reports/${step}-report.md`);
   writeFileSync(file, readFileSync(file, 'utf8').replace(/- \[ \]/g, '- [x]').replace(/<[^<>\n]+>/g, 'ok'));
 };
+/** The reports/design-audit.json that audit-design --report writes (the polish gate reads its counts). */
+const putAudit = (dir, counts = { high: 0, medium: 2, low: 5 }) => put(dir, 'reports/design-audit.json', JSON.stringify({ counts, findings: [] }));
 const state = (dir) => JSON.parse(readFileSync(out(dir, 'flow-state.json'), 'utf8'));
 const raw = (dir) => readFileSync(out(dir, 'flow-state.json'), 'utf8');
 
@@ -204,6 +206,7 @@ test('a step without a file needs --evidence, which is stored', () => {
   assert.equal(refused.status, 1);
   assert.match(refused.stderr, /step "polish" needs --evidence/);
   assert.equal(raw(dir), before);
+  putAudit(dir);
   fillReport(dir, 'polish');
   const ok = flow(dir, 'done', 'polish', '--evidence', 'playwright loop green');
   assert.equal(ok.status, 0, ok.stderr);
@@ -498,6 +501,7 @@ const complete = (dir, homeDir, info) => {
     assert.equal(spawnSync(process.execPath, [TOKENS_TOOL, 'doc', '--dir', dir], { encoding: 'utf8' }).status, 0, 'tokens: doc');
     writeFileSync(join(dir, 'DESIGN.md'), fill(readFileSync(join(dir, 'DESIGN.md'), 'utf8')));
   } else provide(dir, info.artifacts);
+  if (info.step === 'polish') putAudit(dir);
   if (info.report) {
     assert.equal(guided(dir, homeDir, 'report', info.step).status, 0, `${id}: report`);
     const file = join(dir, info.report.file);
@@ -970,6 +974,7 @@ test('flow report writes a checklist for the steps closed with free evidence, an
   assert.match(refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'all green'), dir, before), /check "Reduced motion" is missing from the report/);
 
   writeFileSync(file, filled.replace('- [x] Honesty audit (audit-honesty --strict) — result: 0 findings', '- [n/a] Honesty audit (audit-honesty --strict) — reason: there is no src folder'));
+  putAudit(dir);
   const ok = guided(dir, homeDir, 'done', 'polish', '--evidence', 'all green');
   assert.equal(ok.status, 0, ok.stderr);
   assert.equal(state(dir).steps.at(-1).evidence, 'all green');
@@ -1092,4 +1097,123 @@ test('the tokens instruction tells the reader to choose a few values and run ini
   assert.match(withFigma, /tokens\.mjs init [^\n]*--dark/);
   assert.ok(withFigma.trimEnd().split('\n').length <= 48);
   assert.equal(JSON.parse(guided(dir, homeDir, 'next', '--json').stdout).template, null);
+});
+
+// ---------------------------------------------------------------- the design audit in the flow (T5)
+
+const AUDIT_LINE = 'Design audit (audit-design --report)';
+/** A gated polish route past intake. */
+const polishProject = () => {
+  const dir = project();
+  const homeDir = home();
+  guided(dir, homeDir, 'start', 'polish');
+  put(dir, 'ux/REPO-CONTEXT.md');
+  put(dir, 'UI-MAP.md');
+  assert.equal(guided(dir, homeDir, 'done', 'intake').status, 0);
+  return { dir, homeDir };
+};
+/** Every line of the polish report closed except the design audit one. */
+const closeOtherLines = (dir) => {
+  const file = out(dir, 'reports/polish-report.md');
+  writeFileSync(file, readFileSync(file, 'utf8').split('\n').map((line) => (line.includes(AUDIT_LINE) ? line : line.replace('- [ ]', '- [x]').replace(/<…>/g, 'ok'))).join('\n'));
+};
+
+test('done polish with gates refuses while design-audit.json is missing, and names the command to run (T5)', () => {
+  const { dir, homeDir } = polishProject();
+  assert.equal(guided(dir, homeDir, 'report', 'polish').status, 0);
+  closeOtherLines(dir);
+  const file = out(dir, 'reports/polish-report.md');
+  writeFileSync(file, readFileSync(file, 'utf8').replace(`- [ ] ${AUDIT_LINE} — result: <…>`, `- [x] ${AUDIT_LINE} — result: 0 high`));
+  const before = raw(dir);
+  const refused = refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'x'), dir, before);
+  assert.match(refused, /step "polish" cannot be marked done: ai-frontend-output\/reports\/design-audit\.json is missing/);
+  assert.match(refused, /run: node .*tools\/audit-design\.mjs --report$/m);
+  assert.doesNotMatch(refused, /--url/, 'no Playwright dependency, no --url');
+});
+
+test('done polish refuses a design audit with a high finding and a file that is not an audit, and passes with medium and low only (T5)', () => {
+  const { dir, homeDir } = polishProject();
+  putAudit(dir, { high: 2, medium: 1, low: 0 });
+  assert.equal(guided(dir, homeDir, 'report', 'polish').status, 0);
+  closeOtherLines(dir);
+  const file = out(dir, 'reports/polish-report.md');
+  const line = readFileSync(file, 'utf8').split('\n').find((row) => row.includes(AUDIT_LINE));
+  assert.equal(line, `- [ ] ${AUDIT_LINE} — result: 2 high, 1 medium, 0 low — fix the high findings, run the audit again, then this report command`, 'the counts are pre-filled, not marked done');
+  const before = raw(dir);
+  assert.match(refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'x'), dir, before), /polish-report\.md: check "Design audit \(audit-design --report\)" is not done/);
+
+  writeFileSync(file, readFileSync(file, 'utf8').replace('- [ ] Design audit', '- [x] Design audit'));
+  const high = refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'x'), dir, before);
+  assert.match(high, /design-audit\.json lists 2 high findings; fix them from the top of ai-frontend-output\/reports\/design-audit\.md, then run: node .*audit-design\.mjs --report/);
+
+  put(dir, 'reports/design-audit.json', '{ not json');
+  assert.match(refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'x'), dir, before), /design-audit\.json is not a design audit report; run: node .*audit-design\.mjs --report/);
+  put(dir, 'reports/design-audit.json', JSON.stringify({ counts: { high: 'none' } }));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'x'), dir, before), /not a design audit report/);
+
+  putAudit(dir, { high: 0, medium: 9, low: 9 });
+  const ok = guided(dir, homeDir, 'done', 'polish', '--evidence', 'x');
+  assert.equal(ok.status, 0, ok.stderr);
+});
+
+test('flow report pre-fills the design audit line from design-audit.json and marks it [x] only without a high finding; a hand-filled line is kept (T5)', () => {
+  for (const step of ['polish', 'iterate', 'redesign']) {
+    const dir = project();
+    assert.equal(flow(dir, 'report', step).status, 0, step);
+    const file = out(dir, `reports/${step}-report.md`);
+    assert.match(readFileSync(file, 'utf8'), /^- \[ \] Design audit \(audit-design --report\) — result: <…>$/m, `${step}: the line is in the checklist, empty without an audit`);
+    putAudit(dir, { high: 0, medium: 3, low: 4 });
+    const run = flow(dir, 'report', step);
+    assert.equal(run.status, 0, run.stderr);
+    assert.match(run.stdout, /updated the design audit line of/);
+    assert.match(readFileSync(file, 'utf8'), /^- \[x\] Design audit \(audit-design --report\) — result: 0 high, 3 medium, 4 low$/m, step);
+    putAudit(dir, { high: 1, medium: 0, low: 0 });
+    flow(dir, 'report', step);
+    assert.match(readFileSync(file, 'utf8'), /^- \[ \] Design audit .* — result: 1 high, 0 medium, 0 low — fix the high findings/m, `${step}: a later audit with a high finding reopens the line it wrote`);
+    writeFileSync(file, readFileSync(file, 'utf8').replace(/^- \[ \] Design audit.*$/m, `- [n/a] ${AUDIT_LINE} — reason: static site, nothing to render`));
+    putAudit(dir, { high: 0, medium: 0, low: 0 });
+    const again = flow(dir, 'report', step);
+    assert.match(again.stdout, /already has every check/);
+    assert.match(readFileSync(file, 'utf8'), /^- \[n\/a\] Design audit .* reason: static site, nothing to render$/m, `${step}: a hand-filled line is never rewritten`);
+  }
+});
+
+test('the polish instruction tells the reader to run the audit with --report, and adds --url only when Playwright is a dependency (T5)', () => {
+  const { dir, homeDir } = polishProject();
+  const bare = guided(dir, homeDir, 'next').stdout;
+  assert.match(bare, /Run: node .*audit-design\.mjs --report — it measures/);
+  assert.doesNotMatch(bare, /audit-design\.mjs --report --url/);
+  assert.ok(bare.trimEnd().split('\n').length <= 48);
+  writeFileSync(join(dir, 'package.json'), JSON.stringify({ devDependencies: { playwright: '1.0.0' } }));
+  assert.match(guided(dir, homeDir, 'next').stdout, /audit-design\.mjs --report --url <url>/);
+  writeFileSync(join(dir, 'package.json'), JSON.stringify({ devDependencies: { '@playwright/test': '1.0.0' } }));
+  assert.match(guided(dir, homeDir, 'next').stdout, /audit-design\.mjs --report --url <url>/);
+  assert.equal(bare.split('\n').filter((row) => /Check by hand only what no tool measures/.test(row)).length, 1, 'the prose craft list became what only a person can judge');
+});
+
+test('iterate and redesign instructions also ask for the audit, and stay within 48 lines (T5)', () => {
+  for (const route of ['iterate', 'redesign']) {
+    const dir = project();
+    const homeDir = home();
+    guided(dir, homeDir, 'start', route);
+    put(dir, 'ux/REPO-CONTEXT.md');
+    put(dir, 'UI-MAP.md');
+    guided(dir, homeDir, 'done', 'intake');
+    const text = guided(dir, homeDir, 'next').stdout;
+    assert.match(text, /audit-design\.mjs --report — fix its list from the top/, route);
+    assert.ok(text.trimEnd().split('\n').length <= 48, route);
+  }
+});
+
+test('a state without gates keeps the old polish rule: --evidence alone closes it, no report and no design audit asked for (T5, previous behavior)', () => {
+  const homeDir = home();
+  const dir = project();
+  stateAt(dir, 'polish', {}, 0);
+  const ok = guided(dir, homeDir, 'done', 'polish', '--evidence', 'playwright loop green');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.equal(existsSync(out(dir, 'reports')), false);
+  const high = project();
+  stateAt(high, 'polish', {}, 0);
+  putAudit(high, { high: 3, medium: 0, low: 0 });
+  assert.equal(guided(high, homeDir, 'done', 'polish', '--evidence', 'x').status, 0, 'a high finding does not block a route started before the gate');
 });

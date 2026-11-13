@@ -49,6 +49,7 @@ npx playwright test
 ```
 
 - If the `impeccable` skill is installed: `/impeccable critique <screen>`, `/impeccable audit <screen>` and `/impeccable polish <screen>` before closing each screen, plus `npx impeccable detect <dir-or-url>` (deterministic, no LLM).
+- Design: `node ai-frontend-guide-kit/tools/audit-design.mjs --report` (add `--url http://localhost:3000` when Playwright is installed). It prints a numbered list of fixes, most severe first: colors, sizes and spacing outside `design-tokens.json`, arbitrary values, too many type sizes, motion, focus, headings, and, rendered at 360/768/1280, overflow, contrast, target size, line length and overlaps. Fix it from the top and run it again; `flow.mjs done polish` needs `reports/design-audit.json` with no `high` finding. Do not review these by eye.
 - Failures: fix the exact reported issue, then re-run the full suite. No screen is done with a red test.
 
 ## 4. Automated accessibility (WCAG 2.2)
@@ -70,7 +71,7 @@ test('home has no detectable WCAG 2.x A/AA violations', async ({ page }) => {
 });
 ```
 
-Automated checks catch roughly a third of issues; keep the manual pass. Check by hand what axe cannot: focus not hidden by sticky bars (2.4.11), 24px minimum targets (2.5.8), a non-drag alternative (2.5.7), login without cognitive tests (3.3.8). Reference: `experience/references/reference-wcag-22.md`.
+Automated checks catch roughly a third of issues; keep the manual pass. Check by hand what axe cannot: focus not hidden by sticky bars (2.4.11), 24px minimum targets (2.5.8; `audit-design.mjs --url` measures them), a non-drag alternative (2.5.7), login without cognitive tests (3.3.8). Reference: `experience/references/reference-wcag-22.md`.
 
 ## 5. Performance budget
 
@@ -101,6 +102,7 @@ In a flow route, `flow.mjs report polish` writes this list as `ai-frontend-outpu
 
 - [ ] All critical flows pass E2E.
 - [ ] Visual snapshots exist for key interactive states.
+- [ ] `audit-design.mjs --report` has no `high` finding.
 - [ ] Reduced motion and keyboard focus verified manually once per screen.
 - [ ] axe reports no A/AA violations; 2.2 criteria checked by hand.
 - [ ] Core Web Vitals within the budget.

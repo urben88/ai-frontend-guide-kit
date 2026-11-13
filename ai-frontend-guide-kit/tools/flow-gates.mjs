@@ -307,9 +307,16 @@ const CHECK_LINE = /^\s*[-*]\s*\[([^\]]*)\]\s*(.*)$/;
 /** The line of a report that holds `label`: its box ("", "x", "n/a") and the text after the label. */
 function checkLine(text, label) {
   for (const line of text.replace(/\r\n/g, '\n').split('\n')) {
-    const match = line.match(CHECK_LINE);
-    if (match && match[2].startsWith(label) && (match[2].length === label.length || /^[\s—:-]/.test(match[2].slice(label.length)))) return { box: match[1].trim().toLowerCase(), rest: match[2].slice(label.length) };
+    const found = matchLabel(line, label);
+    if (found) return found;
   }
+  return null;
+}
+
+/** The box ("", "x", "n/a") and the text after `label` when `line` is the report line of that check. */
+function matchLabel(line, label) {
+  const match = line.match(CHECK_LINE);
+  if (match && match[2].startsWith(label) && (match[2].length === label.length || /^[\s—:-]/.test(match[2].slice(label.length)))) return { box: match[1].trim().toLowerCase(), rest: match[2].slice(label.length) };
   return null;
 }
 
@@ -341,4 +348,33 @@ export function reportProblems(text, checks) {
     } else problems.push(`check "${check}" has the box [${found.box}]; use [ ], [x] or [n/a]`);
   }
   return problems;
+}
+
+// ---------------------------------------------------------------- the design audit (tools/audit-design.mjs --report)
+
+/** The data of design-audit.json (it has `counts.high|medium|low`), or null when the text is not a design audit. */
+export function parseDesignAudit(text) {
+  try {
+    const data = JSON.parse(text);
+    return ['high', 'medium', 'low'].every((key) => Number.isInteger(data?.counts?.[key])) ? data : null;
+  } catch {
+    return null;
+  }
+}
+
+const auditResult = (audit) => `${audit.counts.high} high, ${audit.counts.medium} medium, ${audit.counts.low} low`;
+
+/**
+ * Fills the line of `check` from the audit: its counts, and [x] only when no finding is high.
+ * A line the reader already filled by hand is never touched; one this function wrote is rewritten by the next audit.
+ */
+export function prefillAudit(text, check, audit) {
+  const eol = text.includes('\r\n') ? '\r\n' : '\n';
+  const rows = text.split(eol).map((row) => {
+    const found = matchLabel(row, check);
+    if (!found || !(found.box === '' || /result:\s*\d+ high, \d+ medium, \d+ low/.test(found.rest))) return row;
+    const high = audit.counts.high > 0;
+    return `- [${high ? ' ' : 'x'}] ${check} — result: ${auditResult(audit)}${high ? ' — fix the high findings, run the audit again, then this report command' : ''}`;
+  });
+  return rows.join(eol);
 }

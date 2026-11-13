@@ -32,8 +32,8 @@ import { homedir } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { changedPieces, registeredPiece } from './pieces.mjs';
-import { PARTS, hasOwnProductDoc } from './flow-steps.mjs';
-import { GATES, mergeReport, mergeTemplate, reportProblems } from './flow-gates.mjs';
+import { DESIGN_AUDIT_CHECK, PARTS, designAuditCommand, hasOwnProductDoc } from './flow-steps.mjs';
+import { GATES, mergeReport, mergeTemplate, parseDesignAudit, prefillAudit, reportProblems } from './flow-gates.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -102,7 +102,7 @@ const STEPS = {
     title: 'Total polish: external audits, Playwright MCP loop, regression checks green',
     guide: 'guides/08-PHILOSOPHY.md + guides/09-VERIFY.md',
     skill: 'frontend-polish',
-    tool: 'Playwright MCP, @playwright/test, node tools/ui-map.mjs check',
+    tool: 'node tools/audit-design.mjs, Playwright MCP, @playwright/test, node tools/ui-map.mjs check',
     output: 'checks green (optional ai-frontend-output/polish-report.md)',
     artifacts: null,
   },
@@ -139,6 +139,7 @@ const ROUTES = {
 const REPORT_STEPS = Object.keys(PARTS).filter((id) => PARTS[id].at(-1).report);
 const REPORT_STEPS_TEXT = REPORT_STEPS.join(', ');
 const OUT_DIR = 'ai-frontend-output';
+const DESIGN_AUDIT_FILE = 'out:reports/design-audit.json';
 
 class UsageError extends Error {}
 class Refusal extends Error {}
@@ -533,6 +534,13 @@ function done(p, target, flags) {
       const problems = reportProblems(readFileSync(abs, 'utf8'), checks).map((problem) => `${shown}: ${problem}`);
       if (problems.length) refuseWith(p, `step "${id}"`, problems, null);
     }
+    if (id === 'polish') {
+      const { abs, shown } = artifactPath(p, DESIGN_AUDIT_FILE);
+      const command = designAuditCommand(environment(p));
+      const audit = existsSync(abs) ? parseDesignAudit(readFileSync(abs, 'utf8')) : null;
+      if (!audit) throw new Refusal(`step "polish" cannot be marked done: ${shown} is ${existsSync(abs) ? 'not a design audit report' : 'missing'}; run: ${command}`);
+      if (audit.counts.high) throw new Refusal(`step "polish" cannot be marked done: ${shown} lists ${audit.counts.high} high finding${audit.counts.high === 1 ? '' : 's'}; fix them from the top of ai-frontend-output/reports/design-audit.md, then run: ${command}`);
+    }
   }
   step.status = 'done';
   step.done_at = new Date().toISOString();
@@ -586,11 +594,15 @@ function report(p, step) {
   if (!REPORT_STEPS.includes(step)) throw new UsageError(`step "${step}" has no report (reports exist for: ${REPORT_STEPS_TEXT})`);
   const { abs, shown } = artifactPath(p, `out:reports/${step}-report.md`);
   const existing = existsSync(abs) ? readFileSync(abs, 'utf8') : null;
-  const { text, added } = mergeReport(existing, step, PARTS[step].at(-1).report);
-  if (!added.length) return console.log(`Report: ${shown} already has every check; nothing to write.`);
+  const merged = mergeReport(existing, step, PARTS[step].at(-1).report);
+  const { abs: auditAbs } = artifactPath(p, DESIGN_AUDIT_FILE);
+  const audit = existsSync(auditAbs) ? parseDesignAudit(readFileSync(auditAbs, 'utf8')) : null;
+  const text = audit ? prefillAudit(merged.text, DESIGN_AUDIT_CHECK, audit) : merged.text;
+  const added = merged.added;
+  if (!added.length && text === (existing ?? '')) return console.log(`Report: ${shown} already has every check; nothing to write.`);
   mkdirSync(dirname(abs), { recursive: true });
   writeFileSync(abs, text);
-  console.log(`Report: ${existing === null || !existing.trim() ? 'wrote' : `added ${added.length} check${added.length === 1 ? '' : 's'} to`} ${shown}.\nFill every line: [x] and the result after "result:", or [n/a] and the reason after "reason:".`);
+  console.log(`Report: ${existing === null || !existing.trim() ? 'wrote' : added.length ? `added ${added.length} check${added.length === 1 ? '' : 's'} to` : 'updated the design audit line of'} ${shown}.\nFill every line: [x] and the result after "result:", or [n/a] and the reason after "reason:".`);
 }
 
 function reset(p) {

@@ -20,6 +20,10 @@ Phase 3 of the `ai-frontend-guide-kit` workflow. Goal: a screen that survives sc
 3. Look at what changed: `git status` + `git diff --stat` (polish what moved, not the whole app).
 4. Declare the plan in one line: screen + states + tools available.
 
+## Step 0 — The design audit (always, a tool)
+
+Run `node ai-frontend-guide-kit/tools/audit-design.mjs --report` (add `--url <url>` when Playwright is installed). It measures spacing, type sizes, colors, motion, focus, headings, and rendered at 360/768/1280 overflow, contrast, target size, line length and overlaps, and prints a numbered list of fixes, most severe first. Fix it from the top and run it again until it has no `high` finding; do not review those measures by eye. `flow.mjs done polish` reads its `reports/design-audit.json`.
+
 ## Step 1 — External audits (only if installed)
 
 Skills are opt-in by their own descriptions; load them when present, never assume slash commands:
@@ -46,7 +50,7 @@ If Playwright MCP is configured, verify the browser once (`npx playwright instal
 4. **Keyboard**: traverse the screen with Tab/Shift+Tab/Enter/Escape; focus must be visible, ordered and trapped only where it should be (modals).
 5. **Reduced motion**: emulate `prefers-reduced-motion: reduce`; animations must degrade to no-motion or opacity-only.
 6. **Responsive**: resize to the project's breakpoints (e.g. 375 / 768 / 1280 / 1536); check layout collapse, overflow and touch targets (≥ 44px).
-7. **Content**: text hierarchy (max 3 sizes), contrast (body ≥ 4.5:1, large ≥ 3:1), spacing from the scale, no boxes-inside-boxes.
+7. **Content**: what `audit-design.mjs` cannot measure: one focal point, copy that says what the page does, no boxes-inside-boxes. Sizes, contrast and spacing are already in its list.
 8. **Automated a11y and performance**: run the axe and Lighthouse checks from `guides/09-VERIFY.md` (sections 4–5) and the honesty audit (section 6) for conversion flows.
 9. **Fix exactly what was reported**, then re-run the affected checks. No finding is closed without a re-check.
 

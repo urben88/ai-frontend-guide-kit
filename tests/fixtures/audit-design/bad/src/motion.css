@@ -1,0 +1,7 @@
+.a { transition: all 200ms; }
+.b { transition: width 200ms linear; }
+@keyframes grow {
+  from { width: 0; }
+  to { width: 100%; }
+}
+.c { animation: grow 1s; }

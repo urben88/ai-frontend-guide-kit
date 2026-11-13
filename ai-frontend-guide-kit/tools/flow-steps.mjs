@@ -31,6 +31,12 @@ const INVENTORY = `${OUT}/INVENTORY.md`;
 /** The rules of guides/08-PHILOSOPHY.md that a build must keep, short enough to print. */
 const CRAFT_RULES = 'one primary action per screen; spacing only from the scale (4, 8, 12, 16, 24, 32, 48, 64); at most 3 text sizes visible at once; colors, fonts and radius only from the tokens; animate only transform and opacity; at most 2 high-impact effects per view; respect prefers-reduced-motion';
 
+/** The report line the design audit fills (flow report pre-fills it from design-audit.json). */
+export const DESIGN_AUDIT_CHECK = 'Design audit (audit-design --report)';
+
+/** The command that runs the design audit and writes its report; the rendered layer only when Playwright is a dependency here. */
+export const designAuditCommand = (env) => env.run('audit-design.mjs', `--report${env.dep('playwright') || env.dep('@playwright/test') ? ' --url <url>' : ''}`);
+
 /** A repository with its own product document (BMAD PRD, specs) keeps it as the anchor: no PRODUCT.md. */
 export const hasOwnProductDoc = (env) => /bmad|spec/i.test(env.framework);
 const BUILDER_USE = { hallmark: 'new page or section', 'design-taste-frontend': 'app screen' };
@@ -459,6 +465,7 @@ export const PARTS = {
       'Reuse searched first: pieces find and ui-map have',
       'The change is the smallest that satisfies the request',
       'Tokens of DESIGN.md kept',
+      DESIGN_AUDIT_CHECK,
       'Registered pieces versioned, new builds added as pieces',
       'Decision recorded with memory add',
       'ui-map impact run again: no stray left',
@@ -477,6 +484,7 @@ export const PARTS = {
           `After editing a registered piece: ${env.run('pieces.mjs', 'version <name> --note "<what changed>"')}. After a build: ${env.run('pieces.mjs', 'add <name> --level micro|small|medium|large --file <path>')}`,
           `Record: ${env.run('memory.mjs', 'add --screen <screen> --block <block> --need "<need>" --decision reuse|adapt|build [--id <entry id>]')}`,
           `Run ${env.run('ui-map.mjs', 'impact <role or component>')} again: no stray may remain.`,
+          `Run: ${designAuditCommand(env)} — fix its list from the top.`,
           'If the change touches 3 or more screens or adds a flow, stop and tell the user: that is the route ux, not a small change.',
           `Write the report: ${env.run('flow.mjs', 'report iterate')} creates ${OUT}/reports/iterate-report.md. Mark each check [x] with its result, or [n/a] with its reason.`,
         ],
@@ -493,6 +501,7 @@ export const PARTS = {
       'Screen and what must not change agreed with the user',
       'Everything the screen touches located with ui-map impact',
       'New look uses only the tokens of DESIGN.md',
+      DESIGN_AUDIT_CHECK,
       'Flows, steps and meaningful copy unchanged',
       'Registered pieces versioned',
       'Decision recorded with memory add',
@@ -507,6 +516,7 @@ export const PARTS = {
           ? 'Load the skill design-taste-frontend in redesign mode. Keep the brand values and the tokens of DESIGN.md.'
           : `Redesign by hand with these rules: ${CRAFT_RULES}.`,
         'Do not add, remove or reorder steps of a flow, and do not change copy that carries meaning: that is a UX change and needs the route ux.',
+        `Run: ${designAuditCommand(env)} — fix its list from the top.`,
         `After editing a registered piece: ${env.run('pieces.mjs', 'version <name> --note "<what changed>"')}`,
         `Record: ${env.run('memory.mjs', 'add --screen <screen> --block <block> --need "visual redesign" --decision adapt --notes "<what changed>"')}`,
         `Write the report: ${env.run('flow.mjs', 'report redesign')} creates ${OUT}/reports/redesign-report.md. Mark each check [x] with its result, or [n/a] with its reason.`,
@@ -521,6 +531,7 @@ export const PARTS = {
     title: 'audit and fix until every check is green',
     report: [
       'Honesty audit (audit-honesty --strict)',
+      DESIGN_AUDIT_CHECK,
       'Accessibility audit (axe)',
       'Performance audit (LCP, CLS, TBT)',
       'Frontend map check (ui-map check)',
@@ -530,7 +541,7 @@ export const PARTS = {
       'Widths 360, 768 and 1280',
       'Keyboard only',
       'Reduced motion',
-      'Craft rules (one primary action, spacing from the scale, tokens only, at most 3 text sizes)',
+      'Craft by hand (one focal point, copy that says what the page does, nothing default-looking)',
       'Every finding was fixed and its check run again',
     ],
     build: (env) => ({
@@ -542,13 +553,14 @@ export const PARTS = {
           ? 'With the Playwright MCP, on every touched screen: accessibility snapshot, empty, loading and error states, console without errors, keyboard only, reduced motion, widths 360, 768 and 1280.'
           : 'The Playwright MCP is not configured in this project: check each screen by hand at widths 360, 768 and 1280, with the keyboard only and with reduced motion, and say so in the report.',
         `Run: ${env.run('audit-honesty.mjs', 'src --strict')}`,
+        `Run: ${designAuditCommand(env)} — it measures spacing, sizes, colors, motion, focus, contrast and layout. Fix its list from the top, most severe first, and run it again until no high finding is left.`,
         env.dep('@axe-core/playwright') ? `Run: ${env.run('audit-a11y.mjs', '<url>')}` : 'Accessibility audit: @axe-core/playwright is not a dependency here. Tell the user it can be added with: npm i -D @axe-core/playwright',
         `Run: ${env.run('audit-perf.mjs', '<url>')} (fails above LCP 2.5 s, CLS 0.1, TBT 200 ms).`,
         `Run: ${env.run('ui-map.mjs', 'check')}`,
         env.dep('@playwright/test') ? 'Run: npx playwright test' : 'There is no @playwright/test in this project: no regression suite runs. Mark that check [n/a] in the report.',
         env.skill('impeccable') && 'Load the skill impeccable: /impeccable audit <screen>, then /impeccable polish <screen>.',
         env.skill('hallmark') && 'Name the skill hallmark for a second-opinion audit. Report only: it must not rebuild the screen.',
-        `Check by hand against: ${CRAFT_RULES}.`,
+        'Check by hand only what no tool measures: one focal point (where the eye lands first), copy that says what the page does, nothing that looks like a default.',
         'Fix exactly what each check reported and run that check again. A screen is not done with a red check or a console error.',
         `Write the report: ${env.run('flow.mjs', 'report polish')} creates ${OUT}/reports/polish-report.md. Mark each check [x] with its result, or [n/a] with the reason it could not run.`,
       ],

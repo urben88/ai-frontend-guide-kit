@@ -50,6 +50,7 @@ Run them from the project root. Every tool prints one screen, not a dump.
 | `tools/laya_select.py` | Optional local decision engine: ranks questions, directions and components (`--check`, `--install`) |
 | `tools/audit-a11y.mjs` | WCAG 2.x A/AA check of one or more URLs through axe-core + Playwright |
 | `tools/audit-perf.mjs` | Lighthouse Core Web Vitals budget: LCP, CLS, TBT |
+| `tools/audit-design.mjs` | Design audit: a numbered list of fixes for colors, sizes and spacing outside `design-tokens.json`, arbitrary values, type sizes, motion, focus, headings, plus (with `--url` and Playwright) overflow at 360/768/1280, contrast, target size, line length and overlaps; `--report` feeds the `polish` gate |
 | `tools/audit-honesty.mjs` | Static scan for deceptive-pattern tells in UI copy and markup (flags to review, never proof of intent) |
 | `install.mjs` | Copies the kit into a project, adds the routing block, creates the memory folder, runs the first map scan, optionally installs skills and MCP servers |
 
@@ -88,6 +89,7 @@ Skills are optional accelerators. The kit's files always win over a skill's defa
 - "Why does this screen look generic?" → `frontend-polish` audit, then the fixes it names.
 - "Document the UX we already have" → summarize path of `guides/02-UX-FLOWS.md`, no redesign.
 - "Check accessibility and performance of this page" → `audit-a11y` and `audit-perf`.
+- "Is the layout and spacing consistent?" → `audit-design` (add `--url <page>` for the rendered checks).
 - "Give me the context of this repository in one page" → `context.mjs` plus `UI-MAP.md`.
 - "Explain this tool to a colleague" → this file.
 

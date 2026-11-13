@@ -50,6 +50,7 @@ Se corren desde la raíz del proyecto. Cada una imprime una pantalla, no un volc
 | `tools/laya_select.py` | Motor de decisión local opcional: ordena preguntas, direcciones y componentes (`--check`, `--install`) |
 | `tools/audit-a11y.mjs` | Chequeo WCAG 2.x A/AA de una o más URLs con axe-core + Playwright |
 | `tools/audit-perf.mjs` | Presupuesto de Core Web Vitals con Lighthouse: LCP, CLS, TBT |
+| `tools/audit-design.mjs` | Auditoría de diseño: lista numerada de arreglos para colores, tamaños y espaciados fuera de `design-tokens.json`, valores arbitrarios, tamaños de texto, movimiento, foco y encabezados, y (con `--url` y Playwright) desborde a 360/768/1280, contraste, tamaño de los objetivos táctiles, largo de línea y solapes; `--report` alimenta la puerta de `polish` |
 | `tools/audit-honesty.mjs` | Escaneo estático de patrones engañosos en textos y marcado de la interfaz (marca para revisar, nunca prueba de intención) |
 | `install.mjs` | Copia el kit al proyecto, agrega el bloque de ruteo, crea la carpeta de memoria, corre el primer escaneo y opcionalmente instala skills y servidores MCP |
 
@@ -88,6 +89,7 @@ Las skills son aceleradores opcionales. Los archivos del kit siempre ganan sobre
 - "¿Por qué esta pantalla se ve genérica?" → auditoría de `frontend-polish` y los arreglos que nombre.
 - "Documentá la UX que ya existe" → camino resumen de `guides/02-UX-FLOWS.md`, sin rediseño.
 - "Revisá accesibilidad y performance de esta página" → `audit-a11y` y `audit-perf`.
+- "¿El layout y los espaciados son consistentes?" → `audit-design` (con `--url <página>` para los chequeos renderizados).
 - "Dame el contexto de este repositorio en una página" → `context.mjs` más `UI-MAP.md`.
 - "Explicale esta herramienta a un colega" → este archivo.
 

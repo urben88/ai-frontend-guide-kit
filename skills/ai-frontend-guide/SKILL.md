@@ -16,7 +16,7 @@ When this kit is installed, the project contains:
 - `ai-frontend-guide-kit/guides/00…10` — the guided workflow (router + direction + three phases + iteration).
 - `ai-frontend-guide-kit/experience/` — direction knowledge: `EXPERIENCE-DIRECTION.md`, `QUESTION-BANK.md`, `SITE-ARCHETYPES.md`, `UX-PHILOSOPHIES.md`, `STYLE-DIRECTIONS.md`, `REFERENCE-PROTOCOL.md`, `DISCOVERY-LOOP.md`, `experience-manifest.json` and `references/` (saved idea cards).
 - `ai-frontend-guide-kit/catalog/` — 7,358 reusable entries from 39 verified sources (licenses, install commands, links), plus a light index.
-- `ai-frontend-guide-kit/tools/` — `flow.mjs` (the route and step of this project), `context.mjs` (stack, screens and UI libraries), `tokens.mjs` (design tokens: `design-tokens.json`, contrast, CSS theme), `find.mjs`, `get.mjs`, `memory.mjs` (decisions and libraries), `ui-map.mjs`, `laya_select.py` and `excalidraw-mcp.mjs` (local, dependency-free Excalidraw MCP).
+- `ai-frontend-guide-kit/tools/` — `flow.mjs` (the route and step of this project), `context.mjs` (stack, screens and UI libraries), `tokens.mjs` (design tokens: `design-tokens.json`, contrast, CSS theme), `audit-design.mjs` (numbered list of design fixes), `find.mjs`, `get.mjs`, `memory.mjs` (decisions and libraries), `ui-map.mjs`, `laya_select.py` and `excalidraw-mcp.mjs` (local, dependency-free Excalidraw MCP).
 - Sibling skills (when installed): `frontend-polish` (total polish phase), `frontend-refactor` (FSD structure, only on explicit request), `ux-map` (visual screen map) and the external design skills, each at its step of the flow: `landing-page-design` (phase 1, landing pages only), `hallmark` and `design-taste-frontend` (build only in phase 2, for decision `build`, and `design-taste-frontend` also for an agreed visual redesign; raw material without building in phase 1; `hallmark` also gives a report-only audit in phase 3), `emilkowalski` (phases 2–3), `impeccable` (phase 3). Details in `guides/00-START-HERE.md`, "External design skills by step".
 
 If the folder is missing, install it with:
@@ -55,7 +55,7 @@ Never skip a step: when `done` refuses, produce the missing artifact first. Ever
 | 1 · UX & theory | `01-EXPERIENCE-DIRECTION.md` | `EXPERIENCE-BRIEF.md` (archetype, philosophy, journey, IA, 3 directions, visual brief) |
 | 1 · UX & theory | `02-UX-FLOWS.md`, `03-TOKENS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw` + `design-tokens.json` + `DESIGN.md` |
 | 2 · Composition | `04-INVENTORY.md` … `07-ADAPT.md` | inventory, shortlist, reuse/adapt/build + install, adapted components |
-| 3 · Total polish | `frontend-polish` skill + `08-PHILOSOPHY.md`, `09-VERIFY.md` | audits + Playwright MCP loop + E2E/visual checks green |
+| 3 · Total polish | `frontend-polish` skill + `08-PHILOSOPHY.md`, `09-VERIFY.md` | `audit-design.mjs --report` without high findings + audits + Playwright MCP loop + E2E/visual checks green |
 | Iterate | `10-ITERATE.md` | small changes and custom additions |
 | Visual feedback (optional, React) | `11-VISUAL-FEEDBACK.md` | the user clicks elements in the browser (Agentation MCP); the agent changes exactly those |
 
@@ -103,7 +103,7 @@ The UI inventory and memory `--screen/--block` names come from `UX-SPEC.md`.
 
 ## Total polish (phase 3)
 
-Before closing a screen, run the sibling skill `frontend-polish` when installed: external audits (`impeccable`, `hallmark`, emilkowalski, plus the checks of `design-taste-frontend` when it built the screen) if available, the Playwright MCP loop (states, console, accessibility, keyboard, reduced motion, responsive) and the closing `@playwright/test` regression of `09-VERIFY`. Fallback without tools: the distilled checklist of `08-PHILOSOPHY`. In React projects, offer the optional human round (the user points at elements with Agentation; see `11-VISUAL-FEEDBACK.md`, which holds the install message) during composition for fine tweaks or at the end of polish.
+Before closing a screen, run the sibling skill `frontend-polish` when installed: external audits (`impeccable`, `hallmark`, emilkowalski, plus the checks of `design-taste-frontend` when it built the screen) if available, the Playwright MCP loop (states, console, accessibility, keyboard, reduced motion, responsive) and the closing `@playwright/test` regression of `09-VERIFY`. Design measures come from `audit-design.mjs --report` (the polish step cannot close with a high finding); fallback without other tools: the distilled rules of `08-PHILOSOPHY`. In React projects, offer the optional human round (the user points at elements with Agentation; see `11-VISUAL-FEEDBACK.md`, which holds the install message) during composition for fine tweaks or at the end of polish.
 
 ## Query the catalog (mandatory first step before writing any component)
 

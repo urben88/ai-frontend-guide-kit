@@ -50,7 +50,7 @@ Every step, with its guide, skill, tools and output: `ai-frontend-guide-kit/guid
 | Study a component site the user links | `scout.mjs` |
 | Rank candidates (optional, ask the user first) | `laya_select.py` |
 | Draw the screen map | `excalidraw-mcp.mjs` |
-| Audit before closing | `audit-a11y.mjs`, `audit-honesty.mjs`, `audit-perf.mjs` |
+| Audit before closing | `audit-design.mjs` (spacing, sizes, colors, contrast, layout; `--report`), `audit-a11y.mjs`, `audit-honesty.mjs`, `audit-perf.mjs` |
 
 ## Rules that always hold
 
