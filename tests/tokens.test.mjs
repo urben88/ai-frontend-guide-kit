@@ -232,3 +232,25 @@ test('the exported functions: ramp has 11 steps with the chosen color in it, typ
   assert.ok(scale.find((entry) => entry.name === '5xl').lineHeight < scale.find((entry) => entry.name === 'base').lineHeight);
   assert.throws(() => ramp('blue'));
 });
+
+test('init writes the layout tokens of LAYOUT-RULES.md: section-lg by density (96 only here), container.form, and css prints them (T6)', () => {
+  const by = { compact: [32, 48], regular: [48, 64], spacious: [64, 96] };
+  for (const [density, [small, large]] of Object.entries(by)) {
+    const dir = made('--primary', '#8a4b08', '--density', density);
+    const { tokens: all } = resolveTokens(JSON.parse(read(dir, 'design-tokens.json')));
+    assert.equal(all['spacing.section'].value, `${small}px`, density);
+    assert.equal(all['spacing.section-lg'].value, `${large}px`, density);
+    assert.equal(all['container.form'].value, '28rem');
+    assert.equal(all['container.page'].value, '72rem');
+    assert.equal(all['container.prose'].value, '42rem');
+  }
+  const dir = made('--primary', '#8a4b08');
+  const css = tokens(dir, 'css');
+  assert.equal(css.status, 0, css.stderr);
+  assert.match(css.stdout, /--spacing-section-lg: 64px;/);
+  assert.match(css.stdout, /--container-form: 28rem;/);
+  assert.equal(tokens(dir, 'check').status, 0);
+  assert.match(read(dir, 'design-tokens.json'), /"section-lg"/);
+  assert.equal(tokens(dir, 'doc').status, 0);
+  assert.match(read(dir, 'DESIGN.md'), /section-lg 64px/);
+});

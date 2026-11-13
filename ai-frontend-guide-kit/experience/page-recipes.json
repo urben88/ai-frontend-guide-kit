@@ -1,0 +1,382 @@
+{
+  "version": 1,
+  "note": "Page recipes: the single source for recipe.mjs and LAYOUT-RULES.md. Edit here, then run recipe.mjs check.",
+  "recipes": [
+    {
+      "id": "marketing-landing",
+      "name": "Marketing landing page",
+      "use_when": "One page that persuades a visitor from a campaign or search to take one action: buy, sign up, book or ask.",
+      "match": ["landing","home","homepage","inicio","campaign","promo"],
+      "site_archetypes": ["Marketing / conversion","Signpost / presence"],
+      "experience_archetypes": ["Converter","Explainer"],
+      "navigation_model": "single-page-anchors",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"hero","job":"In 3 seconds say what it is, who it is for and what to do: one headline, one sentence, one primary button and one image of the result.","narrative":"attention","serves":"G","category":"hero","query":"hero","required":true,"layout":"split","avoid":"A generic claim like \"the best platform\", three buttons, and a stock photo that shows nothing."},
+        {"id":"logos","job":"Show 4 to 6 real names the visitor trusts, right under the hero, before they doubt the claim.","narrative":"proof","serves":"P","category":"testimonials","query":"logo cloud","required":false,"layout":"grid-4","avoid":"Invented or blurred logos, or a grid so big that it becomes the page."},
+        {"id":"benefits","job":"Name 3 outcomes the visitor gets, each with a short title and one sentence in the words of the audience.","narrative":"interest","serves":null,"category":"features","query":"benefits","required":true,"layout":"grid-3","avoid":"Listing features of the product instead of what changes for the visitor."},
+        {"id":"how-it-works","job":"Show the path from now to result in 3 numbered steps, so the action feels small.","narrative":"interest","serves":null,"category":"features","query":"process steps","required":false,"layout":"grid-3","avoid":"More than 4 steps, or steps that describe the product internals."},
+        {"id":"showcase","job":"Show the product or the result in use with one real screenshot or photo and a caption that says what to look at.","narrative":"interest","serves":null,"category":"media","query":"image gallery","required":false,"layout":"split","avoid":"A decorative mockup with lorem ipsum inside."},
+        {"id":"testimonials","job":"Put a quote with a name, role and photo next to the doubt it removes, with one number when there is one.","narrative":"proof","serves":"P","category":"testimonials","query":"testimonial","required":true,"layout":"grid-3","avoid":"Anonymous praise such as \"Great product!\" that anyone could have written."},
+        {"id":"pricing-teaser","job":"Answer \"how much?\" with the plans or a starting price and what is included, before the visitor leaves to find out.","narrative":"objection","serves":"O","category":"pricing","query":"pricing plans","required":false,"layout":"contained","avoid":"Hiding the price behind \"contact us\" when the offer is a standard one."},
+        {"id":"faq","job":"Answer the 5 to 7 doubts that stop the action, in the order of how often they come up.","narrative":"objection","serves":"O","category":"faq","query":"faq","required":true,"layout":"narrow-reading","avoid":"Questions the company wants to answer instead of the ones visitors ask."},
+        {"id":"final-cta","job":"Repeat the same primary action once more, with the promise and the lowest-risk wording, after the visitor has the whole story.","narrative":"action","serves":"G","category":"cta","query":"cta","required":true,"layout":"full-bleed","avoid":"A different action than the hero, or three choices at the end."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    },
+    {
+      "id": "saas-home",
+      "name": "SaaS product home",
+      "use_when": "The public home of a software product: it must explain a tool that is not obvious from a photo, and move the visitor to a trial or a demo.",
+      "match": ["saas","platform","plataforma","product home","product tour","producto"],
+      "site_archetypes": ["Marketing / conversion"],
+      "experience_archetypes": ["Converter","Explainer"],
+      "navigation_model": "single-page-anchors",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"hero","job":"Say which job the tool does and for whom, with a real screenshot of the main screen beside one headline and a \"start free\" or \"book a demo\" button.","narrative":"attention","serves":"G","category":"hero","query":"hero","required":true,"layout":"split","avoid":"A dashboard illustration with fake charts and a headline made of buzzwords."},
+        {"id":"logos","job":"Show the customers a buyer would recognise, in one row, so trust comes before the feature list.","narrative":"proof","serves":"P","category":"testimonials","query":"logo cloud","required":true,"layout":"grid-4","avoid":"Logos of tools you integrate with, presented as if they were customers."},
+        {"id":"product-tour","job":"Show the 4 to 6 capabilities that decide the purchase, each tile with a screenshot detail and one line of what it saves.","narrative":"interest","serves":null,"category":"features","query":"bento grid","required":true,"layout":"grid-bento","avoid":"A tile for every feature of the product: the visitor reads none."},
+        {"id":"use-cases","job":"Let a visitor find their own case with 3 roles or jobs, each with its outcome and a link to the detail.","narrative":"interest","serves":null,"category":"features","query":"services","required":false,"layout":"grid-3","avoid":"Use cases written as company segments the visitor does not recognise themselves in."},
+        {"id":"integrations","job":"Remove the \"will it work with my tools?\" doubt by showing the 8 to 12 integrations that matter.","narrative":"objection","serves":"O","category":"features","query":"integrations","required":false,"layout":"grid-4","avoid":"Showing 60 logos where only 10 are real integrations."},
+        {"id":"metrics","job":"Back the claim with 3 or 4 measured numbers, each with what it counts and the period.","narrative":"proof","serves":"P","category":"data-display","query":"statistics","required":false,"layout":"grid-4","avoid":"Round numbers without a source or a unit."},
+        {"id":"testimonials","job":"Show a customer with name, role and company who describes the result they got in their own numbers.","narrative":"proof","serves":"P","category":"testimonials","query":"testimonial","required":true,"layout":"grid-3","avoid":"A quote about how \"easy\" the tool is, with no result in it."},
+        {"id":"pricing-teaser","job":"Show the plans in a table of 3 columns with one highlighted, the billing toggle and what is free.","narrative":"objection","serves":"O","category":"pricing","query":"pricing plans","required":true,"layout":"contained","avoid":"Four plans with 20 rows of features, so no plan can be chosen."},
+        {"id":"security","job":"Settle the buyer's risk questions with 3 facts: where data lives, who can see it and the certifications held.","narrative":"objection","serves":"O","category":"features","query":"feature","required":false,"layout":"grid-3","avoid":"Claiming certifications that are not held, or a shield icon with no fact beside it."},
+        {"id":"faq","job":"Answer the trial, billing, cancel and data questions in short answers with a link when more is needed.","narrative":"objection","serves":"O","category":"faq","query":"faq","required":true,"layout":"narrow-reading","avoid":"Answers that say \"contact sales\" to every question."},
+        {"id":"final-cta","job":"Repeat the trial or demo action with the first step visible, such as an email field.","narrative":"action","serves":"G","category":"cta","query":"cta","required":true,"layout":"full-bleed","avoid":"A second, different button that competes with the first."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    },
+    {
+      "id": "pricing-page",
+      "name": "Pricing page",
+      "use_when": "A page whose only job is to let a visitor pick a plan and start, or understand why it costs what it costs.",
+      "match": ["pricing","precios","plans","planes","tarifas","prices"],
+      "site_archetypes": ["Marketing / conversion","Commerce / transactional"],
+      "experience_archetypes": ["Comparator","Converter"],
+      "navigation_model": "hub",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"header","job":"Say in one headline what is being priced and add the billing toggle, so the plans below show the right price.","narrative":"attention","serves":null,"category":"blocks-sections","query":"header","required":true,"layout":"narrow-reading","avoid":"A hero with an image: the visitor came for the price."},
+        {"id":"plans","job":"Show 3 plans side by side, the recommended one highlighted, each with a price, 5 to 7 inclusions and one button.","narrative":"interest","serves":"G","category":"pricing","query":"pricing plans","required":true,"layout":"grid-3","avoid":"Four or more plans, or every button filled in the same color."},
+        {"id":"billing-toggle","job":"Let the visitor switch between monthly and yearly and show the saving as a number.","narrative":"interest","serves":null,"category":"pricing","query":"pricing toggle monthly annual","required":false,"layout":"narrow-reading","avoid":"Showing the yearly price per month without saying it is billed yearly."},
+        {"id":"comparison","job":"Give the visitor who needs detail one table of features by plan, with the plan names fixed at the top.","narrative":"interest","serves":null,"category":"pricing","query":"plan comparison table","required":false,"layout":"contained","avoid":"A table of 40 rows with a tick in every cell."},
+        {"id":"guarantee","job":"Remove the fear of paying with 3 facts such as a refund period, cancel any time and no card to start.","narrative":"objection","serves":"O","category":"features","query":"benefits","required":false,"layout":"grid-3","avoid":"Guarantee text in small grey print under the button."},
+        {"id":"testimonials","job":"Show one customer who says the price was worth it, with the plan they use.","narrative":"proof","serves":"P","category":"testimonials","query":"testimonial","required":false,"layout":"grid-3","avoid":"Quotes that praise the product and say nothing about the cost."},
+        {"id":"faq","job":"Answer the billing questions: taxes, invoices, upgrades, cancel, refunds and what happens to the data.","narrative":"objection","serves":"O","category":"faq","query":"faq","required":true,"layout":"narrow-reading","avoid":"Pricing answers that depend on \"it depends\"."},
+        {"id":"final-cta","job":"Offer the same start action again and a way to talk to someone for a custom plan.","narrative":"action","serves":"G","category":"cta","query":"cta","required":true,"layout":"full-bleed","avoid":"Ending the page after the FAQ with no action."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    },
+    {
+      "id": "about-company",
+      "name": "About / company page",
+      "use_when": "A page that lets a stranger decide whether to trust the people behind the product or service.",
+      "match": ["about","about us","nosotros","acerca","company","empresa","team","equipo","story"],
+      "site_archetypes": ["Signpost / presence","Marketing / conversion","Narrative / experiential"],
+      "experience_archetypes": ["Explainer","Storyteller"],
+      "navigation_model": "tree",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"intro","job":"State in one sentence what the company does and why it exists, next to a real photo of the people or the place.","narrative":"attention","serves":null,"category":"blocks-sections","query":"about","required":true,"layout":"split","avoid":"A mission statement full of \"innovative\" and \"passionate\" with a stock photo."},
+        {"id":"story","job":"Tell in 3 short paragraphs how it started, the problem it saw and what changed since.","narrative":"interest","serves":null,"category":"blocks-sections","query":"about","required":false,"layout":"narrow-reading","avoid":"A history that lists dates and says nothing about why anyone should care."},
+        {"id":"values","job":"Name 3 values as behaviours the customer can see, each with a proof in one line.","narrative":"interest","serves":null,"category":"features","query":"benefits","required":false,"layout":"grid-3","avoid":"Six abstract words such as \"integrity\" with no example."},
+        {"id":"numbers","job":"Give 3 or 4 verifiable figures: years, customers served, projects delivered.","narrative":"proof","serves":"P","category":"data-display","query":"statistics","required":false,"layout":"grid-4","avoid":"Vanity numbers with no unit or date."},
+        {"id":"team","job":"Show the people with a real photo, name and role, so a visitor knows who they will deal with.","narrative":"proof","serves":"P","category":"blocks-sections","query":"team","required":true,"layout":"grid-4","avoid":"Cartoon avatars, or a team grid with no roles."},
+        {"id":"timeline","job":"Show 4 to 6 milestones in order when the history is part of the trust.","narrative":"interest","serves":null,"category":"data-display","query":"timeline","required":false,"layout":"narrow-reading","avoid":"A timeline of every product release."},
+        {"id":"cta","job":"End with one next step that fits a curious visitor: contact, see the work or join the team.","narrative":"action","serves":"G","category":"cta","query":"cta","required":true,"layout":"full-bleed","avoid":"Three equal buttons for three different goals."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    },
+    {
+      "id": "contact",
+      "name": "Contact page",
+      "use_when": "A page where a visitor with a question or a request reaches a person with the least effort.",
+      "match": ["contact","contacto","support","soporte","get in touch"],
+      "site_archetypes": ["Signpost / presence","Marketing / conversion"],
+      "experience_archetypes": ["Converter"],
+      "navigation_model": "hub",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"header","job":"Say who answers and how fast, in one line, so the visitor trusts the form.","narrative":"attention","serves":null,"category":"blocks-sections","query":"header","required":true,"layout":"narrow-reading","avoid":"A decorative hero image that pushes the form below the first screen."},
+        {"id":"form","job":"Collect the message with name, email and message only, one button and a clear promise of the reply time.","narrative":"action","serves":"G","category":"forms","query":"contact form","required":true,"layout":"main-aside","states":["loading","error"],"avoid":"Ten required fields, a captcha puzzle, or a button that says \"Submit\"."},
+        {"id":"channels","job":"Give the other ways to reach the company: email, phone with hours and the address, each one a link.","narrative":"interest","serves":null,"category":"blocks-sections","query":"contact","required":true,"layout":"main-aside","avoid":"A phone number as an image, or hours that are not stated."},
+        {"id":"map","job":"For a business with a place, show where it is with an interactive map and the address as text.","narrative":"proof","serves":"P","category":"media","query":"map","required":false,"layout":"contained","avoid":"A map with no address in text, so it cannot be copied."},
+        {"id":"faq","job":"Answer the 3 questions that most contacts ask, so those people do not need the form.","narrative":"objection","serves":"O","category":"faq","query":"faq","required":false,"layout":"narrow-reading","avoid":"An FAQ longer than the form."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    },
+    {
+      "id": "blog-index",
+      "name": "Blog index",
+      "use_when": "The list of articles of a site: lets a reader find something worth reading and subscribe.",
+      "match": ["blog","news","noticias","articles","artículos","articulos","posts","journal"],
+      "site_archetypes": ["Knowledge / reference / media"],
+      "experience_archetypes": ["Explorer","Editorial"],
+      "navigation_model": "hub",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"header","job":"Say what the blog is about and for whom in one line, with a search field if there are more than 30 posts.","narrative":"attention","serves":null,"category":"blocks-sections","query":"header","required":true,"layout":"contained","avoid":"A large hero that pushes the posts below the first screen."},
+        {"id":"featured","job":"Put the one post to read first at the top with its image, title and a two-line summary.","narrative":"attention","serves":null,"category":"blocks-sections","query":"blog","required":false,"layout":"split","avoid":"Three featured posts that compete for attention."},
+        {"id":"categories","job":"Offer 4 to 7 topics as tabs or chips, with the active one marked, so a reader can narrow down.","narrative":"orientation","serves":null,"category":"navigation","query":"tabs","required":false,"layout":"contained","avoid":"A tag cloud of 40 tags."},
+        {"id":"posts","job":"List posts as cards with image, title, 2 lines of summary, date and reading time, all with the same image ratio.","narrative":"interest","serves":null,"category":"blocks-sections","query":"blog post","required":true,"layout":"grid-3","states":["empty","loading","error"],"avoid":"Cards with different heights and no date."},
+        {"id":"pagination","job":"Let the reader continue with numbered pages or a \"load more\" button that keeps the position.","narrative":"orientation","serves":null,"category":"navigation","query":"pagination","required":false,"layout":"contained","avoid":"Infinite scroll with no way to reach the footer."},
+        {"id":"newsletter","job":"Offer the subscription once, with what the reader gets and how often.","narrative":"action","serves":"G","category":"cta","query":"newsletter","required":false,"layout":"full-bleed","avoid":"A pop-up before the reader has read anything."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    },
+    {
+      "id": "article",
+      "name": "Article page",
+      "use_when": "One article, guide or post read from start to end.",
+      "match": ["article","artículo","articulo","post","story","guide","guía","entry"],
+      "site_archetypes": ["Knowledge / reference / media"],
+      "experience_archetypes": ["Editorial","Reference"],
+      "navigation_model": "tree",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"article-header","job":"Give the title, a one-line summary, author, date and reading time, so the reader decides to stay.","narrative":"attention","serves":null,"category":"blocks-sections","query":"article","required":true,"layout":"narrow-reading","avoid":"A title in three font sizes, or no date."},
+        {"id":"cover","job":"Show one cover image that belongs to the article, with an aspect ratio of 16:9 and alt text.","narrative":"interest","serves":null,"category":"media","query":"image gallery","required":false,"layout":"contained","avoid":"A stock image that says nothing about the topic."},
+        {"id":"body","job":"Make the text easy to read: 45 to 75 characters per line, body size, headings every few paragraphs.","narrative":"task","serves":null,"category":"layout","query":"container","required":true,"layout":"narrow-reading","avoid":"Full-width text at 1280px, which is over 120 characters per line."},
+        {"id":"toc","job":"For a long article, show the table of contents with the current section marked.","narrative":"orientation","serves":null,"category":"navigation","query":"sidebar","required":false,"layout":"main-aside","avoid":"A table of contents that does not follow the scroll."},
+        {"id":"author","job":"Say who wrote it with a photo, a line of credentials and a link to more of their work.","narrative":"proof","serves":"P","category":"data-display","query":"avatar","required":false,"layout":"narrow-reading","avoid":"A bio of five lines about the author's hobbies."},
+        {"id":"related","job":"Offer 3 articles on the same topic to continue reading.","narrative":"interest","serves":null,"category":"blocks-sections","query":"blog","required":false,"layout":"grid-3","avoid":"Related posts that are only the latest posts."},
+        {"id":"newsletter","job":"Close with a single subscribe action that fits the topic just read.","narrative":"action","serves":"G","category":"cta","query":"newsletter","required":false,"layout":"narrow-reading","avoid":"A pop-up covering the text while it is being read."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    },
+    {
+      "id": "docs-page",
+      "name": "Docs / reference page",
+      "use_when": "A page of documentation where a reader looks something up or follows steps to do a task.",
+      "match": ["docs","documentation","documentación","documentacion","reference","referencia","api","guide","manual","help","ayuda"],
+      "site_archetypes": ["Knowledge / reference / media"],
+      "experience_archetypes": ["Reference","Educator"],
+      "navigation_model": "tree",
+      "sections": [
+        {"id":"topbar","job":"Offer search first, then the version and the link back to the product.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"full-bleed","avoid":"Search hidden behind an icon on desktop.","shared":true},
+        {"id":"sidebar","job":"Show the whole tree of the docs, with the current page marked and the section opened.","narrative":"orientation","serves":null,"category":"navigation","query":"sidebar","required":true,"layout":"sidebar-main","avoid":"A tree three levels deep, closed by default.","shared":true},
+        {"id":"content","job":"Give one answer per page: a title, a short intro, steps or a table, and a result the reader can check.","narrative":"task","serves":null,"category":"layout","query":"container","required":true,"layout":"narrow-reading","avoid":"Several topics on one page with no headings."},
+        {"id":"code","job":"Show runnable code with a copy button, the language and the expected output.","narrative":"task","serves":null,"category":"data-display","query":"code block","required":false,"layout":"narrow-reading","avoid":"Code in an image or without the imports."},
+        {"id":"toc","job":"List the headings of the page on the right with the current one marked.","narrative":"orientation","serves":null,"category":"navigation","query":"sidebar","required":false,"layout":"main-aside","avoid":"A list longer than the page."},
+        {"id":"feedback","job":"Ask \"was this helpful?\" with yes or no and one optional comment.","narrative":"proof","serves":null,"category":"feedback","query":"rating","required":false,"layout":"narrow-reading","avoid":"A feedback form of five questions."},
+        {"id":"pager","job":"Link the previous and the next page by title, so the reader can follow the order.","narrative":"orientation","serves":null,"category":"navigation","query":"pagination","required":true,"layout":"narrow-reading","avoid":"Links named \"previous\" and \"next\" with no titles."}
+      ]
+    },
+    {
+      "id": "portfolio-case",
+      "name": "Portfolio case study",
+      "use_when": "One project of a designer, developer or studio, told as a problem, a process and a result.",
+      "match": ["portfolio","portafolio","case","caso","project","proyecto","work","trabajo","case study"],
+      "site_archetypes": ["Narrative / experiential","Signpost / presence"],
+      "experience_archetypes": ["Portfolio","Storyteller"],
+      "navigation_model": "hub",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"intro","job":"Name the project, the client, your role and the year, over the best image of the result.","narrative":"attention","serves":null,"category":"hero","query":"hero","required":true,"layout":"full-bleed","avoid":"A title that is only the client name, with no role or result."},
+        {"id":"overview","job":"Give the facts in 4 cells: role, duration, tools and team.","narrative":"interest","serves":null,"category":"data-display","query":"statistics","required":true,"layout":"grid-4","avoid":"A paragraph that hides the facts."},
+        {"id":"challenge","job":"State the problem and the constraint in 2 short paragraphs, from the client's point of view.","narrative":"interest","serves":null,"category":"blocks-sections","query":"about","required":true,"layout":"narrow-reading","avoid":"Describing the task instead of the problem."},
+        {"id":"process","job":"Show 3 to 4 decisive steps with an image each, and say what you chose and what you discarded.","narrative":"interest","serves":null,"category":"features","query":"process steps","required":false,"layout":"grid-3","avoid":"Twenty process screenshots with no explanation."},
+        {"id":"gallery","job":"Show the final work large, in the real context, with a consistent image ratio.","narrative":"attention","serves":null,"category":"media","query":"gallery","required":true,"layout":"grid-bento","avoid":"Mockups that hide the actual design."},
+        {"id":"results","job":"Close the story with 2 or 3 measured results or a quote from the client.","narrative":"proof","serves":"P","category":"data-display","query":"statistics","required":false,"layout":"grid-3","avoid":"Claims such as \"improved the experience\" with no number."},
+        {"id":"next","job":"Offer the next project and a way to start a conversation.","narrative":"action","serves":"G","category":"cta","query":"cta","required":true,"layout":"full-bleed","avoid":"Ending on a dead end with no link."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    },
+    {
+      "id": "product-page",
+      "name": "Product page (e-commerce)",
+      "use_when": "One product in a shop: the visitor decides to buy or not, and adds it to the cart.",
+      "match": ["product","producto","item","artículo","pdp","detalle de producto"],
+      "site_archetypes": ["Commerce / transactional"],
+      "experience_archetypes": ["Marketplace","Comparator","Converter"],
+      "navigation_model": "catalog",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"breadcrumb","job":"Show the path back to the category.","narrative":"orientation","serves":null,"category":"navigation","query":"breadcrumb","required":false,"layout":"contained","avoid":"A breadcrumb that repeats the page title as a link."},
+        {"id":"gallery","job":"Show 4 to 6 photos with zoom, the first one on a plain background and one in use, all with the same ratio.","narrative":"attention","serves":null,"category":"media","query":"gallery","required":true,"layout":"split","avoid":"One small photo, or a carousel that autoplays."},
+        {"id":"buy-box","job":"Put the name, price, stock state and the one \"Add to cart\" button together, beside the gallery.","narrative":"action","serves":"G","category":"blocks-sections","query":"ecommerce","required":true,"layout":"split","states":["loading","error"],"avoid":"Price below the fold, or two buttons of the same weight."},
+        {"id":"options","job":"Let the buyer choose size or color with visible options, the chosen one marked and the unavailable ones crossed.","narrative":"task","serves":null,"category":"forms","query":"radio cards","required":false,"layout":"split","avoid":"A dropdown for three colors, or an option that fails only after the click."},
+        {"id":"assurance","job":"Answer the fear of buying in 3 lines: delivery time and cost, returns, and payment security.","narrative":"objection","serves":"O","category":"features","query":"benefits","required":true,"layout":"grid-3","avoid":"Shipping costs that appear for the first time at checkout."},
+        {"id":"details","job":"Hold the description, specifications and care in tabs or sections after the decision block.","narrative":"interest","serves":null,"category":"navigation","query":"tabs","required":false,"layout":"narrow-reading","avoid":"A wall of marketing text before the specifications."},
+        {"id":"reviews","job":"Show the average rating, the count and 3 recent reviews with the buyer's name.","narrative":"proof","serves":"P","category":"testimonials","query":"testimonial","required":true,"layout":"contained","states":["empty","loading","error"],"avoid":"Only five-star reviews, or reviews with no date."},
+        {"id":"related","job":"Offer 4 products that complete or replace this one.","narrative":"interest","serves":null,"category":"blocks-sections","query":"product","required":false,"layout":"grid-4","avoid":"Random products from the same category."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    },
+    {
+      "id": "product-listing",
+      "name": "Category / product listing",
+      "use_when": "A grid of products or results with filters, where a visitor narrows down and chooses one.",
+      "match": ["category","categoría","categoria","catalog","catálogo","catalogo","shop","tienda","listing","results","resultados","search results","collection"],
+      "site_archetypes": ["Commerce / transactional"],
+      "experience_archetypes": ["Explorer","Marketplace","Comparator"],
+      "navigation_model": "catalog",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"header","job":"Show the category name, the result count and the path back.","narrative":"orientation","serves":null,"category":"navigation","query":"breadcrumb","required":true,"layout":"contained","avoid":"No count, so the visitor does not know how many items match."},
+        {"id":"filters","job":"Offer the 4 to 6 filters that decide the choice, with the applied ones shown as removable chips.","narrative":"task","serves":null,"category":"forms","query":"filters","required":true,"layout":"sidebar-main","states":["loading"],"avoid":"Twelve filters open at once, or filters that reload the whole page."},
+        {"id":"sort","job":"Let the visitor sort by relevance, price and newest, with the current choice visible.","narrative":"task","serves":null,"category":"forms","query":"select","required":false,"layout":"contained","avoid":"A sort control that does not say what is selected."},
+        {"id":"grid","job":"Show products as cards with image, name, price and one badge at most, all with the same ratio.","narrative":"interest","serves":null,"category":"blocks-sections","query":"product","required":true,"layout":"grid-4","states":["empty","loading","error"],"avoid":"Cards of different heights, or price missing from the card."},
+        {"id":"pagination","job":"Move through the results with numbered pages that keep the filters.","narrative":"orientation","serves":null,"category":"navigation","query":"pagination","required":true,"layout":"contained","avoid":"Infinite scroll that loses the position when going back."},
+        {"id":"empty","job":"When nothing matches, say so, show the filters that caused it and a button to clear them.","narrative":"task","serves":null,"category":"layout","query":"empty state","required":true,"layout":"center-stage","states":["empty"],"avoid":"A blank page with the word \"No results\"."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    },
+    {
+      "id": "checkout",
+      "name": "Checkout",
+      "use_when": "The steps from cart to paid order. Nothing else may compete with finishing.",
+      "match": ["checkout","pago","cart","carrito","payment","pay","order","pedido","compra"],
+      "site_archetypes": ["Commerce / transactional"],
+      "experience_archetypes": ["Workflow","Converter"],
+      "navigation_model": "linear-wizard",
+      "sections": [
+        {"id":"header","job":"Keep only the logo and a link back to the cart: remove the shop menu.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"The full site menu, which gives the buyer ways to leave.","shared":true},
+        {"id":"steps","job":"Show the 3 steps (contact, delivery, payment) with the current one marked.","narrative":"orientation","serves":null,"category":"navigation","query":"steps","required":true,"layout":"narrow-reading","avoid":"More than 4 steps, or no way to go back."},
+        {"id":"contact-delivery","job":"Ask for email and the delivery address with the fewest fields and autocomplete on.","narrative":"task","serves":null,"category":"forms","query":"address form","required":true,"layout":"main-aside","states":["error"],"avoid":"Asking for a phone, a company and an account password before the first order."},
+        {"id":"payment","job":"Offer the payment methods as visible options and take the card in the secure field of the provider.","narrative":"task","serves":null,"category":"forms","query":"payment","required":true,"layout":"main-aside","states":["loading","error"],"avoid":"A card field that looks like a plain input, with no padlock or provider name."},
+        {"id":"summary","job":"Show the items, delivery, taxes and the total in a column that stays in view.","narrative":"task","serves":null,"category":"data-display","query":"order summary","required":true,"layout":"main-aside","avoid":"Costs that change after the last step."},
+        {"id":"trust","job":"Remind of the guarantee: secure payment, returns and where to get help.","narrative":"objection","serves":"O","category":"features","query":"benefits","required":false,"layout":"main-aside","avoid":"A badge strip of ten logos."},
+        {"id":"place-order","job":"End with one button that names the action and the total, such as \"Pay 48,00 EUR\".","narrative":"action","serves":"G","category":"cta","query":"cta","required":true,"layout":"main-aside","states":["loading","error"],"avoid":"A button that says \"Continue\" on the last step."}
+      ]
+    },
+    {
+      "id": "auth",
+      "name": "Sign in / sign up",
+      "use_when": "A screen where a person logs in or creates an account.",
+      "match": ["login","log in","sign in","signin","signup","sign up","register","registro","acceso","iniciar sesión","iniciar sesion","entrar","auth","cuenta","password","contraseña"],
+      "site_archetypes": ["Destination / application","Commerce / transactional"],
+      "experience_archetypes": ["Activator","Operator"],
+      "navigation_model": "linear-wizard",
+      "sections": [
+        {"id":"brand","job":"Show the logo and one line that says which action this screen is.","narrative":"orientation","serves":null,"category":"layout","query":"logo","required":true,"layout":"center-stage","avoid":"A marketing paragraph above the form."},
+        {"id":"form","job":"Ask for email and password only, with a visible label, the show-password toggle and one primary button.","narrative":"action","serves":"G","category":"forms","query":"login","required":true,"layout":"narrow-form","states":["loading","error"],"avoid":"Placeholders as labels, or error messages that appear only after the submit."},
+        {"id":"signup-form","job":"For sign-up ask the minimum (email and password), and say what happens next.","narrative":"action","serves":"G","category":"forms","query":"signup","required":false,"layout":"narrow-form","states":["loading","error"],"avoid":"A sign-up with seven fields and a terms checkbox pre-ticked."},
+        {"id":"social","job":"Offer the one or two providers your audience uses, above or below the form, with the same weight.","narrative":"task","serves":null,"category":"forms","query":"social login","required":false,"layout":"narrow-form","avoid":"Six provider buttons that outweigh the form."},
+        {"id":"switch","job":"Link to the other path (create account or sign in) and to password recovery, in plain text links.","narrative":"orientation","serves":null,"category":"forms","query":"login","required":true,"layout":"narrow-form","avoid":"Hiding \"forgot password\" so users cannot find it."},
+        {"id":"side-visual","job":"On wide screens a calm image or a line of social proof beside the form; hide it below md.","narrative":"attention","serves":null,"category":"media","query":"image gallery","required":false,"layout":"split","avoid":"A visual that pushes the form out of the first screen on mobile."}
+      ]
+    },
+    {
+      "id": "onboarding",
+      "name": "Onboarding",
+      "use_when": "The first minutes after sign-up: get the new user to the first success with few choices.",
+      "match": ["onboarding","welcome","bienvenida","setup","primeros pasos","getting started","wizard","activation","activación"],
+      "site_archetypes": ["Destination / application"],
+      "experience_archetypes": ["Activator","Workflow","Configurator"],
+      "navigation_model": "linear-wizard",
+      "sections": [
+        {"id":"progress","job":"Show where the user is in a 3 to 5 step setup, and what is left.","narrative":"orientation","serves":null,"category":"feedback","query":"progress","required":true,"layout":"narrow-form","avoid":"No progress, so the user cannot tell how long this is."},
+        {"id":"step","job":"Ask one thing per step with a clear title, so the answer is easy.","narrative":"task","serves":"G","category":"forms","query":"wizard","required":true,"layout":"narrow-form","states":["loading","error"],"avoid":"Three questions on one step, or a step that asks what the product could have guessed."},
+        {"id":"choices","job":"When the user picks a goal or a template, show 3 to 4 large cards with a one-line outcome each.","narrative":"task","serves":null,"category":"forms","query":"radio cards","required":false,"layout":"narrow-form","avoid":"A dropdown of 12 options."},
+        {"id":"skip","job":"Offer \"skip for now\" and \"back\" at every step, as a text link, so nobody is trapped.","narrative":"orientation","serves":null,"category":"micro-interactions","query":"button","required":true,"layout":"narrow-form","avoid":"Mandatory steps that could be done later."},
+        {"id":"success","job":"Confirm what is ready and lead to the first real task with one button.","narrative":"action","serves":"G","category":"feedback","query":"success","required":true,"layout":"center-stage","avoid":"A congratulations screen with confetti and no next action."}
+      ]
+    },
+    {
+      "id": "dashboard-home",
+      "name": "Dashboard home",
+      "use_when": "The first screen of a signed-in user of an application: it answers \"what needs my attention today?\".",
+      "match": ["dashboard","panel","overview","resumen","inicio app","home app","console","consola","admin"],
+      "site_archetypes": ["Destination / application","Internal / operational"],
+      "experience_archetypes": ["Operator","Monitor"],
+      "navigation_model": "console",
+      "sections": [
+        {"id":"app-shell","job":"Keep the sections of the product one click away: sidebar with 5 to 7 items, current item marked, account menu at the bottom.","narrative":"orientation","serves":null,"category":"navigation","query":"sidebar","required":true,"layout":"sidebar-main","avoid":"More than 7 top-level items, or a current item that is not marked.","shared":true},
+        {"id":"topbar","job":"Hold what is global to every screen: search, notifications and the account menu, in the same place on every page.","narrative":"orientation","serves":null,"category":"navigation","query":"topbar","required":true,"layout":"full-bleed","avoid":"Page actions in the top bar: they belong to the page header.","shared":true},
+        {"id":"page-header","job":"Say what this screen is, the period shown and the one primary action of the product.","narrative":"orientation","serves":null,"category":"blocks-sections","query":"header","required":true,"layout":"contained","avoid":"Three primary buttons in the header."},
+        {"id":"kpis","job":"Show the 3 or 4 numbers the user acts on, each with its change against the last period.","narrative":"task","serves":"G","category":"data-display","query":"kpi","required":true,"layout":"grid-4","states":["empty","loading","error"],"avoid":"Twelve metrics of equal weight."},
+        {"id":"main-chart","job":"Show the one trend that matters over time, with a clear title, axis labels and a period switch.","narrative":"task","serves":null,"category":"data-display","query":"chart","required":true,"layout":"main-aside","states":["empty","loading","error"],"avoid":"A chart without units, or four charts at once."},
+        {"id":"attention","job":"List what needs action now: failures, overdue items and approvals, most urgent first.","narrative":"task","serves":null,"category":"feedback","query":"alert","required":false,"layout":"main-aside","states":["empty","loading","error"],"avoid":"Alerts that are only information."},
+        {"id":"recent","job":"Show the latest 5 to 10 events or records with a link to each and to the full list.","narrative":"task","serves":null,"category":"data-display","query":"activity feed","required":false,"layout":"contained","states":["empty","loading","error"],"avoid":"A list with no link to the record."}
+      ]
+    },
+    {
+      "id": "data-table",
+      "name": "Data list / table screen",
+      "use_when": "A screen listing records of one kind, where a user searches, filters, sorts and opens one.",
+      "match": ["list","lista","table","tabla","users","usuarios","orders","pedidos","customers","clientes","records","inbox","index","directory","directorio"],
+      "site_archetypes": ["Destination / application","Internal / operational"],
+      "experience_archetypes": ["Operator","Reference","Explorer"],
+      "navigation_model": "console",
+      "sections": [
+        {"id":"app-shell","job":"Keep the sections of the product one click away: sidebar with 5 to 7 items, current item marked, account menu at the bottom.","narrative":"orientation","serves":null,"category":"navigation","query":"sidebar","required":true,"layout":"sidebar-main","avoid":"More than 7 top-level items, or a current item that is not marked.","shared":true},
+        {"id":"page-header","job":"Name the record type with its count and put the one \"New ...\" action at the right.","narrative":"orientation","serves":null,"category":"blocks-sections","query":"header","required":true,"layout":"contained","avoid":"The primary action hidden in a row menu."},
+        {"id":"toolbar","job":"Give a search field and the 2 to 4 filters used most, with the applied filters shown as chips.","narrative":"task","serves":null,"category":"forms","query":"search","required":true,"layout":"contained","states":["loading","error"],"avoid":"A filter bar of ten controls that wraps on two lines."},
+        {"id":"table","job":"Show 5 to 7 columns that identify the record and its state, sortable, with the row opening the detail.","narrative":"task","serves":null,"category":"data-display","query":"table","required":true,"layout":"contained","states":["empty","loading","error"],"avoid":"Every field of the record as a column, or a row that has no click target."},
+        {"id":"bulk","job":"When rows are selected, show the bulk actions in a bar and confirm the destructive ones.","narrative":"task","serves":null,"category":"overlay","query":"dialog","required":false,"layout":"contained","avoid":"Delete with no confirmation and no undo."},
+        {"id":"pagination","job":"Show the range and total, the page size choice and the previous and next pages.","narrative":"orientation","serves":null,"category":"navigation","query":"pagination","required":true,"layout":"contained","avoid":"Page size fixed at 100, so the list is slow and long."}
+      ]
+    },
+    {
+      "id": "detail-record",
+      "name": "Detail / record screen",
+      "use_when": "One record of an application, opened from a list: the user reads it, edits it or acts on it.",
+      "match": ["detail","detalle","record","registro","profile","perfil","view","ficha","order detail","user detail"],
+      "site_archetypes": ["Destination / application","Internal / operational"],
+      "experience_archetypes": ["Operator","Reference","Monitor"],
+      "navigation_model": "console",
+      "sections": [
+        {"id":"app-shell","job":"Keep the sections of the product one click away: sidebar with 5 to 7 items, current item marked, account menu at the bottom.","narrative":"orientation","serves":null,"category":"navigation","query":"sidebar","required":true,"layout":"sidebar-main","avoid":"More than 7 top-level items, or a current item that is not marked.","shared":true},
+        {"id":"breadcrumb","job":"Show the way back to the list the user came from.","narrative":"orientation","serves":null,"category":"navigation","query":"breadcrumb","required":true,"layout":"contained","avoid":"A back link that goes to the home page."},
+        {"id":"record-header","job":"Show the record name, its status and the 1 or 2 main actions, with the other actions in a menu.","narrative":"task","serves":"G","category":"data-display","query":"detail","required":true,"layout":"contained","states":["loading","error"],"avoid":"Six action buttons of the same weight."},
+        {"id":"summary","job":"List the key fields as label and value pairs, grouped by meaning.","narrative":"task","serves":null,"category":"data-display","query":"description list","required":true,"layout":"main-aside","states":["empty","loading","error"],"avoid":"A form that looks editable when it is only for reading."},
+        {"id":"tabs","job":"Split the rest into 3 to 5 tabs (activity, files, settings) with the current tab in the URL.","narrative":"orientation","serves":null,"category":"navigation","query":"tabs","required":false,"layout":"contained","avoid":"Tabs that hide the main information."},
+        {"id":"activity","job":"Show the history of the record, newest first, with who did what and when.","narrative":"task","serves":null,"category":"data-display","query":"activity feed","required":false,"layout":"main-aside","states":["empty","loading","error"],"avoid":"A log with no author or time."},
+        {"id":"danger","job":"Keep irreversible actions apart at the bottom and ask for confirmation naming the record.","narrative":"task","serves":null,"category":"overlay","query":"confirm dialog","required":false,"layout":"main-aside","avoid":"Delete as the first button, in the header."}
+      ]
+    },
+    {
+      "id": "settings",
+      "name": "Settings",
+      "use_when": "A screen where a user changes preferences, account details and plan.",
+      "match": ["settings","ajustes","configuración","configuracion","preferences","preferencias","account","cuenta","billing","facturación","facturacion","security"],
+      "site_archetypes": ["Destination / application","Internal / operational"],
+      "experience_archetypes": ["Operator","Configurator"],
+      "navigation_model": "console",
+      "sections": [
+        {"id":"app-shell","job":"Keep the sections of the product one click away: sidebar with 5 to 7 items, current item marked, account menu at the bottom.","narrative":"orientation","serves":null,"category":"navigation","query":"sidebar","required":true,"layout":"sidebar-main","avoid":"More than 7 top-level items, or a current item that is not marked.","shared":true},
+        {"id":"page-header","job":"Name the screen and say what can be changed here in one line.","narrative":"orientation","serves":null,"category":"blocks-sections","query":"header","required":true,"layout":"contained","avoid":"No title, so the user does not know which settings they are in."},
+        {"id":"settings-nav","job":"Group the settings in 4 to 6 sections (profile, security, notifications, billing, team) with the current one marked.","narrative":"orientation","serves":null,"category":"navigation","query":"tabs","required":true,"layout":"sidebar-main","avoid":"One page with 40 settings and no groups."},
+        {"id":"profile-form","job":"Show each setting with a label, a help line and its current value, and one Save button per group.","narrative":"task","serves":"G","category":"forms","query":"settings","required":true,"layout":"narrow-reading","states":["loading","error"],"avoid":"A save button at the bottom of a page that scrolls for 3 screens."},
+        {"id":"toggles","job":"Use switches for settings that apply at once and say what each one does.","narrative":"task","serves":null,"category":"forms","query":"switch toggle","required":false,"layout":"narrow-reading","avoid":"Switches that need a save button to take effect."},
+        {"id":"notice","job":"Confirm every change with a short message or toast, and show errors beside the field.","narrative":"task","serves":null,"category":"feedback","query":"alert","required":false,"layout":"narrow-reading","avoid":"Saving silently, so the user repeats the action."},
+        {"id":"danger-zone","job":"Put delete account and similar actions last, with a confirmation that names what is lost.","narrative":"task","serves":null,"category":"overlay","query":"confirm dialog","required":false,"layout":"narrow-reading","avoid":"A red delete button next to the Save button."}
+      ]
+    },
+    {
+      "id": "first-run",
+      "name": "Empty / first-run screen",
+      "use_when": "A screen of an application that has no data yet: it must lead to the first record, not show an empty box.",
+      "match": ["empty","vacío","vacio","first run","first-run","primer uso","no data","sin datos","blank slate"],
+      "site_archetypes": ["Destination / application"],
+      "experience_archetypes": ["Activator","Operator"],
+      "navigation_model": "console",
+      "sections": [
+        {"id":"app-shell","job":"Keep the sections of the product one click away: sidebar with 5 to 7 items, current item marked, account menu at the bottom.","narrative":"orientation","serves":null,"category":"navigation","query":"sidebar","required":true,"layout":"sidebar-main","avoid":"More than 7 top-level items, or a current item that is not marked.","shared":true},
+        {"id":"illustration","job":"Show one calm illustration or icon that relates to the missing content, no larger than 240px.","narrative":"attention","serves":null,"category":"assets","query":"illustration","required":false,"layout":"center-stage","avoid":"A large decorative image that is the main thing on the screen."},
+        {"id":"message","job":"Say what will appear here and why it is empty, in two lines.","narrative":"orientation","serves":null,"category":"layout","query":"empty state","required":true,"layout":"center-stage","states":["empty"],"avoid":"The words \"No data\" with nothing else."},
+        {"id":"first-action","job":"Give one primary button that creates the first record, named with the object, such as \"Add your first project\".","narrative":"action","serves":"G","category":"cta","query":"cta","required":true,"layout":"center-stage","avoid":"Two equal buttons and a link to the docs."},
+        {"id":"sample","job":"Offer a second path for people who want to look first: sample data or a short checklist.","narrative":"task","serves":null,"category":"feedback","query":"progress","required":false,"layout":"center-stage","avoid":"A checklist of ten items."}
+      ]
+    },
+    {
+      "id": "error-404",
+      "name": "404 / error page",
+      "use_when": "A page shown when the address does not exist or something failed: it must get the visitor back on track.",
+      "match": ["404","error","not found","no encontrada","no encontrado","500","offline","maintenance","mantenimiento"],
+      "site_archetypes": ["Marketing / conversion","Destination / application","Commerce / transactional","Knowledge / reference / media","Signpost / presence"],
+      "experience_archetypes": ["Explorer","Operator"],
+      "navigation_model": "tree",
+      "sections": [
+        {"id":"navbar","job":"Say whose site this is with the logo, give 3 to 5 links and show one filled button for the primary action.","narrative":"orientation","serves":null,"category":"navigation","query":"navbar","required":true,"layout":"contained","avoid":"Eight links and two filled buttons: the visitor cannot tell which one counts.","shared":true},
+        {"id":"message","job":"Say what happened in plain words, such as \"This page does not exist\", and never blame the visitor.","narrative":"attention","serves":null,"category":"layout","query":"404","required":true,"layout":"center-stage","states":["error"],"avoid":"A joke that hides the fact that the page is missing, or a raw error code alone."},
+        {"id":"primary-action","job":"Give one button that takes the visitor to the home or to the last useful place.","narrative":"action","serves":"G","category":"cta","query":"cta","required":true,"layout":"center-stage","avoid":"Three buttons that all say \"Home\"."},
+        {"id":"search","job":"Offer a search field or 3 popular links so the visitor can find what they wanted.","narrative":"task","serves":null,"category":"forms","query":"search","required":false,"layout":"center-stage","avoid":"A search that returns another 404."},
+        {"id":"footer","job":"Close the page with the links that did not fit in the header, the legal pages and one way to contact.","narrative":"orientation","serves":null,"category":"layout","query":"footer","required":true,"layout":"contained","avoid":"A wall of 40 links that repeats the whole site map.","shared":true}
+      ]
+    }
+  ]
+}

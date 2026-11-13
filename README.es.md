@@ -215,9 +215,9 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # vis
 ├── ai-frontend-guide-kit/        # 📦 el kit distribuible (copia esto)
 │   ├── AGENTS.md · README.md · VERIFICATION.md
 │   ├── guides/00..10         # dirección de experiencia + flujo UX/UI "reutilizar primero"
-│   ├── experience/           # arquetipos, filosofías, estilos, banco de preguntas, bucle de descubrimiento, fichas de referencia + experience-manifest.json
+│   ├── experience/           # arquetipos, filosofías, estilos, banco de preguntas, bucle de descubrimiento, fichas de referencia, recetas de página + reglas de layout + experience-manifest.json
 │   ├── catalog/              # índice + taxonomía + guías de instalación + 39 fuentes + explorer.html + license-report.md
-│   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp · audit-design · audit-honesty · audit-a11y · audit-perf
+│   └── tools/                # context · find · get · memory · tokens · recipe · laya_select · excalidraw-mcp · audit-design · audit-honesty · audit-a11y · audit-perf
 ├── skills/                   # ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + 16 skills UX incluidas (MIT)
 ├── manifest/                 # fuente de verdad del catálogo (generado)
 ├── media/explainer/          # 🎬 explainer dibujado a mano (ES/EN, GIF, póster)

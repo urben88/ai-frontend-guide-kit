@@ -4,6 +4,10 @@ Purpose: turn each screen into a list of **needed components by category**, befo
 
 **Source of truth:** `ai-frontend-output/ux/UX-SPEC.md` (from guide 02), coherent with `EXPERIENCE-BRIEF.md`. Inventory rows derive from its screens/blocks — including the empty, loading and error states listed there. Do not invent screens outside the UX-SPEC.
 
+## Start from the recipe
+
+Do not write the table from nothing. Each kind of page has a recipe (`experience/page-recipes.json`): its sections in order, the job of each, the category and the catalog words to search, the layout (`experience/LAYOUT-RULES.md`). Run `node tools/recipe.mjs suggest` (the recipe of each screen of `UX-SPEC.md`), then `node tools/recipe.mjs inventory --write` (writes `INVENTORY.md`). Then review the rows: remove what this product does not need, add what is missing, fill `Serves` with the ids of `PRODUCT.md`. A screen with no recipe is described by hand with the method below. `recipe.mjs show <id>` prints one recipe.
+
 ## Method
 
 For every screen in `PRODUCT.md`:
@@ -15,13 +19,15 @@ For every screen in `PRODUCT.md`:
 
 ## Inventory table (write it to `INVENTORY.md`)
 
-| Screen | Block | Category | Priority | Notes |
-|---|---|---|---|---|
-| Landing | Top section | hero | must | uses brand gradient |
-| Landing | Plan comparison | pricing | must | monthly/annual toggle |
-| Landing | FAQ | faq | should | accordion behavior |
-| Dashboard | KPI row | data-display | must | 4 metrics, count-up |
-| Signup | Form | forms | must | email + password, validation |
+| Screen | Block | Category | Priority | Notes | Candidates | Decision | Serves | Layout | Query |
+|---|---|---|---|---|---|---|---|---|---|
+| Landing | hero | hero | must | uses brand gradient | | | G1 | split | hero |
+| Landing | plans | pricing | must | monthly/annual toggle | | | G1 | grid-3 | pricing plans |
+| Landing | faq | faq | should | accordion behavior | | | O1, O2 | narrow-reading | faq |
+| Dashboard | kpis | data-display | must | 4 metrics, count-up | | | G1 | grid-4 | kpi |
+| Signup | form | forms | must | email + password, validation | | | G1 | narrow-form | signup |
+
+`Candidates` and `Decision` stay empty until the next steps. `Serves` says which item of `PRODUCT.md` the block answers; `Layout` is a name from `LAYOUT-RULES.md`; `Query` is the first search words for `find.mjs`.
 
 ## Check what the project already has
 

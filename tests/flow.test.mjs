@@ -1217,3 +1217,131 @@ test('a state without gates keeps the old polish rule: --evidence alone closes i
   putAudit(high, { high: 3, medium: 0, low: 0 });
   assert.equal(guided(high, homeDir, 'done', 'polish', '--evidence', 'x').status, 0, 'a high finding does not block a route started before the gate');
 });
+
+const RECIPE_TOOL = join(ROOT, 'ai-frontend-guide-kit', 'tools', 'recipe.mjs');
+const recipeIn = (dir, ...args) => spawnSync(process.execPath, [RECIPE_TOOL, ...args, '--dir', dir], { encoding: 'utf8', env: cleanEnv() });
+const WIDE_HEADER = '| Screen | Block | Category | Priority | Notes | Candidates | Decision | Serves | Layout | Query |';
+
+test('compose.inventory tells the reader to run recipe suggest, then recipe inventory --write, then review the rows; the template has the wide header (T6)', () => {
+  const homeDir = home();
+  const dir = project();
+  stateAt(dir, 'compose');
+  const text = guided(dir, homeDir, 'next').stdout;
+  const suggest = text.indexOf('recipe.mjs suggest');
+  const write = text.indexOf('recipe.mjs inventory --write');
+  const review = text.search(/remove .*(does not need|not need)/i);
+  assert.ok(suggest > 0 && write > suggest && review > write, 'suggest, then inventory --write, then review');
+  assert.doesNotMatch(text, /node tools\//);
+  assert.ok(text.includes(WIDE_HEADER), 'the template has the wide header');
+  assert.match(text, /Serves/);
+  assert.ok(text.trimEnd().split('\n').length <= 48, `${text.trimEnd().split('\n').length} lines`);
+  const info = JSON.parse(guided(dir, homeDir, 'next', '--json').stdout);
+  assert.ok(info.template.lines.includes(WIDE_HEADER));
+  assert.equal(guided(dir, homeDir, 'scaffold').status, 0);
+  assert.ok(readFileSync(out(dir, 'INVENTORY.md'), 'utf8').includes(WIDE_HEADER));
+});
+
+test('compose.find uses the Query column as the first search words, and direction.journey starts from recipe show (T6)', () => {
+  const homeDir = home();
+  const dir = project();
+  stateAt(dir, 'compose', { parts_done: ['inventory'] });
+  const find = guided(dir, homeDir, 'next').stdout;
+  assert.match(find, /Query/);
+  assert.match(find, /find\.mjs "<the Query of the row>"/);
+  assert.ok(find.trimEnd().split('\n').length <= 48);
+
+  const journey = project();
+  stateAt(journey, 'direction', { parts_done: ['questions', 'classify'] });
+  const text = guided(journey, homeDir, 'next').stdout;
+  assert.match(text, /direction\.journey|part 3\/6: journey/);
+  assert.match(text, /recipe\.mjs list/);
+  assert.match(text, /recipe\.mjs show <id>/);
+  assert.ok(text.trimEnd().split('\n').length <= 48, `${text.trimEnd().split('\n').length} lines`);
+});
+
+test('compose.adapt and the tokens step point to experience/LAYOUT-RULES.md instead of pasting it (T6)', () => {
+  const homeDir = home();
+  const adapt = project();
+  stateAt(adapt, 'compose', { parts_done: ['inventory', 'find', 'decide'] });
+  const adaptText = guided(adapt, homeDir, 'next').stdout;
+  assert.match(adaptText, /ai-frontend-guide-kit\/experience\/LAYOUT-RULES\.md/);
+  assert.ok(adaptText.trimEnd().split('\n').length <= 48);
+  const tokens = project();
+  stateAt(tokens, 'tokens');
+  const tokensText = guided(tokens, homeDir, 'next').stdout;
+  assert.match(tokensText, /ai-frontend-guide-kit\/experience\/LAYOUT-RULES\.md/);
+  assert.ok(tokensText.trimEnd().split('\n').length <= 48);
+  assert.doesNotMatch(tokensText + adaptText, /full-bleed|narrow-reading/, 'the layout table is not pasted');
+});
+
+test('the inventory gate accepts the wide table, and find and decide read their columns in it (T6)', () => {
+  const homeDir = home();
+  const wide = [
+    '# Inventory',
+    WIDE_HEADER, '|---|---|---|---|---|---|---|---|---|---|',
+    '| Home | hero | hero | must | one image | | | G1 | split | hero |',
+    '| Home | faq | faq | should | doubts | | | O1, O2 | narrow-reading | faq |',
+    '',
+  ].join('\n');
+  const dir = project();
+  stateAt(dir, 'compose');
+  put(dir, 'INVENTORY.md', wide);
+  assert.equal(guided(dir, homeDir, 'done', 'compose.inventory').status, 0);
+  const before = raw(dir);
+  assert.match(refusal(guided(dir, homeDir, 'done', 'compose.find'), dir, before), /row "Home \/ hero": no candidates/);
+  put(dir, 'INVENTORY.md', wide.replace('| | | G1 |', '| magicui-hero | | G1 |').replace('| | | O1, O2 |', '| shadcnspace-faq-01 | | O1, O2 |'));
+  assert.equal(guided(dir, homeDir, 'done', 'compose.find').status, 0);
+  const late = raw(dir);
+  assert.match(refusal(guided(dir, homeDir, 'done', 'compose.decide'), dir, late), /row "Home \/ hero": no decision/);
+  put(dir, 'INVENTORY.md', wide.replace('| | | G1 |', '| magicui-hero | reuse | G1 |').replace('| | | O1, O2 |', '| shadcnspace-faq-01 | adapt | O1, O2 |'));
+  assert.equal(guided(dir, homeDir, 'done', 'compose.decide').status, 0);
+});
+
+test('the file that recipe inventory --write makes closes compose.inventory with gates (T6)', () => {
+  const homeDir = home();
+  const dir = project();
+  put(dir, BRIEF, VALID_BRIEF);
+  put(dir, 'ux/UX-SPEC.md');
+  writeFileSync(join(dir, 'PRODUCT.md'), VALID_PRODUCT);
+  stateAt(dir, 'compose');
+  const written = recipeIn(dir, 'inventory', '--write');
+  assert.equal(written.status, 0, written.stderr);
+  assert.match(readFileSync(out(dir, 'INVENTORY.md'), 'utf8'), /\| Home \| hero \| hero \| must \|/);
+  const closed = guided(dir, homeDir, 'done', 'compose.inventory');
+  assert.equal(closed.status, 0, closed.stderr);
+});
+
+test('flow scaffold then recipe inventory --write works without --force: the scaffold is only a template (T6)', () => {
+  const dir = project();
+  put(dir, BRIEF, VALID_BRIEF);
+  put(dir, 'ux/UX-SPEC.md');
+  stateAt(dir, 'compose');
+  assert.equal(guided(dir, home(), 'scaffold').status, 0);
+  const written = recipeIn(dir, 'inventory', '--write');
+  assert.equal(written.status, 0, written.stderr);
+  assert.doesNotMatch(readFileSync(out(dir, 'INVENTORY.md'), 'utf8'), /<screen of the spec>/);
+});
+
+test('a state without gates closes compose.inventory with any non-empty file, as before the wide table (T6, previous behavior)', () => {
+  const homeDir = home();
+  const legacy = project();
+  stateAt(legacy, 'compose', {}, 0);
+  put(legacy, 'INVENTORY.md', 'x\n');
+  assert.equal(guided(legacy, homeDir, 'done', 'compose.inventory').status, 0);
+  const old = project();
+  stateAt(old, 'compose', {}, 0);
+  put(old, 'INVENTORY.md', VALID_INVENTORY);
+  assert.equal(guided(old, homeDir, 'done', 'compose.inventory').status, 0, 'the seven-column table of before still closes it');
+  const gated = project();
+  stateAt(gated, 'compose');
+  put(gated, 'INVENTORY.md', VALID_INVENTORY);
+  assert.equal(guided(gated, homeDir, 'done', 'compose.inventory').status, 0, 'and so does it with gates');
+});
+
+test('flow list names recipe.mjs in direction and compose, and guides/FLOWS.md is the same text (T6)', () => {
+  const homeDir = home();
+  const list = guided(project(), homeDir, 'list').stdout;
+  assert.match(list, /node tools\/recipe\.mjs/);
+  const flows = readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'guides', 'FLOWS.md'), 'utf8').replace(/\r\n/g, '\n');
+  assert.equal(flows, list);
+});

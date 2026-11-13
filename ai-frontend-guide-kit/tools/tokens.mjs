@@ -131,7 +131,7 @@ export function typeScale(ratio = 1.25, base = 16) {
 
 const SPACING = [1, 2, 3, 4, 6, 8, 12, 16];
 const RADIUS = { none: [0, 0, 0], small: [2, 4, 6], medium: [4, 8, 12], large: [8, 16, 24] };
-const DENSITY = { compact: { control: 40, gutter: 16, section: 32 }, regular: { control: 44, gutter: 24, section: 48 }, spacious: { control: 48, gutter: 32, section: 64 } };
+const DENSITY = { compact: { control: 40, gutter: 16, section: 32, sectionLg: 48 }, regular: { control: 44, gutter: 24, section: 48, sectionLg: 64 }, spacious: { control: 48, gutter: 32, section: 64, sectionLg: 96 } };
 const MOTION = {
   calm: { fast: 150, base: 250, slow: 400, standard: [0.4, 0, 0.2, 1], enter: [0, 0, 0.2, 1], exit: [0.4, 0, 1, 1] },
   snappy: { fast: 100, base: 160, slow: 240, standard: [0.2, 0, 0, 1], enter: [0.05, 0.7, 0.1, 1], exit: [0.3, 0, 0.8, 0.15] },
@@ -243,13 +243,14 @@ export function buildTokens(options) {
       ...Object.fromEntries(SPACING.map((n) => [String(n), { $value: px(n * 4) }])),
       control: { $value: px(density.control), $description: 'Height of buttons and inputs.' },
       gutter: { $value: px(density.gutter), $description: 'Space between neighbouring blocks.' },
-      section: { $value: px(density.section), $description: 'Vertical space between page sections.' },
+      section: { $value: px(density.section), $description: 'Vertical padding of a page section below the md breakpoint.' },
+      'section-lg': { $value: px(density.sectionLg), $description: 'Vertical padding of a page section from the md breakpoint up.' },
     },
     radius: { $type: 'dimension', sm: { $value: px(radius[0]) }, md: { $value: px(radius[1]) }, lg: { $value: px(radius[2]) }, full: { $value: '9999px' } },
     duration: { $type: 'duration', fast: { $value: `${motion.fast}ms` }, base: { $value: `${motion.base}ms` }, slow: { $value: `${motion.slow}ms` } },
     easing: { $type: 'cubicBezier', standard: bezier(motion.standard), enter: bezier(motion.enter), exit: bezier(motion.exit) },
     breakpoint: { $type: 'dimension', ...Object.fromEntries(Object.entries(BREAKPOINTS).map(([name, value]) => [name, { $value: value }])) },
-    container: { $type: 'dimension', page: { $value: '72rem', $description: 'Maximum width of the page content.' }, prose: { $value: '42rem', $description: 'Maximum width of running text.' } },
+    container: { $type: 'dimension', page: { $value: '72rem', $description: 'Maximum width of the page content.' }, prose: { $value: '42rem', $description: 'Maximum width of running text.' }, form: { $value: '28rem', $description: 'Maximum width of a single-column form.' } },
     $extensions: {
       kit: {
         choices: { primary: primaryHex, accent: accentHex, neutral: neutralHex ?? 'from the primary hue', 'font-display': choices['font-display'], 'font-body': choices['font-body'], radius: choices.radius, density: choices.density, 'type-ratio': choices['type-ratio'], motion: choices.motion, dark: Boolean(choices.dark) },

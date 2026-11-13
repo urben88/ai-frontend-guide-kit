@@ -20,6 +20,8 @@
  * flow-gates.mjs, next to the templates they read.
  */
 
+import { INVENTORY_COLUMNS } from './flow-gates.mjs';
+
 const OUT = 'ai-frontend-output';
 const BRIEF = `${OUT}/ux/EXPERIENCE-BRIEF.md`;
 const CONTEXT = `${OUT}/ux/REPO-CONTEXT.md`;
@@ -128,6 +130,7 @@ export const PARTS = {
         steps: [
           'Write the journey of the main visitor: phases in order, and for each phase what they do, think and feel, what blocks them and what would help.',
           'Write the information architecture: content by priority, navigation, section order of each page, where visitors arrive and leave, what needs search or filters.',
+          `Start the section order of each page from its recipe: ${env.run('recipe.mjs', 'list')} finds it, ${env.run('recipe.mjs', 'show <id>')} prints its sections in order. Keep them in order, drop the ones this journey does not need, and add none that has no job.`,
           'Organize everything by the tasks of the visitor, never by how the company is organized.',
           `Take proven patterns from ${env.kit('experience/references/INDEX.md')} and cite each as [ref: <slug>].`,
           `Add the two sections below to ${BRIEF}.`,
@@ -358,6 +361,7 @@ export const PARTS = {
         `Write the Tailwind v4 theme, then import that file from the global CSS, after the tailwindcss import. Names are semantic (--color-primary, --color-surface). Run: ${env.run('tokens.mjs', 'css --out ai-frontend-output/theme.css')}`,
         `Write the token tables of DESIGN.md. Run: ${env.run('tokens.mjs', 'doc')}`,
         'Replace the <…> line under Visual intent in DESIGN.md with one paragraph you can quote when choosing components.',
+        `The layout numbers that sit on these tokens (container, grid, section padding, type step per heading) are in ${env.kit('experience/LAYOUT-RULES.md')}. Follow them; do not choose them by eye.`,
         env.skill('impeccable') && 'Load the skill impeccable and follow its guidelines for the token choices.',
       ],
       done: ['design-tokens.json exists and the check command prints no failure (body text is 4.5:1 or more on its surface).', 'DESIGN.md has every section filled, with the token tables and a Visual intent paragraph.', 'The global CSS gets the @theme block from the css command.'],
@@ -374,21 +378,22 @@ export const PARTS = {
         goal: 'Turn each screen into a list of needed blocks by category, before looking at any library.',
         steps: [
           `Read ${SPEC}. Take only its screens; do not invent others.`,
-          'For each screen list its blocks from top to bottom, including the empty, loading and error states.',
-          `Label each block with one category of ${env.kit('catalog/taxonomy.md')}. Do not name libraries or components yet.`,
-          'Priority is must, should or nice. A block that repeats across screens is one row, marked "shared".',
-          `Write ${INVENTORY} with the template below, 30 rows at most.`,
+          `Run: ${env.run('recipe.mjs', 'suggest')} — it names the page recipe of each screen. A screen with no recipe you describe by hand.`,
+          `Run: ${env.run('recipe.mjs', 'inventory --write')} — it writes ${INVENTORY} with one row per section of each recipe: category, priority, layout and search words filled (add --force only to replace a file that is yours to replace).`,
+          `Review the rows. Remove the blocks this product does not need; add the ones it lacks (with a category of ${env.kit('catalog/taxonomy.md')}), and the rows of screens without a recipe, including empty, loading and error states.`,
+          'Fill every empty Serves cell with the ids of PRODUCT.md the block answers (G1, O1, P1). A block that serves none has no reason to exist: remove it.',
+          'Priority is must, should or nice. A block that repeats across screens is one row, marked "shared". Do not name libraries or components yet; about 30 rows.',
         ],
         template: {
           file: INVENTORY,
           lines: [
             '# Inventory',
-            '| Screen | Block | Category | Priority | Notes | Candidates | Decision |',
-            '|---|---|---|---|---|---|---|',
-            '| <screen of the spec> | <block> | <category> | must | <…> | | |',
+            `| ${INVENTORY_COLUMNS.join(' | ')} |`,
+            `|${INVENTORY_COLUMNS.map(() => '---').join('|')}|`,
+            '| <screen of the spec> | <block> | <category> | must | <…> | | | <G1, O1, P1> | <layout> | <search words> |',
           ],
         },
-        done: [`${INVENTORY} has one row per block of every screen; Candidates and Decision are still empty.`],
+        done: [`${INVENTORY} has one row per block of every screen, with Serves and Query filled; Candidates and Decision are still empty.`],
         reference: env.kit('guides/04-INVENTORY.md'),
       }),
     },
@@ -402,7 +407,7 @@ export const PARTS = {
           'Then, for each must and should row, in this order:',
           `  a. ${env.run('ui-map.mjs', 'have "<need>"')} — a component of this project wins.`,
           `  b. ${env.run('pieces.mjs', 'find "<need>"')} — own piece, then a variant, then a piece of another project.`,
-          `  c. ${env.run('find.mjs', '"<need>"')} — the catalog. Read the results from the top: ReUI, then shadcn/ui, then Shadcn Space.`,
+          `  c. ${env.run('find.mjs', '"<the Query of the row>"')} — the catalog; the Query column holds the first search words, and --category <Category> narrows them. Read the results from the top: ReUI, then shadcn/ui, then Shadcn Space.`,
           `  d. ${env.run('get.mjs', '<id>')} — license, dependencies and install command of each candidate you keep.`,
           'With no result that fits, search again with other words or with --category <category>. Two searches at least before giving up.',
           env.laya && `Order each shortlist: ${env.python('laya_select.py', `--need "<need>" --category <category> --direction <direction id> --context-file ${BRIEF} --confirmed`)}`,
@@ -444,6 +449,7 @@ export const PARTS = {
         steps: [
           'Adapt in this order and stop at the first that is enough: tokens of the theme; the props and variants of the component; a wrapper around it; a patch inside it, with a comment that says what changed, why and the catalog id.',
           'Never write a color, size or radius by hand in a component: use the tokens.',
+          `Container, grid, section padding and type steps follow ${env.kit('experience/LAYOUT-RULES.md')}, using the Layout column of ${INVENTORY}.`,
           'Replace linear transitions with springs; keep at most 2 high-impact animated blocks per view; give a static fallback under prefers-reduced-motion.',
           'The same component on three screens is one shared component, not three copies.',
           `Register each catalog component that landed: ${env.run('get.mjs', '<id> --landed <path of the file>')}`,

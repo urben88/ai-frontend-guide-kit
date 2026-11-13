@@ -216,6 +216,13 @@ function tokensFile(ctx) {
   return validateTokens(data).problems.map((problem) => `design-tokens.json: ${problem}`);
 }
 
+/**
+ * The columns of INVENTORY.md, in order. The one list: the template in flow-steps.mjs and the rows
+ * recipe.mjs writes both take it from here. The gate below finds columns by name, so an older table
+ * with only the first seven columns still passes.
+ */
+export const INVENTORY_COLUMNS = ['Screen', 'Block', 'Category', 'Priority', 'Notes', 'Candidates', 'Decision', 'Serves', 'Layout', 'Query'];
+
 /** The rows of the inventory with the cells a check needs; `where` names a row the way a reader finds it. */
 function inventoryRows(text) {
   const { header, rows } = table(text);

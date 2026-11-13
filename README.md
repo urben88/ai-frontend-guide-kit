@@ -221,9 +221,9 @@ El ranking de componentes acepta `--direction <id>` (la dirección elegida del b
 ├── ai-frontend-guide-kit/        # 📦 the distributable kit (copy this)
 │   ├── AGENTS.md · README.md · VERIFICATION.md
 │   ├── guides/00..10         # experience direction + reuse-first UX/UI workflow (00 = router, 01 = direction, 02 = flows, 10 = iteration)
-│   ├── experience/           # archetypes, philosophies, styles, question bank, discovery loop, reference cards + experience-manifest.json
+│   ├── experience/           # archetypes, philosophies, styles, question bank, discovery loop, reference cards, page recipes + layout rules + experience-manifest.json
 │   ├── catalog/              # index + taxonomy + install-guides + 39 sources + explorer.html + license-report.md
-│   └── tools/                # context · find · get · memory · laya_select · excalidraw-mcp · audit-design · audit-honesty · audit-a11y · audit-perf
+│   └── tools/                # context · find · get · memory · tokens · recipe · laya_select · excalidraw-mcp · audit-design · audit-honesty · audit-a11y · audit-perf
 ├── skills/                   # ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + 16 vendored UX flow skills (MIT)
 ├── manifest/                 # catalog source of truth (generated)
 ├── media/explainer/          # 🎬 hand-drawn explainer: index.html + render.mjs + video (ES/EN, GIF, poster)
