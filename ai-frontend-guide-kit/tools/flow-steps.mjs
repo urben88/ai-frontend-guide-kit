@@ -24,6 +24,8 @@ const INVENTORY = `${OUT}/INVENTORY.md`;
 /** The rules of guides/08-PHILOSOPHY.md that a build must keep, short enough to print. */
 const CRAFT_RULES = 'one primary action per screen; spacing only from the scale (4, 8, 12, 16, 24, 32, 48, 64); at most 3 text sizes visible at once; colors, fonts and radius only from the tokens; animate only transform and opacity; at most 2 high-impact effects per view; respect prefers-reduced-motion';
 
+/** A repository with its own product document (BMAD PRD, specs) keeps it as the anchor: no PRODUCT.md. */
+const hasOwnProductDoc = (env) => /bmad|spec/i.test(env.framework);
 const BUILDER_USE = { hallmark: 'new page or section', 'design-taste-frontend': 'app screen' };
 const builderSkill = (env) => ['hallmark', 'design-taste-frontend'].filter((name) => env.skill(name));
 
@@ -224,12 +226,13 @@ export const PARTS = {
     {
       id: 'product',
       title: 'anchor the product',
+      artifacts: (env) => (hasOwnProductDoc(env) ? [] : [['root:PRODUCT.md']]),
       build: (env) => {
-        const adapter = /bmad|openspec|spec/i.test(env.framework);
+        const adapter = hasOwnProductDoc(env);
         return {
           goal: 'Fix what the product is for, so every screen can be traced to a business reason.',
           steps: [
-            env.uxPresent === null && `${CONTEXT} is missing. Run: ${env.run('context.mjs')} and then ask for this instruction again.`,
+            env.uxPresent === null && `${CONTEXT} is missing or does not say whether UX exists. Run: ${env.run('context.mjs')} and then ask for this instruction again.`,
             adapter && `This repository uses ${env.framework}. Read ${env.kit('guides/ADAPTERS.md')}: its product document is the anchor. Do not create PRODUCT.md.`,
             !adapter && env.hasProduct && 'PRODUCT.md exists. Read it. Do not rewrite it; add only what the template below asks and it lacks.',
             !adapter && !env.hasProduct && 'Create PRODUCT.md in the project root with the template below. Ask the user what you cannot answer from the brief.',

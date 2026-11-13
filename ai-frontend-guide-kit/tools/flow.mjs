@@ -219,6 +219,9 @@ function currentPart(step) {
   return PARTS[step.id].find((part) => !closed.includes(part.id)) ?? PARTS[step.id].at(-1);
 }
 
+/** The files a part must leave; a part may decide them from the project facts (a function of env). */
+const partArtifacts = (p, part) => (typeof part.artifacts === 'function' ? part.artifacts(environment(p)) : part.artifacts ?? []);
+
 /** Facts about this project that the tool resolves, so the instruction leaves no branch to the reader. */
 function environment(p) {
   const rel = relative(p.root, KIT_DIR).replace(/\\/g, '/');
@@ -278,7 +281,7 @@ function instruction(p, state) {
     do: built.steps.filter(Boolean),
     template: built.template ?? null,
     done_when: built.done,
-    artifacts: [...(part.artifacts ?? []), ...((last && STEPS[step.id].artifacts) || [])].map((alternatives) => artifactPath(p, alternatives[0]).shown),
+    artifacts: [...partArtifacts(p, part), ...((last && STEPS[step.id].artifacts) || [])].map((alternatives) => artifactPath(p, alternatives[0]).shown),
     needs_evidence: needsEvidence,
     done_command: env.run('flow.mjs', `done ${id}${needsEvidence ? ' --evidence "<each check you ran and its result>"' : ''}`),
     reference: built.reference,
@@ -438,7 +441,7 @@ function done(p, target, flags) {
   if (partId !== undefined) {
     const part = currentPart(step);
     if (part.id !== partId) throw new Refusal(`part "${partId}" is not the current part (current: ${part.id}); parts are never skipped`);
-    const missing = missingArtifacts(p, part.artifacts);
+    const missing = missingArtifacts(p, partArtifacts(p, part));
     if (missing.length) throw new Refusal(`part "${target}" cannot be marked done: missing ${missing.join(', ')}`);
     if (part !== PARTS[id].at(-1)) {
       step.parts_done = [...(step.parts_done ?? []), partId];

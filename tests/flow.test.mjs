@@ -374,6 +374,7 @@ const FILES = {
   [`${O}/ux/UX-SPEC.md`]: 'x',
   [`${O}/ux/ux-map.excalidraw`]: '{}',
   'DESIGN.md': 'x',
+  'PRODUCT.md': 'x',
   [`${O}/INVENTORY.md`]: 'x',
   [`${O}/selections.jsonl`]: '{"decision":"reuse"}',
   [`${O}/architecture.json`]: '{}',
@@ -489,4 +490,30 @@ test('with the kit inside the project every command uses the path from the proje
   assert.match(started.stdout, /Run: node ai-frontend-guide-kit\/tools\/context\.mjs$/m);
   assert.match(started.stdout, /Then run: node ai-frontend-guide-kit\/tools\/flow\.mjs done intake$/m);
   assert.match(started.stdout, /ai-frontend-guide-kit\/guides\/00-START-HERE\.md/);
+});
+
+test('done ux.product needs PRODUCT.md, except where the repository has its own product document (S2)', () => {
+  const atProduct = (context) => {
+    const dir = project();
+    const homeDir = home();
+    guided(dir, homeDir, 'start', 'ux');
+    put(dir, 'ux/REPO-CONTEXT.md', context);
+    put(dir, 'UI-MAP.md');
+    assert.equal(guided(dir, homeDir, 'done', 'intake').status, 0);
+    return { dir, homeDir };
+  };
+  const plain = atProduct('- **UX present:** no\n- **Framework:** none\n');
+  const before = raw(plain.dir);
+  const refused = guided(plain.dir, plain.homeDir, 'done', 'ux.product');
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /part "ux\.product" cannot be marked done: missing PRODUCT\.md/);
+  assert.equal(raw(plain.dir), before);
+  writeFileSync(join(plain.dir, 'PRODUCT.md'), '# Product\n');
+  const ok = guided(plain.dir, plain.homeDir, 'done', 'ux.product');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.deepEqual(state(plain.dir).steps[1].parts_done, ['product']);
+
+  const bmad = atProduct('- **UX present:** no\n- **Framework:** bmad — _bmad/ found\n');
+  assert.match(guided(bmad.dir, bmad.homeDir, 'next').stdout, /Do not create PRODUCT\.md/);
+  assert.equal(guided(bmad.dir, bmad.homeDir, 'done', 'ux.product').status, 0);
 });
