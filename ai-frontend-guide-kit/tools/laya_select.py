@@ -19,11 +19,11 @@ links, manifest fields) always come from the catalog/manifest; Laya only
 scores semantic fit.
 
 Usage:
-  python tools/laya_select.py --check                 # environment status (exit 0 = ready, 1 = missing)
-  python tools/laya_select.py --install               # python -m pip install -U laya, then verify
-  python tools/laya_select.py --need "..." [filters] --confirmed  # rank (ask the user for consent first)
-  python tools/laya_select.py --need "..." --dry-run  # print state + questions without importing Laya
-  python tools/laya_select.py --dataset experience --kind question --task next-question \
+  python ai-frontend-guide-kit/tools/laya_select.py --check                 # environment status (exit 0 = ready, 1 = missing)
+  python ai-frontend-guide-kit/tools/laya_select.py --install               # python -m pip install -U laya, then verify
+  python ai-frontend-guide-kit/tools/laya_select.py --need "..." [filters] --confirmed  # rank (ask the user for consent first)
+  python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run  # print state + questions without importing Laya
+  python ai-frontend-guide-kit/tools/laya_select.py --dataset experience --kind question --task next-question \
       --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 
 Filters (components): --category --stack --license --commercial --free --source --text
@@ -50,6 +50,18 @@ DEFAULT_CANDIDATES = 8
 LOW_CONFIDENCE = 0.50
 
 KIT_DIR = Path(__file__).resolve().parent.parent
+
+
+def tool_cmd(tool: str, runner: str = "node") -> str:
+    """A kit command in the one path form: the kit relative to the current folder (absolute outside it), quoted when it has spaces."""
+    try:
+        base = KIT_DIR.relative_to(Path.cwd().resolve()).as_posix()
+    except ValueError:
+        base = KIT_DIR.as_posix()
+    path = f"{base}/tools/{tool}"
+    return f'{runner} "{path}"' if " " in path else f"{runner} {path}"
+
+
 CATALOG_DIR = KIT_DIR / "catalog"
 SOURCES_DIR = CATALOG_DIR / "sources"
 EXPERIENCE_MANIFEST = KIT_DIR / "experience" / "experience-manifest.json"
@@ -130,14 +142,14 @@ def run_check(as_json: bool = False) -> int:
     print()
     if info["ready"]:
         print("Ready. Example:")
-        print('  python tools/laya_select.py --need "marketing hero with animated gradient" --category hero --commercial')
+        print(f'  {tool_cmd("laya_select.py", "python")} --need "marketing hero with animated gradient" --category hero --commercial')
     else:
         if not info["python_ok"]:
             print("Install Python 3.10+ (3.11-3.13 recommended if pip fails to find a torch wheel).")
         if not info["laya_installed"]:
             print("Install Laya with:")
             print(f'  "{sys.executable}" -m pip install -U laya')
-        print("Fallback without Laya: node tools/find.mjs ... and node tools/get.mjs ...")
+        print(f"Fallback without Laya: {tool_cmd('find.mjs')} ... and {tool_cmd('get.mjs')} ...")
     return 0 if info["ready"] else 1
 
 
@@ -340,7 +352,7 @@ def run_ranking(args: argparse.Namespace) -> int:
 
     if not candidates:
         print("No candidates after the deterministic filter. Broaden filters (try --text or drop --stack).")
-        print("Fallback: node tools/find.mjs ... (components) or the deterministic question tree (experience). No Laya call was made.")
+        print(f"Fallback: {tool_cmd('find.mjs')} ... (components) or the deterministic question tree (experience). No Laya call was made.")
         return 2
 
     state, questions = build_payload(need, context, candidates, args.task, direction_text, direction_id)
@@ -365,13 +377,13 @@ def run_ranking(args: argparse.Namespace) -> int:
     if not args.confirmed:
         print("Laya is optional and must not run without the user's permission.")
         print("Ask the user for consent first, then repeat the same command adding --confirmed, e.g.:")
-        print(f'  python tools/laya_select.py --need "{need}" --confirmed   # plus your filters')
-        print("Without Laya, continue with: node tools/find.mjs ... and node tools/get.mjs ...")
+        print(f'  {tool_cmd("laya_select.py", "python")} --need "{need}" --confirmed   # plus your filters')
+        print(f"Without Laya, continue with: {tool_cmd('find.mjs')} ... and {tool_cmd('get.mjs')} ...")
         return 3
 
     if not laya_installed():
-        print("Laya is not installed. Run: python tools/laya_select.py --check")
-        print("Fallback: node tools/find.mjs ... and node tools/get.mjs ...")
+        print(f"Laya is not installed. Run: {tool_cmd('laya_select.py', 'python')} --check")
+        print(f"Fallback: {tool_cmd('find.mjs')} ... and {tool_cmd('get.mjs')} ...")
         return 2
 
     from laya import Router  # noqa: PLC0415

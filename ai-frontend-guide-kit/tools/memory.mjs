@@ -12,25 +12,26 @@
  *   SUMMARY.md          generated summary (regenerated on every mutation)
  *
  * Usage:
- *   node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> [--style a,b] [--ref "spec:<capability>|story:<id>"] [--type <component-type>] [--notes "..."]
- *   node tools/memory.mjs add --screen experience --block reference --need "..." --decision adapt --ref "reference:<slug>" [--notes "..."]
- *   node tools/memory.mjs add --screen landing --block custom-x --need "..." --decision build --name "Custom marquee"
- *     (build is the last conclusion: refused unless `node tools/pieces.mjs find "<need>"` ran for that need in this project)
- *   node tools/memory.mjs list [--screen landing] [--limit 15] [--json]
- *   node tools/memory.mjs summary
- *   node tools/memory.mjs combo save <name> [--all] [--note "..."]
- *   node tools/memory.mjs combo list [--json]
- *   node tools/memory.mjs combo show <name> [--json]
- *   node tools/memory.mjs combo apply <name>
- *   node tools/memory.mjs lib add <package|registry> --status using|research [--source <catalog-source>] [--notes "..."]
- *   node tools/memory.mjs lib list [--status using|research] [--json]
- *   node tools/memory.mjs lib sync [--root <project>]     import the UI libraries context.mjs detects; never overwrites a recorded one
+ *   node ai-frontend-guide-kit/tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> [--style a,b] [--ref "spec:<capability>|story:<id>"] [--type <component-type>] [--notes "..."]
+ *   node ai-frontend-guide-kit/tools/memory.mjs add --screen experience --block reference --need "..." --decision adapt --ref "reference:<slug>" [--notes "..."]
+ *   node ai-frontend-guide-kit/tools/memory.mjs add --screen landing --block custom-x --need "..." --decision build --name "Custom marquee"
+ *     (build is the last conclusion: refused unless `node ai-frontend-guide-kit/tools/pieces.mjs find "<need>"` ran for that need in this project)
+ *   node ai-frontend-guide-kit/tools/memory.mjs list [--screen landing] [--limit 15] [--json]
+ *   node ai-frontend-guide-kit/tools/memory.mjs summary
+ *   node ai-frontend-guide-kit/tools/memory.mjs combo save <name> [--all] [--note "..."]
+ *   node ai-frontend-guide-kit/tools/memory.mjs combo list [--json]
+ *   node ai-frontend-guide-kit/tools/memory.mjs combo show <name> [--json]
+ *   node ai-frontend-guide-kit/tools/memory.mjs combo apply <name>
+ *   node ai-frontend-guide-kit/tools/memory.mjs lib add <package|registry> --status using|research [--source <catalog-source>] [--notes "..."]
+ *   node ai-frontend-guide-kit/tools/memory.mjs lib list [--status using|research] [--json]
+ *   node ai-frontend-guide-kit/tools/memory.mjs lib sync [--root <project>]     import the UI libraries context.mjs detects; never overwrites a recorded one
  */
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { findRan } from './pieces.mjs';
+import { toolPath } from './kit-path.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -230,7 +231,7 @@ function commandAdd(args, outputDir, catalog) {
   }
   if (!DECISIONS.has(flags.decision)) fail(`--decision must be one of: ${[...DECISIONS].join(', ')}`);
   if (flags.decision === 'build' && !findRan(outputDir, flags.need)) {
-    fail(`A build is the last conclusion: no "pieces find" ran for "${flags.need}" in this project. Run: node tools/pieces.mjs find "${flags.need}" (own pieces, variants and the catalog come first), then record the build.`);
+    fail(`A build is the last conclusion: no "pieces find" ran for "${flags.need}" in this project. Run: node ${toolPath('pieces.mjs')} find "${flags.need}" (own pieces, variants and the catalog come first), then record the build.`);
   }
 
   const record = {
@@ -248,7 +249,7 @@ function commandAdd(args, outputDir, catalog) {
 
   if (flags.id) {
     const entry = catalog.get(flags.id);
-    if (!entry) fail(`Entry "${flags.id}" not found in the catalog. Use node tools/find.mjs to get a valid id.`);
+    if (!entry) fail(`Entry "${flags.id}" not found in the catalog. Use node ${toolPath('find.mjs')} to get a valid id.`);
     record.entry_id = entry.id;
     record.name = entry.name;
     record.source = entry.source;

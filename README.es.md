@@ -19,9 +19,9 @@ Este repositorio es a la vez la 🏭 **fábrica** (pipeline de extracción + cat
 
 | | Qué | Detalle |
 |---|---|---|
-| 📚 | **Catálogo** | 39 fuentes verificadas · 7.358 entradas reutilizables · 21 categorías · puntuación de calidad, licencia e instalación por entrada · React, Vue y Svelte · `explorer.html` sin conexión |
+| 📚 | **Catálogo** | <!--fig:sources-->39<!--/fig--> fuentes verificadas · <!--fig:entries:es-->7.358<!--/fig--> entradas reutilizables · <!--fig:categories-->21<!--/fig--> categorías · puntuación de calidad, licencia e instalación por entrada · React, Vue y Svelte · `explorer.html` sin conexión |
 | 🧭 | **Kit guiado** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + flujo de 3 fases en guías cortas (00–13) + herramientas `find`/`get`. Autocontenido: sin build ni dependencias npm |
-| 🧠 | **Skills para agentes** | `ai-frontend-guide` (flujo), `frontend-polish` (fase 3), `frontend-refactor` (FSD, solo a pedido), `ux-map` (mapa visual de pantallas) y 16 skills UX incluidas (`userflow` + 15 `flow-*`, MIT) |
+| 🧠 | **Skills para agentes** | `ai-frontend-guide` (flujo), `frontend-polish` (fase 3), `frontend-refactor` (FSD, solo a pedido), `ux-map` (mapa visual de pantallas) y <!--fig:uxskills-->16<!--/fig--> skills UX incluidas (`userflow` + 15 `flow-*`, MIT) |
 | 🧭 | **Flujo de diseño** | `flow.mjs` guarda la ruta y el paso actual de cada proyecto y no deja saltar pasos; `guides/FLOWS.md` lista todas las rutas |
 | 💾 | **Memoria de selección** | `ai-frontend-output/`: historial de decisiones (solo añade), resumen de estilos/componentes, combinaciones reutilizables y librerías de UI en uso o por investigar |
 | 🛡️ | **Auditorías** | `audit-design` (tokens, espaciado, contraste, layout), `audit-honesty` (patrones engañosos), `audit-a11y` (axe + WCAG 2.2), `audit-perf` (Lighthouse frente a Core Web Vitals) en `ai-frontend-guide-kit/tools/` |
@@ -74,7 +74,7 @@ npx ./ai-frontend-guide-kit-<versión>.tgz # ejecútalo en el proyecto de destin
 
 Después dile a tu agente:
 
-> *"Lee `ai-frontend-guide-kit/AGENTS.md` y sigue su flujo."*
+> *"Lee `ai-frontend-guide-kit/INDEX.md` y síguelo."*
 
 ## 🧩 Piezas: tus propios bloques Lego
 
@@ -115,7 +115,7 @@ Tú solo hablas con tu agente. Por detrás, él usa el kit así:
 1. El agente mira en qué punto está el proyecto
    $ node ai-frontend-guide-kit/tools/flow.mjs status
    Kit: installed
-   Flow: none (declare the route with: node tools/flow.mjs start <route>)
+   Flow: none (declare the route with: node ai-frontend-guide-kit/tools/flow.mjs start <route>)
 
 2. Declara la ruta de un frontend nuevo
    $ node ai-frontend-guide-kit/tools/flow.mjs start new
@@ -134,7 +134,7 @@ Tú solo hablas con tu agente. Por detrás, él usa el kit así:
 5. Compartes una web que te gusta: https://magicui.design/docs/components/marquee
    $ node ai-frontend-guide-kit/tools/scout.mjs https://magicui.design/docs/components/marquee
    In the catalog: `magicui` (Magic UI, 78 entries, MIT ...)
-   Query it instead of reading the site: node tools/find.mjs --source magicui
+   Query it instead of reading the site: node ai-frontend-guide-kit/tools/find.mjs --source magicui
 ```
 
 Así sigue, paso a paso, hasta `polish`. Si vuelves mañana, o alguien de tu equipo abre otro chat, `flow.mjs status` enseña exactamente dónde lo dejasteis.
@@ -154,7 +154,7 @@ Los resultados se ordenan por **calidad** (claridad de licencia, esfuerzo de ins
 1. 📁 Copia `ai-frontend-guide-kit/` al proyecto de destino (elimina el antiguo `ai-frontend-guide/` si existe).
 2. 📌 Añade el **bloque de enrutado de diseño** (lo ejecutan `init` y `update`, y también una ejecución sin comando). Dice a todo agente que cualquier petición de frontend, UI, UX o diseño empieza leyendo `ai-frontend-guide-kit/INDEX.md` y ejecutando `flow.mjs status`, sin saltarse nada. Archivos: siempre `AGENTS.md` y `CLAUDE.md` (se crea si falta, porque Claude Code no lee `AGENTS.md`); `.claude/CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.cursorrules` y `.windsurfrules` solo si ya existen; `.cursor/rules/ai-frontend-guide-kit.mdc` (siempre aplicada) solo si existe `.cursor/`. Un bloque nuevo va arriba, bajo el título; uno existente se actualiza en su sitio. Va marcado: reinstalar nunca toca tu contenido ni tus saltos de línea.
 3. 💾 Crea `ai-frontend-output/` (memoria de selección) si falta; nunca se borra en las actualizaciones.
-4. 🧩 Instala las **20 skills de este repo** en `.agents/skills/` (limpio: sin lockfile ni enlaces por todas partes) y, por defecto, las **16 skills de diseño externas** mediante su CLI. Si el proyecto tiene `.claude/`, enlaza las 20 en `.claude/skills/`.
+4. 🧩 Instala las **<!--fig:skills-->20<!--/fig--> skills de este repo** en `.agents/skills/` (limpio: sin lockfile ni enlaces por todas partes) y, por defecto, los **repos de skills de diseño externas** mediante su CLI. Si el proyecto tiene `.claude/`, enlaza las <!--fig:skills-->20<!--/fig--> en `.claude/skills/`.
 5. 🎭 Configura los servidores **Playwright + Excalidraw MCP** según el entorno detectado (`.mcp.json` para Claude Code, `opencode.json` para OpenCode) y crea la plantilla `ai-frontend-output/ux/ux-map.excalidraw`; si no, imprime los comandos exactos. Navegador una vez: `npx playwright install chromium`.
    - 🖱️ **Opcional — Agentation** (clic en un elemento de tu app React y dile al agente exactamente qué cambiar; guía `11-VISUAL-FEEDBACK.md`). El instalador solo imprime el mensaje, no lo instala: `npm install agentation -D`, `claude mcp add agentation -- npx -y agentation-mcp server`, `npx agentation-mcp doctor` y monta `<Agentation endpoint="http://localhost:4747" />` solo en desarrollo.
 6. 🗺️ Escanea el proyecto con `ui-map` (siempre) y escribe el mapa del frontend bajo `ai-frontend-output/` (si el escaneo falla, solo avisa).
@@ -216,9 +216,9 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # vis
 │   ├── AGENTS.md · README.md · VERIFICATION.md
 │   ├── guides/00..10         # dirección de experiencia + flujo UX/UI "reutilizar primero"
 │   ├── experience/           # arquetipos, filosofías, estilos, banco de preguntas, bucle de descubrimiento, fichas de referencia, recetas de página + reglas de layout + experience-manifest.json
-│   ├── catalog/              # índice + taxonomía + guías de instalación + 39 fuentes + explorer.html + license-report.md
+│   ├── catalog/              # índice + taxonomía + guías de instalación + <!--fig:sources-->39<!--/fig--> fuentes + explorer.html + license-report.md
 │   └── tools/                # context · find · get · memory · tokens · recipe · laya_select · excalidraw-mcp · audit-design · audit-honesty · audit-a11y · audit-perf
-├── skills/                   # ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + 16 skills UX incluidas (MIT)
+├── skills/                   # ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + <!--fig:uxskills-->16<!--/fig--> skills UX incluidas (MIT)
 ├── manifest/                 # fuente de verdad del catálogo (generado)
 ├── media/explainer/          # 🎬 explainer dibujado a mano (ES/EN, GIF, póster)
 ├── tools/                    # pipeline de extracción/refresco/build/validación/calidad/licencias
@@ -235,11 +235,11 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # vis
 node tools/refresh.mjs <source_id>   # refresca una fuente (o "all")
 node tools/build-index.mjs           # reconstruye el índice ligero y las puntuaciones de calidad
 node tools/build-kit.mjs             # sincroniza el catálogo en ai-frontend-guide-kit/ y genera explorer.html
-node tools/sync-ux-skills.mjs        # vuelve a incluir las 16 skills UX (MIT); --check para ver novedades
+node tools/sync-ux-skills.mjs        # vuelve a incluir las <!--fig:uxskills-->16<!--/fig--> skills UX (MIT); --check para ver novedades
 node tools/validate.mjs              # comprobaciones de esquema, IDs e índice
 node tools/validate.mjs --urls 100   # comprobación estratificada de enlaces (falla si >10 % rotos)
 node tools/check-licenses.mjs        # compara licencias declaradas con el LICENSE de cada repo (--apply mejora "unknown")
-node tools/audit-categories.mjs      # auditoría de categorías (--strict para CI)
+node ai-frontend-guide-kit/tools/audit-categories.mjs      # auditoría de categorías (--strict para CI)
 npm test                             # suite de pruebas
 npm run verify                       # validate + build-kit + tests
 ```

@@ -233,7 +233,7 @@ test('--url without Playwright prints one clear line, still reports the static r
   // A copy of the tool outside the repository, so no node_modules above it can supply Playwright.
   const base = mkdtempSync(join(tmpdir(), 'audit-design-nopw-'));
   mkdirSync(join(base, 'kit', 'tools'), { recursive: true });
-  for (const name of ['audit-design.mjs', 'tokens.mjs']) cpSync(join(TOOLS, name), join(base, 'kit', 'tools', name));
+  for (const name of ['audit-design.mjs', 'tokens.mjs', 'kit-path.mjs']) cpSync(join(TOOLS, name), join(base, 'kit', 'tools', name));
   const dir = project('bad');
   const run = spawnSync(process.execPath, [join(base, 'kit', 'tools', 'audit-design.mjs'), '--url', 'http://localhost:9', '--dir', dir], { encoding: 'utf8', env: cleanEnv() });
   assert.equal(run.status, 0, run.stderr);

@@ -4,7 +4,7 @@ Purpose: decide per inventory row and execute the installation with a documented
 
 ## Decision tree
 
-First run `node tools/ui-map.mjs have "<need>"`: an existing project component beats any catalog entry (reuse > extend or compose > adapt > create).
+First run `node ai-frontend-guide-kit/tools/ui-map.mjs have "<need>"`: an existing project component beats any catalog entry (reuse > extend or compose > adapt > create).
 
 ```
 Need from inventory
@@ -24,7 +24,7 @@ Need from inventory
 
 Record the path taken and one sentence of reasoning per row. "I liked it" is not a reason; "matches hero intent, MIT, reacts to scroll like the anchor requires" is.
 
-**On BUILD CUSTOM:** if installed, load `hallmark` (new page or section) or `design-taste-frontend` (app screen) and build only that row, inside the project's tokens. See "External design skills by step" in `00-START-HERE.md`. Without them, follow `08-PHILOSOPHY.md`.
+**On BUILD CUSTOM:** load the builder skill `flow.mjs next` names (`hallmark` for a new page or section, `design-taste-frontend` for an app screen) and build only that row, inside the project's tokens. See "External design skills by step" in `00-START-HERE.md`. When it names none, follow `08-PHILOSOPHY.md`.
 
 ## Install by method (use the `install_command` from `get`)
 
@@ -59,17 +59,17 @@ After install: run the dev server, render the component in isolation once, and c
 ## Record every decision (required)
 
 ```bash
-node tools/memory.mjs add --screen <screen> --block <block> --need "<need>" \
+node ai-frontend-guide-kit/tools/memory.mjs add --screen <screen> --block <block> --need "<need>" \
   --decision reuse|adapt|build --id <entry-id> [--style a,b] [--notes "..."]
 ```
 
 - Facts (license, commercial flag, install command) are copied from the catalog — never type them by hand.
 - `--screen` and `--block` MUST match the names used in `ai-frontend-output/ux/UX-SPEC.md` (this keeps UX and component decisions in sync).
 - Custom build: `--decision build --name "Custom logo marquee"` (no id needed).
-- Check progress with `node tools/memory.mjs list`; the generated summary lives in `ai-frontend-output/SUMMARY.md`.
+- Check progress with `node ai-frontend-guide-kit/tools/memory.mjs list`; the generated summary lives in `ai-frontend-output/SUMMARY.md`.
 - When a screen's decisions are complete, save them as a reusable combination:
   ```bash
-  node tools/memory.mjs combo save <name> --note "what this combination is for"
+  node ai-frontend-guide-kit/tools/memory.mjs combo save <name> --note "what this combination is for"
   ```
   Combinations can be reused in other projects (`combo show`/`combo apply`) by copying `combinations.json` or pointing `AI_FRONTEND_OUTPUT` to a shared folder.
 

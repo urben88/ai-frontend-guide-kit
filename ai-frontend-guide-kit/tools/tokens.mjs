@@ -14,8 +14,9 @@
  * Project root: --dir, then AI_FRONTEND_PROJECT, then the folder that holds the kit.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runTool, toolPath } from './kit-path.mjs';
 
 const SELF = fileURLToPath(import.meta.url);
 const KIT_DIR = resolve(dirname(SELF), '..');
@@ -476,14 +477,14 @@ export function mergeDoc(existing, block) {
 const USAGE = `tokens — design tokens as data: design-tokens.json (W3C Design Tokens format) in the project root
 
 Usage:
-  node tools/tokens.mjs init [--primary <hex>] [--accent <hex>] [--neutral <hex>] [--font-display <name>] [--font-body <name>]
+  node ${toolPath('tokens.mjs')} init [--primary <hex>] [--accent <hex>] [--neutral <hex>] [--font-display <name>] [--font-body <name>]
                              [--radius ${CHOICES.radius.join('|')}] [--density ${CHOICES.density.join('|')}]
                              [--type-ratio ${CHOICES['type-ratio'].join('|')}] [--motion ${CHOICES.motion.join('|')}] [--dark] [--force]
       you choose a few values; the tool computes ramps, semantic colors with passing text, type scale, spacing, radii, motion
-  node tools/tokens.mjs check              validate the file and measure the contrast of every declared pair; exit 1 on a failure
-  node tools/tokens.mjs css [--out <file>] the Tailwind v4 @theme block (dark and reduced-motion blocks when they apply)
-  node tools/tokens.mjs doc                write or refresh the token tables of DESIGN.md between ${DOC_START} and ${DOC_END}
-  node tools/tokens.mjs contrast <fg> <bg> ratio of two hex colors or token names, and whether it passes AA
+  node ${toolPath('tokens.mjs')} check              validate the file and measure the contrast of every declared pair; exit 1 on a failure
+  node ${toolPath('tokens.mjs')} css [--out <file>] the Tailwind v4 @theme block (dark and reduced-motion blocks when they apply)
+  node ${toolPath('tokens.mjs')} doc                write or refresh the token tables of DESIGN.md between ${DOC_START} and ${DOC_END}
+  node ${toolPath('tokens.mjs')} contrast <fg> <bg> ratio of two hex colors or token names, and whether it passes AA
 Options: --dir <project>, --json (init, check, doc, contrast), --help
 Exit: 0 ok, 1 refused or a check failed, 2 wrong usage. init never overwrites design-tokens.json without --force.
 `;
@@ -524,11 +525,7 @@ function rootOf(flags) {
 }
 
 /** The command line of this tool in the one path form of the project (from its root). */
-function selfCommand(root, args) {
-  const rel = relative(root, SELF).replace(/\\/g, '/');
-  const path = rel && !rel.startsWith('..') && !isAbsolute(rel) ? rel : SELF.replace(/\\/g, '/');
-  return `node ${/\s/.test(path) ? `"${path}"` : path} ${args}`;
-}
+const selfCommand = (root, args) => runTool('tokens.mjs', args, root);
 
 const say = (flags, json, text) => console.log(flags.json ? JSON.stringify(json, null, 2) : text);
 const numbered = (lines) => lines.map((line, at) => `${at + 1}. ${line}`).join('\n');

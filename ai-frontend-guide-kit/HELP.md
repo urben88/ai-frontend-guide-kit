@@ -48,6 +48,7 @@ Run them from the project root. Every tool prints one screen, not a dump.
 | `tools/flow.mjs` | `list` prints every route and step (the text of `guides/FLOWS.md`); `status` says whether the kit is installed, the active route and step, and what the project has recorded; `start <route>` declares the route; `next` prints the whole instruction of the current micro-step (goal, exact commands, template, done criteria; texts in `tools/flow-steps.mjs`), already resolved for what the project has installed; `scaffold [<step>[.<part>]]` writes the template of a micro-step into its file (never changing what is there); `done <step>` refuses a skipped step, a missing artifact or a file whose required sections are empty, hold a `<…>` token or cite ids that do not exist (the checks live in `tools/flow-gates.mjs`), and the large steps close part by part (`done direction.questions`); `report <step>` writes the checklist that `polish`, `iterate`, `redesign` and `visual-feedback` need besides `--evidence`; `reset` drops the route. State: `ai-frontend-output/flow-state.json`, committed with the project |
 | `tools/memory.mjs` | `add`, `list`, `summary`, `combo save\|list\|show\|apply` — the reusable decision history; `lib add\|list\|sync` keeps the UI libraries the project uses and the ones to research (`sync` imports what `context.mjs` detects) |
 | `tools/excalidraw-mcp.mjs` | Local, offline Excalidraw MCP server for the screen/navigation map |
+| `tools/kit-path.mjs` | Internal helper: writes the one command form every tool prints (`node ai-frontend-guide-kit/tools/<tool> ...`, the kit path relative to the project root) |
 | `tools/laya_select.py` | Optional local decision engine: ranks questions, directions and components (`--check`, `--install`) |
 | `tools/audit-a11y.mjs` | WCAG 2.x A/AA check of one or more URLs through axe-core + Playwright |
 | `tools/audit-perf.mjs` | Lighthouse Core Web Vitals budget: LCP, CLS, TBT |
@@ -61,7 +62,7 @@ Skills are optional accelerators. The kit's files always win over a skill's defa
 
 | Skill | When it runs |
 |---|---|
-| `ai-frontend-guide` | The router every design, UI or UX request goes through |
+| `ai-frontend-guide` | The router every design, UI or UX request goes through; short, it opens one file of `steps/` only at the step the flow is at |
 | `frontend-polish` | Phase 3: external audits + Playwright MCP loop + regression |
 | `frontend-refactor` | Only on explicit request: maps folders to FSD roles and refactors one slice at a time, checking `ui-map build` and `check` after each one |
 | `ux-map` | The screen/navigation map in `ai-frontend-output/ux/ux-map.excalidraw` |
@@ -101,7 +102,7 @@ Read ai-frontend-guide-kit/HELP.md and tell me what this kit can do for my proje
 ```
 
 ```
-Run the kit intake: read ai-frontend-guide-kit/INDEX.md and ai-frontend-guide-kit/AGENTS.md, run tools/context.mjs and read UI-MAP.md, then declare the route in one line before touching any code.
+Run the kit intake: read ai-frontend-guide-kit/INDEX.md, run node ai-frontend-guide-kit/tools/flow.mjs status and follow flow.mjs next exactly, then declare the route in one line before touching any code.
 ```
 
 ```

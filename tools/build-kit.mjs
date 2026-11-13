@@ -3,10 +3,14 @@
  * ai-frontend-guide-kit/catalog/ and verifies every kit asset is present.
  * Idempotent: running it twice produces the same tree.
  *
+ * It also computes the figures the docs state (entries, sources, categories, skills ...) and writes them
+ * between `<!--fig:name-->` and `<!--/fig-->` markers; a test fails when a marked figure is stale.
+ *
  * Usage: node tools/build-kit.mjs
  */
-import { cpSync, rmSync, mkdirSync, existsSync, readFileSync, statSync, readdirSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { cpSync, rmSync, mkdirSync, existsSync, readFileSync, statSync, readdirSync, writeFileSync } from 'node:fs';
+import { join, relative, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { ROOT, MANIFEST_DIR } from './extract/lib.mjs';
@@ -56,6 +60,7 @@ const REQUIRED_KIT_FILES = [
   'tools/flow.mjs',
   'tools/flow-steps.mjs',
   'tools/flow-gates.mjs',
+  'tools/kit-path.mjs',
   'tools/tokens.mjs',
   'tools/recipe.mjs',
   'tools/scout.mjs',
@@ -94,10 +99,14 @@ const FLOW_SKILLS = [
   'flow-tables',
 ];
 
+// One file per flow step, loaded only at that step (skills/ai-frontend-guide/steps/<step>.md).
+const STEP_SKILLS = ['intake', 'direction', 'ux', 'tokens', 'compose', 'iterate', 'redesign', 'polish', 'visual-feedback', 'architecture'];
+
 const REQUIRED_REPO_FILES = [
   'skills/UX-SKILLS-ORIGIN.md',
   'skills/UX-SKILLS-LICENSE',
   'skills/ai-frontend-guide/SKILL.md',
+  ...STEP_SKILLS.map((name) => `skills/ai-frontend-guide/steps/${name}.md`),
   'skills/frontend-polish/SKILL.md',
   'skills/frontend-refactor/SKILL.md',
   'skills/ux-map/SKILL.md',
@@ -105,6 +114,66 @@ const REQUIRED_REPO_FILES = [
   'skills/userflow/report-template.html',
   ...FLOW_SKILLS.map((name) => `skills/${name}/SKILL.md`),
 ];
+
+// ---------------------------------------------------------------- figures stated in the docs
+
+// Files that state figures. Each figure sits in a marker: <!--fig:entries-->7,358<!--/fig--> (":es" writes 7.358).
+export const FIGURE_FILES = [
+  'README.md',
+  'README.es.md',
+  'ai-frontend-guide-kit/README.md',
+  'ai-frontend-guide-kit/AGENTS.md',
+  'ai-frontend-guide-kit/INDEX.md',
+  'ai-frontend-guide-kit/HELP.md',
+  'ai-frontend-guide-kit/HELP.es.md',
+  'skills/ai-frontend-guide/SKILL.md',
+];
+const FIGURE_MARKER = /<!--fig:(\w+)(?::(\w+))?-->([\s\S]*?)<!--\/fig-->/g;
+
+/** The numbers the docs state, computed from the catalog and the folders; nobody types them. */
+export function computeFigures() {
+  const { totals } = JSON.parse(readFileSync(join(MANIFEST_DIR, 'component-manifest.json'), 'utf8'));
+  const skillNames = readdirSync(join(ROOT, 'skills'), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && existsSync(join(ROOT, 'skills', entry.name, 'SKILL.md')))
+    .map((entry) => entry.name);
+  const recipes = JSON.parse(readFileSync(join(KIT_DIR, 'experience', 'page-recipes.json'), 'utf8')).recipes;
+  return {
+    entries: totals.entries,
+    sources: totals.sources,
+    categories: Object.keys(totals.categories).length,
+    skills: skillNames.length,
+    uxskills: skillNames.filter((name) => name === 'userflow' || name.startsWith('flow-')).length,
+    guides: readdirSync(join(KIT_DIR, 'guides')).filter((name) => /^\d\d-.*\.md$/.test(name)).length,
+    recipes: recipes.length,
+    tools: readdirSync(join(KIT_DIR, 'tools')).filter((name) => /\.(mjs|py)$/.test(name)).length,
+  };
+}
+
+const formatFigure = (value, locale) => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, locale === 'es' ? '.' : locale === 'raw' ? '' : ',');
+
+/** Every marked figure of the doc files: what each says now and what it should say. `write` fixes them. */
+export function checkFigures({ write = false } = {}) {
+  const figures = computeFigures();
+  const stale = [];
+  let checked = 0;
+  for (const rel of FIGURE_FILES) {
+    const path = join(ROOT, ...rel.split('/'));
+    if (!existsSync(path)) continue;
+    const original = readFileSync(path, 'utf8');
+    const next = original.replace(FIGURE_MARKER, (whole, name, locale, current) => {
+      if (!(name in figures)) {
+        stale.push(`${rel}: unknown figure "${name}"`);
+        return whole;
+      }
+      checked += 1;
+      const expected = formatFigure(figures[name], locale);
+      if (current !== expected) stale.push(`${rel}: ${name} says ${current}, computed ${expected}`);
+      return `<!--fig:${name}${locale ? `:${locale}` : ''}-->${expected}<!--/fig-->`;
+    });
+    if (write && next !== original) writeFileSync(path, next);
+  }
+  return { checked, stale };
+}
 
 function hashFile(path) {
   return createHash('sha256').update(readFileSync(path)).digest('hex').slice(0, 12);
@@ -191,15 +260,23 @@ function main() {
     }
   }
 
+  const fixed = checkFigures({ write: true });
+  const unknown = fixed.stale.filter((line) => line.includes('unknown figure'));
+  if (unknown.length > 0) {
+    console.error(`Kit build FAILED.\n- ${unknown.join('\n- ')}`);
+    process.exit(1);
+  }
+  console.log(`kit: ${fixed.checked} marked figures in the docs${fixed.stale.length ? `, ${fixed.stale.length} rewritten` : ' (all current)'}`);
+
   const totalBytes = dirSize(KIT_DIR);
   const experienceEntries = checkExperienceManifest();
   console.log(`kit: ${REQUIRED_KIT_FILES.length} required assets present, ${sourceFiles.length} source files synced`);
   console.log(`kit: experience manifest OK (${experienceEntries} entries, unique ids, required fields)`);
   console.log(`kit: ${FLOW_SKILLS.length + 1} UX skills vendored (userflow + ${FLOW_SKILLS.length} flow-*) with license + origin pin`);
-  console.log('kit: 20 repo skills verified (ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + userflow + 15 UX flow skills)');
+  console.log(`kit: ${computeFigures().skills} repo skills verified (ai-frontend-guide + its ${STEP_SKILLS.length} step files + frontend-polish + frontend-refactor + ux-map + userflow + ${FLOW_SKILLS.length} UX flow skills)`);
   console.log(`kit: catalog coherent with manifest: ${coherent ? 'yes' : 'NO'}`);
   console.log(`kit: total size ${(totalBytes / 1024 / 1024).toFixed(2)} MB at ${relative(ROOT, KIT_DIR)}`);
   if (!coherent) process.exit(1);
 }
 
-main();
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

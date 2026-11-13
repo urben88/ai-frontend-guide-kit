@@ -40,7 +40,7 @@ Optionally rank candidates with Laya (`--dataset experience --kind archetype|phi
 
 Write the journey (actor, scenario, phases, actions, thoughts, emotions, friction, opportunities) and the IA (priority content, navigation, section order, entry/exit points, search/filter needs). Organize by user tasks, never by org chart. Use patterns from `experience/references/INDEX.md`; cite as `[ref: <slug>]`.
 
-## Step 4 — Discover references with the user (recommended)
+## Step 4 — Discover references with the user
 
 Follow `experience/DISCOVERY-LOOP.md` (phase A) between the IA and the three directions:
 

@@ -27,24 +27,20 @@ const AGENTS_BLOCK = `${BLOCK_START}
 ## Frontend, UI and design: always this flow (ai-frontend-guide-kit)
 **Mandatory.** Any request about frontend, UI, UX, design, a screen, page, component, style or polish, however small,
 starts like this, before any file is read or edited:
-1. Read \`ai-frontend-guide-kit/INDEX.md\`.
-2. Run \`node ai-frontend-guide-kit/tools/flow.mjs status\`, declare the route with \`flow.mjs start <route>\` (a small change
-   is route \`iterate\`), follow \`flow.mjs next\` and close each step with \`flow.mjs done <step>\`, which refuses a skipped step.
-The flow is never skipped. Routes: \`ai-frontend-guide-kit/guides/FLOWS.md\`; full rules: \`ai-frontend-guide-kit/AGENTS.md\`.
+1. Read \`ai-frontend-guide-kit/INDEX.md\` (one page, enough to work).
+2. Run \`node ai-frontend-guide-kit/tools/flow.mjs status\`. With no route, declare one with \`flow.mjs start <route>\` (a small change
+   is \`iterate\`). Then follow \`flow.mjs next\` exactly and close each step with the command it prints (\`flow.mjs done <step>\`).
+The flow is never skipped. Every route and step: \`ai-frontend-guide-kit/guides/FLOWS.md\`.
+Catalog first, no exceptions: before writing ANY component, section, form or animation run
+\`node ai-frontend-guide-kit/tools/find.mjs "<need>"\`, then \`node ai-frontend-guide-kit/tools/get.mjs <id>\`, and use what it finds
+(ReUI, shadcn/ui and Shadcn Space come first). Build new code only after a search found nothing that fits, and say so with the reason.
+Before creating or changing UI: \`node ai-frontend-guide-kit/tools/ui-map.mjs have <name>\` and \`ui-map.mjs impact <role|component>\`; read \`ai-frontend-output/UI-MAP.md\`, never explore the repo.
+External design skills (landing-page-design, hallmark, design-taste-frontend, emilkowalski, impeccable) never start the work; each runs only at the step \`flow.mjs next\` names.
 Triggers: design, redesign, restyle, UI, UX, look and feel, theme, colors, typography, fonts, spacing, layout, screen, page,
 landing, dashboard, component, form, animation, polish; diseño, rediseñar, estilo, aspecto, tema, colores, tipografía,
 fuentes, espaciado, maquetación, pantalla, página, landing, componente, formulario, animación, pulir.
-Catalog first, no exceptions: before writing ANY component, section, form or animation, search the catalog and use what it finds:
-\`node ai-frontend-guide-kit/tools/find.mjs "<need>"\`, then \`node ai-frontend-guide-kit/tools/get.mjs <id>\`, then install it.
-Results put the big free sources first (ReUI, shadcn/ui, Shadcn Space), best match on top. Build new code only after a search found nothing that fits, and say
-so with the reason. Also \`tools/pieces.mjs find "<need>"\` (own pieces) and \`tools/ui-map.mjs have <name>\` before creating,
-\`ui-map.mjs impact <role|component>\` before changing UI (read \`ai-frontend-output/UI-MAP.md\`, do not explore the repo).
-Record every decision with \`tools/memory.mjs add\`, and every piece use, version and reaction with \`tools/pieces.mjs\`.
-External design skills never start the work; each runs only at its step (\`guides/00-START-HERE.md\`): landing-page-design in phase 1
-(landing pages), hallmark and design-taste-frontend only to build in phase 2, emilkowalski in phases 2-3, impeccable in phase 3
-through \`frontend-polish\` (Playwright MCP). UX map: skill \`ux-map\`.
-On "what is this", "qué puedo pedirle", "dame un resumen de esta herramienta": read \`ai-frontend-guide-kit/HELP.md\`
-(Spanish: \`HELP.es.md\`) and answer from it; never explore the folders to explain the kit.
+On "what is this", "qué puedo pedirle", "dame un resumen de esta herramienta": answer from \`ai-frontend-guide-kit/HELP.md\`
+(Spanish: \`HELP.es.md\`); never explore the folders to explain the kit.
 ${BLOCK_END}
 `;
 
@@ -145,7 +141,14 @@ function parseArgs(argv) {
   return args;
 }
 
+/** How many skills the package ships and how many of them are the UX flow skills; counted, never typed. */
+function skillCounts() {
+  const names = existsSync(KIT_SKILLS_DIR) ? readdirSync(KIT_SKILLS_DIR, { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => entry.name) : [];
+  return { all: names.length, ux: names.filter((name) => name === 'userflow' || name.startsWith('flow-')).length };
+}
+
 function printHelp() {
+  const skills = skillCounts();
   console.log(`AI Frontend Guide installer
 
 Usage:
@@ -158,7 +161,7 @@ Commands:
 Options:
   --target <dir>        install into <dir> (default: current directory)
   --no-skills           skip installing skills entirely
-  --skills-mode <mode>  copy (default): copy the 20 kit skills to .agents/skills (clean, no lockfile)
+  --skills-mode <mode>  copy (default): copy the ${skills.all} kit skills to .agents/skills (clean, no lockfile)
                         cli: use "npx skills add" (lockfile + multi-agent links, includes design skills)
   --no-design-skills    skip the 5 external design skill repos (impeccable/taste-skill/emilkowalski/hallmark/
                         landing-page-design; need network)
@@ -176,7 +179,7 @@ What it does:
      nothing outside the markers changes. Removes the legacy ai-frontend-guide/ folder.
   3. Creates ai-frontend-output/ (selection memory) if missing; it is never removed on refresh.
      It also creates ai-frontend-output/ux/ux-map.excalidraw (Excalidraw scaffold) if missing.
-  4. Installs skills into .agents/skills: copy mode copies the 20 kit skills (workflow + 16 UX flows +
+  4. Installs skills into .agents/skills: copy mode copies the ${skills.all} kit skills (workflow + ${skills.ux} UX flows +
      frontend-polish + ux-map + frontend-refactor); if the project has a .claude/ folder, they are also
      linked into .claude/skills (junction/symlink, fallback to copy). The 5 external design skill repos also
      install by default via the CLI (use --no-design-skills to skip them).

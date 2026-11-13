@@ -3,7 +3,7 @@
  * Static scan for deceptive-pattern tells in UI source (no dependencies).
  * Heuristic: it flags things to review, it does not prove intent.
  *
- * Usage: node tools/audit-honesty.mjs [dir ...] [--strict] [--json]
+ * Usage: node ai-frontend-guide-kit/tools/audit-honesty.mjs [dir ...] [--strict] [--json]
  * Default dirs: src app pages components public index.html (those that exist).
  * --strict exits 1 when any "high" finding exists.
  */

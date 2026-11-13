@@ -8,12 +8,12 @@
  * It never edits, moves or renames project source.
  *
  * Usage:
- *   node tools/ui-map.mjs build [--dir <project-root>] [--json]
- *   node tools/ui-map.mjs impact <role|component> [--dir <project-root>] [--json]
- *   node tools/ui-map.mjs have <name> [--dir <project-root>] [--json]
- *   node tools/ui-map.mjs types [--dir <project-root>] [--json]
- *   node tools/ui-map.mjs docs [--profile sprint|standard|long-term] [--dir <project-root>] [--json]
- *   node tools/ui-map.mjs check [--profile sprint|standard|long-term] [--dir <project-root>] [--json]
+ *   node ai-frontend-guide-kit/tools/ui-map.mjs build [--dir <project-root>] [--json]
+ *   node ai-frontend-guide-kit/tools/ui-map.mjs impact <role|component> [--dir <project-root>] [--json]
+ *   node ai-frontend-guide-kit/tools/ui-map.mjs have <name> [--dir <project-root>] [--json]
+ *   node ai-frontend-guide-kit/tools/ui-map.mjs types [--dir <project-root>] [--json]
+ *   node ai-frontend-guide-kit/tools/ui-map.mjs docs [--profile sprint|standard|long-term] [--dir <project-root>] [--json]
+ *   node ai-frontend-guide-kit/tools/ui-map.mjs check [--profile sprint|standard|long-term] [--dir <project-root>] [--json]
  *
  * Project root: --dir, then AI_FRONTEND_PROJECT, then the folder that holds the kit.
  * Output folder: AI_FRONTEND_OUTPUT, else <project-root>/ai-frontend-output.
@@ -22,6 +22,7 @@ import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, statS
 import { dirname, join, posix, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadEntries, search } from './find.mjs';
+import { toolPath } from './kit-path.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -114,12 +115,12 @@ function resolveOutputDir(root) {
 const USAGE = `ui-map — always-on map of the project's frontend
 
 Usage:
-  node tools/ui-map.mjs build                    scan the project and write ui-map.json, UI-MAP.md and ui-history.jsonl
-  node tools/ui-map.mjs impact <role|component>  owner, users, routes, strays and unresolved imports
-  node tools/ui-map.mjs have <name>              does it exist? type aliases, close matches, catalog candidates, decision
-  node tools/ui-map.mjs types                    coverage of catalog/component-types.json, unclassified components, possible duplicates
-  node tools/ui-map.mjs docs                     documents the profile needs, and which are missing
-  node tools/ui-map.mjs check                    findings from the map plus the missing documents; exit 1 when one blocks
+  node ${toolPath('ui-map.mjs')} build                    scan the project and write ui-map.json, UI-MAP.md and ui-history.jsonl
+  node ${toolPath('ui-map.mjs')} impact <role|component>  owner, users, routes, strays and unresolved imports
+  node ${toolPath('ui-map.mjs')} have <name>              does it exist? type aliases, close matches, catalog candidates, decision
+  node ${toolPath('ui-map.mjs')} types                    coverage of catalog/component-types.json, unclassified components, possible duplicates
+  node ${toolPath('ui-map.mjs')} docs                     documents the profile needs, and which are missing
+  node ${toolPath('ui-map.mjs')} check                    findings from the map plus the missing documents; exit 1 when one blocks
 
 Options:
   --dir <project-root>   project to scan (default: AI_FRONTEND_PROJECT, then the folder that holds the kit)

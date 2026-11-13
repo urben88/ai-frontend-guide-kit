@@ -1,197 +1,85 @@
-# AI Frontend Guide
+# AI Frontend Guide: reference
 
-**Read `INDEX.md` first: it is the single entry point (when the flow applies, the first command, the routes and the tool for each job).**
+Reference. You do not need to read this to work: `INDEX.md` and `flow.mjs next` are enough. Open it for a tool option, a license rule, the memory rules, the Laya rules or the pieces rules.
 
-This folder is a **guided, self-contained kit** for agents (and humans) that build frontend UX/UI. Its purpose: **reuse what already exists before creating anything from scratch** — and decide the experience direction before choosing visuals.
+The kit is a guided, self-contained set for agents and humans that build frontend UX/UI: **reuse what exists before creating anything**, and decide the experience direction before choosing visuals.
 
-## What you have here
+## What is here
 
-- A catalog of **7,358 reusable UI entries** from **39 verified sources** (updated 2026-11-12; ranked by a quality score, with Vue/Svelte ports and icon/illustration/kit resources under the `assets` category), organized in 21 categories.
-- An **experience direction layer** (`experience/`): archetypes, philosophies, styles with limits, an adaptive question bank, reference cards with saved ideas, an interactive discovery loop (`DISCOVERY-LOOP.md`) and a machine-readable `experience-manifest.json` for Laya.
-- Per-entry decision data: what it is, when to use it, where to find it, how to install it and its license constraints.
-- A standardized reuse-first workflow in three on-demand phases (router in `guides/00`, guides 00–13).
-- Two local query tools (`tools/find.mjs`, `tools/get.mjs`) that answer with minimal output, a frontend map of the project (`tools/ui-map.mjs`, always on, no dependencies), design tokens as data with computed contrast and CSS (`tools/tokens.mjs`), page recipes that give each kind of page its sections in order and the inventory rows (`tools/recipe.mjs`, numbers in `experience/LAYOUT-RULES.md`), a design audit that prints a numbered list of fixes (`tools/audit-design.mjs`), plus a local Excalidraw MCP server (`tools/excalidraw-mcp.mjs`, no dependencies) for the UX map.
-- A generic agent skill (`skills/ai-frontend-guide/SKILL.md`) that teaches this workflow to Codex/OpenAI, Claude Code, OpenCode and other agent harnesses, plus a total-polish skill (`skills/frontend-polish/SKILL.md`), a visual map skill (`skills/ux-map/SKILL.md`) and an FSD refactor skill (`skills/frontend-refactor/SKILL.md`, only on explicit request).
-- `HELP.md` and `HELP.es.md`: the plain-language explanation of what this kit is, what runs always and what only on request, its tools and skills, what you can ask for and ready-to-copy prompts. When someone asks what the kit does or how to use it, answer from those files instead of exploring the folders.
+- A catalog of <!--fig:entries-->7,358<!--/fig--> reusable UI entries from <!--fig:sources-->39<!--/fig--> verified sources in <!--fig:categories-->21<!--/fig--> categories, ranked by a quality score (`catalog/`, overview in `catalog/digest.md`).
+- An experience direction layer (`experience/`): archetypes, philosophies, styles, a question bank, reference cards, the discovery loop, page recipes and layout rules.
+- <!--fig:tools-->19<!--/fig--> local tools in `tools/` (one line each in `INDEX.md`), <!--fig:skills-->20<!--/fig--> skills in `skills/` and <!--fig:guides-->14<!--/fig--> numbered guides.
+- `HELP.md` and `HELP.es.md`: what the kit is and what to ask for. Answer "what is this" from them, never by exploring.
 
-## Golden rule
+## Flow commands
 
-> **Before writing any component, form, section or animation from scratch: search this catalog.**
-> **Before choosing colors or components: choose the experience direction.**
+`flow.mjs` keeps the route in `ai-frontend-output/flow-state.json` (commit it). The commands are `node ai-frontend-guide-kit/tools/flow.mjs status` (first), then `start <route>`, `next`, `scaffold`, `report <step>` and `done <step>`; every route and step is in `guides/FLOWS.md`. Close each step with `flow.mjs done <step>`: it refuses a skipped step, a missing artifact, empty sections or `<…>` left. Large steps close part by part (`done direction.questions`). The phases are entry points, not a pipeline: never run a phase the user did not ask for.
 
-Search with `node tools/find.mjs "<need>"` then `node tools/get.mjs <id>`, in source order: ReUI, shadcn/ui, Shadcn Space. Only if that search found nothing that fits (or the license blocks you), build custom, stating the reason — and follow `guides/08-PHILOSOPHY.md`.
+## Token layers
 
-## How to use (token-efficient layers)
-
-| Layer | Read / run | Cost |
+| Layer | What | Cost |
 |---|---|---|
-| 0 · Awareness | this file | ~1 page |
-| 1 · Guide | only the guide for the current phase/step (`guides/00` … `10`) | ≤ ~120 lines |
-| 2 · Knowledge | `experience/*.md` and `experience/references/INDEX.md`, on demand | per topic |
-| 3 · Overview | `catalog/digest.md`: the 5 best entries per category, one line each (generated) | ~2.5k tokens, once, before choosing what to query |
-| 3 · Query | `node tools/find.mjs ...`, `node tools/get.mjs <id>`, `node tools/scout.mjs <url> [--fetch] [--record]` (a component site the user links), `node tools/ui-map.mjs impact` / `have`, `node tools/pieces.mjs find`, Laya dry-runs | < 1 KB each |
-| 3 · Map | `ai-frontend-output/UI-MAP.md` (generated by `ui-map build`) | ~1 page, instead of exploring the repo |
-| 4 · Detail | `catalog/sources/<source>.json` or the official docs URL | only when needed |
+| 1 · Guide | only the guide of the current step (`guides/`) | about 120 lines |
+| 2 · Knowledge | `experience/*.md`, `experience/references/INDEX.md`, on demand | per topic |
+| 3 · Overview | `catalog/digest.md`, once, before choosing what to query | about 2.5k tokens |
+| 3 · Query | `find.mjs`, `get.mjs`, `scout.mjs <url>`, `ui-map.mjs impact|have`, `pieces.mjs find` | under 1 KB each |
+| 3 · Map | `ai-frontend-output/UI-MAP.md` instead of exploring the repo | one page |
+| 4 · Detail | `catalog/sources/<source>.json` or the official docs | only when needed |
 
-Never load all `catalog/sources/*.json` files into context. Never read `install-guides.md` end-to-end — jump to the section of the chosen source. Never paste the whole `experience-manifest.json`; query it.
+Never load all `catalog/sources/*.json`, never read `install-guides.md` end to end (jump to the section of the source), never paste `experience-manifest.json` (query it).
 
-## Route first (intake)
-
-Before touching code, ask the user what they want and declare the route: new frontend (phases 1→2→3), direction only (`guides/01-EXPERIENCE-DIRECTION.md`), small change or custom addition (`guides/10-ITERATE.md`), polish only (phase 3), UX only (`guides/02-UX-FLOWS.md`). **The phases are entry points, not a fixed pipeline** — never run a phase the user did not ask for.
-
-The route is kept per project in `ai-frontend-output/flow-state.json` (commit it), so every person and agent that talks about the design continues at the same step. **Never skip a step.**
+## Catalog
 
 ```bash
-node tools/flow.mjs status          # kit installed? active route and step, decisions and libraries recorded
-node tools/flow.mjs list            # every route and step with its guide, skill, tools and output (= guides/FLOWS.md)
-node tools/flow.mjs start <route>   # new | direction | ux | iterate | polish | redesign | visual-feedback | architecture
-node tools/flow.mjs next            # the whole instruction of the current micro-step: goal, exact commands, template, done criteria
-node tools/flow.mjs scaffold        # writes the template of the current micro-step into its file (never changes what is there)
-node tools/flow.mjs done <step>     # refuses a skipped step, a missing artifact, or a file with empty sections or <…> tokens left; large steps close part by part (done direction.questions)
-node tools/flow.mjs report <step>   # polish | iterate | redesign | visual-feedback: the checklist to fill besides --evidence "..."
+node ai-frontend-guide-kit/tools/find.mjs "<need>"          # best match first; big free sources first (ReUI, shadcn/ui, Shadcn Space)
+node ai-frontend-guide-kit/tools/find.mjs --category hero --stack react --commercial --limit 8
+node ai-frontend-guide-kit/tools/get.mjs <id>                # license, dependencies, install command
 ```
 
-When someone asks which flows exist, answer from `guides/FLOWS.md` and recommend the route that fits the request.
+Present 2–3 combinations with their rationale and the facts from `get` before closing a selection. Web-discovered components stay `provisional` until their license is verified on the origin page (`experience/DISCOVERY-LOOP.md`, phase B).
 
-## Workflow map (three phases)
+## Frontend map
 
-| Phase | Guide | Output |
-|---|---|---|
-| 0 · Intake | `guides/00-START-HERE.md` | route declared + flow map |
-| 1 · UX & theory | `guides/01-EXPERIENCE-DIRECTION.md` | `EXPERIENCE-BRIEF.md` (archetype, philosophy, journey, IA, 3 directions, visual brief) |
-| 1 · UX & theory | `guides/02-UX-FLOWS.md` | context + `PRODUCT.md` + `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw` (4 paths) |
-| 1 · UX & theory | `guides/03-TOKENS.md` | `design-tokens.json` + `DESIGN.md` + Tailwind v4 theme from the visual brief (`tools/tokens.mjs`; Figma MCP values go into its flags) |
-| 2 · Composition | `guides/04-INVENTORY.md` … `guides/07-ADAPT.md` (+ `08` while composing) | inventory (`recipe.mjs suggest`, then `inventory --write`), shortlist, reuse/adapt/build + install, adapted components |
-| 3 · Total polish | `frontend-polish` skill + `guides/08-PHILOSOPHY.md` + `guides/09-VERIFY.md` | `audit-design.mjs --report` without high findings + external audits + Playwright MCP loop + E2E/visual checks green |
-| Iterate | `guides/10-ITERATE.md` | small changes and custom additions without repeating the UX phase |
-| Visual feedback (optional) | `guides/11-VISUAL-FEEDBACK.md` | the user points at elements in the browser (Agentation MCP) and the agent changes exactly those |
+`ui-map.mjs` keeps `ui-map.json`, `UI-MAP.md` and `ui-history.jsonl` in `ai-frontend-output/` and never edits source. Run `node ai-frontend-guide-kit/tools/ui-map.mjs check` as the gate. Commands: `build`, `impact <role|component>` (owner, users, routes, strays, unresolved imports: change every one it lists), `have "<name>"` (also resolves type aliases: `modal` finds a `Dialog`), `types`, `docs [--profile ...]`, `check [--profile ...]`. `check` lists every finding and exits 1 when one blocks: profile `sprint` blocks nothing, `standard` (default) blocks unresolved imports and missing documents, `long-term` blocks all. Unresolved imports are never assumed fine. The folder structure is a separate decision (`guides/12-ARCHITECTURE.md`): `map` is the default; FSD only when the user asks, through the `frontend-refactor` skill.
 
-## Query examples
+## Pieces
 
-```bash
-node tools/find.mjs --category hero --stack react --commercial
-node tools/find.mjs --text marquee --limit 8
-node tools/get.mjs magicui-micro-interactions-marquee
-```
+`pieces.mjs` registers the project's own components where its architecture keeps them; the kit stores only metadata, history and an index (`ai-frontend-output/pieces/`), never component code.
 
-Before closing a selection, present 2–3 **combinations** with their rationale and the facts from `get`; web-discovered components stay `provisional` until their license is verified on the origin page (`experience/DISCOVERY-LOOP.md`, phase B).
+- Before creating a component run `pieces.mjs find "<need>"`: own piece, variant, piece of another registered project (`adopt` copies the file in), the catalog, and only then a new piece (`add` refuses otherwise unless `--new --reason "..."`).
+- A polish request ("more spacing") means editing the file and then `pieces.mjs version <name>`, or a new variant, never a new piece.
+- Without waiting to be asked: `use` when a piece goes in, `version` after an edit, `like` or `dislike` when the user reacts, `note` for any remark.
+- Origin: `get.mjs <id> --landed <path>` registers a catalog component (`catalog:<id>`); an internet one uses `add ... --origin internet:<url>`. `--relation` is `chosen`, `modified` or `copied`. `pieces.mjs personality set <key> <value>` keeps the project's taste.
+- `memory.mjs add --decision build` needs a prior `pieces.mjs find`; `flow.mjs done compose|iterate` needs every build registered and every registered piece recorded after its last edit. A global index at `~/.ai-frontend-guide-kit/` (override: `AI_FRONTEND_PIECES` or `--global`) holds only references to registered projects.
 
-## Laya (local decision engine — optional accelerator)
+## Selection memory
 
-Laya is a fast decision model with **calibrated probabilities** that runs entirely on this PC (no server). It ranks three things: **questions** of the direction phase, **direction** candidates (archetypes, philosophies, styles) and **components** of the catalog. For components, `--direction <id>` injects the chosen direction into the ranking state so the fit matches the UX.
+`ai-frontend-output/` lives next to the kit and survives refreshes: never store memory inside `ai-frontend-guide-kit/`.
 
-```bash
-python tools/laya_select.py --check       # ready? (exit 0 = usable on this PC)
-python tools/laya_select.py --install     # only if missing (first run downloads checkpoints, ~0.1-1.7 GB)
-# questions (state = the brief in progress)
-python tools/laya_select.py --dataset experience --kind question --task next-question \
-  --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
-# direction (archetype/philosophy/style)
-python tools/laya_select.py --dataset experience --kind archetype --task direction \
-  --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
-# components (default dataset) — pass the chosen direction so fit matches the UX direction
-python tools/laya_select.py --need "pricing table with monthly/anual toggle" --category pricing --commercial \
-  --direction <experience-id> --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
-```
+- Check `memory.mjs combo list` before searching; reuse a saved combination when it fits.
+- Record every decision with `memory.mjs add` right after choosing; references and directions can use `--ref "reference:<slug>"` or `--ref "direction:<id>"` without `--id`.
+- `SUMMARY.md` is the generated summary of styles and components. `combo save <name>` and `combo apply <name>` reuse a set.
+- UI libraries: `memory.mjs lib sync` imports what `context.mjs` detects; `lib add <name> --status using|research` records one by hand. Prefer a library the project already uses before adding another; for one to research, use its own documentation.
 
-Rules:
+## UX rules
 
-- **Consent once per session:** ask the user at the start of the phase, record `laya_consent` in `EXPERIENCE-BRIEF.md`, then use `--confirmed` per call; a revocation returns to the deterministic fallback. Never run the model without consent.
-- **Facts vs opinion:** licenses, compatibility, install commands and manifest fields always come from the catalog/manifest; Laya only scores semantic fit.
-- Treat probabilities as **relative** between candidates; if the top score is low the script says so — compare alternatives or broaden filters.
-- If Python/Laya is unavailable, continue with the question tree, the heuristic tables in `experience/` and `find`/`get`. Never block the workflow on Laya.
-- Pre-filter is deterministic and mandatory: non-commercial entries never reach the model for commercial projects.
+- No UX in the repo: design from scratch with the `userflow` dispatcher (load 1–4 `flow-*` skills, never from memory). UX exists: **ask the user once**, Summarize (as-is plus audit, no changes) or Radical redesign (baseline, ideal, diff). Never redesign silently; redesign is UX-only and `PRODUCT.md` stays.
+- BMAD or spec-driven repos (`Framework:` in `REPO-CONTEXT.md`): `guides/ADAPTERS.md`. A BMAD PRD is the business anchor (cite `--ref "story:<id>"`); OpenSpec specs are the behavioral truth (`--ref "spec:<capability>"`).
+- Gate: no UI step until `EXPERIENCE-BRIEF.md` has the chosen direction and `UX-SPEC.md` lists screens with empty, loading and error states, and `ux-map.excalidraw` matches both.
+- Polish: design measures come from `audit-design.mjs --report`, never from your own review; the `polish` step cannot close with a high finding. Agentation (`guides/11-VISUAL-FEEDBACK.md`) is a human round on request, never required.
 
-## UX phase first (`ai-frontend-output/ux/`)
+## Laya (local decision engine, only after the user agrees)
 
-Before any UI work, run the direction phase (`01`) and the UX phase (`02`) with the bundled UX flow skills (`userflow` + 15 `flow-*`, proven patterns for auth, onboarding, checkout, paywall, settings, navigation, tables, forms, errors, empty states, AI chat…):
+Laya ranks questions, directions and components with calibrated probabilities, on this PC, no server. `python ai-frontend-guide-kit/tools/laya_select.py --check` says if it is ready; `--install` downloads about 0.1–1.7 GB once.
 
-```bash
-node tools/context.mjs        # scans the repo → ai-frontend-output/ux/REPO-CONTEXT.md (incl. ux_present)
-```
-
-Then:
-
-1. Follow `guides/01-EXPERIENCE-DIRECTION.md`: adaptive questions (rounds of 3–5, `experience/QUESTION-BANK.md`) → archetype/philosophy/journey/IA → three directions (safe/differentiated/experimental) → `EXPERIENCE-BRIEF.md`. Gate before the flows. (Recommended) run the discovery loop first: `experience/DISCOVERY-LOOP.md` phase A proposes example sites with their structure, asks which the user likes, saves screenshots in `ai-frontend-output/ux/references/` and records picks with `--ref "reference:<slug>"`.
-2. Follow `guides/02-UX-FLOWS.md`:
-   - **No UX detected** → design from scratch with the `userflow` dispatcher (load 1–4 `flow-*` skills, never from memory) → `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw`.
-   - **UX exists** → **ask the user once**: *Summarize* (as-is documentation + anti-pattern audit, no changes) or *Radical redesign* (baseline → ideal UX → diff). Never redesign silently. Redesign is UX-only: `PRODUCT.md` stays.
-   - **Single surface** → spot audit via `/userflow audit …` (findings only).
-   - **BMAD / spec-driven repos** → read `guides/ADAPTERS.md`. Detection is automatic (`Framework:` in `REPO-CONTEXT.md`): with a BMAD PRD, use it as the business anchor and cite stories with `--ref "story:<id>"`; with OpenSpec, specs are the behavioral source of truth and decisions cite `--ref "spec:<capability>"`.
-
-Either path ends with the **visual screen map** (skill `ux-map` + local Excalidraw MCP): `ai-frontend-output/ux/ux-map.excalidraw`, template chosen by the brief's `navigation_model` (`one-page`, `flow`, `hub`, `catalog`, `console`, `tree`), areas/colors from the brief IA and a legend with the direction (+ `P(fit)` when Laya ranked). Redesign snapshots `ux-map-baseline.excalidraw` first and updates the map incrementally.
-
-Gate: do not start the UI steps until `EXPERIENCE-BRIEF.md` has the chosen direction and `UX-SPEC.md` lists screens with empty/loading/error states and flows, and `ux-map.excalidraw` matches both. The UI inventory and `memory.mjs --screen/--block` come from it.
-
-## Total polish phase (`frontend-polish` + Playwright MCP)
-
-External design skills run only at the step `guides/00-START-HERE.md` gives them: `landing-page-design` in phase 1 (landing pages only), `hallmark` and `design-taste-frontend` build only in phase 2, for decision `build` (`design-taste-frontend` also for an agreed visual redesign); both may give raw material for the directions in phase 1 without building; `hallmark` gives a report-only audit in phase 3; `emilkowalski` in phases 2–3; `impeccable` in phase 3.
-
-Before closing any screen, run the `frontend-polish` skill: external audits when installed (impeccable, hallmark, emilkowalski, plus the checks of design-taste-frontend when it built the screen), the Playwright MCP loop (a11y snapshot, states, console, keyboard, reduced motion, responsive) and the `@playwright/test` regression of `guides/09-VERIFY.md`. The installer configures Playwright MCP for detected harnesses; the browser installs once with `npx playwright install chromium`. Design measures (spacing, sizes, colors, contrast, layout) come from `node tools/audit-design.mjs --report`, never from your own review; the `polish` step cannot close with a high finding.
-
-Optional human round (React projects): the user can click the elements to change with Agentation; the agent processes the annotations through its MCP (`guides/11-VISUAL-FEEDBACK.md`, which also holds the install message: `npm install agentation -D` + `claude mcp add agentation -- npx -y agentation-mcp server`). Offer it during composition for fine adjustments and at the end of polish; never require it.
-
-## Frontend map (`ai-frontend-output/UI-MAP.md`, always on)
-
-The installer scans the project and keeps `ui-map.json`, `UI-MAP.md` and `ui-history.jsonl` in `ai-frontend-output/` (components, who uses them, routes, visual roles, strays, unresolved imports). It never edits source.
-
-```bash
-node tools/ui-map.mjs impact loading        # before changing UI: owner, users, routes, strays, unresolved
-node tools/ui-map.mjs have "data table"     # before creating: exists? type alias, close match, catalog candidates
-node tools/ui-map.mjs types                 # coverage of catalog/component-types.json, unclassified, possible duplicates
-node tools/ui-map.mjs docs                  # documents the profile needs, and which are missing (guides/13-CONTEXT-DOCS.md)
-node tools/ui-map.mjs check                 # profile gate: findings from the map + missing documents; exit 1 when one blocks
-node tools/ui-map.mjs build                 # refresh by hand (impact/have rebuild when stale)
-```
-
-Read `UI-MAP.md` instead of exploring. Change every owner, user and stray that `impact` lists; none may be left out. Unresolved imports are never assumed fine.
-`have` also resolves the canonical component types and their aliases (`modal` finds a `Dialog`); `types` and `docs` are read-only reports, and `docs --profile sprint|standard|long-term` sets how many context documents the project owes.
-`check` is the gate: it lists every finding (unresolved imports, duplicate component types, strays, ownerless roles, missing documents) and the profile only decides which kinds block — `sprint` blocks nothing, `standard` (default) blocks unresolved imports and missing documents, `long-term` blocks all of them; it exits 1 when at least one blocking finding exists. Stack combinations per project type live in `experience/STACK-RECIPES.md`.
-
-The folder structure is a separate decision: `map` (the default) only records folder roles, and FSD is applied only when the user asks for it (`guides/12-ARCHITECTURE.md`, skill `frontend-refactor`).
-
-## Pieces (the project's own reusable components)
-
-Pieces (`node tools/pieces.mjs`) are the project's own components, registered where its architecture already keeps them (for example `src/components/`); the kit never copies or stores component code, only metadata, history and an index. Before creating any component run `pieces find "<need>"`: your own piece, a new variant of a close piece, a piece of another registered project (`pieces adopt` copies its file into this project), the kit catalog, and only then a new piece (`add` refuses otherwise unless `--new --reason "..."`). A polish request ("más espaciado", "more image") means editing the component file and then `pieces version <name>`, or a new variant, never a new piece. Without waiting to be asked, record `pieces use` when a piece goes into the project, `version` after the user adjusts it, `like`/`dislike` when they react, and `note` for any remark. Say where a component came from: `node tools/get.mjs <id> --landed <path>` registers a catalog component that landed in the project (origin `catalog:<id>`); for one from the internet use `pieces add ... --origin internet:<url>`; set `--relation` to `chosen` (used as is), `modified` (adapted) or `copied` (traced from a reference). The project keeps only its personality and usage in `ai-frontend-output/pieces/` (`pieces personality set <key> <value>`).
-
-```bash
-node tools/pieces.mjs find "pricing table"                 # before creating: own piece > variant > other project > catalog > new
-node tools/pieces.mjs adopt pricing-table --from other-site   # copy another project's piece into this project's component folder
-node tools/pieces.mjs add pricing-table --level medium --file src/components/PricingTable.tsx --variants monthly,annual   # only after find
-node tools/get.mjs <entry-id> --landed src/components/Marquee.tsx   # a catalog component that landed: registered with its origin
-node tools/pieces.mjs use pricing-table --variant annual   # record use
-node tools/pieces.mjs version pricing-table --note "more spacing"   # after editing the file: records its SHA-256 (and git commit)
-node tools/pieces.mjs like pricing-table --note "love the spacing"   # or dislike / note
-node tools/pieces.mjs show pricing-table                   # latest state first, then history
-node tools/pieces.mjs list --origin catalog                # what came from the catalog / internet / another project / generated
-```
-
-Per project the kit keeps `ai-frontend-output/pieces/` (`pieces.json` registry with personality and usage, `history.jsonl`, `index.db`, kept out of git by its own `.gitignore`). A global index at `~/.ai-frontend-guide-kit/` (override with `AI_FRONTEND_PIECES` or `--global`) holds only references to the registered projects (project, path, hash, metadata, likes) so `find` also sees pieces of your other projects. The index is SQLite + FTS5 with SHA-256 hashes (`pieces index` rebuilds it); on Node older than 22.13 the registries are scanned instead. `memory add --decision build` needs a prior `pieces find`, and `flow done compose|iterate` needs every build registered as a piece and every registered piece recorded after its last edit (`pieces version`).
-
-## Selection memory (`ai-frontend-output/`)
-
-Every decision is recorded and reusable. The folder lives next to the kit and **survives kit refreshes** — never store memory inside `ai-frontend-guide-kit/`.
-
-```bash
-node tools/memory.mjs combo list        # check saved combinations BEFORE searching
-node tools/memory.mjs add --screen landing --block orders --need "order table" --decision reuse --id <entry-id> --type table
-node tools/memory.mjs add --screen experience --block direction --need "..." --decision adapt --ref "direction:<id>"
-node tools/memory.mjs list              # recent decisions
-node tools/memory.mjs combo save saas-landing-v1 --note "..."   # snapshot for reuse
-node tools/memory.mjs combo apply saas-landing-v1                # reuse in this project
-```
-
-Rules:
-
-- Check `combo list` before searching the catalog; reuse existing combinations when they fit.
-- Record every decision with `add` right after choosing (facts come from the catalog).
-- References, likes and directions can be recorded without `--id` using `--ref` (e.g. `--ref "reference:<slug>"`).
-- `ai-frontend-output/SUMMARY.md` is the generated summary of styles and components extracted.
-- UI libraries: `node tools/memory.mjs lib sync` imports the ones `context.mjs` detects (covered by the catalog, compatible, or to research) into `libraries.json`; `lib add <name> --status using|research` records one by hand and `lib list` shows them. For a library to research, use its own documentation; prefer a library the project already uses before adding another.
+- Consent once per session: record `laya_consent` in `EXPERIENCE-BRIEF.md`, then pass `--confirmed` per call. Never run the model without it; a revocation returns to the deterministic path.
+- Facts (licenses, compatibility, install commands) always come from the catalog; Laya only scores semantic fit. Probabilities are relative between candidates; a low top score means compare or broaden filters.
+- The pre-filter is deterministic and mandatory: non-commercial entries never reach the model for a commercial project.
+- Without Python or Laya, continue with the question tree, the tables in `experience/` and `find.mjs`/`get.mjs`. Never block the workflow on Laya.
 
 ## License discipline
 
-- `license_type: non-commercial` → **do not use in commercial work** (permission required).
-- `license_type: unknown` → verify on the component page before production.
-- `commercial_use: conditional` → read `limits` in `get` output first.
-- This kit never ships third-party component code; it only stores metadata and links.
+- `license_type: non-commercial`: do not use in commercial work without permission.
+- `license_type: unknown`: verify on the component page before production.
+- `commercial_use: conditional`: read `limits` in the `get` output first.
+- The kit never ships third-party component code; it stores metadata and links. Pictures from external skills keep their own licenses and credits.

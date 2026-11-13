@@ -21,31 +21,31 @@ Read `catalog/digest.md` once: the 5 best entries per category (at most 2 per so
 
 ## A site the user links
 
-When the user gives the URL of a component site, run `node tools/scout.mjs <url>` before opening it. If it is a catalog source, query it with `find --source <id>`. If not, `scout <url> --fetch` reads only that page and prints its components, install commands and license and paid hints; add `--record` to keep it in the project's libraries as `research`. Its components stay provisional until the license is verified on the origin page.
+When the user gives the URL of a component site, run `node ai-frontend-guide-kit/tools/scout.mjs <url>` before opening it. If it is a catalog source, query it with `find --source <id>`. If not, `scout <url> --fetch` reads only that page and prints its components, install commands and license and paid hints; add `--record` to keep it in the project's libraries as `research`. Its components stay provisional until the license is verified on the origin page.
 
 ## Query basics
 
 ```bash
-node tools/find.mjs --category hero --commercial          # must-have filter for client work
-node tools/find.mjs --category forms --stack react
-node tools/find.mjs "pricing card with toggle" --limit 8      # a positional query works like --text
-node tools/find.mjs --text marquee --limit 8
-node tools/find.mjs --source magicui --category backgrounds-effects
-node tools/find.mjs --text "pricing toggle" --stack react --licensed --min-quality 70   # ranked by quality / relevance
-node tools/get.mjs <entry-id>                             # full card: install, license, deps
+node ai-frontend-guide-kit/tools/find.mjs --category hero --commercial          # must-have filter for client work
+node ai-frontend-guide-kit/tools/find.mjs --category forms --stack react
+node ai-frontend-guide-kit/tools/find.mjs "pricing card with toggle" --limit 8      # a positional query works like --text
+node ai-frontend-guide-kit/tools/find.mjs --text marquee --limit 8
+node ai-frontend-guide-kit/tools/find.mjs --source magicui --category backgrounds-effects
+node ai-frontend-guide-kit/tools/find.mjs --text "pricing toggle" --stack react --licensed --min-quality 70   # ranked by quality / relevance
+node ai-frontend-guide-kit/tools/get.mjs <entry-id>                             # full card: install, license, deps
 ```
 
 Filters: `--category`, `--stack`, `--license`, `--commercial`, `--free`, `--source`, `--type`, `--text` (or a positional query), `--limit` (default 12), `--json`.
 
-## Rank with Laya (recommended, local)
+## Rank with Laya (local; `flow.mjs next` prints it only when the brief records consent)
 
 After the `find` shortlist and the `get` cards, rank the candidates with the local Laya engine, passing the **chosen direction** and the brief as context. Consent is once per session (recorded in `EXPERIENCE-BRIEF.md` from guide 01):
 
 ```bash
-python tools/laya_select.py --check                    # ready? (exit 0 = usable)
-python tools/laya_select.py --need "…" --dry-run        # preview the payload without the model
+python ai-frontend-guide-kit/tools/laya_select.py --check                    # ready? (exit 0 = usable)
+python ai-frontend-guide-kit/tools/laya_select.py --need "…" --dry-run        # preview the payload without the model
 # after the user consented this session:
-python tools/laya_select.py --need "…the block need…" --category <category> --commercial \
+python ai-frontend-guide-kit/tools/laya_select.py --need "…the block need…" --category <category> --commercial \
   --direction <experience-id> --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 ```
 
@@ -58,15 +58,15 @@ python tools/laya_select.py --need "…the block need…" --category <category> 
 
 1. Before searching, check saved combinations (they live next to the kit and survive refreshes):
    ```bash
-   node tools/memory.mjs combo list
+   node ai-frontend-guide-kit/tools/memory.mjs combo list
    ```
-   If one fits this project, `node tools/memory.mjs combo show <name>` and reuse its entries (record them with `combo apply` or `add`).
+   If one fits this project, `node ai-frontend-guide-kit/tools/memory.mjs combo show <name>` and reuse its entries (record them with `combo apply` or `add`).
 2. For each inventory row run **one** `find` with the tightest filters.
 3. If 0 results: broaden one filter at a time (category → text → drop stack). If still 0, mark "build custom" and move on.
 4. For the top 2–3 results per row run `get` and note: license, commercial flag, dependencies, install command.
 5. Add candidates to your working table; do not stop at the first result — compare at least two when available.
 6. Present the shortlist to the user as **2–3 combinations** (see below), not loose links; iterate variants until the set fits.
-7. Recommended: rank the shortlist with Laya passing `--direction <id>` and the brief as context (consent once per session); adopt its order and keep the facts from `get`.
+7. When the brief records consent, rank the shortlist with Laya passing `--direction <id>` and the brief as context (consent once per session); adopt its order and keep the facts from `get`.
 
 ## Candidate table (extend `INVENTORY.md`)
 

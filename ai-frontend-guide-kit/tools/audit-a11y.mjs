@@ -3,16 +3,17 @@
  * Automated WCAG 2.x A/AA check of one or more URLs with axe-core through Playwright.
  * Needs (project dev dependencies): npm i -D @playwright/test @axe-core/playwright, then npx playwright install chromium.
  *
- * Usage: node tools/audit-a11y.mjs <url> [<url> ...] [--tags wcag2a,wcag2aa,wcag22aa] [--json]
+ * Usage: node ai-frontend-guide-kit/tools/audit-a11y.mjs <url> [<url> ...] [--tags wcag2a,wcag2aa,wcag22aa] [--json]
  * Exit code 1 when violations are found, 2 when the tooling is missing.
  */
+import { toolPath } from './kit-path.mjs';
 const argv = process.argv.slice(2);
 const tagsIndex = argv.indexOf('--tags');
 const urls = argv.filter((a, i) => !a.startsWith('--') && argv[i - 1] !== '--tags');
 const tags = tagsIndex >= 0 ? argv[tagsIndex + 1].split(',') : ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'];
 
 if (urls.length === 0) {
-  console.error('Usage: node tools/audit-a11y.mjs <url> [<url> ...] [--tags ...] [--json]');
+  console.error(`Usage: node ${toolPath('audit-a11y.mjs')} <url> [<url> ...] [--tags ...] [--json]`);
   process.exit(2);
 }
 

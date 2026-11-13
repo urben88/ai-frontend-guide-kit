@@ -7,7 +7,7 @@
  * not have to explore the whole repository (token-efficient).
  *
  * Usage:
- *   node tools/context.mjs [--dir <project-root>] [--json]
+ *   node ai-frontend-guide-kit/tools/context.mjs [--dir <project-root>] [--json]
  *
  * UI libraries come from package.json and components.json: covered (a catalog source is built on it),
  * compatible (catalog entries depend on it) or to research (not in the catalog: use its own docs).
@@ -15,6 +15,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { toolPath } from './kit-path.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -345,7 +346,7 @@ function main() {
     lines.push('## UI libraries');
     lines.push('');
     if (libraries.covered.length > 0) {
-      lines.push(`- Covered by the catalog: ${libraries.covered.map((lib) => `\`${lib.package}\` → \`${lib.sources[0]}\` (\`node tools/find.mjs --source ${lib.sources[0]}\`)`).join(', ')}`);
+      lines.push(`- Covered by the catalog: ${libraries.covered.map((lib) => `\`${lib.package}\` → \`${lib.sources[0]}\` (\`node ${toolPath('find.mjs', projectRoot)} --source ${lib.sources[0]}\`)`).join(', ')}`);
     }
     if (libraries.compatible.length > 0) {
       lines.push(`- Used by catalog sources (compatible picks): ${libraries.compatible.map((lib) => `\`${lib.package}\` (${lib.sources.map((id) => `\`${id}\``).join(', ')})`).join(', ')}`);

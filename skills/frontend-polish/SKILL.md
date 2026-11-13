@@ -24,15 +24,15 @@ Phase 3 of the `ai-frontend-guide-kit` workflow. Goal: a screen that survives sc
 
 Run `node ai-frontend-guide-kit/tools/audit-design.mjs --report` (add `--url <url>` when Playwright is installed). It measures spacing, type sizes, colors, motion, focus, headings, and rendered at 360/768/1280 overflow, contrast, target size, line length and overlaps, and prints a numbered list of fixes, most severe first. Fix it from the top and run it again until it has no `high` finding; do not review those measures by eye. `flow.mjs done polish` reads its `reports/design-audit.json`.
 
-## Step 1 — External audits (only if installed)
+## Step 1 — External audits (the ones `flow.mjs next` names)
 
-Skills are opt-in by their own descriptions; load them when present, never assume slash commands:
+`flow.mjs next` names the audits this project has installed: run only those, and never assume slash commands. Notes on each:
 
-- **`impeccable`** (if installed): the primary craft checklist. Run its `critique` workflow on the screen (scored UX review), then `audit` (accessibility, performance, theming, responsive), then `polish`. Also run `npx impeccable detect <dir-or-url>`: deterministic rules, no LLM.
-- **`hallmark`** (if installed): second opinion, report only, for pages and sites. It audits only when named, so say "use hallmark to audit <path>", and run `node <skill-dir>/scripts/sloplint.mjs <path> --render`. Static checks run without a browser; browser checks need `puppeteer-core` and Chrome.
-- **`design-taste-frontend`** (if installed): only when it built or redesigned this screen. Its lint and browser inspection must be green. It is a page builder, not a review pass: do not start it here on a screen it did not build.
-- **emilkowalski** (if installed): `review-animations` (or `improve-animations`) when the screen has motion; `emil-design-eng` for interaction physics.
-- If none are installed, use the distilled checklist in `guides/08-PHILOSOPHY.md` (anti-generic rules, springs, effect budget).
+- **`impeccable`**: the primary craft checklist. Run its `critique` workflow on the screen (scored UX review), then `audit` (accessibility, performance, theming, responsive), then `polish`. Also run `npx impeccable detect <dir-or-url>`: deterministic rules, no LLM.
+- **`hallmark`**: second opinion, report only, for pages and sites. It audits only when named, so say "use hallmark to audit <path>", and run `node <skill-dir>/scripts/sloplint.mjs <path> --render`. Static checks run without a browser; browser checks need `puppeteer-core` and Chrome.
+- **`design-taste-frontend`**: only when it built or redesigned this screen. Its lint and browser inspection must be green. It is a page builder, not a review pass: do not start it here on a screen it did not build.
+- **emilkowalski**: `review-animations` (or `improve-animations`) when the screen has motion; `emil-design-eng` for interaction physics.
+- When `flow.mjs next` names none, use the distilled checklist in `guides/08-PHILOSOPHY.md` (anti-generic rules, springs, effect budget).
 
 If a check of an installed skill cannot run (older Node, no browser, offline), say which one and continue with the others; never report it as passed. Taste's checks need Node 22+ and Chrome, Edge or Chromium.
 

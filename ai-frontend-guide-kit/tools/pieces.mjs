@@ -24,6 +24,7 @@ import { spawnSync } from 'node:child_process';
 import { basename, dirname, extname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { catalogCandidates, matchName } from './ui-map.mjs';
+import { toolPath } from './kit-path.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -111,10 +112,10 @@ The kit never copies or stores component code: a piece is a real file in the pro
 The kit keeps metadata, history and an index only.
 
 Usage:
-  node tools/pieces.mjs find <need> [--file <path>]
+  node ${toolPath('pieces.mjs')} find <need> [--file <path>]
                                                search order: own piece > new variant of an own piece > a piece of another
                                                registered project (adopt) > kit catalog > new piece. Records that it ran.
-  node tools/pieces.mjs add <name> --level micro|small|medium|large --file <path>
+  node ${toolPath('pieces.mjs')} add <name> --level micro|small|medium|large --file <path>
         [--summary "..."] [--variants a,b] [--contexts x,y] [--composed-of p1,p2] [--license MIT]
         [--origin generated|catalog:<id>|internet:<url>|project:<name>:<path>] [--relation chosen|modified|copied]
         [--need "the need you searched"] [--new --reason "why no existing piece fits"]
@@ -122,22 +123,22 @@ Usage:
                                                inside the project, comma-separated for several files). Refused unless "find"
                                                ran for this need and no exact, close or same-structure piece exists (here or
                                                in another registered project); --new --reason overrides and is kept on record.
-  node tools/pieces.mjs adopt <name> [--from <project>] [--to <dir>] [--as <new-name>]
+  node ${toolPath('pieces.mjs')} adopt <name> [--from <project>] [--to <dir>] [--as <new-name>]
                                                copy a piece of another registered project into this project's component
                                                folder and register it with origin project:<name>:<path>
-  node tools/pieces.mjs version <name> [--file <path>] [--note "..."] [--variants a,b] [--contexts x,y] [--relation r]
+  node ${toolPath('pieces.mjs')} version <name> [--file <path>] [--note "..."] [--variants a,b] [--contexts x,y] [--relation r]
                                                record the file's current content as a new version (SHA-256 of the real
                                                file, plus the git commit when there is one); an unchanged file adds none
-  node tools/pieces.mjs use <name> [--version N] [--variant v]
-  node tools/pieces.mjs like <name> [--version N] [--note "..."]
-  node tools/pieces.mjs dislike <name> [--version N] [--note "..."]
-  node tools/pieces.mjs note <name> "text"
-  node tools/pieces.mjs show <name>            latest state first, then the history
-  node tools/pieces.mjs list [--level micro|small|medium|large] [--origin generated|catalog|internet|project] [--liked] [--text "words"]
+  node ${toolPath('pieces.mjs')} use <name> [--version N] [--variant v]
+  node ${toolPath('pieces.mjs')} like <name> [--version N] [--note "..."]
+  node ${toolPath('pieces.mjs')} dislike <name> [--version N] [--note "..."]
+  node ${toolPath('pieces.mjs')} note <name> "text"
+  node ${toolPath('pieces.mjs')} show <name>            latest state first, then the history
+  node ${toolPath('pieces.mjs')} list [--level micro|small|medium|large] [--origin generated|catalog|internet|project] [--liked] [--text "words"]
                                                ranked: liked and most used first, disliked last
-  node tools/pieces.mjs index                  refresh this project's index and the global reference index
-  node tools/pieces.mjs personality set <key> <value>
-  node tools/pieces.mjs personality show       this project's settings (spacing, image weight, ...)
+  node ${toolPath('pieces.mjs')} index                  refresh this project's index and the global reference index
+  node ${toolPath('pieces.mjs')} personality set <key> <value>
+  node ${toolPath('pieces.mjs')} personality show       this project's settings (spacing, image weight, ...)
 
 Options:
   --dir <project-root>   project (default: AI_FRONTEND_PROJECT, then the folder that holds the kit)
@@ -887,7 +888,7 @@ async function checkReuse(ctx, name, text, flags) {
   const searched = readFinds(ctx.out).some((entry) => (flags.need ? matchName(entry.need, flags.need) === 'exact' : matchName(entry.need, name) !== null));
   const override = 'or, if none fits, say why: --new --reason "..."';
   if (!searched) {
-    throw new Fail(`no find ran for "${need}" in this project. Search before creating: node tools/pieces.mjs find "${need}" (${flags.need ? 'then add with the same --need' : 'it must be about this piece'}); ${override}`);
+    throw new Fail(`no find ran for "${need}" in this project. Search before creating: node ${toolPath('pieces.mjs')} find "${need}" (${flags.need ? 'then add with the same --need' : 'it must be about this piece'}); ${override}`);
   }
   const { own, others } = await loadRows(ctx, { others: true });
   for (const row of [...own, ...others]) {
@@ -1209,7 +1210,7 @@ async function runFind(ctx, flags) {
     catalog = catalogCandidates(need);
     if (catalog.length > 0) {
       status = 'catalog';
-      decision = 'no piece fits: adapt a catalog candidate (node tools/get.mjs <id>), place it in the project, then register it (get.mjs --landed <path> does it with its origin)';
+      decision = `no piece fits: adapt a catalog candidate (node ${toolPath('get.mjs')} <id>), place it in the project, then register it (get.mjs --landed <path> does it with its origin)`;
     }
   }
   let nearDuplicates = [];

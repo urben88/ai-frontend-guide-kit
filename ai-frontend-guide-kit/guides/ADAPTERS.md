@@ -5,7 +5,7 @@ This kit plugs into projects that already run **BMAD** (product/UX/story artifac
 ## Detection (automatic)
 
 ```bash
-node tools/context.mjs        # → REPO-CONTEXT.md: "Framework: bmad | spec-driven | bmad + spec-driven | none"
+node ai-frontend-guide-kit/tools/context.mjs        # → REPO-CONTEXT.md: "Framework: bmad | spec-driven | bmad + spec-driven | none"
 ```
 
 | Marker found in the repo | Framework |

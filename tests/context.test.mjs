@@ -55,7 +55,7 @@ test('REPO-CONTEXT.md lists the UI libraries and tells the agent how to use each
   assert.equal(run.status, 0, run.stderr);
   const text = readFileSync(join(dir, 'ai-frontend-output', 'ux', 'REPO-CONTEXT.md'), 'utf8');
   assert.match(text, /^## UI libraries$/m);
-  assert.match(text, /`@mui\/material` → `mui` \(`node tools\/find\.mjs --source mui`\)/);
+  assert.match(text, /`@mui\/material` → `mui` \(`node \S*tools\/find\.mjs --source mui`\)/);
   assert.match(text, /To research \(not in the catalog\): `@acme`, `primereact`/);
   assert.match(text, /own documentation/);
 });

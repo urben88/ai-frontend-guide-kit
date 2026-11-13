@@ -3,14 +3,14 @@
  * find — query the component catalog with minimal output.
  *
  * Usage:
- *   node tools/find.mjs [query] [--category hero] [--stack react] [--license MIT]
+ *   node ai-frontend-guide-kit/tools/find.mjs [query] [--category hero] [--stack react] [--license MIT]
  *                       [--commercial] [--free] [--licensed] [--source magicui]
  *                       [--type component|block|design-system|icon] [--text <query>]
  *                       [--min-quality N] [--sort relevance|quality|name]
  *                       [--all] [--limit N] [--json]
  *
  * Behavior:
- *   A positional query works like --text:  node tools/find.mjs "pricing card"
+ *   A positional query works like --text:  node ai-frontend-guide-kit/tools/find.mjs "pricing card"
  *   --text splits into words, ignores stopwords (with, and, the...) and needs at least half of the words to match.
  *   Ranking: sources with a large free catalog first (ReUI, shadcn/ui, Shadcn Space), then other licensed sources, then
  *   unknown license; inside a group, entries matching more words first, then role order, then weighted relevance
@@ -22,9 +22,9 @@
  *   --source takes a source id (mui, shadcn, reactaria, ...) for an exact match, or part of a source name.
  *
  * Examples:
- *   node tools/find.mjs --category hero --stack react --commercial
- *   node tools/find.mjs "pricing card with toggle" --limit 5
- *   node tools/find.mjs --text "marquee logos" --min-quality 60
+ *   node ai-frontend-guide-kit/tools/find.mjs --category hero --stack react --commercial
+ *   node ai-frontend-guide-kit/tools/find.mjs "pricing card with toggle" --limit 5
+ *   node ai-frontend-guide-kit/tools/find.mjs --text "marquee logos" --min-quality 60
  */
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';

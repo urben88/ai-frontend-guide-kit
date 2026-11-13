@@ -3,18 +3,19 @@
  * Lab performance check with Lighthouse against the Core Web Vitals budget.
  * Uses `npx lighthouse` (downloaded on demand) and a local Chrome. Lab data only: INP is approximated by Total Blocking Time.
  *
- * Usage: node tools/audit-perf.mjs <url> [--desktop]
+ * Usage: node ai-frontend-guide-kit/tools/audit-perf.mjs <url> [--desktop]
  * Exit code 1 when LCP > 2.5 s, CLS > 0.1 or TBT > 200 ms; 2 when Lighthouse cannot run.
  */
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { toolPath } from './kit-path.mjs';
 
 const argv = process.argv.slice(2);
 const url = argv.find((a) => !a.startsWith('--'));
 if (!url) {
-  console.error('Usage: node tools/audit-perf.mjs <url> [--desktop]');
+  console.error(`Usage: node ${toolPath('audit-perf.mjs')} <url> [--desktop]`);
   process.exit(2);
 }
 const out = join(mkdtempSync(join(tmpdir(), 'lh-')), 'report.json');

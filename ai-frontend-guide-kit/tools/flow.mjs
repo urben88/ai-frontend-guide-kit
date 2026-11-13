@@ -17,20 +17,21 @@
  * step that closes with free evidence.
  *
  * Usage:
- *   node tools/flow.mjs list                   every route and step (the text of guides/FLOWS.md)
- *   node tools/flow.mjs status                 kit installed?, active route and step, what is recorded
- *   node tools/flow.mjs start <route>          new | direction | ux | iterate | polish | redesign | visual-feedback | architecture
- *   node tools/flow.mjs next                   the whole instruction of the current micro-step
- *   node tools/flow.mjs scaffold [<step>[.<part>]]   write the template of a micro-step (default: the current one)
- *   node tools/flow.mjs report <step>          write the checklist of a step closed with evidence
- *   node tools/flow.mjs done <step>[.<part>] [--evidence "..."]
- *   node tools/flow.mjs reset                  drop the active route
+ *   node ai-frontend-guide-kit/tools/flow.mjs list                   every route and step (the text of guides/FLOWS.md)
+ *   node ai-frontend-guide-kit/tools/flow.mjs status                 kit installed?, active route and step, what is recorded
+ *   node ai-frontend-guide-kit/tools/flow.mjs start <route>          new | direction | ux | iterate | polish | redesign | visual-feedback | architecture
+ *   node ai-frontend-guide-kit/tools/flow.mjs next                   the whole instruction of the current micro-step
+ *   node ai-frontend-guide-kit/tools/flow.mjs scaffold [<step>[.<part>]]   write the template of a micro-step (default: the current one)
+ *   node ai-frontend-guide-kit/tools/flow.mjs report <step>          write the checklist of a step closed with evidence
+ *   node ai-frontend-guide-kit/tools/flow.mjs done <step>[.<part>] [--evidence "..."]
+ *   node ai-frontend-guide-kit/tools/flow.mjs reset                  drop the active route
  * Options: --dir <project> (default: the folder that holds the kit), --json
  */
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
-import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { kitFile, kitPath, quotePath, runTool } from './kit-path.mjs';
 import { changedPieces, registeredPiece } from './pieces.mjs';
 import { DESIGN_AUDIT_CHECK, PARTS, designAuditCommand, hasOwnProductDoc } from './flow-steps.mjs';
 import { GATES, mergeReport, mergeTemplate, parseDesignAudit, prefillAudit, reportProblems } from './flow-gates.mjs';
@@ -46,7 +47,7 @@ const STEPS = {
     title: 'Intake: ask what we are doing, read the project context, declare the route',
     guide: 'guides/00-START-HERE.md',
     skill: 'ai-frontend-guide',
-    tool: 'node tools/context.mjs; node tools/ui-map.mjs build',
+    tool: 'node {kit}/tools/context.mjs; node {kit}/tools/ui-map.mjs build',
     output: 'ai-frontend-output/ux/REPO-CONTEXT.md + ai-frontend-output/UI-MAP.md',
     artifacts: [['out:ux/REPO-CONTEXT.md'], ['out:UI-MAP.md']],
   },
@@ -54,7 +55,7 @@ const STEPS = {
     title: 'Experience direction: questions, archetype, philosophy, journey, IA, three directions',
     guide: 'guides/01-EXPERIENCE-DIRECTION.md',
     skill: 'ai-frontend-guide (+ landing-page-design for landing pages)',
-    tool: 'experience/DISCOVERY-LOOP.md, node tools/recipe.mjs (list, show), Laya (optional)',
+    tool: 'experience/DISCOVERY-LOOP.md, node {kit}/tools/recipe.mjs (list, show)',
     output: 'ai-frontend-output/ux/EXPERIENCE-BRIEF.md',
     artifacts: [['out:ux/EXPERIENCE-BRIEF.md']],
   },
@@ -62,15 +63,15 @@ const STEPS = {
     title: 'UX flows: product anchor, screens with empty/loading/error states, screen map',
     guide: 'guides/02-UX-FLOWS.md',
     skill: 'userflow + flow-*, ux-map',
-    tool: 'node tools/excalidraw-mcp.mjs',
+    tool: 'node {kit}/tools/excalidraw-mcp.mjs',
     output: 'ai-frontend-output/ux/UX-SPEC.md + ai-frontend-output/ux/ux-map.excalidraw',
     artifacts: [['out:ux/UX-SPEC.md'], ['out:ux/ux-map.excalidraw']],
   },
   tokens: {
     title: 'Tokens: palette, type, spacing, radius and motion from the visual brief',
     guide: 'guides/03-TOKENS.md',
-    skill: 'impeccable (if installed)',
-    tool: 'node tools/tokens.mjs (init, check, css, doc); Figma MCP (optional)',
+    skill: 'impeccable',
+    tool: 'node {kit}/tools/tokens.mjs (init, check, css, doc)',
     output: 'design-tokens.json + DESIGN.md + Tailwind v4 theme',
     artifacts: [['root:DESIGN.md', 'out:DESIGN.md']],
   },
@@ -78,7 +79,7 @@ const STEPS = {
     title: 'Composition: inventory, find, reuse/adapt/build, record every decision',
     guide: 'guides/04-INVENTORY.md … guides/07-ADAPT.md (+ guides/08-PHILOSOPHY.md)',
     skill: 'ai-frontend-guide (hallmark / design-taste-frontend only for decision build)',
-    tool: 'node tools/pieces.mjs find; node tools/recipe.mjs (suggest, inventory); node tools/ui-map.mjs have; node tools/find.mjs; node tools/get.mjs; node tools/memory.mjs add',
+    tool: 'node {kit}/tools/pieces.mjs find; node {kit}/tools/recipe.mjs (suggest, inventory); node {kit}/tools/ui-map.mjs have; node {kit}/tools/find.mjs; node {kit}/tools/get.mjs; node {kit}/tools/memory.mjs add',
     output: 'ai-frontend-output/selections.jsonl',
     artifacts: [['out:selections.jsonl']],
   },
@@ -86,7 +87,7 @@ const STEPS = {
     title: 'Iterate: a small change or custom addition without repeating the UX phase',
     guide: 'guides/10-ITERATE.md',
     skill: 'ai-frontend-guide',
-    tool: 'node tools/pieces.mjs find; node tools/ui-map.mjs impact; node tools/memory.mjs add',
+    tool: 'node {kit}/tools/pieces.mjs find; node {kit}/tools/ui-map.mjs impact; node {kit}/tools/memory.mjs add',
     output: 'the change, with its decision recorded',
     artifacts: null,
   },
@@ -94,7 +95,7 @@ const STEPS = {
     title: 'Visual redesign of an existing screen, keeping flows, content and wiring',
     guide: 'guides/00-START-HERE.md (external design skills by step)',
     skill: 'design-taste-frontend (redesign mode)',
-    tool: 'node tools/ui-map.mjs impact',
+    tool: 'node {kit}/tools/ui-map.mjs impact',
     output: 'the redesigned screen',
     artifacts: null,
   },
@@ -102,7 +103,7 @@ const STEPS = {
     title: 'Total polish: external audits, Playwright MCP loop, regression checks green',
     guide: 'guides/08-PHILOSOPHY.md + guides/09-VERIFY.md',
     skill: 'frontend-polish',
-    tool: 'node tools/audit-design.mjs, Playwright MCP, @playwright/test, node tools/ui-map.mjs check',
+    tool: 'node {kit}/tools/audit-design.mjs, Playwright MCP, @playwright/test, node {kit}/tools/ui-map.mjs check',
     output: 'checks green (optional ai-frontend-output/polish-report.md)',
     artifacts: null,
   },
@@ -118,7 +119,7 @@ const STEPS = {
     title: 'Architecture: folder roles (map), or FSD only on explicit request',
     guide: 'guides/12-ARCHITECTURE.md',
     skill: 'frontend-refactor (only for fsd-new / fsd-refactor)',
-    tool: 'node tools/ui-map.mjs build; node tools/ui-map.mjs check',
+    tool: 'node {kit}/tools/ui-map.mjs build; node {kit}/tools/ui-map.mjs check',
     output: 'ai-frontend-output/architecture.json',
     artifacts: [['out:architecture.json']],
   },
@@ -163,22 +164,22 @@ function parseArgs(argv) {
   return flags;
 }
 
-const USAGE = `flow — the step-by-step design flow, kept per project
+const usage = () => `flow — the step-by-step design flow, kept per project
 
 Usage:
-  node tools/flow.mjs list
-  node tools/flow.mjs status
-  node tools/flow.mjs start <route>        ${Object.keys(ROUTES).join(' | ')}
-  node tools/flow.mjs next                 the whole instruction of the current micro-step: goal, commands, template, done criteria
-  node tools/flow.mjs scaffold [<step>[.<part>]]   write the template of a micro-step into its file (default: the current one)
-  node tools/flow.mjs report <step>        write the checklist of ${REPORT_STEPS_TEXT}
-  node tools/flow.mjs done <step>[.<part>] [--evidence "..."]
-  node tools/flow.mjs reset
+  ${cmd('flow.mjs', 'list')}
+  ${cmd('flow.mjs', 'status')}
+  ${cmd('flow.mjs', 'start <route>')}        ${Object.keys(ROUTES).join(' | ')}
+  ${cmd('flow.mjs', 'next')}                 the whole instruction of the current micro-step: goal, commands, template, done criteria
+  ${cmd('flow.mjs', 'scaffold [<step>[.<part>]]')}   write the template of a micro-step into its file (default: the current one)
+  ${cmd('flow.mjs', 'report <step>')}        write the checklist of ${REPORT_STEPS_TEXT}
+  ${cmd('flow.mjs', 'done <step>[.<part>] [--evidence "..."]')}
+  ${cmd('flow.mjs', 'reset')}
   direction, ux and compose have parts, closed in order (done direction.questions, ...); the last part closes the step.
   done also reads the file: required sections filled, no <…> left, tables with rows, ids that exist; it lists what is missing.
   ${REPORT_STEPS_TEXT} close with --evidence and a report with every line checked or marked n/a.
-  compose and iterate also refuse while a build decision has no piece registered in this project (node tools/pieces.mjs add)
-  or a registered piece changed since its last version (node tools/pieces.mjs version <name>).
+  compose and iterate also refuse while a build decision has no piece registered in this project (${cmd('pieces.mjs', 'add')})
+  or a registered piece changed since its last version (${cmd('pieces.mjs', 'version <name>')}).
 Options: --dir <project>, --json
 `;
 
@@ -219,13 +220,19 @@ function missingArtifacts(p, artifacts) {
   return missing;
 }
 
+/** The project the printed commands are written for: the folder the tool runs from, or --dir. */
+let projectRoot = process.cwd();
+const cmd = (tool, args) => runTool(tool, args, projectRoot);
+/** Fills the `{kit}/tools/<tool>` placeholders of the step table with the path form of this project. */
+const fillKit = (text) => text.replace(/\{kit\}\/tools\/([\w.-]+)/g, (_, tool) => quotePath(`${kitPath(projectRoot)}/tools/${tool}`));
+
 function describeStep(id) {
   const def = STEPS[id];
   return [
     `Next step: ${id} — ${def.title}`,
     `  guide:  ${def.guide}`,
     `  skill:  ${def.skill}`,
-    `  tools:  ${def.tool}`,
+    `  tools:  ${fillKit(def.tool)}`,
     `  output: ${def.output}${def.artifacts ? '' : ' (mark done with --evidence)'}`,
   ].join('\n');
 }
@@ -241,9 +248,6 @@ const partArtifacts = (p, part) => (typeof part.artifacts === 'function' ? part.
 
 /** Facts about this project that the tool resolves, so the instruction leaves no branch to the reader. */
 function environment(p) {
-  const rel = relative(p.root, KIT_DIR).replace(/\\/g, '/');
-  const kitPath = rel && !rel.startsWith('..') && !isAbsolute(rel) ? rel : KIT_DIR.replace(/\\/g, '/');
-  const quote = (path) => (/\s/.test(path) ? `"${path}"` : path);
   const readText = (file) => (existsSync(file) ? readFileSync(file, 'utf8') : '');
   const readJson = (file) => {
     try {
@@ -259,11 +263,10 @@ function environment(p) {
   const deps = { ...(manifest.dependencies ?? {}), ...(manifest.devDependencies ?? {}) };
   const servers = Object.keys({ ...(readJson(join(p.root, '.mcp.json')).mcpServers ?? {}), ...(readJson(join(p.root, 'opencode.json')).mcp ?? {}) }).map((name) => name.toLowerCase());
   const skillRoots = [p.root, homedir()].flatMap((base) => [join(base, '.agents', 'skills'), join(base, '.claude', 'skills')]);
-  const command = (runner, tool, args) => `${runner} ${quote(`${kitPath}/tools/${tool}`)}${args ? ` ${args}` : ''}`;
   return {
-    run: (tool, args) => command('node', tool, args),
-    python: (tool, args) => command('python', tool, args),
-    kit: (path) => `${kitPath}/${path}`,
+    run: (tool, args) => runTool(tool, args, p.root),
+    python: (tool, args) => runTool(tool, args, p.root, 'python'),
+    kit: (path) => kitFile(path, p.root),
     skill: (name) => skillRoots.some((root) => existsSync(join(root, name))),
     mcp: (name) => servers.some((server) => server.includes(name)),
     dep: (name) => name in deps,
@@ -373,13 +376,13 @@ function status(p, flags) {
   };
   if (flags.json) return console.log(JSON.stringify(report, null, 2));
   const lines = [`Project: ${p.root}`, `Kit: ${report.kit}${kitInstalled ? '' : ` (no ${KIT_NAME}/AGENTS.md here; run the installer to use the flow)`}`, `Index: ${INDEX_FILE} (read it first)`];
-  if (!state) lines.push('Flow: none (declare the route with: node tools/flow.mjs start <route>)');
+  if (!state) lines.push(`Flow: none (declare the route with: ${cmd('flow.mjs', 'start <route>')})`);
   else if (!step) lines.push(`Flow: ${state.route} · complete`);
   else lines.push(`Flow: ${state.route} · step ${report.flow.position}/${report.flow.total} · ${step.id}`);
   lines.push(`Decisions recorded: ${report.recorded.decisions} · combinations: ${report.recorded.combinations}`);
   lines.push(`Libraries: ${report.recorded.libraries.using} in use · ${report.recorded.libraries.research} to research`);
   for (const name of ['REPO-CONTEXT.md', 'UI-MAP.md', 'EXPERIENCE-BRIEF.md', 'UX-SPEC.md']) lines.push(`${name}: ${report.recorded[name] ? 'yes' : 'no'}`);
-  if (step) lines.push('', describeStep(step.id), '  full instruction: node tools/flow.mjs next');
+  if (step) lines.push('', describeStep(step.id), `  full instruction: ${cmd('flow.mjs', 'next')}`);
   console.log(lines.join('\n'));
 }
 
@@ -387,7 +390,7 @@ function start(p, route) {
   if (!route) throw new UsageError(`start needs a route: ${Object.keys(ROUTES).join(', ')}`);
   if (!ROUTES[route]) throw new UsageError(`unknown route "${route}" (routes: ${Object.keys(ROUTES).join(', ')})`);
   const existing = readState(p);
-  if (existing && current(existing)) throw new Refusal(`route "${existing.route}" is active at step "${current(existing).id}"; finish it or run: node tools/flow.mjs reset`);
+  if (existing && current(existing)) throw new Refusal(`route "${existing.route}" is active at step "${current(existing).id}"; finish it or run: ${cmd('flow.mjs', 'reset')}`);
   const now = new Date().toISOString();
   const state = { route, gates: 1, started_at: now, complete: false, steps: ROUTES[route].steps.map((id) => ({ id, status: 'pending' })) };
   writeState(p, state);
@@ -395,10 +398,13 @@ function start(p, route) {
 }
 
 function list() {
+  // FLOWS.md ships in the kit: its commands are written for a kit that sits in the project root, wherever this runs.
+  projectRoot = dirname(KIT_DIR);
+  const listCmd = (args) => cmd('flow.mjs', args);
   const lines = [
     '# Flows of the AI Frontend Guide kit',
     '',
-    'Generated by `node tools/flow.mjs list`; do not edit by hand. Every design conversation declares one route with `node tools/flow.mjs start <route>` and follows its steps in order: `node tools/flow.mjs next` prints the whole instruction of the current micro-step (goal, exact commands, template, done criteria), already resolved for what this project has installed, `node tools/flow.mjs scaffold` writes the skeleton of the file the step asks for, and `node tools/flow.mjs done <step>` refuses a skipped step, a missing artifact or a file whose required sections are empty or still hold a template token. The steps closed with evidence (`polish`, `iterate`, `redesign`, `visual-feedback`) also need their report: `node tools/flow.mjs report <step>` writes the checklist. Skills marked "if installed" are optional; without them, use `guides/08-PHILOSOPHY.md`.',
+    `Generated by \`${listCmd('list')}\`; do not edit by hand. Every design conversation declares one route with \`${listCmd('start <route>')}\` and follows its steps in order: \`${listCmd('next')}\` prints the whole instruction of the current micro-step (goal, exact commands, template, done criteria), already resolved for what this project has installed, \`${listCmd('scaffold')}\` writes the skeleton of the file the step asks for, and \`${listCmd('done <step>')}\` refuses a skipped step, a missing artifact or a file whose required sections are empty or still hold a template token. The steps closed with evidence (\`polish\`, \`iterate\`, \`redesign\`, \`visual-feedback\`) also need their report: \`${listCmd('report <step>')}\` writes the checklist. \`next\` names only the skills this project has installed; the rules of \`guides/08-PHILOSOPHY.md\` cover the rest.`,
     '',
     '## Routes',
     '',
@@ -413,10 +419,10 @@ function list() {
     route.steps.forEach((stepId, index) => {
       const def = STEPS[stepId];
       const output = def.artifacts ? def.output : `${def.output} (\`--evidence\`)`;
-      lines.push(`| ${index + 1} | \`${stepId}\` | ${def.guide} | ${def.skill} | ${def.tool} | ${output} |`);
+      lines.push(`| ${index + 1} | \`${stepId}\` | ${def.guide} | ${def.skill} | ${fillKit(def.tool)} | ${output} |`);
     });
   }
-  lines.push('', '## Parts of the large steps', '', 'Closed in order with `node tools/flow.mjs done <step>.<part>`; a skipped part is refused and the last part closes the step. `done <step>` still closes a whole step at once.', '', '| Step | # | Part | What it does |', '|---|---|---|---|');
+  lines.push('', '## Parts of the large steps', '', `Closed in order with \`${listCmd('done <step>.<part>')}\`; a skipped part is refused and the last part closes the step. \`done <step>\` still closes a whole step at once.`, '', '| Step | # | Part | What it does |', '|---|---|---|---|');
   for (const [stepId, parts] of Object.entries(PARTS)) {
     if (parts.length > 1) parts.forEach((part, index) => lines.push(`| \`${stepId}\` | ${index + 1} | \`${stepId}.${part.id}\` | ${part.title} |`));
   }
@@ -425,9 +431,9 @@ function list() {
 
 function next(p, flags) {
   const state = readState(p);
-  if (!state) throw new Refusal('no active flow; declare the route with: node tools/flow.mjs start <route>');
+  if (!state) throw new Refusal(`no active flow; declare the route with: ${cmd('flow.mjs', 'start <route>')}`);
   const step = current(state);
-  if (!step) return console.log(flags.json ? JSON.stringify({ route: state.route, complete: true }, null, 2) : `Route "${state.route}" complete. Start a new one with: node tools/flow.mjs reset, then start <route>`);
+  if (!step) return console.log(flags.json ? JSON.stringify({ route: state.route, complete: true }, null, 2) : `Route "${state.route}" complete. Start a new one with: ${cmd('flow.mjs', 'reset')}, then start <route>`);
   const info = instruction(p, state);
   console.log(flags.json ? JSON.stringify(info, null, 2) : renderInstruction(info));
 }
@@ -480,7 +486,7 @@ function refuseWith(p, subject, problems, scaffoldTarget) {
 
 function done(p, target, flags) {
   const state = readState(p);
-  if (!state) throw new Refusal('no active flow; declare the route with: node tools/flow.mjs start <route>');
+  if (!state) throw new Refusal(`no active flow; declare the route with: ${cmd('flow.mjs', 'start <route>')}`);
   if (!target) throw new UsageError('done needs a step');
   const [id, partId] = target.split(/\.(.*)/s);
   if (!state.steps.some((step) => step.id === id)) throw new UsageError(`unknown step "${id}" for route "${state.route}" (steps: ${state.steps.map((step) => step.id).join(', ')})`);
@@ -506,11 +512,11 @@ function done(p, target, flags) {
   if (id === 'compose' || id === 'iterate') {
     const unregistered = unregisteredBuilds(p);
     if (unregistered.length) {
-      throw new Refusal(`step "${id}" cannot be marked done: build decision(s) with no registered piece: ${unregistered.join(', ')}. Register each with: node tools/pieces.mjs add <name> --level micro|small|medium|large --file <src> (after node tools/pieces.mjs find "<need>")`);
+      throw new Refusal(`step "${id}" cannot be marked done: build decision(s) with no registered piece: ${unregistered.join(', ')}. Register each with: ${cmd('pieces.mjs', 'add <name> --level micro|small|medium|large --file <src>')} (after ${cmd('pieces.mjs', 'find "<need>"')})`);
     }
     const changed = changedPieces(p.root, p.out);
     if (changed.length) {
-      throw new Refusal(`step "${id}" cannot be marked done: piece(s) changed since their last recorded version: ${changed.map((piece) => `${piece.name} (v${piece.version})`).join(', ')}. Record each with: ${changed.map((piece) => `node tools/pieces.mjs version ${piece.name}`).join('; ')}`);
+      throw new Refusal(`step "${id}" cannot be marked done: piece(s) changed since their last recorded version: ${changed.map((piece) => `${piece.name} (v${piece.version})`).join(', ')}. Record each with: ${changed.map((piece) => cmd('pieces.mjs', `version ${piece.name}`)).join('; ')}`);
     }
   }
   if (STEPS[id].artifacts) {
@@ -558,7 +564,7 @@ function scaffold(p, target) {
   let part;
   if (target === undefined) {
     const state = readState(p);
-    if (!state) throw new Refusal('no active flow; declare the route with: node tools/flow.mjs start <route>');
+    if (!state) throw new Refusal(`no active flow; declare the route with: ${cmd('flow.mjs', 'start <route>')}`);
     const step = current(state);
     if (!step) throw new Refusal(`route "${state.route}" is already complete`);
     stepId = step.id;
@@ -614,7 +620,8 @@ function main() {
   let flags;
   try {
     flags = parseArgs(process.argv.slice(2));
-    if (flags.help) return console.log(USAGE);
+    projectRoot = paths(flags).root;
+    if (flags.help) return console.log(usage());
     const [command = 'status', arg, ...extra] = flags._;
     if (extra.length) throw new UsageError(`unexpected argument "${extra[0]}"`);
     const p = paths(flags);
@@ -629,7 +636,7 @@ function main() {
     throw new UsageError(`unknown command "${command}"`);
   } catch (error) {
     if (error instanceof UsageError) {
-      console.error(`flow: ${error.message}\n\n${USAGE}`);
+      console.error(`flow: ${error.message}\n\n${usage()}`);
       process.exitCode = 2;
     } else if (error instanceof Refusal) {
       console.error(`flow: ${error.message}`);

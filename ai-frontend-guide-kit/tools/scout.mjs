@@ -9,12 +9,13 @@
  * a catalog source as `using`, an unknown site as `research`.
  *
  * Usage:
- *   node tools/scout.mjs <url> [--fetch] [--record] [--dir <project>] [--json]
+ *   node ai-frontend-guide-kit/tools/scout.mjs <url> [--fetch] [--record] [--dir <project>] [--json]
  */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
+import { toolPath } from './kit-path.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -121,7 +122,7 @@ function record(flags, url, source, page) {
 
 async function main() {
   const flags = parseArgs(process.argv.slice(2));
-  if (flags.help) return console.log('Usage: node tools/scout.mjs <url> [--fetch] [--record] [--dir <project>] [--json]');
+  if (flags.help) return console.log(`Usage: node ${toolPath('scout.mjs')} <url> [--fetch] [--record] [--dir <project>] [--json]`);
   if (flags._.length !== 1) throw new UsageError('give exactly one URL');
   let url;
   try {
@@ -139,7 +140,7 @@ async function main() {
   const lines = [];
   if (source) {
     lines.push(`In the catalog: \`${source.id}\` (${source.name}, ${source.entries} entries${source.license ? `, ${source.license}` : ''})`);
-    lines.push(`Query it instead of reading the site: node tools/find.mjs --source ${source.id} [--category <category>]`);
+    lines.push(`Query it instead of reading the site: node ${toolPath('find.mjs', flags.dir)} --source ${source.id} [--category <category>]`);
   } else {
     lines.push(`Not in the catalog: ${bareHost(url.host)}`);
     if (!page) lines.push('Run again with --fetch for a small report of this page, then check the license on the site before using anything.');
@@ -158,7 +159,7 @@ async function main() {
 
 main().catch((error) => {
   if (error instanceof UsageError) {
-    console.error(`scout: ${error.message}\nUsage: node tools/scout.mjs <url> [--fetch] [--record] [--dir <project>] [--json]`);
+    console.error(`scout: ${error.message}\nUsage: node ${toolPath('scout.mjs')} <url> [--fetch] [--record] [--dir <project>] [--json]`);
     process.exitCode = 2;
   } else if (error instanceof Refusal) {
     console.error(`scout: ${error.message}`);

@@ -25,7 +25,7 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 
 | | What | Details |
 |---|---|---|
-| 📚 | **Catalog** | 39 verified sources · 7,358 reusable entries · 21 categories · quality score, per-entry licenses and install commands · React, Vue and Svelte · offline `explorer.html` |
+| 📚 | **Catalog** | <!--fig:sources-->39<!--/fig--> verified sources · <!--fig:entries-->7,358<!--/fig--> reusable entries · <!--fig:categories-->21<!--/fig--> categories · quality score, per-entry licenses and install commands · React, Vue and Svelte · offline `explorer.html` |
 | 🧭 | **Guided kit** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + 3-phase workflow in short guides (00–13) + `find`/`get` query tools. Self-contained: no build, no npm dependencies |
 | 🧠 | **Agent skills** | `ai-frontend-guide` (workflow), `frontend-polish` (phase 3), `frontend-refactor` (FSD, only on request), `ux-map` (visual screen map) and 16 vendored UX skills (`userflow` + 15 `flow-*`, MIT) |
 | 🧭 | **Design flow** | `flow.mjs` keeps the route and current step per project and refuses skipped steps; `guides/FLOWS.md` lists every route |
@@ -81,7 +81,7 @@ npx ./ai-frontend-guide-kit-1.2.0.tgz     # run it in the destination project
 
 Then tell your agent:
 
-> *"Read `ai-frontend-guide-kit/AGENTS.md` and follow its workflow."*
+> *"Read `ai-frontend-guide-kit/INDEX.md` and follow it."*
 
 ## 🗺️ Frontend map (always on)
 
@@ -131,7 +131,7 @@ You only talk to your agent. Behind the scenes it uses the kit like this:
 1. The agent checks where the project is
    $ node ai-frontend-guide-kit/tools/flow.mjs status
    Kit: installed
-   Flow: none (declare the route with: node tools/flow.mjs start <route>)
+   Flow: none (declare the route with: node ai-frontend-guide-kit/tools/flow.mjs start <route>)
 
 2. It declares the route for a new frontend
    $ node ai-frontend-guide-kit/tools/flow.mjs start new
@@ -150,7 +150,7 @@ You only talk to your agent. Behind the scenes it uses the kit like this:
 5. You share a site you like: https://magicui.design/docs/components/marquee
    $ node ai-frontend-guide-kit/tools/scout.mjs https://magicui.design/docs/components/marquee
    In the catalog: `magicui` (Magic UI, 78 entries, MIT ...)
-   Query it instead of reading the site: node tools/find.mjs --source magicui
+   Query it instead of reading the site: node ai-frontend-guide-kit/tools/find.mjs --source magicui
 ```
 
 It goes on like this, step by step, until `polish`. If you come back tomorrow, or a teammate opens another chat, `flow.mjs status` shows exactly where you left off.
@@ -170,7 +170,7 @@ Results are ranked by **quality** (license clarity, install effort, dependency w
 1. 📁 Copies `ai-frontend-guide-kit/` into the target project (removes the legacy `ai-frontend-guide/` if present).
 2. 📌 Adds the **design routing block** (`init` and `update` run it; so does a bare run). It tells every agent that any frontend, UI, UX or design request starts by reading `ai-frontend-guide-kit/INDEX.md` and running `flow.mjs status`, never skipped. Files: always `AGENTS.md` and `CLAUDE.md` (created if missing, because Claude Code does not read `AGENTS.md`); `.claude/CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.cursorrules` and `.windsurfrules` only if they already exist; `.cursor/rules/ai-frontend-guide-kit.mdc` (always applied) only if `.cursor/` exists. A new block goes at the top, below the title; an existing one is refreshed in place. The block is marked, so re-running never touches your own content or line endings.
 3. 💾 Creates `ai-frontend-output/` (selection memory) if missing — never removed on refresh.
-4. 🧩 Installs the **20 skills of this repo** into `.agents/skills/` (clean: no lockfile, no symlink sprawl) plus the **5 external design skill repos** via their CLI by default; the routing block gives each one its step in the flow. If the project has `.claude/`, the 20 are linked into `.claude/skills/`.
+4. 🧩 Installs the **<!--fig:skills-->20<!--/fig--> skills of this repo** into `.agents/skills/` (clean: no lockfile, no symlink sprawl) plus the **5 external design skill repos** via their CLI by default; the routing block gives each one its step in the flow. If the project has `.claude/`, the <!--fig:skills-->20<!--/fig--> are linked into `.claude/skills/`.
 5. 🎭 Configures the **Playwright + Excalidraw MCP** servers per detected harness (`.mcp.json` for Claude Code, `opencode.json` for OpenCode) and creates the `ai-frontend-output/ux/ux-map.excalidraw` scaffold; otherwise prints the exact commands. Browser once: `npx playwright install chromium`.
    - 🖱️ **Optional — Agentation** (click an element in your React app and tell the agent exactly what to change; guide `11-VISUAL-FEEDBACK.md`). The installer only prints the message, it does not install it: `npm install agentation -D`, `claude mcp add agentation -- npx -y agentation-mcp server`, `npx agentation-mcp doctor`, and mount `<Agentation endpoint="http://localhost:4747" />` in dev only.
 6. 🗺️ Scans the project with `ui-map` (always) and writes the frontend map under `ai-frontend-output/` (a failed scan only warns).
@@ -222,7 +222,7 @@ El ranking de componentes acepta `--direction <id>` (la dirección elegida del b
 │   ├── AGENTS.md · README.md · VERIFICATION.md
 │   ├── guides/00..10         # experience direction + reuse-first UX/UI workflow (00 = router, 01 = direction, 02 = flows, 10 = iteration)
 │   ├── experience/           # archetypes, philosophies, styles, question bank, discovery loop, reference cards, page recipes + layout rules + experience-manifest.json
-│   ├── catalog/              # index + taxonomy + install-guides + 39 sources + explorer.html + license-report.md
+│   ├── catalog/              # index + taxonomy + install-guides + <!--fig:sources-->39<!--/fig--> sources + explorer.html + license-report.md
 │   └── tools/                # context · find · get · memory · tokens · recipe · laya_select · excalidraw-mcp · audit-design · audit-honesty · audit-a11y · audit-perf
 ├── skills/                   # ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + 16 vendored UX flow skills (MIT)
 ├── manifest/                 # catalog source of truth (generated)
@@ -241,12 +241,12 @@ El ranking de componentes acepta `--direction <id>` (la dirección elegida del b
 node tools/refresh.mjs <source_id>   # refresh one source (or "all")
 node tools/build-index.mjs           # rebuild the light index
 node tools/build-kit.mjs             # re-sync catalog into ai-frontend-guide-kit/
-node tools/sync-ux-skills.mjs        # re-vendor the 16 UX skills (MIT); --check for updates
+node tools/sync-ux-skills.mjs        # re-vendor the <!--fig:uxskills-->16<!--/fig--> UX skills (MIT); --check for updates
 node tools/validate.mjs              # schema + ID + index checks
 node tools/validate.mjs --urls 100   # stratified link check (fails above 10% broken)
 node tools/quality.mjs               # recompute quality scores (also run by build-index)
 node tools/check-licenses.mjs        # compare declared licenses with repo LICENSE files (--apply upgrades unknown)
-node tools/audit-categories.mjs      # category sanity audit (--strict for CI)
+node ai-frontend-guide-kit/tools/audit-categories.mjs      # category sanity audit (--strict for CI)
 node tools/build-explorer.mjs        # regenerate catalog/explorer.html (also run by build-kit)
 npm test                             # test suite
 npm run verify                       # validate + build-kit + tests

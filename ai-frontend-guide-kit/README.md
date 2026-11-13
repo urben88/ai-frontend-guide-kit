@@ -1,19 +1,19 @@
 # ai-frontend-guide-kit — README
 
-Self-contained guided kit for building frontend UX/UI with a reuse-first workflow. Copy this folder into any frontend repository and point your AI agent to `AGENTS.md`.
+Self-contained guided kit for building frontend UX/UI with a reuse-first workflow. Copy this folder into any frontend repository and point your AI agent to `INDEX.md`.
 
 ## Copy into a project
 
 1. Copy the whole `ai-frontend-guide-kit/` folder to the target repository root (keep the folder intact).
-2. Tell the agent: *"Read `ai-frontend-guide-kit/AGENTS.md` and follow its workflow."*
+2. Tell the agent: *"Read `ai-frontend-guide-kit/INDEX.md` and follow it."*
 3. Optional: add a pointer in the project's own `AGENTS.md`:
 
 ```markdown
 ## Frontend UI
-Before creating UI components, follow `ai-frontend-guide-kit/AGENTS.md` (reuse-first workflow).
+For any frontend or design request, read `ai-frontend-guide-kit/INDEX.md` and run `node ai-frontend-guide-kit/tools/flow.mjs status` first (reuse-first workflow).
 ```
 
-Prefer the installer (`npm i -D github:urben88/ai-frontend-guide-kit` + `npx ai-frontend-guide-kit`): it copies this folder, creates `ai-frontend-output/`, patches `AGENTS.md`, installs the 20 skills of the repo cleanly into `.agents/skills/` (plus `.claude/skills/` when a `.claude/` folder exists), installs the 5 external design skill repos via their CLI (`--no-design-skills` to skip) and configures the Playwright + Excalidraw MCP servers for detected harnesses (`--no-mcp` to skip).
+Prefer the installer (`npm i -D github:urben88/ai-frontend-guide-kit` + `npx ai-frontend-guide-kit`): it copies this folder, creates `ai-frontend-output/`, patches `AGENTS.md`, installs the <!--fig:skills-->20<!--/fig--> skills of the repo cleanly into `.agents/skills/` (plus `.claude/skills/` when a `.claude/` folder exists), installs the 5 external design skill repos via their CLI (`--no-design-skills` to skip) and configures the Playwright + Excalidraw MCP servers for detected harnesses (`--no-mcp` to skip).
 
 Requirements: none for reading the guides or catalog. The query tools need Node.js ≥ 18; no npm packages are required.
 
@@ -21,7 +21,7 @@ Requirements: none for reading the guides or catalog. The query tools need Node.
 
 ```
 ai-frontend-guide-kit/
-├── AGENTS.md              # awareness layer: scope, golden rule, navigation
+├── AGENTS.md              # reference only: tool options, license, memory, Laya and pieces rules
 ├── HELP.md · HELP.es.md    # plain-language "what this is and what you can ask" (answer a kit summary from here)
 ├── README.md              # this file (copy + integration instructions)
 ├── guides/                # 00-START-HERE (router: intake + 3 phases) … 10-ITERATE (small changes), 11-VISUAL-FEEDBACK (Agentation), 13-CONTEXT-DOCS (which documents a project owes)
@@ -34,7 +34,7 @@ ai-frontend-guide-kit/
 │   ├── install-guides.md         # install/code retrieval per source
 │   ├── schema.json               # entry schema
 │   ├── component-types.json      # canonical component types: aliases, usual layer, catalog category
-│   └── sources/*.json            # 39 source files (7,358 entries), explorer.html, license-report.md
+│   └── sources/*.json            # <!--fig:sources-->39<!--/fig--> source files (<!--fig:entries-->7,358<!--/fig--> entries), explorer.html, license-report.md
 └── tools/
     ├── context.mjs        # repo context for the UX phase (REPO-CONTEXT.md)
     ├── ui-map.mjs         # always-on frontend map: build, impact <role|component>, have <name>, types, docs, check
@@ -57,7 +57,7 @@ An interactive loop to choose with the user instead of guessing: the agent propo
 
 The kit ships **16 vendored UX skills** (MIT, from `jpoindexter/ux-flow-skills`): the `userflow` dispatcher plus 15 `flow-*` skills (auth, onboarding, checkout, paywall, settings, navigation, app shell, tables, search, forms, errors, empty states, permissions, sharing, AI chat). Guide `02-UX-FLOWS` runs before any UI work, after the experience direction:
 
-- `node tools/context.mjs` → `REPO-CONTEXT.md` (includes whether the repo already has UX).
+- `node ai-frontend-guide-kit/tools/context.mjs` → `REPO-CONTEXT.md` (includes whether the repo already has UX).
 - **No UX** → design from scratch with `userflow` → `UX-SPEC.md` + `flow-report.html` + `ux-map.excalidraw`.
 - **UX exists** → ask the user: *Summarize* (as-is + audit) or *Radical redesign* (baseline + ideal UX + diff, UX only). Never redesign silently.
 
@@ -72,11 +72,11 @@ The kit workflow ends with phase 3, run by the sibling `frontend-polish` skill: 
 Created next to the kit by the installer and **preserved on refreshes**: append-only history (`selections.jsonl`), named reusable combinations (`combinations.json`) and a generated styles/components summary (`SUMMARY.md`).
 
 ```bash
-node tools/memory.mjs combo list          # check saved combinations before searching
-node tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> --style gradient,dark
-node tools/memory.mjs add --screen experience --block reference --need "..." --decision adapt --ref "reference:<slug>"
-node tools/memory.mjs combo save saas-landing-v1 --note "..."
-node tools/memory.mjs combo apply saas-landing-v1
+node ai-frontend-guide-kit/tools/memory.mjs combo list          # check saved combinations before searching
+node ai-frontend-guide-kit/tools/memory.mjs add --screen landing --block hero --need "..." --decision reuse --id <entry-id> --style gradient,dark
+node ai-frontend-guide-kit/tools/memory.mjs add --screen experience --block reference --need "..." --decision adapt --ref "reference:<slug>"
+node ai-frontend-guide-kit/tools/memory.mjs combo save saas-landing-v1 --note "..."
+node ai-frontend-guide-kit/tools/memory.mjs combo apply saas-landing-v1
 ```
 
 ## Laya (optional local ranking)
@@ -84,14 +84,14 @@ node tools/memory.mjs combo apply saas-landing-v1
 `tools/laya_select.py` ranks **questions**, **experience directions** and **components** with calibrated probabilities, running entirely on this PC:
 
 ```bash
-python tools/laya_select.py --check     # environment status
-python tools/laya_select.py --install   # pip install -U laya (first run downloads checkpoints)
+python ai-frontend-guide-kit/tools/laya_select.py --check     # environment status
+python ai-frontend-guide-kit/tools/laya_select.py --install   # pip install -U laya (first run downloads checkpoints)
 # after the user consents once per session:
-python tools/laya_select.py --dataset experience --kind question --task next-question \
+python ai-frontend-guide-kit/tools/laya_select.py --dataset experience --kind question --task next-question \
   --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
-python tools/laya_select.py --dataset experience --kind archetype --task direction \
+python ai-frontend-guide-kit/tools/laya_select.py --dataset experience --kind archetype --task direction \
   --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
-python tools/laya_select.py --need "pricing table with monthly toggle" --category pricing --commercial \
+python ai-frontend-guide-kit/tools/laya_select.py --need "pricing table with monthly toggle" --category pricing --commercial \
   --direction <experience-id> --context-file ai-frontend-output/ux/EXPERIENCE-BRIEF.md --confirmed
 ```
 

@@ -48,6 +48,7 @@ Se corren desde la raíz del proyecto. Cada una imprime una pantalla, no un volc
 | `tools/flow.mjs` | `list` muestra todas las rutas y pasos (el texto de `guides/FLOWS.md`); `status` dice si el kit está instalado, la ruta y el paso activos y lo que el proyecto tiene registrado; `start <ruta>` declara la ruta; `next` imprime la instrucción completa del micro-paso actual (objetivo, comandos exactos, plantilla, criterio de terminado; textos en `tools/flow-steps.mjs`), ya resuelta según lo que el proyecto tiene instalado; `scaffold [<paso>[.<parte>]]` escribe la plantilla de un micro-paso en su archivo (sin cambiar lo que ya hay); `done <paso>` rechaza un paso saltado, un artefacto que falta o un archivo con secciones vacías, con un marcador `<…>` o con ids que no existen (las comprobaciones están en `tools/flow-gates.mjs`), y los pasos grandes se cierran parte por parte (`done direction.questions`); `report <paso>` escribe la lista que `polish`, `iterate`, `redesign` y `visual-feedback` necesitan además de `--evidence`; `reset` quita la ruta. Estado: `ai-frontend-output/flow-state.json`, que se versiona con el proyecto |
 | `tools/memory.mjs` | `add`, `list`, `summary`, `combo save\|list\|show\|apply` — el historial reutilizable de decisiones; `lib add\|list\|sync` guarda las librerías de UI que usa el proyecto y las que hay que investigar (`sync` importa lo que detecta `context.mjs`) |
 | `tools/excalidraw-mcp.mjs` | Servidor MCP local de Excalidraw, offline, para el mapa de pantallas y navegación |
+| `tools/kit-path.mjs` | Ayuda interna: escribe la única forma de comando que imprime cada herramienta (`node ai-frontend-guide-kit/tools/<herramienta> ...`, la ruta del kit relativa a la raíz del proyecto) |
 | `tools/laya_select.py` | Motor de decisión local opcional: ordena preguntas, direcciones y componentes (`--check`, `--install`) |
 | `tools/audit-a11y.mjs` | Chequeo WCAG 2.x A/AA de una o más URLs con axe-core + Playwright |
 | `tools/audit-perf.mjs` | Presupuesto de Core Web Vitals con Lighthouse: LCP, CLS, TBT |
@@ -61,7 +62,7 @@ Las skills son aceleradores opcionales. Los archivos del kit siempre ganan sobre
 
 | Skill | Cuándo corre |
 |---|---|
-| `ai-frontend-guide` | El router por el que pasa todo pedido de diseño, UI o UX |
+| `ai-frontend-guide` | El router por el que pasa todo pedido de diseño, UI o UX; es corta y abre un solo archivo de `steps/` en el paso en que está el flujo |
 | `frontend-polish` | Fase 3: auditorías externas + loop de Playwright MCP + regresión |
 | `frontend-refactor` | Solo si lo pedís explícitamente: mapea las carpetas a los roles de FSD y refactoriza una slice por vez, corriendo `ui-map build` y `check` después de cada una |
 | `ux-map` | El mapa de pantallas y navegación en `ai-frontend-output/ux/ux-map.excalidraw` |
@@ -101,7 +102,7 @@ Leé ai-frontend-guide-kit/HELP.es.md y contame qué puede hacer este kit por mi
 ```
 
 ```
-Hacé el intake del kit: leé ai-frontend-guide-kit/INDEX.md y ai-frontend-guide-kit/AGENTS.md, corré tools/context.mjs y leé UI-MAP.md, y recién después declarame la ruta en una línea antes de tocar código.
+Haz el intake del kit: lee ai-frontend-guide-kit/INDEX.md, ejecuta node ai-frontend-guide-kit/tools/flow.mjs status, sigue flow.mjs next al pie de la letra y declárame la ruta en una línea antes de tocar código.
 ```
 
 ```

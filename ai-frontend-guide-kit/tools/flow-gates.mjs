@@ -13,6 +13,7 @@
  */
 
 import { validateTokens } from './tokens.mjs';
+import { runTool } from './kit-path.mjs';
 
 const norm = (text) => text.toLowerCase().replace(/\s+/g, ' ').trim();
 
@@ -205,7 +206,7 @@ function design(text) {
 /** design-tokens.json, next to DESIGN.md: it exists, every value parses, references resolve and every declared contrast pair passes. */
 function tokensFile(ctx) {
   const text = ctx.read('root:design-tokens.json');
-  const run = ctx.run ?? ((tool, args) => `node tools/${tool} ${args}`);
+  const run = ctx.run ?? ((tool, args) => runTool(tool, args));
   if (text === null) return [`design-tokens.json: the file is missing; write it with: ${run('tokens.mjs', 'init --primary <hex>')} (then check, css and doc)`];
   let data;
   try {

@@ -7,12 +7,12 @@ The tokens live as data in `design-tokens.json` (W3C Design Tokens format, proje
 ## The path
 
 1. Choose: primary, accent and neutral color (hex), display and body font, radius (`none|small|medium|large`), density (`compact|regular|spacious`), type ratio (`1.2|1.25|1.333`), motion (`calm|snappy|playful`).
-2. `node tools/tokens.mjs init --primary <hex> --font-display <name> ...` (add `--dark` for dashboards and dev tools). It refuses to overwrite an existing file unless `--force`.
-3. `node tools/tokens.mjs check`: every `$value` parses, references resolve, and every declared text/background pair reaches its ratio. One numbered line per failure; fix it and run it again.
-4. `node tools/tokens.mjs css --out <file>`: the Tailwind v4 `@theme` block (`--color-primary`, `--color-surface`, `--font-display`, `--text-*`, `--spacing-*`, `--radius-*`, `--ease-*`), a dark block when dark tokens exist, and a `prefers-reduced-motion` block. Import it from the global CSS.
-5. `node tools/tokens.mjs doc`: the token tables of `DESIGN.md` between `<!-- tokens:start -->` and `<!-- tokens:end -->`; what you write outside the markers is never touched. Write the "Visual intent" paragraph there.
+2. `node ai-frontend-guide-kit/tools/tokens.mjs init --primary <hex> --font-display <name> ...` (add `--dark` for dashboards and dev tools). It refuses to overwrite an existing file unless `--force`.
+3. `node ai-frontend-guide-kit/tools/tokens.mjs check`: every `$value` parses, references resolve, and every declared text/background pair reaches its ratio. One numbered line per failure; fix it and run it again.
+4. `node ai-frontend-guide-kit/tools/tokens.mjs css --out <file>`: the Tailwind v4 `@theme` block (`--color-primary`, `--color-surface`, `--font-display`, `--text-*`, `--spacing-*`, `--radius-*`, `--ease-*`), a dark block when dark tokens exist, and a `prefers-reduced-motion` block. Import it from the global CSS.
+5. `node ai-frontend-guide-kit/tools/tokens.mjs doc`: the token tables of `DESIGN.md` between `<!-- tokens:start -->` and `<!-- tokens:end -->`; what you write outside the markers is never touched. Write the "Visual intent" paragraph there.
 
-`node tools/tokens.mjs contrast <fg> <bg>` answers AA for any two colors (hex or token names). Never edit the generated CSS or the marked block: change `design-tokens.json` (or the init flags) and run the commands again.
+`node ai-frontend-guide-kit/tools/tokens.mjs contrast <fg> <bg>` answers AA for any two colors (hex or token names). Never edit the generated CSS or the marked block: change `design-tokens.json` (or the init flags) and run the commands again.
 
 ## Source of the choices
 
@@ -21,8 +21,8 @@ The tokens live as data in `design-tokens.json` (W3C Design Tokens format, proje
 **No Figma:** derive them from the **visual brief** of `ai-frontend-output/ux/EXPERIENCE-BRIEF.md` (style, palette intent, typography personality, composition, motion, anti-generic list) plus `PRODUCT.md`: brand adjectives, competitor contrast, audience expectations. For a system-level reference, search the catalog's design systems:
 
 ```bash
-node tools/find.mjs --type design-system
-node tools/get.mjs <id>   # docs + Figma kit link
+node ai-frontend-guide-kit/tools/find.mjs --type design-system
+node ai-frontend-guide-kit/tools/get.mjs <id>   # docs + Figma kit link
 ```
 
 ## Rules

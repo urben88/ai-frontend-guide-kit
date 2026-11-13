@@ -3,8 +3,8 @@
  * get — full decision card for one catalog entry, including how to install it.
  *
  * Usage:
- *   node tools/get.mjs <entry-id> [--json]
- *   node tools/get.mjs <entry-id> --landed <path> [--name <piece-name>] [--level micro|small|medium|large]
+ *   node ai-frontend-guide-kit/tools/get.mjs <entry-id> [--json]
+ *   node ai-frontend-guide-kit/tools/get.mjs <entry-id> --landed <path> [--name <piece-name>] [--level micro|small|medium|large]
  *                      [--relation chosen|modified|copied] [--dir <project>] [--global <dir>] [--json]
  *
  * --landed: the component is already in the project at <path> (installed or copied there). It is registered as a
@@ -13,6 +13,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { toolPath } from './kit-path.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CATALOG_DIR = join(__dirname, '..', 'catalog');
@@ -33,7 +34,7 @@ const id = positional[0];
 const asJson = args.includes('--json');
 
 if (!id || id.startsWith('--') || (opts.landed !== undefined && !opts.landed)) {
-  console.error('Usage: node tools/get.mjs <entry-id> [--json] | node tools/get.mjs <entry-id> --landed <path> [--name n] [--level l] [--relation r]');
+  console.error(`Usage: node ${toolPath('get.mjs')} <entry-id> [--json] | node ${toolPath('get.mjs')} <entry-id> --landed <path> [--name n] [--level l] [--relation r]`);
   process.exit(1);
 }
 

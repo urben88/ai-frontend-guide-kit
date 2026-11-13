@@ -12,13 +12,14 @@
  * first screen and spacing off the scale. The browser part only reads the page (collectPage); every
  * decision is made by pure functions on plain data (analyzeSnapshot), so they run without a browser.
  *
- * Usage: node tools/audit-design.mjs [paths...] [--url <url> ...] [--report] [--strict] [--json] [--dir <project>]
+ * Usage: node ai-frontend-guide-kit/tools/audit-design.mjs [paths...] [--url <url> ...] [--report] [--strict] [--json] [--dir <project>]
  * Exit: 0 done, 1 with --strict and a "high" finding, 2 wrong usage.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, extname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { contrastRatio, loadTokens } from './tokens.mjs';
+import { toolPath } from './kit-path.mjs';
 
 const SELF = fileURLToPath(import.meta.url);
 const KIT_DIR = resolve(dirname(SELF), '..');
@@ -546,7 +547,7 @@ function reportMarkdown(result) {
 const USAGE = `audit-design — checks the design and prints a numbered list of fixes, most severe first
 
 Usage:
-  node tools/audit-design.mjs [paths...] [--url <url> ...] [--report] [--strict] [--json] [--dir <project>]
+  node ${toolPath('audit-design.mjs')} [paths...] [--url <url> ...] [--report] [--strict] [--json] [--dir <project>]
 
   paths     files or folders to scan, relative to the project (default: ${DEFAULT_TARGETS.join(' ')})
   --url     also open this page at 360, 768 and 1280 px (needs Playwright; repeat for several pages)

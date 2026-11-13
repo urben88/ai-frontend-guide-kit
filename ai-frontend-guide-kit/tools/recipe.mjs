@@ -14,6 +14,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { INVENTORY_COLUMNS, sections as markdownSections, table } from './flow-gates.mjs';
+import { runTool, toolPath } from './kit-path.mjs';
 
 const SELF = fileURLToPath(import.meta.url);
 const KIT_DIR = resolve(dirname(SELF), '..');
@@ -37,11 +38,11 @@ class Refusal extends Error {}
 const USAGE = `recipe — page recipes: sections in order, the job of each, and the catalog words to search
 
 Usage:
-  node tools/recipe.mjs list [--archetype <name>]   one line per recipe; the archetype is a site or an experience archetype
-  node tools/recipe.mjs show <id> [<section>]       the sections in order with job, narrative, layout and query; one section in full
-  node tools/recipe.mjs suggest                     the recipe of each screen of UX-SPEC.md (or the pages of EXPERIENCE-BRIEF.md), with the reason
-  node tools/recipe.mjs inventory [--write] [--force]   the inventory rows built from those recipes; --write saves ai-frontend-output/INVENTORY.md
-  node tools/recipe.mjs check [--recipes <file>]    validate page-recipes.json: shape, categories, layouts, archetypes
+  node ${toolPath('recipe.mjs')} list [--archetype <name>]   one line per recipe; the archetype is a site or an experience archetype
+  node ${toolPath('recipe.mjs')} show <id> [<section>]       the sections in order with job, narrative, layout and query; one section in full
+  node ${toolPath('recipe.mjs')} suggest                     the recipe of each screen of UX-SPEC.md (or the pages of EXPERIENCE-BRIEF.md), with the reason
+  node ${toolPath('recipe.mjs')} inventory [--write] [--force]   the inventory rows built from those recipes; --write saves ai-frontend-output/INVENTORY.md
+  node ${toolPath('recipe.mjs')} check [--recipes <file>]    validate page-recipes.json: shape, categories, layouts, archetypes
 Options: --dir <project>, --json, --help
 Exit: 0 ok, 1 refused or a check failed, 2 wrong usage. inventory --write never overwrites INVENTORY.md without --force.
 `;
@@ -85,10 +86,7 @@ const shown = (root, file) => {
   return rel && !rel.startsWith('..') && !isAbsolute(rel) ? rel : file.replace(/\\/g, '/');
 };
 /** The command line of this tool in the one path form of the project (from its root). */
-function selfCommand(root, args) {
-  const path = shown(root, SELF);
-  return `node ${/\s/.test(path) ? `"${path}"` : path} ${args}`;
-}
+const selfCommand = (root, args) => runTool('recipe.mjs', args, root);
 const say = (flags, json, text) => console.log(flags.json ? JSON.stringify(json, null, 2) : text);
 const numbered = (lines) => lines.map((line, at) => `${at + 1}. ${line}`).join('\n');
 const readText = (file) => (existsSync(file) ? readFileSync(file, 'utf8').replace(/\r\n/g, '\n') : null);

@@ -48,7 +48,7 @@ test('a URL of a catalog source says so and points to find.mjs, without fetching
   const run = await scout('https://ui.shadcn.com/docs/components/button');
   assert.equal(run.status, 0, run.stderr);
   assert.match(run.stdout, /In the catalog: `shadcn`/);
-  assert.match(run.stdout, /node tools\/find\.mjs --source shadcn/);
+  assert.match(run.stdout, /node \S*tools\/find\.mjs --source shadcn/);
 });
 
 test('a shared host matches a source only under its path', async () => {

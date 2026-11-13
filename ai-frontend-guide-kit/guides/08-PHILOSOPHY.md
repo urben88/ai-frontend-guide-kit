@@ -9,7 +9,7 @@ These rules apply to **new code**. Existing violations are recorded by the map (
 - One responsibility per component.
 - One owner per visual role (loading, empty, error, layout...): reuse the owner, do not write a second one.
 - UI apart from logic: data fetching and state outside presentational components.
-- No duplicates: run `node tools/ui-map.mjs have "<name>"` before creating.
+- No duplicates: run `node ai-frontend-guide-kit/tools/ui-map.mjs have "<name>"` before creating.
 - Order of preference: reuse > extend or compose > adapt > create.
 
 ## Hierarchy and density (taste)
@@ -42,7 +42,7 @@ These rules apply to **new code**. Existing violations are recorded by the map (
 - No default purples/blue gradients, no generic glassmorphism wallpaper, no stock "AI look".
 - The design must express the `PRODUCT.md` personality; if you can swap the logo and it fits any competitor, iterate.
 - Contrast is non-negotiable: body text ≥ 4.5:1, large text ≥ 3:1.
-- Audit continuously: at the end of each screen, run the `impeccable` audit if installed (`/impeccable audit <screen>`), and always run `node ai-frontend-guide-kit/tools/audit-design.mjs --report`.
+- Audit continuously: at the end of each screen, run the `impeccable` audit when `flow.mjs next` names it (`/impeccable audit <screen>`), and always run `node ai-frontend-guide-kit/tools/audit-design.mjs --report`.
 
 ## Combination limits
 

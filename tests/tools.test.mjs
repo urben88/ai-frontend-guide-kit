@@ -83,7 +83,7 @@ test('installer is idempotent: second run adds nothing and keeps one AGENTS.md p
   const second = node(args);
   assert.equal(second.status, 0, second.stderr);
   const agents = readFileSync(join(target, 'AGENTS.md'), 'utf8');
-  assert.equal(agents.split('ai-frontend-guide-kit/AGENTS.md').length - 1, 1);
+  assert.equal(agents.split('<!-- ai-frontend-guide-kit:start -->').length - 1, 1, 'one routing block after two runs');
 });
 
 const install = (target) => node([join(ROOT, 'install.mjs'), '--target', target, '--no-skills', '--no-mcp']);
@@ -313,14 +313,16 @@ test('installer copies every kit skill and no skill count contradicts skills/', 
     .sort();
   assert.deepEqual(installed, skills, 'every kit skill is copied into .agents/skills');
 
+  // The installer help counts the skills folder at run time; the READMEs state it between figure markers (build-kit fixes them).
+  const help = node([join(ROOT, 'install.mjs'), '--help']).stdout;
   const claims = [
-    ['install.mjs', /(\d+) kit skills/g],
-    ['README.md', /(\d+) skills of this repo/g],
-    ['README.es.md', /(\d+) skills de este repo/g],
-    ['RESUMEN.md', /(\d+) skills propias/g],
+    ['install.mjs --help', help, /(\d+) kit skills/g],
+    ['README.md', readFileSync(join(ROOT, 'README.md'), 'utf8'), /(\d+)(?:<!--\/fig-->)? skills of this repo/g],
+    ['README.es.md', readFileSync(join(ROOT, 'README.es.md'), 'utf8'), /(\d+)(?:<!--\/fig-->)? skills de este repo/g],
+    ['RESUMEN.md', readFileSync(join(ROOT, 'RESUMEN.md'), 'utf8'), /(\d+) skills propias/g],
   ];
-  for (const [file, pattern] of claims) {
-    const found = [...readFileSync(join(ROOT, file), 'utf8').matchAll(pattern)].map((match) => Number(match[1]));
+  for (const [file, text, pattern] of claims) {
+    const found = [...text.matchAll(pattern)].map((match) => Number(match[1]));
     assert.ok(found.length > 0, `${file} states a skill count`);
     for (const claimed of found) assert.equal(claimed, skills.length, `${file} claims ${claimed} skills`);
   }

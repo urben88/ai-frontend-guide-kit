@@ -307,7 +307,7 @@ test('compose and iterate list pieces find as their first tool (S5)', () => {
   assert.equal(run.status, 0, run.stderr);
   for (const step of ['compose', 'iterate']) {
     const row = run.stdout.split('\n').find((line) => /^\| \d+ \|/.test(line) && line.includes(`\`${step}\``));
-    assert.match(row, /\| node tools\/pieces\.mjs find; /, step);
+    assert.match(row, /\| node ai-frontend-guide-kit\/tools\/pieces\.mjs find; /, step);
   }
 });
 
@@ -393,7 +393,7 @@ test('done iterate refuses while a registered piece changed since its last versi
   assert.equal(refused.status, 1);
   assert.match(refused.stderr, /step "iterate" cannot be marked done/);
   assert.match(refused.stderr, /pricing-table/);
-  assert.match(refused.stderr, /node tools\/pieces\.mjs version pricing-table/);
+  assert.match(refused.stderr, /node \S*tools\/pieces\.mjs version pricing-table/);
   assert.equal(raw(again.dir), before, 'a refusal changes nothing');
   assert.equal(piecesIn(again, 'version', 'pricing-table', '--note', 'roomier').status, 0);
   const ok = flowIn(again, 'done', 'iterate', '--evidence', 'built');
@@ -1341,7 +1341,7 @@ test('a state without gates closes compose.inventory with any non-empty file, as
 test('flow list names recipe.mjs in direction and compose, and guides/FLOWS.md is the same text (T6)', () => {
   const homeDir = home();
   const list = guided(project(), homeDir, 'list').stdout;
-  assert.match(list, /node tools\/recipe\.mjs/);
+  assert.match(list, /node ai-frontend-guide-kit\/tools\/recipe\.mjs/);
   const flows = readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'guides', 'FLOWS.md'), 'utf8').replace(/\r\n/g, '\n');
   assert.equal(flows, list);
 });

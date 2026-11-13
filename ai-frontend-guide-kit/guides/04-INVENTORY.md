@@ -6,7 +6,7 @@ Purpose: turn each screen into a list of **needed components by category**, befo
 
 ## Start from the recipe
 
-Do not write the table from nothing. Each kind of page has a recipe (`experience/page-recipes.json`): its sections in order, the job of each, the category and the catalog words to search, the layout (`experience/LAYOUT-RULES.md`). Run `node tools/recipe.mjs suggest` (the recipe of each screen of `UX-SPEC.md`), then `node tools/recipe.mjs inventory --write` (writes `INVENTORY.md`). Then review the rows: remove what this product does not need, add what is missing, fill `Serves` with the ids of `PRODUCT.md`. A screen with no recipe is described by hand with the method below. `recipe.mjs show <id>` prints one recipe.
+Do not write the table from nothing. Each kind of page has a recipe (`experience/page-recipes.json`): its sections in order, the job of each, the category and the catalog words to search, the layout (`experience/LAYOUT-RULES.md`). Run `node ai-frontend-guide-kit/tools/recipe.mjs suggest` (the recipe of each screen of `UX-SPEC.md`), then `node ai-frontend-guide-kit/tools/recipe.mjs inventory --write` (writes `INVENTORY.md`). Then review the rows: remove what this product does not need, add what is missing, fill `Serves` with the ids of `PRODUCT.md`. A screen with no recipe is described by hand with the method below. `recipe.mjs show <id>` prints one recipe.
 
 ## Method
 
@@ -31,7 +31,7 @@ For every screen in `PRODUCT.md`:
 
 ## Check what the project already has
 
-In a project with code, run `node tools/ui-map.mjs have "<need>"` for each row before searching the catalog or creating anything: it says whether the component exists (path, usage), lists close matches and gives catalog candidates. Mark the row `reuse existing` when it exists. Then run `node tools/pieces.mjs find "<need>"`: your own pieces come first (a close one gets a new variant or version, not a copy), then pieces of your other projects (`pieces adopt` copies the file into this project), the catalog next, a new piece last. Components stay in the project's own folders; the kit stores no code. Record each piece you place with `pieces use`, and a catalog component that landed with `get.mjs <id> --landed <path>`.
+In a project with code, run `node ai-frontend-guide-kit/tools/ui-map.mjs have "<need>"` for each row before searching the catalog or creating anything: it says whether the component exists (path, usage), lists close matches and gives catalog candidates. Mark the row `reuse existing` when it exists. Then run `node ai-frontend-guide-kit/tools/pieces.mjs find "<need>"`: your own pieces come first (a close one gets a new variant or version, not a copy), then pieces of your other projects (`pieces adopt` copies the file into this project), the catalog next, a new piece last. Components stay in the project's own folders; the kit stores no code. Record each piece you place with `pieces use`, and a catalog component that landed with `get.mjs <id> --landed <path>`.
 
 ## Reflection questions (answer before step 04)
 
