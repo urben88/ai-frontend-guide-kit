@@ -97,6 +97,8 @@ Reference: `experience/references/reference-deceptive-patterns.md`.
 
 ## Done checklist
 
+In a flow route, `flow.mjs report polish` writes this list as `ai-frontend-output/reports/polish-report.md`; `flow.mjs done polish` needs every line marked `[x]` with its result or `[n/a]` with its reason.
+
 - [ ] All critical flows pass E2E.
 - [ ] Visual snapshots exist for key interactive states.
 - [ ] Reduced motion and keyboard focus verified manually once per screen.

@@ -50,7 +50,7 @@ If Playwright MCP is configured, verify the browser once (`npx playwright instal
 8. **Automated a11y and performance**: run the axe and Lighthouse checks from `guides/09-VERIFY.md` (sections 4–5) and the honesty audit (section 6) for conversion flows.
 9. **Fix exactly what was reported**, then re-run the affected checks. No finding is closed without a re-check.
 
-Report each iteration with evidence: state + screenshot + what changed. Keep a running findings list (optionally `ai-frontend-output/polish-report.md`).
+Report each iteration with evidence: state + screenshot + what changed. Keep a running findings list. In a flow route, `flow.mjs report polish` writes the checklist `ai-frontend-output/reports/polish-report.md`: mark every line `[x]` with its result or `[n/a]` with its reason, then `flow.mjs done polish --evidence "<one line>"`.
 
 ## Step 3 — Regression gate
 

@@ -25,9 +25,86 @@ const project = ({ kit = true } = {}) => {
   return dir;
 };
 const out = (dir, rel) => join(dir, 'ai-frontend-output', rel);
-const put = (dir, rel, text = 'x\n') => {
+
+// Content that passes every content gate of its file (the gates read the text, not only the file name).
+const VALID_PRODUCT = [
+  '# Product',
+  '## Audience', 'Neighbours who order bread online.',
+  '## Primary action', 'G1: place a first order.',
+  '## Objections', 'O1: delivery may be late.', 'O2: the price is unknown.',
+  '## Proof', 'P1: 2,000 orders delivered.',
+  '## Tone', 'Warm, plain, never pushy.',
+  '## User flows', 'Home → Menu → order.',
+  '## Screen list', '- Home — sells', '- Menu — lists',
+  '## Constraints', 'None.',
+  '',
+].join('\n');
+const VALID_BRIEF = [
+  '# Experience brief',
+  '## Context', 'Bakery for neighbours who order bread online.',
+  '## Goal', 'The visitor places a first order.',
+  '## Archetype', 'site archetype: catalog · experience archetype: storefront', 'navigation_model: catalog', 'pages: Home — sells; Menu — lists', 'why: orders start at the menu',
+  '## Philosophy', 'chosen: warm · why: trust', 'discarded: minimal · why: too cold',
+  '## Journey', 'actor: neighbour · scenario: hungry',
+  '| Phase | Does | Thinks | Feels | Friction | Opportunity |', '|---|---|---|---|---|---|',
+  '| Arrive | looks | nice | curious | slow | photo |', '| Choose | picks | which | unsure | many | filters |', '| Order | pays | done | calm | form | one step |',
+  '## Information architecture', 'priority content: menu', 'navigation: menu, cart', 'section order: Home — hero, menu', 'entry and exit points: search · search or filters: none',
+  '## Reference discoveries', 'the user gave no reference',
+  '## Three directions',
+  '### safe: Classic', 'changes: none', '### differentiated: Market', 'changes: stalls', '### experimental: Night', 'changes: dark',
+  '## Recommended direction', 'id: market · rationale: fits · risks: low',
+  '## Interaction patterns', '- menu: grid — solves choice',
+  '## Visual brief', 'style: warm · palette intent: bread · typography personality: friendly', 'composition: grid · motion: calm', 'anti-generic list: no stock photos',
+  '## Accessibility', 'keyboard: tab order · contrast: 4.5 · motion: reduced · language: en',
+  '## Open questions', '- none',
+  '',
+].join('\n');
+const VALID_SPEC = [
+  '# UX spec',
+  '## Screens',
+  '| Screen | Purpose | Primary action | Empty state | Loading state | Error state | Serves |', '|---|---|---|---|---|---|---|',
+  '| Home | sells | Order | none yet | skeleton | retry | G1, P1 |', '| Menu | lists | Pick | no items | skeleton | retry | O1 |',
+  '## Flows', '### Order', '1. Home → shows menu → primary action order → goes to Menu',
+  '## Navigation', 'Top bar, collapses to a menu button',
+  '## Audit', '| Anti-pattern | Result (PASS, WARN or FAIL) | Where |', '|---|---|---|',
+  '',
+].join('\n');
+const VALID_DESIGN = [
+  '# Design',
+  '## Visual intent', 'Warm and plain.',
+  '## Color', '| Token | Value | Use |', '|---|---|---|', '| --color-primary | #8a4b08 | buttons |',
+  '## Type', 'display: Fraunces · body: Inter · scale: 14, 16, 24',
+  '## Spacing', 'scale: 4, 8, 12, 16, 24, 32, 48, 64',
+  '## Radius', 'medium',
+  '## Motion', 'calm · 200ms ease-out',
+  '## Contrast', 'body text on surface: 7.1:1',
+  '',
+].join('\n');
+const VALID_INVENTORY = [
+  '# Inventory',
+  '| Screen | Block | Category | Priority | Notes | Candidates | Decision |', '|---|---|---|---|---|---|---|',
+  '| Home | hero | hero | must | one image | magicui-hero | reuse |',
+  '',
+].join('\n');
+const VALID_ARCHITECTURE = JSON.stringify({ version: 1, mode: 'map', framework: 'react', layers: { app: [], pages: [], widgets: [], features: [], entities: [], shared: [] }, unmapped: [], notes: 'Mapping only.' });
+const VALID_MAP = JSON.stringify({ elements: [{ type: 'text', text: 'Home' }, { type: 'text', text: 'Menu' }] });
+const VALID = {
+  'ux/EXPERIENCE-BRIEF.md': VALID_BRIEF,
+  'ux/UX-SPEC.md': VALID_SPEC,
+  'ux/ux-map.excalidraw': VALID_MAP,
+  'DESIGN.md': VALID_DESIGN,
+  'INVENTORY.md': VALID_INVENTORY,
+  'architecture.json': VALID_ARCHITECTURE,
+};
+const put = (dir, rel, text = VALID[rel] ?? 'x\n') => {
   mkdirSync(dirname(out(dir, rel)), { recursive: true });
   writeFileSync(out(dir, rel), text);
+};
+/** `flow report <step>`, then every line marked [x] with a result: what a finished report looks like. */
+const fillReport = (dir, step) => {
+  assert.equal(flow(dir, 'report', step).status, 0, `report ${step}`);
+  const file = out(dir, `reports/${step}-report.md`);
+  writeFileSync(file, readFileSync(file, 'utf8').replace(/- \[ \]/g, '- [x]').replace(/<[^<>\n]+>/g, 'ok'));
 };
 const state = (dir) => JSON.parse(readFileSync(out(dir, 'flow-state.json'), 'utf8'));
 const raw = (dir) => readFileSync(out(dir, 'flow-state.json'), 'utf8');
@@ -124,6 +201,7 @@ test('a step without a file needs --evidence, which is stored', () => {
   assert.equal(refused.status, 1);
   assert.match(refused.stderr, /step "polish" needs --evidence/);
   assert.equal(raw(dir), before);
+  fillReport(dir, 'polish');
   const ok = flow(dir, 'done', 'polish', '--evidence', 'playwright loop green');
   assert.equal(ok.status, 0, ok.stderr);
   assert.equal(state(dir).steps[1].evidence, 'playwright loop green');
@@ -205,6 +283,7 @@ const iterateProject = () => {
   put(dir, 'ux/REPO-CONTEXT.md');
   put(dir, 'UI-MAP.md');
   assert.equal(flow(dir, 'done', 'intake').status, 0);
+  fillReport(dir, 'iterate');
   return { dir, lib };
 };
 const flowIn = (ctx, ...args) => spawnSync(process.execPath, [TOOL, ...args, '--dir', ctx.dir], { encoding: 'utf8', env: piecesEnv(ctx.lib) });
@@ -250,6 +329,7 @@ test('compose gets the same guard through the new route (S5)', () => {
   flowIn(ctx, 'start', 'new');
   for (const step of ['intake', 'direction', 'ux', 'tokens']) {
     for (const file of ['ux/REPO-CONTEXT.md', 'UI-MAP.md', 'ux/EXPERIENCE-BRIEF.md', 'ux/UX-SPEC.md', 'ux/ux-map.excalidraw', 'DESIGN.md']) put(dir, file);
+    writeFileSync(join(dir, 'PRODUCT.md'), VALID_PRODUCT);
     const done = flowIn(ctx, 'done', step);
     assert.equal(done.status, 0, `${step}: ${done.stderr}`);
   }
@@ -321,6 +401,7 @@ test('done compose refuses a changed piece too (flow-always S4b)', () => {
   flowIn(ctx, 'start', 'new');
   for (const step of ['intake', 'direction', 'ux', 'tokens']) {
     for (const file of ['ux/REPO-CONTEXT.md', 'UI-MAP.md', 'ux/EXPERIENCE-BRIEF.md', 'ux/UX-SPEC.md', 'ux/ux-map.excalidraw', 'DESIGN.md']) put(dir, file);
+    writeFileSync(join(dir, 'PRODUCT.md'), VALID_PRODUCT);
     assert.equal(flowIn(ctx, 'done', step).status, 0);
   }
   put(dir, 'selections.jsonl', '{"decision":"reuse"}\n');
@@ -370,20 +451,49 @@ const O = 'ai-frontend-output';
 const FILES = {
   [`${O}/ux/REPO-CONTEXT.md`]: '- **UX present:** no',
   [`${O}/UI-MAP.md`]: 'x',
-  [`${O}/ux/EXPERIENCE-BRIEF.md`]: 'x',
-  [`${O}/ux/UX-SPEC.md`]: 'x',
-  [`${O}/ux/ux-map.excalidraw`]: '{}',
-  'DESIGN.md': 'x',
-  'PRODUCT.md': 'x',
-  [`${O}/INVENTORY.md`]: 'x',
+  [`${O}/ux/EXPERIENCE-BRIEF.md`]: VALID_BRIEF,
+  [`${O}/ux/UX-SPEC.md`]: VALID_SPEC,
+  [`${O}/ux/ux-map.excalidraw`]: VALID_MAP,
+  'DESIGN.md': VALID_DESIGN,
+  'PRODUCT.md': VALID_PRODUCT,
+  [`${O}/INVENTORY.md`]: VALID_INVENTORY,
   [`${O}/selections.jsonl`]: '{"decision":"reuse"}',
-  [`${O}/architecture.json`]: '{}',
+  [`${O}/architecture.json`]: VALID_ARCHITECTURE,
 };
 /** Writes the files an instruction names (paths from the project root, as `next --json` lists them). */
 const provide = (dir, files) => {
   for (const rel of files) {
     mkdirSync(dirname(join(dir, rel)), { recursive: true });
     writeFileSync(join(dir, rel), FILES[rel]);
+  }
+};
+
+const fill = (text) => text.replace(/<[^<>\n]+>/g, 'ok');
+/** What a weak model must do with a scaffolded file: replace every token, and add the rows a gate needs. */
+const COMPLETE = {
+  'direction.classify': (text) => fill(text.replace('<one of the six>', 'hub')),
+  'direction.journey': (text) => fill(text).replace('|---|---|---|---|---|---|\n', `$&${'| a | b | c | d | e | f |\n'.repeat(3)}`),
+  'direction.directions': (text) => fill(text).replace(/### ok: ok\n[\s\S]*$/, '### safe: A\nchanges: a\n### differentiated: B\nchanges: b\n### experimental: C\nchanges: c\n'),
+  'ux.spec': (text) => fill(text).replace('|---|---|---|---|---|---|---|\n', '$&| Home | ok | ok | ok | ok | ok | G1, O1 |\n'),
+  tokens: (text) => fill(text.replace('<ratio>', '7:1')),
+  'compose.find': (text) => text.replace('| must | ok | | |', '| must | ok | magicui-x | |'),
+  'compose.decide': (text) => text.replace('| must | ok | magicui-x | |', '| must | ok | magicui-x | reuse |'),
+};
+/** Closes the micro-step `info` describes with valid content: scaffold, fill, and the report of the steps that need one. */
+const complete = (dir, homeDir, info) => {
+  const id = info.part ? `${info.step}.${info.part}` : info.step;
+  if (info.template) {
+    assert.equal(guided(dir, homeDir, 'scaffold').status, 0, `${id}: scaffold`);
+    const file = join(dir, info.template.file);
+    writeFileSync(file, (COMPLETE[id] ?? fill)(readFileSync(file, 'utf8')));
+  } else if (id === 'compose.find' || id === 'compose.decide') {
+    const file = out(dir, 'INVENTORY.md');
+    writeFileSync(file, COMPLETE[id](readFileSync(file, 'utf8')));
+  } else provide(dir, info.artifacts);
+  if (info.report) {
+    assert.equal(guided(dir, homeDir, 'report', info.step).status, 0, `${id}: report`);
+    const file = join(dir, info.report.file);
+    writeFileSync(file, fill(readFileSync(file, 'utf8')).replace(/- \[ \]/g, '- [x]'));
   }
 };
 
@@ -408,7 +518,7 @@ test('next prints the whole instruction of every micro-step of every route, and 
       assert.doesNotMatch(text, /if installed|\(optional\)|\(recommended\)/i, `${id} leaves a branch to the reader`);
       assert.doesNotMatch(text, /node tools\//, `${id} uses a second path form`);
       assert.ok(text.includes(`done ${id}`), `${id} does not print its done command`);
-      provide(dir, info.artifacts);
+      complete(dir, homeDir, info);
       const close = guided(dir, homeDir, 'done', id, ...(info.needs_evidence ? ['--evidence', 'checked'] : []));
       assert.equal(close.status, 0, `${id}: ${close.stderr}`);
     }
@@ -452,7 +562,7 @@ test('done <step> still closes a whole step, also on a state file written before
   assert.equal(refused.status, 1);
   assert.match(refused.stderr, /missing ai-frontend-output\/ux\/EXPERIENCE-BRIEF\.md/);
   assert.match(guided(dir, homeDir, 'next').stdout, /part 1\/6: questions/);
-  provide(dir, [`${O}/ux/EXPERIENCE-BRIEF.md`]);
+  put(dir, 'ux/EXPERIENCE-BRIEF.md', 'x\n');
   const ok = guided(dir, homeDir, 'done', 'direction');
   assert.equal(ok.status, 0, ok.stderr);
   assert.equal(state(dir).complete, true);
@@ -508,7 +618,7 @@ test('done ux.product needs PRODUCT.md, except where the repository has its own 
   assert.equal(refused.status, 1);
   assert.match(refused.stderr, /part "ux\.product" cannot be marked done: missing PRODUCT\.md/);
   assert.equal(raw(plain.dir), before);
-  writeFileSync(join(plain.dir, 'PRODUCT.md'), '# Product\n');
+  writeFileSync(join(plain.dir, 'PRODUCT.md'), VALID_PRODUCT);
   const ok = guided(plain.dir, plain.homeDir, 'done', 'ux.product');
   assert.equal(ok.status, 0, ok.stderr);
   assert.deepEqual(state(plain.dir).steps[1].parts_done, ['product']);
@@ -516,4 +626,401 @@ test('done ux.product needs PRODUCT.md, except where the repository has its own 
   const bmad = atProduct('- **UX present:** no\n- **Framework:** bmad — _bmad/ found\n');
   assert.match(guided(bmad.dir, bmad.homeDir, 'next').stdout, /Do not create PRODUCT\.md/);
   assert.equal(guided(bmad.dir, bmad.homeDir, 'done', 'ux.product').status, 0);
+});
+
+// ---------------------------------------------------------------- scaffolds and content gates (weak-model-design S2, S3)
+
+const NEW_STEPS = ['intake', 'direction', 'ux', 'tokens', 'compose', 'polish'];
+/** Writes a flow-state.json of route `new` whose current step is `current`; `gates: 0` writes the state of a route started before content gates. */
+const stateAt = (dir, current, extra = {}, gates = 1) => {
+  const at = NEW_STEPS.indexOf(current);
+  const steps = NEW_STEPS.map((id, index) => ({ id, status: index < at ? 'done' : 'pending', ...(index === at ? extra : {}) }));
+  put(dir, 'flow-state.json', JSON.stringify({ route: 'new', ...(gates ? { gates } : {}), started_at: '2026-11-13T00:00:00.000Z', complete: false, steps }));
+};
+const BRIEF = 'ux/EXPERIENCE-BRIEF.md';
+const BRIEF_SHOWN = 'ai-frontend-output/ux/EXPERIENCE-BRIEF.md';
+const refusal = (run, dir, before) => {
+  assert.equal(run.status, 1, run.stdout);
+  assert.equal(raw(dir), before, 'a refusal leaves flow-state.json untouched');
+  return run.stderr;
+};
+
+test('start records gates: 1 in the state, so the content gates apply to this route (S2)', () => {
+  const dir = project();
+  assert.equal(flow(dir, 'start', 'new').status, 0);
+  assert.equal(state(dir).gates, 1);
+});
+
+test('scaffold writes the template of the current micro-step, then adds only the sections a file lacks and never changes what is there (S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'direction');
+  const before = raw(dir);
+  const first = guided(dir, homeDir, 'scaffold');
+  assert.equal(first.status, 0, first.stderr);
+  assert.match(first.stdout, /ai-frontend-output\/ux\/EXPERIENCE-BRIEF\.md/);
+  const written = readFileSync(out(dir, BRIEF), 'utf8');
+  assert.match(written, /^# Experience brief$/m);
+  assert.match(written, /^## Context$/m);
+  assert.match(written, /^## Goal$/m);
+  assert.match(written, /<the one action that counts as success>/);
+  assert.doesNotMatch(written, /## Archetype/, 'only the sections of the current part');
+  assert.equal(raw(dir), before, 'scaffold does not touch the state');
+
+  const again = guided(dir, homeDir, 'scaffold');
+  assert.equal(again.status, 0, again.stderr);
+  assert.match(again.stdout, /nothing to write/i);
+  assert.equal(readFileSync(out(dir, BRIEF), 'utf8'), written);
+
+  const mine = '# Experience brief\n## Context\nA bakery for neighbours.\n';
+  writeFileSync(out(dir, BRIEF), mine);
+  assert.equal(guided(dir, homeDir, 'scaffold', 'direction.questions').status, 0);
+  const merged = readFileSync(out(dir, BRIEF), 'utf8');
+  assert.ok(merged.startsWith(mine), 'existing content is untouched');
+  assert.equal(merged.match(/^## Context$/gm).length, 1);
+  assert.match(merged, /^## Goal$/m);
+  assert.equal(guided(dir, homeDir, 'scaffold', 'direction.classify').status, 0);
+  const more = readFileSync(out(dir, BRIEF), 'utf8');
+  assert.ok(more.startsWith(merged));
+  assert.match(more, /^## Archetype$/m);
+  assert.match(more, /^## Philosophy$/m);
+});
+
+test('scaffold says so when a part has no template, writes a JSON template only when the file is missing, and refuses unknown names (S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  const noFlow = guided(dir, homeDir, 'scaffold');
+  assert.equal(noFlow.status, 1);
+  assert.match(noFlow.stderr, /no active flow/);
+  const none = guided(dir, homeDir, 'scaffold', 'compose.find');
+  assert.equal(none.status, 0, none.stderr);
+  assert.match(none.stdout, /no template/);
+  const made = guided(dir, homeDir, 'scaffold', 'architecture');
+  assert.equal(made.status, 0, made.stderr);
+  assert.equal(JSON.parse(readFileSync(out(dir, 'architecture.json'), 'utf8')).mode, 'map');
+  writeFileSync(out(dir, 'architecture.json'), '{"mine":1}');
+  assert.equal(guided(dir, homeDir, 'scaffold', 'architecture').status, 0);
+  assert.equal(readFileSync(out(dir, 'architecture.json'), 'utf8'), '{"mine":1}');
+  assert.equal(guided(dir, homeDir, 'scaffold', 'nope').status, 2);
+  const part = guided(dir, homeDir, 'scaffold', 'direction.nope');
+  assert.equal(part.status, 2);
+  assert.match(part.stderr, /unknown part "nope"/);
+});
+
+test('done refuses a file that exists but says nothing: a numbered list names file, section and what is missing, and the state stays unchanged (S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'direction');
+  const before = raw(dir);
+  put(dir, BRIEF, '# Experience brief\n## Context\n<product · audience>\n## Goal\n\n');
+  const empty = refusal(guided(dir, homeDir, 'done', 'direction.questions'), dir, before);
+  assert.match(empty, /part "direction\.questions" cannot be marked done/);
+  assert.match(empty, /1\. ai-frontend-output\/ux\/EXPERIENCE-BRIEF\.md: section "Context" still has a template token/);
+  assert.match(empty, /2\. ai-frontend-output\/ux\/EXPERIENCE-BRIEF\.md: section "Goal" is empty/);
+  put(dir, BRIEF, '# Experience brief\n## Context\nreal\n');
+  assert.match(refusal(guided(dir, homeDir, 'done', 'direction.questions'), dir, before), /section "Goal" is missing/);
+  put(dir, BRIEF, '# Experience brief\n## Context\nreal\n## Goal\nthe first order\n');
+  const ok = guided(dir, homeDir, 'done', 'direction.questions');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.deepEqual(state(dir).steps[1].parts_done, ['questions']);
+});
+
+test('direction.classify needs one of the six navigation models, a page list and the discarded philosophy; direction.choose needs the id (S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'direction', { parts_done: ['questions'] });
+  const before = raw(dir);
+  const philosophy = '## Philosophy\nchosen: warm · why: trust\ndiscarded: minimal · why: cold\n';
+  const brief = (nav, rest = philosophy) => `# Experience brief\n## Archetype\nsite archetype: catalog\n${nav}\npages: Home — sells\n${rest}`;
+  put(dir, BRIEF, brief('why: one'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'direction.classify'), dir, before), /section "Archetype": the line "navigation_model: …" is missing/);
+  put(dir, BRIEF, brief('navigation_model: carousel'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'direction.classify'), dir, before), /navigation_model "carousel" is not one of: single-page-anchors, linear-wizard, hub, catalog, console, tree/);
+  put(dir, BRIEF, brief('navigation_model: hub', '## Philosophy\nchosen: warm\n'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'direction.classify'), dir, before), /section "Philosophy": the "discarded:" line is missing/);
+  put(dir, BRIEF, brief('navigation_model: hub'));
+  assert.equal(guided(dir, homeDir, 'done', 'direction.classify').status, 0);
+
+  const choose = project();
+  stateAt(choose, 'direction', { parts_done: ['questions', 'classify', 'journey', 'references', 'directions'] });
+  const base = raw(choose);
+  put(choose, BRIEF, VALID_BRIEF.replace('id: market · rationale', 'rationale'));
+  assert.match(refusal(guided(choose, homeDir, 'done', 'direction.choose'), choose, base), /section "Recommended direction": the line "id: …" is missing/);
+  put(choose, BRIEF, VALID_BRIEF.replace('## Accessibility\nkeyboard: tab order · contrast: 4.5 · motion: reduced · language: en\n', ''));
+  assert.match(refusal(guided(choose, homeDir, 'done', 'direction.choose'), choose, base), /section "Accessibility" is missing/);
+  put(choose, BRIEF, VALID_BRIEF);
+  assert.equal(guided(choose, homeDir, 'done', 'direction.choose').status, 0);
+});
+
+test('direction.journey needs a table of at least 3 phases, and direction.directions the three blocks (S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'direction', { parts_done: ['questions', 'classify'] });
+  const before = raw(dir);
+  put(dir, BRIEF, VALID_BRIEF.replace('| Choose | picks | which | unsure | many | filters |\n', '').replace('| Order | pays | done | calm | form | one step |\n', ''));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'direction.journey'), dir, before), /section "Journey": the table needs at least 3 rows of data \(it has 1\)/);
+  put(dir, BRIEF, VALID_BRIEF);
+  assert.equal(guided(dir, homeDir, 'done', 'direction.journey').status, 0);
+  assert.equal(guided(dir, homeDir, 'done', 'direction.references').status, 0);
+  const mid = raw(dir);
+  put(dir, BRIEF, VALID_BRIEF.replace('### experimental: Night\nchanges: dark\n', ''));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'direction.directions'), dir, mid), /section "Three directions": no "experimental" block/);
+  put(dir, BRIEF, VALID_BRIEF);
+  assert.equal(guided(dir, homeDir, 'done', 'direction.directions').status, 0);
+});
+
+test('done direction closes the whole step only when every part gate passes (S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'direction');
+  const before = raw(dir);
+  put(dir, BRIEF, '# Experience brief\n## Context\nreal\n## Goal\nthe first order\n');
+  const refused = refusal(guided(dir, homeDir, 'done', 'direction'), dir, before);
+  assert.match(refused, /step "direction" cannot be marked done/);
+  assert.match(refused, /section "Archetype" is missing/);
+  assert.match(refused, /section "Three directions" is missing/);
+  put(dir, BRIEF, VALID_BRIEF);
+  assert.equal(guided(dir, homeDir, 'done', 'direction').status, 0);
+});
+
+test('done ux.product needs Audience, Primary action (G1), Objections (O1), Proof (P1) and Tone, except where the repository has its own product document (S3)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'ux');
+  put(dir, 'ux/REPO-CONTEXT.md', '- **UX present:** no\n- **Framework:** none\n');
+  const before = raw(dir);
+  writeFileSync(join(dir, 'PRODUCT.md'), '# Product\n## Audience\nNeighbours.\n## Primary conversion\nOrders.\n');
+  const old = refusal(guided(dir, homeDir, 'done', 'ux.product'), dir, before);
+  assert.match(old, /PRODUCT\.md: section "Primary action" is missing/);
+  assert.match(old, /PRODUCT\.md: section "Objections" is missing/);
+  assert.match(old, /PRODUCT\.md: section "Proof" is missing/);
+  assert.match(old, /PRODUCT\.md: section "Tone" is missing/);
+  writeFileSync(join(dir, 'PRODUCT.md'), VALID_PRODUCT.replace('G1: place a first order.', 'place a first order.').replace('O1: delivery may be late.\nO2: the price is unknown.', 'delivery may be late.').replace('P1: ', ''));
+  const ids = refusal(guided(dir, homeDir, 'done', 'ux.product'), dir, before);
+  assert.match(ids, /section "Primary action": give the action an id, "G1: …"/);
+  assert.match(ids, /section "Objections": give each objection an id, "O1: …"/);
+  assert.match(ids, /section "Proof": give each proof an id, "P1: …"/);
+  writeFileSync(join(dir, 'PRODUCT.md'), VALID_PRODUCT.replace('G1: place a first order.', 'G1: <the one measurable action>'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'ux.product'), dir, before), /section "Primary action" still has a template token/);
+  writeFileSync(join(dir, 'PRODUCT.md'), VALID_PRODUCT);
+  assert.equal(guided(dir, homeDir, 'done', 'ux.product').status, 0);
+
+  const own = project();
+  stateAt(own, 'ux');
+  put(own, 'ux/REPO-CONTEXT.md', '- **UX present:** no\n- **Framework:** bmad — _bmad/ found\n');
+  writeFileSync(join(own, 'PRODUCT.md'), 'free text of an old file\n');
+  assert.equal(guided(own, homeDir, 'done', 'ux.product').status, 0, 'a repository with its own product document has no PRODUCT.md gate');
+});
+
+test('done ux.spec needs three states and a Serves cell on every screen, and the ids must exist in PRODUCT.md (S3)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'ux', { parts_done: ['product'] });
+  writeFileSync(join(dir, 'PRODUCT.md'), VALID_PRODUCT);
+  const before = raw(dir);
+  const spec = (rows, header = '| Screen | Purpose | Primary action | Empty state | Loading state | Error state | Serves |') => VALID_SPEC.replace(/\| Screen \|[^\n]*\n\|---\|---\|---\|---\|---\|---\|---\|\n\| Home[^\n]*\n\| Menu[^\n]*\n/, `${header}\n|---|---|---|---|---|---|---|\n${rows}\n`);
+  put(dir, 'ux/UX-SPEC.md', spec('| Home | sells | Order | none yet | skeleton | retry | |\n| Menu | lists | Pick | no items | skeleton | | G9 |'));
+  const refused = refusal(guided(dir, homeDir, 'done', 'ux.spec'), dir, before);
+  assert.match(refused, /UX-SPEC\.md: section "Screens", screen "Home": "Serves" is empty; cite the id of what it serves in PRODUCT\.md \(G1, O1, P1\)/);
+  assert.match(refused, /screen "Menu": the error state is empty/);
+  assert.match(refused, /screen "Menu": "Serves" cites G9, which PRODUCT\.md does not define/);
+  put(dir, 'ux/UX-SPEC.md', spec('| Home | sells | Order | none yet | skeleton | retry | tbd |'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'ux.spec'), dir, before), /screen "Home": "Serves" holds no id/);
+  put(dir, 'ux/UX-SPEC.md', spec('| Home | sells | Order | none yet | skeleton | retry |', '| Screen | Purpose | Primary action | Empty state | Loading state | Error state |'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'ux.spec'), dir, before), /section "Screens": the table has no "Serves" column/);
+  put(dir, 'ux/UX-SPEC.md', VALID_SPEC.replace('1. Home →', 'Home →'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'ux.spec'), dir, before), /section "Flows": no numbered flow/);
+  put(dir, 'ux/UX-SPEC.md', VALID_SPEC);
+  assert.equal(guided(dir, homeDir, 'done', 'ux.spec').status, 0);
+
+  const own = project();
+  stateAt(own, 'ux', { parts_done: ['product'] });
+  put(own, 'ux/UX-SPEC.md', VALID_SPEC.replace('G1, P1', 'story:2.1').replace('| O1 |', '| story:3.4 |'));
+  assert.equal(guided(own, homeDir, 'done', 'ux.spec').status, 0, 'without PRODUCT.md any id is accepted');
+});
+
+test('done ux.map needs every screen of the spec as a node (S3)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'ux', { parts_done: ['product', 'spec'] });
+  put(dir, 'ux/UX-SPEC.md');
+  const before = raw(dir);
+  put(dir, 'ux/ux-map.excalidraw', JSON.stringify({ elements: [{ type: 'text', text: 'Home' }] }));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'ux.map'), dir, before), /ux-map\.excalidraw: the screen "Menu" of UX-SPEC\.md is not a node of the map/);
+  put(dir, 'ux/ux-map.excalidraw', '{not json');
+  assert.match(refusal(guided(dir, homeDir, 'done', 'ux.map'), dir, before), /is not valid JSON/);
+  put(dir, 'ux/ux-map.excalidraw');
+  assert.equal(guided(dir, homeDir, 'done', 'ux.map').status, 0);
+});
+
+test('tokens, inventory and architecture check their content, and compose.find and compose.decide check the Candidates and Decision cells (S2)', () => {
+  const homeDir = home();
+  const dir = project();
+  stateAt(dir, 'tokens');
+  const before = raw(dir);
+  put(dir, 'DESIGN.md', VALID_DESIGN.replace('7.1:1', '3.2:1'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'tokens'), dir, before), /section "Contrast": 3\.2 is below 4\.5/);
+  put(dir, 'DESIGN.md', VALID_DESIGN.replace('| --color-primary | #8a4b08 | buttons |\n', '| --color-primary | <…> | <…> |\n'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'tokens'), dir, before), /section "Color" still has a template token/);
+  put(dir, 'DESIGN.md');
+  assert.equal(guided(dir, homeDir, 'done', 'tokens').status, 0);
+
+  const compose = project();
+  stateAt(compose, 'compose');
+  const base = raw(compose);
+  put(compose, 'INVENTORY.md', '# Inventory\n| Screen | Block | Category | Priority | Notes | Candidates | Decision |\n|---|---|---|---|---|---|---|\n');
+  assert.match(refusal(guided(compose, homeDir, 'done', 'compose.inventory'), compose, base), /INVENTORY\.md: the table has no rows of data/);
+  put(compose, 'INVENTORY.md', VALID_INVENTORY.replace('| must |', '| urgent |'));
+  assert.match(refusal(guided(compose, homeDir, 'done', 'compose.inventory'), compose, base), /Priority "urgent" is not must, should or nice/);
+  put(compose, 'INVENTORY.md', VALID_INVENTORY.replace('| magicui-hero | reuse |', '| | |'));
+  assert.equal(guided(compose, homeDir, 'done', 'compose.inventory').status, 0, 'candidates and decision are still empty after the inventory');
+  const mid = raw(compose);
+  assert.match(refusal(guided(compose, homeDir, 'done', 'compose.find'), compose, mid), /row "Home \/ hero": no candidates/);
+  put(compose, 'INVENTORY.md', VALID_INVENTORY.replace('| reuse |', '| |'));
+  assert.equal(guided(compose, homeDir, 'done', 'compose.find').status, 0);
+  const late = raw(compose);
+  assert.match(refusal(guided(compose, homeDir, 'done', 'compose.decide'), compose, late), /row "Home \/ hero": no decision/);
+  put(compose, 'INVENTORY.md');
+  assert.equal(guided(compose, homeDir, 'done', 'compose.decide').status, 0);
+
+  const arch = project();
+  guided(arch, homeDir, 'start', 'architecture');
+  put(arch, 'ux/REPO-CONTEXT.md');
+  put(arch, 'UI-MAP.md');
+  assert.equal(guided(arch, homeDir, 'done', 'intake').status, 0);
+  const archBefore = raw(arch);
+  put(arch, 'architecture.json', '{"version":1,"mode":"map","framework":"<from REPO-CONTEXT.md>","layers":{}}');
+  assert.match(refusal(guided(arch, homeDir, 'done', 'architecture'), arch, archBefore), /architecture\.json: "framework" still has a template token/);
+  put(arch, 'architecture.json', '{"version":1,"mode":"everything","layers":{}}');
+  assert.match(refusal(guided(arch, homeDir, 'done', 'architecture'), arch, archBefore), /mode "everything" is not one of: map, fsd-new, fsd-refactor/);
+  put(arch, 'architecture.json');
+  assert.equal(guided(arch, homeDir, 'done', 'architecture').status, 0);
+});
+
+test('a route started before content gates keeps the old rule: the file exists and is not empty (previous behavior)', () => {
+  const homeDir = home();
+  const legacy = project();
+  stateAt(legacy, 'direction', {}, 0);
+  put(legacy, BRIEF, 'x\n');
+  assert.equal(guided(legacy, homeDir, 'done', 'direction.questions').status, 0, 'a one-line brief closes a part');
+  assert.equal(guided(legacy, homeDir, 'done', 'direction').status, 0, 'and the whole step');
+
+  const product = project();
+  stateAt(product, 'ux', {}, 0);
+  writeFileSync(join(product, 'PRODUCT.md'), '# Product\n');
+  assert.equal(guided(product, homeDir, 'done', 'ux.product').status, 0);
+  put(product, 'ux/UX-SPEC.md', 'x\n');
+  assert.equal(guided(product, homeDir, 'done', 'ux.spec').status, 0);
+
+  const polish = project();
+  stateAt(polish, 'polish', {}, 0);
+  const before = raw(polish);
+  assert.match(refusal(guided(polish, homeDir, 'done', 'polish'), polish, before), /step "polish" needs --evidence/);
+  const ok = guided(polish, homeDir, 'done', 'polish', '--evidence', 'playwright loop green');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.equal(state(polish).steps.at(-1).evidence, 'playwright loop green');
+  assert.equal(existsSync(out(polish, 'reports')), false, 'no report was asked for');
+});
+
+test('flow report writes a checklist for the steps closed with free evidence, and done needs it filled: --evidence alone is not enough (S3)', () => {
+  const dir = project();
+  const homeDir = home();
+  guided(dir, homeDir, 'start', 'polish');
+  put(dir, 'ux/REPO-CONTEXT.md');
+  put(dir, 'UI-MAP.md');
+  assert.equal(guided(dir, homeDir, 'done', 'intake').status, 0);
+  const before = raw(dir);
+  const alone = refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'all green'), dir, before);
+  assert.match(alone, /step "polish" cannot be marked done/);
+  assert.match(alone, /ai-frontend-output\/reports\/polish-report\.md is missing/);
+  assert.match(alone, /flow\.mjs report polish/);
+
+  const made = guided(dir, homeDir, 'report', 'polish');
+  assert.equal(made.status, 0, made.stderr);
+  const file = out(dir, 'reports/polish-report.md');
+  const text = readFileSync(file, 'utf8');
+  assert.match(text, /^# Polish report$/m);
+  assert.match(text, /^- \[ \] Honesty audit \(audit-honesty --strict\) — result: <…>$/m);
+  assert.match(text, /^- \[ \] Console without errors — result: <…>$/m);
+  assert.equal(raw(dir), before, 'report does not touch the state');
+  const open = refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'all green'), dir, before);
+  assert.match(open, /polish-report\.md: check "Console without errors" is not done/);
+
+  const filled = text.replace(/- \[ \]/g, '- [x]').replace(/<…>/g, '0 findings');
+  writeFileSync(file, filled);
+  assert.equal(guided(dir, homeDir, 'report', 'polish').status, 0);
+  assert.equal(readFileSync(file, 'utf8'), filled, 'running report again never changes what was written');
+
+  writeFileSync(file, filled.replace('- [x] Console without errors — result: 0 findings', '- [x] Console without errors — result: <…>'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'all green'), dir, before), /check "Console without errors": the result still has a template token/);
+  writeFileSync(file, filled.replace('- [x] Console without errors — result: 0 findings', '- [x] Console without errors'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'all green'), dir, before), /check "Console without errors": write its result after "result:"/);
+  writeFileSync(file, filled.replace('- [x] Honesty audit (audit-honesty --strict) — result: 0 findings', '- [n/a] Honesty audit (audit-honesty --strict) — result: 0 findings'));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'all green'), dir, before), /check "Honesty audit \(audit-honesty --strict\)": write why it does not apply after "reason:"/);
+  writeFileSync(file, filled.replace(/- \[x\] Reduced motion[^\n]*\n/, ''));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'all green'), dir, before), /check "Reduced motion" is missing from the report/);
+
+  writeFileSync(file, filled.replace('- [x] Honesty audit (audit-honesty --strict) — result: 0 findings', '- [n/a] Honesty audit (audit-honesty --strict) — reason: there is no src folder'));
+  const ok = guided(dir, homeDir, 'done', 'polish', '--evidence', 'all green');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.equal(state(dir).steps.at(-1).evidence, 'all green');
+});
+
+test('flow report exists for polish, iterate, redesign and visual-feedback only (S3)', () => {
+  const dir = project();
+  for (const step of ['polish', 'iterate', 'redesign', 'visual-feedback']) {
+    const run = flow(dir, 'report', step);
+    assert.equal(run.status, 0, `${step}: ${run.stderr}`);
+    assert.ok(existsSync(out(dir, `reports/${step}-report.md`)), step);
+    assert.match(readFileSync(out(dir, `reports/${step}-report.md`), 'utf8'), /^- \[ \] .+ — result: <…>$/m);
+  }
+  const intake = flow(dir, 'report', 'intake');
+  assert.equal(intake.status, 2);
+  assert.match(intake.stderr, /reports exist for: iterate, redesign, polish, visual-feedback/);
+  assert.equal(flow(dir, 'report').status, 2);
+});
+
+test('next tells the reader how to write the file and the report, and resolves the branches ux.product and ux.map left to the reader (S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'direction');
+  const text = guided(dir, homeDir, 'next').stdout;
+  assert.match(text, /write it with: node [^\n]*flow\.mjs scaffold direction\.questions/);
+  const info = JSON.parse(guided(dir, homeDir, 'next', '--json').stdout);
+  assert.equal(info.template.file, BRIEF_SHOWN);
+
+  const ux = project();
+  stateAt(ux, 'ux', { parts_done: ['product', 'spec'] });
+  put(ux, 'ux/REPO-CONTEXT.md', '- **UX present:** no\n');
+  const plain = guided(ux, homeDir, 'next').stdout;
+  assert.doesNotMatch(plain, /if it exists|already exists/i);
+  assert.doesNotMatch(plain, /ux-map-baseline/);
+  assert.match(plain, /There is no .*EXPERIENCE-BRIEF\.md/);
+  put(ux, 'ux/ux-map.excalidraw');
+  put(ux, BRIEF);
+  const redo = guided(ux, homeDir, 'next').stdout;
+  assert.match(redo, /copy it first to ai-frontend-output\/ux\/ux-map-baseline\.excalidraw/);
+  assert.match(redo, /Choose the template from navigation_model/);
+
+  const product = project();
+  stateAt(product, 'ux');
+  put(product, 'ux/REPO-CONTEXT.md', '- **UX present:** no\n');
+  assert.doesNotMatch(guided(product, homeDir, 'next').stdout, /if it exists/);
+  put(product, BRIEF);
+  assert.match(guided(product, homeDir, 'next').stdout, /Read ai-frontend-output\/ux\/EXPERIENCE-BRIEF\.md: the screens must respect its direction/);
+
+  const polish = project();
+  stateAt(polish, 'polish');
+  const polishText = guided(polish, homeDir, 'next').stdout;
+  assert.match(polishText, /flow\.mjs report polish/);
+  assert.equal(JSON.parse(guided(polish, homeDir, 'next', '--json').stdout).report.file, 'ai-frontend-output/reports/polish-report.md');
+});
+
+test('the usage text and guides/FLOWS.md name scaffold, report and the content gates (S2, S3)', () => {
+  const help = spawnSync(process.execPath, [TOOL, '--help'], { encoding: 'utf8', env: cleanEnv() }).stdout;
+  assert.match(help, /flow\.mjs scaffold \[<step>\[\.<part>\]\]/);
+  assert.match(help, /flow\.mjs report <step>/);
+  const flows = readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'guides', 'FLOWS.md'), 'utf8');
+  assert.match(flows, /scaffold/);
+  assert.match(flows, /flow\.mjs report/);
 });

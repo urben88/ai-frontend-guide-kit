@@ -113,7 +113,9 @@ Why it matters: when several people (or several chats) work on the design, each 
 | `flow.mjs list` | Every route and its steps, with the guide and skill for each (same text as `guides/FLOWS.md`) |
 | `flow.mjs start <route>` | Declares the route: `new`, `direction`, `ux`, `iterate`, `polish`, `redesign`, `visual-feedback`, `architecture` |
 | `flow.mjs next` | Prints the whole instruction of the current micro-step: goal, exact commands, template to fill, done criteria and the command that closes it |
-| `flow.mjs done <step>` | Closes the step only if it is the current one **and** its file exists |
+| `flow.mjs scaffold` | Writes the template of the current micro-step into its file, never changing what is there |
+| `flow.mjs done <step>` | Closes the step only if it is the current one **and** its file says what it must: required sections filled, no `<…>` left, tables with rows, ids that exist |
+| `flow.mjs report <step>` | Writes the checklist of `polish`, `iterate`, `redesign` or `visual-feedback`, which `done` needs filled besides `--evidence` |
 
 Three more helpers keep the agent's context small:
 

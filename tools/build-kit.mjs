@@ -53,6 +53,7 @@ const REQUIRED_KIT_FILES = [
   'tools/ui-map.mjs',
   'tools/flow.mjs',
   'tools/flow-steps.mjs',
+  'tools/flow-gates.mjs',
   'tools/scout.mjs',
   'tools/pieces.mjs',
   'tools/excalidraw-mcp.mjs',

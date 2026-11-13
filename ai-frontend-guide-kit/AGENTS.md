@@ -46,7 +46,9 @@ node tools/flow.mjs status          # kit installed? active route and step, deci
 node tools/flow.mjs list            # every route and step with its guide, skill, tools and output (= guides/FLOWS.md)
 node tools/flow.mjs start <route>   # new | direction | ux | iterate | polish | redesign | visual-feedback | architecture
 node tools/flow.mjs next            # the whole instruction of the current micro-step: goal, exact commands, template, done criteria
-node tools/flow.mjs done <step>     # refuses a skipped step or a missing artifact; steps without a file need --evidence "..."; large steps close part by part (done direction.questions)
+node tools/flow.mjs scaffold        # writes the template of the current micro-step into its file (never changes what is there)
+node tools/flow.mjs done <step>     # refuses a skipped step, a missing artifact, or a file with empty sections or <…> tokens left; large steps close part by part (done direction.questions)
+node tools/flow.mjs report <step>   # polish | iterate | redesign | visual-feedback: the checklist to fill besides --evidence "..."
 ```
 
 When someone asks which flows exist, answer from `guides/FLOWS.md` and recommend the route that fits the request.

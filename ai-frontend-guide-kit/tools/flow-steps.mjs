@@ -11,7 +11,12 @@
  *   env.dep(name)        is that package a dependency? env.laya       did the user grant Laya?
  *   env.uxPresent        true | false | null (no context scan yet)
  *   env.framework        the spec framework the scan detected ('' when none)
- *   env.hasProduct       does PRODUCT.md exist?
+ *   env.hasProduct       does PRODUCT.md exist?   env.hasBrief  does EXPERIENCE-BRIEF.md exist?   env.hasMap  does ux-map.excalidraw exist?
+ *
+ * A part may also carry `report`: the fixed checklist of a step that closes with free evidence
+ * (polish, iterate, redesign, visual-feedback). `flow report <step>` writes it, one line per check,
+ * and `done` asks that every line is closed. The content checks of the other parts live in
+ * flow-gates.mjs, next to the templates they read.
  */
 
 const OUT = 'ai-frontend-output';
@@ -19,13 +24,14 @@ const BRIEF = `${OUT}/ux/EXPERIENCE-BRIEF.md`;
 const CONTEXT = `${OUT}/ux/REPO-CONTEXT.md`;
 const SPEC = `${OUT}/ux/UX-SPEC.md`;
 const MAP = `${OUT}/ux/ux-map.excalidraw`;
+const REPORT_ROW = 'Every line of the report is [x] with its result, or [n/a] with its reason.';
 const INVENTORY = `${OUT}/INVENTORY.md`;
 
 /** The rules of guides/08-PHILOSOPHY.md that a build must keep, short enough to print. */
 const CRAFT_RULES = 'one primary action per screen; spacing only from the scale (4, 8, 12, 16, 24, 32, 48, 64); at most 3 text sizes visible at once; colors, fonts and radius only from the tokens; animate only transform and opacity; at most 2 high-impact effects per view; respect prefers-reduced-motion';
 
 /** A repository with its own product document (BMAD PRD, specs) keeps it as the anchor: no PRODUCT.md. */
-const hasOwnProductDoc = (env) => /bmad|spec/i.test(env.framework);
+export const hasOwnProductDoc = (env) => /bmad|spec/i.test(env.framework);
 const BUILDER_USE = { hallmark: 'new page or section', 'design-taste-frontend': 'app screen' };
 const builderSkill = (env) => ['hallmark', 'design-taste-frontend'].filter((name) => env.skill(name));
 
@@ -60,7 +66,7 @@ export const PARTS = {
           env.skill('landing-page-design') && 'For a landing or marketing page, load the skill landing-page-design and add its intake topics to the rounds: offer, primary action, audience, objections, traffic source, proof.',
           env.laya && `With more than 3 questions left, rank the next one: ${env.python('laya_select.py', `--dataset experience --kind question --task next-question --context-file ${BRIEF} --confirmed`)}`,
           'Stop when 10 to 18 questions are answered, or when the user says it is enough.',
-          `Create ${BRIEF} with the template below and write every answer under Context or Goal.`,
+          `Write ${BRIEF} from the template below and put every answer under Context or Goal.`,
         ],
         template: {
           file: BRIEF,
@@ -234,9 +240,10 @@ export const PARTS = {
           steps: [
             env.uxPresent === null && `${CONTEXT} is missing or does not say whether UX exists. Run: ${env.run('context.mjs')} and then ask for this instruction again.`,
             adapter && `This repository uses ${env.framework}. Read ${env.kit('guides/ADAPTERS.md')}: its product document is the anchor. Do not create PRODUCT.md.`,
-            !adapter && env.hasProduct && 'PRODUCT.md exists. Read it. Do not rewrite it; add only what the template below asks and it lacks.',
-            !adapter && !env.hasProduct && 'Create PRODUCT.md in the project root with the template below. Ask the user what you cannot answer from the brief.',
-            `Read ${BRIEF} if it exists: the screens must respect its direction.`,
+            !adapter && env.hasProduct && 'PRODUCT.md exists. Read it. Do not rewrite it; add only the sections of the template below that it lacks.',
+            !adapter && !env.hasProduct && 'Write PRODUCT.md in the project root from the template below. Ask the user what you cannot answer from the brief.',
+            !adapter && 'Give every item an id, so a screen can cite it later: G1 the primary action, O1, O2… the objections, P1, P2… the proof.',
+            env.hasBrief && `Read ${BRIEF}: the screens must respect its direction.`,
           ],
           template: adapter ? null : {
             file: 'PRODUCT.md',
@@ -244,17 +251,23 @@ export const PARTS = {
               '# Product',
               '## Audience',
               '<who uses this, in what context>',
-              '## Primary conversion',
-              '<the one measurable action>',
+              '## Primary action',
+              'G1: <the one measurable action the visitor takes>',
+              '## Objections',
+              'O1: <what stops them from taking it>',
+              '## Proof',
+              'P1: <what makes the claim believable: a number, a name, a guarantee>',
+              '## Tone',
+              '<three adjectives, and one thing the copy never does>',
               '## User flows',
-              '<arrival → … → the primary conversion → what comes after>',
+              '<arrival → … → the primary action → what comes after>',
               '## Screen list',
               '- <screen> — <its purpose in one line>',
               '## Constraints',
               '<brand, legal, accessibility, scope limits>',
             ],
           },
-          done: [adapter ? 'You read the product document of the repository and can name audience and primary conversion.' : 'PRODUCT.md has the five sections filled.'],
+          done: [adapter ? 'You read the product document of the repository and can name audience and primary action.' : 'PRODUCT.md has Audience, Primary action (G1), Objections (O1…), Proof (P1…) and Tone filled.'],
           reference: env.kit('guides/02-UX-FLOWS.md'),
         };
       },
@@ -271,7 +284,10 @@ export const PARTS = {
           env.skill('userflow')
             ? 'Load the skill userflow. It selects 1 to 4 flow-* skills: load those, say which in one line, and apply their rules. Never write a flow from memory.'
             : 'The userflow skill is not installed here: write the flows by hand and tell the user that the proven flow patterns were not available.',
-          `Write ${SPEC} with the template below. Every screen needs its empty, loading and error state.`,
+          `Write ${SPEC} from the template below. Every screen needs its empty, loading and error state.`,
+          env.hasProduct
+            ? 'End every screen row with the ids of PRODUCT.md it serves (G1, O2, P1), separated by commas. A screen that serves none has no reason to exist: remove it.'
+            : 'End every screen row with the id of the requirement or story of the product document of this repository that it serves.',
           env.skill('userflow') && `Generate flow-report.html from the template of userflow and save it in ${OUT}/ux/.`,
           env.skill('userflow') && 'Check the result against the Anti-Patterns section of each loaded skill and fill the Audit table.',
         ],
@@ -280,8 +296,8 @@ export const PARTS = {
           lines: [
             '# UX spec',
             '## Screens',
-            '| Screen | Purpose | Primary action | Empty state | Loading state | Error state |',
-            '|---|---|---|---|---|---|',
+            '| Screen | Purpose | Primary action | Empty state | Loading state | Error state | Serves |',
+            '|---|---|---|---|---|---|---|',
             '## Flows',
             '### <flow name>',
             '1. <screen> → shows <…> → primary action <…> → goes to <screen> (branch: <condition>)',
@@ -292,7 +308,7 @@ export const PARTS = {
             '|---|---|---|',
           ],
         },
-        done: [`${SPEC} lists every screen of the product with its three states, and every flow as numbered steps.`],
+        done: [`${SPEC} lists every screen of the product with its three states and the ids it serves, and every flow as numbered steps.`],
         reference: env.kit('guides/02-UX-FLOWS.md'),
       }),
     },
@@ -307,8 +323,10 @@ export const PARTS = {
             ? 'Draw with the Excalidraw MCP server (it is configured in this project).'
             : 'The Excalidraw MCP server is not configured in this project: use the manual fallback of the skill and tell the user.',
           `One node per screen (name, primary action, key blocks), one labeled arrow per button or action that navigates, and a start node. Node names are exactly the screen names of ${SPEC}.`,
-          `Choose the template from navigation_model in ${BRIEF}; take areas and colors from its Information architecture.`,
-          `If ${MAP} already exists and this is a redesign, copy it first to ${OUT}/ux/ux-map-baseline.excalidraw.`,
+          env.hasBrief
+            ? `Choose the template from navigation_model in ${BRIEF}; take areas and colors from its Information architecture.`
+            : `There is no ${BRIEF}: choose the template from the shape of the screens (single-page-anchors, linear-wizard, hub, catalog, console or tree).`,
+          env.hasMap && `${MAP} already exists: copy it first to ${OUT}/ux/ux-map-baseline.excalidraw, then update it.`,
           `Save the map as ${MAP}.`,
         ],
         done: [`${MAP} exists and every screen of ${SPEC} is a node in it.`],
@@ -327,7 +345,7 @@ export const PARTS = {
           ? 'The Figma MCP is configured: ask the user for the Figma file URL, inspect it and extract palette, type scale, radii and spacing.'
           : `No Figma here: derive the tokens from the Visual brief section of ${BRIEF} and from PRODUCT.md.`,
         `For a system-level reference: ${env.run('find.mjs', '--type design-system')} and then ${env.run('get.mjs', '<id>')}`,
-        'Write DESIGN.md in the project root with the template below.',
+        'Write DESIGN.md in the project root from the template below, and add the rows accent, muted, border and a neutral ramp to the Color table.',
         'Write the same values as a Tailwind v4 @theme block in the global CSS. Names are semantic (--color-primary, --color-surface), never palette names.',
         'Check the contrast of body text on its background: it must be 4.5:1 or more. Change the color until it is.',
         env.skill('impeccable') && 'Load the skill impeccable and follow its guidelines for the token choices.',
@@ -341,7 +359,9 @@ export const PARTS = {
           '## Color',
           '| Token | Value | Use |',
           '|---|---|---|',
-          '| --color-primary | <…> | <…> |   (also: accent, surface, text, muted, border, a neutral ramp)',
+          '| --color-primary | <…> | <…> |',
+          '| --color-surface | <…> | <…> |',
+          '| --color-text | <…> | <…> |',
           '## Type',
           'display: <font> · body: <font> · scale: <sizes>',
           '## Spacing',
@@ -454,6 +474,16 @@ export const PARTS = {
   iterate: [{
     id: null,
     title: 'make one small change',
+    report: [
+      'Located with ui-map impact: every owner, user and stray changed',
+      'Reuse searched first: pieces find and ui-map have',
+      'The change is the smallest that satisfies the request',
+      'Tokens of DESIGN.md kept',
+      'Registered pieces versioned, new builds added as pieces',
+      'Decision recorded with memory add',
+      'ui-map impact run again: no stray left',
+      'The change touches fewer than 3 screens and adds no flow',
+    ],
     build: (env) => {
       const skills = builderSkill(env);
       return {
@@ -468,8 +498,9 @@ export const PARTS = {
           `Record: ${env.run('memory.mjs', 'add --screen <screen> --block <block> --need "<need>" --decision reuse|adapt|build [--id <entry id>]')}`,
           `Run ${env.run('ui-map.mjs', 'impact <role or component>')} again: no stray may remain.`,
           'If the change touches 3 or more screens or adds a flow, stop and tell the user: that is the route ux, not a small change.',
+          `Write the report: ${env.run('flow.mjs', 'report iterate')} creates ${OUT}/reports/iterate-report.md. Mark each check [x] with its result, or [n/a] with its reason.`,
         ],
-        done: ['The change is applied, recorded with memory add, and impact lists no stray in scope.'],
+        done: ['The change is applied, recorded with memory add, and impact lists no stray in scope.', REPORT_ROW],
         reference: env.kit('guides/10-ITERATE.md'),
       };
     },
@@ -478,6 +509,15 @@ export const PARTS = {
   redesign: [{
     id: null,
     title: 'redesign the look of one screen',
+    report: [
+      'Screen and what must not change agreed with the user',
+      'Everything the screen touches located with ui-map impact',
+      'New look uses only the tokens of DESIGN.md',
+      'Flows, steps and meaningful copy unchanged',
+      'Registered pieces versioned',
+      'Decision recorded with memory add',
+      'The project builds',
+    ],
     build: (env) => ({
       goal: 'Change how one existing screen looks, keeping its flows, its content and its wiring.',
       steps: [
@@ -489,8 +529,9 @@ export const PARTS = {
         'Do not add, remove or reorder steps of a flow, and do not change copy that carries meaning: that is a UX change and needs the route ux.',
         `After editing a registered piece: ${env.run('pieces.mjs', 'version <name> --note "<what changed>"')}`,
         `Record: ${env.run('memory.mjs', 'add --screen <screen> --block <block> --need "visual redesign" --decision adapt --notes "<what changed>"')}`,
+        `Write the report: ${env.run('flow.mjs', 'report redesign')} creates ${OUT}/reports/redesign-report.md. Mark each check [x] with its result, or [n/a] with its reason.`,
       ],
-      done: ['The screen has the new look, the same flows and content, and the project builds.'],
+      done: ['The screen has the new look, the same flows and content, and the project builds.', REPORT_ROW],
       reference: env.kit('guides/08-PHILOSOPHY.md'),
     }),
   }],
@@ -498,6 +539,20 @@ export const PARTS = {
   polish: [{
     id: null,
     title: 'audit and fix until every check is green',
+    report: [
+      'Honesty audit (audit-honesty --strict)',
+      'Accessibility audit (axe)',
+      'Performance audit (LCP, CLS, TBT)',
+      'Frontend map check (ui-map check)',
+      'Regression suite (@playwright/test)',
+      'Console without errors',
+      'States: empty, loading and error',
+      'Widths 360, 768 and 1280',
+      'Keyboard only',
+      'Reduced motion',
+      'Craft rules (one primary action, spacing from the scale, tokens only, at most 3 text sizes)',
+      'Every finding was fixed and its check run again',
+    ],
     build: (env) => ({
       goal: 'Prove that the screen works and that the craft holds. Fix what each check reports, then run it again.',
       steps: [
@@ -505,18 +560,19 @@ export const PARTS = {
         env.skill('frontend-polish') && 'Load the skill frontend-polish and follow its loop on every touched screen.',
         env.mcp('playwright')
           ? 'With the Playwright MCP, on every touched screen: accessibility snapshot, empty, loading and error states, console without errors, keyboard only, reduced motion, widths 360, 768 and 1280.'
-          : 'The Playwright MCP is not configured in this project: check each screen by hand at widths 360, 768 and 1280, with the keyboard only and with reduced motion, and say so in the evidence.',
+          : 'The Playwright MCP is not configured in this project: check each screen by hand at widths 360, 768 and 1280, with the keyboard only and with reduced motion, and say so in the report.',
         `Run: ${env.run('audit-honesty.mjs', 'src --strict')}`,
         env.dep('@axe-core/playwright') ? `Run: ${env.run('audit-a11y.mjs', '<url>')}` : 'Accessibility audit: @axe-core/playwright is not a dependency here. Tell the user it can be added with: npm i -D @axe-core/playwright',
         `Run: ${env.run('audit-perf.mjs', '<url>')} (fails above LCP 2.5 s, CLS 0.1, TBT 200 ms).`,
         `Run: ${env.run('ui-map.mjs', 'check')}`,
-        env.dep('@playwright/test') ? 'Run: npx playwright test' : 'There is no @playwright/test in this project: no regression suite runs. Say so in the evidence.',
+        env.dep('@playwright/test') ? 'Run: npx playwright test' : 'There is no @playwright/test in this project: no regression suite runs. Mark that check [n/a] in the report.',
         env.skill('impeccable') && 'Load the skill impeccable: /impeccable audit <screen>, then /impeccable polish <screen>.',
         env.skill('hallmark') && 'Name the skill hallmark for a second-opinion audit. Report only: it must not rebuild the screen.',
         `Check by hand against: ${CRAFT_RULES}.`,
         'Fix exactly what each check reported and run that check again. A screen is not done with a red check or a console error.',
+        `Write the report: ${env.run('flow.mjs', 'report polish')} creates ${OUT}/reports/polish-report.md. Mark each check [x] with its result, or [n/a] with the reason it could not run.`,
       ],
-      done: ['Every command above ran, and its last run reported no blocking finding.', 'The evidence names each command with its result, and each check that could not run with the reason.'],
+      done: ['Every command above ran, and its last run reported no blocking finding.', REPORT_ROW],
       reference: env.kit('guides/09-VERIFY.md'),
     }),
   }],
@@ -524,6 +580,13 @@ export const PARTS = {
   'visual-feedback': [{
     id: null,
     title: 'the user points, you change exactly that',
+    report: [
+      'Annotations read, or the elements named by the user one by one',
+      'Each element the user named was changed, and nothing else',
+      'Each annotation was resolved with one line of what changed',
+      'Registered pieces versioned',
+      'No annotation is pending',
+    ],
     build: (env) => {
       const ready = env.dep('react') && env.mcp('agentation');
       return {
@@ -533,6 +596,7 @@ export const PARTS = {
             'This project is not React: the Agentation toolbar cannot run here.',
             'Ask the user to name each element and what to change, one at a time.',
             `Locate each one: ${env.run('ui-map.mjs', 'impact <component>')}, change it, and show the result.`,
+            `Write the report: ${env.run('flow.mjs', 'report visual-feedback')} creates ${OUT}/reports/visual-feedback-report.md. Mark each check [x] with its result, or [n/a] with its reason.`,
           ]
           : [
             !ready && 'Agentation is not configured here. Give the user these commands and wait: npm install agentation -D ; claude mcp add agentation -- npx -y agentation-mcp server ; npx agentation-mcp doctor',
@@ -541,8 +605,9 @@ export const PARTS = {
             'Read the pending annotations with the agentation tools. For each: acknowledge it, change exactly that element, resolve it with one line of what changed.',
             'Do not touch elements without an annotation. A note that asks for a new flow or screen is not for this route: tell the user.',
             `After editing a registered piece: ${env.run('pieces.mjs', 'version <name> --note "<what changed>"')}`,
+            `Write the report: ${env.run('flow.mjs', 'report visual-feedback')} creates ${OUT}/reports/visual-feedback-report.md. Mark each check [x] with its result, or [n/a] with its reason.`,
           ],
-        done: ['No annotation is pending, or every element the user named was changed and shown.'],
+        done: ['No annotation is pending, or every element the user named was changed and shown.', REPORT_ROW],
         reference: env.kit('guides/11-VISUAL-FEEDBACK.md'),
       };
     },

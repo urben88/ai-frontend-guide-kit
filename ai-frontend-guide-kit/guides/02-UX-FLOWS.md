@@ -19,10 +19,15 @@ Read `ai-frontend-output/ux/REPO-CONTEXT.md` (compact, ~150 lines) instead of ex
 If `PRODUCT.md` does not exist, create it (this is the business anchor and the constraint for everything below):
 
 1. **Audience** — who uses this, in what context.
-2. **Primary conversion** — the one measurable action.
-3. **User flows** — landing → onboarding → checkout/confirmation → dashboard.
-4. **Screen list** — one line of purpose each.
-5. **Constraints** — brand, legal, accessibility, scope limits.
+2. **Primary action** — the one measurable action, as `G1: …`.
+3. **Objections** — what stops the visitor, one per line: `O1: …`.
+4. **Proof** — what makes the claim believable, one per line: `P1: …`.
+5. **Tone** — three adjectives and one thing the copy never does.
+6. **User flows** — landing → onboarding → checkout/confirmation → dashboard.
+7. **Screen list** — one line of purpose each.
+8. **Constraints** — brand, legal, accessibility, scope limits.
+
+`flow.mjs scaffold ux.product` writes this skeleton. The ids let every screen cite the business item it serves; `flow.mjs done ux.product` needs sections 1 to 5 filled.
 
 ## Step 2 — Choose the path
 
@@ -50,7 +55,7 @@ Use the `userflow` dispatcher (installed as a skill) with the context from Step 
 
 Required content (this is what the UI phase consumes):
 
-- **Screens table**: screen · purpose · primary action · empty state · loading state · error state.
+- **Screens table**: screen · purpose · primary action · empty state · loading state · error state · serves (the ids of `PRODUCT.md`, such as `G1, O2, P1`; a screen that serves none has no reason to exist).
 - **Flows**: numbered steps per flow: screen → what it shows → primary action → destination → branch conditions.
 - **Navigation / app shell**: structure and responsive collapse order.
 - **Audit**: anti-pattern table with PASS/WARN/FAIL taken from the loaded skills.

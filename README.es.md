@@ -97,7 +97,9 @@ Por qué importa: cuando varias personas (o varios chats) trabajan en el diseño
 | `flow.mjs list` | Todas las rutas y sus pasos, con la guía y la skill de cada uno (el mismo texto que `guides/FLOWS.md`) |
 | `flow.mjs start <ruta>` | Declara la ruta: `new`, `direction`, `ux`, `iterate`, `polish`, `redesign`, `visual-feedback`, `architecture` |
 | `flow.mjs next` | Imprime la instrucción completa del micro-paso actual: objetivo, comandos exactos, plantilla a rellenar, criterio de terminado y el comando que lo cierra |
-| `flow.mjs done <paso>` | Cierra el paso solo si es el actual **y** existe su archivo |
+| `flow.mjs scaffold` | Escribe la plantilla del micro-paso actual en su archivo, sin cambiar lo que ya hay |
+| `flow.mjs done <paso>` | Cierra el paso solo si es el actual **y** su archivo dice lo que debe: secciones obligatorias rellenas, sin `<…>`, tablas con filas, ids que existen |
+| `flow.mjs report <paso>` | Escribe la lista de `polish`, `iterate`, `redesign` o `visual-feedback`, que `done` necesita rellena además de `--evidence` |
 
 Tres ayudas más mantienen pequeño el contexto del agente:
 

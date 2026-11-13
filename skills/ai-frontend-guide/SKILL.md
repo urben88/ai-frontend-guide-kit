@@ -35,7 +35,9 @@ The route lives in the project, so everyone who talks about the design follows t
 node ai-frontend-guide-kit/tools/flow.mjs status          # kit installed? active route and step, what is recorded
 node ai-frontend-guide-kit/tools/flow.mjs start <route>   # new | direction | ux | iterate | polish | redesign | visual-feedback | architecture
 node ai-frontend-guide-kit/tools/flow.mjs next            # the whole instruction of the current micro-step: goal, exact commands, template, done criteria
-node ai-frontend-guide-kit/tools/flow.mjs done <step>     # refuses a skipped step or a missing artifact (--evidence for steps without a file)
+node ai-frontend-guide-kit/tools/flow.mjs scaffold        # writes the template of the current micro-step into its file
+node ai-frontend-guide-kit/tools/flow.mjs done <step>     # refuses a skipped step, a missing artifact or a file with empty sections (--evidence for steps without a file)
+node ai-frontend-guide-kit/tools/flow.mjs report <step>   # polish | iterate | redesign | visual-feedback: the checklist to fill besides --evidence
 ```
 
 When the user links a component site, run `node ai-frontend-guide-kit/tools/scout.mjs <url>` (add `--fetch` for an unknown site, `--record` to keep it) instead of reading the whole site; start from `ai-frontend-guide-kit/catalog/digest.md` for an overview of the catalog.
