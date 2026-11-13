@@ -1,0 +1,577 @@
+/**
+ * flow-steps — the whole instruction of every micro-step that `flow.mjs next` prints.
+ *
+ * Not a command: `flow.mjs` imports it. A step has one or more parts; each part is one instruction
+ * of about 40 lines: goal, numbered actions with the exact commands, a template to fill and the
+ * done criteria. `env` carries the facts the tool already resolved for this project (which skills
+ * and MCP servers are installed, what the context scan found), so no branch is left to the reader:
+ *   env.run(tool, args)  the command line of a kit tool, in the one path form of this project
+ *   env.kit(rel)         the path of a kit file
+ *   env.skill(name)      is that skill installed?      env.mcp(name)  is that MCP server configured?
+ *   env.dep(name)        is that package a dependency? env.laya       did the user grant Laya?
+ *   env.uxPresent        true | false | null (no context scan yet)
+ *   env.framework        the spec framework the scan detected ('' when none)
+ *   env.hasProduct       does PRODUCT.md exist?
+ */
+
+const OUT = 'ai-frontend-output';
+const BRIEF = `${OUT}/ux/EXPERIENCE-BRIEF.md`;
+const CONTEXT = `${OUT}/ux/REPO-CONTEXT.md`;
+const SPEC = `${OUT}/ux/UX-SPEC.md`;
+const MAP = `${OUT}/ux/ux-map.excalidraw`;
+const INVENTORY = `${OUT}/INVENTORY.md`;
+
+/** The rules of guides/08-PHILOSOPHY.md that a build must keep, short enough to print. */
+const CRAFT_RULES = 'one primary action per screen; spacing only from the scale (4, 8, 12, 16, 24, 32, 48, 64); at most 3 text sizes visible at once; colors, fonts and radius only from the tokens; animate only transform and opacity; at most 2 high-impact effects per view; respect prefers-reduced-motion';
+
+const BUILDER_USE = { hallmark: 'new page or section', 'design-taste-frontend': 'app screen' };
+const builderSkill = (env) => ['hallmark', 'design-taste-frontend'].filter((name) => env.skill(name));
+
+export const PARTS = {
+  intake: [{
+    id: null,
+    title: 'read the project context',
+    build: (env) => ({
+      goal: 'Know what this project already has, before reading or editing any of its files.',
+      steps: [
+        `Run: ${env.run('context.mjs')}`,
+        `Run: ${env.run('ui-map.mjs', 'build')}`,
+        `Run: ${env.run('memory.mjs', 'lib sync')}`,
+        `Read ${CONTEXT} (stack, screens, ux_present, UI libraries) and ${OUT}/UI-MAP.md (components, roles, routes). Do not explore the repository by hand.`,
+        'Tell the user in one line: the route, the stack and what already exists.',
+      ],
+      done: [`${CONTEXT} and ${OUT}/UI-MAP.md exist.`],
+      reference: env.kit('guides/00-START-HERE.md'),
+    }),
+  }],
+
+  direction: [
+    {
+      id: 'questions',
+      title: 'ask the user about the product, the audience and the goal',
+      artifacts: [['out:ux/EXPERIENCE-BRIEF.md']],
+      build: (env) => ({
+        goal: 'Learn from the user what is being built, for whom and what counts as success.',
+        steps: [
+          `Read ${CONTEXT}${env.hasProduct ? ' and PRODUCT.md' : ''}. Never ask the user what is already answered there.`,
+          `Open ${env.kit('experience/QUESTION-BANK.md')}. Ask the user the questions you cannot answer yourself, in rounds of 3 to 5, each with 2 to 4 options plus free text.`,
+          env.skill('landing-page-design') && 'For a landing or marketing page, load the skill landing-page-design and add its intake topics to the rounds: offer, primary action, audience, objections, traffic source, proof.',
+          env.laya && `With more than 3 questions left, rank the next one: ${env.python('laya_select.py', `--dataset experience --kind question --task next-question --context-file ${BRIEF} --confirmed`)}`,
+          'Stop when 10 to 18 questions are answered, or when the user says it is enough.',
+          `Create ${BRIEF} with the template below and write every answer under Context or Goal.`,
+        ],
+        template: {
+          file: BRIEF,
+          lines: [
+            '# Experience brief',
+            '## Context',
+            '<product · audience · where and when they use it · each answer the user gave>',
+            '## Goal',
+            '<the one action that counts as success>',
+            '## Laya consent',
+            env.laya ? 'granted' : 'not asked',
+          ],
+        },
+        done: [`${BRIEF} exists with Context and Goal filled from the user's answers, not from guesses.`],
+        reference: env.kit('guides/01-EXPERIENCE-DIRECTION.md'),
+      }),
+    },
+    {
+      id: 'classify',
+      title: 'choose the archetype, the philosophy and the navigation model',
+      build: (env) => ({
+        goal: 'Name what kind of site this is, so every later choice follows one idea.',
+        steps: [
+          `Read ${env.kit('experience/SITE-ARCHETYPES.md')}. Choose one site archetype and one experience archetype (two at most). List the pages, one line each with the job of the page.`,
+          `Read ${env.kit('experience/UX-PHILOSOPHIES.md')}. Choose one philosophy. Name the alternative you discarded and why.`,
+          'Choose one navigation_model: single-page-anchors, linear-wizard, hub, catalog, console or tree.',
+          env.laya && `Rank the candidates first: ${env.python('laya_select.py', `--dataset experience --kind archetype --task direction --context-file ${BRIEF} --confirmed`)} (scores only compare candidates; explain your pick).`,
+          `Add the two sections below to ${BRIEF}.`,
+        ],
+        template: {
+          file: BRIEF,
+          lines: [
+            '## Archetype',
+            'site archetype: <id> · experience archetype: <id>',
+            'navigation_model: <one of the six>',
+            'pages: <page — its job> (one line per page)',
+            'why: <one sentence tied to Context and Goal>',
+            '## Philosophy',
+            'chosen: <id> · why: <one sentence>',
+            'discarded: <id> · why: <one sentence>',
+          ],
+        },
+        done: ['The brief has Archetype (with navigation_model and the page list) and Philosophy (with the discarded alternative).'],
+        reference: env.kit('guides/01-EXPERIENCE-DIRECTION.md'),
+      }),
+    },
+    {
+      id: 'journey',
+      title: 'write the journey and the information architecture',
+      build: (env) => ({
+        goal: 'Decide what the visitor does, in what order, and what content each moment needs.',
+        steps: [
+          'Write the journey of the main visitor: phases in order, and for each phase what they do, think and feel, what blocks them and what would help.',
+          'Write the information architecture: content by priority, navigation, section order of each page, where visitors arrive and leave, what needs search or filters.',
+          'Organize everything by the tasks of the visitor, never by how the company is organized.',
+          `Take proven patterns from ${env.kit('experience/references/INDEX.md')} and cite each as [ref: <slug>].`,
+          `Add the two sections below to ${BRIEF}.`,
+        ],
+        template: {
+          file: BRIEF,
+          lines: [
+            '## Journey',
+            'actor: <who> · scenario: <what brings them>',
+            '| Phase | Does | Thinks | Feels | Friction | Opportunity |',
+            '|---|---|---|---|---|---|',
+            '## Information architecture',
+            'priority content: <ordered list>',
+            'navigation: <items, in order>',
+            'section order: <page — section 1, section 2, …> (one line per page)',
+            'entry and exit points: <…> · search or filters: <…>',
+          ],
+        },
+        done: ['The brief has Journey (at least 3 phases) and Information architecture (a section order for every page of Archetype).'],
+        reference: env.kit('guides/01-EXPERIENCE-DIRECTION.md'),
+      }),
+    },
+    {
+      id: 'references',
+      title: 'look at real examples with the user',
+      build: (env) => ({
+        goal: 'Find out which real sites the user likes and what exactly they like in them.',
+        steps: [
+          `Collect 3 to 5 example sites that share this archetype: from a web search, from ${env.kit('experience/references/INDEX.md')} and from URLs the user gives.`,
+          'For each one tell the user: its navigation model, its section order and one moment worth looking at.',
+          'Ask the user which they prefer and what they highlight. One more round of 2 or 3 candidates at most.',
+          env.mcp('playwright')
+            ? `Open the chosen ones with the Playwright MCP and save a screenshot of each in ${OUT}/ux/references/.`
+            : `The Playwright MCP is not configured in this project: take no screenshots, and write "no browser available" in the section.`,
+          `Record each pick: ${env.run('memory.mjs', 'add --screen experience --block reference --need "<what the user liked>" --decision adapt --ref "reference:<slug>"')}`,
+          `Add the section below to ${BRIEF}.`,
+        ],
+        template: {
+          file: BRIEF,
+          lines: [
+            '## Reference discoveries',
+            '- [ref: <slug>] <url> — liked: <…> · disliked: <…>',
+          ],
+        },
+        done: ['The brief has Reference discoveries with at least one reference the user chose, or the sentence "the user gave no reference".'],
+        reference: env.kit('experience/DISCOVERY-LOOP.md'),
+      }),
+    },
+    {
+      id: 'directions',
+      title: 'propose three directions that differ in structure',
+      build: (env) => ({
+        goal: 'Give the user three real alternatives, not three recolors of one idea.',
+        steps: [
+          'Write three directions: safe (familiar patterns), differentiated (a recognizable structure with one distinctive composition, narration or navigation) and experimental (unusual, still clear and accessible).',
+          'They must differ in archetype, navigation, journey, composition or narrative. A change of color or font alone is not a direction.',
+          `Read the anti-generic list of ${env.kit('experience/STYLE-DIRECTIONS.md')} and remove from each direction anything it names.`,
+          ...builderSkill(env).map((name) => `Load the skill ${name} only to collect themes as raw material. Build nothing with it here.`),
+          `Add the section below to ${BRIEF}, filled three times.`,
+        ],
+        template: {
+          file: BRIEF,
+          lines: [
+            '## Three directions',
+            '### <safe | differentiated | experimental>: <name>',
+            'changes: <what is structurally different>',
+            'key patterns: <…>',
+            'sacrifices: <…> · main risk: <…> · do not use when: <…>',
+          ],
+        },
+        done: ['The brief has Three directions with the three blocks, and each differs from the others in structure.'],
+        reference: env.kit('guides/01-EXPERIENCE-DIRECTION.md'),
+      }),
+    },
+    {
+      id: 'choose',
+      title: 'the user chooses; write the visual brief',
+      build: (env) => ({
+        goal: 'Close the direction with the user and leave the visual brief the tokens step reads.',
+        steps: [
+          'Show the three directions to the user. The user chooses one or combines them. Do not choose for them.',
+          `Record it: ${env.run('memory.mjs', 'add --screen experience --block direction --need "<one line>" --decision adapt --notes "direction:<id>; risk:<…>" --ref "direction:<id>"')}`,
+          `Add the five sections below to ${BRIEF}.`,
+        ],
+        template: {
+          file: BRIEF,
+          lines: [
+            '## Recommended direction',
+            'id: <id> · rationale: <…> · risks: <…>',
+            '## Interaction patterns',
+            '- <screen type>: <pattern> — solves <problem>',
+            '## Visual brief',
+            'style: <…> · palette intent: <…> · typography personality: <…>',
+            'composition: <…> · motion: <calm | snappy | playful>',
+            'anti-generic list: <what this design must never look like>',
+            '## Accessibility',
+            'keyboard: <…> · contrast: <…> · motion: <…> · language: <…>',
+            '## Open questions',
+            '- <pending decision, or "none">',
+          ],
+        },
+        done: ['The brief has Recommended direction with the id the user chose, and a complete Visual brief.'],
+        reference: env.kit('guides/01-EXPERIENCE-DIRECTION.md'),
+      }),
+    },
+  ],
+
+  ux: [
+    {
+      id: 'product',
+      title: 'anchor the product',
+      build: (env) => {
+        const adapter = /bmad|openspec|spec/i.test(env.framework);
+        return {
+          goal: 'Fix what the product is for, so every screen can be traced to a business reason.',
+          steps: [
+            env.uxPresent === null && `${CONTEXT} is missing. Run: ${env.run('context.mjs')} and then ask for this instruction again.`,
+            adapter && `This repository uses ${env.framework}. Read ${env.kit('guides/ADAPTERS.md')}: its product document is the anchor. Do not create PRODUCT.md.`,
+            !adapter && env.hasProduct && 'PRODUCT.md exists. Read it. Do not rewrite it; add only what the template below asks and it lacks.',
+            !adapter && !env.hasProduct && 'Create PRODUCT.md in the project root with the template below. Ask the user what you cannot answer from the brief.',
+            `Read ${BRIEF} if it exists: the screens must respect its direction.`,
+          ],
+          template: adapter ? null : {
+            file: 'PRODUCT.md',
+            lines: [
+              '# Product',
+              '## Audience',
+              '<who uses this, in what context>',
+              '## Primary conversion',
+              '<the one measurable action>',
+              '## User flows',
+              '<arrival → … → the primary conversion → what comes after>',
+              '## Screen list',
+              '- <screen> — <its purpose in one line>',
+              '## Constraints',
+              '<brand, legal, accessibility, scope limits>',
+            ],
+          },
+          done: [adapter ? 'You read the product document of the repository and can name audience and primary conversion.' : 'PRODUCT.md has the five sections filled.'],
+          reference: env.kit('guides/02-UX-FLOWS.md'),
+        };
+      },
+    },
+    {
+      id: 'spec',
+      title: 'write the screens, flows and states',
+      artifacts: [['out:ux/UX-SPEC.md']],
+      build: (env) => ({
+        goal: 'Define how the product works, screen by screen, before any component is chosen.',
+        steps: [
+          env.uxPresent === true && 'This project already has UX. Ask the user once: "There is existing UX. Do you want a summary of what exists (as-is) or a radical redesign?" Summary: document and audit, propose nothing. Redesign: first write the current state in ai-frontend-output/ux/UX-BASELINE.md, and at the end the differences in UX-DIFF.md; PRODUCT.md stays as it is.',
+          env.uxPresent !== true && 'This project has no UX yet: design it from scratch.',
+          env.skill('userflow')
+            ? 'Load the skill userflow. It selects 1 to 4 flow-* skills: load those, say which in one line, and apply their rules. Never write a flow from memory.'
+            : 'The userflow skill is not installed here: write the flows by hand and tell the user that the proven flow patterns were not available.',
+          `Write ${SPEC} with the template below. Every screen needs its empty, loading and error state.`,
+          env.skill('userflow') && `Generate flow-report.html from the template of userflow and save it in ${OUT}/ux/.`,
+          env.skill('userflow') && 'Check the result against the Anti-Patterns section of each loaded skill and fill the Audit table.',
+        ],
+        template: {
+          file: SPEC,
+          lines: [
+            '# UX spec',
+            '## Screens',
+            '| Screen | Purpose | Primary action | Empty state | Loading state | Error state |',
+            '|---|---|---|---|---|---|',
+            '## Flows',
+            '### <flow name>',
+            '1. <screen> → shows <…> → primary action <…> → goes to <screen> (branch: <condition>)',
+            '## Navigation',
+            '<structure · order in which it collapses on small screens>',
+            '## Audit',
+            '| Anti-pattern | Result (PASS, WARN or FAIL) | Where |',
+            '|---|---|---|',
+          ],
+        },
+        done: [`${SPEC} lists every screen of the product with its three states, and every flow as numbered steps.`],
+        reference: env.kit('guides/02-UX-FLOWS.md'),
+      }),
+    },
+    {
+      id: 'map',
+      title: 'draw the screen map',
+      build: (env) => ({
+        goal: 'Leave a visual map of screens and navigation that matches the spec exactly.',
+        steps: [
+          env.skill('ux-map') ? 'Load the skill ux-map: it carries the recipe.' : `The ux-map skill is not installed here: follow "Step 5" of ${env.kit('guides/02-UX-FLOWS.md')}.`,
+          env.mcp('excalidraw')
+            ? 'Draw with the Excalidraw MCP server (it is configured in this project).'
+            : 'The Excalidraw MCP server is not configured in this project: use the manual fallback of the skill and tell the user.',
+          `One node per screen (name, primary action, key blocks), one labeled arrow per button or action that navigates, and a start node. Node names are exactly the screen names of ${SPEC}.`,
+          `Choose the template from navigation_model in ${BRIEF}; take areas and colors from its Information architecture.`,
+          `If ${MAP} already exists and this is a redesign, copy it first to ${OUT}/ux/ux-map-baseline.excalidraw.`,
+          `Save the map as ${MAP}.`,
+        ],
+        done: [`${MAP} exists and every screen of ${SPEC} is a node in it.`],
+        reference: env.kit('guides/02-UX-FLOWS.md'),
+      }),
+    },
+  ],
+
+  tokens: [{
+    id: null,
+    title: 'fix the visual system',
+    build: (env) => ({
+      goal: 'Fix color, type, spacing, radius and motion before choosing components, so every piece inherits this identity.',
+      steps: [
+        env.mcp('figma')
+          ? 'The Figma MCP is configured: ask the user for the Figma file URL, inspect it and extract palette, type scale, radii and spacing.'
+          : `No Figma here: derive the tokens from the Visual brief section of ${BRIEF} and from PRODUCT.md.`,
+        `For a system-level reference: ${env.run('find.mjs', '--type design-system')} and then ${env.run('get.mjs', '<id>')}`,
+        'Write DESIGN.md in the project root with the template below.',
+        'Write the same values as a Tailwind v4 @theme block in the global CSS. Names are semantic (--color-primary, --color-surface), never palette names.',
+        'Check the contrast of body text on its background: it must be 4.5:1 or more. Change the color until it is.',
+        env.skill('impeccable') && 'Load the skill impeccable and follow its guidelines for the token choices.',
+      ],
+      template: {
+        file: 'DESIGN.md',
+        lines: [
+          '# Design',
+          '## Visual intent',
+          '<one paragraph you can quote when choosing components>',
+          '## Color',
+          '| Token | Value | Use |',
+          '|---|---|---|',
+          '| --color-primary | <…> | <…> |   (also: accent, surface, text, muted, border, a neutral ramp)',
+          '## Type',
+          'display: <font> · body: <font> · scale: <sizes>',
+          '## Spacing',
+          'scale: 4, 8, 12, 16, 24, 32, 48, 64',
+          '## Radius',
+          '<one value, or small / medium / large>',
+          '## Motion',
+          '<calm | snappy | playful> · <durations and easing>',
+          '## Contrast',
+          'body text on surface: <ratio>',
+        ],
+      },
+      done: ['DESIGN.md has every section filled and the measured contrast is 4.5:1 or more.', 'The global CSS has the @theme block with the same values.'],
+      reference: env.kit('guides/03-TOKENS.md'),
+    }),
+  }],
+
+  compose: [
+    {
+      id: 'inventory',
+      title: 'list what each screen needs',
+      artifacts: [['out:INVENTORY.md', 'root:INVENTORY.md']],
+      build: (env) => ({
+        goal: 'Turn each screen into a list of needed blocks by category, before looking at any library.',
+        steps: [
+          `Read ${SPEC}. Take only its screens; do not invent others.`,
+          'For each screen list its blocks from top to bottom, including the empty, loading and error states.',
+          `Label each block with one category of ${env.kit('catalog/taxonomy.md')}. Do not name libraries or components yet.`,
+          'Priority is must, should or nice. A block that repeats across screens is one row, marked "shared".',
+          `Write ${INVENTORY} with the template below, 30 rows at most.`,
+        ],
+        template: {
+          file: INVENTORY,
+          lines: [
+            '# Inventory',
+            '| Screen | Block | Category | Priority | Notes | Candidates | Decision |',
+            '|---|---|---|---|---|---|---|',
+            '| <screen of the spec> | <block> | <category> | must | <…> | | |',
+          ],
+        },
+        done: [`${INVENTORY} has one row per block of every screen; Candidates and Decision are still empty.`],
+        reference: env.kit('guides/04-INVENTORY.md'),
+      }),
+    },
+    {
+      id: 'find',
+      title: 'search before creating anything',
+      build: (env) => ({
+        goal: 'Fill the Candidates column: what already exists for each must and should row.',
+        steps: [
+          `Once: ${env.run('memory.mjs', 'combo list')} — reuse a saved combination when it fits.`,
+          'Then, for each must and should row, in this order:',
+          `  a. ${env.run('ui-map.mjs', 'have "<need>"')} — a component of this project wins.`,
+          `  b. ${env.run('pieces.mjs', 'find "<need>"')} — own piece, then a variant, then a piece of another project.`,
+          `  c. ${env.run('find.mjs', '"<need>"')} — the catalog. Read the results from the top: ReUI, then shadcn/ui, then Shadcn Space.`,
+          `  d. ${env.run('get.mjs', '<id>')} — license, dependencies and install command of each candidate you keep.`,
+          'With no result that fits, search again with other words or with --category <category>. Two searches at least before giving up.',
+          env.laya && `Order each shortlist: ${env.python('laya_select.py', `--need "<need>" --category <category> --direction <direction id> --context-file ${BRIEF} --confirmed`)}`,
+          `Write up to 3 candidates per row in ${INVENTORY}: id, license, and one reason.`,
+          'Never use an entry with license_type non-commercial in commercial work. Verify an unknown license on its page first.',
+        ],
+        done: ['Every must and should row has candidates, or the words of the two searches that found nothing.'],
+        reference: env.kit('guides/05-FIND.md'),
+      }),
+    },
+    {
+      id: 'decide',
+      title: 'decide reuse, adapt or build, install and record',
+      build: (env) => {
+        const skills = builderSkill(env);
+        return {
+          goal: 'Take one decision per row, install it and record it with its reason.',
+          steps: [
+            'Per row: reuse when a candidate fits with a compatible license and stack; adapt when it fits but needs porting to this stack; build only when the searches found nothing or the license blocks it.',
+            'Show the user 2 or 3 combinations with their reasons before installing.',
+            `Install with the install_command that ${env.run('get.mjs', '<id>')} prints. Never type an install command from memory.`,
+            'After each install, render the component alone once and confirm the project builds.',
+            skills.length
+              ? `For a build, load the skill ${skills.map((name) => `${name} (${BUILDER_USE[name]})`).join(' or ')} and build only that row, inside the tokens of DESIGN.md.`
+              : `For a build, keep these rules: ${CRAFT_RULES}.`,
+            `Record every row right after deciding it: ${env.run('memory.mjs', 'add --screen <screen> --block <block> --need "<need>" --decision reuse|adapt|build --id <entry id>')} (a build has no id: use --name "<name>" and --notes "<what you searched and why it did not fit>").`,
+            `Screen and block names are the ones of ${SPEC}. Write the decision in ${INVENTORY} too.`,
+          ],
+          done: [`Every must and should row of ${INVENTORY} has a decision, and ${env.run('memory.mjs', 'list')} shows one record per row.`],
+          reference: env.kit('guides/06-REUSE.md'),
+        };
+      },
+    },
+    {
+      id: 'adapt',
+      title: 'make every piece look like this product, and register it',
+      build: (env) => ({
+        goal: 'Make reused components carry this identity without rewriting them, and register what the project now owns.',
+        steps: [
+          'Adapt in this order and stop at the first that is enough: tokens of the theme; the props and variants of the component; a wrapper around it; a patch inside it, with a comment that says what changed, why and the catalog id.',
+          'Never write a color, size or radius by hand in a component: use the tokens.',
+          'Replace linear transitions with springs; keep at most 2 high-impact animated blocks per view; give a static fallback under prefers-reduced-motion.',
+          'The same component on three screens is one shared component, not three copies.',
+          `Register each catalog component that landed: ${env.run('get.mjs', '<id> --landed <path of the file>')}`,
+          `Register each build: ${env.run('pieces.mjs', 'add <name> --level micro|small|medium|large --file <path of the file>')}`,
+          `After editing a registered piece: ${env.run('pieces.mjs', 'version <name> --note "<what changed>"')}`,
+          `When a screen is complete, save it for reuse: ${env.run('memory.mjs', 'combo save <name> --note "<what it is for>"')}`,
+        ],
+        done: ['Every component renders with the tokens of DESIGN.md.', 'Every build is a registered piece and no registered piece changed after its last version.'],
+        reference: env.kit('guides/07-ADAPT.md'),
+      }),
+    },
+  ],
+
+  iterate: [{
+    id: null,
+    title: 'make one small change',
+    build: (env) => {
+      const skills = builderSkill(env);
+      return {
+        goal: 'Make the smallest change that satisfies the request, reusing what exists, and record it.',
+        steps: [
+          `Locate: ${env.run('ui-map.mjs', 'impact <role or component>')} — change every owner, user and stray it lists.`,
+          `Reuse first: ${env.run('pieces.mjs', 'find "<need>"')} and ${env.run('ui-map.mjs', 'have "<name>"')}. A request to adjust a piece ("more spacing") means editing its file, never a new piece.`,
+          `Only for something new: ${env.run('memory.mjs', 'combo list')}, then ${env.run('find.mjs', '"<need>"')} and ${env.run('get.mjs', '<id>')}. Build only when two searches found nothing that fits.`,
+          skills.length ? `For a build, load the skill ${skills.join(' or ')} and build only that block.` : `For a build, keep these rules: ${CRAFT_RULES}.`,
+          'Apply the change. Keep the tokens of DESIGN.md. Do not redesign what was not asked.',
+          `After editing a registered piece: ${env.run('pieces.mjs', 'version <name> --note "<what changed>"')}. After a build: ${env.run('pieces.mjs', 'add <name> --level micro|small|medium|large --file <path>')}`,
+          `Record: ${env.run('memory.mjs', 'add --screen <screen> --block <block> --need "<need>" --decision reuse|adapt|build [--id <entry id>]')}`,
+          `Run ${env.run('ui-map.mjs', 'impact <role or component>')} again: no stray may remain.`,
+          'If the change touches 3 or more screens or adds a flow, stop and tell the user: that is the route ux, not a small change.',
+        ],
+        done: ['The change is applied, recorded with memory add, and impact lists no stray in scope.'],
+        reference: env.kit('guides/10-ITERATE.md'),
+      };
+    },
+  }],
+
+  redesign: [{
+    id: null,
+    title: 'redesign the look of one screen',
+    build: (env) => ({
+      goal: 'Change how one existing screen looks, keeping its flows, its content and its wiring.',
+      steps: [
+        'Agree with the user which screen, and what must not change.',
+        `Locate everything it touches: ${env.run('ui-map.mjs', 'impact <screen or component>')}`,
+        env.skill('design-taste-frontend')
+          ? 'Load the skill design-taste-frontend in redesign mode. Keep the brand values and the tokens of DESIGN.md.'
+          : `Redesign by hand with these rules: ${CRAFT_RULES}.`,
+        'Do not add, remove or reorder steps of a flow, and do not change copy that carries meaning: that is a UX change and needs the route ux.',
+        `After editing a registered piece: ${env.run('pieces.mjs', 'version <name> --note "<what changed>"')}`,
+        `Record: ${env.run('memory.mjs', 'add --screen <screen> --block <block> --need "visual redesign" --decision adapt --notes "<what changed>"')}`,
+      ],
+      done: ['The screen has the new look, the same flows and content, and the project builds.'],
+      reference: env.kit('guides/08-PHILOSOPHY.md'),
+    }),
+  }],
+
+  polish: [{
+    id: null,
+    title: 'audit and fix until every check is green',
+    build: (env) => ({
+      goal: 'Prove that the screen works and that the craft holds. Fix what each check reports, then run it again.',
+      steps: [
+        'Start the app and note its URL.',
+        env.skill('frontend-polish') && 'Load the skill frontend-polish and follow its loop on every touched screen.',
+        env.mcp('playwright')
+          ? 'With the Playwright MCP, on every touched screen: accessibility snapshot, empty, loading and error states, console without errors, keyboard only, reduced motion, widths 360, 768 and 1280.'
+          : 'The Playwright MCP is not configured in this project: check each screen by hand at widths 360, 768 and 1280, with the keyboard only and with reduced motion, and say so in the evidence.',
+        `Run: ${env.run('audit-honesty.mjs', 'src --strict')}`,
+        env.dep('@axe-core/playwright') ? `Run: ${env.run('audit-a11y.mjs', '<url>')}` : 'Accessibility audit: @axe-core/playwright is not a dependency here. Tell the user it can be added with: npm i -D @axe-core/playwright',
+        `Run: ${env.run('audit-perf.mjs', '<url>')} (fails above LCP 2.5 s, CLS 0.1, TBT 200 ms).`,
+        `Run: ${env.run('ui-map.mjs', 'check')}`,
+        env.dep('@playwright/test') ? 'Run: npx playwright test' : 'There is no @playwright/test in this project: no regression suite runs. Say so in the evidence.',
+        env.skill('impeccable') && 'Load the skill impeccable: /impeccable audit <screen>, then /impeccable polish <screen>.',
+        env.skill('hallmark') && 'Name the skill hallmark for a second-opinion audit. Report only: it must not rebuild the screen.',
+        `Check by hand against: ${CRAFT_RULES}.`,
+        'Fix exactly what each check reported and run that check again. A screen is not done with a red check or a console error.',
+      ],
+      done: ['Every command above ran, and its last run reported no blocking finding.', 'The evidence names each command with its result, and each check that could not run with the reason.'],
+      reference: env.kit('guides/09-VERIFY.md'),
+    }),
+  }],
+
+  'visual-feedback': [{
+    id: null,
+    title: 'the user points, you change exactly that',
+    build: (env) => {
+      const ready = env.dep('react') && env.mcp('agentation');
+      return {
+        goal: 'Change exactly the elements the user points at in the browser, and nothing else.',
+        steps: !env.dep('react')
+          ? [
+            'This project is not React: the Agentation toolbar cannot run here.',
+            'Ask the user to name each element and what to change, one at a time.',
+            `Locate each one: ${env.run('ui-map.mjs', 'impact <component>')}, change it, and show the result.`,
+          ]
+          : [
+            !ready && 'Agentation is not configured here. Give the user these commands and wait: npm install agentation -D ; claude mcp add agentation -- npx -y agentation-mcp server ; npx agentation-mcp doctor',
+            !ready && 'Mount it once in the app root, development only: {process.env.NODE_ENV === \'development\' && <Agentation endpoint="http://localhost:4747" />} — then the user restarts the agent session.',
+            'The user runs the app, clicks each element and writes a note.',
+            'Read the pending annotations with the agentation tools. For each: acknowledge it, change exactly that element, resolve it with one line of what changed.',
+            'Do not touch elements without an annotation. A note that asks for a new flow or screen is not for this route: tell the user.',
+            `After editing a registered piece: ${env.run('pieces.mjs', 'version <name> --note "<what changed>"')}`,
+          ],
+        done: ['No annotation is pending, or every element the user named was changed and shown.'],
+        reference: env.kit('guides/11-VISUAL-FEEDBACK.md'),
+      };
+    },
+  }],
+
+  architecture: [{
+    id: null,
+    title: 'record which folder holds what',
+    build: (env) => ({
+      goal: 'Record the role of each folder so the next change knows where a file goes. Nothing is moved.',
+      steps: [
+        `Run: ${env.run('ui-map.mjs', 'build')}`,
+        `Read ${OUT}/UI-MAP.md.`,
+        `Write ${OUT}/architecture.json with the template below, mode "map". List only folders that exist; put what fits no layer under unmapped.`,
+        'Do not move, rename or create any folder. FSD (modes fsd-new and fsd-refactor) runs only when the user asked for it in this conversation; then load the skill frontend-refactor and move one slice at a time.',
+        `Run: ${env.run('ui-map.mjs', 'check')}`,
+      ],
+      template: {
+        file: `${OUT}/architecture.json`,
+        lines: [
+          '{',
+          '  "version": 1,',
+          '  "mode": "map",',
+          '  "framework": "<from REPO-CONTEXT.md>",',
+          '  "layers": { "app": [], "pages": [], "widgets": [], "features": [], "entities": [], "shared": [] },',
+          '  "unmapped": [],',
+          '  "notes": "Mapping only. Nothing was moved."',
+          '}',
+        ],
+      },
+      done: [`${OUT}/architecture.json exists, is valid JSON and its mode is the one the user agreed to.`],
+      reference: env.kit('guides/12-ARCHITECTURE.md'),
+    }),
+  }],
+};

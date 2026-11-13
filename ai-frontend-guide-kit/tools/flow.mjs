@@ -8,19 +8,25 @@
  * A step is marked done only when it is the current step and its artifact exists;
  * a step without a file needs `--evidence "<what proves it>"`. Refusals change nothing.
  *
+ * `next` prints the whole instruction of one micro-step (goal, exact commands, template, done
+ * criteria; the texts live in flow-steps.mjs). The large steps have parts, closed in order with
+ * `done <step>.<part>`; the last part closes the step. `done <step>` still closes a whole step.
+ *
  * Usage:
  *   node tools/flow.mjs list                   every route and step (the text of guides/FLOWS.md)
  *   node tools/flow.mjs status                 kit installed?, active route and step, what is recorded
  *   node tools/flow.mjs start <route>          new | direction | ux | iterate | polish | redesign | visual-feedback | architecture
- *   node tools/flow.mjs next                   the current step: guide, skill, output
- *   node tools/flow.mjs done <step> [--evidence "..."]
+ *   node tools/flow.mjs next                   the whole instruction of the current micro-step
+ *   node tools/flow.mjs done <step>[.<part>] [--evidence "..."]
  *   node tools/flow.mjs reset                  drop the active route
  * Options: --dir <project> (default: the folder that holds the kit), --json
  */
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { homedir } from 'node:os';
+import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { changedPieces, registeredPiece } from './pieces.mjs';
+import { PARTS } from './flow-steps.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -150,9 +156,10 @@ Usage:
   node tools/flow.mjs list
   node tools/flow.mjs status
   node tools/flow.mjs start <route>        ${Object.keys(ROUTES).join(' | ')}
-  node tools/flow.mjs next
-  node tools/flow.mjs done <step> [--evidence "..."]
+  node tools/flow.mjs next                 the whole instruction of the current micro-step: goal, commands, template, done criteria
+  node tools/flow.mjs done <step>[.<part>] [--evidence "..."]
   node tools/flow.mjs reset
+  direction, ux and compose have parts, closed in order (done direction.questions, ...); the last part closes the step.
   compose and iterate also refuse while a build decision has no piece registered in this project (node tools/pieces.mjs add)
   or a registered piece changed since its last version (node tools/pieces.mjs version <name>).
 Options: --dir <project>, --json
@@ -182,11 +189,10 @@ function artifactPath(p, ref) {
   return { abs: join(scope === 'root' ? p.root : p.out, rel), shown: scope === 'root' ? rel : `ai-frontend-output/${rel}` };
 }
 
-function missingArtifacts(p, step) {
-  const def = STEPS[step];
-  if (!def.artifacts) return [];
+function missingArtifacts(p, artifacts) {
+  if (!artifacts) return [];
   const missing = [];
-  for (const alternatives of def.artifacts) {
+  for (const alternatives of artifacts) {
     const found = alternatives.some((ref) => {
       const { abs } = artifactPath(p, ref);
       return existsSync(abs) && readFileSync(abs, 'utf8').trim().length > 0;
@@ -205,6 +211,94 @@ function describeStep(id) {
     `  tools:  ${def.tool}`,
     `  output: ${def.output}${def.artifacts ? '' : ' (mark done with --evidence)'}`,
   ].join('\n');
+}
+
+/** The first part of the step that is not closed yet (a step with one part always returns it). */
+function currentPart(step) {
+  const closed = step.parts_done ?? [];
+  return PARTS[step.id].find((part) => !closed.includes(part.id)) ?? PARTS[step.id].at(-1);
+}
+
+/** Facts about this project that the tool resolves, so the instruction leaves no branch to the reader. */
+function environment(p) {
+  const rel = relative(p.root, KIT_DIR).replace(/\\/g, '/');
+  const kitPath = rel && !rel.startsWith('..') && !isAbsolute(rel) ? rel : KIT_DIR.replace(/\\/g, '/');
+  const quote = (path) => (/\s/.test(path) ? `"${path}"` : path);
+  const readText = (file) => (existsSync(file) ? readFileSync(file, 'utf8') : '');
+  const readJson = (file) => {
+    try {
+      return JSON.parse(readText(file));
+    } catch {
+      return {};
+    }
+  };
+  const context = readText(join(p.out, 'ux', 'REPO-CONTEXT.md'));
+  const ux = context.match(/\*\*UX present:\*\*\s*(yes|no)/i) ?? context.match(/ux_present\W{0,4}(true|false)/i);
+  const framework = (context.match(/\*\*Framework:\*\*\s*([^—\n]+)/)?.[1] ?? '').trim();
+  const manifest = readJson(join(p.root, 'package.json'));
+  const deps = { ...(manifest.dependencies ?? {}), ...(manifest.devDependencies ?? {}) };
+  const servers = Object.keys({ ...(readJson(join(p.root, '.mcp.json')).mcpServers ?? {}), ...(readJson(join(p.root, 'opencode.json')).mcp ?? {}) }).map((name) => name.toLowerCase());
+  const skillRoots = [p.root, homedir()].flatMap((base) => [join(base, '.agents', 'skills'), join(base, '.claude', 'skills')]);
+  const command = (runner, tool, args) => `${runner} ${quote(`${kitPath}/tools/${tool}`)}${args ? ` ${args}` : ''}`;
+  return {
+    run: (tool, args) => command('node', tool, args),
+    python: (tool, args) => command('python', tool, args),
+    kit: (path) => `${kitPath}/${path}`,
+    skill: (name) => skillRoots.some((root) => existsSync(join(root, name))),
+    mcp: (name) => servers.some((server) => server.includes(name)),
+    dep: (name) => name in deps,
+    laya: /laya[_ ]consent[^a-z]*granted/i.test(readText(join(p.out, 'ux', 'EXPERIENCE-BRIEF.md'))),
+    uxPresent: ux ? /yes|true/i.test(ux[1]) : null,
+    framework: /^(none|unknown)?$/i.test(framework) ? '' : framework,
+    hasProduct: existsSync(join(p.root, 'PRODUCT.md')),
+  };
+}
+
+/** The current micro-step of an active route, as data: what `next` prints and `next --json` returns. */
+function instruction(p, state) {
+  const step = current(state);
+  const parts = PARTS[step.id];
+  const part = currentPart(step);
+  const env = environment(p);
+  const built = part.build(env);
+  const last = part === parts.at(-1);
+  const id = part.id ? `${step.id}.${part.id}` : step.id;
+  const needsEvidence = last && !STEPS[step.id].artifacts;
+  return {
+    route: state.route,
+    complete: false,
+    step: step.id,
+    part: part.id,
+    title: part.title,
+    position: state.steps.indexOf(step) + 1,
+    total: state.steps.length,
+    part_position: parts.indexOf(part) + 1,
+    part_total: parts.length,
+    goal: built.goal,
+    do: built.steps.filter(Boolean),
+    template: built.template ?? null,
+    done_when: built.done,
+    artifacts: [...(part.artifacts ?? []), ...((last && STEPS[step.id].artifacts) || [])].map((alternatives) => artifactPath(p, alternatives[0]).shown),
+    needs_evidence: needsEvidence,
+    done_command: env.run('flow.mjs', `done ${id}${needsEvidence ? ' --evidence "<each check you ran and its result>"' : ''}`),
+    reference: built.reference,
+  };
+}
+
+function renderInstruction(info) {
+  let number = 0;
+  const lines = [
+    `Next step: ${info.step} — ${STEPS[info.step].title}`,
+    `Route ${info.route} · step ${info.position}/${info.total}${info.part ? ` · part ${info.part_position}/${info.part_total}: ${info.part} — ${info.title}` : ` · ${info.title}`}`,
+    '',
+    `Goal: ${info.goal}`,
+    '',
+    'Do, in this order:',
+    ...info.do.map((line) => (line.startsWith('  ') ? `   ${line}` : `${(number += 1)}. ${line}`)),
+  ];
+  if (info.template) lines.push('', `Template for ${info.template.file} (copy it and replace every <…>):`, ...info.template.lines.map((line) => `    ${line}`));
+  lines.push('', 'Done when:', ...info.done_when.map((line) => `- ${line}`), '', `Then run: ${info.done_command}`, `Only if you are stuck, read: ${info.reference}`);
+  return lines.join('\n');
 }
 
 function countLines(file) {
@@ -260,7 +354,7 @@ function status(p, flags) {
   lines.push(`Decisions recorded: ${report.recorded.decisions} · combinations: ${report.recorded.combinations}`);
   lines.push(`Libraries: ${report.recorded.libraries.using} in use · ${report.recorded.libraries.research} to research`);
   for (const name of ['REPO-CONTEXT.md', 'UI-MAP.md', 'EXPERIENCE-BRIEF.md', 'UX-SPEC.md']) lines.push(`${name}: ${report.recorded[name] ? 'yes' : 'no'}`);
-  if (step) lines.push('', describeStep(step.id));
+  if (step) lines.push('', describeStep(step.id), '  full instruction: node tools/flow.mjs next');
   console.log(lines.join('\n'));
 }
 
@@ -272,14 +366,14 @@ function start(p, route) {
   const now = new Date().toISOString();
   const state = { route, started_at: now, complete: false, steps: ROUTES[route].steps.map((id) => ({ id, status: 'pending' })) };
   writeState(p, state);
-  console.log(`Route: ${route} — ${ROUTES[route].title}\nSteps: ${ROUTES[route].steps.join(' → ')}\n\n${describeStep(state.steps[0].id)}`);
+  console.log(`Route: ${route} — ${ROUTES[route].title}\nSteps: ${ROUTES[route].steps.join(' → ')}\n\n${renderInstruction(instruction(p, state))}`);
 }
 
 function list() {
   const lines = [
     '# Flows of the AI Frontend Guide kit',
     '',
-    'Generated by `node tools/flow.mjs list`; do not edit by hand. Every design conversation declares one route with `node tools/flow.mjs start <route>` and follows its steps in order: `node tools/flow.mjs done <step>` refuses a skipped step or a missing artifact. Skills marked "if installed" are optional; without them, use `guides/08-PHILOSOPHY.md`.',
+    'Generated by `node tools/flow.mjs list`; do not edit by hand. Every design conversation declares one route with `node tools/flow.mjs start <route>` and follows its steps in order: `node tools/flow.mjs next` prints the whole instruction of the current micro-step (goal, exact commands, template, done criteria), already resolved for what this project has installed, and `node tools/flow.mjs done <step>` refuses a skipped step or a missing artifact. Skills marked "if installed" are optional; without them, use `guides/08-PHILOSOPHY.md`.',
     '',
     '## Routes',
     '',
@@ -297,15 +391,20 @@ function list() {
       lines.push(`| ${index + 1} | \`${stepId}\` | ${def.guide} | ${def.skill} | ${def.tool} | ${output} |`);
     });
   }
+  lines.push('', '## Parts of the large steps', '', 'Closed in order with `node tools/flow.mjs done <step>.<part>`; a skipped part is refused and the last part closes the step. `done <step>` still closes a whole step at once.', '', '| Step | # | Part | What it does |', '|---|---|---|---|');
+  for (const [stepId, parts] of Object.entries(PARTS)) {
+    if (parts.length > 1) parts.forEach((part, index) => lines.push(`| \`${stepId}\` | ${index + 1} | \`${stepId}.${part.id}\` | ${part.title} |`));
+  }
   process.stdout.write(`${lines.join('\n')}\n`);
 }
 
-function next(p) {
+function next(p, flags) {
   const state = readState(p);
   if (!state) throw new Refusal('no active flow; declare the route with: node tools/flow.mjs start <route>');
   const step = current(state);
-  if (!step) return console.log(`Route "${state.route}" complete. Start a new one with: node tools/flow.mjs reset, then start <route>`);
-  console.log(describeStep(step.id));
+  if (!step) return console.log(flags.json ? JSON.stringify({ route: state.route, complete: true }, null, 2) : `Route "${state.route}" complete. Start a new one with: node tools/flow.mjs reset, then start <route>`);
+  const info = instruction(p, state);
+  console.log(flags.json ? JSON.stringify(info, null, 2) : renderInstruction(info));
 }
 
 /** Every `build` decision in selections.jsonl must resolve to a piece registered in this project. */
@@ -326,14 +425,27 @@ function unregisteredBuilds(p) {
   return [...new Set(missing)];
 }
 
-function done(p, id, flags) {
+function done(p, target, flags) {
   const state = readState(p);
   if (!state) throw new Refusal('no active flow; declare the route with: node tools/flow.mjs start <route>');
-  if (!id) throw new UsageError('done needs a step');
+  if (!target) throw new UsageError('done needs a step');
+  const [id, partId] = target.split(/\.(.*)/s);
   if (!state.steps.some((step) => step.id === id)) throw new UsageError(`unknown step "${id}" for route "${state.route}" (steps: ${state.steps.map((step) => step.id).join(', ')})`);
   const step = current(state);
   if (!step) throw new Refusal(`route "${state.route}" is already complete`);
+  if (partId !== undefined && !PARTS[id].some((part) => part.id === partId)) throw new UsageError(`unknown part "${partId}" of step "${id}" (parts: ${PARTS[id].map((part) => part.id).filter(Boolean).join(', ') || 'none'})`);
   if (step.id !== id) throw new Refusal(`step "${id}" is not the current step (current: ${step.id}); steps are never skipped`);
+  if (partId !== undefined) {
+    const part = currentPart(step);
+    if (part.id !== partId) throw new Refusal(`part "${partId}" is not the current part (current: ${part.id}); parts are never skipped`);
+    const missing = missingArtifacts(p, part.artifacts);
+    if (missing.length) throw new Refusal(`part "${target}" cannot be marked done: missing ${missing.join(', ')}`);
+    if (part !== PARTS[id].at(-1)) {
+      step.parts_done = [...(step.parts_done ?? []), partId];
+      writeState(p, state);
+      return console.log(`Done: ${target}\n\n${renderInstruction(instruction(p, state))}`);
+    }
+  }
   if (id === 'compose' || id === 'iterate') {
     const unregistered = unregisteredBuilds(p);
     if (unregistered.length) {
@@ -345,18 +457,19 @@ function done(p, id, flags) {
     }
   }
   if (STEPS[id].artifacts) {
-    const missing = missingArtifacts(p, id);
+    const missing = missingArtifacts(p, STEPS[id].artifacts);
     if (missing.length) throw new Refusal(`step "${id}" cannot be marked done: missing ${missing.join(', ')}`);
   } else if (!flags.evidence) {
     throw new Refusal(`step "${id}" needs --evidence "<what proves it is done>"`);
   }
   step.status = 'done';
   step.done_at = new Date().toISOString();
+  if (partId !== undefined) step.parts_done = [...(step.parts_done ?? []), partId];
   if (flags.evidence) step.evidence = flags.evidence;
   const following = current(state);
   state.complete = !following;
   writeState(p, state);
-  console.log(following ? `Done: ${id}\n\n${describeStep(following.id)}` : `Done: ${id}\nRoute "${state.route}" complete.`);
+  console.log(following ? `Done: ${target}\n\n${renderInstruction(instruction(p, state))}` : `Done: ${target}\nRoute "${state.route}" complete.`);
 }
 
 function reset(p) {
@@ -375,7 +488,7 @@ function main() {
     if (command === 'status') return status(p, flags);
     if (command === 'start') return start(p, arg);
     if (command === 'list') return list();
-    if (command === 'next') return next(p);
+    if (command === 'next') return next(p, flags);
     if (command === 'done') return done(p, arg, flags);
     if (command === 'reset') return reset(p);
     throw new UsageError(`unknown command "${command}"`);

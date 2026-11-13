@@ -112,7 +112,7 @@ Why it matters: when several people (or several chats) work on the design, each 
 | `flow.mjs status` | Is the kit installed? Which route and step are active? What has been recorded? |
 | `flow.mjs list` | Every route and its steps, with the guide and skill for each (same text as `guides/FLOWS.md`) |
 | `flow.mjs start <route>` | Declares the route: `new`, `direction`, `ux`, `iterate`, `polish`, `redesign`, `visual-feedback`, `architecture` |
-| `flow.mjs next` | Shows the current step: which guide to read, which skill to use, which file to produce |
+| `flow.mjs next` | Prints the whole instruction of the current micro-step: goal, exact commands, template to fill, done criteria and the command that closes it |
 | `flow.mjs done <step>` | Closes the step only if it is the current one **and** its file exists |
 
 Three more helpers keep the agent's context small:

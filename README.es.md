@@ -96,7 +96,7 @@ Por qué importa: cuando varias personas (o varios chats) trabajan en el diseño
 | `flow.mjs status` | ¿Está instalado el kit? ¿Qué ruta y qué paso están activos? ¿Qué se ha registrado? |
 | `flow.mjs list` | Todas las rutas y sus pasos, con la guía y la skill de cada uno (el mismo texto que `guides/FLOWS.md`) |
 | `flow.mjs start <ruta>` | Declara la ruta: `new`, `direction`, `ux`, `iterate`, `polish`, `redesign`, `visual-feedback`, `architecture` |
-| `flow.mjs next` | Muestra el paso actual: qué guía leer, qué skill usar, qué archivo producir |
+| `flow.mjs next` | Imprime la instrucción completa del micro-paso actual: objetivo, comandos exactos, plantilla a rellenar, criterio de terminado y el comando que lo cierra |
 | `flow.mjs done <paso>` | Cierra el paso solo si es el actual **y** existe su archivo |
 
 Tres ayudas más mantienen pequeño el contexto del agente:

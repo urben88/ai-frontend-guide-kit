@@ -45,8 +45,8 @@ The route is kept per project in `ai-frontend-output/flow-state.json` (commit it
 node tools/flow.mjs status          # kit installed? active route and step, decisions and libraries recorded
 node tools/flow.mjs list            # every route and step with its guide, skill, tools and output (= guides/FLOWS.md)
 node tools/flow.mjs start <route>   # new | direction | ux | iterate | polish | redesign | visual-feedback | architecture
-node tools/flow.mjs next            # the current step
-node tools/flow.mjs done <step>     # refuses a skipped step or a missing artifact; steps without a file need --evidence "..."
+node tools/flow.mjs next            # the whole instruction of the current micro-step: goal, exact commands, template, done criteria
+node tools/flow.mjs done <step>     # refuses a skipped step or a missing artifact; steps without a file need --evidence "..."; large steps close part by part (done direction.questions)
 ```
 
 When someone asks which flows exist, answer from `guides/FLOWS.md` and recommend the route that fits the request.

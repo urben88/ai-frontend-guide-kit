@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -360,4 +360,133 @@ test('flow status names INDEX.md, with and without an active route (flow-always 
   assert.match(flow(dir, 'status').stdout, /Index: ai-frontend-guide-kit\/INDEX\.md/);
   const json = JSON.parse(flow(dir, 'status', '--json').stdout);
   assert.equal(json.index, 'ai-frontend-guide-kit/INDEX.md');
+});
+
+// ---------------------------------------------------------------- conductor: flow next gives the whole instruction (weak-model-design S2, S5)
+
+const home = () => mkdtempSync(join(tmpdir(), 'flow-home-'));
+const guided = (dir, homeDir, ...args) => spawnSync(process.execPath, [TOOL, ...args, '--dir', dir], { encoding: 'utf8', env: { ...cleanEnv(), HOME: homeDir, USERPROFILE: homeDir } });
+const O = 'ai-frontend-output';
+const FILES = {
+  [`${O}/ux/REPO-CONTEXT.md`]: '- **UX present:** no',
+  [`${O}/UI-MAP.md`]: 'x',
+  [`${O}/ux/EXPERIENCE-BRIEF.md`]: 'x',
+  [`${O}/ux/UX-SPEC.md`]: 'x',
+  [`${O}/ux/ux-map.excalidraw`]: '{}',
+  'DESIGN.md': 'x',
+  [`${O}/INVENTORY.md`]: 'x',
+  [`${O}/selections.jsonl`]: '{"decision":"reuse"}',
+  [`${O}/architecture.json`]: '{}',
+};
+/** Writes the files an instruction names (paths from the project root, as `next --json` lists them). */
+const provide = (dir, files) => {
+  for (const rel of files) {
+    mkdirSync(dirname(join(dir, rel)), { recursive: true });
+    writeFileSync(join(dir, rel), FILES[rel]);
+  }
+};
+
+test('next prints the whole instruction of every micro-step of every route, and the printed done command closes it (S2)', () => {
+  const routes = ['new', 'direction', 'ux', 'iterate', 'polish', 'redesign', 'visual-feedback', 'architecture'];
+  const seen = new Set();
+  for (const route of routes) {
+    const dir = project();
+    const homeDir = home();
+    assert.equal(guided(dir, homeDir, 'start', route).status, 0);
+    for (let guard = 0; guard < 40; guard += 1) {
+      const json = guided(dir, homeDir, 'next', '--json');
+      assert.equal(json.status, 0, json.stderr);
+      const info = JSON.parse(json.stdout);
+      if (info.complete) break;
+      const text = guided(dir, homeDir, 'next').stdout;
+      const id = info.part ? `${info.step}.${info.part}` : info.step;
+      seen.add(id);
+      assert.match(text, new RegExp(`^Next step: ${info.step} — `), id);
+      for (const heading of ['Goal: ', 'Do, in this order:', '1. ', 'Done when:', 'Then run: ']) assert.ok(text.includes(heading), `${id} misses "${heading}"`);
+      assert.ok(text.trimEnd().split('\n').length <= 48, `${id} has ${text.trimEnd().split('\n').length} lines`);
+      assert.doesNotMatch(text, /if installed|\(optional\)|\(recommended\)/i, `${id} leaves a branch to the reader`);
+      assert.doesNotMatch(text, /node tools\//, `${id} uses a second path form`);
+      assert.ok(text.includes(`done ${id}`), `${id} does not print its done command`);
+      provide(dir, info.artifacts);
+      const close = guided(dir, homeDir, 'done', id, ...(info.needs_evidence ? ['--evidence', 'checked'] : []));
+      assert.equal(close.status, 0, `${id}: ${close.stderr}`);
+    }
+    assert.equal(state(dir).complete, true, `route ${route} did not complete`);
+  }
+  for (const id of ['direction.questions', 'direction.classify', 'direction.journey', 'direction.references', 'direction.directions', 'direction.choose', 'ux.product', 'ux.spec', 'ux.map', 'compose.inventory', 'compose.find', 'compose.decide', 'compose.adapt', 'intake', 'tokens', 'polish', 'iterate', 'redesign', 'visual-feedback', 'architecture']) {
+    assert.ok(seen.has(id), `no instruction for ${id}`);
+  }
+});
+
+test('a part is refused out of order or without its file, and the state stays unchanged (S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  guided(dir, homeDir, 'start', 'direction');
+  provide(dir, [`${O}/ux/REPO-CONTEXT.md`, `${O}/UI-MAP.md`]);
+  assert.equal(guided(dir, homeDir, 'done', 'intake').status, 0);
+  const before = raw(dir);
+  const skipped = guided(dir, homeDir, 'done', 'direction.classify');
+  assert.equal(skipped.status, 1);
+  assert.match(skipped.stderr, /not the current part \(current: questions\); parts are never skipped/);
+  const missing = guided(dir, homeDir, 'done', 'direction.questions');
+  assert.equal(missing.status, 1);
+  assert.match(missing.stderr, /missing ai-frontend-output\/ux\/EXPERIENCE-BRIEF\.md/);
+  const unknown = guided(dir, homeDir, 'done', 'direction.nope');
+  assert.equal(unknown.status, 2);
+  assert.equal(raw(dir), before);
+  provide(dir, [`${O}/ux/EXPERIENCE-BRIEF.md`]);
+  const ok = guided(dir, homeDir, 'done', 'direction.questions');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.match(ok.stdout, /Done: direction\.questions/);
+  assert.match(ok.stdout, /part 2\/6: classify/);
+  assert.deepEqual(state(dir).steps[1].parts_done, ['questions']);
+  assert.equal(state(dir).steps[1].status, 'pending');
+});
+
+test('done <step> still closes a whole step, also on a state file written before parts existed (previous behavior)', () => {
+  const dir = project();
+  const homeDir = home();
+  put(dir, 'flow-state.json', JSON.stringify({ route: 'direction', started_at: '2026-11-01T00:00:00.000Z', complete: false, steps: [{ id: 'intake', status: 'done' }, { id: 'direction', status: 'pending' }] }));
+  const refused = guided(dir, homeDir, 'done', 'direction');
+  assert.equal(refused.status, 1);
+  assert.match(refused.stderr, /missing ai-frontend-output\/ux\/EXPERIENCE-BRIEF\.md/);
+  assert.match(guided(dir, homeDir, 'next').stdout, /part 1\/6: questions/);
+  provide(dir, [`${O}/ux/EXPERIENCE-BRIEF.md`]);
+  const ok = guided(dir, homeDir, 'done', 'direction');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.equal(state(dir).complete, true);
+});
+
+test('next resolves what is installed instead of asking the reader (S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  guided(dir, homeDir, 'start', 'polish');
+  provide(dir, [`${O}/ux/REPO-CONTEXT.md`, `${O}/UI-MAP.md`]);
+  guided(dir, homeDir, 'done', 'intake');
+  const bare = guided(dir, homeDir, 'next').stdout;
+  assert.doesNotMatch(bare, /impeccable/);
+  assert.match(bare, /Playwright MCP is not configured/);
+  assert.match(bare, /no @playwright\/test in this project/);
+  mkdirSync(join(dir, '.agents', 'skills', 'impeccable'), { recursive: true });
+  mkdirSync(join(homeDir, '.claude', 'skills', 'frontend-polish'), { recursive: true });
+  writeFileSync(join(dir, '.mcp.json'), JSON.stringify({ mcpServers: { playwright: { command: 'npx' } } }));
+  writeFileSync(join(dir, 'package.json'), JSON.stringify({ devDependencies: { '@playwright/test': '1.0.0' } }));
+  const full = guided(dir, homeDir, 'next').stdout;
+  assert.match(full, /\/impeccable audit/);
+  assert.match(full, /Load the skill frontend-polish/);
+  assert.match(full, /With the Playwright MCP/);
+  assert.match(full, /Run: npx playwright test/);
+});
+
+test('with the kit inside the project every command uses the path from the project root (S5)', () => {
+  const dir = project();
+  const homeDir = home();
+  cpSync(join(ROOT, 'ai-frontend-guide-kit', 'tools'), join(dir, 'ai-frontend-guide-kit', 'tools'), { recursive: true });
+  const inner = join(dir, 'ai-frontend-guide-kit', 'tools', 'flow.mjs');
+  const run = (...args) => spawnSync(process.execPath, [inner, ...args], { encoding: 'utf8', env: { ...cleanEnv(), HOME: homeDir, USERPROFILE: homeDir } });
+  const started = run('start', 'iterate');
+  assert.equal(started.status, 0, started.stderr);
+  assert.match(started.stdout, /Run: node ai-frontend-guide-kit\/tools\/context\.mjs$/m);
+  assert.match(started.stdout, /Then run: node ai-frontend-guide-kit\/tools\/flow\.mjs done intake$/m);
+  assert.match(started.stdout, /ai-frontend-guide-kit\/guides\/00-START-HERE\.md/);
 });

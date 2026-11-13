@@ -34,7 +34,7 @@ The route lives in the project, so everyone who talks about the design follows t
 ```bash
 node ai-frontend-guide-kit/tools/flow.mjs status          # kit installed? active route and step, what is recorded
 node ai-frontend-guide-kit/tools/flow.mjs start <route>   # new | direction | ux | iterate | polish | redesign | visual-feedback | architecture
-node ai-frontend-guide-kit/tools/flow.mjs next            # current step: guide, skill, tools, output
+node ai-frontend-guide-kit/tools/flow.mjs next            # the whole instruction of the current micro-step: goal, exact commands, template, done criteria
 node ai-frontend-guide-kit/tools/flow.mjs done <step>     # refuses a skipped step or a missing artifact (--evidence for steps without a file)
 ```
 

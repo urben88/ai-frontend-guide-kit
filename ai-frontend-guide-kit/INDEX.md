@@ -14,7 +14,8 @@ node ai-frontend-guide-kit/tools/flow.mjs status
 ```
 
 It shows the active route and step. With no route, ask the user what they want, then declare one:
-`node ai-frontend-guide-kit/tools/flow.mjs start <route>`. Follow `flow.mjs next` and close each step with
+`node ai-frontend-guide-kit/tools/flow.mjs start <route>`. Follow `flow.mjs next`: it prints the whole instruction of one micro-step
+(goal, exact commands, template, done criteria); do that and nothing else, then close it with the command it prints,
 `flow.mjs done <step>`; it refuses a skipped step, a missing artifact, a build with no registered piece and a piece
 changed since its last version.
 
@@ -37,7 +38,7 @@ Every step, with its guide, skill, tools and output: `ai-frontend-guide-kit/guid
 
 | Job | Tool |
 |---|---|
-| Declare, follow and close the flow | `flow.mjs` |
+| Declare, follow and close the flow; `next` prints the whole instruction of the current micro-step | `flow.mjs` (its texts: `flow-steps.mjs`) |
 | Read the project context | `context.mjs` |
 | Map the frontend, find owners, users and strays | `ui-map.mjs` (`build`, `impact`, `have`, `check`) |
 | Before creating a component: own piece, variant, other project, catalog | `pieces.mjs find "<need>"` |
