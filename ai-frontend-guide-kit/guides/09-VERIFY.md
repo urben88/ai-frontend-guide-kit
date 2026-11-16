@@ -49,7 +49,7 @@ npx playwright test
 ```
 
 - If the `impeccable` skill is installed: `/impeccable critique <screen>`, `/impeccable audit <screen>` and `/impeccable polish <screen>` before closing each screen, plus `npx impeccable detect <dir-or-url>` (deterministic, no LLM).
-- Design: `node ai-frontend-guide-kit/tools/audit-design.mjs --report` (add `--url http://localhost:3000` when Playwright is installed). It prints a numbered list of fixes, most severe first: colors, sizes and spacing outside `design-tokens.json`, arbitrary values, too many type sizes, motion, focus, headings, and, rendered at 360/768/1280, overflow, contrast, target size, line length and overlaps. Fix it from the top and run it again; `flow.mjs done polish` needs `reports/design-audit.json` with no `high` finding. Do not review these by eye.
+- Design: `node ai-frontend-guide-kit/tools/audit-design.mjs --report` (add `--url http://localhost:3000` when Playwright is installed). It prints a numbered list of fixes, most severe first: colors, sizes and spacing outside `design-tokens.json`, arbitrary values, too many type sizes, motion, focus, headings, and, rendered at 360/768/1280, overflow, contrast, target size, body text size, line length, overlaps, one primary action and more than 5 choices side by side. Fix it from the top and run it again; `flow.mjs done polish` needs `reports/design-audit.json` with no `high` finding. Do not review these by eye.
 - Failures: fix the exact reported issue, then re-run the full suite. No screen is done with a red test.
 
 ## 4. Automated accessibility (WCAG 2.2)
@@ -85,7 +85,7 @@ Targets (field, 75th percentile): LCP <= 2.5 s, INP <= 200 ms, CLS <= 0.1. If an
 
 ## 6. Honesty audit (deceptive patterns)
 
-First run the static scan: `node ai-frontend-guide-kit/tools/audit-honesty.mjs src --strict` (scarcity, urgency, confirmshaming, pre-checked boxes, placeholder proof, unverified metrics, consent asymmetry). Then confirm by hand:
+First run the static scan: `node ai-frontend-guide-kit/tools/audit-honesty.mjs src --strict` (scarcity, urgency, countdowns, "people viewing" claims, confirmshaming, hard cancellation, subscriptions with no cancel, tiny decline buttons, hidden fees, pre-checked boxes and switches, dialogs with no close, endless feeds, placeholder proof, unverified metrics, consent asymmetry). Then confirm by hand:
 
 For every conversion flow (signup, checkout, subscription, consent, cancel) confirm:
 

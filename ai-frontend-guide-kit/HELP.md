@@ -53,8 +53,9 @@ Run them from the project root. Every tool prints one screen, not a dump.
 | `tools/laya_select.py` | Optional local decision engine: ranks questions, directions and components (`--check`, `--install`) |
 | `tools/audit-a11y.mjs` | WCAG 2.x A/AA check of one or more URLs through axe-core + Playwright |
 | `tools/audit-perf.mjs` | Lighthouse Core Web Vitals budget: LCP, CLS, TBT |
-| `tools/audit-design.mjs` | Design audit: a numbered list of fixes for colors, sizes and spacing outside `design-tokens.json`, arbitrary values, type sizes, motion, focus, headings, plus (with `--url` and Playwright) overflow at 360/768/1280, contrast, target size, line length and overlaps; `--report` feeds the `polish` gate |
-| `tools/audit-honesty.mjs` | Static scan for deceptive-pattern tells in UI copy and markup (flags to review, never proof of intent) |
+| `tools/audit-design.mjs` | Design audit: a numbered list of fixes for colors, sizes and spacing outside `design-tokens.json`, arbitrary values, type sizes, motion, focus, headings, plus (with `--url` and Playwright) overflow at 360/768/1280, contrast, target size, body text size, line length, overlaps, one primary action and more than 5 choices side by side; `--report` feeds the `polish` gate |
+| `tools/audit-honesty.mjs` | Static scan for deceptive-pattern tells in UI copy and markup: false scarcity and urgency, countdowns, "people viewing" claims, hard cancellation, subscriptions that never say cancel, tiny decline buttons, fees, pre-checked boxes, dialogs with no close, endless feeds (flags to review, never proof of intent) |
+| `tools/technique.mjs` | The technique repertoire in `experience/techniques.json`: <!--fig:techniques-->133<!--/fig--> short cards (when to use, when not, steps, check, cost, fallback, style directions) for layout, type, color, motion, imagery, 3D, SVG, interaction, content, direction and psychology; cards of kind external give the prompt for a tool outside the kit. `check` validates the file |
 | `install.mjs` | Copies the kit into a project, adds the routing block, creates the memory folder, runs the first map scan, optionally installs skills and MCP servers |
 
 ## Skills

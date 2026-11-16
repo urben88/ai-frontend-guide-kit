@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import {
-  analyzeSnapshot, blend, charsPerLine, isLargeText, loadChromium, mergeWidths, nearest, numbered, onScale, overlapArea, parseColor, renderAudit, scanText, shortSelector, tokenContext, toHexColor,
+  LIMITS, analyzeSnapshot, blend, charsPerLine, isLargeText, loadChromium, mergeWidths, nearest, numbered, onScale, overlapArea, parseColor, renderAudit, scanText, shortSelector, tokenContext, toHexColor,
 } from '../ai-frontend-guide-kit/tools/audit-design.mjs';
 import { loadTokens } from '../ai-frontend-guide-kit/tools/tokens.mjs';
 
@@ -430,4 +430,57 @@ test('mergeWidths and numbered: one finding with its widths, and most severe fir
   assert.deepEqual(merged[0].widths, [360, 768]);
   const list = numbered([{ id: 'a', severity: 'low' }, { id: 'b', severity: 'high' }, { id: 'c', severity: 'medium' }, { id: 'd', severity: 'high' }]);
   assert.deepEqual(list.map((f) => `${f.n}${f.id}`), ['1b', '2d', '3c', '4a']);
+});
+
+// ---------------------------------------------------------------- psychology checks of the rendered layer (T14)
+
+let row = 0;
+const choice = (parent, over = {}) => node({ tag: 'button', interactive: true, parent, rect: { x: 0, y: (row += 60), w: 120, h: 44 }, ...over });
+const group = (count, over = {}) => [node({ tag: 'div', classes: ['options'] }), ...Array.from({ length: count }, (_, at) => choice(0, { classes: [`opt-${at}`], ...over }))];
+
+test('analyzeSnapshot: more than 5 choices side by side in one group is a medium "choices-many", 5 or fewer is not (Hick)', () => {
+  const found = analyzeSnapshot(snap(group(6)), { width: 360 });
+  const hit = found.find((f) => f.id === 'choices-many');
+  assert.ok(hit, 'six choices');
+  assert.equal(hit.severity, 'medium');
+  assert.match(hit.what, /^review: 6 choices side by side in div\.options/);
+  assert.match(hit.fix, /^review: /);
+  assert.equal(LIMITS.choices, 5);
+  assert.ok(!ids(analyzeSnapshot(snap(group(5)), { width: 360 })).includes('choices-many'), 'five are fine');
+});
+
+test('analyzeSnapshot: choices in a nav or a footer are not counted (the menu check owns them), and neither are fields', () => {
+  const inNav = [node({ tag: 'nav' }), ...Array.from({ length: 8 }, () => choice(0, { tag: 'a' }))];
+  assert.ok(!ids(analyzeSnapshot(snap(inNav), { width: 360 })).includes('choices-many'));
+  const inFooter = [node({ tag: 'div', classes: ['wrap'] }), node({ tag: 'footer', parent: 0 }), ...Array.from({ length: 8 }, () => choice(1, { tag: 'a' }))];
+  assert.ok(!ids(analyzeSnapshot(snap(inFooter), { width: 360 })).includes('choices-many'));
+  const fields = [node({ tag: 'form' }), ...Array.from({ length: 8 }, () => choice(0, { tag: 'input' }))];
+  assert.ok(!ids(analyzeSnapshot(snap(fields), { width: 360 })).includes('choices-many'));
+});
+
+test('analyzeSnapshot: links wrapped in list items count as one group of their list', () => {
+  const nodes = [node({ tag: 'ul', classes: ['picks'] })];
+  for (let at = 0; at < 7; at += 1) {
+    nodes.push(node({ tag: 'li', parent: 0 }));
+    nodes.push(choice(nodes.length - 1, { tag: 'a' }));
+  }
+  assert.match(analyzeSnapshot(snap(nodes), { width: 768 }).find((f) => f.id === 'choices-many')?.what ?? '', /7 choices side by side in ul\.picks/);
+});
+
+test('analyzeSnapshot: body text under 14px is a medium "text-small"; short labels and 14px text are not', () => {
+  const long = 'Body copy that explains the offer in a couple of sentences so that it is real text.';
+  const small = analyzeSnapshot(snap([node({ tag: 'p', classes: ['fine'], text: long, textLength: long.length, fontSize: 12 })]), { width: 360 }).find((f) => f.id === 'text-small');
+  assert.ok(small);
+  assert.equal(small.severity, 'medium');
+  assert.match(small.what, /12px/);
+  assert.ok(!ids(analyzeSnapshot(snap([node({ tag: 'p', text: long, textLength: long.length, fontSize: 14 })]), { width: 360 })).includes('text-small'));
+  assert.ok(!ids(analyzeSnapshot(snap([node({ tag: 'span', text: 'New', textLength: 3, fontSize: 11 })]), { width: 360 })).includes('text-small'), 'a short label is not body text');
+});
+
+test('previous behavior: a plain snapshot, a 7-link menu and a normal paragraph give no finding of the old kind or the new ones', () => {
+  const nodes = [node({ tag: 'nav' }), ...Array.from({ length: 7 }, () => choice(0, { tag: 'a', display: 'inline-block' }))];
+  assert.deepEqual(ids(analyzeSnapshot(snap([node()]), { width: 360 })), []);
+  assert.deepEqual(ids(analyzeSnapshot(snap(nodes), { width: 360 })), []);
+  const text = 'Body copy that explains the offer in a couple of sentences so that it is real text.';
+  assert.deepEqual(ids(analyzeSnapshot(snap([node({ tag: 'p', text, textLength: text.length, rect: { x: 0, y: 0, w: 300, h: 60 } })]), { width: 360 })), []);
 });

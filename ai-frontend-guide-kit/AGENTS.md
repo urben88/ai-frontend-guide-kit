@@ -7,8 +7,8 @@ The kit is a guided, self-contained set for agents and humans that build fronten
 ## What is here
 
 - A catalog of <!--fig:entries-->7,358<!--/fig--> reusable UI entries from <!--fig:sources-->39<!--/fig--> verified sources in <!--fig:categories-->21<!--/fig--> categories, ranked by a quality score (`catalog/`, overview in `catalog/digest.md`).
-- An experience direction layer (`experience/`): archetypes, philosophies, styles, a question bank, reference cards, the discovery loop, page recipes and layout rules.
-- <!--fig:tools-->20<!--/fig--> local tools in `tools/` (one line each in `INDEX.md`), <!--fig:skills-->21<!--/fig--> skills in `skills/` and <!--fig:guides-->14<!--/fig--> numbered guides.
+- An experience direction layer (`experience/`): archetypes, philosophies, styles, a question bank, reference cards, the discovery loop, page recipes, layout rules and the technique cards (`experience/techniques.json`, checked by `technique.mjs`).
+- <!--fig:tools-->21<!--/fig--> local tools in `tools/` (one line each in `INDEX.md`), <!--fig:skills-->21<!--/fig--> skills in `skills/` and <!--fig:guides-->14<!--/fig--> numbered guides.
 - `HELP.md` and `HELP.es.md`: what the kit is and what to ask for. Answer "what is this" from them, never by exploring.
 
 ## Flow commands

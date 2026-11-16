@@ -28,6 +28,34 @@ export const RULES = [
     pattern: /accept( all)?( cookies)?/i,
     why: 'Accept without an equally visible reject/manage option.',
   },
+  // The anti-manipulation rules of the applied-psychology list (experience/references/reference-deceptive-patterns.md) that source text can show.
+  { id: 'countdown-timer', severity: 'medium', pattern: /\bcount-?down\b|\b(ends|expires|left|remaining)\b[^\n]{0,30}\b\d{1,2}:\d{2}:\d{2}\b|\b\d{1,2}:\d{2}:\d{2}\b[^\n]{0,30}\b(left|remaining|to go)\b/i, why: 'Countdown; it must run to a real deadline the user can verify, and reset never.' },
+  { id: 'fomo-activity', severity: 'medium', pattern: /\b\d+\s+(people|others|users|shoppers|customers|visitors)\s+(are\s+|have\s+)?(viewing|looking|watching|buying|bought|booked)\b|\b(selling|going) fast\b|\balmost (sold out|gone)\b|\bin high demand\b|\b(bought|sold|booked)\b[^\n]{0,24}\bin the last (hour|day|\d+ (hours|minutes))\b/i, why: 'Activity or demand claim (FOMO); show it only when it is real, live data.' },
+  { id: 'hard-cancel', severity: 'medium', pattern: /\b(to cancel|cancellations?)\b[^\n.]{0,40}\b(call|phone|e-?mail|write to|contact (us|support|sales))\b|\bcall (us )?to cancel\b/i, why: 'Cancelling needs a call or a message; offer cancellation where the user signed up, in one click.' },
+  {
+    id: 'subscription-no-cancel',
+    severity: 'medium',
+    file: (text) => !/cancel/i.test(text),
+    pattern: /\b(free trial|subscription|billed (monthly|annually|yearly)|per (month|year))\b|\/(mo|month|yr|year)\b/i,
+    why: 'Recurring charge or trial with no mention of cancelling in this file; say how and where to cancel.',
+  },
+  { id: 'tiny-decline', severity: 'medium', pattern: /^(?=.*\b(reject|decline|deny|no,? thanks|not now|maybe later)\b)(?=.*(\btext-xs\b|\btext-\[(?:8|9|10|11)px\]|font-size:\s*(?:8|9|10|11)px|fontSize:\s*['"]?(?:8|9|10|11)(?:px)?\b|\bopacity-(?:10|20|30|40|50)\b|\btext-(?:gray|slate|zinc|neutral)-[34]00\b))/i, why: 'Decline option styled small or faded next to the accept option; give both equal weight.' },
+  { id: 'hidden-fee', severity: 'medium', pattern: /(?<!\bno )(?<!\bzero )(?<!\bwithout )\b(booking|service|processing|convenience|handling|admin(istration)?) fees?\b/i, why: 'A fee on top of the price; show the total from the first price the user sees.' },
+  { id: 'prechecked-component', severity: 'high', pattern: /<(Checkbox|Switch|Toggle)\b[^>]*(\bdefaultChecked\b(?!\s*=\s*\{\s*false)|\bchecked\b(?:\s*=\s*\{\s*true\s*\})?(?=[\s/>]))/, why: 'Checkbox, switch or toggle that starts on; consent and paid or data-sharing options must be opt-in.' },
+  {
+    id: 'modal-no-close',
+    severity: 'high',
+    file: (text) => !/close|dismiss|onOpenChange|onClose|&times;|×|✕|cerrar/i.test(text),
+    pattern: /role=["']dialog["']|aria-modal|<dialog\b|<(Modal|Popup|Drawer|Dialog)\b/,
+    why: 'Dialog or popup with no way to close it in this file; it must close with a button, Esc and a click outside.',
+  },
+  {
+    id: 'infinite-scroll',
+    severity: 'medium',
+    file: (text) => !/load more|show more|ver más|pagination|\bnext page\b/i.test(text),
+    pattern: /infinite[- ]?scroll|useInfiniteQuery/i,
+    why: 'Endless feed with no load-more button or paging; give it an end, a count or a way out.',
+  },
 ];
 
 function walk(path, out) {

@@ -91,13 +91,13 @@ const inProject = (dir, tool, ...args) => spawnSync(process.execPath, [join(dir,
 
 test('every JS tool prints its own commands in the one path form when asked for help', () => {
   const dir = projectWithKit();
-  const printing = ['flow.mjs', 'find.mjs', 'get.mjs', 'pieces.mjs', 'recipe.mjs', 'scout.mjs', 'tokens.mjs', 'ui-map.mjs', 'context.mjs', 'audit-design.mjs', 'audit-honesty.mjs', 'audit-a11y.mjs', 'audit-perf.mjs', 'memory.mjs'];
+  const printing = ['flow.mjs', 'find.mjs', 'get.mjs', 'pieces.mjs', 'recipe.mjs', 'scout.mjs', 'tokens.mjs', 'ui-map.mjs', 'context.mjs', 'audit-design.mjs', 'audit-honesty.mjs', 'audit-a11y.mjs', 'audit-perf.mjs', 'memory.mjs', 'technique.mjs'];
   for (const tool of printing) {
     const run = inProject(dir, tool, '--help');
     const text = `${run.stdout}${run.stderr}`;
     assert.ok(!/\b(?:node|python3?) tools\//.test(text), `${tool} --help still prints node tools/: ${text.slice(0, 200)}`);
   }
-  for (const tool of ['flow.mjs', 'get.mjs', 'pieces.mjs', 'recipe.mjs', 'scout.mjs', 'tokens.mjs', 'ui-map.mjs', 'audit-design.mjs']) {
+  for (const tool of ['flow.mjs', 'get.mjs', 'pieces.mjs', 'recipe.mjs', 'scout.mjs', 'tokens.mjs', 'ui-map.mjs', 'audit-design.mjs', 'technique.mjs']) {
     const run = inProject(dir, tool, '--help');
     assert.ok(`${run.stdout}${run.stderr}`.includes(`node ai-frontend-guide-kit/tools/${tool}`), `${tool} --help does not print its own command in the one form`);
   }

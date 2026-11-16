@@ -1345,3 +1345,95 @@ test('flow list names recipe.mjs in direction and compose, and guides/FLOWS.md i
   const flows = readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'guides', 'FLOWS.md'), 'utf8').replace(/\r\n/g, '\n');
   assert.equal(flows, list);
 });
+
+// ---------------------------------------------------------------- the psychology questions of the polish report (T14)
+
+const QUESTIONS = [
+  'Psychology: is it clear in 3 seconds what this is and who it is for?',
+  'Psychology: does one element dominate each viewport (one focal point)?',
+  'Psychology: does the main button say what happens when pressed?',
+  'Psychology: is related information grouped, with room between blocks?',
+  'Psychology: does every action give immediate feedback?',
+  'Psychology: is the social proof specific and credible?',
+  'Psychology: can the user go back, cancel or undo?',
+  'Psychology: is every reward real and proportional to the effort?',
+  'Psychology: does the page end with one clear action?',
+];
+/** The 13 checks the polish report had before the questions. */
+const OLD_POLISH = ['Honesty audit (audit-honesty --strict)', AUDIT_LINE, 'Accessibility audit (axe)', 'Performance audit (LCP, CLS, TBT)', 'Frontend map check (ui-map check)', 'Regression suite (@playwright/test)', 'Console without errors', 'States: empty, loading and error', 'Widths 360, 768 and 1280', 'Keyboard only', 'Reduced motion', 'Craft by hand (one focal point, copy that says what the page does, nothing default-looking)', 'Every finding was fixed and its check run again'];
+
+test('flow report polish writes the nine psychology questions after the old checks, each as an open yes/no line (S12)', () => {
+  const { dir, homeDir } = polishProject();
+  assert.equal(guided(dir, homeDir, 'report', 'polish').status, 0);
+  const text = readFileSync(out(dir, 'reports/polish-report.md'), 'utf8');
+  const lines = text.split('\n').filter((line) => line.startsWith('- [ ]'));
+  assert.equal(lines.length, OLD_POLISH.length + QUESTIONS.length);
+  assert.deepEqual(lines.slice(0, OLD_POLISH.length).map((line) => line.slice(6).replace(/ — result: <…>$/, '')), OLD_POLISH);
+  assert.deepEqual(lines.slice(OLD_POLISH.length).map((line) => line.slice(6).replace(/ — result: <…>$/, '')), QUESTIONS);
+});
+
+test('done polish refuses a report whose psychology question is open, names it, and passes once it is answered with its evidence (S12)', () => {
+  const { dir, homeDir } = polishProject();
+  assert.equal(guided(dir, homeDir, 'report', 'polish').status, 0);
+  closeOtherLines(dir);
+  const file = out(dir, 'reports/polish-report.md');
+  const closed = readFileSync(file, 'utf8').replace(`- [ ] ${AUDIT_LINE} — result: <…>`, `- [x] ${AUDIT_LINE} — result: 0 high`);
+  const open = QUESTIONS[6];
+  writeFileSync(file, closed.replace(`- [x] ${open} — result: ok`, `- [ ] ${open} — result: <…>`));
+  putAudit(dir);
+  const before = raw(dir);
+  assert.match(refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'x'), dir, before), /polish-report\.md: check "Psychology: can the user go back, cancel or undo\?" is not done/);
+  writeFileSync(file, closed.replace(`- [x] ${open} — result: ok`, `- [x] ${open} — result: yes, the Back link and Cancel button on the checkout screen`));
+  const ok = guided(dir, homeDir, 'done', 'polish', '--evidence', 'x');
+  assert.equal(ok.status, 0, ok.stderr);
+});
+
+test('a question can be closed [n/a] with its reason, and still needs the reason (S12)', () => {
+  const { dir, homeDir } = polishProject();
+  assert.equal(guided(dir, homeDir, 'report', 'polish').status, 0);
+  closeOtherLines(dir);
+  const file = out(dir, 'reports/polish-report.md');
+  const base = readFileSync(file, 'utf8').replace(`- [ ] ${AUDIT_LINE} — result: <…>`, `- [x] ${AUDIT_LINE} — result: 0 high`);
+  putAudit(dir);
+  const before = raw(dir);
+  const question = QUESTIONS[5];
+  writeFileSync(file, base.replace(`- [x] ${question} — result: ok`, `- [n/a] ${question}`));
+  assert.match(refusal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'x'), dir, before), /check "Psychology: is the social proof specific and credible\?": write why it does not apply after "reason:"/);
+  writeFileSync(file, base.replace(`- [x] ${question} — result: ok`, `- [n/a] ${question} — reason: the page shows no proof, it is an internal tool`));
+  assert.equal(guided(dir, homeDir, 'done', 'polish', '--evidence', 'x').status, 0);
+});
+
+test('a report written before the questions gets only the nine new lines from flow report polish; what was written stays (S12, previous behavior)', () => {
+  const { dir, homeDir } = polishProject();
+  const file = out(dir, 'reports/polish-report.md');
+  mkdirSync(dirname(file), { recursive: true });
+  const old = ['# Polish report', 'Mark every line.', ...OLD_POLISH.map((check) => `- [x] ${check} — result: kept`), ''].join('\n');
+  writeFileSync(file, old);
+  assert.equal(guided(dir, homeDir, 'report', 'polish').status, 0);
+  const text = readFileSync(file, 'utf8');
+  assert.ok(text.startsWith(old.trimEnd()), 'the old lines are untouched');
+  assert.equal(text.split('\n').filter((line) => line.startsWith('- [ ] Psychology:')).length, QUESTIONS.length);
+});
+
+test('the polish instruction names the psychology lines and keeps its one "Check by hand" row and its 48 lines (S12, previous behavior)', () => {
+  const { dir, homeDir } = polishProject();
+  const text = guided(dir, homeDir, 'next').stdout;
+  assert.equal(text.split('\n').filter((row) => /Check by hand only what no tool measures/.test(row)).length, 1);
+  assert.match(text, /Psychology:/);
+  assert.match(text, /yes or no/);
+  assert.ok(text.trimEnd().split('\n').length <= 48);
+  assert.deepEqual(JSON.parse(guided(dir, homeDir, 'next', '--json').stdout).report.checks.slice(-QUESTIONS.length), QUESTIONS);
+});
+
+test('the other steps with a report (iterate, redesign, visual-feedback) have no psychology lines; their checks are unchanged (S12, previous behavior)', () => {
+  for (const route of ['iterate', 'redesign']) {
+    const dir = project();
+    const homeDir = home();
+    guided(dir, homeDir, 'start', route);
+    put(dir, 'ux/REPO-CONTEXT.md');
+    put(dir, 'UI-MAP.md');
+    guided(dir, homeDir, 'done', 'intake');
+    assert.equal(guided(dir, homeDir, 'report', route).status, 0);
+    assert.doesNotMatch(readFileSync(out(dir, `reports/${route}-report.md`), 'utf8'), /Psychology:/, route);
+  }
+});

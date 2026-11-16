@@ -49,6 +49,7 @@ const REQUIRED_KIT_FILES = [
   'experience/DISCOVERY-LOOP.md',
   'experience/LAYOUT-RULES.md',
   'experience/page-recipes.json',
+  'experience/techniques.json',
   'experience/experience-manifest.json',
   'experience/references/INDEX.md',
   'tools/find.mjs',
@@ -64,6 +65,7 @@ const REQUIRED_KIT_FILES = [
   'tools/tokens.mjs',
   'tools/recipe.mjs',
   'tools/svg.mjs',
+  'tools/technique.mjs',
   'tools/scout.mjs',
   'tools/pieces.mjs',
   'tools/excalidraw-mcp.mjs',
@@ -147,6 +149,7 @@ export function computeFigures() {
     uxskills: skillNames.filter((name) => name === 'userflow' || name.startsWith('flow-')).length,
     guides: readdirSync(join(KIT_DIR, 'guides')).filter((name) => /^\d\d-.*\.md$/.test(name)).length,
     recipes: recipes.length,
+    techniques: JSON.parse(readFileSync(join(KIT_DIR, 'experience', 'techniques.json'), 'utf8')).cards.length,
     tools: readdirSync(join(KIT_DIR, 'tools')).filter((name) => /\.(mjs|py)$/.test(name)).length,
   };
 }

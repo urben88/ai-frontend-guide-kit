@@ -50,7 +50,7 @@ If Playwright MCP is configured, verify the browser once (`npx playwright instal
 4. **Keyboard**: traverse the screen with Tab/Shift+Tab/Enter/Escape; focus must be visible, ordered and trapped only where it should be (modals).
 5. **Reduced motion**: emulate `prefers-reduced-motion: reduce`; animations must degrade to no-motion or opacity-only.
 6. **Responsive**: resize to the project's breakpoints (e.g. 375 / 768 / 1280 / 1536); check layout collapse, overflow and touch targets (≥ 44px).
-7. **Content**: what `audit-design.mjs` cannot measure: one focal point, copy that says what the page does, no boxes-inside-boxes. Sizes, contrast and spacing are already in its list.
+7. **Content**: what `audit-design.mjs` cannot measure: one focal point, copy that says what the page does, no boxes-inside-boxes. Answer the `Psychology:` yes/no lines of the polish report with evidence. Sizes, contrast, spacing, one primary action and choices per group are already in its list.
 8. **Automated a11y and performance**: run the axe and Lighthouse checks from `guides/09-VERIFY.md` (sections 4–5) and the honesty audit (section 6) for conversion flows.
 9. **Fix exactly what was reported**, then re-run the affected checks. No finding is closed without a re-check.
 

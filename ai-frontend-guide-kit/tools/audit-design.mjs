@@ -8,8 +8,8 @@
  * motion, focus, z-index, headings, images, buttons, long forms and menus. It never edits the source.
  *
  * Rendered layer: opens each --url at 360, 768 and 1280 px and measures overflow, target size, real
- * contrast, line length, heading order, overlaps, clipped text, font sizes, the primary actions of the
- * first screen and spacing off the scale. The browser part only reads the page (collectPage); every
+ * contrast, line length, heading order, overlaps, clipped text, font sizes, body text size, the primary
+ * actions of the first screen, choices side by side (Hick) and spacing off the scale. The browser part only reads the page (collectPage); every
  * decision is made by pure functions on plain data (analyzeSnapshot), so they run without a browser.
  *
  * Usage: node ai-frontend-guide-kit/tools/audit-design.mjs [paths...] [--url <url> ...] [--report] [--strict] [--json] [--dir <project>]
@@ -29,7 +29,7 @@ const SKIP = new Set(['node_modules', '.git', 'dist', 'build', '.next', 'ai-fron
 const DEFAULT_TARGETS = ['src', 'app', 'pages', 'components', 'public', 'styles', 'index.html'];
 export const WIDTHS = [360, 768, 1280];
 export const SEVERITIES = ['high', 'medium', 'low'];
-export const LIMITS = { fontSizes: 6, fontFamilies: 2, zIndex: 50, zIndexValues: 6, important: 5, formFields: 7, navItems: 7, minTarget: 24, lineMin: 45, lineMax: 90, outputCap: 60, spacingOffenders: 10 };
+export const LIMITS = { choices: 5, minBodyText: 14, fontSizes: 6, fontFamilies: 2, zIndex: 50, zIndexValues: 6, important: 5, formFields: 7, navItems: 7, minTarget: 24, lineMin: 45, lineMax: 90, outputCap: 60, spacingOffenders: 10 };
 const NO_TOKENS = `skipped: no ${TOKENS_FILE} (run tokens.mjs init)`;
 
 class UsageError extends Error {}
@@ -407,6 +407,7 @@ export function analyzeSnapshot(snapshot, { width, ctx = null }) {
       const chars = Math.min(charsPerLine(node.rect.w, node.fontSize), node.textLength);
       if (chars > LIMITS.lineMax || (chars < LIMITS.lineMin && node.textLength >= 120)) at(node, 'line-length', 'low', `about ${chars} characters per line; body text reads best between ${LIMITS.lineMin} and ${LIMITS.lineMax}`, chars > LIMITS.lineMax ? 'limit the text block to max-width: 65ch (the container.prose token)' : 'widen the text block or reduce its side padding');
     }
+    if (/^(p|li|blockquote|dd)$/.test(node.tag) && node.textLength >= 60 && node.fontSize > 0 && node.fontSize < LIMITS.minBodyText) at(node, 'text-small', 'medium', `body text of ${node.fontSize}px; running text under ${LIMITS.minBodyText}px is hard to read on a phone`, 'use the base size token (16px) for running text; sm (14px) is the smallest');
     if (node.clipped && node.textLength > 0) at(node, 'text-clipped', 'medium', 'the text is cut off by its container', 'let the container grow (min-height, not height) or shorten the text; use an ellipsis only on purpose');
   }
 
@@ -442,6 +443,22 @@ export function analyzeSnapshot(snapshot, { width, ctx = null }) {
 
   const primaries = nodes.filter((node) => node.primary && node.rect.y < page.viewportHeight);
   if (primaries.length > 1) at(primaries[0], 'multiple-primary', 'medium', `review: ${primaries.length} primary-looking actions in the first screen (${primaries.slice(0, 3).map(selectorOf).join(', ')})`, 'review: one primary action per screen; make the others secondary');
+
+  // Hick: more than LIMITS.choices buttons or links side by side in one group slows the decision. Menus (nav) and footers have their own rules; fields are not choices.
+  const within = (start, pattern) => {
+    for (let at2 = start; at2 >= 0; at2 = nodes[at2].parent) if (pattern.test(nodes[at2].tag)) return true;
+    return false;
+  };
+  const choiceGroups = new Map();
+  for (const node of nodes) {
+    if (!node.interactive || !/^(a|button|summary)$/.test(node.tag) || node.parent < 0) continue;
+    const owner = nodes[node.parent].tag === 'li' && nodes[node.parent].parent >= 0 ? nodes[node.parent].parent : node.parent;
+    if (within(owner, /^(nav|footer)$/)) continue;
+    choiceGroups.set(owner, (choiceGroups.get(owner) ?? 0) + 1);
+  }
+  for (const [owner, total] of choiceGroups) {
+    if (total > LIMITS.choices) at(nodes[owner], 'choices-many', 'medium', `review: ${total} choices side by side in ${selectorOf(nodes[owner])}; more than ${LIMITS.choices} slows the decision`, `review: keep at most ${LIMITS.choices} visible, highlight the recommended one and move the rest behind "More" or a filter`);
+  }
 
   if (ctx) {
     const groups = new Map();

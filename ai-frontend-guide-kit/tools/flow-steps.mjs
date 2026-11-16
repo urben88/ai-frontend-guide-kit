@@ -39,6 +39,23 @@ export const DESIGN_AUDIT_CHECK = 'Design audit (audit-design --report)';
 /** The command that runs the design audit and writes its report; the rendered layer only when Playwright is a dependency here. */
 export const designAuditCommand = (env) => env.run('audit-design.mjs', `--report${env.dep('playwright') || env.dep('@playwright/test') ? ' --url <url>' : ''}`);
 
+/**
+ * The yes/no questions of the per-screen psychology checklist that no tool can measure. Each becomes a line of the polish
+ * report: [x] with "yes" or "no" and where it was seen, or [n/a] with the reason. What a tool can measure (one primary action,
+ * choices side by side, target size, menu length, fields per form, contrast, text size) is in audit-design.mjs, not here.
+ */
+export const PSYCHOLOGY_CHECKS = [
+  'Psychology: is it clear in 3 seconds what this is and who it is for?',
+  'Psychology: does one element dominate each viewport (one focal point)?',
+  'Psychology: does the main button say what happens when pressed?',
+  'Psychology: is related information grouped, with room between blocks?',
+  'Psychology: does every action give immediate feedback?',
+  'Psychology: is the social proof specific and credible?',
+  'Psychology: can the user go back, cancel or undo?',
+  'Psychology: is every reward real and proportional to the effort?',
+  'Psychology: does the page end with one clear action?',
+];
+
 /** A repository with its own product document (BMAD PRD, specs) keeps it as the anchor: no PRODUCT.md. */
 export const hasOwnProductDoc = (env) => /bmad|spec/i.test(env.framework);
 const BUILDER_USE = { hallmark: 'new page or section', 'design-taste-frontend': 'app screen' };
@@ -550,6 +567,7 @@ export const PARTS = {
       'Reduced motion',
       'Craft by hand (one focal point, copy that says what the page does, nothing default-looking)',
       'Every finding was fixed and its check run again',
+      ...PSYCHOLOGY_CHECKS,
     ],
     build: (env) => ({
       goal: 'Prove that the screen works and that the craft holds. Fix what each check reports, then run it again.',
@@ -567,7 +585,7 @@ export const PARTS = {
         env.dep('@playwright/test') ? 'Run: npx playwright test' : 'There is no @playwright/test in this project: no regression suite runs. Mark that check [n/a] in the report.',
         env.skill('impeccable') && 'Load the skill impeccable: /impeccable audit <screen>, then /impeccable polish <screen>.',
         env.skill('hallmark') && 'Name the skill hallmark for a second-opinion audit. Report only: it must not rebuild the screen.',
-        'Check by hand only what no tool measures: one focal point (where the eye lands first), copy that says what the page does, nothing that looks like a default.',
+        'Check by hand only what no tool measures: answer every "Psychology:" line of the report with yes or no and where you saw it (focal point, what the button promises, proof, the way back, the closing action), and that nothing looks like a default.',
         'Fix exactly what each check reported and run that check again. A screen is not done with a red check or a console error.',
         `Write the report: ${env.run('flow.mjs', 'report polish')} creates ${OUT}/reports/polish-report.md. Mark each check [x] with its result, or [n/a] with the reason it could not run.`,
       ],

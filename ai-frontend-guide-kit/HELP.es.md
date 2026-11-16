@@ -54,7 +54,8 @@ Se corren desde la raíz del proyecto. Cada una imprime una pantalla, no un volc
 | `tools/audit-a11y.mjs` | Chequeo WCAG 2.x A/AA de una o más URLs con axe-core + Playwright |
 | `tools/audit-perf.mjs` | Presupuesto de Core Web Vitals con Lighthouse: LCP, CLS, TBT |
 | `tools/audit-design.mjs` | Auditoría de diseño: lista numerada de arreglos para colores, tamaños y espaciados fuera de `design-tokens.json`, valores arbitrarios, tamaños de texto, movimiento, foco y encabezados, y (con `--url` y Playwright) desborde a 360/768/1280, contraste, tamaño de los objetivos táctiles, largo de línea y solapes; `--report` alimenta la puerta de `polish` |
-| `tools/audit-honesty.mjs` | Escaneo estático de patrones engañosos en textos y marcado de la interfaz (marca para revisar, nunca prueba de intención) |
+| `tools/audit-honesty.mjs` | Escaneo estático de patrones engañosos en textos y marcado de la interfaz: escasez y urgencia falsas, cuentas atrás, "personas viendo esto", cancelación difícil, suscripciones que nunca dicen cancelar, botones de rechazo diminutos, comisiones, casillas premarcadas, diálogos sin cierre, feeds infinitos (marca para revisar, nunca prueba de intención) |
+| `tools/technique.mjs` | El repertorio de técnicas en `experience/techniques.json`: <!--fig:techniques-->133<!--/fig--> fichas cortas (cuándo usar, cuándo no, pasos, comprobación, coste, alternativa, direcciones de estilo) de layout, tipografía, color, movimiento, imagen, 3D, SVG, interacción, contenido, dirección y psicología; las de tipo external dan el prompt para una herramienta fuera del kit. `check` valida el archivo |
 | `install.mjs` | Copia el kit al proyecto, agrega el bloque de ruteo, crea la carpeta de memoria, corre el primer escaneo y opcionalmente instala skills y servidores MCP |
 
 ## Skills
