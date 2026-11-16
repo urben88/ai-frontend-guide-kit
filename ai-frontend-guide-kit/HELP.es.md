@@ -55,7 +55,7 @@ Se corren desde la raíz del proyecto. Cada una imprime una pantalla, no un volc
 | `tools/audit-perf.mjs` | Presupuesto de Core Web Vitals con Lighthouse: LCP, CLS, TBT |
 | `tools/audit-design.mjs` | Auditoría de diseño: lista numerada de arreglos para colores, tamaños y espaciados fuera de `design-tokens.json`, valores arbitrarios, tamaños de texto, movimiento, foco y encabezados, y (con `--url` y Playwright) desborde a 360/768/1280, contraste, tamaño de los objetivos táctiles, largo de línea y solapes; `--report` alimenta la puerta de `polish` |
 | `tools/audit-honesty.mjs` | Escaneo estático de patrones engañosos en textos y marcado de la interfaz: escasez y urgencia falsas, cuentas atrás, "personas viendo esto", cancelación difícil, suscripciones que nunca dicen cancelar, botones de rechazo diminutos, comisiones, casillas premarcadas, diálogos sin cierre, feeds infinitos (marca para revisar, nunca prueba de intención) |
-| `tools/technique.mjs` | El repertorio de técnicas en `experience/techniques.json`: <!--fig:techniques-->133<!--/fig--> fichas cortas (cuándo usar, cuándo no, pasos, comprobación, coste, alternativa, direcciones de estilo) de layout, tipografía, color, movimiento, imagen, 3D, SVG, interacción, contenido, dirección y psicología; las de tipo external dan el prompt para una herramienta fuera del kit. `check` valida el archivo |
+| `tools/technique.mjs` | El repertorio de técnicas en `experience/techniques.json`: <!--fig:techniques-->133<!--/fig--> fichas cortas (cuándo usar, cuándo no, pasos, comprobación, coste, alternativa, direcciones de estilo) de layout, tipografía, color, movimiento, imagen, 3D, SVG, interacción, contenido, dirección y psicología; las de tipo external dan el prompt para una herramienta fuera del kit. `find "<need>"` y `get <id>` responden en menos de 1 KB, `digest` escribe la lista de una página `experience/TECHNIQUES.md`, `check` valida el archivo |
 | `install.mjs` | Copia el kit al proyecto, agrega el bloque de ruteo, crea la carpeta de memoria, corre el primer escaneo y opcionalmente instala skills y servidores MCP |
 
 ## Skills
@@ -68,6 +68,13 @@ Las skills son aceleradores opcionales. Los archivos del kit siempre ganan sobre
 | `frontend-polish` | Fase 3: auditorías externas + loop de Playwright MCP + regresión |
 | `frontend-refactor` | Solo si lo pedís explícitamente: mapea las carpetas a los roles de FSD y refactoriza una slice por vez, corriendo `ui-map build` y `check` después de cada una |
 | `svg-craft` | Iconos, ilustraciones, divisores y patrones: se generan con `svg.mjs gen` o se dibujan en una rejilla de 24, y luego `check` y `optimize` |
+| `technique-layout` | composición de página: rejillas, hero, ritmo, móvil; loaded only at its step, with `technique.mjs find --area layout` |
+| `technique-type` | fuentes, escala, titulares, texto sobre imagen; loaded only at its step, with `technique.mjs find --area type` |
+| `technique-color` | paleta, acentos, degradados, modo oscuro real; loaded only at its step, with `technique.mjs find --area color` |
+| `technique-motion` | animación con propósito y alternativa sin movimiento; loaded only at its step, with `technique.mjs find --area motion` |
+| `technique-imagery` | dirección de arte, marcadores, prompts para herramientas de imagen; loaded only at its step, with `technique.mjs find --area imagery` |
+| `technique-3d` | escena en texto primero, alternativa 2D, presupuesto; loaded only at its step, with `technique.mjs find --area 3d` |
+| `technique-psychology` | atención, elección, formularios, pruebas, urgencia honesta; loaded only at its step, with `technique.mjs find --area psychology` |
 | `ux-map` | El mapa de pantallas y navegación en `ai-frontend-output/ux/ux-map.excalidraw` |
 | `userflow` | Dispatcher de las skills de flujo; también `userflow audit` para una pantalla |
 | `flow-onboarding` | Primera vez, activación y configuración inicial |

@@ -11,6 +11,8 @@ Total polish of what was built. `flow.mjs next` prints the commands and the repo
 - React projects: offer the user the human round (they point at elements with Agentation, `steps/visual-feedback.md`) for fine tweaks, once, at the end. Never require it.
 - Fill the report line by line: `[x]` with the result, or `[n/a]` with the reason.
 
+- For the `Psychology:` lines of the report load `technique-psychology`; `audit-design.mjs` and `audit-honesty.mjs` measure what they can.
+
 ## Common mistakes
 
 - Declaring spacing or contrast "fine" by eye while the audit lists a finding.

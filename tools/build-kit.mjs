@@ -14,12 +14,13 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { ROOT, MANIFEST_DIR } from './extract/lib.mjs';
+import { renderDigest } from '../ai-frontend-guide-kit/tools/technique.mjs';
 
 const KIT_DIR = join(ROOT, 'ai-frontend-guide-kit');
 const CATALOG_DIR = join(KIT_DIR, 'catalog');
 
 const CATALOG_FILES = ['component-manifest.json', 'component-manifest.md', 'taxonomy.md', 'install-guides.md', 'schema.json', 'license-report.md', 'component-types.json'];
-const REQUIRED_KIT_FILES = [
+export const REQUIRED_KIT_FILES = [
   'AGENTS.md',
   'INDEX.md',
   'README.md',
@@ -50,6 +51,7 @@ const REQUIRED_KIT_FILES = [
   'experience/LAYOUT-RULES.md',
   'experience/page-recipes.json',
   'experience/techniques.json',
+  'experience/TECHNIQUES.md',
   'experience/experience-manifest.json',
   'experience/references/INDEX.md',
   'tools/find.mjs',
@@ -105,7 +107,10 @@ const FLOW_SKILLS = [
 // One file per flow step, loaded only at that step (skills/ai-frontend-guide/steps/<step>.md).
 const STEP_SKILLS = ['intake', 'direction', 'ux', 'tokens', 'compose', 'iterate', 'redesign', 'polish', 'visual-feedback', 'architecture'];
 
-const REQUIRED_REPO_FILES = [
+export // One small skill per technique area (svg is served by svg-craft), loaded only at its step.
+const TECHNIQUE_SKILLS = ['layout', 'type', 'color', 'motion', 'imagery', '3d', 'psychology'];
+
+export const REQUIRED_REPO_FILES = [
   'skills/UX-SKILLS-ORIGIN.md',
   'skills/UX-SKILLS-LICENSE',
   'skills/ai-frontend-guide/SKILL.md',
@@ -114,6 +119,7 @@ const REQUIRED_REPO_FILES = [
   'skills/frontend-refactor/SKILL.md',
   'skills/ux-map/SKILL.md',
   'skills/svg-craft/SKILL.md',
+  ...TECHNIQUE_SKILLS.map((area) => `skills/technique-${area}/SKILL.md`),
   'skills/userflow/SKILL.md',
   'skills/userflow/report-template.html',
   ...FLOW_SKILLS.map((name) => `skills/${name}/SKILL.md`),
@@ -220,6 +226,12 @@ function dirSize(dir) {
   return total;
 }
 
+/** The digest experience/TECHNIQUES.md, regenerated from techniques.json so it never drifts. */
+function writeTechniqueDigest() {
+  const data = JSON.parse(readFileSync(join(KIT_DIR, 'experience', 'techniques.json'), 'utf8'));
+  writeFileSync(join(KIT_DIR, 'experience', 'TECHNIQUES.md'), renderDigest(data));
+}
+
 function main() {
   if (!existsSync(MANIFEST_DIR)) throw new Error('manifest/ does not exist. Run the extraction scripts first.');
 
@@ -241,6 +253,7 @@ function main() {
     process.exit(1);
   }
 
+  writeTechniqueDigest();
   const missing = REQUIRED_KIT_FILES.filter((file) => !existsSync(join(KIT_DIR, file)));
   if (missing.length > 0) {
     console.error(`Kit build FAILED. Missing assets:\n- ${missing.join('\n- ')}`);
@@ -278,7 +291,7 @@ function main() {
   console.log(`kit: ${REQUIRED_KIT_FILES.length} required assets present, ${sourceFiles.length} source files synced`);
   console.log(`kit: experience manifest OK (${experienceEntries} entries, unique ids, required fields)`);
   console.log(`kit: ${FLOW_SKILLS.length + 1} UX skills vendored (userflow + ${FLOW_SKILLS.length} flow-*) with license + origin pin`);
-  console.log(`kit: ${computeFigures().skills} repo skills verified (ai-frontend-guide + its ${STEP_SKILLS.length} step files + frontend-polish + frontend-refactor + ux-map + svg-craft + userflow + ${FLOW_SKILLS.length} UX flow skills)`);
+  console.log(`kit: ${computeFigures().skills} repo skills verified (ai-frontend-guide + its ${STEP_SKILLS.length} step files + frontend-polish + frontend-refactor + ux-map + svg-craft + ${TECHNIQUE_SKILLS.length} technique-* + userflow + ${FLOW_SKILLS.length} UX flow skills)`);
   console.log(`kit: catalog coherent with manifest: ${coherent ? 'yes' : 'NO'}`);
   console.log(`kit: total size ${(totalBytes / 1024 / 1024).toFixed(2)} MB at ${relative(ROOT, KIT_DIR)}`);
   if (!coherent) process.exit(1);

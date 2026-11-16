@@ -1437,3 +1437,74 @@ test('the other steps with a report (iterate, redesign, visual-feedback) have no
     assert.doesNotMatch(readFileSync(out(dir, `reports/${route}-report.md`), 'utf8'), /Psychology:/, route);
   }
 });
+
+// ---------------------------------------------------------------- technique sets and area skills (T12, S10)
+
+const EDITORIAL_BRIEF = VALID_BRIEF.replace('id: market', 'id: editorial');
+const TECHNIQUE_IDS = new Map(JSON.parse(readFileSync(join(ROOT, 'ai-frontend-guide-kit', 'experience', 'techniques.json'), 'utf8')).cards.map((card) => [card.id, card]));
+const techniqueLine = (text) => text.split('\n').find((row) => /Techniques that fit the direction/.test(row)) ?? '';
+const withSkill = (homeDir, name) => mkdirSync(join(homeDir, '.claude', 'skills', name), { recursive: true });
+
+for (const [step, extra] of [['tokens', {}], ['compose', { parts_done: ['inventory', 'find', 'decide'] }]]) {
+  test(`${step}: flow next proposes at most 5 technique cards that fit the direction recorded in the brief (T12)`, () => {
+    const dir = project();
+    const homeDir = home();
+    stateAt(dir, step, extra);
+    put(dir, BRIEF, EDITORIAL_BRIEF);
+    const text = guided(dir, homeDir, 'next').stdout;
+    const line = techniqueLine(text);
+    assert.match(line, /direction "editorial"/);
+    const ids = [...line.matchAll(/`([a-z0-9-]+)`/g)].map((match) => match[1]);
+    assert.ok(ids.length >= 3 && ids.length <= 5, `${ids.length} ids in: ${line}`);
+    for (const id of ids) assert.ok(TECHNIQUE_IDS.get(id)?.directions.includes('editorial'), `${id} fits editorial`);
+    assert.match(text, /technique\.mjs get <id>/);
+    assert.ok(text.trimEnd().split('\n').length <= 48, `${text.trimEnd().split('\n').length} lines`);
+    assert.deepEqual(JSON.parse(guided(dir, homeDir, 'next', '--json').stdout).do.filter((row) => /Techniques that fit/.test(row)).length, 1);
+  });
+
+  test(`${step}: with no direction recorded, flow next prints the find command instead (T12)`, () => {
+    const dir = project();
+    const homeDir = home();
+    stateAt(dir, step, extra);
+    const text = guided(dir, homeDir, 'next').stdout;
+    assert.doesNotMatch(text, /Techniques that fit the direction/);
+    assert.match(text, /No direction is recorded yet[^\n]*technique\.mjs find "<need>"/);
+    put(dir, BRIEF, VALID_BRIEF);
+    assert.match(guided(dir, homeDir, 'next').stdout, /No direction is recorded yet/, 'a brief whose direction is not a style of the kit proposes nothing');
+    assert.ok(text.trimEnd().split('\n').length <= 48);
+  });
+}
+
+test('the direction recorded by memory.mjs (direction:<id>) is read when the brief has none (T12)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'tokens');
+  put(dir, 'selections.jsonl', `${JSON.stringify({ screen: 'experience', block: 'direction', decision: 'adapt', ref: 'direction:swiss' })}\n`);
+  assert.match(techniqueLine(guided(dir, homeDir, 'next').stdout), /direction "swiss"/);
+});
+
+test('a part names an area skill only when it is installed, and the other parts stay as they were (T12, previous behavior)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'tokens');
+  assert.doesNotMatch(guided(dir, homeDir, 'next').stdout, /technique-(type|color)/);
+  withSkill(homeDir, 'technique-type');
+  withSkill(homeDir, 'technique-color');
+  assert.match(guided(dir, homeDir, 'next').stdout, /skill technique-type[^\n]*technique-color|skills technique-type and technique-color/);
+  const adapt = project();
+  stateAt(adapt, 'compose', { parts_done: ['inventory', 'find', 'decide'] });
+  for (const name of ['technique-layout', 'technique-motion', 'technique-imagery', 'technique-3d']) withSkill(homeDir, name);
+  const adaptText = guided(adapt, homeDir, 'next').stdout;
+  for (const name of ['technique-layout', 'technique-motion', 'technique-imagery', 'technique-3d']) assert.ok(adaptText.includes(name), name);
+  assert.ok(adaptText.trimEnd().split('\n').length <= 48, `${adaptText.trimEnd().split('\n').length} lines`);
+  const polish = project();
+  stateAt(polish, 'polish');
+  assert.doesNotMatch(guided(polish, home(), 'next').stdout, /technique-psychology/);
+  withSkill(homeDir, 'technique-psychology');
+  assert.match(guided(polish, homeDir, 'next').stdout, /technique-psychology/);
+  for (const [step, extra] of [['direction', {}], ['compose', { parts_done: ['inventory'] }]]) {
+    const other = project();
+    stateAt(other, step, extra);
+    assert.doesNotMatch(guided(other, homeDir, 'next').stdout, /technique/i, `${step}: no technique line in a part that does not need one`);
+  }
+});

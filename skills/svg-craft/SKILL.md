@@ -7,6 +7,8 @@ description: "Use when the page needs an icon, a spot illustration, a section di
 
 The tool is `ai-frontend-guide-kit/tools/svg.mjs` (run it as `flow.mjs next` prints it). Colors always come from `design-tokens.json`: `var(--color-primary, #hex)`, so the drawing follows the theme.
 
+More techniques (icon and illustration systems): `node ai-frontend-guide-kit/tools/technique.mjs find --area svg`, then `get <id>`.
+
 ## Generate or draw
 
 | Need | Do |

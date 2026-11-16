@@ -55,7 +55,7 @@ Run them from the project root. Every tool prints one screen, not a dump.
 | `tools/audit-perf.mjs` | Lighthouse Core Web Vitals budget: LCP, CLS, TBT |
 | `tools/audit-design.mjs` | Design audit: a numbered list of fixes for colors, sizes and spacing outside `design-tokens.json`, arbitrary values, type sizes, motion, focus, headings, plus (with `--url` and Playwright) overflow at 360/768/1280, contrast, target size, body text size, line length, overlaps, one primary action and more than 5 choices side by side; `--report` feeds the `polish` gate |
 | `tools/audit-honesty.mjs` | Static scan for deceptive-pattern tells in UI copy and markup: false scarcity and urgency, countdowns, "people viewing" claims, hard cancellation, subscriptions that never say cancel, tiny decline buttons, fees, pre-checked boxes, dialogs with no close, endless feeds (flags to review, never proof of intent) |
-| `tools/technique.mjs` | The technique repertoire in `experience/techniques.json`: <!--fig:techniques-->133<!--/fig--> short cards (when to use, when not, steps, check, cost, fallback, style directions) for layout, type, color, motion, imagery, 3D, SVG, interaction, content, direction and psychology; cards of kind external give the prompt for a tool outside the kit. `check` validates the file |
+| `tools/technique.mjs` | The technique repertoire in `experience/techniques.json`: <!--fig:techniques-->133<!--/fig--> short cards (when to use, when not, steps, check, cost, fallback, style directions) for layout, type, color, motion, imagery, 3D, SVG, interaction, content, direction and psychology; cards of kind external give the prompt for a tool outside the kit. `find "<need>"` and `get <id>` answer under 1 KB, `digest` writes the one-page list `experience/TECHNIQUES.md`, `check` validates the file |
 | `install.mjs` | Copies the kit into a project, adds the routing block, creates the memory folder, runs the first map scan, optionally installs skills and MCP servers |
 
 ## Skills
@@ -68,6 +68,13 @@ Skills are optional accelerators. The kit's files always win over a skill's defa
 | `frontend-polish` | Phase 3: external audits + Playwright MCP loop + regression |
 | `frontend-refactor` | Only on explicit request: maps folders to FSD roles and refactors one slice at a time, checking `ui-map build` and `check` after each one |
 | `svg-craft` | Icons, spot illustrations, dividers and patterns: generate with `svg.mjs gen` or draw on a 24 grid, then `check` and `optimize` |
+| `technique-layout` | page composition: grids, hero, rhythm, mobile; loaded only at its step, with `technique.mjs find --area layout` |
+| `technique-type` | fonts, scale, headlines, text on images; loaded only at its step, with `technique.mjs find --area type` |
+| `technique-color` | palette, accents, gradients, real dark mode; loaded only at its step, with `technique.mjs find --area color` |
+| `technique-motion` | animation with a purpose and a reduced-motion fallback; loaded only at its step, with `technique.mjs find --area motion` |
+| `technique-imagery` | art direction, placeholders, prompts for image tools; loaded only at its step, with `technique.mjs find --area imagery` |
+| `technique-3d` | scene text first, fallback, performance budget; loaded only at its step, with `technique.mjs find --area 3d` |
+| `technique-psychology` | attention, choice, forms, proof, honest urgency; loaded only at its step, with `technique.mjs find --area psychology` |
 | `ux-map` | The screen/navigation map in `ai-frontend-output/ux/ux-map.excalidraw` |
 | `userflow` | Dispatcher for the UX flow skills; also `userflow audit` for one surface |
 | `flow-onboarding` | First-run, activation and setup patterns |

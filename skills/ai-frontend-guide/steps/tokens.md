@@ -11,6 +11,8 @@ Colors, type, spacing and motion become data. `flow.mjs next` prints the command
 - A reference system (`find.mjs --type design-system`) is raw material for choosing values, not a file to copy.
 - Dark theme only when the brief says so (for example a console).
 
+- Technique skills, only here: `technique-type` for fonts and scale, `technique-color` for the palette. `flow.mjs next` names them when installed.
+
 ## Common mistakes
 
 - Writing `DESIGN.md` tables by hand: `tokens.mjs doc` writes them between its markers.

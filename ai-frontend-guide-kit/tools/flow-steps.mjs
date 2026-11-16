@@ -11,7 +11,8 @@
  *   env.dep(name)        is that package a dependency? env.laya       did the user grant Laya?
  *   env.uxPresent        true | false | null (no context scan yet)
  *   env.framework        the spec framework the scan detected ('' when none)
- *   env.dark             true when the brief's navigation_model is console (a dashboard or tool: dark tokens from day one)
+ *   env.techniques(areas) the style direction(s) the project recorded and the few technique cards of those areas that fit them ({ directions, ids })
+ *   env.dark            true when the brief's navigation_model is console (a dashboard or tool: dark tokens from day one)
  *   env.hasProduct       does PRODUCT.md exist?   env.hasBrief  does EXPERIENCE-BRIEF.md exist?   env.hasMap  does ux-map.excalidraw exist?
  *
  * A part may also carry `report`: the fixed checklist of a step that closes with free evidence
@@ -55,6 +56,29 @@ export const PSYCHOLOGY_CHECKS = [
   'Psychology: is every reward real and proportional to the effort?',
   'Psychology: does the page end with one clear action?',
 ];
+
+/**
+ * The line that proposes technique cards. With a direction recorded in the project the tool picks the few cards that fit it
+ * (the model does not browse); with none it prints the find command instead.
+ */
+export const techniqueLine = (env, areas) => {
+  const { directions, ids } = env.techniques(areas);
+  const get = env.run('technique.mjs', 'get <id>');
+  if (directions.length && ids.length) {
+    const more = env.run('technique.mjs', `find "<need>" --direction ${directions[0]}`);
+    return `Techniques that fit the direction "${directions.join(' + ')}": ${ids.map((id) => `\`${id}\``).join(', ')}. Read one: ${get}. Apply at most 2 per screen; more: ${more}`;
+  }
+  if (directions.length) return `No technique card of this step names the direction "${directions.join(' + ')}". Find: ${env.run('technique.mjs', `find "<need>" --direction ${directions[0]}`)} Read one: ${get}`;
+  return `No direction is recorded yet. Find techniques: ${env.run('technique.mjs', 'find "<need>"')} (add --area layout|type|color|motion|imagery|3d|psychology). Read one: ${get}`;
+};
+
+/** A line that names the area skills that are installed here (none installed: no line); each carries the rules of its area. */
+export const areaSkills = (env, names, use) => {
+  const have = names.filter((name) => env.skill(name));
+  if (!have.length) return false;
+  const list = have.length > 1 ? `${have.slice(0, -1).join(', ')} and ${have.at(-1)}` : have[0];
+  return `Load the skill${have.length > 1 ? 's' : ''} ${list} for ${use}: each lists when to use a technique, how to check it and which cards matter.`;
+};
 
 /** A repository with its own product document (BMAD PRD, specs) keeps it as the anchor: no PRODUCT.md. */
 export const hasOwnProductDoc = (env) => /bmad|spec/i.test(env.framework);
@@ -379,6 +403,8 @@ export const PARTS = {
         `Write the token tables of DESIGN.md. Run: ${env.run('tokens.mjs', 'doc')}`,
         'Replace the <…> line under Visual intent in DESIGN.md with one paragraph you can quote when choosing components.',
         `The layout numbers that sit on these tokens (container, grid, section padding, type step per heading) are in ${env.kit('experience/LAYOUT-RULES.md')}. Follow them; do not choose them by eye.`,
+        areaSkills(env, ['technique-type', 'technique-color'], 'the type and color choices'),
+        techniqueLine(env, ['type', 'color', 'layout']),
         env.skill('impeccable') && 'Load the skill impeccable and follow its guidelines for the token choices.',
       ],
       done: ['design-tokens.json exists and the check command prints no failure (body text is 4.5:1 or more on its surface).', 'DESIGN.md has every section filled, with the token tables and a Visual intent paragraph.', 'The global CSS gets the @theme block from the css command.'],
@@ -470,6 +496,8 @@ export const PARTS = {
           'Replace linear transitions with springs; keep at most 2 high-impact animated blocks per view; give a static fallback under prefers-reduced-motion.',
           'The same component on three screens is one shared component, not three copies.',
           `Decorative shapes, dividers, patterns and icons come from ${env.run('svg.mjs', 'gen <kind> --out <file>')} (kinds: ${env.run('svg.mjs', 'gen --list')}); every drawn or imported SVG passes ${env.run('svg.mjs', 'check <file> --strict')}.${env.skill('svg-craft') ? ' Load the skill svg-craft for the drawing method.' : ''}`,
+          areaSkills(env, ['technique-layout', 'technique-motion', 'technique-imagery', 'technique-3d'], 'layout, motion, images and 3D'),
+          techniqueLine(env, ['layout', 'motion', 'imagery', 'svg', '3d']),
           `Register each catalog component that landed: ${env.run('get.mjs', '<id> --landed <path of the file>')}`,
           `Register each build: ${env.run('pieces.mjs', 'add <name> --level micro|small|medium|large --file <path of the file>')}`,
           `After editing a registered piece: ${env.run('pieces.mjs', 'version <name> --note "<what changed>"')}`,
@@ -586,6 +614,7 @@ export const PARTS = {
         env.skill('impeccable') && 'Load the skill impeccable: /impeccable audit <screen>, then /impeccable polish <screen>.',
         env.skill('hallmark') && 'Name the skill hallmark for a second-opinion audit. Report only: it must not rebuild the screen.',
         'Check by hand only what no tool measures: answer every "Psychology:" line of the report with yes or no and where you saw it (focal point, what the button promises, proof, the way back, the closing action), and that nothing looks like a default.',
+        areaSkills(env, ['technique-psychology'], 'the Psychology lines of the report'),
         'Fix exactly what each check reported and run that check again. A screen is not done with a red check or a console error.',
         `Write the report: ${env.run('flow.mjs', 'report polish')} creates ${OUT}/reports/polish-report.md. Mark each check [x] with its result, or [n/a] with the reason it could not run.`,
       ],

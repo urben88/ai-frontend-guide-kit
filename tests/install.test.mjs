@@ -160,3 +160,33 @@ test('the block makes the catalog search the mandatory first step, in source ord
   assert.ok(block.indexOf('ReUI') < block.indexOf('shadcn/ui') && block.indexOf('shadcn/ui') < block.indexOf('Shadcn Space'));
   assert.match(block, /only after a search found nothing/);
 });
+
+test('the block sends every agent to the technique repertoire in one line, and stays short (T13, S11)', () => {
+  const target = project();
+  assert.equal(run(target, 'init').status, 0);
+  for (const file of ['AGENTS.md', 'CLAUDE.md']) {
+    const block = blockOf(read(target, file));
+    const lines = block.split('\n').filter((row) => row.includes('technique.mjs find'));
+    assert.equal(lines.length, 1, `${file}: one line points at the repertoire`);
+    assert.ok(lines[0].includes('node ai-frontend-guide-kit/tools/technique.mjs find "<need>"'), lines[0]);
+    assert.match(lines[0], /layout, type, color, motion, imagery, 3D/);
+    assert.ok(lines[0].includes('get <id>'));
+    assert.ok(block.split('\n').length <= 30, `${block.split('\n').length} lines`);
+    assert.ok(!/optional/i.test(block));
+  }
+});
+
+test('a block written before the repertoire existed is refreshed in place, keeps the markers and the text around it (T13, previous behavior)', () => {
+  const target = project();
+  const old = `# Mine\n\nbefore\n\n${START}\n## Frontend, UI and design: always this flow\nold text\n${END}\n\nafter\n`;
+  put(target, 'AGENTS.md', old);
+  const first = run(target, 'update');
+  assert.equal(first.status, 0, first.stderr);
+  assert.match(first.stdout, /AGENTS\.md: kit routing block updated/);
+  const text = read(target, 'AGENTS.md');
+  assert.ok(text.startsWith('# Mine\n\nbefore\n\n'));
+  assert.ok(text.endsWith(`${END}\n\nafter\n`));
+  assert.equal(count(text, START), 1);
+  assert.ok(blockOf(text).includes('technique.mjs find'));
+  assert.match(run(target, 'update').stdout, /AGENTS\.md: kit routing block unchanged/);
+});

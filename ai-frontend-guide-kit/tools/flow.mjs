@@ -34,6 +34,7 @@ import { fileURLToPath } from 'node:url';
 import { kitFile, kitPath, quotePath, runTool } from './kit-path.mjs';
 import { changedPieces, registeredPiece } from './pieces.mjs';
 import { DESIGN_AUDIT_CHECK, PARTS, designAuditCommand, hasOwnProductDoc } from './flow-steps.mjs';
+import { directionCards, loadCards, resolveDirections, styleDirections } from './technique.mjs';
 import { GATES, mergeReport, mergeTemplate, parseDesignAudit, prefillAudit, reportProblems } from './flow-gates.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -276,6 +277,16 @@ function environment(p) {
     hasProduct: existsSync(join(p.root, 'PRODUCT.md')),
     hasBrief: existsSync(join(p.out, 'ux', 'EXPERIENCE-BRIEF.md')),
     hasMap: existsSync(join(p.out, 'ux', 'ux-map.excalidraw')),
+    techniques: (areas) => {
+      try {
+        const found = resolveDirections(readText(join(p.out, 'ux', 'EXPERIENCE-BRIEF.md')), readText(join(p.out, 'selections.jsonl')), styleDirections());
+        const data = loadCards();
+        const cards = found.flatMap((direction) => directionCards(data, direction, found.length > 1 ? 3 : 5, areas));
+        return { directions: found, ids: [...new Set(cards.map((card) => card.id))].slice(0, 5) };
+      } catch {
+        return { directions: [], ids: [] };
+      }
+    },
     dark: /navigation_model\s*:\s*`?console/i.test(readText(join(p.out, 'ux', 'EXPERIENCE-BRIEF.md'))),
   };
 }

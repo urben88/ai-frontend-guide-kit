@@ -42,7 +42,7 @@ It gives the goal, the exact commands, the template and the done criteria of one
 - `find.mjs`, `get.mjs`: search the catalog, read one entry, register what landed. `scout.mjs`: study a component site the user links.
 - `audit-design.mjs` (`--report`), `audit-a11y.mjs`, `audit-honesty.mjs`, `audit-perf.mjs`: audit before closing.
 - `svg.mjs`: SVG icons, dividers and patterns (`gen` from the tokens, `check`, `optimize`, `sprite`).
-- `technique.mjs`: the repertoire in `experience/techniques.json` (<!--fig:techniques-->133<!--/fig--> cards: techniques and psychology principles; `check` validates it).
+- `technique.mjs`: the repertoire (<!--fig:techniques-->133<!--/fig--> cards of layout, type, color, motion, imagery, 3D, psychology): `node ai-frontend-guide-kit/tools/technique.mjs find "<need>"`, then `get <id>`; one page by area: `experience/TECHNIQUES.md`.
 - `excalidraw-mcp.mjs`: draw the screen map. `laya_select.py`: rank candidates, only after the user agrees.
 
 ## Rules that always hold

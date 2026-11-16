@@ -13,6 +13,8 @@ Build each screen from what exists. `flow.mjs next` prints each part and its exa
 - Adapt: make every piece look like this product (tokens, copy, states) and register it. Keep high-impact animation to 1 or 2 per view and respect the brief's anti-generic list.
 - `hallmark` and `design-taste-frontend` build only for a row with decision `build`, and only after the search for that block.
 
+- Technique skills, only here and only for what the screen needs: `technique-layout`, `technique-motion`, `technique-imagery`, `technique-3d` (3D only when asked). `flow.mjs next` proposes the cards that fit the chosen direction.
+
 ## Common mistakes
 
 - Writing a component first and searching afterwards.

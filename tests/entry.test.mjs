@@ -204,3 +204,23 @@ test('the installer block is short, in the one path form, and an older block is 
   assert.ok(!block.includes('old text'));
   for (const piece of ['ai-frontend-guide-kit/INDEX.md', 'flow.mjs status', 'flow.mjs next', 'exactly', 'Catalog first', 'HELP.md', 'diseño']) assert.ok(block.includes(piece), `block misses ${piece}`);
 });
+
+// ---------------------------------------------------------------- the technique repertoire in the entry (weak-model-design T13, S11)
+
+test('INDEX.md points at the technique repertoire in one line and stays within its limit', () => {
+  const text = read('ai-frontend-guide-kit', 'INDEX.md');
+  const rows = text.split('\n').filter((row) => row.includes('technique.mjs find'));
+  assert.equal(rows.length, 1, 'one line names the find command');
+  assert.ok(rows[0].includes('node ai-frontend-guide-kit/tools/technique.mjs find "<need>"'), rows[0]);
+  assert.ok(text.includes('experience/TECHNIQUES.md'), 'names the one-page digest');
+  assert.ok(text.trimEnd().split('\n').length <= 70);
+});
+
+test('HELP.md and HELP.es.md and the tools line of INDEX.md describe find, get and the digest', () => {
+  for (const file of ['HELP.md', 'HELP.es.md', 'INDEX.md']) {
+    const text = read('ai-frontend-guide-kit', file);
+    const rows = text.split('\n').filter((row) => row.includes('technique.mjs'));
+    assert.ok(rows.some((row) => /\bfind\b/.test(row) && /\bget\b/.test(row)), `${file} describes find and get`);
+    assert.ok(text.includes('TECHNIQUES.md'), `${file} names the digest`);
+  }
+});

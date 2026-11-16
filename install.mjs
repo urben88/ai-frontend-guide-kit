@@ -35,6 +35,7 @@ Catalog first, no exceptions: before writing ANY component, section, form or ani
 \`node ai-frontend-guide-kit/tools/find.mjs "<need>"\`, then \`node ai-frontend-guide-kit/tools/get.mjs <id>\`, and use what it finds
 (ReUI, shadcn/ui and Shadcn Space come first). Build new code only after a search found nothing that fits, and say so with the reason.
 Before creating or changing UI: \`node ai-frontend-guide-kit/tools/ui-map.mjs have <name>\` and \`ui-map.mjs impact <role|component>\`; read \`ai-frontend-output/UI-MAP.md\`, never explore the repo.
+Design techniques (layout, type, color, motion, imagery, 3D, psychology): \`node ai-frontend-guide-kit/tools/technique.mjs find "<need>"\`, then \`get <id>\`; never invent a technique from memory.
 External design skills (landing-page-design, hallmark, design-taste-frontend, emilkowalski, impeccable) never start the work; each runs only at the step \`flow.mjs next\` names.
 Triggers: design, redesign, restyle, UI, UX, look and feel, theme, colors, typography, fonts, spacing, layout, screen, page,
 landing, dashboard, component, form, animation, polish; diseño, rediseñar, estilo, aspecto, tema, colores, tipografía,
