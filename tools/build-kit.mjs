@@ -63,6 +63,7 @@ const REQUIRED_KIT_FILES = [
   'tools/kit-path.mjs',
   'tools/tokens.mjs',
   'tools/recipe.mjs',
+  'tools/svg.mjs',
   'tools/scout.mjs',
   'tools/pieces.mjs',
   'tools/excalidraw-mcp.mjs',
@@ -110,6 +111,7 @@ const REQUIRED_REPO_FILES = [
   'skills/frontend-polish/SKILL.md',
   'skills/frontend-refactor/SKILL.md',
   'skills/ux-map/SKILL.md',
+  'skills/svg-craft/SKILL.md',
   'skills/userflow/SKILL.md',
   'skills/userflow/report-template.html',
   ...FLOW_SKILLS.map((name) => `skills/${name}/SKILL.md`),
@@ -273,7 +275,7 @@ function main() {
   console.log(`kit: ${REQUIRED_KIT_FILES.length} required assets present, ${sourceFiles.length} source files synced`);
   console.log(`kit: experience manifest OK (${experienceEntries} entries, unique ids, required fields)`);
   console.log(`kit: ${FLOW_SKILLS.length + 1} UX skills vendored (userflow + ${FLOW_SKILLS.length} flow-*) with license + origin pin`);
-  console.log(`kit: ${computeFigures().skills} repo skills verified (ai-frontend-guide + its ${STEP_SKILLS.length} step files + frontend-polish + frontend-refactor + ux-map + userflow + ${FLOW_SKILLS.length} UX flow skills)`);
+  console.log(`kit: ${computeFigures().skills} repo skills verified (ai-frontend-guide + its ${STEP_SKILLS.length} step files + frontend-polish + frontend-refactor + ux-map + svg-craft + userflow + ${FLOW_SKILLS.length} UX flow skills)`);
   console.log(`kit: catalog coherent with manifest: ${coherent ? 'yes' : 'NO'}`);
   console.log(`kit: total size ${(totalBytes / 1024 / 1024).toFixed(2)} MB at ${relative(ROOT, KIT_DIR)}`);
   if (!coherent) process.exit(1);

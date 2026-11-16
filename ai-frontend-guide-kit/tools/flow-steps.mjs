@@ -452,6 +452,7 @@ export const PARTS = {
           `Container, grid, section padding and type steps follow ${env.kit('experience/LAYOUT-RULES.md')}, using the Layout column of ${INVENTORY}.`,
           'Replace linear transitions with springs; keep at most 2 high-impact animated blocks per view; give a static fallback under prefers-reduced-motion.',
           'The same component on three screens is one shared component, not three copies.',
+          `Decorative shapes, dividers, patterns and icons come from ${env.run('svg.mjs', 'gen <kind> --out <file>')} (kinds: ${env.run('svg.mjs', 'gen --list')}); every drawn or imported SVG passes ${env.run('svg.mjs', 'check <file> --strict')}.${env.skill('svg-craft') ? ' Load the skill svg-craft for the drawing method.' : ''}`,
           `Register each catalog component that landed: ${env.run('get.mjs', '<id> --landed <path of the file>')}`,
           `Register each build: ${env.run('pieces.mjs', 'add <name> --level micro|small|medium|large --file <path of the file>')}`,
           `After editing a registered piece: ${env.run('pieces.mjs', 'version <name> --note "<what changed>"')}`,
