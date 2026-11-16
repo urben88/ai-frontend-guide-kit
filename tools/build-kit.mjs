@@ -72,6 +72,7 @@ export const REQUIRED_KIT_FILES = [
   'tools/scout.mjs',
   'tools/pieces.mjs',
   'tools/excalidraw-mcp.mjs',
+  'tools/kit-mcp.mjs',
   'tools/audit-honesty.mjs',
   'tools/audit-design.mjs',
   'tools/audit-a11y.mjs',

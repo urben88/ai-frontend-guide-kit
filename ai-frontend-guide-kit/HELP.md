@@ -50,6 +50,7 @@ Run them from the project root. Every tool prints one screen, not a dump.
 | `tools/flow.mjs` | `list` prints every route and step (the text of `guides/FLOWS.md`); `status` says whether the kit is installed, the active route and step, and what the project has recorded; `start <route>` declares the route; `next` prints the whole instruction of the current micro-step (goal, exact commands, template, done criteria; texts in `tools/flow-steps.mjs`), already resolved for what the project has installed; `scaffold [<step>[.<part>]]` writes the template of a micro-step into its file (never changing what is there); `done <step>` refuses a skipped step, a missing artifact or a file whose required sections are empty, hold a `<…>` token or cite ids that do not exist (the checks live in `tools/flow-gates.mjs`), and the large steps close part by part (`done direction.questions`); `report <step>` writes the checklist that `polish`, `iterate`, `redesign` and `visual-feedback` need besides `--evidence`; `reset` drops the route. State: `ai-frontend-output/flow-state.json`, committed with the project |
 | `tools/memory.mjs` | `add`, `list`, `summary`, `combo save\|list\|show\|apply` — the reusable decision history; `lib add\|list\|sync` keeps the UI libraries the project uses and the ones to research (`sync` imports what `context.mjs` detects) |
 | `tools/excalidraw-mcp.mjs` | Local, offline Excalidraw MCP server for the screen/navigation map |
+| `tools/kit-mcp.mjs` | Local, dependency-free MCP server (optional): 17 typed tools (`flow_*`, `find`, `get`, `technique_*`, `recipe_*`, `tokens_check`, `audit_design`, `svg_*`, `scene_check`) that run the same commands as the CLI and check the inputs first; the CLI stays the base |
 | `tools/kit-path.mjs` | Internal helper: writes the one command form every tool prints (`node ai-frontend-guide-kit/tools/<tool> ...`, the kit path relative to the project root) |
 | `tools/laya_select.py` | Optional local decision engine: ranks questions, directions and components (`--check`, `--install`) |
 | `tools/audit-a11y.mjs` | WCAG 2.x A/AA check of one or more URLs through axe-core + Playwright |
@@ -135,6 +136,22 @@ Do not restructure anything. Only document what exists: summarize the UX of this
 
 ```
 At the end of this task, explain what this kit is and what I can ask of it, in one screen, using ai-frontend-guide-kit/HELP.md as the source.
+```
+
+## Use the tools as MCP tools (optional)
+
+An agent that speaks MCP can call the kit tools as typed tools instead of typing commands: a wrong argument comes back as an error, not as a crash. The installer does not register it; add it yourself. Every tool runs the same `node ai-frontend-guide-kit/tools/<tool>.mjs` command and returns its text, a failed command comes back as an error with its output. The project is `--dir <project>`, else `AI_FRONTEND_PROJECT`, else the folder that holds the kit.
+
+Claude Code, `.mcp.json`:
+
+```json
+{ "mcpServers": { "ai-frontend-kit": { "command": "node", "args": ["ai-frontend-guide-kit/tools/kit-mcp.mjs"] } } }
+```
+
+OpenCode, `opencode.json`:
+
+```json
+{ "mcp": { "ai-frontend-kit": { "type": "local", "command": ["node", "ai-frontend-guide-kit/tools/kit-mcp.mjs"], "enabled": true } } }
 ```
 
 ## Where things are written

@@ -44,7 +44,7 @@ It gives the goal, the exact commands, the template and the done criteria of one
 - `svg.mjs`: SVG icons, dividers and patterns (`gen` from the tokens, `check`, `optimize`, `sprite`).
 - `scene.mjs`: only when 3D is chosen: `init` writes a SCENE-SPEC.md, `check` validates it, `prompt` or `code` make the instructions for an external 3D tool or a Three.js starter.
 - `technique.mjs`: the repertoire (<!--fig:techniques-->133<!--/fig--> cards of layout, type, color, motion, imagery, 3D, psychology): `node ai-frontend-guide-kit/tools/technique.mjs find "<need>"`, then `get <id>`; one page by area: `experience/TECHNIQUES.md`.
-- `excalidraw-mcp.mjs`: draw the screen map. `laya_select.py`: rank candidates, only after the user agrees.
+- `kit-mcp.mjs`: optional MCP server with the kit tools as typed tools (register it: `HELP.md`). `excalidraw-mcp.mjs`: draw the screen map. `laya_select.py`: rank candidates, only after the user agrees.
 
 ## Rules that always hold
 

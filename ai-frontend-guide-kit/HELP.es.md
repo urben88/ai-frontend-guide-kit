@@ -50,6 +50,7 @@ Se corren desde la raíz del proyecto. Cada una imprime una pantalla, no un volc
 | `tools/flow.mjs` | `list` muestra todas las rutas y pasos (el texto de `guides/FLOWS.md`); `status` dice si el kit está instalado, la ruta y el paso activos y lo que el proyecto tiene registrado; `start <ruta>` declara la ruta; `next` imprime la instrucción completa del micro-paso actual (objetivo, comandos exactos, plantilla, criterio de terminado; textos en `tools/flow-steps.mjs`), ya resuelta según lo que el proyecto tiene instalado; `scaffold [<paso>[.<parte>]]` escribe la plantilla de un micro-paso en su archivo (sin cambiar lo que ya hay); `done <paso>` rechaza un paso saltado, un artefacto que falta o un archivo con secciones vacías, con un marcador `<…>` o con ids que no existen (las comprobaciones están en `tools/flow-gates.mjs`), y los pasos grandes se cierran parte por parte (`done direction.questions`); `report <paso>` escribe la lista que `polish`, `iterate`, `redesign` y `visual-feedback` necesitan además de `--evidence`; `reset` quita la ruta. Estado: `ai-frontend-output/flow-state.json`, que se versiona con el proyecto |
 | `tools/memory.mjs` | `add`, `list`, `summary`, `combo save\|list\|show\|apply` — el historial reutilizable de decisiones; `lib add\|list\|sync` guarda las librerías de UI que usa el proyecto y las que hay que investigar (`sync` importa lo que detecta `context.mjs`) |
 | `tools/excalidraw-mcp.mjs` | Servidor MCP local de Excalidraw, offline, para el mapa de pantallas y navegación |
+| `tools/kit-mcp.mjs` | Servidor MCP local sin dependencias (opcional): 17 herramientas tipadas (`flow_*`, `find`, `get`, `technique_*`, `recipe_*`, `tokens_check`, `audit_design`, `svg_*`, `scene_check`) que ejecutan los mismos comandos que la CLI y revisan los datos antes; la CLI sigue siendo la base |
 | `tools/kit-path.mjs` | Ayuda interna: escribe la única forma de comando que imprime cada herramienta (`node ai-frontend-guide-kit/tools/<herramienta> ...`, la ruta del kit relativa a la raíz del proyecto) |
 | `tools/laya_select.py` | Motor de decisión local opcional: ordena preguntas, direcciones y componentes (`--check`, `--install`) |
 | `tools/audit-a11y.mjs` | Chequeo WCAG 2.x A/AA de una o más URLs con axe-core + Playwright |
@@ -135,6 +136,22 @@ No reestructures nada. Solo documentá lo que existe: resumí la UX de este repo
 
 ```
 Al final de esta tarea, explicame qué es este kit y qué le puedo pedir, en una pantalla, usando ai-frontend-guide-kit/HELP.es.md como fuente.
+```
+
+## Usar las herramientas como herramientas MCP (opcional)
+
+Un agente que habla MCP puede llamar a las herramientas del kit como herramientas tipadas en vez de escribir comandos: un argumento incorrecto vuelve como error, no como caída. El instalador no lo registra; lo agregás vos. Cada herramienta ejecuta el mismo comando `node ai-frontend-guide-kit/tools/<herramienta>.mjs` y devuelve su texto; un comando que falla vuelve como error con su salida. El proyecto es `--dir <proyecto>`, si no `AI_FRONTEND_PROJECT`, si no la carpeta que contiene el kit.
+
+Claude Code, `.mcp.json`:
+
+```json
+{ "mcpServers": { "ai-frontend-kit": { "command": "node", "args": ["ai-frontend-guide-kit/tools/kit-mcp.mjs"] } } }
+```
+
+OpenCode, `opencode.json`:
+
+```json
+{ "mcp": { "ai-frontend-kit": { "type": "local", "command": ["node", "ai-frontend-guide-kit/tools/kit-mcp.mjs"], "enabled": true } } }
 ```
 
 ## Dónde se escribe todo
