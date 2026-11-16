@@ -17,7 +17,7 @@ node ai-frontend-guide-kit/tools/technique.mjs get <id>
 
 ## Rules
 
-1. Write the scene as text first: purpose, camera, light, materials (colors from the tokens), performance budget, fallback. Then code or a prompt follows from it.
+1. Load the skill `scene-3d` (`scene.mjs init`, `check`, then `code` or `prompt`): it holds the method, so do not repeat it here. Write the scene as text first: purpose, camera, light, materials (colors from the tokens), performance budget, fallback. Then code or a prompt follows from it.
 2. Every 3D piece has a 2D fallback that is accessible and loads first (`3d-fallback`); decide the budget before the scene (`3d-perf-budget`).
 3. Load 3D lazily, below the first paint, and never block the main action behind it.
 4. With no budget or time, get depth without WebGL first (`depth-without-3d`: layers, shadows, perspective in CSS).

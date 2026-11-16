@@ -287,6 +287,8 @@ function environment(p) {
         return { directions: [], ids: [] };
       }
     },
+    // 3D was chosen: the brief, the UX spec or the inventory name it, or a scene spec already exists.
+    wants3d: existsSync(join(p.out, 'SCENE-SPEC.md')) || /\b(3d|three\.?js|webgl)\b/i.test([join(p.out, 'ux', 'EXPERIENCE-BRIEF.md'), join(p.out, 'ux', 'UX-SPEC.md'), join(p.out, 'INVENTORY.md')].map(readText).join('\n')),
     dark: /navigation_model\s*:\s*`?console/i.test(readText(join(p.out, 'ux', 'EXPERIENCE-BRIEF.md'))),
   };
 }

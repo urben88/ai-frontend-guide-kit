@@ -12,6 +12,7 @@
  *   env.uxPresent        true | false | null (no context scan yet)
  *   env.framework        the spec framework the scan detected ('' when none)
  *   env.techniques(areas) the style direction(s) the project recorded and the few technique cards of those areas that fit them ({ directions, ids })
+ *   env.wants3d         true when the brief, UX spec or inventory name 3D, or a SCENE-SPEC.md exists
  *   env.dark            true when the brief's navigation_model is console (a dashboard or tool: dark tokens from day one)
  *   env.hasProduct       does PRODUCT.md exist?   env.hasBrief  does EXPERIENCE-BRIEF.md exist?   env.hasMap  does ux-map.excalidraw exist?
  *
@@ -496,6 +497,7 @@ export const PARTS = {
           'Replace linear transitions with springs; keep at most 2 high-impact animated blocks per view; give a static fallback under prefers-reduced-motion.',
           'The same component on three screens is one shared component, not three copies.',
           `Decorative shapes, dividers, patterns and icons come from ${env.run('svg.mjs', 'gen <kind> --out <file>')} (kinds: ${env.run('svg.mjs', 'gen --list')}); every drawn or imported SVG passes ${env.run('svg.mjs', 'check <file> --strict')}.${env.skill('svg-craft') ? ' Load the skill svg-craft for the drawing method.' : ''}`,
+          env.wants3d && `3D was chosen: write the scene spec first with ${env.run('scene.mjs', 'init')}, fill it, run ${env.run('scene.mjs', 'check')}, then build from it with ${env.run('scene.mjs', 'code')} or ${env.run('scene.mjs', 'prompt')}.${env.skill('scene-3d') ? ' Load the skill scene-3d for the method.' : ''}`,
           areaSkills(env, ['technique-layout', 'technique-motion', 'technique-imagery', 'technique-3d'], 'layout, motion, images and 3D'),
           techniqueLine(env, ['layout', 'motion', 'imagery', 'svg', '3d']),
           `Register each catalog component that landed: ${env.run('get.mjs', '<id> --landed <path of the file>')}`,
