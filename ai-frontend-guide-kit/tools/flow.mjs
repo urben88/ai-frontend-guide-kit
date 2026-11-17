@@ -531,14 +531,15 @@ function closeBoard(p, flags) {
 }
 
 function done(p, target, flags) {
+  const named = String(target ?? '').split('.')[0];
+  if (flags.declined && named !== 'board') throw new UsageError(`only the board step can be declined (--declined); "${named}" closes with its own checks`);
+  if (flags.declined && !flags.reason) throw new UsageError('--declined needs --reason "<why the user said no>"');
+  if (flags.reason !== undefined && !flags.declined) throw new UsageError('--reason goes with --declined');
   const state = readState(p);
   if (!state) throw new Refusal(`no active flow; declare the route with: ${cmd('flow.mjs', 'start <route>')}`);
   if (!target) throw new UsageError('done needs a step');
   const [id, partId] = target.split(/\.(.*)/s);
   if (!state.steps.some((step) => step.id === id)) throw new UsageError(`unknown step "${id}" for route "${state.route}" (steps: ${state.steps.map((step) => step.id).join(', ')})`);
-  if (flags.declined && id !== 'board') throw new UsageError(`only the board step can be declined (--declined); "${id}" closes with its own checks`);
-  if (flags.declined && !flags.reason) throw new UsageError('--declined needs --reason "<why the user said no>"');
-  if (flags.reason !== undefined && !flags.declined) throw new UsageError('--reason goes with --declined');
   const step = current(state);
   if (!step) throw new Refusal(`route "${state.route}" is already complete`);
   if (partId !== undefined && !PARTS[id].some((part) => part.id === partId)) throw new UsageError(`unknown part "${partId}" of step "${id}" (parts: ${PARTS[id].map((part) => part.id).filter(Boolean).join(', ') || 'none'})`);

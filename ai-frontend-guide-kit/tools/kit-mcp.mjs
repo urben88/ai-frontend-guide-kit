@@ -71,16 +71,20 @@ const DEFS = [
   },
   {
     name: 'flow_done',
-    description: 'Close a step or a part (for example "direction.questions"). The tool refuses a step with missing or empty content.',
+    description: 'Close a step or a part (for example "direction.questions"). The tool refuses a step with missing or empty content. The board step can close with declined and reason.',
     tool: 'flow.mjs', project: true,
     properties: {
       step: { ...STEP, description: 'Step or step.part, as printed by flow_next.' },
       evidence: str('What proves the step, only for steps that close with evidence.', { minLength: 1 }),
+      declined: bool('Only for the board step: the user said no to Storybook. Needs reason.'),
+      reason: str('The answer of the user when declined, in their words.', { minLength: 1 }),
     },
     required: ['step'],
     args: (a) => {
       const out = ['done', a.step];
       opt(out, a, 'evidence');
+      on(out, a, 'declined');
+      opt(out, a, 'reason');
       return out;
     },
   },
@@ -261,6 +265,61 @@ const DEFS = [
     args: (a) => {
       const out = ['check', ...a.files];
       for (const name of ['strict', 'json']) on(out, a, name);
+      return out;
+    },
+  },
+  {
+    name: 'board_detect',
+    description: 'Is Storybook installed here? Framework, story glob and the exact install command. Never installs: ask the user first.',
+    tool: 'board.mjs', project: true,
+    properties: { json: bool('Return data instead of text.') },
+    args: (a) => {
+      const out = ['detect'];
+      on(out, a, 'json');
+      return out;
+    },
+  },
+  {
+    name: 'board_plan',
+    description: 'The pages and components of ui-map.json that the design board should show, and the boards still to create.',
+    tool: 'board.mjs', project: true,
+    properties: { json: bool('Return data instead of text.') },
+    args: (a) => {
+      const out = ['plan'];
+      on(out, a, 'json');
+      return out;
+    },
+  },
+  {
+    name: 'board_scaffold',
+    description: 'Write a composition story for one layout version of a page (v1-sidebar). Adds to an existing board; never overwrites a version.',
+    tool: 'board.mjs', project: true,
+    properties: {
+      page: str('Page name, for example login or Expedientes.', { minLength: 1, pattern: '^[A-Za-z0-9][A-Za-z0-9 _.-]*$' }),
+      version: str('Layout version, kebab-case, for example v1-sidebar.', { pattern: '^[a-z][a-z0-9]*(-[a-z0-9]+)*$' }),
+    },
+    required: ['page', 'version'],
+    args: (a) => ['scaffold', a.page, '--version', a.version],
+  },
+  {
+    name: 'board_list',
+    description: 'The design boards of the project and their layout versions.',
+    tool: 'board.mjs', project: true,
+    properties: { json: bool('Return data instead of text.') },
+    args: (a) => {
+      const out = ['list'];
+      on(out, a, 'json');
+      return out;
+    },
+  },
+  {
+    name: 'board_check',
+    description: 'Numbered findings when a board imports a store, router, API client or data hook, or calls fetch. An error while one exists.',
+    tool: 'board.mjs', project: true,
+    properties: { json: bool('Return data instead of text.') },
+    args: (a) => {
+      const out = ['check'];
+      on(out, a, 'json');
       return out;
     },
   },

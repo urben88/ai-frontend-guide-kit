@@ -86,6 +86,7 @@ const EXPECTED = [
   'flow_status', 'flow_start', 'flow_next', 'flow_done', 'flow_scaffold', 'flow_report',
   'find', 'get', 'technique_find', 'technique_get', 'recipe_suggest', 'recipe_show',
   'tokens_check', 'audit_design', 'svg_gen', 'svg_check', 'scene_check',
+  'board_detect', 'board_plan', 'board_scaffold', 'board_list', 'board_check',
 ];
 
 test('kit-mcp: initialize answers with the protocol version, tools capability and server info', async () => {
@@ -279,4 +280,82 @@ test('kit-mcp: it is part of the kit and does not use a shell', () => {
   assert.ok(REQUIRED_KIT_FILES.includes('tools/kit-mcp.mjs'));
   const source = readFileSync(SERVER, 'utf8');
   assert.doesNotMatch(source, /\bexecSync\b|\bexec\(|shell:\s*true/);
+});
+
+// ---------------------------------------------------------------- the board tools (storybook-board S3, T4)
+
+const withStorybook = (dir) => writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'app', devDependencies: { storybook: '10.6.7', react: '19.0.0', typescript: '5.6.0' } }));
+
+test('kit-mcp: board_detect, board_plan, board_scaffold, board_list and board_check return what the CLI returns', async () => {
+  const dir = project();
+  const mirror = project();
+  for (const where of [dir, mirror]) withStorybook(where);
+  const same = (result, expected, label) => {
+    const joined = [expected.stdout.trimEnd(), expected.stderr.trimEnd()].filter(Boolean).join('\n');
+    const shown = expected.status === 0 ? expected.stdout : joined;
+    const hide = (value, where) => value.trimEnd().split(where.replace(/\\/g, '/')).join('<P>').split(where).join('<P>');
+    assert.equal(hide(text(result), dir), hide(shown, mirror), label);
+    assert.equal(result.isError, expected.status !== 0, label);
+  };
+  await withServer(async (server) => {
+    same(await server.call('board_detect', {}), cli('board.mjs', ['detect', '--dir', mirror]), 'detect');
+    same(await server.call('board_detect', { json: true }), cli('board.mjs', ['detect', '--json', '--dir', mirror]), 'detect --json');
+    const noMap = await server.call('board_plan', {});
+    assert.equal(noMap.isError, true, 'plan without ui-map.json is an error, like the exit code');
+    assert.match(text(noMap), /ui-map\.mjs/);
+    same(await server.call('board_list', {}), cli('board.mjs', ['list', '--dir', mirror]), 'list before any board');
+
+    const scaffold = await server.call('board_scaffold', { page: 'login', version: 'v1-sidebar' });
+    assert.equal(scaffold.isError, false, text(scaffold));
+    same(scaffold, cli('board.mjs', ['scaffold', 'login', '--version', 'v1-sidebar', '--dir', mirror]), 'scaffold');
+    assert.equal(readFileSync(join(dir, 'src', 'board', 'Login.board.stories.tsx'), 'utf8'), readFileSync(join(mirror, 'src', 'board', 'Login.board.stories.tsx'), 'utf8'));
+    const again = await server.call('board_scaffold', { page: 'login', version: 'v1-sidebar' });
+    assert.equal(again.isError, true, 'an existing version is never overwritten: the refusal is an MCP error');
+    assert.match(text(again), /already has the version v1-sidebar/);
+
+    same(await server.call('board_list', { json: true }), cli('board.mjs', ['list', '--json', '--dir', mirror]), 'list --json');
+    same(await server.call('board_check', {}), cli('board.mjs', ['check', '--dir', mirror]), 'check');
+    writeFileSync(join(dir, 'src', 'board', 'Bad.board.stories.tsx'), "import { create } from 'zustand';\nexport const V1 = {};\n");
+    writeFileSync(join(mirror, 'src', 'board', 'Bad.board.stories.tsx'), "import { create } from 'zustand';\nexport const V1 = {};\n");
+    const check = await server.call('board_check', { json: true });
+    assert.equal(check.isError, true, 'a finding is an error, like the exit code');
+    same(check, cli('board.mjs', ['check', '--json', '--dir', mirror]), 'check --json with a finding');
+  }, ['--dir', dir]);
+});
+
+test('kit-mcp: the board tools check their input, and flow_done can record the no to Storybook', async () => {
+  const dir = project();
+  await withServer(async (server) => {
+    const cases = [
+      ['board_scaffold', { page: 'login' }, /version is required/],
+      ['board_scaffold', { version: 'v1-sidebar' }, /page is required/],
+      ['board_scaffold', { page: 'login', version: 'V1 Sidebar' }, /wrong format/],
+      ['board_scaffold', { page: '', version: 'v1-sidebar' }, /must not be empty/],
+      ['board_scaffold', { page: '--dir', version: 'v1-sidebar' }, /wrong format|read as an option/],
+      ['board_scaffold', { page: 'login', version: 'v1-sidebar', force: true }, /not an accepted argument/],
+      ['board_detect', { install: true }, /not an accepted argument/],
+      ['board_check', { json: 'yes' }, /json must be a boolean/],
+      ['flow_done', { step: 'board', declined: true }, /needs --reason/],
+      ['flow_done', { step: 'board', reason: 'no' }, /goes with --declined/],
+      ['flow_done', { step: 'board', declined: 'yes', reason: 'no' }, /declined must be a boolean/],
+    ];
+    for (const [name, args, pattern] of cases) {
+      const result = await server.call(name, args);
+      assert.equal(result.isError, true, `${name} ${JSON.stringify(args)}`);
+      assert.match(text(result), pattern, `${name} ${JSON.stringify(args)}`);
+    }
+    assert.equal((await server.call('flow_start', { route: 'new' })).isError, false);
+    const state = join(dir, 'ai-frontend-output', 'flow-state.json');
+    const data = JSON.parse(readFileSync(state, 'utf8'));
+    data.steps.forEach((step) => { step.status = step.id === 'board' || step.id === 'polish' ? 'pending' : 'done'; });
+    writeFileSync(state, JSON.stringify(data));
+    const refused = await server.call('flow_done', { step: 'board' });
+    assert.equal(refused.isError, true, 'no Storybook and no answer: refused');
+    assert.match(text(refused), /Storybook is not installed/);
+    const declined = await server.call('flow_done', { step: 'board', declined: true, reason: 'the user does not want it' });
+    assert.equal(declined.isError, false, text(declined));
+    const step = JSON.parse(readFileSync(state, 'utf8')).steps.find((s) => s.id === 'board');
+    assert.equal(step.declined, true);
+    assert.equal(step.reason, 'the user does not want it');
+  }, ['--dir', dir]);
 });
