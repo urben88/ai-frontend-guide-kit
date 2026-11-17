@@ -116,6 +116,8 @@ Why it matters: when several people (or several chats) work on the design, each 
 | `flow.mjs scaffold` | Writes the template of the current micro-step into its file, never changing what is there |
 | `flow.mjs done <step>` | Closes the step only if it is the current one **and** its file says what it must: required sections filled, no `<…>` left, tables with rows, ids that exist |
 | `flow.mjs report <step>` | Writes the checklist of `polish`, `iterate`, `redesign` or `visual-feedback`, which `done` needs filled besides `--evidence` |
+| `flow.mjs report` | With no step: the whole route in one page, in order (what each step did, what the user answered, the tools they picked, the files that came out), also written to `ai-frontend-output/FLOW-REPORT.md` |
+| `flow.mjs done <step>.<part> --answer "..." [--tools ids]` | The parts that are the user's choice (directions, references, the product questions, which components to reuse, the Storybook question) end `next` with a STOP block and close only with the user's words, kept in `flow-state.json`; `--tools` records which of the kit tools that `next` lists the user chose. `done` then prints a summary for the user. `compose` also refuses a catalog component decided `reuse` or `adapt` that no page or component imports |
 | `flow.mjs done board --declined --reason "..."` | The `board` step (route `new`) asks the user before Storybook is installed; this records the user's no and why, so the step can close without it |
 
 Three more helpers keep the agent's context small:

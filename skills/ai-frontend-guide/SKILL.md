@@ -18,9 +18,10 @@ No route yet: ask the user what they want, then `node ai-frontend-guide-kit/tool
 ## The loop
 
 1. `node ai-frontend-guide-kit/tools/flow.mjs next` prints the whole instruction of one micro-step: goal, exact commands, template, done criteria.
-2. Do exactly what it prints. If a file is needed, `flow.mjs scaffold` writes its template.
+2. Do exactly what it prints. If a file is needed, `flow.mjs scaffold` writes its template. Show the user the tool menu it lists and ask which to use; record the pick with `--tools <ids>`.
+   If it ends with **STOP**, the choice is the user's: show the options, wait, and never answer for them. Close that part with `--answer "<their words>"`.
 3. Close it with the command it prints (`flow.mjs done <step>`). It refuses a skipped step, an empty file, a `<…>` left in a file or an unregistered piece: fix what it lists, never work around it.
-4. Back to 1 until `next` says the route is complete.
+4. Back to 1 until `next` says the route is complete. Each `done` prints a summary: show it to the user. `flow.mjs report` writes the whole route to `ai-frontend-output/FLOW-REPORT.md`.
 
 Open the step file below only when you are at that step. Do not read the others.
 

@@ -6,6 +6,7 @@ Design the screens and flows from the business, before any UI. `flow.mjs next` p
 
 - No UX in the repo: design from scratch with the `userflow` skill. Load 1 to 4 `flow-*` skills for the patterns that fit (auth, onboarding, checkout, paywall, settings, navigation, tables, forms, errors, empty states, AI chat), never from memory.
 - UX already exists: ask the user once, "Summarize" (as-is documentation plus an anti-pattern audit, no changes) or "Radical redesign" (baseline, ideal UX, diff). Never redesign silently. A redesign is UX only and `PRODUCT.md` stays.
+- `ux.product` (when PRODUCT.md must be written) and the summary-or-redesign question end with STOP: ask the user, wait, and close with `--answer "<their words>"`.
 - One surface only: `/userflow audit <surface>`, findings only.
 - Every screen and section cites the business item it serves (a goal, an objection or a proof). A screen that serves none is removed or justified.
 - Every screen lists its empty, loading and error states; a screen with only the happy path is not done.

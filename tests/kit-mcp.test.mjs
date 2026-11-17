@@ -383,3 +383,45 @@ test('kit-mcp: board_scaffold takes an optional kind (component or page) and wri
     assert.match(text(bad), /one of: page, component/);
   }, ['--dir', dir]);
 });
+
+test('kit-mcp: flow_done passes the answer of the user and the tools they picked; a decision part is refused without the answer (guided-flow S2, S3)', async () => {
+  const dir = project();
+  const out = join(dir, 'ai-frontend-output');
+  mkdirSync(join(out, 'ux'), { recursive: true });
+  writeFileSync(join(out, 'ux', 'EXPERIENCE-BRIEF.md'), '# Experience brief\n## Context\nBakery for neighbours.\n## Goal\nA first order.\n');
+  const stateFile = join(out, 'flow-state.json');
+  writeFileSync(stateFile, JSON.stringify({ route: 'direction', gates: 1, started_at: '2026-11-17T00:00:00.000Z', complete: false, steps: [{ id: 'intake', status: 'done' }, { id: 'direction', status: 'pending' }] }));
+  await withServer(async (server) => {
+    const next = JSON.parse(text(await server.call('flow_next', {})));
+    assert.ok(next.decision.what, 'flow_next carries the decision');
+    assert.ok(next.tools.length >= 1, 'and the tool menu');
+    const refused = await server.call('flow_done', { step: 'direction.questions' });
+    assert.equal(refused.isError, true);
+    assert.match(text(refused), /is the user's decision/);
+    for (const [args, pattern] of [[{ step: 'direction.questions', answer: '' }, /must not be empty/], [{ step: 'direction.questions', answer: 5 }, /answer must be a string/], [{ step: 'direction.questions', tools: 'hammer', answer: 'x' }, /unknown tool "hammer"/], [{ step: 'direction.questions', tools: ['recipe'] }, /tools must be a string/]]) {
+      const result = await server.call('flow_done', args);
+      assert.equal(result.isError, true, JSON.stringify(args));
+      assert.match(text(result), pattern, JSON.stringify(args));
+    }
+    const done = await server.call('flow_done', { step: 'direction.questions', answer: 'A bakery site; the action is the first order', tools: 'recipe,technique' });
+    assert.equal(done.isError, false, text(done));
+    assert.match(text(done), /Summary for the user — direction\.questions/);
+    const entry = JSON.parse(readFileSync(stateFile, 'utf8')).steps[1].answers[0];
+    assert.equal(entry.answer, 'A bakery site; the action is the first order');
+    assert.deepEqual(entry.tools, ['recipe', 'technique']);
+  }, ['--dir', dir]);
+});
+
+test('kit-mcp: flow_report without a step writes the whole route to FLOW-REPORT.md, and with a step still writes its checklist (guided-flow S4)', async () => {
+  const dir = project();
+  await withServer(async (server) => {
+    assert.equal((await server.call('flow_start', { route: 'architecture' })).isError, false);
+    const whole = await server.call('flow_report', {});
+    assert.equal(whole.isError, false, text(whole));
+    assert.match(text(whole), /^# Flow report/);
+    assert.match(readFileSync(join(dir, 'ai-frontend-output', 'FLOW-REPORT.md'), 'utf8'), /## 1\. intake — in progress/);
+    const step = await server.call('flow_report', { step: 'polish' });
+    assert.equal(step.isError, false, text(step));
+    assert.match(text(step), /polish-report\.md/);
+  }, ['--dir', dir]);
+});

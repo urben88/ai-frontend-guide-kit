@@ -19,6 +19,7 @@ node ai-frontend-guide-kit/tools/flow.mjs status
 Then repeat: run `flow.mjs next`, do exactly what it prints, then run the command it prints.
 It gives the goal, the exact commands, the template and the done criteria of one micro-step.
 `flow.mjs done` refuses a skipped step, an empty file, a `<…>` left in a file and an unregistered piece: fix what it lists.
+When `next` ends with STOP, the choice is the user's: show them the options, wait, and close the part with `done <step>.<part> --answer "<their words>"`. `next` also lists tools for the user to pick; `done` prints a summary to show them.
 
 ## Routes
 

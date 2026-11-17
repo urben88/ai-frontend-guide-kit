@@ -100,6 +100,8 @@ Por qué importa: cuando varias personas (o varios chats) trabajan en el diseño
 | `flow.mjs scaffold` | Escribe la plantilla del micro-paso actual en su archivo, sin cambiar lo que ya hay |
 | `flow.mjs done <paso>` | Cierra el paso solo si es el actual **y** su archivo dice lo que debe: secciones obligatorias rellenas, sin `<…>`, tablas con filas, ids que existen |
 | `flow.mjs report <paso>` | Escribe la lista de `polish`, `iterate`, `redesign` o `visual-feedback`, que `done` necesita rellena además de `--evidence` |
+| `flow.mjs report` | Sin paso: toda la ruta en una página y en orden (qué hizo cada paso, qué respondió el usuario, las herramientas que eligió, los archivos que salieron); también se escribe en `ai-frontend-output/FLOW-REPORT.md` |
+| `flow.mjs done <paso>.<parte> --answer "..." [--tools ids]` | Las partes que son decisión del usuario (direcciones, referencias, las preguntas del producto, qué componentes reutilizar, la pregunta de Storybook) terminan `next` con un bloque STOP y solo se cierran con las palabras del usuario, que quedan en `flow-state.json`; `--tools` guarda cuáles de las herramientas del kit que lista `next` eligió el usuario. Después `done` imprime un resumen para el usuario. `compose` además rechaza un componente del catálogo decidido `reuse` o `adapt` que ninguna página ni componente importa |
 | `flow.mjs done board --declined --reason "..."` | El paso `board` (ruta `new`) pregunta al usuario antes de instalar Storybook; esto guarda su no y el motivo, y el paso se cierra sin él |
 
 Tres ayudas más mantienen pequeño el contexto del agente:

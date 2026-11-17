@@ -8,7 +8,8 @@ Build each screen from what exists. `flow.mjs next` prints each part and its exa
 - `find.mjs` ranks the big free sources first (ReUI, shadcn/ui, Shadcn Space): pick from the top and say why when you skip one. A search that was never run is not a reason to build.
 - The Query column of the inventory holds the first search words; `--category <Category>` narrows them. When two searches find nothing, build and say so.
 - Licenses are facts. Read `license_type` and `commercial_use` before using an entry; `non-commercial` never goes into commercial work, `unknown` is verified on its page first.
-- Present 2 or 3 combinations with the facts from `get` before closing a selection. A web-found component stays `provisional` until its license is checked.
+- Present 2 or 3 combinations with the facts from `get` before closing a selection; `compose.decide` ends with STOP and closes only with the user's words (`--answer`). A web-found component stays `provisional` until its license is checked.
+- A catalog component recorded as `reuse` or `adapt` must be imported by a page or a component. The gate lists the ones that are not: import it, or re-decide it with `memory.mjs add ... --decision build` and the reason.
 - Install with the command `get.mjs` prints, never one typed from memory.
 - Adapt: make every piece look like this product (tokens, copy, states) and register it. Keep high-impact animation to 1 or 2 per view and respect the brief's anti-generic list.
 - `hallmark` and `design-taste-frontend` build only for a row with decision `build`, and only after the search for that block.

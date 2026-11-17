@@ -64,20 +64,22 @@ const DEFS = [
   },
   {
     name: 'flow_next',
-    description: 'The whole instruction of the current micro-step as JSON: goal, exact commands, template, done criteria.',
+    description: 'The instruction of the current micro-step as JSON: goal, commands, template, done criteria, the tool menu (tools) and, when the user decides, decision.',
     tool: 'flow.mjs', project: true,
     properties: {},
     args: () => ['next', '--json'],
   },
   {
     name: 'flow_done',
-    description: 'Close a step or a part (for example "direction.questions"). The tool refuses a step with missing or empty content. The board step can close with declined and reason.',
+    description: 'Close a step or a part ("direction.questions"). Refuses missing or empty content. A part with a decision needs answer, the words of the user. Prints a summary.',
     tool: 'flow.mjs', project: true,
     properties: {
       step: { ...STEP, description: 'Step or step.part, as printed by flow_next.' },
       evidence: str('What proves the step, only for steps that close with evidence.', { minLength: 1 }),
       declined: bool('Only for the board step: the user said no to Storybook. Needs reason.'),
       reason: str('The answer of the user when declined, in their words.', { minLength: 1 }),
+      answer: str('The words of the user, required when flow_next lists a decision for this part. Ask the user first; never write it yourself.', { minLength: 1 }),
+      tools: str('The ids the user picked from the tool menu of flow_next (tools[].id), comma separated, or none.', { minLength: 1 }),
     },
     required: ['step'],
     args: (a) => {
@@ -85,6 +87,8 @@ const DEFS = [
       opt(out, a, 'evidence');
       on(out, a, 'declined');
       opt(out, a, 'reason');
+      opt(out, a, 'answer');
+      opt(out, a, 'tools');
       return out;
     },
   },
@@ -97,11 +101,10 @@ const DEFS = [
   },
   {
     name: 'flow_report',
-    description: 'Write the checklist report of iterate, redesign, polish or visual-feedback.',
+    description: 'With a step: the checklist of iterate, redesign, polish or visual-feedback. Without: the whole route in one page, written to FLOW-REPORT.md.',
     tool: 'flow.mjs', project: true,
-    properties: { step: { ...STEP, description: 'iterate, redesign, polish or visual-feedback.' } },
-    required: ['step'],
-    args: (a) => ['report', a.step],
+    properties: { step: { ...STEP, description: 'iterate, redesign, polish or visual-feedback. Leave it out for the report of the whole route.' } },
+    args: (a) => (a.step === undefined ? ['report'] : ['report', a.step]),
   },
   {
     name: 'find',
