@@ -26,7 +26,7 @@ This repository is both the 🏭 **factory** (extraction pipeline + catalog) and
 | | What | Details |
 |---|---|---|
 | 📚 | **Catalog** | <!--fig:sources-->39<!--/fig--> verified sources · <!--fig:entries-->7,358<!--/fig--> reusable entries · <!--fig:categories-->21<!--/fig--> categories · quality score, per-entry licenses and install commands · React, Vue and Svelte · offline `explorer.html` |
-| 🧭 | **Guided kit** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + 3-phase workflow in short guides (00–13) + `find`/`get` query tools. Self-contained: no build, no npm dependencies |
+| 🧭 | **Guided kit** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + 3-phase workflow in short guides (00–14) + `find`/`get` query tools. Self-contained: no build, no npm dependencies |
 | 🧠 | **Agent skills** | `ai-frontend-guide` (workflow), `frontend-polish` (phase 3), `frontend-refactor` (FSD, only on request), `ux-map` (visual screen map), `svg-craft` (SVG icons and illustrations), `scene-3d` (3D scene spec, then code or prompt) and 16 vendored UX skills (`userflow` + 15 `flow-*`, MIT) |
 | 🧭 | **Design flow** | `flow.mjs` keeps the route and current step per project and refuses skipped steps; `guides/FLOWS.md` lists every route |
 | 💾 | **Selection memory** | `ai-frontend-output/`: append-only decision history, styles/components summary, reusable combinations and the UI libraries in use or to research |
@@ -116,6 +116,7 @@ Why it matters: when several people (or several chats) work on the design, each 
 | `flow.mjs scaffold` | Writes the template of the current micro-step into its file, never changing what is there |
 | `flow.mjs done <step>` | Closes the step only if it is the current one **and** its file says what it must: required sections filled, no `<…>` left, tables with rows, ids that exist |
 | `flow.mjs report <step>` | Writes the checklist of `polish`, `iterate`, `redesign` or `visual-feedback`, which `done` needs filled besides `--evidence` |
+| `flow.mjs done board --declined --reason "..."` | The `board` step (route `new`) asks the user before Storybook is installed; this records the user's no and why, so the step can close without it |
 
 Three more helpers keep the agent's context small:
 
@@ -135,7 +136,7 @@ You only talk to your agent. Behind the scenes it uses the kit like this:
 
 2. It declares the route for a new frontend
    $ node ai-frontend-guide-kit/tools/flow.mjs start new
-   Steps: intake → direction → ux → tokens → compose → polish
+   Steps: intake → direction → ux → tokens → compose → board → polish
    Next step: intake — ask what we are doing, read the project context, declare the route
 
 3. It tries to jump to the visual direction... and the kit says no

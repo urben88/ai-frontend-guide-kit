@@ -16,6 +16,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync, appendFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { frameworkOf } from './context.mjs';
 import { runTool, toolPath } from './kit-path.mjs';
 
 const SELF = fileURLToPath(import.meta.url);
@@ -61,25 +62,11 @@ function readManifest(root) {
   }
 }
 
-/** Same framework names and order as context.mjs (its detection is not exported). */
-const FRAMEWORKS = [
-  ['next', 'Next.js'],
-  ['nuxt', 'Nuxt'],
-  ['@sveltejs/kit', 'SvelteKit'],
-  ['svelte', 'Svelte'],
-  ['astro', 'Astro'],
-  ['@remix-run/react', 'Remix'],
-  ['vue', 'Vue'],
-  ['react', 'React'],
-  ['solid-js', 'Solid'],
-  ['@angular/core', 'Angular'],
-];
-
 /** Is Storybook in the project, which framework, the story glob and the exact install command. Also what flow.mjs and install.mjs read. */
 export function detect(root) {
   const manifest = readManifest(root);
   const deps = { ...(manifest?.dependencies ?? {}), ...(manifest?.devDependencies ?? {}) };
-  const framework = FRAMEWORKS.find(([dep]) => deps[dep])?.[1] ?? 'unknown';
+  const framework = frameworkOf(deps);
   const typescript = Boolean(deps.typescript) || existsSync(join(root, 'tsconfig.json'));
   const packages = Object.keys(deps).filter((name) => name === 'storybook' || name.startsWith('@storybook/')).sort();
   const configFolder = existsSync(join(root, '.storybook'));

@@ -40,6 +40,7 @@ export const REQUIRED_KIT_FILES = [
   'guides/12-ARCHITECTURE.md',
   'guides/FLOWS.md',
   'guides/13-CONTEXT-DOCS.md',
+  'guides/14-DESIGN-BOARD.md',
   'experience/EXPERIENCE-DIRECTION.md',
   'experience/QUESTION-BANK.md',
   'experience/SITE-ARCHETYPES.md',

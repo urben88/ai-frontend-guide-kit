@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -65,4 +65,46 @@ test('a project without package.json or components.json reports no UI libraries'
   const run = context(dir, '--json');
   assert.equal(run.status, 0, run.stderr);
   assert.deepEqual(JSON.parse(run.stdout).libraries, { covered: [], compatible: [], toResearch: [] });
+});
+
+// ---------------------------------------------------------------- one framework list, shared with board.mjs (storybook-board T6)
+
+const BOARD_TOOL = join(ROOT, 'ai-frontend-guide-kit', 'tools', 'board.mjs');
+const FRAMEWORK_CASES = [
+  [{ next: '15.0.0', react: '19.0.0' }, 'Next.js'],
+  [{ nuxt: '3.0.0', vue: '3.5.0' }, 'Nuxt'],
+  [{ '@sveltejs/kit': '2.0.0', svelte: '5.0.0' }, 'SvelteKit'],
+  [{ svelte: '5.0.0' }, 'Svelte'],
+  [{ astro: '5.0.0' }, 'Astro'],
+  [{ '@remix-run/react': '2.0.0', react: '19.0.0' }, 'Remix'],
+  [{ vue: '3.5.0' }, 'Vue'],
+  [{ react: '19.0.0' }, 'React'],
+  [{ 'solid-js': '1.9.0' }, 'Solid'],
+  [{ '@angular/core': '19.0.0' }, 'Angular'],
+  [{ lodash: '4.0.0' }, 'unknown'],
+];
+
+test('context and board name the framework the same way for every supported dependency (previous behavior)', () => {
+  for (const [dependencies, label] of FRAMEWORK_CASES) {
+    const dir = mkdtempSync(join(tmpdir(), 'context-fw-'));
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'demo', dependencies }));
+    assert.equal(context(dir).status, 0);
+    const text = readFileSync(join(dir, 'ai-frontend-output', 'ux', 'REPO-CONTEXT.md'), 'utf8');
+    assert.ok(text.includes(label === 'unknown' ? '- **Project:** demo\n' : `- **Project:** demo (${label})\n`), `${label}: REPO-CONTEXT.md`);
+    const board = spawnSync(process.execPath, [BOARD_TOOL, 'detect', '--json', '--dir', dir], { encoding: 'utf8', env: cleanEnv() });
+    assert.equal(JSON.parse(board.stdout).framework, label, `${label}: board detect`);
+  }
+});
+
+test('board.mjs takes the framework detection from context.mjs instead of keeping its own list (T6)', () => {
+  const board = readFileSync(BOARD_TOOL, 'utf8');
+  assert.match(board, /from '\.\/context\.mjs'/);
+  assert.doesNotMatch(board, /'@sveltejs\/kit'/, 'no second copy of the framework list');
+});
+
+test('context.mjs exports frameworkOf and importing it runs nothing (T6)', () => {
+  const cwd = mkdtempSync(join(tmpdir(), 'context-import-'));
+  const run = spawnSync(process.execPath, ['--input-type=module', '-e', `const m = await import(${JSON.stringify(pathToFileURL(TOOL).href)}); console.log(typeof m.frameworkOf, m.frameworkOf({ vue: '3' }), m.frameworkOf({}));`], { encoding: 'utf8', cwd, env: cleanEnv() });
+  assert.equal(run.status, 0, run.stderr);
+  assert.equal(run.stdout.trim(), 'function Vue unknown');
 });

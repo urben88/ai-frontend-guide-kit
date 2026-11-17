@@ -20,7 +20,7 @@ Este repositorio es a la vez la 🏭 **fábrica** (pipeline de extracción + cat
 | | Qué | Detalle |
 |---|---|---|
 | 📚 | **Catálogo** | <!--fig:sources-->39<!--/fig--> fuentes verificadas · <!--fig:entries:es-->7.358<!--/fig--> entradas reutilizables · <!--fig:categories-->21<!--/fig--> categorías · puntuación de calidad, licencia e instalación por entrada · React, Vue y Svelte · `explorer.html` sin conexión |
-| 🧭 | **Kit guiado** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + flujo de 3 fases en guías cortas (00–13) + herramientas `find`/`get`. Autocontenido: sin build ni dependencias npm |
+| 🧭 | **Kit guiado** (`ai-frontend-guide-kit/`) | `AGENTS.md` + router + flujo de 3 fases en guías cortas (00–14) + herramientas `find`/`get`. Autocontenido: sin build ni dependencias npm |
 | 🧠 | **Skills para agentes** | `ai-frontend-guide` (flujo), `frontend-polish` (fase 3), `frontend-refactor` (FSD, solo a pedido), `ux-map` (mapa visual de pantallas), `svg-craft` (iconos e ilustraciones SVG), `scene-3d` (especificación de escena 3D, luego código o prompt) y <!--fig:uxskills-->16<!--/fig--> skills UX incluidas (`userflow` + 15 `flow-*`, MIT) |
 | 🧭 | **Flujo de diseño** | `flow.mjs` guarda la ruta y el paso actual de cada proyecto y no deja saltar pasos; `guides/FLOWS.md` lista todas las rutas |
 | 💾 | **Memoria de selección** | `ai-frontend-output/`: historial de decisiones (solo añade), resumen de estilos/componentes, combinaciones reutilizables y librerías de UI en uso o por investigar |
@@ -100,6 +100,7 @@ Por qué importa: cuando varias personas (o varios chats) trabajan en el diseño
 | `flow.mjs scaffold` | Escribe la plantilla del micro-paso actual en su archivo, sin cambiar lo que ya hay |
 | `flow.mjs done <paso>` | Cierra el paso solo si es el actual **y** su archivo dice lo que debe: secciones obligatorias rellenas, sin `<…>`, tablas con filas, ids que existen |
 | `flow.mjs report <paso>` | Escribe la lista de `polish`, `iterate`, `redesign` o `visual-feedback`, que `done` necesita rellena además de `--evidence` |
+| `flow.mjs done board --declined --reason "..."` | El paso `board` (ruta `new`) pregunta al usuario antes de instalar Storybook; esto guarda su no y el motivo, y el paso se cierra sin él |
 
 Tres ayudas más mantienen pequeño el contexto del agente:
 
@@ -119,7 +120,7 @@ Tú solo hablas con tu agente. Por detrás, él usa el kit así:
 
 2. Declara la ruta de un frontend nuevo
    $ node ai-frontend-guide-kit/tools/flow.mjs start new
-   Steps: intake → direction → ux → tokens → compose → polish
+   Steps: intake → direction → ux → tokens → compose → board → polish
    Next step: intake — preguntar qué hacemos, leer el contexto del proyecto, declarar la ruta
 
 3. Intenta saltar directamente a la dirección visual... y el kit no le deja

@@ -13,7 +13,7 @@ The kit is a guided, self-contained set for agents and humans that build fronten
 
 ## Flow commands
 
-`flow.mjs` keeps the route in `ai-frontend-output/flow-state.json` (commit it). The commands are `node ai-frontend-guide-kit/tools/flow.mjs status` (first), then `start <route>`, `next`, `scaffold`, `report <step>` and `done <step>`; every route and step is in `guides/FLOWS.md`. Close each step with `flow.mjs done <step>`: it refuses a skipped step, a missing artifact, empty sections or `<…>` left. Large steps close part by part (`done direction.questions`). The phases are entry points, not a pipeline: never run a phase the user did not ask for.
+`flow.mjs` keeps the route in `ai-frontend-output/flow-state.json` (commit it). The commands are `node ai-frontend-guide-kit/tools/flow.mjs status` (first), then `start <route>`, `next`, `scaffold`, `report <step>` and `done <step>`; every route and step is in `guides/FLOWS.md`. Close each step with `flow.mjs done <step>`: it refuses a skipped step, a missing artifact, empty sections or `<…>` left. Large steps close part by part (`done direction.questions`). The `board` step (route `new`) asks the user before Storybook is installed and never installs it alone: it closes with a clean board, or with `done board --declined --reason "..."` when the user said no (`guides/14-DESIGN-BOARD.md`). The phases are entry points, not a pipeline: never run a phase the user did not ask for.
 
 ## Token layers
 

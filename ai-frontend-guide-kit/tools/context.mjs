@@ -12,7 +12,7 @@
  * UI libraries come from package.json and components.json: covered (a catalog source is built on it),
  * compatible (catalog entries depend on it) or to research (not in the catalog: use its own docs).
  */
-import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, statSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { toolPath } from './kit-path.mjs';
@@ -62,25 +62,30 @@ function walk(root) {
   return files;
 }
 
+/** The frontend frameworks, in the order they are told apart (the first dependency found wins). board.mjs reads the same list. */
+export const FRAMEWORKS = [
+  ['next', 'Next.js'],
+  ['nuxt', 'Nuxt'],
+  ['@sveltejs/kit', 'SvelteKit'],
+  ['svelte', 'Svelte'],
+  ['astro', 'Astro'],
+  ['@remix-run/react', 'Remix'],
+  ['vue', 'Vue'],
+  ['react', 'React'],
+  ['solid-js', 'Solid'],
+  ['@angular/core', 'Angular'],
+];
+
+/** The framework name of a dependency map ({ name: version }), or 'unknown'. */
+export const frameworkOf = (deps) => FRAMEWORKS.find(([dep]) => deps[dep])?.[1] ?? 'unknown';
+
 function detectStack(root) {
   const manifestPath = join(root, 'package.json');
   if (!existsSync(manifestPath)) return { name: basename(root), framework: 'unknown', detected: [] };
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
   const deps = { ...(manifest.dependencies ?? {}), ...(manifest.devDependencies ?? {}) };
   const detected = [];
-  const frameworkMap = [
-    ['next', 'Next.js'],
-    ['nuxt', 'Nuxt'],
-    ['@sveltejs/kit', 'SvelteKit'],
-    ['svelte', 'Svelte'],
-    ['astro', 'Astro'],
-    ['@remix-run/react', 'Remix'],
-    ['vue', 'Vue'],
-    ['react', 'React'],
-    ['solid-js', 'Solid'],
-    ['@angular/core', 'Angular'],
-  ];
-  const framework = frameworkMap.find(([dep]) => deps[dep])?.[1] ?? 'unknown';
+  const framework = frameworkOf(deps);
   if (deps.tailwindcss) detected.push(`tailwindcss ${deps.tailwindcss.includes('4') ? 'v4' : 'v3?'}`);
   if (deps.typescript) detected.push('typescript');
   for (const [dep, label] of [['motion', 'motion'], ['framer-motion', 'framer-motion'], ['shadcn', 'shadcn'], ['preline', 'preline'], ['daisyui', 'daisyui']]) {
@@ -386,4 +391,12 @@ function main() {
   console.log(`written : ${join(outDir, 'REPO-CONTEXT.md')}`);
 }
 
-main();
+/** Runs only as a command, not when board.mjs imports frameworkOf; the real paths are compared so a linked kit folder still runs. */
+const runsAsCommand = () => {
+  try {
+    return realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url));
+  } catch {
+    return false;
+  }
+};
+if (runsAsCommand()) main();
