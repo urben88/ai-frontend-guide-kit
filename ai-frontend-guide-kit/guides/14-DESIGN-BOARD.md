@@ -21,17 +21,18 @@ Storybook shows stories, not relations and not comments. Relations (which page u
 ## Write the boards from the project's real components
 
 - Container-presentational: the container keeps the logic (store, router, API); the board renders only the presentational part with mock props. If a component mixes both, split it first (`12-ARCHITECTURE.md`) or leave it out of the board.
-- `board.mjs plan` lists the pages and their components from `ui-map.json` (build it first with `ui-map.mjs build`). Use those components; do not redraw them.
+- `board.mjs plan` lists the page boards and the component boards (shared components first) from `ui-map.json` (build it first with `ui-map.mjs build`). Use those components; do not redraw them.
 - `board.mjs scaffold <page> --version <name>` writes `src/board/<Page>.board.stories.tsx` (`.jsx` without TypeScript) with the rules, a mock-data section and one export per version. A new version goes into the same file; an existing version is never overwritten.
-- One story per layout version. Names are kebab-case and say what changes (`v1-sidebar`, not `v1`).
+- `board.mjs scaffold <Component> --kind component --version <state>` writes `src/board/components/<Component>.board.stories.tsx` (title `Board/Components/<Component>`): one story per variant or state (`default`, `disabled`, `loading`) from mock props. Add each state with another `--version`; an existing one is never overwritten. Only presentational components go on this board.
+- One story per layout version of a page. Names are kebab-case and say what changes (`v1-sidebar`, not `v1`).
 - Mock data is made up and typed like the real props. No fetching, no stores, no router.
 
 ## Compare and edit versions
 
-- `board.mjs list` shows each board and its versions.
+- `board.mjs list` shows each board, pages and components, and its versions.
 - To try another layout, add a new version; do not edit the old one unless the user asks. Changing a version means changing layout and style only, never the logic, routes, stores or API calls.
 - The user compares versions in Storybook and comments with Agentation; apply the chosen one to the real page as a separate, explicit step.
 
 ## Before closing
 
-`node ai-frontend-guide-kit/tools/board.mjs check` must print 0 findings. It flags a board that imports a store (redux, zustand, pinia, mobx), a router (react-router, next/navigation, vue-router), an API or fetch client (axios, `fetch(`, files under `api/` or `services/`) or a data-fetching hook (`@tanstack/react-query`, swr). Fix each by passing mock props instead. `list` and `plan` show what is left.
+`node ai-frontend-guide-kit/tools/board.mjs check` must print 0 findings. It flags a board that imports a store (redux, zustand, pinia, mobx), a router (react-router, next/navigation, vue-router), an API or fetch client (axios, `fetch(`, files under `api/` or `services/`, also through an alias such as `@/api/client`, `~/stores/auth` or a `paths` alias of tsconfig/jsconfig) or a data-fetching hook (`@tanstack/react-query`, swr). Fix each by passing mock props instead. `list` and `plan` show what is left.

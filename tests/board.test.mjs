@@ -189,3 +189,135 @@ test('usage: no command or an unknown one exits 2', () => {
   assert.equal(board(dir, 'nope').status, 2);
   assert.match(board(dir, '--help').stdout, /scaffold/);
 });
+
+// ---------------------------------------------------------------- verification fixes: path aliases and the components board (S7)
+
+import { createHash } from 'node:crypto';
+
+const sha = (text) => createHash('sha256').update(text).digest('hex');
+
+test('check: a store or an API client imported through a project alias is a finding, like the same import by a relative path (S7)', () => {
+  const dir = project(REACT_TS, {
+    'tsconfig.json': '{\n  // paths with a comment, as tsc allows\n  "compilerOptions": { "paths": { "@data/*": ["src/api/*"], "@app": ["src/app/index.ts"] } }\n}\n',
+    'src/board/Alias.board.stories.tsx': [
+      "import { useAuthStore } from '@/stores/auth';",
+      "import { client } from '@/api/client';",
+      "import { other } from '~/api/client';",
+      "import { svc } from '#/services/user';",
+      "import { rel } from '../api/client';",
+      "import { viaPaths } from '@data/client';",
+      "import { useQuery } from '@tanstack/react-query';",
+      "import { configureStore } from '@reduxjs/toolkit';",
+      'export const V1 = {};',
+      '',
+    ].join('\n'),
+  });
+  const run = board(dir, 'check');
+  assert.equal(run.status, 1, run.stdout);
+  for (const needle of ['@/stores/auth', '@/api/client', '~/api/client', '#/services/user', '../api/client', '@data/client', '@tanstack/react-query', '@reduxjs/toolkit']) {
+    assert.ok(run.stdout.includes(`"${needle}"`), `finding for ${needle}\n${run.stdout}`);
+  }
+  assert.equal(JSON.parse(board(dir, 'check', '--json').stdout).findings.length, 8);
+});
+
+test('check: aliases that point at presentational code, and scoped packages that are not stores or clients, stay clean (S7)', () => {
+  const dir = project(REACT_TS, {
+    'src/board/Clean.board.stories.tsx': [
+      "import { Button } from '@/components/Button';",
+      "import { Card } from '~/ui/Card';",
+      "import { theme } from '#/theme';",
+      "import * as Dialog from '@radix-ui/react-dialog';",
+      "import { formatStore } from '@/lib/format-store';",
+      'export const V1 = {};',
+      '',
+    ].join('\n'),
+  });
+  const run = board(dir, 'check');
+  assert.equal(run.status, 0, run.stdout);
+  assert.match(run.stdout, /0 findings/);
+});
+
+test('scaffold: the call without --kind keeps its exact output and file (previous behavior, S7)', () => {
+  const dir = project(REACT_TS);
+  const first = board(dir, 'scaffold', 'login', '--version', 'v1-sidebar');
+  assert.equal(first.status, 0, first.stderr);
+  assert.equal(first.stdout.split('\n')[0], 'board: wrote src/board/Login.board.stories.tsx (story Board/Pages/Login, version v1-sidebar, export V1Sidebar)');
+  assert.match(first.stdout.split('\n')[1], /^Next: compose the presentational components with mock data, then run: node .*board\.mjs check$/);
+  const file = join(dir, 'src', 'board', 'Login.board.stories.tsx');
+  assert.equal(sha(readFileSync(file, 'utf8')), 'e44fb3826a495505fdf46656d2e63a3793091e7eeab51d84f0d7f308a4df2259');
+  const explicit = project(REACT_TS);
+  assert.equal(board(explicit, 'scaffold', 'login', '--version', 'v1-sidebar', '--kind', 'page').stdout, first.stdout);
+  assert.equal(readFileSync(join(explicit, 'src', 'board', 'Login.board.stories.tsx'), 'utf8'), readFileSync(file, 'utf8'));
+  board(dir, 'scaffold', 'login', '--version', 'v2-topbar');
+  assert.equal(sha(readFileSync(file, 'utf8')), '13d6e605ce215319ae004813fc683d2c93ce7eead6dcf051c1f590b6d76c6d84');
+});
+
+test('scaffold --kind component writes Board/Components/<Name> with one story per variant or state, and adds more to the same file (S7)', () => {
+  const dir = project(REACT_TS);
+  const first = board(dir, 'scaffold', 'button', '--kind', 'component', '--version', 'default');
+  assert.equal(first.status, 0, first.stderr);
+  const file = join(dir, 'src', 'board', 'components', 'Button.board.stories.tsx');
+  assert.ok(existsSync(file), 'story file written under src/board/components');
+  assert.match(first.stdout, /Board\/Components\/Button/);
+  assert.match(first.stdout, /src\/board\/components\/Button\.board\.stories\.tsx/);
+  assert.ok(!existsSync(join(dir, 'src', 'board', 'Button.board.stories.tsx')), 'no page board was made');
+  const text = readFileSync(file, 'utf8');
+  assert.ok(text.includes("title: 'Board/Components/Button'"));
+  assert.ok(!text.includes('Board/Pages'));
+  assert.ok(text.includes('export const Default'));
+  assert.ok(text.includes('// version: default'));
+  assert.match(text, /[Mm]ock props/);
+  assert.match(text, /presentational/);
+
+  assert.equal(board(dir, 'scaffold', 'button', '--kind', 'component', '--version', 'disabled').status, 0);
+  assert.equal(board(dir, 'scaffold', 'button', '--kind', 'component', '--version', 'loading').status, 0);
+  const after = readFileSync(file, 'utf8');
+  for (const name of ['Default', 'Disabled', 'Loading']) assert.ok(after.includes(`export const ${name}`), name);
+  assert.equal(after.split("title: 'Board/Components/Button'").length - 1, 1, 'one title only');
+  const again = board(dir, 'scaffold', 'button', '--kind', 'component', '--version', 'disabled');
+  assert.equal(again.status, 1);
+  assert.match(again.stderr, /already/);
+  assert.equal(readFileSync(file, 'utf8'), after, 'an existing story is never overwritten');
+
+  // a page and a component with the same name are two boards
+  assert.equal(board(dir, 'scaffold', 'button', '--version', 'v1-plain').status, 0);
+  assert.ok(existsSync(join(dir, 'src', 'board', 'Button.board.stories.tsx')));
+  assert.equal(board(dir, 'check').status, 0);
+});
+
+test('scaffold: an unknown --kind is a usage error, and a component still needs --version (S7)', () => {
+  const dir = project(REACT_TS);
+  const bad = board(dir, 'scaffold', 'button', '--kind', 'widget', '--version', 'default');
+  assert.equal(bad.status, 2);
+  assert.match(bad.stderr, /component or page/);
+  assert.equal(board(dir, 'scaffold', 'button', '--kind', 'component').status, 2);
+  assert.ok(!existsSync(join(dir, 'src')), 'nothing written');
+});
+
+test('plan proposes a component board per component of ui-map, shared ones first; list shows pages and components (S7)', () => {
+  const dir = project(REACT_TS, { 'ai-frontend-output/ui-map.json': JSON.stringify(UI_MAP) });
+  const json = JSON.parse(board(dir, 'plan', '--json').stdout);
+  assert.deepEqual(json.componentBoards.map((c) => c.name), ['Sidebar', 'LoginForm', 'StatCard']);
+  assert.equal(json.componentBoards[0].shared, true);
+  assert.equal(json.componentBoards[0].title, 'Board/Components/Sidebar');
+  assert.equal(json.componentBoards[1].shared, false);
+  assert.equal(json.componentBoards.every((c) => c.exists === false), true);
+  assert.equal(json.pages.length, 2, 'the pages are as before');
+  assert.equal(json.components, 3, 'the count is as before');
+  const text = board(dir, 'plan').stdout;
+  assert.match(text, /Board\/Components\/Sidebar .*\[to create\]/);
+  assert.match(text, /scaffold Sidebar --kind component --version default/);
+  assert.match(text, /Board\/Pages\/Login/);
+
+  board(dir, 'scaffold', 'Sidebar', '--kind', 'component', '--version', 'default');
+  board(dir, 'scaffold', 'login', '--version', 'v1-sidebar');
+  const after = JSON.parse(board(dir, 'plan', '--json').stdout);
+  assert.equal(after.componentBoards.find((c) => c.name === 'Sidebar').exists, true);
+  assert.equal(after.pages.find((p) => p.name === 'Login').exists, true);
+  const list = board(dir, 'list');
+  assert.match(list.stdout, /Board\/Components\/Sidebar .*default/);
+  assert.match(list.stdout, /Board\/Pages\/Login .*v1-sidebar/);
+  const listed = JSON.parse(board(dir, 'list', '--json').stdout).boards;
+  assert.equal(listed.find((b) => b.title === 'Board/Components/Sidebar').kind, 'component');
+  assert.equal(listed.find((b) => b.title === 'Board/Pages/Login').kind, 'page');
+});

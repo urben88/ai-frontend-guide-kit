@@ -359,3 +359,27 @@ test('kit-mcp: the board tools check their input, and flow_done can record the n
     assert.equal(step.reason, 'the user does not want it');
   }, ['--dir', dir]);
 });
+
+test('kit-mcp: board_scaffold takes an optional kind (component or page) and writes the same story as the CLI (S7)', async () => {
+  const dir = project();
+  const mirror = project();
+  for (const where of [dir, mirror]) withStorybook(where);
+  await withServer(async (server) => {
+    const component = await server.call('board_scaffold', { page: 'Button', version: 'default', kind: 'component' });
+    assert.equal(component.isError, false, text(component));
+    const expected = cli('board.mjs', ['scaffold', 'Button', '--version', 'default', '--kind', 'component', '--dir', mirror]);
+    const hide = (value, where) => value.split(where.replace(/\\/g, '/')).join('<P>').split(where).join('<P>');
+    assert.equal(hide(text(component), dir), hide(expected.stdout, mirror));
+    const file = join('src', 'board', 'components', 'Button.board.stories.tsx');
+    assert.equal(readFileSync(join(dir, file), 'utf8'), readFileSync(join(mirror, file), 'utf8'));
+    assert.match(readFileSync(join(dir, file), 'utf8'), /Board\/Components\/Button/);
+    const page = await server.call('board_scaffold', { page: 'Button', version: 'v1-plain', kind: 'page' });
+    assert.equal(page.isError, false, text(page));
+    assert.match(readFileSync(join(dir, 'src', 'board', 'Button.board.stories.tsx'), 'utf8'), /Board\/Pages\/Button/);
+    const list = JSON.parse(text(await server.call('board_list', { json: true })));
+    assert.deepEqual(list.boards.map((b) => b.kind).sort(), ['component', 'page']);
+    const bad = await server.call('board_scaffold', { page: 'Button', version: 'default', kind: 'widget' });
+    assert.equal(bad.isError, true);
+    assert.match(text(bad), /one of: page, component/);
+  }, ['--dir', dir]);
+});

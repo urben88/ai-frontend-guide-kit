@@ -292,14 +292,19 @@ const DEFS = [
   },
   {
     name: 'board_scaffold',
-    description: 'Write a composition story for one layout version of a page (v1-sidebar). Adds to an existing board; never overwrites a version.',
+    description: 'Write a story for one layout version of a page (v1-sidebar) or one variant of a component (kind component). Never overwrites.',
     tool: 'board.mjs', project: true,
     properties: {
-      page: str('Page name, for example login or Expedientes.', { minLength: 1, pattern: '^[A-Za-z0-9][A-Za-z0-9 _.-]*$' }),
-      version: str('Layout version, kebab-case, for example v1-sidebar.', { pattern: '^[a-z][a-z0-9]*(-[a-z0-9]+)*$' }),
+      page: str('Page name (login, Expedientes) or, with kind component, the component name (Button).', { minLength: 1, pattern: '^[A-Za-z0-9][A-Za-z0-9 _.-]*$' }),
+      version: str('Kebab-case: the layout version of a page (v1-sidebar) or the variant or state of a component (default, disabled).', { pattern: '^[a-z][a-z0-9]*(-[a-z0-9]+)*$' }),
+      kind: { type: 'string', enum: ['page', 'component'], description: 'page (default): Board/Pages. component: Board/Components.' },
     },
     required: ['page', 'version'],
-    args: (a) => ['scaffold', a.page, '--version', a.version],
+    args: (a) => {
+      const out = ['scaffold', a.page, '--version', a.version];
+      opt(out, a, 'kind');
+      return out;
+    },
   },
   {
     name: 'board_list',

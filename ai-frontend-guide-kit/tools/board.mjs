@@ -28,6 +28,7 @@ const DEFAULT_GLOB = 'src/**/*.stories.@(js|jsx|ts|tsx|mdx)';
 const BOARD_DIR = 'src/board';
 const IGNORED = /(^|\/)(node_modules|\.git|\.next|\.nuxt|\.svelte-kit|dist|build|coverage|\.cache|\.output|out|storybook-static)(\/|$)/;
 const MAX_PAGE_COMPONENTS = 12;
+const MAX_COMPONENT_BOARDS = 15;
 
 class UsageError extends Error {}
 
@@ -164,6 +165,45 @@ export const ${exportName}${ts ? ': Story' : ''} = {
 `;
 }
 
+// The components board: one story per variant or state of one component, from mock props.
+
+const COMPONENT_RULES = (name) => `/*
+ * Components board: ${name}. One story per variant or state (default, disabled, loading, empty...), from mock props.
+ * Rules (run \`${'node ai-frontend-guide-kit/tools/board.mjs check'}\` before closing):
+ *  - Only a presentational component: everything it shows comes in through props.
+ *  - Mock props only (the section below). Never real data.
+ *  - No stores, no router, no API or fetch clients, no data-fetching hooks. A component that needs them is split first.
+ *  - Never edit the real component to make a story work.
+ */`;
+
+function componentBlock(version, ts) {
+  return `// version: ${version}
+export const ${pascal(version)}${ts ? ': Story' : ''} = {
+  args: { ...mock /* , the props of this variant or state */ },
+};
+`;
+}
+
+function newComponentFile(name, version, ts) {
+  const head = ts ? "import type { Meta, StoryObj } from '@storybook/react';\n" : '';
+  const body = `  title: 'Board/Components/${name}',\n  // component: ${name}, // uncomment once it is imported above\n  parameters: { layout: 'centered' },\n`;
+  const meta = ts
+    ? `const meta = {\n${body}} satisfies Meta;\n\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n`
+    : `const meta = {\n${body}};\n\nexport default meta;\n`;
+  return `${head}// Import the PRESENTATIONAL component, for example:
+// import { ${name} } from '../../components/${name}';
+// With another framework, import the story types from its Storybook package.
+
+${COMPONENT_RULES(name)}
+
+// ---- Mock props (made up; shape them like the props of the component)
+const mock = {};
+
+${meta}
+// ---- Variants and states
+${componentBlock(version, ts)}`;
+}
+
 function newBoardFile(page, version, ts) {
   const head = ts ? "import type { Meta, StoryObj } from '@storybook/react';\n" : '';
   const meta = ts
@@ -184,10 +224,13 @@ ${versionBlock(version, ts)}`;
 }
 
 function cmdScaffold(flags, root) {
+  const kind = flags.opts.kind ?? 'page';
+  if (!['page', 'component'].includes(kind)) throw new UsageError(`--kind must be component or page (got "${kind}")`);
+  const component = kind === 'component';
   const pageArg = flags._[1];
-  if (!pageArg) throw new UsageError('give the page: scaffold <page> --version <name>');
+  if (!pageArg) throw new UsageError(component ? 'give the component: scaffold <component> --kind component --version <name>' : 'give the page: scaffold <page> --version <name>');
   const version = flags.opts.version;
-  if (!version) throw new UsageError('give the layout version: --version <name>, for example v1-sidebar');
+  if (!version) throw new UsageError(component ? 'give the variant or state: --version <name>, for example default or disabled' : 'give the layout version: --version <name>, for example v1-sidebar');
   if (!KEBAB.test(version)) throw new UsageError(`version "${version}" must be kebab-case (lowercase letters, digits and dashes, starting with a letter), for example v1-sidebar`);
   const page = pascal(pageArg);
   if (!page) throw new UsageError(`"${pageArg}" is not a page name`);
@@ -195,10 +238,10 @@ function cmdScaffold(flags, root) {
   if (!['React', 'Next.js', 'Remix', 'unknown'].includes(info.framework)) {
     console.error(`board: warning: the skeleton is JSX (React); ${info.framework} stories need the same structure written by hand`);
   }
-  const title = `Board/Pages/${page}`;
+  const title = `Board/${component ? 'Components' : 'Pages'}/${page}`;
   const existing = findBoards(root).find((b) => b.title === title);
   const ts = info.typescript;
-  const file = existing?.file ?? `${BOARD_DIR}/${page}.board.stories.${ts ? 'tsx' : 'jsx'}`;
+  const file = existing?.file ?? `${BOARD_DIR}/${component ? 'components/' : ''}${page}.board.stories.${ts ? 'tsx' : 'jsx'}`;
   const target = join(root, file);
   if (existing) {
     if (existing.versions.includes(version) || existing.exports.includes(pascal(version))) {
@@ -206,14 +249,14 @@ function cmdScaffold(flags, root) {
       process.exitCode = 1;
       return;
     }
-    appendFileSync(target, `\n${versionBlock(version, /\.tsx?$/.test(file))}`);
+    appendFileSync(target, `\n${(component ? componentBlock : versionBlock)(version, /\.tsx?$/.test(file))}`);
     console.log(`board: added the version ${version} (export ${pascal(version)}) to ${file}`);
   } else {
     mkdirSync(dirname(target), { recursive: true });
-    writeFileSync(target, newBoardFile(page, version, ts));
+    writeFileSync(target, (component ? newComponentFile : newBoardFile)(page, version, ts));
     console.log(`board: wrote ${file} (story ${title}, version ${version}, export ${pascal(version)})`);
   }
-  console.log(`Next: compose the presentational components with mock data, then run: ${runTool('board.mjs', 'check', root)}`);
+  console.log(`Next: ${component ? 'give the component its mock props' : 'compose the presentational components with mock data'}, then run: ${runTool('board.mjs', 'check', root)}`);
 }
 
 // ---------------------------------------------------------------- check
@@ -238,14 +281,44 @@ function stripComments(text) {
   return blanked.split('\n').map((line) => line.replace(/(^|[^:'"`])\/\/.*$/, '$1')).join('\n');
 }
 
-function scanBoard(file, text) {
+/** Project aliases every bundler and tsconfig convention knows: `@/x`, `~/x` and `#/x` point into the project, not at a package. */
+const ALIAS_PREFIX = /^(@|~|#)\//;
+
+/** The aliases of tsconfig.json / jsconfig.json `compilerOptions.paths` as { prefix, target } (comments in the file are tolerated). */
+function readAliases(root) {
+  for (const name of ['tsconfig.json', 'jsconfig.json']) {
+    try {
+      const text = readFileSync(join(root, name), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '').replace(/,(\s*[}\]])/g, '$1');
+      const paths = JSON.parse(text)?.compilerOptions?.paths ?? {};
+      return Object.entries(paths).flatMap(([key, targets]) => {
+        const prefix = key.replace(/\*$/, '');
+        const target = Array.isArray(targets) ? String(targets[0] ?? '').replace(/\*$/, '') : '';
+        return prefix && target ? [{ prefix, target }] : [];
+      });
+    } catch {
+      continue;
+    }
+  }
+  return [];
+}
+
+/** The path form of an import that stays inside the project (relative, absolute, an alias), or null for a package. A declared alias is replaced by its target. */
+function localPath(specifier, aliases) {
+  const alias = aliases.find(({ prefix }) => specifier.startsWith(prefix));
+  if (alias) return `${alias.target}${specifier.slice(alias.prefix.length)}`;
+  if (/^(\.{1,2}\/|\/)/.test(specifier) || ALIAS_PREFIX.test(specifier)) return specifier;
+  return null;
+}
+
+function scanBoard(file, text, aliases = []) {
   const findings = [];
   const lines = stripComments(text).split('\n');
   lines.forEach((line, index) => {
     for (const m of line.matchAll(/(?:from\s+|import\s*\(\s*|import\s+|require\s*\(\s*)['"]([^'"]+)['"]/g)) {
       const specifier = m[1];
+      const local = localPath(specifier, aliases);
       for (const p of PATTERNS) {
-        if (p.spec.test(specifier) || (p.path && !/^[@a-z]/.test(specifier) && p.path.test(specifier))) {
+        if ((local === null && p.spec.test(specifier)) || (local !== null && p.path && p.path.test(local))) {
           findings.push({ id: p.id, file, line: index + 1, what: `imports "${specifier}" (${p.kind})`, fix: FIXES[p.id] });
           break;
         }
@@ -259,7 +332,8 @@ function scanBoard(file, text) {
 /** The board files and the numbered findings of the check (what `check` prints and what `flow done board` reads). */
 export function checkBoards(root) {
   const files = walk(root).filter(isBoardFile);
-  const findings = files.flatMap((file) => scanBoard(file, readFileSync(join(root, file), 'utf8'))).map((f, i) => ({ n: i + 1, severity: 'high', ...f }));
+  const aliases = readAliases(root);
+  const findings = files.flatMap((file) => scanBoard(file, readFileSync(join(root, file), 'utf8'), aliases)).map((f, i) => ({ n: i + 1, severity: 'high', ...f }));
   return { files, findings };
 }
 
@@ -309,10 +383,22 @@ function cmdPlan(flags, root) {
     const components = (map.components ?? []).filter((c) => (c.routes ?? []).includes(route)).map((c) => c.name).sort();
     return { route, file, name, slug, title: `Board/Pages/${name}`, components, exists: boards.some((b) => b.title === `Board/Pages/${name}`) };
   });
-  const result = { pages, components: (map.components ?? []).length };
+  const componentBoards = (map.components ?? [])
+    .map((c) => {
+      const name = pascal(c.name);
+      return { name: c.name, file: c.file, title: `Board/Components/${name}`, routes: c.routes ?? [], shared: (c.routes ?? []).length > 1 || (c.usage ?? 0) > 1, usage: c.usage ?? 0, exists: boards.some((b) => b.title === `Board/Components/${name}`) };
+    })
+    .sort((a, b) => Number(b.shared) - Number(a.shared) || b.usage - a.usage || a.name.localeCompare(b.name));
+  const result = { pages, components: (map.components ?? []).length, componentBoards };
   if (flags.bool.has('json')) return console.log(JSON.stringify(result, null, 2));
   console.log(`board plan: ${pages.length} page${pages.length === 1 ? '' : 's'}, ${result.components} components (from ui-map.json)`);
-  console.log(`Board/Components: one story per presentational component, for the components board (${result.components} in the map)`);
+  console.log(`Components board: ${componentBoards.length} component${componentBoards.length === 1 ? '' : 's'} in the map, shared ones first (use only the presentational ones; a component with a store, router or API call is split first)`);
+  for (const c of componentBoards.slice(0, MAX_COMPONENT_BOARDS)) {
+    console.log(`- ${c.title} (${c.file}, ${c.routes.length} page${c.routes.length === 1 ? '' : 's'}${c.shared ? ', shared' : ''}) ${c.exists ? '[board exists]' : '[to create]'}`);
+    if (!c.exists) console.log(`    ${runTool('board.mjs', `scaffold ${c.name} --kind component --version default`, root)}`);
+  }
+  if (componentBoards.length > MAX_COMPONENT_BOARDS) console.log(`  +${componentBoards.length - MAX_COMPONENT_BOARDS} more components (all of them with --json)`);
+  console.log(`Pages board: ${pages.length} page${pages.length === 1 ? '' : 's'}`);
   for (const p of pages) {
     const shown = p.components.slice(0, MAX_PAGE_COMPONENTS).join(', ') || 'no components reached';
     const more = p.components.length > MAX_PAGE_COMPONENTS ? `, +${p.components.length - MAX_PAGE_COMPONENTS} more` : '';
@@ -323,7 +409,7 @@ function cmdPlan(flags, root) {
 }
 
 function cmdList(flags, root) {
-  const boards = findBoards(root).map((b) => ({ title: b.title ?? '(no title)', file: b.file, versions: b.versions }));
+  const boards = findBoards(root).map((b) => ({ title: b.title ?? '(no title)', kind: b.title?.startsWith('Board/Components/') ? 'component' : 'page', file: b.file, versions: b.versions }));
   if (flags.bool.has('json')) return console.log(JSON.stringify({ boards }, null, 2));
   if (boards.length === 0) return console.log(`board list: no boards yet. Plan them: ${runTool('board.mjs', 'plan', root)}`);
   console.log(`board list: ${boards.length} board${boards.length === 1 ? '' : 's'}`);
@@ -338,20 +424,23 @@ Usage:
   node ${toolPath('board.mjs')} detect [--json]
   node ${toolPath('board.mjs')} plan [--json]
   node ${toolPath('board.mjs')} scaffold <page> --version <name>
+  node ${toolPath('board.mjs')} scaffold <component> --kind component --version <name>
   node ${toolPath('board.mjs')} list [--json]
   node ${toolPath('board.mjs')} check [--json]
 
   detect    is Storybook there, the framework, the story glob and the exact install command (never installs: ask the user first)
-  plan      pages and components from ai-frontend-output/ui-map.json, and the boards to create
+  plan      the page boards and the component boards (shared components first) from ai-frontend-output/ui-map.json, and what is still to create
   scaffold  a composition story for one layout version, e.g. src/board/Login.board.stories.tsx with export V1Sidebar for v1-sidebar;
             adds a new version to an existing file; never overwrites a version; names are kebab-case
-  list      the boards found and their versions
+            --kind component writes Board/Components/<Name> (src/board/components/<Name>.board.stories.tsx): one story per variant or
+            state (default, disabled, loading) from mock props; --kind page (the default) is the page board above
+  list      the boards found, pages and components, and their versions
   check     numbered findings when a board imports stores, routers, API clients, data-fetching hooks or calls fetch(; exit 1 on a finding
   --dir     the project (default: AI_FRONTEND_PROJECT, then the folder that holds the kit)
   --json    print the data instead of the text (detect, plan, list, check)
 `;
 
-const VALUE_OPTS = new Set(['dir', 'version']);
+const VALUE_OPTS = new Set(['dir', 'version', 'kind']);
 const BOOL_OPTS = new Set(['json', 'help']);
 
 function parseArgs(argv) {
