@@ -104,6 +104,8 @@ Por qué importa: cuando varias personas (o varios chats) trabajan en el diseño
 | `flow.mjs done <paso>.<parte> --answer "..." [--tools ids]` | Las partes que son decisión del usuario (direcciones, referencias, las preguntas del producto, qué componentes reutilizar, la pregunta de Storybook) terminan `next` con un bloque STOP y solo se cierran con las palabras del usuario, que quedan en `flow-state.json`; `--tools` guarda cuáles de las herramientas del kit que lista `next` eligió el usuario. Después `done` imprime un resumen para el usuario. `compose` además rechaza un componente del catálogo decidido `reuse` o `adapt` que ninguna página ni componente importa |
 | `flow.mjs done board --declined --reason "..."` | El paso `board` (ruta `new`) pregunta al usuario antes de instalar Storybook; esto guarda su no y el motivo, y el paso se cierra sin él |
 
+**Guiado por el usuario:** los pasos que necesitan una decisión (direcciones, referencias, preguntas del producto, componentes a reutilizar, Storybook) terminan `next` con un bloque STOP. El agente muestra las opciones y espera; la respuesta del usuario cierra la parte con `done <paso>.<parte> --answer "<las palabras del usuario>"`. `next` lista las herramientas del kit que encajan en el paso, y `--tools <ids>` guarda las que eligió el usuario. Tras cada paso, `done` imprime un resumen para el usuario, y `flow.mjs report` escribe la ruta completa en `ai-frontend-output/FLOW-REPORT.md`. `compose` rechaza un componente del catálogo decidido `reuse` o `adapt` que nadie importa.
+
 Tres ayudas más mantienen pequeño el contexto del agente:
 
 - **Librerías del proyecto:** `context.mjs` lista las librerías de UI que el proyecto ya usa (en el catálogo, compatibles o por investigar) y `memory.mjs lib sync` las guarda, para que el agente las reutilice en vez de añadir otras.
@@ -142,6 +144,27 @@ Tú solo hablas con tu agente. Por detrás, él usa el kit así:
 
 Así sigue, paso a paso, hasta `polish`. Si vuelves mañana, o alguien de tu equipo abre otro chat, `flow.mjs status` enseña exactamente dónde lo dejasteis.
 
+## 🎨 Pizarra de diseño (Storybook)
+
+Una pizarra de diseño muestra los componentes y las páginas del propio proyecto aislados, con varias versiones de layout una al lado de otra, para que tú y el agente las comparéis sin tocar la lógica, las rutas, los stores ni las llamadas a la API. Tiene dos partes:
+
+- **Pizarra de componentes** (`Board/Components/<Nombre>`): un componente presentacional con sus estados.
+- **Pizarra de páginas** (`Board/Pages/<Página>`): una página con datos de prueba, una historia por versión de layout (`v1-sidebar`, `v2-topbar`, ...).
+
+Las historias usan componentes presentacionales reales con datos de prueba. Sin lógica, rutas, stores ni llamadas a la API.
+
+El kit **siempre pregunta antes de instalar Storybook** y nunca lo instala por su cuenta. `board.mjs detect` imprime el comando fijado (`npx storybook@10.6.7 init`) para cuando digas que sí.
+
+| Comando | Qué hace |
+|---|---|
+| `board.mjs detect` | ¿Está Storybook? Framework, patrón de historias y el comando de instalación (nunca instala) |
+| `board.mjs plan` | Propone las pizarras desde `ui-map.json`, primero los componentes compartidos |
+| `board.mjs scaffold <nombre> --kind component\|page --version <nombre>` | Escribe una historia por versión de layout (`--kind component` para la pizarra de componentes) |
+| `board.mjs list` | Muestra las pizarras y sus versiones |
+| `board.mjs check` | Marca stores, routers o llamadas a la API en una pizarra (debe imprimir 0 hallazgos) |
+
+La ruta `new` tiene un paso `board`. Se cierra con una pizarra limpia o con el no del usuario, que queda registrado.
+
 ## 🔎 Buscar componentes
 
 ```bash
@@ -161,7 +184,8 @@ Los resultados se ordenan por **calidad** (claridad de licencia, esfuerzo de ins
 5. 🎭 Configura los servidores **Playwright + Excalidraw MCP** según el entorno detectado (`.mcp.json` para Claude Code, `opencode.json` para OpenCode) y crea la plantilla `ai-frontend-output/ux/ux-map.excalidraw`; si no, imprime los comandos exactos. Navegador una vez: `npx playwright install chromium`.
    - 🖱️ **Opcional — Agentation** (clic en un elemento de tu app React y dile al agente exactamente qué cambiar; guía `11-VISUAL-FEEDBACK.md`). El instalador solo imprime el mensaje, no lo instala: `npm install agentation -D`, `claude mcp add agentation -- npx -y agentation-mcp server`, `npx agentation-mcp doctor` y monta `<Agentation endpoint="http://localhost:4747" />` solo en desarrollo.
 6. 🗺️ Escanea el proyecto con `ui-map` (siempre) y escribe el mapa del frontend bajo `ai-frontend-output/` (si el escaneo falla, solo avisa).
-7. 🐍 Comprueba Python/Laya e imprime el siguiente paso exacto.
+7. 🎨 Busca Storybook (la pizarra de diseño). Si falta, imprime la propuesta y el comando exacto de instalación, y no lo instala: el agente te pregunta antes.
+8. 🐍 Comprueba Python/Laya e imprime el siguiente paso exacto.
 
 > 💡 Las skills externas necesitan red; si fallan, la instalación continúa y el kit sigue funcionando con `find`/`get`.
 
@@ -212,6 +236,18 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # vis
 
 ⚠️ El agente **debe preguntar antes de usarlo**: el consentimiento es una vez por proyecto/sesión (se registra en `EXPERIENCE-BRIEF.md`) y `--confirmed` es obligatorio en cada llamada como prueba (sin él, el script sale con código 3 y no carga nada). Todo se ejecuta en local. Sin Python/Laya el kit sigue funcionando con el árbol de preguntas y `find.mjs` + `get.mjs`.
 
+## 🔌 Herramientas del kit como MCP
+
+`ai-frontend-guide-kit/tools/kit-mcp.mjs` es un servidor MCP local y sin dependencias (opcional). El instalador no lo registra: añádelo tú a `.mcp.json` (Claude Code):
+
+```json
+{ "mcpServers": { "ai-frontend-kit": { "command": "node", "args": ["ai-frontend-guide-kit/tools/kit-mcp.mjs"] } } }
+```
+
+Cada herramienta ejecuta el mismo comando que la CLI y revisa antes sus argumentos. El proyecto es `--dir <proyecto>`; si no, `AI_FRONTEND_PROJECT`; si tampoco, la carpeta que contiene el kit. Las 22 herramientas:
+
+`flow_status` · `flow_start` · `flow_next` · `flow_done` · `flow_scaffold` · `flow_report` · `find` · `get` · `technique_find` · `technique_get` · `recipe_suggest` · `recipe_show` · `tokens_check` · `audit_design` · `svg_gen` · `svg_check` · `board_detect` · `board_plan` · `board_scaffold` · `board_list` · `board_check` · `scene_check`
+
 ## 📂 Estructura del repositorio
 
 ```
@@ -220,7 +256,7 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "..." --dry-run   # vis
 │   ├── guides/00..10         # dirección de experiencia + flujo UX/UI "reutilizar primero"
 │   ├── experience/           # arquetipos, filosofías, estilos, banco de preguntas, bucle de descubrimiento, fichas de referencia, recetas de página + reglas de layout + experience-manifest.json
 │   ├── catalog/              # índice + taxonomía + guías de instalación + <!--fig:sources-->39<!--/fig--> fuentes + explorer.html + license-report.md
-│   └── tools/                # context · find · get · memory · tokens · recipe · laya_select · excalidraw-mcp · audit-design · audit-honesty · audit-a11y · audit-perf
+│   └── tools/                # context · find · get · memory · tokens · recipe · ui-map · pieces · scout · flow · board · svg · scene · technique · kit-mcp · laya_select · excalidraw-mcp · audit-design · audit-honesty · audit-a11y · audit-perf
 ├── skills/                   # ai-frontend-guide + frontend-polish + frontend-refactor + ux-map + <!--fig:uxskills-->16<!--/fig--> skills UX incluidas (MIT)
 ├── manifest/                 # fuente de verdad del catálogo (generado)
 ├── media/explainer/          # 🎬 explainer dibujado a mano (ES/EN, GIF, póster)

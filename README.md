@@ -120,6 +120,8 @@ Why it matters: when several people (or several chats) work on the design, each 
 | `flow.mjs done <step>.<part> --answer "..." [--tools ids]` | The parts that are the user's choice (directions, references, the product questions, which components to reuse, the Storybook question) end `next` with a STOP block and close only with the user's words, kept in `flow-state.json`; `--tools` records which of the kit tools that `next` lists the user chose. `done` then prints a summary for the user. `compose` also refuses a catalog component decided `reuse` or `adapt` that no page or component imports |
 | `flow.mjs done board --declined --reason "..."` | The `board` step (route `new`) asks the user before Storybook is installed; this records the user's no and why, so the step can close without it |
 
+**Guided by the user:** the steps that need a decision (directions, references, product questions, components to reuse, Storybook) end `next` with a STOP block. The agent shows the options and waits; the user's answer closes the part with `done <step>.<part> --answer "<the user's words>"`. `next` lists the kit tools that fit the step, and `--tools <ids>` records the ones the user picked. After each step `done` prints a short summary for the user, and `flow.mjs report` writes the whole route to `ai-frontend-output/FLOW-REPORT.md`. `compose` refuses a catalog component decided `reuse` or `adapt` that nothing imports.
+
 Three more helpers keep the agent's context small:
 
 - **Project libraries:** `context.mjs` lists the UI libraries the project already uses (in the catalog, compatible, or to research) and `memory.mjs lib sync` saves them, so the agent reuses them instead of adding new ones.
@@ -158,6 +160,27 @@ You only talk to your agent. Behind the scenes it uses the kit like this:
 
 It goes on like this, step by step, until `polish`. If you come back tomorrow, or a teammate opens another chat, `flow.mjs status` shows exactly where you left off.
 
+## 🎨 Design board (Storybook)
+
+A design board shows the project's own components and pages in isolation, with several layout versions side by side, so you and the agent can compare them without touching logic, routes, stores or API calls. It has two parts:
+
+- **Components board** (`Board/Components/<Name>`): one presentational component with its states.
+- **Pages board** (`Board/Pages/<Page>`): one page with mock data, one story per layout version (`v1-sidebar`, `v2-topbar`, ...).
+
+The stories use real presentational components with mock data. No logic, routes, stores or API calls.
+
+The kit **always asks before installing Storybook** and never installs it on its own. `board.mjs detect` prints the pinned command (`npx storybook@10.6.7 init`) for when you say yes.
+
+| Command | What it does |
+|---|---|
+| `board.mjs detect` | Is Storybook there? Framework, story glob and the install command (it never installs) |
+| `board.mjs plan` | Proposes the boards from `ui-map.json`, shared components first |
+| `board.mjs scaffold <name> --kind component\|page --version <name>` | Writes one story per layout version (`--kind component` for the components board) |
+| `board.mjs list` | Shows the boards and their versions |
+| `board.mjs check` | Flags stores, routers or API calls in a board (it must print 0 findings) |
+
+The `new` route has a `board` step. It closes with a clean board, or with the user's recorded no.
+
 ## 🔎 Finding components
 
 ```bash
@@ -177,7 +200,8 @@ Results are ranked by **quality** (license clarity, install effort, dependency w
 5. 🎭 Configures the **Playwright + Excalidraw MCP** servers per detected harness (`.mcp.json` for Claude Code, `opencode.json` for OpenCode) and creates the `ai-frontend-output/ux/ux-map.excalidraw` scaffold; otherwise prints the exact commands. Browser once: `npx playwright install chromium`.
    - 🖱️ **Optional — Agentation** (click an element in your React app and tell the agent exactly what to change; guide `11-VISUAL-FEEDBACK.md`). The installer only prints the message, it does not install it: `npm install agentation -D`, `claude mcp add agentation -- npx -y agentation-mcp server`, `npx agentation-mcp doctor`, and mount `<Agentation endpoint="http://localhost:4747" />` in dev only.
 6. 🗺️ Scans the project with `ui-map` (always) and writes the frontend map under `ai-frontend-output/` (a failed scan only warns).
-7. 🐍 Checks Python/Laya and prints the exact next step.
+7. 🎨 Looks for Storybook (the design board). If it is missing, it prints the proposal and the exact install command and does not install it: the agent asks you first.
+8. 🐍 Checks Python/Laya and prints the exact next step.
 
 > 💡 External skills need network; if they fail the install continues and the kit still works with `find`/`get`.
 
@@ -217,6 +241,18 @@ python ai-frontend-guide-kit/tools/laya_select.py --need "pricing table with mon
 El ranking de componentes acepta `--direction <id>` (la dirección elegida del brief) como contexto, para que el encaje coincida con el UX definido; sin Laya, `find`/`get` y las heurísticas siguen bastando.
 
 ⚠️ The agent **must ask before using it**: consent is once per project/session (recorded in `EXPERIENCE-BRIEF.md`) and `--confirmed` is required per call as proof (without it the script exits with code 3 and loads nothing). Everything runs locally — no server, no external APIs beyond the one-time Hugging Face checkpoint download. Without Python/Laya the kit still works via the question tree and `find.mjs` + `get.mjs`.
+
+## 🔌 Kit tools as MCP tools
+
+`ai-frontend-guide-kit/tools/kit-mcp.mjs` is a local, dependency-free MCP server (optional). The installer does not register it: add it yourself to `.mcp.json` (Claude Code):
+
+```json
+{ "mcpServers": { "ai-frontend-kit": { "command": "node", "args": ["ai-frontend-guide-kit/tools/kit-mcp.mjs"] } } }
+```
+
+Each tool runs the same command as the CLI and checks its arguments first. The project is `--dir <project>`, else `AI_FRONTEND_PROJECT`, else the folder that holds the kit. The 22 tools:
+
+`flow_status` · `flow_start` · `flow_next` · `flow_done` · `flow_scaffold` · `flow_report` · `find` · `get` · `technique_find` · `technique_get` · `recipe_suggest` · `recipe_show` · `tokens_check` · `audit_design` · `svg_gen` · `svg_check` · `board_detect` · `board_plan` · `board_scaffold` · `board_list` · `board_check` · `scene_check`
 
 ## 📂 Repository layout
 
