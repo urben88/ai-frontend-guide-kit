@@ -14,6 +14,7 @@
  *   env.techniques(areas) the style direction(s) the project recorded and the few technique cards of those areas that fit them ({ directions, ids })
  *   env.wants3d         true when the brief, UX spec or inventory name 3D, or a SCENE-SPEC.md exists
  *   env.dark            true when the brief's navigation_model is console (a dashboard or tool: dark tokens from day one)
+ *   env.storybook        board.mjs detect of the project: { present, install (the exact command, null when present), framework }
  *   env.hasProduct       does PRODUCT.md exist?   env.hasBrief  does EXPERIENCE-BRIEF.md exist?   env.hasMap  does ux-map.excalidraw exist?
  *
  * A part may also carry `report`: the fixed checklist of a step that closes with free evidence
@@ -510,6 +511,40 @@ export const PARTS = {
       }),
     },
   ],
+
+  board: [{
+    id: null,
+    title: 'ask about Storybook, then compose the real components into a design board',
+    build: (env) => {
+      const { present, install, framework } = env.storybook;
+      const detect = env.run('board.mjs', 'detect');
+      const declined = env.run('flow.mjs', 'done board --declined --reason "<the answer of the user, in their words>"');
+      return {
+        goal: 'Give the project a design board: Storybook stories that compose its own components with mock data, one story per layout version, without touching its logic, routes, stores or API calls. Storybook is installed only when the user says yes.',
+        steps: present
+          ? [
+            `Run: ${detect}`,
+            `Storybook is installed here (framework: ${framework}). Build the map and read the plan: ${env.run('ui-map.mjs', 'build')} then ${env.run('board.mjs', 'plan')}`,
+            'Ask the user which pages go on the board first (3 at most, from the plan). Do not choose for them.',
+            `For each page: ${env.run('board.mjs', 'scaffold <page> --version v1-<name>')}. Another layout of the same page is another version: ${env.run('board.mjs', 'scaffold <page> --version v2-<name>')} (kebab-case, for example v1-sidebar, v2-topbar, v3-compact).`,
+            'Fill each story with the real presentational components of that page (the plan lists them) and made-up mock data. Change only layout and style: never the logic, routes, stores or API calls.',
+            `Run: ${env.run('board.mjs', 'check')} — fix every finding it lists (pass mock props instead) and run it again until it prints 0 findings.`,
+            `Run: ${env.run('board.mjs', 'list')} and tell the user the stories are under Board/Pages in Storybook (the project's storybook script opens it).`,
+            'Do not apply a version to the real page: that is a separate step, only when the user asks for it.',
+          ]
+          : [
+            `Run: ${detect}`,
+            `Storybook is not installed in this project. Ask the user, in one message: "Install Storybook as the design board of this project? It runs ${install}." Then STOP and wait for the answer. Never install it on your own.`,
+            `The user says yes: run ${install} in the project root, run ${detect} again, then ask for this instruction again with: ${env.run('flow.mjs', 'next')}`,
+            `The user says no: run ${declined} and go on to the next step. Do not ask again unless the user brings it up.`,
+          ],
+        done: present
+          ? [`${env.run('board.mjs', 'check')} prints 0 findings.`, `${env.run('board.mjs', 'list')} shows at least one page with a version.`]
+          : ['The user answered: Storybook is installed and detect says present, or the declined command ran with the reason of the user.'],
+        reference: env.kit('guides/14-DESIGN-BOARD.md'),
+      };
+    },
+  }],
 
   iterate: [{
     id: null,

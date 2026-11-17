@@ -2,7 +2,7 @@
 
 A design board shows the project's own screens in isolation, with several layout versions side by side, so the user and the AI can compare, comment and improve the design without changing logic, routes, stores or API calls. It is built with [Storybook](https://storybook.js.org) stories inside the repo. The tool is `ai-frontend-guide-kit/tools/board.mjs`; the skill is `storybook-board`.
 
-Optional for the user, but the kit always offers it. It never installs Storybook on its own.
+Optional for the user, but the kit always offers it: the route `new` has a `board` step that closes only with Storybook installed and a clean board, or with the user's recorded no. It never installs Storybook on its own.
 
 ## Two boards
 
@@ -15,7 +15,7 @@ Storybook shows stories, not relations and not comments. Relations (which page u
 
 1. `node ai-frontend-guide-kit/tools/board.mjs detect` says if Storybook is present, the framework, the story glob and the exact install command.
 2. If it is missing, **ask the user** whether to install it and stop until they answer. Never install on your own.
-3. A "no" is a valid answer: record it with its reason (`memory.mjs add`) and go on without the board.
+3. A "no" is a valid answer: close the flow step with `node ai-frontend-guide-kit/tools/flow.mjs done board --declined --reason "<the answer of the user>"`. The no and its reason stay in `flow-state.json`, and the flow goes on without the board.
 4. A "yes": run the command `detect` printed (`npx storybook@<pinned version> init`; it detects React, Next.js, Vue, Svelte, Angular and others by itself and asks its own questions). The version is pinned in `board.mjs`; change it only after `npm view storybook version`.
 
 ## Write the boards from the project's real components

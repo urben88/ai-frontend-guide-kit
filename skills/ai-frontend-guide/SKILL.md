@@ -33,6 +33,7 @@ Open the step file below only when you are at that step. Do not read the others.
 | `ux` | `steps/ux.md` |
 | `tokens` | `steps/tokens.md` |
 | `compose` | `steps/compose.md` |
+| `board` | `steps/board.md` |
 | `iterate` | `steps/iterate.md` |
 | `redesign` | `steps/redesign.md` |
 | `polish` | `steps/polish.md` |

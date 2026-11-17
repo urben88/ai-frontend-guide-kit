@@ -75,7 +75,8 @@ const FRAMEWORKS = [
   ['@angular/core', 'Angular'],
 ];
 
-function detect(root) {
+/** Is Storybook in the project, which framework, the story glob and the exact install command. Also what flow.mjs and install.mjs read. */
+export function detect(root) {
   const manifest = readManifest(root);
   const deps = { ...(manifest?.dependencies ?? {}), ...(manifest?.devDependencies ?? {}) };
   const framework = FRAMEWORKS.find(([dep]) => deps[dep])?.[1] ?? 'unknown';
@@ -146,7 +147,8 @@ function parseBoard(text) {
   return { title, versions, exports };
 }
 
-function findBoards(root) {
+/** The board stories of the project: file, title and the layout versions each one holds. */
+export function findBoards(root) {
   return walk(root).filter(isBoardFile).map((file) => ({ file, ...parseBoard(readFileSync(join(root, file), 'utf8')) }));
 }
 
@@ -267,9 +269,15 @@ function scanBoard(file, text) {
   return findings;
 }
 
-function cmdCheck(flags, root) {
+/** The board files and the numbered findings of the check (what `check` prints and what `flow done board` reads). */
+export function checkBoards(root) {
   const files = walk(root).filter(isBoardFile);
   const findings = files.flatMap((file) => scanBoard(file, readFileSync(join(root, file), 'utf8'))).map((f, i) => ({ n: i + 1, severity: 'high', ...f }));
+  return { files, findings };
+}
+
+function cmdCheck(flags, root) {
+  const { files, findings } = checkBoards(root);
   const summary = `board check: ${findings.length} finding${findings.length === 1 ? '' : 's'} in ${files.length} board file${files.length === 1 ? '' : 's'}`;
   if (flags.bool.has('json')) console.log(JSON.stringify({ files, findings, summary }, null, 2));
   else {

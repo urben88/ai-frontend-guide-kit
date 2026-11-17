@@ -107,7 +107,7 @@ const FLOW_SKILLS = [
 ];
 
 // One file per flow step, loaded only at that step (skills/ai-frontend-guide/steps/<step>.md).
-const STEP_SKILLS = ['intake', 'direction', 'ux', 'tokens', 'compose', 'iterate', 'redesign', 'polish', 'visual-feedback', 'architecture'];
+const STEP_SKILLS = ['intake', 'direction', 'ux', 'tokens', 'compose', 'board', 'iterate', 'redesign', 'polish', 'visual-feedback', 'architecture'];
 
 export // One small skill per technique area (svg is served by svg-craft), loaded only at its step.
 const TECHNIQUE_SKILLS = ['layout', 'type', 'color', 'motion', 'imagery', '3d', 'psychology'];

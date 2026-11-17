@@ -148,12 +148,12 @@ test('start writes the route with its first step as the current one', () => {
   assert.equal(run.status, 0, run.stderr);
   const s = state(dir);
   assert.equal(s.route, 'new');
-  assert.deepEqual(s.steps.map((step) => step.id), ['intake', 'direction', 'ux', 'tokens', 'compose', 'polish']);
+  assert.deepEqual(s.steps.map((step) => step.id), ['intake', 'direction', 'ux', 'tokens', 'compose', 'board', 'polish']);
   assert.ok(s.steps.every((step) => step.status === 'pending'));
   assert.match(run.stdout, /Next step: intake/);
   assert.match(run.stdout, /guides\/00-START-HERE\.md/);
   const status = flow(dir, 'status');
-  assert.match(status.stdout, /Flow: new · step 1\/6 · intake/);
+  assert.match(status.stdout, /Flow: new · step 1\/7 · intake/);
 });
 
 test('done refuses a step that is not the current one and leaves the state unchanged', () => {
@@ -500,6 +500,11 @@ const complete = (dir, homeDir, info) => {
     putTokens(dir);
     assert.equal(spawnSync(process.execPath, [TOKENS_TOOL, 'doc', '--dir', dir], { encoding: 'utf8' }).status, 0, 'tokens: doc');
     writeFileSync(join(dir, 'DESIGN.md'), fill(readFileSync(join(dir, 'DESIGN.md'), 'utf8')));
+  } else if (id === 'board') {
+    // Storybook installed (the user said yes) and one clean board story: what the step asks for.
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'app', devDependencies: { storybook: '10.6.7' } }));
+    mkdirSync(join(dir, 'src', 'board'), { recursive: true });
+    writeFileSync(join(dir, 'src', 'board', 'Home.board.stories.jsx'), "const meta = { title: 'Board/Pages/Home' };\nexport default meta;\n// version: v1-default\nexport const V1Default = { render: () => null };\n");
   } else provide(dir, info.artifacts);
   if (info.step === 'polish') putAudit(dir);
   if (info.report) {
@@ -536,7 +541,7 @@ test('next prints the whole instruction of every micro-step of every route, and 
     }
     assert.equal(state(dir).complete, true, `route ${route} did not complete`);
   }
-  for (const id of ['direction.questions', 'direction.classify', 'direction.journey', 'direction.references', 'direction.directions', 'direction.choose', 'ux.product', 'ux.spec', 'ux.map', 'compose.inventory', 'compose.find', 'compose.decide', 'compose.adapt', 'intake', 'tokens', 'polish', 'iterate', 'redesign', 'visual-feedback', 'architecture']) {
+  for (const id of ['direction.questions', 'direction.classify', 'direction.journey', 'direction.references', 'direction.directions', 'direction.choose', 'ux.product', 'ux.spec', 'ux.map', 'compose.inventory', 'compose.find', 'compose.decide', 'compose.adapt', 'board', 'intake', 'tokens', 'polish', 'iterate', 'redesign', 'visual-feedback', 'architecture']) {
     assert.ok(seen.has(id), `no instruction for ${id}`);
   }
 });
@@ -1507,4 +1512,163 @@ test('a part names an area skill only when it is installed, and the other parts 
     stateAt(other, step, extra);
     assert.doesNotMatch(guided(other, homeDir, 'next').stdout, /technique/i, `${step}: no technique line in a part that does not need one`);
   }
+});
+
+// ---------------------------------------------------------------- the board step (storybook-board S1, T3)
+
+const BOARD_STEPS = ['intake', 'direction', 'ux', 'tokens', 'compose', 'board', 'polish'];
+/** A flow-state.json of route `new` (with the board step) whose current step is `current`. */
+const boardStateAt = (dir, current = 'board', extra = {}) => {
+  const at = BOARD_STEPS.indexOf(current);
+  const steps = BOARD_STEPS.map((id, index) => ({ id, status: index < at ? 'done' : 'pending', ...(index === at ? extra : {}) }));
+  put(dir, 'flow-state.json', JSON.stringify({ route: 'new', gates: 1, started_at: '2026-11-17T00:00:00.000Z', complete: false, steps }));
+};
+const PINNED = /npx storybook@\d+\.\d+\.\d+ init/;
+/** Storybook in the project, the way `npx storybook init` leaves it in package.json. */
+const withStorybook = (dir) => writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'app', devDependencies: { storybook: '10.6.7', react: '19.0.0' } }));
+const BOARD_STORY = [
+  "const meta = { title: 'Board/Pages/Login', parameters: { layout: 'fullscreen' } };",
+  'export default meta;',
+  '// version: v1-sidebar',
+  'export const V1Sidebar = { render: () => null };',
+  '',
+].join('\n');
+const putStory = (dir, text = BOARD_STORY) => {
+  mkdirSync(join(dir, 'src', 'board'), { recursive: true });
+  writeFileSync(join(dir, 'src', 'board', 'Login.board.stories.jsx'), text);
+};
+
+test('the route new has the board step after compose and before polish; flow list and status show it (S1)', () => {
+  const dir = project();
+  assert.equal(flow(dir, 'start', 'new').status, 0);
+  assert.deepEqual(state(dir).steps.map((step) => step.id), BOARD_STEPS);
+  assert.match(flow(dir, 'status').stdout, /Flow: new · step 1\/7 · intake/);
+  const listed = flow(dir, 'list').stdout;
+  assert.match(listed, /\| `new` \|[^\n]*compose → board → polish \|/);
+  assert.match(listed, /\| `board` \| guides\/14-DESIGN-BOARD\.md \| storybook-board \|/);
+  for (const route of ['direction', 'ux', 'iterate', 'polish', 'redesign', 'visual-feedback', 'architecture']) {
+    assert.doesNotMatch(flow(dir, 'list').stdout.match(new RegExp(`### \`${route}\`[\\s\\S]*?(?=\\n### |\\n## )`))[0], /`board`/, `${route} has no board step`);
+  }
+});
+
+test('next with Storybook missing tells the reader to ask the user and stop, shows the pinned command and never installs (S1)', () => {
+  const dir = project();
+  boardStateAt(dir);
+  const text = guided(dir, home(), 'next').stdout;
+  assert.match(text, /^Next step: board — /);
+  assert.ok(text.includes('board.mjs'), 'names the board tool');
+  assert.match(text, /detect/);
+  assert.match(text, PINNED, 'shows the exact install command');
+  assert.match(text, /ask the user/i);
+  assert.match(text, /STOP/);
+  assert.match(text, /never install/i);
+  assert.match(text, /done board --declined --reason/);
+  assert.ok(text.trimEnd().split('\n').length <= 48, 'within 48 lines');
+  assert.doesNotMatch(text, /if installed|\(optional\)|\(recommended\)/i);
+  const info = JSON.parse(guided(dir, home(), 'next', '--json').stdout);
+  assert.equal(info.step, 'board');
+  assert.equal(info.needs_evidence, false);
+  assert.match(info.done_command, /flow\.mjs" done board$|flow\.mjs done board$/);
+});
+
+test('next with Storybook present goes to plan, scaffold and check, and no longer asks to install (S1)', () => {
+  const dir = project();
+  boardStateAt(dir);
+  withStorybook(dir);
+  const text = guided(dir, home(), 'next').stdout;
+  for (const word of ['board.mjs', 'plan', 'scaffold', 'check']) assert.ok(text.includes(word), `names ${word}`);
+  assert.doesNotMatch(text, PINNED);
+  assert.doesNotMatch(text, /STOP/);
+  assert.ok(text.trimEnd().split('\n').length <= 48, 'within 48 lines');
+});
+
+test('done board refuses while Storybook is missing: it names the question to ask and the way to record a no, and changes nothing (S1)', () => {
+  const dir = project();
+  boardStateAt(dir);
+  const before = raw(dir);
+  const message = refusal(guided(dir, home(), 'done', 'board'), dir, before);
+  assert.match(message, /step "board" cannot be marked done/);
+  assert.match(message, /Storybook is not installed/);
+  assert.match(message, PINNED);
+  assert.match(message, /ask the user/i);
+  assert.match(message, /done board --declined --reason/);
+});
+
+test('done board refuses Storybook without any board story, and a board with findings, listing each one (S1)', () => {
+  const dir = project();
+  boardStateAt(dir);
+  withStorybook(dir);
+  const before = raw(dir);
+  assert.match(refusal(guided(dir, home(), 'done', 'board'), dir, before), /no board story/);
+  putStory(dir, `import { useStore } from 'zustand';\n${BOARD_STORY}`);
+  const message = refusal(guided(dir, home(), 'done', 'board'), dir, before);
+  assert.match(message, /1 problem/);
+  assert.match(message, /board-store/);
+  assert.match(message, /Login\.board\.stories\.jsx:1/);
+});
+
+test('done board passes with Storybook, one clean board story, and records what it found; the route moves on to polish (S1)', () => {
+  const dir = project();
+  boardStateAt(dir);
+  withStorybook(dir);
+  putStory(dir);
+  const run = guided(dir, home(), 'done', 'board');
+  assert.equal(run.status, 0, run.stderr);
+  const step = state(dir).steps.find((s) => s.id === 'board');
+  assert.equal(step.status, 'done');
+  assert.match(step.evidence, /board check clean/);
+  assert.match(step.evidence, /1 board stor/);
+  assert.equal(step.declined, undefined);
+  assert.match(run.stdout, /Next step: polish/);
+});
+
+test('done board --declined --reason closes the step without Storybook and keeps the no on record (S1)', () => {
+  const dir = project();
+  boardStateAt(dir);
+  const run = guided(dir, home(), 'done', 'board', '--declined', '--reason', 'the user does not want Storybook in this repo');
+  assert.equal(run.status, 0, run.stderr);
+  const step = state(dir).steps.find((s) => s.id === 'board');
+  assert.equal(step.status, 'done');
+  assert.equal(step.declined, true);
+  assert.equal(step.reason, 'the user does not want Storybook in this repo');
+  assert.match(step.evidence, /declined by the user: the user does not want Storybook in this repo/);
+  assert.match(run.stdout, /Next step: polish/);
+});
+
+test('--declined needs --reason, --reason needs --declined, and only the board step can be declined; each exits 2 and changes nothing (S1)', () => {
+  const dir = project();
+  boardStateAt(dir);
+  const before = raw(dir);
+  for (const args of [['done', 'board', '--declined'], ['done', 'board', '--reason', 'no'], ['done', 'compose', '--declined', '--reason', 'no']]) {
+    const run = guided(dir, home(), ...args);
+    assert.equal(run.status, 2, args.join(' '));
+    assert.equal(raw(dir), before, `${args.join(' ')} leaves flow-state.json untouched`);
+  }
+  assert.match(guided(dir, home(), 'done', 'board', '--declined').stderr, /--declined needs --reason/);
+  assert.match(guided(dir, home(), 'done', 'board', '--reason', 'no').stderr, /--reason goes with --declined/);
+  assert.match(guided(dir, home(), 'done', 'compose', '--declined', '--reason', 'no').stderr, /only the board step/);
+});
+
+test('a route started before the board step existed keeps its own steps: next, status and done work and never mention the board (S1, previous behavior)', () => {
+  const dir = project();
+  const homeDir = home();
+  const steps = ['intake', 'direction', 'ux', 'tokens', 'compose', 'polish'].map((id) => ({ id, status: id === 'polish' ? 'pending' : 'done' }));
+  put(dir, 'flow-state.json', JSON.stringify({ route: 'new', gates: 1, started_at: '2026-11-13T00:00:00.000Z', complete: false, steps }));
+  const next = guided(dir, homeDir, 'next');
+  assert.equal(next.status, 0, next.stderr);
+  assert.match(next.stdout, /^Next step: polish — /);
+  assert.match(next.stdout, /step 6\/6/);
+  assert.doesNotMatch(next.stdout, /\bboard\b/i);
+  const status = guided(dir, homeDir, 'status');
+  assert.equal(status.status, 0, status.stderr);
+  assert.match(status.stdout, /Flow: new · step 6\/6 · polish/);
+  const unknown = guided(dir, homeDir, 'done', 'board');
+  assert.equal(unknown.status, 2);
+  assert.match(unknown.stderr, /unknown step "board" for route "new"/);
+  fillReport(dir, 'polish');
+  putAudit(dir);
+  const ok = guided(dir, homeDir, 'done', 'polish', '--evidence', 'checked');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.equal(state(dir).complete, true);
+  assert.deepEqual(state(dir).steps.map((s) => s.id), ['intake', 'direction', 'ux', 'tokens', 'compose', 'polish']);
 });

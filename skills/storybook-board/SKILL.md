@@ -10,7 +10,7 @@ The tool is `ai-frontend-guide-kit/tools/board.mjs` (run it as `flow.mjs next` p
 ## Method (follow it in order)
 
 1. `board.mjs detect`: is Storybook there, which framework, the story glob and the exact install command (version pinned in the tool).
-2. Storybook missing: **ask the user** whether to install it, then stop and wait. Never install on your own. A "no" is recorded with its reason (`memory.mjs add`); continue without the board. A "yes": run the command `detect` printed.
+2. Storybook missing: **ask the user** whether to install it, then stop and wait. Never install on your own. A "no" is recorded with its reason (`flow.mjs done board --declined --reason "<their words>"` when the flow step `board` is active); continue without the board. A "yes": run the command `detect` printed.
 3. `ui-map.mjs build`, then `board.mjs plan`: pages and the components each one uses. Use those real components; never redraw them.
 4. `board.mjs scaffold <page> --version <name>` (kebab-case: `v1-sidebar`, `v2-topbar`, `v3-compact`). It writes `src/board/<Page>.board.stories.tsx` (title `Board/Pages/<Page>`, export `V1Sidebar`). A new version goes into the same file; it never overwrites one.
 5. Fill the story: import the presentational components, feed them mock data, change only layout and style. One story per layout version.

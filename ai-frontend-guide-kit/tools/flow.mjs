@@ -34,6 +34,7 @@ import { fileURLToPath } from 'node:url';
 import { kitFile, kitPath, quotePath, runTool } from './kit-path.mjs';
 import { changedPieces, registeredPiece } from './pieces.mjs';
 import { DESIGN_AUDIT_CHECK, PARTS, designAuditCommand, hasOwnProductDoc } from './flow-steps.mjs';
+import { checkBoards, detect as detectStorybook, findBoards } from './board.mjs';
 import { directionCards, loadCards, resolveDirections, styleDirections } from './technique.mjs';
 import { GATES, mergeReport, mergeTemplate, parseDesignAudit, prefillAudit, reportProblems } from './flow-gates.mjs';
 
@@ -84,6 +85,15 @@ const STEPS = {
     output: 'ai-frontend-output/selections.jsonl',
     artifacts: [['out:selections.jsonl']],
   },
+  board: {
+    title: 'Design board: Storybook asked first, then one story per layout version of the real components',
+    guide: 'guides/14-DESIGN-BOARD.md',
+    skill: 'storybook-board',
+    tool: 'node {kit}/tools/board.mjs (detect, plan, scaffold, list, check)',
+    output: 'src/board/*.board.stories.* (Storybook installed with the yes of the user, or the no on record)',
+    closes: 'board check clean with a board story, or --declined --reason',
+    artifacts: null,
+  },
   iterate: {
     title: 'Iterate: a small change or custom addition without repeating the UX phase',
     guide: 'guides/10-ITERATE.md',
@@ -127,7 +137,7 @@ const STEPS = {
 };
 
 const ROUTES = {
-  new: { title: 'New frontend or major build (phases 1 → 2 → 3)', steps: ['intake', 'direction', 'ux', 'tokens', 'compose', 'polish'] },
+  new: { title: 'New frontend or major build (phases 1 → 2 → 3)', steps: ['intake', 'direction', 'ux', 'tokens', 'compose', 'board', 'polish'] },
   direction: { title: 'Direction only, no UI', steps: ['intake', 'direction'] },
   ux: { title: 'UX only or UX redesign, no UI work', steps: ['intake', 'ux'] },
   iterate: { title: 'Small change or custom component', steps: ['intake', 'iterate', 'polish'] },
@@ -152,12 +162,13 @@ function parseArgs(argv) {
     const token = argv[i];
     const eq = token.startsWith('--') ? token.indexOf('=') : -1;
     const name = eq === -1 ? token : token.slice(0, eq);
-    if (name === '--dir' || name === '--evidence') {
+    if (name === '--dir' || name === '--evidence' || name === '--reason') {
       const value = eq === -1 ? argv[i + 1] : token.slice(eq + 1);
       if (!value || (eq === -1 && value.startsWith('--'))) throw new UsageError(`option ${name} needs a value`);
       flags[name.slice(2)] = value;
       if (eq === -1) i += 1;
     } else if (eq === -1 && token === '--json') flags.json = true;
+    else if (eq === -1 && token === '--declined') flags.declined = true;
     else if (eq === -1 && (token === '--help' || token === '-h')) flags.help = true;
     else if (token.startsWith('-') && token.length > 1) throw new UsageError(`unknown option "${token}"`);
     else flags._.push(token);
@@ -175,9 +186,11 @@ Usage:
   ${cmd('flow.mjs', 'scaffold [<step>[.<part>]]')}   write the template of a micro-step into its file (default: the current one)
   ${cmd('flow.mjs', 'report <step>')}        write the checklist of ${REPORT_STEPS_TEXT}
   ${cmd('flow.mjs', 'done <step>[.<part>] [--evidence "..."]')}
+  ${cmd('flow.mjs', 'done board --declined --reason "..."')}   the user said no to Storybook: the no and its reason stay on record
   ${cmd('flow.mjs', 'reset')}
   direction, ux and compose have parts, closed in order (done direction.questions, ...); the last part closes the step.
   done also reads the file: required sections filled, no <…> left, tables with rows, ids that exist; it lists what is missing.
+  board closes when Storybook is installed (always asked first, never installed alone), a board story exists and board.mjs check is clean, or with --declined --reason.
   ${REPORT_STEPS_TEXT} close with --evidence and a report with every line checked or marked n/a.
   compose and iterate also refuse while a build decision has no piece registered in this project (${cmd('pieces.mjs', 'add')})
   or a registered piece changed since its last version (${cmd('pieces.mjs', 'version <name>')}).
@@ -234,7 +247,7 @@ function describeStep(id) {
     `  guide:  ${def.guide}`,
     `  skill:  ${def.skill}`,
     `  tools:  ${fillKit(def.tool)}`,
-    `  output: ${def.output}${def.artifacts ? '' : ' (mark done with --evidence)'}`,
+    `  output: ${def.output}${def.artifacts ? '' : def.closes ? ` (closes with: ${def.closes})` : ' (mark done with --evidence)'}`,
   ].join('\n');
 }
 
@@ -266,6 +279,7 @@ function environment(p) {
   const skillRoots = [p.root, homedir()].flatMap((base) => [join(base, '.agents', 'skills'), join(base, '.claude', 'skills')]);
   return {
     run: (tool, args) => runTool(tool, args, p.root),
+    storybook: detectStorybook(p.root),
     python: (tool, args) => runTool(tool, args, p.root, 'python'),
     kit: (path) => kitFile(path, p.root),
     skill: (name) => skillRoots.some((root) => existsSync(join(root, name))),
@@ -302,7 +316,7 @@ function instruction(p, state) {
   const built = part.build(env);
   const last = part === parts.at(-1);
   const id = part.id ? `${step.id}.${part.id}` : step.id;
-  const needsEvidence = last && !STEPS[step.id].artifacts;
+  const needsEvidence = last && !STEPS[step.id].artifacts && !STEPS[step.id].closes;
   return {
     route: state.route,
     complete: false,
@@ -431,7 +445,7 @@ function list() {
     lines.push('', `### \`${id}\``, '', route.title, '', '| # | Step | Guide | Skill | Tools | Output |', '|---|---|---|---|---|---|');
     route.steps.forEach((stepId, index) => {
       const def = STEPS[stepId];
-      const output = def.artifacts ? def.output : `${def.output} (\`--evidence\`)`;
+      const output = def.artifacts ? def.output : `${def.output} (${def.closes ?? '`--evidence`'})`;
       lines.push(`| ${index + 1} | \`${stepId}\` | ${def.guide} | ${def.skill} | ${fillKit(def.tool)} | ${output} |`);
     });
   }
@@ -497,12 +511,34 @@ function refuseWith(p, subject, problems, scaffoldTarget) {
   throw new Refusal(`${subject} cannot be marked done: ${problems.length} problem${problems.length === 1 ? '' : 's'}\n${list}\nFix ${problems.length === 1 ? 'it' : 'them'} and run the same command again.${hint}`);
 }
 
+/**
+ * The board step closes in one of two ways: Storybook is installed, at least one board story exists and
+ * `board.mjs check` is clean; or the user said no and --declined --reason keeps that on record. Storybook is never
+ * installed here. Returns what the state keeps on the step; every refusal throws before anything is written.
+ */
+function closeBoard(p, flags) {
+  if (flags.declined) return { declined: true, reason: flags.reason, evidence: flags.evidence ?? `declined by the user: ${flags.reason}` };
+  const storybook = detectStorybook(p.root);
+  if (!storybook.present) {
+    throw new Refusal(`step "board" cannot be marked done: Storybook is not installed in this project. Ask the user whether to install it, with this command (never install it on your own): ${storybook.install}. If the user says no, record the no with: ${cmd('flow.mjs', 'done board --declined --reason "<the answer of the user>"')}`);
+  }
+  const boards = findBoards(p.root);
+  const stories = boards.reduce((total, board) => total + board.versions.length, 0);
+  if (!stories) throw new Refusal(`step "board" cannot be marked done: no board story yet. See the pages with: ${cmd('board.mjs', 'plan')} and write one with: ${cmd('board.mjs', 'scaffold <page> --version v1-<name>')}`);
+  const { findings } = checkBoards(p.root);
+  if (findings.length) refuseWith(p, 'step "board"', findings.map((finding) => `${finding.file}:${finding.line} — ${finding.id}: ${finding.what} → ${finding.fix}`), null);
+  return { evidence: flags.evidence ?? `board check clean; ${stories} board ${stories === 1 ? 'story' : 'stories'} in ${boards.length} file${boards.length === 1 ? '' : 's'}` };
+}
+
 function done(p, target, flags) {
   const state = readState(p);
   if (!state) throw new Refusal(`no active flow; declare the route with: ${cmd('flow.mjs', 'start <route>')}`);
   if (!target) throw new UsageError('done needs a step');
   const [id, partId] = target.split(/\.(.*)/s);
   if (!state.steps.some((step) => step.id === id)) throw new UsageError(`unknown step "${id}" for route "${state.route}" (steps: ${state.steps.map((step) => step.id).join(', ')})`);
+  if (flags.declined && id !== 'board') throw new UsageError(`only the board step can be declined (--declined); "${id}" closes with its own checks`);
+  if (flags.declined && !flags.reason) throw new UsageError('--declined needs --reason "<why the user said no>"');
+  if (flags.reason !== undefined && !flags.declined) throw new UsageError('--reason goes with --declined');
   const step = current(state);
   if (!step) throw new Refusal(`route "${state.route}" is already complete`);
   if (partId !== undefined && !PARTS[id].some((part) => part.id === partId)) throw new UsageError(`unknown part "${partId}" of step "${id}" (parts: ${PARTS[id].map((part) => part.id).filter(Boolean).join(', ') || 'none'})`);
@@ -532,9 +568,12 @@ function done(p, target, flags) {
       throw new Refusal(`step "${id}" cannot be marked done: piece(s) changed since their last recorded version: ${changed.map((piece) => `${piece.name} (v${piece.version})`).join(', ')}. Record each with: ${changed.map((piece) => cmd('pieces.mjs', `version ${piece.name}`)).join('; ')}`);
     }
   }
+  let record = {};
   if (STEPS[id].artifacts) {
     const missing = missingArtifacts(p, STEPS[id].artifacts);
     if (missing.length) throw new Refusal(`step "${id}" cannot be marked done: missing ${missing.join(', ')}`);
+  } else if (id === 'board') {
+    record = closeBoard(p, flags);
   } else if (!flags.evidence) {
     throw new Refusal(`step "${id}" needs --evidence "<what proves it is done>"`);
   }
@@ -564,6 +603,7 @@ function done(p, target, flags) {
   step.status = 'done';
   step.done_at = new Date().toISOString();
   if (partId !== undefined) step.parts_done = [...(step.parts_done ?? []), partId];
+  Object.assign(step, record);
   if (flags.evidence) step.evidence = flags.evidence;
   const following = current(state);
   state.complete = !following;
