@@ -1,0 +1,1293 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "node-inicio-1",
+      "type": "ellipse",
+      "x": 0,
+      "y": -240,
+      "width": 200,
+      "height": 60,
+      "angle": 0,
+      "strokeColor": "#d6b656",
+      "backgroundColor": "#fff2cc",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901926,
+      "version": 1,
+      "versionNonce": 901926,
+      "isDeleted": false,
+      "updated": 1794906163233,
+      "link": null,
+      "locked": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-inicio-2"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-entrar-desde-anuncio-o-b-15"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-direcci-n-no-v-lida-27"
+        }
+      ]
+    },
+    {
+      "id": "text-inicio-2",
+      "type": "text",
+      "x": 12,
+      "y": -228,
+      "width": 176,
+      "height": 36,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901927,
+      "version": 1,
+      "versionNonce": 901927,
+      "isDeleted": false,
+      "updated": 1794906163233,
+      "link": null,
+      "locked": false,
+      "text": "INICIO",
+      "originalText": "INICIO",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "node-inicio-1",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "node-leyenda-direcci-n-el-pan-3",
+      "type": "rectangle",
+      "x": 800,
+      "y": -240,
+      "width": 360,
+      "height": 124,
+      "angle": 0,
+      "strokeColor": "#d6b656",
+      "backgroundColor": "#fff2cc",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 901928,
+      "version": 1,
+      "versionNonce": 901928,
+      "isDeleted": false,
+      "updated": 1794906163805,
+      "link": null,
+      "locked": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-leyenda-direcci-n-el-pan-4"
+        }
+      ]
+    },
+    {
+      "id": "text-leyenda-direcci-n-el-pan-4",
+      "type": "text",
+      "x": 812,
+      "y": -228,
+      "width": 336,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901929,
+      "version": 1,
+      "versionNonce": 901929,
+      "isDeleted": false,
+      "updated": 1794906163805,
+      "link": null,
+      "locked": false,
+      "text": "Leyenda\nDirección: El panel que se explica · Conversión sin fricción\nNavegación: single-page-anchors\nP(fit Laya): no ranking",
+      "originalText": "Leyenda\nDirección: El panel que se explica · Conversión sin fricción\nNavegación: single-page-anchors\nP(fit Laya): no ranking",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "node-leyenda-direcci-n-el-pan-3",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "node-landing-cta-pedir-presup-5",
+      "type": "rectangle",
+      "x": 0,
+      "y": 0,
+      "width": 280,
+      "height": 144,
+      "angle": 0,
+      "strokeColor": "#6c8ebf",
+      "backgroundColor": "#dae8fc",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 901930,
+      "version": 1,
+      "versionNonce": 901930,
+      "isDeleted": false,
+      "updated": 1794906164459,
+      "link": null,
+      "locked": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-landing-cta-pedir-presup-6"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-entrar-desde-anuncio-o-b-15"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-pedir-presupuesto-17"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-sin-webgl-o-m-vil-lento-19"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-volver-a-la-landing-25"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-volver-a-la-landing-29"
+        }
+      ]
+    },
+    {
+      "id": "text-landing-cta-pedir-presup-6",
+      "type": "text",
+      "x": 12,
+      "y": 12,
+      "width": 256,
+      "height": 120,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901931,
+      "version": 1,
+      "versionNonce": 901931,
+      "isDeleted": false,
+      "updated": 1794906164459,
+      "link": null,
+      "locked": false,
+      "text": "Landing\nCTA: Pedir presupuesto\nBloques: hero con panel 3D · garantías e instaladores · cómo funciona · precio orientativo · FAQ · cierre",
+      "originalText": "Landing\nCTA: Pedir presupuesto\nBloques: hero con panel 3D · garantías e instaladores · cómo funciona · precio orientativo · FAQ · cierre",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "node-landing-cta-pedir-presup-5",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "node-landing-sin-escena-3d-ct-7",
+      "type": "rectangle",
+      "x": 400,
+      "y": 0,
+      "width": 280,
+      "height": 124,
+      "angle": 0,
+      "strokeColor": "#d6b656",
+      "backgroundColor": "#fff2cc",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 901932,
+      "version": 1,
+      "versionNonce": 901932,
+      "isDeleted": false,
+      "updated": 1794906165092,
+      "link": null,
+      "locked": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-landing-sin-escena-3d-ct-8"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-sin-webgl-o-m-vil-lento-19"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-pedir-presupuesto-21"
+        }
+      ]
+    },
+    {
+      "id": "text-landing-sin-escena-3d-ct-8",
+      "type": "text",
+      "x": 412,
+      "y": 12,
+      "width": 256,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901933,
+      "version": 1,
+      "versionNonce": 901933,
+      "isDeleted": false,
+      "updated": 1794906165092,
+      "link": null,
+      "locked": false,
+      "text": "Landing sin escena 3D\nCTA: Pedir presupuesto\nBloques: mismo contenido · pasos en lista · imagen estática del panel",
+      "originalText": "Landing sin escena 3D\nCTA: Pedir presupuesto\nBloques: mismo contenido · pasos en lista · imagen estática del panel",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "node-landing-sin-escena-3d-ct-7",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "node-formulario-de-presupuest-9",
+      "type": "rectangle",
+      "x": 0,
+      "y": 240,
+      "width": 280,
+      "height": 124,
+      "angle": 0,
+      "strokeColor": "#82b366",
+      "backgroundColor": "#d5e8d4",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 901934,
+      "version": 1,
+      "versionNonce": 901934,
+      "isDeleted": false,
+      "updated": 1794906165645,
+      "link": null,
+      "locked": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-formulario-de-presupuest-10"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-pedir-presupuesto-17"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-pedir-presupuesto-21"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-enviar-y-recibir-presupu-23"
+        }
+      ]
+    },
+    {
+      "id": "text-formulario-de-presupuest-10",
+      "type": "text",
+      "x": 12,
+      "y": 252,
+      "width": 256,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901935,
+      "version": 1,
+      "versionNonce": 901935,
+      "isDeleted": false,
+      "updated": 1794906165645,
+      "link": null,
+      "locked": false,
+      "text": "Formulario de presupuesto\nCTA: Enviar y recibir presupuesto\nBloques: código postal · consumo de factura · teléfono",
+      "originalText": "Formulario de presupuesto\nCTA: Enviar y recibir presupuesto\nBloques: código postal · consumo de factura · teléfono",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "node-formulario-de-presupuest-9",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "node-confirmaci-n-cta-volver--11",
+      "type": "rectangle",
+      "x": 0,
+      "y": 480,
+      "width": 280,
+      "height": 104,
+      "angle": 0,
+      "strokeColor": "#d79b00",
+      "backgroundColor": "#ffe6cc",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 901936,
+      "version": 1,
+      "versionNonce": 901936,
+      "isDeleted": false,
+      "updated": 1794906166174,
+      "link": null,
+      "locked": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-confirmaci-n-cta-volver--12"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-enviar-y-recibir-presupu-23"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-volver-a-la-landing-25"
+        }
+      ]
+    },
+    {
+      "id": "text-confirmaci-n-cta-volver--12",
+      "type": "text",
+      "x": 12,
+      "y": 492,
+      "width": 256,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901937,
+      "version": 1,
+      "versionNonce": 901937,
+      "isDeleted": false,
+      "updated": 1794906166174,
+      "link": null,
+      "locked": false,
+      "text": "Confirmación\nCTA: Volver a la landing\nBloques: qué pasa después · plazo de llamada",
+      "originalText": "Confirmación\nCTA: Volver a la landing\nBloques: qué pasa después · plazo de llamada",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "node-confirmaci-n-cta-volver--11",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "node-404-cta-volver-a-la-land-13",
+      "type": "rectangle",
+      "x": -400,
+      "y": 0,
+      "width": 280,
+      "height": 104,
+      "angle": 0,
+      "strokeColor": "#b85450",
+      "backgroundColor": "#f8cecc",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 901938,
+      "version": 1,
+      "versionNonce": 901938,
+      "isDeleted": false,
+      "updated": 1794906166623,
+      "link": null,
+      "locked": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "text-404-cta-volver-a-la-land-14"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-direcci-n-no-v-lida-27"
+        },
+        {
+          "type": "arrow",
+          "id": "edge-volver-a-la-landing-29"
+        }
+      ]
+    },
+    {
+      "id": "text-404-cta-volver-a-la-land-14",
+      "type": "text",
+      "x": -388,
+      "y": 12,
+      "width": 256,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901939,
+      "version": 1,
+      "versionNonce": 901939,
+      "isDeleted": false,
+      "updated": 1794906166623,
+      "link": null,
+      "locked": false,
+      "text": "404\nCTA: Volver a la landing\nBloques: enlaces a la landing y al formulario",
+      "originalText": "404\nCTA: Volver a la landing\nBloques: enlaces a la landing y al formulario",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "node-404-cta-volver-a-la-land-13",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "edge-entrar-desde-anuncio-o-b-15",
+      "type": "arrow",
+      "x": 200,
+      "y": -210,
+      "width": 200,
+      "height": 282,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 901940,
+      "version": 1,
+      "versionNonce": 901940,
+      "isDeleted": false,
+      "updated": 1794906168174,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -200,
+          282
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-inicio-1",
+        "focus": 0,
+        "gap": 8
+      },
+      "endBinding": {
+        "elementId": "node-landing-cta-pedir-presup-5",
+        "focus": 0,
+        "gap": 8
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "edgelabel-entrar-desde-anuncio-o-b-16"
+        }
+      ]
+    },
+    {
+      "id": "edgelabel-entrar-desde-anuncio-o-b-16",
+      "type": "text",
+      "x": 30,
+      "y": -101,
+      "width": 140,
+      "height": 64,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901941,
+      "version": 1,
+      "versionNonce": 901941,
+      "isDeleted": false,
+      "updated": 1794906168174,
+      "link": null,
+      "locked": false,
+      "text": "Entrar desde anuncio o búsqueda",
+      "originalText": "Entrar desde anuncio o búsqueda",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "edge-entrar-desde-anuncio-o-b-15",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "edge-pedir-presupuesto-17",
+      "type": "arrow",
+      "x": 280,
+      "y": 72,
+      "width": 280,
+      "height": 230,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 901942,
+      "version": 1,
+      "versionNonce": 901942,
+      "isDeleted": false,
+      "updated": 1794906168480,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -280,
+          230
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-landing-cta-pedir-presup-5",
+        "focus": 0,
+        "gap": 8
+      },
+      "endBinding": {
+        "elementId": "node-formulario-de-presupuest-9",
+        "focus": 0,
+        "gap": 8
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "edgelabel-pedir-presupuesto-18"
+        }
+      ]
+    },
+    {
+      "id": "edgelabel-pedir-presupuesto-18",
+      "type": "text",
+      "x": 70,
+      "y": 155,
+      "width": 140,
+      "height": 64,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901943,
+      "version": 1,
+      "versionNonce": 901943,
+      "isDeleted": false,
+      "updated": 1794906168480,
+      "link": null,
+      "locked": false,
+      "text": "Pedir presupuesto",
+      "originalText": "Pedir presupuesto",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "edge-pedir-presupuesto-17",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "edge-sin-webgl-o-m-vil-lento-19",
+      "type": "arrow",
+      "x": 280,
+      "y": 72,
+      "width": 120,
+      "height": 10,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 901944,
+      "version": 1,
+      "versionNonce": 901944,
+      "isDeleted": false,
+      "updated": 1794906168851,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          -10
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-landing-cta-pedir-presup-5",
+        "focus": 0,
+        "gap": 8
+      },
+      "endBinding": {
+        "elementId": "node-landing-sin-escena-3d-ct-7",
+        "focus": 0,
+        "gap": 8
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "edgelabel-sin-webgl-o-m-vil-lento-20"
+        }
+      ]
+    },
+    {
+      "id": "edgelabel-sin-webgl-o-m-vil-lento-20",
+      "type": "text",
+      "x": 270,
+      "y": 35,
+      "width": 140,
+      "height": 64,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901945,
+      "version": 1,
+      "versionNonce": 901945,
+      "isDeleted": false,
+      "updated": 1794906168851,
+      "link": null,
+      "locked": false,
+      "text": "Sin WebGL o móvil lento",
+      "originalText": "Sin WebGL o móvil lento",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "edge-sin-webgl-o-m-vil-lento-19",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "edge-pedir-presupuesto-21",
+      "type": "arrow",
+      "x": 400,
+      "y": 62,
+      "width": 120,
+      "height": 240,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 901946,
+      "version": 1,
+      "versionNonce": 901946,
+      "isDeleted": false,
+      "updated": 1794906169182,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -120,
+          240
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-landing-sin-escena-3d-ct-7",
+        "focus": 0,
+        "gap": 8
+      },
+      "endBinding": {
+        "elementId": "node-formulario-de-presupuest-9",
+        "focus": 0,
+        "gap": 8
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "edgelabel-pedir-presupuesto-22"
+        }
+      ]
+    },
+    {
+      "id": "edgelabel-pedir-presupuesto-22",
+      "type": "text",
+      "x": 270,
+      "y": 150,
+      "width": 140,
+      "height": 64,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901947,
+      "version": 1,
+      "versionNonce": 901947,
+      "isDeleted": false,
+      "updated": 1794906169182,
+      "link": null,
+      "locked": false,
+      "text": "Pedir presupuesto",
+      "originalText": "Pedir presupuesto",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "edge-pedir-presupuesto-21",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "edge-enviar-y-recibir-presupu-23",
+      "type": "arrow",
+      "x": 280,
+      "y": 302,
+      "width": 280,
+      "height": 230,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 901948,
+      "version": 1,
+      "versionNonce": 901948,
+      "isDeleted": false,
+      "updated": 1794906169505,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -280,
+          230
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-formulario-de-presupuest-9",
+        "focus": 0,
+        "gap": 8
+      },
+      "endBinding": {
+        "elementId": "node-confirmaci-n-cta-volver--11",
+        "focus": 0,
+        "gap": 8
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "edgelabel-enviar-y-recibir-presupu-24"
+        }
+      ]
+    },
+    {
+      "id": "edgelabel-enviar-y-recibir-presupu-24",
+      "type": "text",
+      "x": 70,
+      "y": 385,
+      "width": 140,
+      "height": 64,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901949,
+      "version": 1,
+      "versionNonce": 901949,
+      "isDeleted": false,
+      "updated": 1794906169505,
+      "link": null,
+      "locked": false,
+      "text": "Enviar y recibir presupuesto",
+      "originalText": "Enviar y recibir presupuesto",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "edge-enviar-y-recibir-presupu-23",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "edge-volver-a-la-landing-25",
+      "type": "arrow",
+      "x": 280,
+      "y": 532,
+      "width": 280,
+      "height": 460,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 901950,
+      "version": 1,
+      "versionNonce": 901950,
+      "isDeleted": false,
+      "updated": 1794906169831,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -280,
+          -460
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-confirmaci-n-cta-volver--11",
+        "focus": 0,
+        "gap": 8
+      },
+      "endBinding": {
+        "elementId": "node-landing-cta-pedir-presup-5",
+        "focus": 0,
+        "gap": 8
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "edgelabel-volver-a-la-landing-26"
+        }
+      ]
+    },
+    {
+      "id": "edgelabel-volver-a-la-landing-26",
+      "type": "text",
+      "x": 70,
+      "y": 270,
+      "width": 140,
+      "height": 64,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901951,
+      "version": 1,
+      "versionNonce": 901951,
+      "isDeleted": false,
+      "updated": 1794906169831,
+      "link": null,
+      "locked": false,
+      "text": "Volver a la landing",
+      "originalText": "Volver a la landing",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "edge-volver-a-la-landing-25",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "edge-direcci-n-no-v-lida-27",
+      "type": "arrow",
+      "x": 0,
+      "y": -210,
+      "width": 120,
+      "height": 262,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 901952,
+      "version": 1,
+      "versionNonce": 901952,
+      "isDeleted": false,
+      "updated": 1794906170179,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -120,
+          262
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-inicio-1",
+        "focus": 0,
+        "gap": 8
+      },
+      "endBinding": {
+        "elementId": "node-404-cta-volver-a-la-land-13",
+        "focus": 0,
+        "gap": 8
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "edgelabel-direcci-n-no-v-lida-28"
+        }
+      ]
+    },
+    {
+      "id": "edgelabel-direcci-n-no-v-lida-28",
+      "type": "text",
+      "x": -130,
+      "y": -111,
+      "width": 140,
+      "height": 64,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901953,
+      "version": 1,
+      "versionNonce": 901953,
+      "isDeleted": false,
+      "updated": 1794906170180,
+      "link": null,
+      "locked": false,
+      "text": "Dirección no válida",
+      "originalText": "Dirección no válida",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "edge-direcci-n-no-v-lida-27",
+      "lineHeight": 1.25,
+      "autoResize": true
+    },
+    {
+      "id": "edge-volver-a-la-landing-29",
+      "type": "arrow",
+      "x": -120,
+      "y": 52,
+      "width": 120,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 901954,
+      "version": 1,
+      "versionNonce": 901954,
+      "isDeleted": false,
+      "updated": 1794906170449,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          120,
+          20
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "node-404-cta-volver-a-la-land-13",
+        "focus": 0,
+        "gap": 8
+      },
+      "endBinding": {
+        "elementId": "node-landing-cta-pedir-presup-5",
+        "focus": 0,
+        "gap": 8
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "edgelabel-volver-a-la-landing-30"
+        }
+      ]
+    },
+    {
+      "id": "edgelabel-volver-a-la-landing-30",
+      "type": "text",
+      "x": -130,
+      "y": 30,
+      "width": 140,
+      "height": 64,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 901955,
+      "version": 1,
+      "versionNonce": 901955,
+      "isDeleted": false,
+      "updated": 1794906170449,
+      "link": null,
+      "locked": false,
+      "text": "Volver a la landing",
+      "originalText": "Volver a la landing",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "edge-volver-a-la-landing-29",
+      "lineHeight": 1.25,
+      "autoResize": true
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

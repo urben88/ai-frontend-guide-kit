@@ -1,0 +1,557 @@
+{
+  "$description": "Design tokens in the W3C Design Tokens format. Written by tokens.mjs init; edit a value, then run check, css and doc.",
+  "color": {
+    "$type": "color",
+    "ramp": {
+      "primary": {
+        "50": {
+          "$value": "#f5f7f9"
+        },
+        "100": {
+          "$value": "#eceff3"
+        },
+        "200": {
+          "$value": "#d9dee7"
+        },
+        "300": {
+          "$value": "#bfc8d6"
+        },
+        "400": {
+          "$value": "#a0acbd"
+        },
+        "500": {
+          "$value": "#8390a4"
+        },
+        "600": {
+          "$value": "#687588"
+        },
+        "700": {
+          "$value": "#505c6c"
+        },
+        "800": {
+          "$value": "#3d4653"
+        },
+        "900": {
+          "$value": "#1f2a3a"
+        },
+        "950": {
+          "$value": "#161b22"
+        }
+      },
+      "accent": {
+        "50": {
+          "$value": "#fef5eb"
+        },
+        "100": {
+          "$value": "#fcecd8"
+        },
+        "200": {
+          "$value": "#f9d8b0"
+        },
+        "300": {
+          "$value": "#f1bd7a"
+        },
+        "400": {
+          "$value": "#f5a524"
+        },
+        "500": {
+          "$value": "#c27f00"
+        },
+        "600": {
+          "$value": "#9f6700"
+        },
+        "700": {
+          "$value": "#7d5000"
+        },
+        "800": {
+          "$value": "#603c00"
+        },
+        "900": {
+          "$value": "#452a00"
+        },
+        "950": {
+          "$value": "#281600"
+        }
+      },
+      "neutral": {
+        "50": {
+          "$value": "#f7f7f6"
+        },
+        "100": {
+          "$value": "#efeeec"
+        },
+        "200": {
+          "$value": "#dfdeda"
+        },
+        "300": {
+          "$value": "#c9c7c1"
+        },
+        "400": {
+          "$value": "#aeaaa3"
+        },
+        "500": {
+          "$value": "#928f87"
+        },
+        "600": {
+          "$value": "#78746c"
+        },
+        "700": {
+          "$value": "#5e5a54"
+        },
+        "800": {
+          "$value": "#47453f"
+        },
+        "900": {
+          "$value": "#32302c"
+        },
+        "950": {
+          "$value": "#1c1a18"
+        }
+      },
+      "danger": {
+        "50": {
+          "$value": "#fff4f3"
+        },
+        "100": {
+          "$value": "#ffe9e6"
+        },
+        "200": {
+          "$value": "#ffd1cd"
+        },
+        "300": {
+          "$value": "#ffb0a8"
+        },
+        "400": {
+          "$value": "#ff7e77"
+        },
+        "500": {
+          "$value": "#ed5350"
+        },
+        "600": {
+          "$value": "#cc3336"
+        },
+        "700": {
+          "$value": "#a61d23"
+        },
+        "800": {
+          "$value": "#801419"
+        },
+        "900": {
+          "$value": "#5d0b0f"
+        },
+        "950": {
+          "$value": "#390204"
+        }
+      },
+      "success": {
+        "50": {
+          "$value": "#f1faf1"
+        },
+        "100": {
+          "$value": "#e3f4e2"
+        },
+        "200": {
+          "$value": "#c6e9c6"
+        },
+        "300": {
+          "$value": "#9fd9a0"
+        },
+        "400": {
+          "$value": "#74c077"
+        },
+        "500": {
+          "$value": "#4aa651"
+        },
+        "600": {
+          "$value": "#2b8a36"
+        },
+        "700": {
+          "$value": "#176d23"
+        },
+        "800": {
+          "$value": "#0f5419"
+        },
+        "900": {
+          "$value": "#073b0f"
+        },
+        "950": {
+          "$value": "#012204"
+        }
+      },
+      "warning": {
+        "50": {
+          "$value": "#fdf6ec"
+        },
+        "100": {
+          "$value": "#fbecd9"
+        },
+        "200": {
+          "$value": "#f6d9b2"
+        },
+        "300": {
+          "$value": "#edbf7e"
+        },
+        "400": {
+          "$value": "#d99e43"
+        },
+        "500": {
+          "$value": "#bf8100"
+        },
+        "600": {
+          "$value": "#9c6900"
+        },
+        "700": {
+          "$value": "#7b5100"
+        },
+        "800": {
+          "$value": "#5e3d00"
+        },
+        "900": {
+          "$value": "#432b00"
+        },
+        "950": {
+          "$value": "#271700"
+        }
+      }
+    },
+    "primary": {
+      "$value": "{color.ramp.primary.900}",
+      "$description": "Brand color: main actions."
+    },
+    "on-primary": {
+      "$value": "{color.ramp.neutral.50}",
+      "$description": "Text and icons on primary."
+    },
+    "accent": {
+      "$value": "{color.ramp.accent.400}",
+      "$description": "Second brand color: highlights."
+    },
+    "on-accent": {
+      "$value": "{color.ramp.neutral.950}",
+      "$description": "Text and icons on accent."
+    },
+    "surface": {
+      "$value": "{color.ramp.neutral.50}",
+      "$description": "Page background."
+    },
+    "surface-raised": {
+      "$value": "#ffffff",
+      "$description": "Cards and panels above the page."
+    },
+    "text": {
+      "$value": "{color.ramp.neutral.900}",
+      "$description": "Body text on the surface."
+    },
+    "text-muted": {
+      "$value": "{color.ramp.neutral.700}",
+      "$description": "Secondary text."
+    },
+    "border": {
+      "$value": "{color.ramp.neutral.200}",
+      "$description": "Dividers and outlines."
+    },
+    "focus": {
+      "$value": "{color.ramp.primary.600}",
+      "$description": "Keyboard focus ring."
+    },
+    "danger": {
+      "$value": "{color.ramp.danger.600}",
+      "$description": "Errors and destructive actions, as text on the surface."
+    },
+    "success": {
+      "$value": "{color.ramp.success.700}",
+      "$description": "Success messages, as text on the surface."
+    },
+    "warning": {
+      "$value": "{color.ramp.warning.700}",
+      "$description": "Warnings, as text on the surface."
+    }
+  },
+  "font": {
+    "$type": "fontFamily",
+    "display": {
+      "$value": [
+        "Manrope",
+        "ui-sans-serif",
+        "system-ui",
+        "sans-serif"
+      ]
+    },
+    "body": {
+      "$value": [
+        "Inter",
+        "ui-sans-serif",
+        "system-ui",
+        "sans-serif"
+      ]
+    }
+  },
+  "font-size": {
+    "$type": "dimension",
+    "xs": {
+      "$value": "0.75rem"
+    },
+    "sm": {
+      "$value": "0.875rem"
+    },
+    "base": {
+      "$value": "1rem"
+    },
+    "lg": {
+      "$value": "1.25rem"
+    },
+    "xl": {
+      "$value": "1.563rem"
+    },
+    "2xl": {
+      "$value": "1.953rem"
+    },
+    "3xl": {
+      "$value": "2.441rem"
+    },
+    "4xl": {
+      "$value": "3.052rem"
+    },
+    "5xl": {
+      "$value": "3.815rem"
+    }
+  },
+  "line-height": {
+    "$type": "number",
+    "xs": {
+      "$value": 1.6
+    },
+    "sm": {
+      "$value": 1.6
+    },
+    "base": {
+      "$value": 1.6
+    },
+    "lg": {
+      "$value": 1.4
+    },
+    "xl": {
+      "$value": 1.25
+    },
+    "2xl": {
+      "$value": 1.25
+    },
+    "3xl": {
+      "$value": 1.25
+    },
+    "4xl": {
+      "$value": 1.1
+    },
+    "5xl": {
+      "$value": 1.1
+    }
+  },
+  "spacing": {
+    "1": {
+      "$value": "4px"
+    },
+    "2": {
+      "$value": "8px"
+    },
+    "3": {
+      "$value": "12px"
+    },
+    "4": {
+      "$value": "16px"
+    },
+    "6": {
+      "$value": "24px"
+    },
+    "8": {
+      "$value": "32px"
+    },
+    "12": {
+      "$value": "48px"
+    },
+    "16": {
+      "$value": "64px"
+    },
+    "$type": "dimension",
+    "control": {
+      "$value": "44px",
+      "$description": "Height of buttons and inputs."
+    },
+    "gutter": {
+      "$value": "24px",
+      "$description": "Space between neighbouring blocks."
+    },
+    "section": {
+      "$value": "48px",
+      "$description": "Vertical padding of a page section below the md breakpoint."
+    },
+    "section-lg": {
+      "$value": "64px",
+      "$description": "Vertical padding of a page section from the md breakpoint up."
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "sm": {
+      "$value": "4px"
+    },
+    "md": {
+      "$value": "8px"
+    },
+    "lg": {
+      "$value": "12px"
+    },
+    "full": {
+      "$value": "9999px"
+    }
+  },
+  "duration": {
+    "$type": "duration",
+    "fast": {
+      "$value": "150ms"
+    },
+    "base": {
+      "$value": "250ms"
+    },
+    "slow": {
+      "$value": "400ms"
+    }
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "standard": {
+      "$value": [
+        0.4,
+        0,
+        0.2,
+        1
+      ]
+    },
+    "enter": {
+      "$value": [
+        0,
+        0,
+        0.2,
+        1
+      ]
+    },
+    "exit": {
+      "$value": [
+        0.4,
+        0,
+        1,
+        1
+      ]
+    }
+  },
+  "breakpoint": {
+    "$type": "dimension",
+    "sm": {
+      "$value": "40rem"
+    },
+    "md": {
+      "$value": "48rem"
+    },
+    "lg": {
+      "$value": "64rem"
+    },
+    "xl": {
+      "$value": "80rem"
+    },
+    "2xl": {
+      "$value": "96rem"
+    }
+  },
+  "container": {
+    "$type": "dimension",
+    "page": {
+      "$value": "72rem",
+      "$description": "Maximum width of the page content."
+    },
+    "prose": {
+      "$value": "42rem",
+      "$description": "Maximum width of running text."
+    },
+    "form": {
+      "$value": "28rem",
+      "$description": "Maximum width of a single-column form."
+    }
+  },
+  "$extensions": {
+    "kit": {
+      "choices": {
+        "primary": "#1f2a3a",
+        "accent": "#f5a524",
+        "neutral": "#f7f3ea",
+        "font-display": "Manrope",
+        "font-body": "Inter",
+        "radius": "medium",
+        "density": "regular",
+        "type-ratio": "1.25",
+        "motion": "calm",
+        "dark": false
+      },
+      "contrast": [
+        {
+          "foreground": "{color.on-primary}",
+          "background": "{color.primary}",
+          "min": 4.5,
+          "use": "text on the primary button"
+        },
+        {
+          "foreground": "{color.on-accent}",
+          "background": "{color.accent}",
+          "min": 4.5,
+          "use": "text on the accent"
+        },
+        {
+          "foreground": "{color.text}",
+          "background": "{color.surface}",
+          "min": 4.5,
+          "use": "body text"
+        },
+        {
+          "foreground": "{color.text}",
+          "background": "{color.surface-raised}",
+          "min": 4.5,
+          "use": "body text on cards"
+        },
+        {
+          "foreground": "{color.text-muted}",
+          "background": "{color.surface}",
+          "min": 4.5,
+          "use": "secondary text"
+        },
+        {
+          "foreground": "{color.text-muted}",
+          "background": "{color.surface-raised}",
+          "min": 4.5,
+          "use": "secondary text on cards"
+        },
+        {
+          "foreground": "{color.danger}",
+          "background": "{color.surface}",
+          "min": 4.5,
+          "use": "error text"
+        },
+        {
+          "foreground": "{color.success}",
+          "background": "{color.surface}",
+          "min": 4.5,
+          "use": "success text"
+        },
+        {
+          "foreground": "{color.warning}",
+          "background": "{color.surface}",
+          "min": 4.5,
+          "use": "warning text"
+        },
+        {
+          "foreground": "{color.focus}",
+          "background": "{color.surface}",
+          "min": 3,
+          "use": "focus ring"
+        }
+      ]
+    }
+  }
+}

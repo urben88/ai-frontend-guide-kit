@@ -1,0 +1,11 @@
+# Rebuilt by the installer and npm; reinstall with:
+#   node ../../install.mjs init --target .   and   npm install
+node_modules/
+dist/
+ai-frontend-guide-kit/
+.agents/
+.claude/skills/
+.atl/
+.playwright-mcp/
+skills-lock.json
+ai-frontend-output/pieces/index.db

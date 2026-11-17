@@ -1,0 +1,62 @@
+{
+  "route": "new",
+  "gates": 1,
+  "started_at": "2026-11-17T08:58:39.440Z",
+  "complete": false,
+  "steps": [
+    {
+      "id": "intake",
+      "status": "done",
+      "done_at": "2026-11-17T08:58:46.105Z",
+      "evidence": "REPO-CONTEXT.md y UI-MAP.md generados con context.mjs y ui-map.mjs build. Proyecto sin stack ni pantallas: diseño desde cero."
+    },
+    {
+      "id": "direction",
+      "status": "done",
+      "parts_done": [
+        "questions",
+        "classify",
+        "journey",
+        "references",
+        "directions",
+        "choose"
+      ],
+      "done_at": "2026-11-17T09:02:01.360Z",
+      "evidence": "EXPERIENCE-BRIEF.md completo: Recommended direction (differentiated), Interaction patterns, Visual brief, Accessibility y Open questions (marca y precio pendientes del cliente)."
+    },
+    {
+      "id": "ux",
+      "status": "done",
+      "parts_done": [
+        "product",
+        "spec",
+        "map"
+      ],
+      "done_at": "2026-11-17T09:02:54.500Z",
+      "evidence": "ux-map.excalidraw con 5 pantallas de UX-SPEC.md como nodos (Landing, Landing sin escena 3D, Formulario de presupuesto, Confirmación, 404), INICIO, leyenda y 8 flechas etiquetadas con la acción real. Baseline en ux-map-baseline.excalidraw."
+    },
+    {
+      "id": "tokens",
+      "status": "done",
+      "done_at": "2026-11-17T09:03:07.936Z",
+      "evidence": "design-tokens.json válido (129 tokens, 10 pares de contraste pasan), theme.css generado, DESIGN.md con tablas y párrafo de intención visual."
+    },
+    {
+      "id": "compose",
+      "status": "done",
+      "parts_done": [
+        "inventory",
+        "find",
+        "decide",
+        "adapt"
+      ],
+      "done_at": "2026-11-17T09:10:26.468Z",
+      "evidence": "Build de producción OK. Registro de piezas completo: candidatos de catálogo MIT (navbar, landing, how-it-works, presupuesto) y piezas propias (panel-scene, footer-site, trust-bar, final-cta, form-submit, privacy-note, not-found-links, confirmation-message, not-found-message, loading-scene). Renderizado comprobado en 1280 y 390 px; formulario con error y foco verificados en el navegador."
+    },
+    {
+      "id": "polish",
+      "status": "pending"
+    }
+  ],
+  "updated_at": "2026-11-17T09:10:26.469Z"
+}

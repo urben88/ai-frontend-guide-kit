@@ -1,0 +1,784 @@
+{
+  "version": 1,
+  "counts": {
+    "files": 160,
+    "components": 18,
+    "routes": 4,
+    "strays": 2,
+    "unresolved": 14
+  },
+  "components": [
+    {
+      "name": "Feature",
+      "file": ".agents/skills/hallmark/scripts/fixtures/tailwind-fail/Feature.vue",
+      "line": 1,
+      "kind": "file",
+      "roles": [],
+      "usage": 0,
+      "users": [],
+      "routes": []
+    },
+    {
+      "name": "Hero",
+      "file": ".agents/skills/hallmark/scripts/fixtures/tailwind-fail/Hero.tsx",
+      "line": 11,
+      "kind": "export",
+      "roles": [],
+      "usage": 0,
+      "users": [],
+      "routes": []
+    },
+    {
+      "name": "Hero",
+      "file": ".agents/skills/hallmark/scripts/fixtures/tailwind-pass/Hero.tsx",
+      "line": 5,
+      "kind": "export",
+      "roles": [],
+      "usage": 0,
+      "users": [],
+      "routes": []
+    },
+    {
+      "name": "App",
+      "file": "src/App.jsx",
+      "line": 7,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/main.jsx"
+      ],
+      "routes": []
+    },
+    {
+      "name": "CtaButton",
+      "file": "src/components/CtaButton.jsx",
+      "line": 4,
+      "kind": "export",
+      "roles": [],
+      "usage": 2,
+      "users": [
+        "src/components/FinalCta.jsx",
+        "src/pages/Landing.jsx"
+      ],
+      "routes": [
+        "/Landing"
+      ]
+    },
+    {
+      "name": "FinalCta",
+      "file": "src/components/FinalCta.jsx",
+      "line": 4,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/pages/Landing.jsx"
+      ],
+      "routes": [
+        "/Landing"
+      ]
+    },
+    {
+      "name": "Footer",
+      "file": "src/components/Footer.jsx",
+      "line": 3,
+      "kind": "export",
+      "roles": [],
+      "usage": 4,
+      "users": [
+        "src/pages/Gracias.jsx",
+        "src/pages/Landing.jsx",
+        "src/pages/NotFound.jsx",
+        "src/pages/Presupuesto.jsx"
+      ],
+      "routes": [
+        "/Gracias",
+        "/Landing",
+        "/NotFound",
+        "/Presupuesto"
+      ]
+    },
+    {
+      "name": "HowItWorks",
+      "file": "src/components/HowItWorks.jsx",
+      "line": 23,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/pages/Landing.jsx"
+      ],
+      "routes": [
+        "/Landing"
+      ]
+    },
+    {
+      "name": "Navbar",
+      "file": "src/components/Navbar.jsx",
+      "line": 10,
+      "kind": "export",
+      "roles": [
+        "navigation"
+      ],
+      "usage": 4,
+      "users": [
+        "src/pages/Gracias.jsx",
+        "src/pages/Landing.jsx",
+        "src/pages/NotFound.jsx",
+        "src/pages/Presupuesto.jsx"
+      ],
+      "routes": [
+        "/Gracias",
+        "/Landing",
+        "/NotFound",
+        "/Presupuesto"
+      ]
+    },
+    {
+      "name": "NotFoundLinks",
+      "file": "src/components/NotFoundLinks.jsx",
+      "line": 4,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/pages/NotFound.jsx"
+      ],
+      "routes": [
+        "/NotFound"
+      ]
+    },
+    {
+      "name": "PanelHero",
+      "file": "src/components/PanelHero.jsx",
+      "line": 6,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/pages/Landing.jsx"
+      ],
+      "routes": [
+        "/Landing"
+      ]
+    },
+    {
+      "name": "PrivacyNote",
+      "file": "src/components/PrivacyNote.jsx",
+      "line": 2,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/pages/Presupuesto.jsx"
+      ],
+      "routes": [
+        "/Presupuesto"
+      ]
+    },
+    {
+      "name": "SubmitButton",
+      "file": "src/components/SubmitButton.jsx",
+      "line": 2,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/pages/Presupuesto.jsx"
+      ],
+      "routes": [
+        "/Presupuesto"
+      ]
+    },
+    {
+      "name": "TrustBar",
+      "file": "src/components/TrustBar.jsx",
+      "line": 4,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/pages/Landing.jsx"
+      ],
+      "routes": [
+        "/Landing"
+      ]
+    },
+    {
+      "name": "Gracias",
+      "file": "src/pages/Gracias.jsx",
+      "line": 6,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/App.jsx"
+      ],
+      "routes": [
+        "/Gracias"
+      ]
+    },
+    {
+      "name": "Landing",
+      "file": "src/pages/Landing.jsx",
+      "line": 25,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/App.jsx"
+      ],
+      "routes": [
+        "/Landing"
+      ]
+    },
+    {
+      "name": "NotFound",
+      "file": "src/pages/NotFound.jsx",
+      "line": 6,
+      "kind": "export",
+      "roles": [
+        "error"
+      ],
+      "usage": 1,
+      "users": [
+        "src/App.jsx"
+      ],
+      "routes": [
+        "/NotFound"
+      ]
+    },
+    {
+      "name": "Presupuesto",
+      "file": "src/pages/Presupuesto.jsx",
+      "line": 15,
+      "kind": "export",
+      "roles": [],
+      "usage": 1,
+      "users": [
+        "src/App.jsx"
+      ],
+      "routes": [
+        "/Presupuesto"
+      ]
+    }
+  ],
+  "roles": {
+    "layout": {
+      "owners": [],
+      "strays": 0
+    },
+    "loading": {
+      "owners": [],
+      "strays": 0
+    },
+    "empty": {
+      "owners": [],
+      "strays": 0
+    },
+    "error": {
+      "owners": [
+        {
+          "name": "NotFound",
+          "file": "src/pages/NotFound.jsx",
+          "line": 6
+        }
+      ],
+      "strays": 2
+    },
+    "feedback": {
+      "owners": [],
+      "strays": 0
+    },
+    "overlay": {
+      "owners": [],
+      "strays": 0
+    },
+    "navigation": {
+      "owners": [
+        {
+          "name": "Navbar",
+          "file": "src/components/Navbar.jsx",
+          "line": 10
+        }
+      ],
+      "strays": 0
+    },
+    "form": {
+      "owners": [],
+      "strays": 0
+    }
+  },
+  "routes": [
+    {
+      "route": "/Gracias",
+      "file": "src/pages/Gracias.jsx"
+    },
+    {
+      "route": "/Landing",
+      "file": "src/pages/Landing.jsx"
+    },
+    {
+      "route": "/NotFound",
+      "file": "src/pages/NotFound.jsx"
+    },
+    {
+      "route": "/Presupuesto",
+      "file": "src/pages/Presupuesto.jsx"
+    }
+  ],
+  "imports": {
+    ".agents/skills/design-taste-frontend/assets/components/fx-avatar/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-band/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-bars/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-button/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-chart/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-dither-object/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-feature-card/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-globe/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-headline/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-icon-tiles/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-logos/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-map/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-photo/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-pricing/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-progress/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-prompt/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-search/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-spotlight/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-stat/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/fx-tabs/component.js": [
+      ".agents/skills/design-taste-frontend/assets/components/shared.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/components/shared.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/diagrams/mount.js": [
+      ".agents/skills/design-taste-frontend/assets/diagrams/diagram.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/ascii-shade/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/aurora-curtains/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/bayer-dither/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/caustics/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/contour-lines/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/dot-terrain/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/dotted-globe/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/duotone-grade/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/edge-glow/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/film-light-leak/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/fluted-glass/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/god-rays/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/gradient-mesh/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/grain-gradient/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/grid-pulse/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/halftone-screen/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/line-engraving/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/orb-sphere/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/painterly-landscape/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/prism-dispersion/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/ridgeline/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/ruled-grounds/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/silk-folds/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/soft-light-bars/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/effects/spotlight-cone/effect.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/layout/layout.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/moments/moments.js": [
+      ".agents/skills/design-taste-frontend/assets/moments/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/_print-core/demo.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_print-core/print3d.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/_scenes/demo.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_scenes/kit.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/_scenes/kit.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js",
+      ".agents/skills/design-taste-frontend/assets/objects/photo-kit/photo.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/dither-sequence/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_scenes/kit.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/dot-object/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_scenes/kit.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/exploded-layers/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_scenes/kit.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/photo-dither/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/photo-kit/photo.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/photo-engraving/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/photo-kit/photo.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/photo-halftone/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/photo-kit/photo.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/photo-kit/demo.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js",
+      ".agents/skills/design-taste-frontend/assets/objects/photo-kit/photo.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/photo-kit/photo.js": [
+      ".agents/skills/design-taste-frontend/assets/effects/fx.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/print-cards/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_print-core/print3d.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/print-cup/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_print-core/print3d.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/print-globe/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_print-core/print3d.js",
+      ".agents/skills/design-taste-frontend/assets/objects/print-globe/land.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/print-lamp/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_print-core/print3d.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/print-wheel/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_print-core/print3d.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/product-render/auto.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/product-render/build.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/product-render/build.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_print-core/print3d.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/product-turntable/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_scenes/kit.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/objects/split-reveal/object.js": [
+      ".agents/skills/design-taste-frontend/assets/objects/_scenes/kit.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/descend-through-weather/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/dot-becomes-the-full-stop/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/fixed-hero-object/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js",
+      ".agents/skills/design-taste-frontend/assets/scenes/print.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/fly-into-the-shape/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/letter-bar-floods-the-ground/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/letter-physics/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/object-through-giant-type/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js",
+      ".agents/skills/design-taste-frontend/assets/scenes/print.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/parts-lock-into-the-whole/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/powers-of-ten-pullback/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/print.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/product-assembles-into-its-action/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/scenes.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/scenes/shaped-window-over-fixed-world/scene.js": [
+      ".agents/skills/design-taste-frontend/assets/scenes/lib.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/apps/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/calendar/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/chat/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/checklist/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/code/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/cursor/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/diff-review/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/doc/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/files/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/integrations/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/notify/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/pipeline-board/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/search/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/slider/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/stat/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/terminal-run/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/toggles/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/voice/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    ".agents/skills/design-taste-frontend/assets/ui/window/fragment.js": [
+      ".agents/skills/design-taste-frontend/assets/ui/ui.js"
+    ],
+    "src/App.jsx": [
+      "src/pages/Gracias.jsx",
+      "src/pages/Landing.jsx",
+      "src/pages/NotFound.jsx",
+      "src/pages/Presupuesto.jsx"
+    ],
+    "src/components/FinalCta.jsx": [
+      "src/components/CtaButton.jsx"
+    ],
+    "src/components/HowItWorks.jsx": [
+      "src/scene/panel-scene.js"
+    ],
+    "src/components/PanelHero.jsx": [
+      "src/scene/panel-scene.js"
+    ],
+    "src/main.jsx": [
+      "src/App.jsx"
+    ],
+    "src/pages/Gracias.jsx": [
+      "src/components/Footer.jsx",
+      "src/components/Navbar.jsx"
+    ],
+    "src/pages/Landing.jsx": [
+      "src/components/CtaButton.jsx",
+      "src/components/FinalCta.jsx",
+      "src/components/Footer.jsx",
+      "src/components/HowItWorks.jsx",
+      "src/components/Navbar.jsx",
+      "src/components/PanelHero.jsx",
+      "src/components/TrustBar.jsx"
+    ],
+    "src/pages/NotFound.jsx": [
+      "src/components/Footer.jsx",
+      "src/components/Navbar.jsx",
+      "src/components/NotFoundLinks.jsx"
+    ],
+    "src/pages/Presupuesto.jsx": [
+      "src/components/Footer.jsx",
+      "src/components/Navbar.jsx",
+      "src/components/PrivacyNote.jsx",
+      "src/components/SubmitButton.jsx",
+      "src/lib/presupuesto.js"
+    ]
+  },
+  "strays": [
+    {
+      "role": "error",
+      "file": ".agents/skills/impeccable/scripts/live-browser.js",
+      "line": 11273,
+      "signal": "error &&"
+    },
+    {
+      "role": "error",
+      "file": ".agents/skills/impeccable/scripts/live-browser.js",
+      "line": 11318,
+      "signal": "error ?"
+    }
+  ],
+  "unresolved": [
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/effects/fx.js",
+      "line": 875,
+      "specifier": "new URL(`${id}/effect.js`, base",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/moments/moments.js",
+      "line": 55,
+      "specifier": "new URL(`${id}/moment.js`, BASE",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/objects/_print-core/auto.js",
+      "line": 61,
+      "specifier": "new URL(`../${id}/object.js`, import.meta.url",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/objects/_scenes/auto.js",
+      "line": 61,
+      "specifier": "new URL(`../${id}/object.js`, import.meta.url",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/scenes/print.js",
+      "line": 19,
+      "specifier": "new URL(`${object}/object.js`, OBJECTS",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/scenes/scenes.js",
+      "line": 47,
+      "specifier": "new URL(`${id}/scene.js`, BASE",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/system.js",
+      "line": 485,
+      "specifier": "new URL('effects/fx.js', HERE",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/system.js",
+      "line": 486,
+      "specifier": "new URL('ui/ui.js', HERE",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/system.js",
+      "line": 580,
+      "specifier": "new URL('moments/moments.js', HERE",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/ui/ui.js",
+      "line": 90,
+      "specifier": "new URL(`${name}/fragment.js`, BASE",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/design-taste-frontend/assets/ui/voice/fragment.js",
+      "line": 46,
+      "specifier": "new URL('../../effects/fx.js', import.meta.url",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": ".agents/skills/hallmark/scripts/fixtures/tailwind-fail/Hero.tsx",
+      "line": 3,
+      "specifier": "./cn",
+      "reason": "not found"
+    },
+    {
+      "file": ".agents/skills/impeccable/scripts/live-browser.js",
+      "line": 5542,
+      "specifier": "url",
+      "reason": "dynamic import (expression)"
+    },
+    {
+      "file": "src/scene/panel-scene.js",
+      "line": 37,
+      "specifier": "three",
+      "reason": "dynamic import"
+    }
+  ]
+}

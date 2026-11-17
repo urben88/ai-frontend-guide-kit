@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    },
+    "excalidraw": {
+      "command": "node",
+      "args": [
+        "ai-frontend-guide-kit/tools/excalidraw-mcp.mjs",
+        "--diagram",
+        "ai-frontend-output/ux/ux-map.excalidraw"
+      ]
+    },
+    "ai-frontend-kit": {
+      "command": "node",
+      "args": [
+        "ai-frontend-guide-kit/tools/kit-mcp.mjs"
+      ]
+    }
+  }
+}

@@ -1,0 +1,533 @@
+{
+  "version": 2,
+  "pieces": {
+    "navbar": {
+      "name": "navbar",
+      "level": "small",
+      "summary": "A clean top navigation bar with logo, page links, and standout CTA button, ideal for agency or SaaS websites to guide users and drive collaboration effortlessly.",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": "MIT",
+      "origin": "catalog:shadcnspace-navigation-navbar-01",
+      "relation": "chosen",
+      "files": [
+        "src/components/Navbar.jsx"
+      ],
+      "created": "2026-11-17T09:09:17.587Z",
+      "latest": 1,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:09:17.587Z",
+          "sha256": "b5f824813fa7731c88186470bc35025de53b2424e3d9ff53d12616b20117b575",
+          "structural": "c331d44f5f188b79b9ba910c47bb694bacb356994affcf5b8111fa51745e0457",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        }
+      ]
+    },
+    "landing": {
+      "name": "landing",
+      "level": "small",
+      "summary": "Luxury real estate hero section crafted for property listings, featuring immersive imagery, location highlight, key amenities, pricing details, and prominent Schedule a tour CTA for faster inquiries.",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": "MIT",
+      "origin": "catalog:shadcnspace-hero-hero-02",
+      "relation": "modified",
+      "files": [
+        "src/pages/Landing.jsx"
+      ],
+      "created": "2026-11-17T09:09:17.829Z",
+      "latest": 2,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:09:17.829Z",
+          "sha256": "1fd7b2bc680ba1d7afc7b819c857a294ae700faaa398c1704829f675bdf9790d",
+          "structural": "5e6fb9482370c61f0b736efbffc637ea31046501640b96eeac368a17e0260367",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        },
+        {
+          "n": 2,
+          "ts": "2026-11-17T09:10:23.279Z",
+          "sha256": "65466697bd056e32731e4f4ebbe3615c5fa606cc4d7103da839569820eb62c61",
+          "structural": "919b135fe4e4de162f2752992fbeabe03443ea82141f3fbc1fee8c123f433652",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true,
+          "note": "Usa TrustBar y FinalCta; se quitan secciones inline"
+        }
+      ]
+    },
+    "how-it-works": {
+      "name": "how-it-works",
+      "level": "small",
+      "summary": "Timeline with pipeline steps.",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": "MIT",
+      "origin": "catalog:reui-data-display-timeline-6",
+      "relation": "modified",
+      "files": [
+        "src/components/HowItWorks.jsx"
+      ],
+      "created": "2026-11-17T09:09:18.170Z",
+      "latest": 2,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:09:18.170Z",
+          "sha256": "3f4f3dd1480e88cde6b1d8eaa5f2421c25446535865df76f20b451f7b39a243b",
+          "structural": "50bbce768a15dfafe48f29a139457e212384ba9528ecb3f351e82abcfe67094c",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        },
+        {
+          "n": 2,
+          "ts": "2026-11-17T09:13:25.049Z",
+          "sha256": "8880b8b67fe51bd51d0f41ea82ab68311ba2b54b3322384a08cc6c2a709e57a0",
+          "structural": "c7262ab1c8e456c0d5012a438549ed0fe28dc820f7f319580ce415158bd1cc6a",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true,
+          "note": "Monta la escena al acercarse; primer tramo al montar"
+        }
+      ]
+    },
+    "presupuesto": {
+      "name": "presupuesto",
+      "level": "small",
+      "summary": "Input with label",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": "MIT",
+      "origin": "catalog:reui-forms-input-2",
+      "relation": "modified",
+      "files": [
+        "src/pages/Presupuesto.jsx"
+      ],
+      "created": "2026-11-17T09:09:18.715Z",
+      "latest": 2,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:09:18.715Z",
+          "sha256": "b3e0caaf034ec64f175bf9d8ac9644003a3da77d542493b334f0d5f0c174824e",
+          "structural": "19d85702c1d6db41637b81428938b58a2bcb5203d745114ec18c54c777716cfc",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        },
+        {
+          "n": 2,
+          "ts": "2026-11-17T09:10:23.510Z",
+          "sha256": "bc2b669acb64246062909cb3c4380d0cec51e8cfeaffcffdd3a5873227aa3c09",
+          "structural": "34ccb4741cd50c298ebfe38201444fcdc8dc253722bbcb75926b60f6525dd179",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true,
+          "note": "Usa SubmitButton y PrivacyNote"
+        }
+      ]
+    },
+    "panel-scene": {
+      "name": "panel-scene",
+      "level": "large",
+      "summary": "",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": null,
+      "origin": "generated",
+      "relation": "chosen",
+      "files": [
+        "src/scene/panel-scene.js"
+      ],
+      "created": "2026-11-17T09:09:25.321Z",
+      "newReason": "Escena 3D del panel: ningún candidato del catálogo es un panel solar; SCENE-SPEC.md es la fuente",
+      "latest": 2,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:09:25.321Z",
+          "sha256": "f59433a25cb8d26b77a0bfe6632df9bdb5f626c417ab4a71a427eba1c0ff9987",
+          "structural": "185da69008db2e2b7bb4dc7d3c290cf3bebf8bec72c0c5275d4a3b9c8e20e838",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        },
+        {
+          "n": 2,
+          "ts": "2026-11-17T09:13:24.786Z",
+          "sha256": "5e61da1e1faa1a9230298a44e4c053aab4078eb7e9863eccff8869ad13d50543",
+          "structural": "c4a7db8a500e806d54eaebbc08a61a10ae58d4a5c4c910602a98b2c2b3e2457d",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true,
+          "note": "Canvas en bloque; escena montada solo al acercarse"
+        }
+      ]
+    },
+    "footer-site": {
+      "name": "footer-site",
+      "level": "micro",
+      "summary": "",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": null,
+      "origin": "generated",
+      "relation": "chosen",
+      "files": [
+        "src/components/Footer.jsx"
+      ],
+      "created": "2026-11-17T09:09:25.588Z",
+      "newReason": "Pie propio con marca y enlaces; el catálogo solo trae pies con bloques de otro tema",
+      "latest": 1,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:09:25.588Z",
+          "sha256": "25524c613761f5f912f567f28954df1b84ba0faedd935917adc28cfcd9fdf758",
+          "structural": "cee957e6c362f38e9146df026ab008b7e6ffcedbd17688b879825f0a5c247ddf",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        }
+      ]
+    },
+    "confirmation-message": {
+      "name": "confirmation-message",
+      "level": "small",
+      "summary": "",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": null,
+      "origin": "generated",
+      "relation": "chosen",
+      "files": [
+        "src/pages/Gracias.jsx"
+      ],
+      "created": "2026-11-17T09:09:36.107Z",
+      "newReason": "Confirmación propia; la búsqueda solo devolvió chat",
+      "latest": 1,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:09:36.107Z",
+          "sha256": "c44f075d7d1b103bc7fdc4f7ba92ad1f7b37b90775f9f3d32fcdb18fad4ad0cc",
+          "structural": "c07326044f8d9d23e75794325d1c859d17a75a003e7a90725c365b1438c4314c",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        }
+      ]
+    },
+    "not-found-message": {
+      "name": "not-found-message",
+      "level": "small",
+      "summary": "",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": null,
+      "origin": "generated",
+      "relation": "chosen",
+      "files": [
+        "src/pages/NotFound.jsx"
+      ],
+      "created": "2026-11-17T09:09:36.557Z",
+      "newReason": "Página 404 propia; la búsqueda no dio resultados",
+      "latest": 2,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:09:36.557Z",
+          "sha256": "4155ed15ac774c8c3e98a31a5e6cb2db289c9c3052451dafabe73401f7101176",
+          "structural": "4f388a4b74ea4a0e8b93cbdec1513d64607f48ef3dffb50c3f1bf00811efef80",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        },
+        {
+          "n": 2,
+          "ts": "2026-11-17T09:10:23.740Z",
+          "sha256": "c1604bfbf4cf79e4e1d5423df35da0fef3c0bc18fd21e661ac165d4993907708",
+          "structural": "8becb46026370c2073a75be3bed70c584fd64f92fb47c152d4b91ae7829b9cfc",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true,
+          "note": "Usa NotFoundLinks"
+        }
+      ]
+    },
+    "loading-scene": {
+      "name": "loading-scene",
+      "level": "micro",
+      "summary": "",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": null,
+      "origin": "generated",
+      "relation": "chosen",
+      "files": [
+        "src/components/PanelHero.jsx"
+      ],
+      "created": "2026-11-17T09:09:37.338Z",
+      "newReason": "Marco reservado de la escena; sin candidato",
+      "latest": 2,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:09:37.338Z",
+          "sha256": "554e50a974367ef64de3ce925e1bdfe858f47707005049e233b9a0de93ccfd47",
+          "structural": "dcd2d399d0c7044c2b422fd03f8ebdd0edcfe22199a815e2be73b0b1e8b91ef8",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        },
+        {
+          "n": 2,
+          "ts": "2026-11-17T09:13:25.255Z",
+          "sha256": "59c301ef43664b4c370d07e87e859a479168a79456d3dafff5286656912c48a9",
+          "structural": "5916be22715738dc4bc94f6362a5a83e9bafa1c2af939b23e6c867474d61d4dc",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true,
+          "note": "Póster en marcado desde el primer pintado (PanelHero)"
+        }
+      ]
+    },
+    "trust-bar": {
+      "name": "trust-bar",
+      "level": "micro",
+      "summary": "",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": null,
+      "origin": "generated",
+      "relation": "chosen",
+      "files": [
+        "src/components/TrustBar.jsx"
+      ],
+      "created": "2026-11-17T09:10:20.831Z",
+      "newReason": "Barra de tres datos de confianza; el catálogo trae logos, no se usan",
+      "latest": 1,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:10:20.831Z",
+          "sha256": "638a831ee45cd6187783e14e508f1bfdb26c2ed8d39b485dd002b2e83332b195",
+          "structural": "f01f4d7d0ec4216e430e78cdc3697bc84d16a34f2f2dd981a1cbf597413a47f8",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        }
+      ]
+    },
+    "final-cta": {
+      "name": "final-cta",
+      "level": "small",
+      "summary": "",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": null,
+      "origin": "generated",
+      "relation": "chosen",
+      "files": [
+        "src/components/FinalCta.jsx"
+      ],
+      "created": "2026-11-17T09:10:21.324Z",
+      "newReason": "Cierre con la acción principal; el candidato con degradado se descartó",
+      "latest": 1,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:10:21.324Z",
+          "sha256": "7d4a752626986ef0711801702dfdf244febd408e333f33fed8e1b62782484a2c",
+          "structural": "b16e3ed2229e0774135c6626db04217d6d1e0033a4a4c0b2617da1e9b2f26ddb",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        }
+      ]
+    },
+    "form-submit": {
+      "name": "form-submit",
+      "level": "micro",
+      "summary": "",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": null,
+      "origin": "generated",
+      "relation": "chosen",
+      "files": [
+        "src/components/SubmitButton.jsx"
+      ],
+      "created": "2026-11-17T09:10:22.098Z",
+      "newReason": "Botón del sistema con tokens y estados de envío",
+      "latest": 1,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:10:22.098Z",
+          "sha256": "0047978739806c01f1d551528695c1fd456972eeaae9f59e4f477823c5cecb10",
+          "structural": "fd43a69da1df26f394472845c0dfab5e9dde116052c23996543e11f86cde9ae6",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        }
+      ]
+    },
+    "privacy-note": {
+      "name": "privacy-note",
+      "level": "micro",
+      "summary": "",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": null,
+      "origin": "generated",
+      "relation": "chosen",
+      "files": [
+        "src/components/PrivacyNote.jsx"
+      ],
+      "created": "2026-11-17T09:10:22.677Z",
+      "newReason": "Una línea con enlace; no hace falta pieza del catálogo",
+      "latest": 1,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:10:22.677Z",
+          "sha256": "0dfeb58f7197a5c814e2ba59eb5cde997abe43a735ac6a667c2460edfdc43fb4",
+          "structural": "285214193940372248fdcd7b72e4adcfad70d7d6040e7dd1c2fbeafc9585a0e8",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        }
+      ]
+    },
+    "not-found-links": {
+      "name": "not-found-links",
+      "level": "micro",
+      "summary": "",
+      "variants": [],
+      "contexts": [],
+      "composedOf": [],
+      "license": null,
+      "origin": "generated",
+      "relation": "chosen",
+      "files": [
+        "src/components/NotFoundLinks.jsx"
+      ],
+      "created": "2026-11-17T09:10:23.047Z",
+      "newReason": "Enlaces y botón del sistema con tokens",
+      "latest": 1,
+      "versions": [
+        {
+          "n": 1,
+          "ts": "2026-11-17T09:10:23.047Z",
+          "sha256": "234fff7340131b638d854e6947d3c1da10d82d2737427e192ba0e471d06fe5aa",
+          "structural": "22fc4b029046c613291d102b236d522049677294cf089fef9c235e06425428c7",
+          "commit": "a843f2105372d94eefcbe09107417b28b1934b43",
+          "dirty": true
+        }
+      ]
+    }
+  },
+  "used": {},
+  "settings": {},
+  "finds": [
+    {
+      "need": "hero",
+      "ts": "2026-11-17T09:03:30.036Z"
+    },
+    {
+      "need": "pie con enlaces, aviso legal y contacto",
+      "ts": "2026-11-17T09:04:45.617Z"
+    },
+    {
+      "need": "barra de tres datos de confianza",
+      "ts": "2026-11-17T09:04:46.221Z"
+    },
+    {
+      "need": "cierre con el mismo botón",
+      "ts": "2026-11-17T09:04:46.744Z"
+    },
+    {
+      "need": "botón de envío con estados",
+      "ts": "2026-11-17T09:04:47.310Z"
+    },
+    {
+      "need": "enlace a privacidad junto al botón",
+      "ts": "2026-11-17T09:04:47.768Z"
+    },
+    {
+      "need": "qué pasa después y plazo de llamada",
+      "ts": "2026-11-17T09:04:48.190Z"
+    },
+    {
+      "need": "botón de vuelta a la landing",
+      "ts": "2026-11-17T09:04:48.716Z"
+    },
+    {
+      "need": "mensaje de página no encontrada",
+      "ts": "2026-11-17T09:04:49.340Z"
+    },
+    {
+      "need": "enlaces a landing y formulario",
+      "ts": "2026-11-17T09:04:49.790Z"
+    },
+    {
+      "need": "marco reservado mientras carga la escena",
+      "ts": "2026-11-17T09:04:50.060Z"
+    },
+    {
+      "need": "barra de confianza",
+      "ts": "2026-11-17T09:09:34.012Z"
+    },
+    {
+      "need": "cierre con el mismo botón",
+      "ts": "2026-11-17T09:09:34.575Z"
+    },
+    {
+      "need": "botón de envío con estados",
+      "ts": "2026-11-17T09:09:35.041Z"
+    },
+    {
+      "need": "enlace a privacidad junto al botón",
+      "ts": "2026-11-17T09:09:35.478Z"
+    },
+    {
+      "need": "qué pasa después y plazo de llamada",
+      "ts": "2026-11-17T09:09:35.921Z"
+    },
+    {
+      "need": "mensaje de página no encontrada",
+      "ts": "2026-11-17T09:09:36.370Z"
+    },
+    {
+      "need": "enlaces a landing y formulario",
+      "ts": "2026-11-17T09:09:36.762Z"
+    },
+    {
+      "need": "marco reservado mientras carga la escena",
+      "ts": "2026-11-17T09:09:37.083Z"
+    },
+    {
+      "need": "barra de confianza",
+      "ts": "2026-11-17T09:10:20.639Z"
+    },
+    {
+      "need": "cierre con el mismo botón",
+      "ts": "2026-11-17T09:10:21.137Z"
+    },
+    {
+      "need": "botón de envío con estados",
+      "ts": "2026-11-17T09:10:21.790Z"
+    },
+    {
+      "need": "enlace a privacidad junto al botón",
+      "ts": "2026-11-17T09:10:22.451Z"
+    },
+    {
+      "need": "enlaces a landing y formulario",
+      "ts": "2026-11-17T09:10:22.837Z"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "scanned": 18,
+  "tokens": true,
+  "counts": {
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "skipped": [],
+  "rendered": {
+    "ran": false,
+    "urls": []
+  },
+  "findings": [],
+  "summary": "Summary: 0 high, 0 medium, 0 low. Nothing skipped.",
+  "generated_at": "2026-11-17T09:10:29.538Z"
+}
