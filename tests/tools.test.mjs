@@ -301,7 +301,7 @@ test('frontend-refactor skill runs only on request and cites the FSD migration g
 
 test('installer copies every kit skill and no skill count contradicts skills/', () => {
   const skills = skillDirs();
-  assert.equal(skills.length, 29, `skills/ has ${skills.length} directories`);
+  assert.equal(skills.length, 30, `skills/ has ${skills.length} directories`);
   assert.ok(skills.includes('frontend-refactor'), 'frontend-refactor is a kit skill');
 
   const target = mkdtempSync(join(tmpdir(), 'kit-skill-count-'));
