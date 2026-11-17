@@ -37,7 +37,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { kitFile, kitPath, quotePath, runTool } from './kit-path.mjs';
 import { changedPieces, registeredPiece } from './pieces.mjs';
-import { DESIGN_AUDIT_CHECK, PARTS, designAuditCommand, hasOwnProductDoc } from './flow-steps.mjs';
+import { DESIGN_AUDIT_CHECK, PARTS, TOOL_IDS, designAuditCommand, hasOwnProductDoc, toolMenu } from './flow-steps.mjs';
 import { checkBoards, detect as detectStorybook, findBoards } from './board.mjs';
 import { directionCards, loadCards, resolveDirections, styleDirections } from './technique.mjs';
 import { GATES, mergeReport, mergeTemplate, parseDesignAudit, prefillAudit, reportProblems } from './flow-gates.mjs';
@@ -166,7 +166,7 @@ function parseArgs(argv) {
     const token = argv[i];
     const eq = token.startsWith('--') ? token.indexOf('=') : -1;
     const name = eq === -1 ? token : token.slice(0, eq);
-    if (name === '--dir' || name === '--evidence' || name === '--reason' || name === '--answer') {
+    if (name === '--dir' || name === '--evidence' || name === '--reason' || name === '--answer' || name === '--tools') {
       const value = eq === -1 ? argv[i + 1] : token.slice(eq + 1);
       if (!value || (eq === -1 && value.startsWith('--'))) throw new UsageError(`option ${name} needs a value`);
       flags[name.slice(2)] = value;
@@ -347,6 +347,7 @@ function instruction(p, state) {
     report: last && part.report ? { file: artifactPath(p, `out:reports/${step.id}-report.md`).shown, command: env.run('flow.mjs', `report ${step.id}`), checks: part.report } : null,
     needs_evidence: needsEvidence,
     done_command: env.run('flow.mjs', `done ${id}${needsEvidence ? ' --evidence "<each check you ran and its result>"' : ''}`),
+    tools: toolMenu(env, id),
     decision: what ? { what, stop: STOP_TEXT, answer_command: env.run('flow.mjs', `done ${id} --answer "<the user's words>"`) } : null,
     reference: built.reference,
   };
@@ -364,6 +365,7 @@ function renderInstruction(info) {
     ...info.do.map((line) => (line.startsWith('  ') ? `   ${line}` : `${(number += 1)}. ${line}`)),
   ];
   if (info.template) lines.push('', `Template for ${info.template.file} — write it with: ${info.scaffold_command} (what is already in the file is never changed), then replace every <…>:`, ...info.template.lines.map((line) => `    ${line}`));
+  if (info.tools.length) lines.push('', 'Tools you can offer the user here (show them to the user, ask which to use, record the pick on the done command with --tools <ids>, or --tools none):', ...info.tools.map((tool) => `- ${tool.id}: ${tool.command} — ${tool.gives} (cost: ${tool.cost})`));
   lines.push('', 'Done when:', ...info.done_when.map((line) => `- ${line}`), '', `Then run: ${info.decision ? info.decision.answer_command : info.done_command}`, `Only if you are stuck, read: ${info.reference}`);
   if (info.decision) lines.push('', info.decision.stop, `Decision: ${info.decision.what}`);
   return lines.join('\n');
@@ -559,15 +561,28 @@ function requireAnswer(p, subject, target, step, partId, flags) {
   throw new Refusal(`${subject} is the user's decision: ${open.join('; ')}. Do not answer for the user: show them the options, wait for their answer, then close it with: ${cmd('flow.mjs', `done ${target} --answer "<the user's words>"`)}`);
 }
 
-/** Keeps the words of the user on the step, with the part they answer (null: the whole step). */
+/** The ids of --tools as a list ([] for "none"), or undefined when the option is absent; an unknown id is a usage error. */
+function parseTools(value) {
+  if (value === undefined) return undefined;
+  const ids = [...new Set(value.split(',').map((id) => id.trim().toLowerCase()).filter(Boolean))];
+  if (!ids.length) throw new UsageError('--tools needs at least one tool id, or none');
+  if (ids.includes('none') && ids.length > 1) throw new UsageError('--tools none cannot be combined with other tools');
+  const unknown = ids.find((id) => id !== 'none' && !TOOL_IDS.includes(id));
+  if (unknown) throw new UsageError(`unknown tool "${unknown}" in --tools (tools: ${TOOL_IDS.join(', ')}; or none)`);
+  return ids[0] === 'none' ? [] : ids;
+}
+
+/** Keeps on the step the words of the user and the tools they picked, with the part they belong to (null: the whole step). */
 function recordAnswer(step, partId, flags) {
   const answer = flags.answer ?? (flags.declined ? flags.reason : undefined);
-  if (answer === undefined) return;
-  step.answers = [...(step.answers ?? []), { part: partId ?? null, at: new Date().toISOString(), answer: answer.trim() }];
+  const tools = parseTools(flags.tools);
+  if (answer === undefined && tools === undefined) return;
+  step.answers = [...(step.answers ?? []), { part: partId ?? null, at: new Date().toISOString(), ...(answer === undefined ? {} : { answer: answer.trim() }), ...(tools === undefined ? {} : { tools }) }];
 }
 
 function done(p, target, flags) {
   const named = String(target ?? '').split('.')[0];
+  parseTools(flags.tools);
   if (flags.answer !== undefined && (!flags.answer.trim() || /^<[^<>]*>$/.test(flags.answer.trim()))) throw new UsageError('--answer needs the words of the user, not empty and not the placeholder');
   if (flags.declined && named !== 'board') throw new UsageError(`only the board step can be declined (--declined); "${named}" closes with its own checks`);
   if (flags.declined && !flags.reason) throw new UsageError('--declined needs --reason "<why the user said no>"');

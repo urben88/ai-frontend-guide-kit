@@ -91,6 +91,121 @@ export const hasOwnProductDoc = (env) => /bmad|spec/i.test(env.framework);
 const BUILDER_USE = { hallmark: 'new page or section', 'design-taste-frontend': 'app screen' };
 const builderSkill = (env) => ['hallmark', 'design-taste-frontend'].filter((name) => env.skill(name));
 
+/**
+ * The one table of the tools that fit each micro-step (`<step>.<part>`, or `<step>` for a step with one part): [tool, arguments,
+ * what it gives, cost]. The cost is the time or the tokens it takes: low (seconds, a few lines), medium (a minute or a page of
+ * output) or high (needs a running app or a browser). `flow next` prints it as a menu for the user to choose from, and `flow done
+ * --tools <ids>` accepts exactly the ids it holds (the tool name without its extension); nothing else lists tools.
+ */
+const TOOL_MENU = {
+  intake: [
+    ['context.mjs', '', 'the stack, the screens and the UI libraries of the project', 'low'],
+    ['ui-map.mjs', 'build', 'a map of the components, roles and routes, so nothing is explored by hand', 'low'],
+    ['memory.mjs', 'lib sync', 'records the UI libraries the project already uses', 'low'],
+  ],
+  'direction.questions': [
+    ['recipe.mjs', 'list', 'the page types and their sections, to ask what each page needs', 'low'],
+    ['technique.mjs', 'find "<need>"', 'style and technique cards to show the user as options', 'low'],
+    ['scout.mjs', '<url>', 'whether a site the user links is a catalog source, and what it offers', 'medium'],
+  ],
+  'direction.classify': [
+    ['recipe.mjs', 'show <id>', 'the sections, in order, of one page type', 'low'],
+    ['technique.mjs', 'find "<need>" --area direction', 'cards that name a direction, to compare archetypes', 'low'],
+  ],
+  'direction.journey': [
+    ['recipe.mjs', 'show <id>', 'the sections, in order, of the page types of this site', 'low'],
+    ['technique.mjs', 'find "<need>" --area psychology', 'cards on what the visitor thinks and feels at each phase', 'low'],
+  ],
+  'direction.references': [
+    ['scout.mjs', '<url>', 'whether a site the user likes is a catalog source, and what it offers', 'medium'],
+    ['technique.mjs', 'find "<need>"', 'cards that name what the user highlights in an example', 'low'],
+    ['memory.mjs', 'add --screen experience --block reference --need "<need>" --decision adapt --ref "reference:<slug>"', 'keeps each pick of the user on record', 'low'],
+  ],
+  'direction.directions': [
+    ['technique.mjs', 'find "<need>" --direction <id>', 'techniques that make one direction different in structure', 'low'],
+    ['recipe.mjs', 'list', 'page types, to vary the section order between directions', 'low'],
+  ],
+  'direction.choose': [
+    ['technique.mjs', 'find "<need>" --direction <id>', 'cards for the direction the user picks', 'low'],
+    ['memory.mjs', 'add --screen experience --block direction --need "<need>" --decision adapt --ref "direction:<id>"', 'keeps the chosen direction on record', 'low'],
+  ],
+  'ux.product': [
+    ['context.mjs', '', 'what the project already says about its product and UX', 'low'],
+    ['recipe.mjs', 'suggest', 'the page recipe of each screen, to find the objections and the proof', 'low'],
+  ],
+  'ux.spec': [
+    ['recipe.mjs', 'suggest', 'the page recipe of each screen, as the start of its states', 'low'],
+    ['ui-map.mjs', 'have "<name>"', 'whether a screen or component of that name already exists', 'low'],
+  ],
+  'ux.map': [
+    ['excalidraw-mcp.mjs', '--diagram <path>', 'draws the screen map from the spec', 'medium'],
+  ],
+  tokens: [
+    ['tokens.mjs', 'init --primary <hex>', 'computes palette, type, spacing and contrast from a few choices', 'low'],
+    ['find.mjs', '--type design-system', 'design systems of the catalog, as a reference for the visual system', 'low'],
+    ['technique.mjs', 'find "<need>" --area color', 'color and type cards that fit the direction', 'low'],
+    ['svg.mjs', 'gen --list', 'decorative shapes drawn from the tokens', 'low'],
+  ],
+  'compose.inventory': [
+    ['recipe.mjs', 'inventory --write', 'one inventory row per section of each page recipe', 'low'],
+    ['ui-map.mjs', 'have "<need>"', 'what this project already has, before anything is listed', 'low'],
+  ],
+  'compose.find': [
+    ['ui-map.mjs', 'have "<need>"', 'a component of this project that already does it', 'low'],
+    ['pieces.mjs', 'find "<need>"', 'own pieces, variants and pieces of other projects', 'low'],
+    ['find.mjs', '"<need>"', 'catalog entries, best match first', 'low'],
+    ['scout.mjs', '<url>', 'whether a site the user links is a catalog source, and its license hints', 'medium'],
+  ],
+  'compose.decide': [
+    ['get.mjs', '<id>', 'license, dependencies and install command of a candidate', 'low'],
+    ['pieces.mjs', 'find "<need>"', 'the check that must run before a build decision', 'low'],
+    ['memory.mjs', 'add --screen <screen> --block <block> --need "<need>" --decision reuse|adapt|build', 'records each decision with its reason', 'low'],
+  ],
+  'compose.adapt': [
+    ['technique.mjs', 'find "<need>" --area layout', 'layout, motion and imagery cards to apply at most two per screen', 'low'],
+    ['svg.mjs', 'gen <kind> --out <file>', 'dividers, patterns and icons drawn from the tokens', 'low'],
+    ['scene.mjs', 'init', 'a 3D scene spec, only when the user chose 3D', 'medium'],
+    ['pieces.mjs', 'add <name> --level micro|small|medium|large --file <path>', 'registers each build so the project owns it', 'low'],
+  ],
+  board: [
+    ['board.mjs', 'detect', 'whether Storybook is installed, and the exact install command', 'low'],
+    ['board.mjs', 'plan', 'the pages and the real components each board story can use', 'low'],
+    ['board.mjs', 'scaffold <page> --version v1-<name>', 'one story per layout version of a page', 'medium'],
+    ['board.mjs', 'check', 'findings that make a story touch logic, routes, stores or API calls', 'low'],
+  ],
+  iterate: [
+    ['ui-map.mjs', 'impact <role or component>', 'every owner, user and stray the change touches', 'low'],
+    ['pieces.mjs', 'find "<need>"', 'an own piece or variant before anything new', 'low'],
+    ['find.mjs', '"<need>"', 'catalog entries, only for something new', 'low'],
+    ['audit-design.mjs', '--report', 'measured spacing, sizes, colors and contrast of the result', 'medium'],
+  ],
+  redesign: [
+    ['ui-map.mjs', 'impact <screen or component>', 'everything the screen touches', 'low'],
+    ['technique.mjs', 'find "<need>"', 'cards for the new look', 'low'],
+    ['audit-design.mjs', '--report', 'measured spacing, sizes, colors and contrast of the result', 'medium'],
+  ],
+  polish: [
+    ['audit-design.mjs', '--report', 'measured spacing, sizes, colors, motion and layout', 'medium'],
+    ['audit-honesty.mjs', 'src --strict', 'deceptive-pattern tells in the source (fake urgency, hidden costs)', 'low'],
+    ['audit-a11y.mjs', '<url>', 'accessibility violations of the running page', 'high'],
+    ['audit-perf.mjs', '<url>', 'LCP, CLS and TBT of the running page', 'high'],
+  ],
+  'visual-feedback': [
+    ['ui-map.mjs', 'impact <component>', 'where the element the user pointed at is used', 'low'],
+    ['pieces.mjs', 'version <name> --note "<what changed>"', 'records an edit of a registered piece', 'low'],
+  ],
+  architecture: [
+    ['ui-map.mjs', 'build', 'the folder roles as the map sees them', 'low'],
+    ['context.mjs', '', 'the stack and the framework that decide the folder roles', 'low'],
+  ],
+};
+
+/** The ids `flow done --tools` accepts: every tool of the table, by name without extension. */
+export const TOOL_IDS = [...new Set(Object.values(TOOL_MENU).flat().map(([tool]) => tool.replace(/\.(mjs|py)$/, '')))].sort();
+
+/** The menu of one micro-step, with its commands written in the path form of this project. */
+export const toolMenu = (env, key) => (TOOL_MENU[key] ?? []).map(([tool, args, gives, cost]) => ({ id: tool.replace(/\.(mjs|py)$/, ''), command: env.run(tool, args), gives, cost }));
+
 export const PARTS = {
   intake: [{
     id: null,

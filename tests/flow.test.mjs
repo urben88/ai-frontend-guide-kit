@@ -539,6 +539,8 @@ test('next prints the whole instruction of every micro-step of every route, and 
       assert.doesNotMatch(text, /if installed|\(optional\)|\(recommended\)/i, `${id} leaves a branch to the reader`);
       assert.doesNotMatch(text, /node tools\//, `${id} uses a second path form`);
       assert.ok(text.includes(`done ${id}`), `${id} does not print its done command`);
+      assert.ok(info.tools.length >= 1 && info.tools.length <= 4, `${id} has no tool menu (guided-flow S3)`);
+      assert.equal(menuOf(text).length, info.tools.length, `${id} prints its tool menu`);
       complete(dir, homeDir, info);
       const close = guided(dir, homeDir, 'done', id, ...(info.needs_evidence ? ['--evidence', 'checked'] : []));
       assert.equal(close.status, 0, `${id}: ${close.stderr}`);
@@ -1514,7 +1516,7 @@ test('a part names an area skill only when it is installed, and the other parts 
   for (const [step, extra] of [['direction', {}], ['compose', { parts_done: ['inventory'] }]]) {
     const other = project();
     stateAt(other, step, extra);
-    assert.doesNotMatch(guided(other, homeDir, 'next').stdout, /technique/i, `${step}: no technique line in a part that does not need one`);
+    assert.doesNotMatch(guided(other, homeDir, 'next').stdout, /technique-|Techniques that fit|No technique card|No direction is recorded/i, `${step}: no technique line in a part that does not need one`);
   }
 });
 
@@ -1852,4 +1854,95 @@ test('board: --declined --reason is the user\'s answer and is kept as one; the o
   withStorybook(ok);
   putStory(ok);
   assert.equal(guidedRaw(ok, home(), 'done', 'board').status, 0, 'Storybook installed and a clean board close as before');
+});
+
+// ---------------------------------------------------------------- guided flow: the tool menu of each step (guided-flow S3)
+
+const MENU_LINE = /^- ([a-z0-9-]+): (.+) — (.+) \(cost: (low|medium|high)\)$/;
+const menuOf = (text) => text.split('\n').filter((line) => MENU_LINE.test(line));
+
+test('next lists, for each micro-step, the kit tools that fit it: id, exact command, what it gives and its cost, and says how to record the pick (guided-flow S3)', () => {
+  const dir = project();
+  const homeDir = home();
+  decisionAt(dir, 'direction', ['questions', 'classify', 'journey']);
+  const text = guidedRaw(dir, homeDir, 'next').stdout;
+  const header = text.split('\n').find((line) => /^Tools you can offer the user/.test(line));
+  assert.ok(header, 'a header line introduces the menu');
+  assert.match(header, /show them to the user, ask which to use/);
+  assert.match(header, /--tools <ids>/);
+  const lines = menuOf(text);
+  assert.ok(lines.length >= 2 && lines.length <= 4, `${lines.length} tools`);
+  const scout = lines.find((line) => line.startsWith('- scout:'));
+  assert.match(scout, /^- scout: node .*tools\/scout\.mjs <url> — .+ \(cost: medium\)$/);
+  assert.ok(lines.some((line) => /^- technique: node .*tools\/technique\.mjs find /.test(line)));
+  const info = JSON.parse(guidedRaw(dir, homeDir, 'next', '--json').stdout);
+  assert.deepEqual(Object.keys(info.tools[0]).sort(), ['command', 'cost', 'gives', 'id']);
+  assert.equal(info.tools.length, lines.length);
+  assert.ok(info.tools.every((tool) => ['low', 'medium', 'high'].includes(tool.cost)));
+  assert.ok(text.indexOf(header) < text.indexOf('STOP —'), 'and before the STOP block');
+});
+
+test('every id of every menu is accepted by --tools: one table feeds the menu and the record (guided-flow S3)', () => {
+  const dir = project();
+  const homeDir = home();
+  const ids = new Set();
+  for (const [step, partsDone] of [['intake', null], ['direction', []], ['direction', ['questions']], ['ux', []], ['ux', ['product', 'spec']], ['tokens', null], ['compose', []], ['compose', ['inventory', 'find', 'decide']]]) {
+    decisionAt(dir, step, partsDone);
+    for (const tool of JSON.parse(guidedRaw(dir, homeDir, 'next', '--json').stdout).tools) ids.add(tool.id);
+  }
+  assert.ok(ids.size >= 8, [...ids].join(','));
+  decisionAt(dir, 'tokens', null);
+  const run = guidedRaw(dir, homeDir, 'done', 'tokens', '--tools', [...ids].join(','));
+  assert.equal(run.status, 1, 'the refusal is about the missing file, not about the ids');
+  assert.doesNotMatch(run.stderr, /unknown tool/);
+});
+
+test('done --tools keeps the tools the user picked next to the answer, on the part they belong to (guided-flow S3)', () => {
+  const dir = project();
+  const homeDir = home();
+  decisionAt(dir, 'direction', []);
+  put(dir, BRIEF);
+  const run = guidedRaw(dir, homeDir, 'done', 'direction.questions', '--answer', 'Landing for solar panels', '--tools', 'recipe, technique');
+  assert.equal(run.status, 0, run.stderr);
+  const entry = state(dir).steps.find((s) => s.id === 'direction').answers[0];
+  assert.equal(entry.part, 'questions');
+  assert.equal(entry.answer, 'Landing for solar panels');
+  assert.deepEqual(entry.tools, ['recipe', 'technique']);
+});
+
+test('--tools works on a step that is not a decision, and "none" records that the user wanted no extra tool (guided-flow S3)', () => {
+  const dir = project();
+  stateAt(dir, 'tokens');
+  putTokens(dir);
+  assert.equal(spawnSync(process.execPath, [TOKENS_TOOL, 'doc', '--dir', dir], { encoding: 'utf8' }).status, 0);
+  writeFileSync(join(dir, 'DESIGN.md'), fill(readFileSync(join(dir, 'DESIGN.md'), 'utf8')));
+  const run = guidedRaw(dir, home(), 'done', 'tokens', '--tools', 'none');
+  assert.equal(run.status, 0, run.stderr);
+  const entry = state(dir).steps.find((s) => s.id === 'tokens').answers[0];
+  assert.deepEqual(entry.tools, []);
+  assert.equal(entry.answer, undefined);
+  assert.equal(entry.part, null);
+});
+
+test('--tools needs known ids, and "none" cannot be mixed; each exits 2 and changes nothing (guided-flow S3)', () => {
+  const dir = project();
+  decisionAt(dir, 'direction', []);
+  put(dir, BRIEF);
+  const before = raw(dir);
+  const unknown = guidedRaw(dir, home(), 'done', 'direction.questions', '--answer', 'x', '--tools', 'recipe,hammer');
+  assert.equal(unknown.status, 2);
+  assert.match(unknown.stderr, /unknown tool "hammer" in --tools \(tools: .*recipe.*; or none\)/);
+  const mixed = guidedRaw(dir, home(), 'done', 'direction.questions', '--answer', 'x', '--tools', 'none,recipe');
+  assert.equal(mixed.status, 2);
+  assert.match(mixed.stderr, /--tools none cannot be combined/);
+  assert.equal(guidedRaw(dir, home(), 'done', 'direction.questions', '--answer', 'x', '--tools').status, 2);
+  assert.equal(raw(dir), before);
+});
+
+test('a refused done keeps no tool record, and a decision part still asks for the answer when only --tools is given (guided-flow S3, previous behavior)', () => {
+  const dir = project();
+  decisionAt(dir, 'direction', []);
+  put(dir, BRIEF);
+  const before = raw(dir);
+  assert.match(refusal(guidedRaw(dir, home(), 'done', 'direction.questions', '--tools', 'recipe'), dir, before), /is the user's decision/);
 });
