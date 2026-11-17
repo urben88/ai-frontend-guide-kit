@@ -2047,3 +2047,93 @@ test('flow report works on a route started before answers existed, and on a comp
   assert.doesNotMatch(file, /What the user answered/, 'an old state holds no answers: the line is left out');
   assert.match(file, /- Tools: chosen by the user: none recorded/);
 });
+
+// ---------------------------------------------------------------- guided flow: the reuse check of compose (guided-flow S5)
+
+const decided = (dir, rows) => writeFileSync(out(dir, 'selections.jsonl'), `${rows.map((row) => JSON.stringify({ ts: '2026-11-17T09:00:00.000Z', project: 'p', style_tags: [], notes: '', ...row })).join('\n')}\n`);
+const row = (screen, block, decision, entryId, install) => ({ screen, block, decision, entry_id: entryId, name: entryId, ...(install ? { install_command: install } : {}) });
+const writeIn = (dir, rel, text) => {
+  mkdirSync(dirname(join(dir, rel)), { recursive: true });
+  writeFileSync(join(dir, rel), text);
+};
+const component = (name, ...imports) => `${imports.map((target) => `import X${imports.indexOf(target)} from '${target}';`).join('\n')}\nexport default function ${name}() { return null; }\n`;
+/** A project whose compose step waits on its last part; `files` is what the code holds, `rows` what selections.jsonl decided. */
+const composeAt = (files, rows, { gates = 1 } = {}) => {
+  const dir = project();
+  stateAt(dir, 'compose', { parts_done: ['inventory', 'find', 'decide'] }, gates);
+  put(dir, 'INVENTORY.md');
+  for (const [rel, text] of Object.entries(files)) writeIn(dir, rel, text);
+  decided(dir, rows);
+  return dir;
+};
+const LANDING = { 'src/pages/Landing.jsx': component('Landing', '../components/Navbar.jsx', '../components/blocks/faq-01/faq.jsx') };
+const BLOCKS = {
+  'src/components/Navbar.jsx': "export { default } from './blocks/navbar-01/navbar.jsx';\n",
+  'src/components/blocks/navbar-01/navbar.jsx': component('NavbarBlock'),
+  'src/components/blocks/faq-01/faq.jsx': component('Faq'),
+  'src/components/blocks/hero-02/hero.jsx': component('Hero'),
+  'src/components/blocks/hero-02/index.jsx': component('HeroIndex', './hero.jsx'),
+  'src/components/blocks/pricing-01/pricing.jsx': component('Pricing'),
+};
+const NAVBAR = row('Landing', 'navbar', 'adapt', 'shadcnspace-navigation-navbar-01', 'npx shadcn@latest add @shadcn-space/navbar-01');
+const FAQ = row('Landing', 'faq', 'adapt', 'shadcnspace-faq-faq-01', 'npx shadcn@latest add @shadcn-space/faq-01');
+const HERO = row('Landing', 'hero', 'adapt', 'shadcnspace-hero-hero-02', 'npx shadcn@latest add @shadcn-space/hero-02');
+const PRICING = row('Landing', 'pricing-teaser', 'reuse', 'shadcnspace-pricing-pricing-01', 'npx shadcn@latest add @shadcn-space/pricing-01');
+
+test('done compose lists every catalog component decided reuse or adapt that no page or component imports, with the two ways out, and changes nothing (guided-flow S5)', () => {
+  const dir = composeAt({ ...LANDING, ...BLOCKS }, [NAVBAR, FAQ, HERO, PRICING]);
+  const before = raw(dir);
+  const message = refusal(guidedRaw(dir, home(), 'done', 'compose.adapt'), dir, before);
+  assert.match(message, /step "compose" cannot be marked done: 2 problems/);
+  assert.match(message, /shadcnspace-hero-hero-02 \(Landing \/ hero; adapt\): its landed file is not imported by any page or component \(src\/components\/blocks\/hero-02\/hero\.jsx, src\/components\/blocks\/hero-02\/index\.jsx\)\./);
+  assert.match(message, /shadcnspace-pricing-pricing-01 \(Landing \/ pricing-teaser; reuse\): its landed file is not imported[^\n]*src\/components\/blocks\/pricing-01\/pricing\.jsx/);
+  assert.doesNotMatch(message, /faq-01|navbar-01/, 'imported ones are not listed: faq directly, navbar through its re-export');
+  assert.match(message, /Import it where the screen needs it, or re-decide with: node [^\n]*memory\.mjs add --screen "Landing" --block "hero" --need "<need>" --decision build --name "<name>" --notes "<why it was not used>"/);
+});
+
+test('the reuse check passes when every decided component is imported, and the step closes (guided-flow S5)', () => {
+  const dir = composeAt({ ...LANDING, ...BLOCKS }, [NAVBAR, FAQ]);
+  const run = guidedRaw(dir, home(), 'done', 'compose.adapt');
+  assert.equal(run.status, 0, run.stderr);
+  assert.equal(state(dir).steps.find((s) => s.id === 'compose').status, 'done');
+});
+
+test('re-deciding a block as build takes it out of the check: the latest decision of each screen and block counts (guided-flow S5)', () => {
+  const dir = composeAt({ ...LANDING, ...BLOCKS }, [FAQ, HERO, { ...HERO, decision: 'build', entry_id: undefined, name: 'PanelHero', notes: 'the hero needs a 3D panel' }]);
+  writeIn(dir, 'ai-frontend-output/pieces/pieces.json', JSON.stringify({ version: 1, pieces: { hero: { name: 'hero', origin: 'generated', files: ['src/components/PanelHero.jsx'] } } }));
+  const run = guidedRaw(dir, home(), 'done', 'compose.adapt');
+  assert.equal(run.status, 0, run.stderr);
+});
+
+test('a decided component with no file of it in the project is listed with the way to land it (guided-flow S5)', () => {
+  const dir = composeAt({ ...LANDING, ...BLOCKS }, [FAQ, row('Landing', 'logos', 'adapt', 'reui-data-display-logo-cloud-3', 'npx shadcn@latest add @reui/logo-cloud-3')]);
+  const before = raw(dir);
+  const message = refusal(guidedRaw(dir, home(), 'done', 'compose'), dir, before);
+  assert.match(message, /1 problem/);
+  assert.match(message, /reui-data-display-logo-cloud-3 \(Landing \/ logos; adapt\): no file of it landed in the project \(no piece with origin catalog:reui-data-display-logo-cloud-3 and no path named logo-cloud-3\)\. Land it and register it with: node [^\n]*get\.mjs reui-data-display-logo-cloud-3 --landed <path of the file>, or re-decide with:/);
+});
+
+test('a catalog component copied under another name counts through its registered piece (origin catalog:<id>) when it is imported (guided-flow S5)', () => {
+  const dir = composeAt({ 'src/pages/Landing.jsx': component('Landing', '../components/MyHero.jsx'), 'src/components/MyHero.jsx': component('MyHero') }, [HERO]);
+  writeIn(dir, 'ai-frontend-output/pieces/pieces.json', JSON.stringify({ version: 1, pieces: { 'my-hero': { name: 'my-hero', origin: 'catalog:shadcnspace-hero-hero-02', files: ['src/components/MyHero.jsx'] } } }));
+  assert.equal(guidedRaw(dir, home(), 'done', 'compose.adapt').status, 0);
+  const lonely = composeAt({ 'src/components/MyHero.jsx': component('MyHero') }, [HERO]);
+  writeIn(lonely, 'ai-frontend-output/pieces/pieces.json', JSON.stringify({ version: 1, pieces: { 'my-hero': { name: 'my-hero', origin: 'catalog:shadcnspace-hero-hero-02', files: ['src/components/MyHero.jsx'] } } }));
+  assert.match(guidedRaw(lonely, home(), 'done', 'compose.adapt').stderr, /shadcnspace-hero-hero-02 \(Landing \/ hero; adapt\): its landed file is not imported[^\n]*src\/components\/MyHero\.jsx/);
+});
+
+test('only an import from outside the landed files counts: not its own folder, not a story, not a test (guided-flow S5)', () => {
+  const files = { ...LANDING, ...BLOCKS, 'src/components/blocks/hero-02/hero.stories.jsx': component('HeroStory', './hero.jsx'), 'src/components/blocks/hero-02/hero.test.jsx': component('HeroTest', './hero.jsx') };
+  const dir = composeAt(files, [HERO]);
+  assert.match(guidedRaw(dir, home(), 'done', 'compose.adapt').stderr, /shadcnspace-hero-hero-02/);
+  const used = composeAt({ ...files, 'src/pages/Home.jsx': component('Home', '../components/blocks/hero-02/index.jsx') }, [HERO]);
+  assert.equal(guidedRaw(used, home(), 'done', 'compose.adapt').status, 0);
+});
+
+test('decisions without a catalog id (own pieces, builds, references) and a route started before the gates are not checked (guided-flow S5, previous behavior)', () => {
+  const own = composeAt({ ...LANDING, ...BLOCKS }, [FAQ, { screen: 'experience', block: 'direction', decision: 'adapt', name: 'direction:market', ref: 'direction:market' }, { screen: 'Landing', block: 'footer', decision: 'reuse', name: 'footer' }]);
+  assert.equal(guidedRaw(own, home(), 'done', 'compose.adapt').status, 0);
+  const legacy = composeAt({ ...LANDING, ...BLOCKS }, [FAQ, HERO], { gates: 0 });
+  const run = guidedRaw(legacy, home(), 'done', 'compose.adapt');
+  assert.equal(run.status, 0, run.stderr);
+});

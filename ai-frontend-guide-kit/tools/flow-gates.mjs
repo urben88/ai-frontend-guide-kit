@@ -308,6 +308,64 @@ export function mergeTemplate(existing, lines) {
   return { text: `${existing.replace(/\s+$/, '')}${eol}${eol}${missing.map((chunk) => chunk.lines.join(eol)).join(eol)}${eol}`, added: missing.map((chunk) => chunk.title) };
 }
 
+// ---------------------------------------------------------------- the reuse check of compose
+
+/** Words that name where a catalog entry lands: the name its install command gives, else the numbered tail of its id (`hero-02`), else its last word. */
+function landedNames(id, install = '') {
+  const names = [...String(install).matchAll(/@[\w-]+\/([\w.-]+)/g)].map((match) => match[1]);
+  const tail = id.match(/([a-z][a-z0-9]*-\d+)$/i)?.[1];
+  if (!names.length && tail) names.push(tail);
+  if (!names.length && id.split('-').at(-1).length >= 4) names.push(id.split('-').at(-1));
+  return [...new Set(names.map((name) => name.toLowerCase()))];
+}
+
+/** Does a path of the project hold the name as a folder or as a file name (`hero-02/`, `c-input-2.jsx`)? Hidden folders never count. */
+function pathNames(file, names) {
+  const parts = file.toLowerCase().split('/');
+  if (parts.some((part) => part.startsWith('.'))) return false;
+  const base = parts.at(-1).replace(/\.[^.]+$/, '');
+  return [...parts.slice(0, -1), base].some((part) => names.some((name) => part === name || part.endsWith(`-${name}`)));
+}
+
+const STORY_OR_TEST = /\.(stories|story|test|spec)\.[cm]?[jt]sx?$|(^|\/)__tests__\//;
+
+/**
+ * The catalog components that selections.jsonl decided reuse or adapt (the latest decision of each screen and block) and that
+ * the code does not really use: no file of them landed, or none of the files that landed is imported by another file that is
+ * not a story or a test. `records` are the lines of selections.jsonl; `pieces` the registry (origin `catalog:<id>`, files);
+ * `imports` the file graph of ui-map.json (file -> the files it imports or re-exports) and `files` the files of its components (a file that imports nothing and is imported by nothing is only there). The files that landed are the ones
+ * named after the entry (the folder the install wrote); a piece registered with `get.mjs --landed` is the way when the install
+ * was renamed. Each problem names the id and the two ways out.
+ */
+export function reuseProblems({ records, pieces, imports, files = [], run }) {
+  const latest = new Map();
+  for (const record of records) latest.set(`${record.screen}/${record.block}`, record);
+  const wanted = new Map();
+  for (const record of latest.values()) {
+    if (!['reuse', 'adapt'].includes(record.decision) || !record.entry_id) continue;
+    const entry = wanted.get(record.entry_id) ?? { rows: [], install: record.install_command };
+    entry.rows.push(record);
+    wanted.set(record.entry_id, entry);
+  }
+  const known = new Set([...files, ...Object.keys(imports), ...Object.values(imports).flat()]);
+  const problems = [];
+  for (const [id, { rows, install }] of wanted) {
+    const names = landedNames(id, install);
+    const named = [...known].filter((file) => pathNames(file, names)).sort();
+    const registered = pieces.filter((piece) => piece.origin === `catalog:${id}`).flatMap((piece) => piece.files ?? []);
+    const landed = new Set(named.length ? named : registered);
+    const where = `${id} (${rows.map((row) => `${row.screen} / ${row.block}`).join(', ')}; ${[...new Set(rows.map((row) => row.decision))].join('/')})`;
+    const redecide = `re-decide${rows.length > 1 ? ' each block' : ''} with: ${run('memory.mjs', `add --screen "${rows[0].screen}" --block "${rows[0].block}" --need "<need>" --decision build --name "<name>" --notes "<why it was not used>"`)}`;
+    if (!landed.size) {
+      problems.push(`${where}: no file of it landed in the project (no piece with origin catalog:${id} and no path named ${names.join(' or ') || id}). Land it and register it with: ${run('get.mjs', `${id} --landed <path of the file>`)}, or ${redecide}`);
+      continue;
+    }
+    const used = Object.entries(imports).some(([from, targets]) => !landed.has(from) && !STORY_OR_TEST.test(from) && targets.some((target) => landed.has(target)));
+    if (!used) problems.push(`${where}: its landed file is not imported by any page or component (${[...landed].join(', ')}). Import it where the screen needs it, or ${redecide}`);
+  }
+  return problems;
+}
+
 // ---------------------------------------------------------------- reports of the steps closed with free evidence
 
 const CHECK_LINE = /^\s*[-*]\s*\[([^\]]*)\]\s*(.*)$/;

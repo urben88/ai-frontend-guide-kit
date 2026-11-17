@@ -40,7 +40,8 @@ import { changedPieces, registeredPiece } from './pieces.mjs';
 import { DESIGN_AUDIT_CHECK, PARTS, TOOL_IDS, designAuditCommand, hasOwnProductDoc, toolMenu } from './flow-steps.mjs';
 import { checkBoards, detect as detectStorybook, findBoards } from './board.mjs';
 import { directionCards, loadCards, resolveDirections, styleDirections } from './technique.mjs';
-import { GATES, mergeReport, mergeTemplate, parseDesignAudit, prefillAudit, reportProblems } from './flow-gates.mjs';
+import { GATES, mergeReport, mergeTemplate, parseDesignAudit, prefillAudit, reportProblems, reuseProblems } from './flow-gates.mjs';
+import { scanProject } from './ui-map.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KIT_DIR = resolve(__dirname, '..');
@@ -480,22 +481,50 @@ function next(p, flags) {
   console.log(flags.json ? JSON.stringify(info, null, 2) : renderInstruction(info));
 }
 
-/** Every `build` decision in selections.jsonl must resolve to a piece registered in this project. */
-function unregisteredBuilds(p) {
+/** The decisions of selections.jsonl (what `memory.mjs add` wrote), one object per line; a line that is not JSON is skipped. */
+function readSelections(p) {
   const file = join(p.out, 'selections.jsonl');
   if (!existsSync(file)) return [];
-  const missing = [];
-  for (const line of readFileSync(file, 'utf8').split('\n')) {
-    let record;
+  return readFileSync(file, 'utf8').split('\n').flatMap((line) => {
     try {
-      record = JSON.parse(line);
+      const record = JSON.parse(line);
+      return record && typeof record === 'object' ? [record] : [];
     } catch {
-      continue;
+      return [];
     }
-    if (record?.decision !== 'build') continue;
+  });
+}
+
+/** Every `build` decision in selections.jsonl must resolve to a piece registered in this project. */
+function unregisteredBuilds(p) {
+  const missing = [];
+  for (const record of readSelections(p)) {
+    if (record.decision !== 'build') continue;
     if (!registeredPiece(record.name, record.block, p.out)) missing.push(`${record.block} ("${record.name ?? record.block}")`);
   }
   return [...new Set(missing)];
+}
+
+/**
+ * Compose also asks that what was decided reuse or adapt is really used (flow-gates.mjs reuseProblems): the decisions come from
+ * selections.jsonl, the landed files from the pieces registry, and the imports from the file graph of the ui-map scan (the shape
+ * of ui-map.json, read fresh so the check never trusts a stale map). A scan that cannot run lets the step close, as the gates do.
+ */
+function unusedCatalogComponents(p) {
+  const records = readSelections(p);
+  if (!records.some((record) => record.entry_id && ['reuse', 'adapt'].includes(record.decision))) return [];
+  let registry = {};
+  try {
+    registry = JSON.parse(readFileSync(join(p.out, 'pieces', 'pieces.json'), 'utf8'));
+  } catch {
+    registry = {};
+  }
+  try {
+    const map = scanProject(p.root);
+    return reuseProblems({ records, pieces: Object.values(registry.pieces ?? {}), imports: map.imports, files: map.components.map((component) => component.file), run: environment(p).run });
+  } catch {
+    return [];
+  }
 }
 
 /** What the gates may read: another file of the project, and whether the repository has its own product document. */
@@ -700,6 +729,10 @@ function done(p, target, flags) {
     if (changed.length) {
       throw new Refusal(`step "${id}" cannot be marked done: piece(s) changed since their last recorded version: ${changed.map((piece) => `${piece.name} (v${piece.version})`).join(', ')}. Record each with: ${changed.map((piece) => cmd('pieces.mjs', `version ${piece.name}`)).join('; ')}`);
     }
+  }
+  if (id === 'compose' && state.gates) {
+    const unused = unusedCatalogComponents(p);
+    if (unused.length) refuseWith(p, 'step "compose"', unused, null);
   }
   let record = {};
   if (STEPS[id].artifacts) {
