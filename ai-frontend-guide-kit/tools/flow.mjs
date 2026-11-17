@@ -16,6 +16,10 @@
  * `scaffold` writes the template of a micro-step into its file; `report` writes the checklist of a
  * step that closes with free evidence.
  *
+ * Some parts are the user's decision (`decision` in flow-steps.mjs): `next` ends them with a STOP block and `done` closes
+ * them only with `--answer "<the user's words>"`, kept in `answers` of the step. The board's `--declined --reason` is the same
+ * notion: the reason is the answer. A state written before this change keeps working; it asks for the answer on those parts too.
+ *
  * Usage:
  *   node ai-frontend-guide-kit/tools/flow.mjs list                   every route and step (the text of guides/FLOWS.md)
  *   node ai-frontend-guide-kit/tools/flow.mjs status                 kit installed?, active route and step, what is recorded
@@ -23,7 +27,7 @@
  *   node ai-frontend-guide-kit/tools/flow.mjs next                   the whole instruction of the current micro-step
  *   node ai-frontend-guide-kit/tools/flow.mjs scaffold [<step>[.<part>]]   write the template of a micro-step (default: the current one)
  *   node ai-frontend-guide-kit/tools/flow.mjs report <step>          write the checklist of a step closed with evidence
- *   node ai-frontend-guide-kit/tools/flow.mjs done <step>[.<part>] [--evidence "..."]
+ *   node ai-frontend-guide-kit/tools/flow.mjs done <step>[.<part>] [--evidence "..."] [--answer "<the user's words>"]
  *   node ai-frontend-guide-kit/tools/flow.mjs reset                  drop the active route
  * Options: --dir <project> (default: the folder that holds the kit), --json
  */
@@ -162,7 +166,7 @@ function parseArgs(argv) {
     const token = argv[i];
     const eq = token.startsWith('--') ? token.indexOf('=') : -1;
     const name = eq === -1 ? token : token.slice(0, eq);
-    if (name === '--dir' || name === '--evidence' || name === '--reason') {
+    if (name === '--dir' || name === '--evidence' || name === '--reason' || name === '--answer') {
       const value = eq === -1 ? argv[i + 1] : token.slice(eq + 1);
       if (!value || (eq === -1 && value.startsWith('--'))) throw new UsageError(`option ${name} needs a value`);
       flags[name.slice(2)] = value;
@@ -185,10 +189,12 @@ Usage:
   ${cmd('flow.mjs', 'next')}                 the whole instruction of the current micro-step: goal, commands, template, done criteria
   ${cmd('flow.mjs', 'scaffold [<step>[.<part>]]')}   write the template of a micro-step into its file (default: the current one)
   ${cmd('flow.mjs', 'report <step>')}        write the checklist of ${REPORT_STEPS_TEXT}
-  ${cmd('flow.mjs', 'done <step>[.<part>] [--evidence "..."]')}
+  ${cmd('flow.mjs', 'done <step>[.<part>] [--evidence "..."] [--answer "<the user\'s words>"]')}
   ${cmd('flow.mjs', 'done board --declined --reason "..."')}   the user said no to Storybook: the no and its reason stay on record
   ${cmd('flow.mjs', 'reset')}
   direction, ux and compose have parts, closed in order (done direction.questions, ...); the last part closes the step.
+  A part that is the user's decision (direction.questions, .references, .choose, ux.product when PRODUCT.md must be asked, compose.decide, the Storybook question of board)
+  ends next with a STOP block: show the options to the user, wait, and close it with --answer "<the user's words>"; the answer stays in flow-state.json.
   done also reads the file: required sections filled, no <…> left, tables with rows, ids that exist; it lists what is missing.
   board closes when Storybook is installed (always asked first, never installed alone), a board story exists and board.mjs check is clean, or with --declined --reason.
   ${REPORT_STEPS_TEXT} close with --evidence and a report with every line checked or marked n/a.
@@ -307,6 +313,10 @@ function environment(p) {
   };
 }
 
+/** What the user decides in a part, or null when the part is not a decision (or has nothing to ask in this project). */
+const decisionOf = (part, env) => (typeof part.decision === 'function' ? part.decision(env) : part.decision) || null;
+const STOP_TEXT = "STOP — this is the user's decision. Show the options above to the user and wait for the answer. Do not answer for them.";
+
 /** The current micro-step of an active route, as data: what `next` prints and `next --json` returns. */
 function instruction(p, state) {
   const step = current(state);
@@ -317,6 +327,7 @@ function instruction(p, state) {
   const last = part === parts.at(-1);
   const id = part.id ? `${step.id}.${part.id}` : step.id;
   const needsEvidence = last && !STEPS[step.id].artifacts && !STEPS[step.id].closes;
+  const what = decisionOf(part, env);
   return {
     route: state.route,
     complete: false,
@@ -336,6 +347,7 @@ function instruction(p, state) {
     report: last && part.report ? { file: artifactPath(p, `out:reports/${step.id}-report.md`).shown, command: env.run('flow.mjs', `report ${step.id}`), checks: part.report } : null,
     needs_evidence: needsEvidence,
     done_command: env.run('flow.mjs', `done ${id}${needsEvidence ? ' --evidence "<each check you ran and its result>"' : ''}`),
+    decision: what ? { what, stop: STOP_TEXT, answer_command: env.run('flow.mjs', `done ${id} --answer "<the user's words>"`) } : null,
     reference: built.reference,
   };
 }
@@ -352,7 +364,8 @@ function renderInstruction(info) {
     ...info.do.map((line) => (line.startsWith('  ') ? `   ${line}` : `${(number += 1)}. ${line}`)),
   ];
   if (info.template) lines.push('', `Template for ${info.template.file} — write it with: ${info.scaffold_command} (what is already in the file is never changed), then replace every <…>:`, ...info.template.lines.map((line) => `    ${line}`));
-  lines.push('', 'Done when:', ...info.done_when.map((line) => `- ${line}`), '', `Then run: ${info.done_command}`, `Only if you are stuck, read: ${info.reference}`);
+  lines.push('', 'Done when:', ...info.done_when.map((line) => `- ${line}`), '', `Then run: ${info.decision ? info.decision.answer_command : info.done_command}`, `Only if you are stuck, read: ${info.reference}`);
+  if (info.decision) lines.push('', info.decision.stop, `Decision: ${info.decision.what}`);
   return lines.join('\n');
 }
 
@@ -530,8 +543,32 @@ function closeBoard(p, flags) {
   return { evidence: flags.evidence ?? `board check clean; ${stories} board ${stories === 1 ? 'story' : 'stories'} in ${boards.length} file${boards.length === 1 ? '' : 's'}` };
 }
 
+/** The decisions of the user that this close covers and that are still open (closing a whole step covers every open part). */
+function openDecisions(p, step, partId) {
+  const env = environment(p);
+  const closed = step.parts_done ?? [];
+  const covered = partId === undefined ? PARTS[step.id].filter((part) => !closed.includes(part.id)) : [currentPart(step)];
+  return covered.map((part) => decisionOf(part, env)).filter(Boolean);
+}
+
+/** A decision part closes only with the words of the user (--answer), or with the board's --declined --reason, which is the same thing. */
+function requireAnswer(p, subject, target, step, partId, flags) {
+  if (flags.answer !== undefined || flags.declined) return;
+  const open = openDecisions(p, step, partId);
+  if (!open.length) return;
+  throw new Refusal(`${subject} is the user's decision: ${open.join('; ')}. Do not answer for the user: show them the options, wait for their answer, then close it with: ${cmd('flow.mjs', `done ${target} --answer "<the user's words>"`)}`);
+}
+
+/** Keeps the words of the user on the step, with the part they answer (null: the whole step). */
+function recordAnswer(step, partId, flags) {
+  const answer = flags.answer ?? (flags.declined ? flags.reason : undefined);
+  if (answer === undefined) return;
+  step.answers = [...(step.answers ?? []), { part: partId ?? null, at: new Date().toISOString(), answer: answer.trim() }];
+}
+
 function done(p, target, flags) {
   const named = String(target ?? '').split('.')[0];
+  if (flags.answer !== undefined && (!flags.answer.trim() || /^<[^<>]*>$/.test(flags.answer.trim()))) throw new UsageError('--answer needs the words of the user, not empty and not the placeholder');
   if (flags.declined && named !== 'board') throw new UsageError(`only the board step can be declined (--declined); "${named}" closes with its own checks`);
   if (flags.declined && !flags.reason) throw new UsageError('--declined needs --reason "<why the user said no>"');
   if (flags.reason !== undefined && !flags.declined) throw new UsageError('--reason goes with --declined');
@@ -554,6 +591,8 @@ function done(p, target, flags) {
       if (problems.length) refuseWith(p, `part "${target}"`, problems, target);
     }
     if (part !== PARTS[id].at(-1)) {
+      requireAnswer(p, `part "${target}"`, target, step, partId, flags);
+      recordAnswer(step, partId, flags);
       step.parts_done = [...(step.parts_done ?? []), partId];
       writeState(p, state);
       return console.log(`Done: ${target}\n\n${renderInstruction(instruction(p, state))}`);
@@ -601,6 +640,8 @@ function done(p, target, flags) {
       if (audit.counts.high) throw new Refusal(`step "polish" cannot be marked done: ${shown} lists ${audit.counts.high} high finding${audit.counts.high === 1 ? '' : 's'}; fix them from the top of ai-frontend-output/reports/design-audit.md, then run: ${command}`);
     }
   }
+  requireAnswer(p, partId === undefined ? `step "${id}"` : `part "${target}"`, target, step, partId, flags);
+  recordAnswer(step, partId, flags);
   step.status = 'done';
   step.done_at = new Date().toISOString();
   if (partId !== undefined) step.parts_done = [...(step.parts_done ?? []), partId];

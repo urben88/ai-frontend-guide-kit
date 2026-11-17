@@ -16,7 +16,10 @@ const cleanEnv = () => {
   delete env.AI_FRONTEND_PROJECT;
   return env;
 };
-const flow = (dir, ...args) => spawnSync(process.execPath, [TOOL, ...args, '--dir', dir], { encoding: 'utf8', env: cleanEnv() });
+/** A user's answer for every `done` that does not bring one: the decision parts need it, the other parts accept and keep it. `flowRaw` and `guidedRaw` add nothing. */
+const withAnswer = (args) => (args[0] === 'done' && !args.includes('--answer') && !args.includes('--declined') ? [...args, '--answer', 'the user answered in the test'] : args);
+const flowRaw = (dir, ...args) => spawnSync(process.execPath, [TOOL, ...args, '--dir', dir], { encoding: 'utf8', env: cleanEnv() });
+const flow = (dir, ...args) => flowRaw(dir, ...withAnswer(args));
 const project = ({ kit = true } = {}) => {
   const dir = mkdtempSync(join(tmpdir(), 'flow-'));
   if (kit) {
@@ -292,7 +295,7 @@ const iterateProject = () => {
   fillReport(dir, 'iterate');
   return { dir, lib };
 };
-const flowIn = (ctx, ...args) => spawnSync(process.execPath, [TOOL, ...args, '--dir', ctx.dir], { encoding: 'utf8', env: piecesEnv(ctx.lib) });
+const flowIn = (ctx, ...args) => spawnSync(process.execPath, [TOOL, ...withAnswer(args), '--dir', ctx.dir], { encoding: 'utf8', env: piecesEnv(ctx.lib) });
 const memoryIn = (ctx, ...args) => spawnSync(process.execPath, [MEMORY, ...args, '--dir', out(ctx.dir, '')], { encoding: 'utf8', env: piecesEnv(ctx.lib) });
 const piecesIn = (ctx, ...args) => spawnSync(process.execPath, [PIECES, ...args, '--dir', ctx.dir], { encoding: 'utf8', env: piecesEnv(ctx.lib) });
 const build = (ctx, block, name) => {
@@ -454,7 +457,8 @@ test('flow status names INDEX.md, with and without an active route (flow-always 
 // ---------------------------------------------------------------- conductor: flow next gives the whole instruction (weak-model-design S2, S5)
 
 const home = () => mkdtempSync(join(tmpdir(), 'flow-home-'));
-const guided = (dir, homeDir, ...args) => spawnSync(process.execPath, [TOOL, ...args, '--dir', dir], { encoding: 'utf8', env: { ...cleanEnv(), HOME: homeDir, USERPROFILE: homeDir } });
+const guidedRaw = (dir, homeDir, ...args) => spawnSync(process.execPath, [TOOL, ...args, '--dir', dir], { encoding: 'utf8', env: { ...cleanEnv(), HOME: homeDir, USERPROFILE: homeDir } });
+const guided = (dir, homeDir, ...args) => guidedRaw(dir, homeDir, ...withAnswer(args));
 const O = 'ai-frontend-output';
 const FILES = {
   [`${O}/ux/REPO-CONTEXT.md`]: '- **UX present:** no',
@@ -1671,4 +1675,181 @@ test('a route started before the board step existed keeps its own steps: next, s
   assert.equal(ok.status, 0, ok.stderr);
   assert.equal(state(dir).complete, true);
   assert.deepEqual(state(dir).steps.map((s) => s.id), ['intake', 'direction', 'ux', 'tokens', 'compose', 'polish']);
+});
+
+// ---------------------------------------------------------------- guided flow: decision points (guided-flow S2)
+
+const STOP = /^STOP — this is the user's decision\. Show the options above to the user and wait for the answer\. Do not answer for them\.$/m;
+/** Writes the state of route `new` at `step`, with the parts of that step already closed. */
+const decisionAt = (dir, step, partsDone, gates = 1) => stateAt(dir, step, partsDone ? { parts_done: partsDone } : {}, gates);
+const lastLines = (text, count) => text.trimEnd().split('\n').slice(-count);
+
+test('next ends a decision part with a separated STOP block, in text and in --json, and leaves the other parts without it (guided-flow S2)', () => {
+  const decisions = [
+    ['direction', [], 'direction.questions'],
+    ['direction', ['questions', 'classify', 'journey'], 'direction.references'],
+    ['direction', ['questions', 'classify', 'journey', 'references', 'directions'], 'direction.choose'],
+    ['ux', [], 'ux.product'],
+    ['compose', ['inventory', 'find'], 'compose.decide'],
+  ];
+  for (const [step, partsDone, id] of decisions) {
+    const dir = project();
+    const homeDir = home();
+    decisionAt(dir, step, partsDone);
+    const text = guidedRaw(dir, homeDir, 'next').stdout;
+    const tail = lastLines(text, 3);
+    assert.equal(tail[0], '', `${id}: a blank line separates the block`);
+    assert.match(tail[1], STOP, id);
+    assert.match(tail[2], /^Decision: \S/, `${id} names what the user decides`);
+    assert.match(text, new RegExp(`Then run: .*done ${id.replace('.', '\\.')} --answer "<the user's words>"`), `${id} prints the command with --answer`);
+    const info = JSON.parse(guidedRaw(dir, homeDir, 'next', '--json').stdout);
+    assert.ok(info.decision.what, `${id} json names the decision`);
+    assert.match(info.decision.stop, STOP);
+    assert.match(info.decision.answer_command, /--answer "<the user's words>"$/);
+    assert.doesNotMatch(info.done_command, /--answer/, `${id}: done_command keeps its old shape`);
+  }
+  const quiet = [['direction', ['questions'], 'direction.classify'], ['direction', ['questions', 'classify'], 'direction.journey'], ['ux', ['product'], 'ux.spec'], ['compose', [], 'compose.inventory'], ['compose', ['inventory'], 'compose.find'], ['compose', ['inventory', 'find', 'decide'], 'compose.adapt'], ['tokens', null, 'tokens'], ['intake', null, 'intake']];
+  for (const [step, partsDone, id] of quiet) {
+    const dir = project();
+    const homeDir = home();
+    decisionAt(dir, step, partsDone);
+    assert.doesNotMatch(guidedRaw(dir, homeDir, 'next').stdout, /STOP —/, `${id} is not a decision`);
+    assert.equal(JSON.parse(guidedRaw(dir, homeDir, 'next', '--json').stdout).decision, null, id);
+  }
+});
+
+test('ux.product is a decision only when PRODUCT.md must be asked: not when it exists, not with the product document of the repository (guided-flow S2)', () => {
+  const have = project();
+  decisionAt(have, 'ux', []);
+  put(have, 'ux/REPO-CONTEXT.md', '- **UX present:** no\n');
+  writeFileSync(join(have, 'PRODUCT.md'), VALID_PRODUCT);
+  assert.doesNotMatch(guidedRaw(have, home(), 'next').stdout, /STOP —/);
+  const bmad = project();
+  decisionAt(bmad, 'ux', []);
+  put(bmad, 'ux/REPO-CONTEXT.md', '- **UX present:** no\n- **Framework:** bmad — _bmad/ found\n');
+  assert.doesNotMatch(guidedRaw(bmad, home(), 'next').stdout, /STOP —/);
+  const ask = project();
+  decisionAt(ask, 'ux', []);
+  put(ask, 'ux/REPO-CONTEXT.md', '- **UX present:** no\n');
+  assert.match(guidedRaw(ask, home(), 'next').stdout, /STOP —/);
+});
+
+test('the board install question is a decision only while Storybook is missing (guided-flow S2)', () => {
+  const missing = project();
+  boardStateAt(missing);
+  const text = guidedRaw(missing, home(), 'next').stdout;
+  assert.match(lastLines(text, 3)[1], STOP);
+  assert.match(lastLines(text, 3)[2], /Storybook/);
+  const present = project();
+  boardStateAt(present);
+  withStorybook(present);
+  assert.doesNotMatch(guidedRaw(present, home(), 'next').stdout, /STOP —/, 'with Storybook installed the question is over');
+});
+
+test('done refuses a decision part without --answer, names the option and the command, and changes nothing (guided-flow S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  decisionAt(dir, 'direction', []);
+  put(dir, BRIEF);
+  const before = raw(dir);
+  const message = refusal(guidedRaw(dir, homeDir, 'done', 'direction.questions'), dir, before);
+  assert.match(message, /part "direction\.questions" is the user's decision/);
+  assert.match(message, /--answer/);
+  assert.match(message, /done direction\.questions --answer "<the user's words>"/);
+  assert.match(message, /Do not answer for the user/);
+  const whole = project();
+  decisionAt(whole, 'direction', ['questions', 'classify', 'journey', 'references', 'directions']);
+  put(whole, BRIEF);
+  const wholeBefore = raw(whole);
+  assert.match(refusal(guidedRaw(whole, homeDir, 'done', 'direction'), whole, wholeBefore), /step "direction" is the user's decision[\s\S]*--answer/, 'closing the whole step covers the decision part still open');
+});
+
+test('done --answer keeps the words of the user on the part, the part closes, and the next instruction follows (guided-flow S2)', () => {
+  const dir = project();
+  const homeDir = home();
+  decisionAt(dir, 'direction', []);
+  put(dir, BRIEF);
+  const run = guidedRaw(dir, homeDir, 'done', 'direction.questions', '--answer', 'Una landing de placas solares; la acción es pedir presupuesto');
+  assert.equal(run.status, 0, run.stderr);
+  assert.match(run.stdout, /Next step: direction/);
+  const step = state(dir).steps.find((s) => s.id === 'direction');
+  assert.deepEqual(step.parts_done, ['questions']);
+  assert.equal(step.answers.length, 1);
+  assert.equal(step.answers[0].part, 'questions');
+  assert.equal(step.answers[0].answer, 'Una landing de placas solares; la acción es pedir presupuesto');
+  assert.match(step.answers[0].at, /^\d{4}-\d\d-\d\dT/);
+});
+
+test('--answer needs a value that is not empty and not the template placeholder; each exits 2 and changes nothing (guided-flow S2)', () => {
+  const dir = project();
+  decisionAt(dir, 'direction', []);
+  put(dir, BRIEF);
+  const before = raw(dir);
+  for (const answer of ['', '   ', "<the user's words>", '<…>']) {
+    const run = guidedRaw(dir, home(), 'done', 'direction.questions', '--answer', answer);
+    assert.equal(run.status, 2, JSON.stringify(answer));
+    assert.match(run.stderr, /--answer/);
+    assert.equal(raw(dir), before);
+  }
+  assert.equal(guidedRaw(dir, home(), 'done', 'direction.questions', '--answer').status, 2);
+});
+
+test('a step that is not a decision closes with no answer and keeps no answers key; --answer on it is accepted and kept (guided-flow S2, previous behavior)', () => {
+  for (const answer of [null, 'the user liked the warm palette']) {
+    const dir = project();
+    stateAt(dir, 'tokens');
+    putTokens(dir);
+    assert.equal(spawnSync(process.execPath, [TOKENS_TOOL, 'doc', '--dir', dir], { encoding: 'utf8' }).status, 0);
+    writeFileSync(join(dir, 'DESIGN.md'), fill(readFileSync(join(dir, 'DESIGN.md'), 'utf8')));
+    const run = guidedRaw(dir, home(), 'done', 'tokens', ...(answer ? ['--answer', answer] : []));
+    assert.equal(run.status, 0, run.stderr);
+    const step = state(dir).steps.find((s) => s.id === 'tokens');
+    assert.equal(step.status, 'done');
+    if (answer) assert.equal(step.answers[0].answer, answer);
+    else assert.equal(step.answers, undefined);
+  }
+});
+
+test('a route started before decision points existed does not crash: its closed parts stay, and a decision part asks for --answer with the way to give it (guided-flow S2, previous behavior)', () => {
+  const dir = project();
+  const homeDir = home();
+  stateAt(dir, 'direction', { parts_done: ['questions'] }, 0);
+  put(dir, BRIEF);
+  const before = raw(dir);
+  const next = guidedRaw(dir, homeDir, 'next');
+  assert.equal(next.status, 0, next.stderr);
+  assert.match(next.stdout, /part 2\/6: classify/);
+  assert.doesNotMatch(next.stdout, /STOP —/, 'classify is not a decision');
+  assert.equal(guidedRaw(dir, homeDir, 'status').status, 0);
+  assert.equal(raw(dir), before, 'next and status never write');
+  stateAt(dir, 'direction', { parts_done: ['questions', 'classify', 'journey', 'references', 'directions'] }, 0);
+  const old = raw(dir);
+  const refused = refusal(guidedRaw(dir, homeDir, 'done', 'direction.choose'), dir, old);
+  assert.match(refused, /part "direction\.choose" is the user's decision/);
+  assert.match(refused, /done direction\.choose --answer "<the user's words>"/);
+  const ok = guidedRaw(dir, homeDir, 'done', 'direction.choose', '--answer', 'La diferenciada, con la escena 3D');
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.equal(state(dir).gates, undefined, 'an old state stays old');
+  assert.equal(state(dir).steps[1].answers[0].answer, 'La diferenciada, con la escena 3D');
+});
+
+test('board: --declined --reason is the user\'s answer and is kept as one; the old fields and the evidence are unchanged (guided-flow S2, previous behavior)', () => {
+  const dir = project();
+  boardStateAt(dir);
+  const run = guidedRaw(dir, home(), 'done', 'board', '--declined', '--reason', 'the user does not want Storybook in this repo');
+  assert.equal(run.status, 0, run.stderr);
+  const step = state(dir).steps.find((s) => s.id === 'board');
+  assert.equal(step.declined, true);
+  assert.equal(step.reason, 'the user does not want Storybook in this repo');
+  assert.match(step.evidence, /declined by the user: the user does not want Storybook in this repo/);
+  assert.equal(step.answers[0].answer, 'the user does not want Storybook in this repo');
+  const missing = project();
+  boardStateAt(missing);
+  const before = raw(missing);
+  assert.match(refusal(guidedRaw(missing, home(), 'done', 'board'), missing, before), /Storybook is not installed[\s\S]*done board --declined --reason/, 'without Storybook and without the no, the question is still asked');
+  const ok = project();
+  boardStateAt(ok);
+  withStorybook(ok);
+  putStory(ok);
+  assert.equal(guidedRaw(ok, home(), 'done', 'board').status, 0, 'Storybook installed and a clean board close as before');
 });

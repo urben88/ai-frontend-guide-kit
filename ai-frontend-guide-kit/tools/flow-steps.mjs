@@ -17,6 +17,10 @@
  *   env.storybook        board.mjs detect of the project: { present, install (the exact command, null when present), framework }
  *   env.hasProduct       does PRODUCT.md exist?   env.hasBrief  does EXPERIENCE-BRIEF.md exist?   env.hasMap  does ux-map.excalidraw exist?
  *
+ * A part may carry `decision`: what the user decides in it (a string, or a function of env that returns the string or a falsy
+ * value when there is nothing to ask). `flow next` ends such a part with a STOP block and `flow done` closes it only with
+ * `--answer "<the user's words>"`, which the state keeps.
+ *
  * A part may also carry `report`: the fixed checklist of a step that closes with free evidence
  * (polish, iterate, redesign, visual-feedback). `flow report <step>` writes it, one line per check,
  * and `done` asks that every line is closed. The content checks of the other parts live in
@@ -109,6 +113,7 @@ export const PARTS = {
     {
       id: 'questions',
       title: 'ask the user about the product, the audience and the goal',
+      decision: 'the answers about the product, the audience and what counts as success',
       artifacts: [['out:ux/EXPERIENCE-BRIEF.md']],
       build: (env) => ({
         goal: 'Learn from the user what is being built, for whom and what counts as success.',
@@ -199,6 +204,7 @@ export const PARTS = {
     {
       id: 'references',
       title: 'look at real examples with the user',
+      decision: 'which of the example sites they prefer and what they highlight in them (or that they have none)',
       build: (env) => ({
         goal: 'Find out which real sites the user likes and what exactly they like in them.',
         steps: [
@@ -251,6 +257,7 @@ export const PARTS = {
     {
       id: 'choose',
       title: 'the user chooses; write the visual brief',
+      decision: 'which of the three directions to build, or how to combine them',
       build: (env) => ({
         goal: 'Close the direction with the user and leave the visual brief the tokens step reads.',
         steps: [
@@ -285,6 +292,7 @@ export const PARTS = {
     {
       id: 'product',
       title: 'anchor the product',
+      decision: (env) => !hasOwnProductDoc(env) && !env.hasProduct && 'the audience, the primary action, the objections, the proof and the tone of the product (what you cannot answer from the brief)',
       artifacts: (env) => (hasOwnProductDoc(env) ? [] : [['root:PRODUCT.md']]),
       build: (env) => {
         const adapter = hasOwnProductDoc(env);
@@ -328,6 +336,7 @@ export const PARTS = {
     {
       id: 'spec',
       title: 'write the screens, flows and states',
+      decision: (env) => env.uxPresent === true && 'whether to summarize the UX that exists (as-is) or to redesign it radically',
       artifacts: [['out:ux/UX-SPEC.md']],
       build: (env) => ({
         goal: 'Define how the product works, screen by screen, before any component is chosen.',
@@ -466,6 +475,7 @@ export const PARTS = {
     {
       id: 'decide',
       title: 'decide reuse, adapt or build, install and record',
+      decision: 'which components to reuse, adapt or build for each row (they choose among the 2 or 3 combinations you show)',
       build: (env) => {
         const skills = builderSkill(env);
         return {
@@ -515,6 +525,7 @@ export const PARTS = {
   board: [{
     id: null,
     title: 'ask about Storybook, then compose the real components into a design board',
+    decision: (env) => !env.storybook.present && 'whether to install Storybook as the design board of this project (yes or no)',
     build: (env) => {
       const { present, install, framework } = env.storybook;
       const detect = env.run('board.mjs', 'detect');
