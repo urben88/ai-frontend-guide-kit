@@ -580,6 +580,83 @@ function recordAnswer(step, partId, flags) {
   step.answers = [...(step.answers ?? []), { part: partId ?? null, at: new Date().toISOString(), ...(answer === undefined ? {} : { answer: answer.trim() }), ...(tools === undefined ? {} : { tools }) }];
 }
 
+// ---------------------------------------------------------------- the summary for the user (done prints it, `report` gathers it)
+
+/** The tools a step names in the step table (`{kit}/tools/<tool>`), as file names. */
+const commandsOf = (id) => [...new Set([...STEPS[id].tool.matchAll(/\{kit\}\/tools\/([\w.-]+)/g)].map((match) => match[1]))];
+
+/** The files of `artifacts` that exist and are not empty, as the project shows them (the first alternative that is there). */
+function foundArtifacts(p, artifacts) {
+  const shown = [];
+  for (const alternatives of artifacts ?? []) {
+    const hit = alternatives.map((ref) => artifactPath(p, ref)).find(({ abs }) => existsSync(abs) && readFileSync(abs, 'utf8').trim().length > 0);
+    if (hit) shown.push(hit.shown);
+  }
+  return shown;
+}
+
+/**
+ * What a step has done so far, as data for the human: the parts closed (all of them when the step is done, or just `scope.partId`),
+ * the answers and tool picks recorded on them, and the files of the step that exist.
+ */
+function stepFacts(p, step, scope) {
+  const closed = step.status === 'done' ? PARTS[step.id] : PARTS[step.id].filter((part) => (step.parts_done ?? []).includes(part.id));
+  const parts = scope ? PARTS[step.id].filter((part) => part.id === scope.partId) : closed;
+  const records = (step.answers ?? []).filter((entry) => !scope || entry.part === scope.partId);
+  const answers = records.filter((entry) => entry.answer !== undefined);
+  const picked = records.filter((entry) => entry.tools !== undefined).flatMap((entry) => entry.tools);
+  const chosen = records.some((entry) => entry.tools !== undefined) ? (picked.length ? [...new Set(picked)].join(', ') : 'none (the user wanted no extra tool)') : 'none recorded';
+  const report = artifactPath(p, `out:reports/${step.id}-report.md`);
+  const files = [
+    ...parts.flatMap((part) => foundArtifacts(p, partArtifacts(p, part))),
+    ...(scope ? [] : foundArtifacts(p, STEPS[step.id].artifacts)),
+    ...(!scope && existsSync(report.abs) ? [report.shown] : []),
+    ...(!scope && step.id === 'board' ? findBoards(p.root).map((board) => board.file) : []),
+  ];
+  const said = answers.length ? `The user answered: ${answers.map((entry) => `"${entry.answer}"`).join('; ')}` : '';
+  const what = parts.length ? [`${parts.map((part) => part.title).join('; ')}.`, !scope && step.evidence ? step.evidence : '', said].filter(Boolean).join(' ') : null;
+  const commands = commandsOf(step.id);
+  return { what, answers, files: [...new Set(files)], tools: `Tools: chosen by the user: ${chosen} · commands of this step: ${commands.length ? commands.join(', ') : 'none'}` };
+}
+
+/** The block `done` prints for the human after it closes `target`; `info` is the instruction of what comes next (null: the route is complete). */
+function closeSummary(p, step, target, partId, info) {
+  const facts = stepFacts(p, step, partId !== undefined && step.status !== 'done' ? { partId } : undefined);
+  const next = info ? `${info.step}${info.part ? `.${info.part}` : ''} — ${info.title}` : 'none, the route is complete';
+  return [`Summary for the user — ${target}`, `- What was done: ${facts.what}`, `- ${facts.tools}`, `- Files written: ${facts.files.join(', ') || 'none'}`, `- Next: ${next}`].join('\n');
+}
+
+/** `report` without a step: the whole route in one page, in order, written to FLOW-REPORT.md. */
+function routeReport(p) {
+  const state = readState(p);
+  if (!state) throw new UsageError(`report needs a step (reports exist for: ${REPORT_STEPS_TEXT}), or an active route for the summary of the whole route`);
+  const open = current(state);
+  const finished = state.steps.filter((step) => step.status === 'done').length;
+  const lines = [
+    '# Flow report',
+    '',
+    `Route \`${state.route}\` — ${ROUTES[state.route]?.title ?? 'a route of an earlier kit'} · started ${String(state.started_at ?? '').slice(0, 10)} · ${finished} of ${state.steps.length} steps done.`,
+    `Written by \`${cmd('flow.mjs', 'report')}\`: what each step did, what the user answered, the tools they picked and the files that came out. Read it instead of the chat.`,
+  ];
+  state.steps.forEach((step, index) => {
+    const label = step.status === 'done' ? 'done' : step === open ? `in progress${PARTS[step.id].length > 1 ? ` (part ${Math.min((step.parts_done ?? []).length + 1, PARTS[step.id].length)} of ${PARTS[step.id].length})` : ''}` : 'pending';
+    lines.push('', `## ${index + 1}. ${step.id} — ${label}`, STEPS[step.id].title);
+    const facts = stepFacts(p, step);
+    if (!facts.what) return lines.push('- Not started.');
+    lines.push(`- What was done: ${facts.what.replace(/ The user answered: .*$/, '')}`);
+    if (facts.answers.length) {
+      lines.push('- What the user answered:');
+      for (const entry of facts.answers) lines.push(`  - ${entry.part ?? step.id}: "${entry.answer}"${entry.tools?.length ? ` (tools: ${entry.tools.join(', ')})` : ''}`);
+    }
+    lines.push(`- ${facts.tools}`, `- Files written: ${facts.files.join(', ') || 'none'}`);
+  });
+  const { abs, shown } = artifactPath(p, 'out:FLOW-REPORT.md');
+  mkdirSync(dirname(abs), { recursive: true });
+  const text = `${lines.join('\n')}\n`;
+  writeFileSync(abs, text);
+  console.log(`${text}\nWritten: ${shown}`);
+}
+
 function done(p, target, flags) {
   const named = String(target ?? '').split('.')[0];
   parseTools(flags.tools);
@@ -610,7 +687,8 @@ function done(p, target, flags) {
       recordAnswer(step, partId, flags);
       step.parts_done = [...(step.parts_done ?? []), partId];
       writeState(p, state);
-      return console.log(`Done: ${target}\n\n${renderInstruction(instruction(p, state))}`);
+      const info = instruction(p, state);
+      return console.log(`Done: ${target}\n\n${closeSummary(p, step, target, partId, info)}\n\n${renderInstruction(info)}`);
     }
   }
   if (id === 'compose' || id === 'iterate') {
@@ -665,7 +743,9 @@ function done(p, target, flags) {
   const following = current(state);
   state.complete = !following;
   writeState(p, state);
-  console.log(following ? `Done: ${target}\n\n${renderInstruction(instruction(p, state))}` : `Done: ${target}\nRoute "${state.route}" complete.`);
+  if (!following) return console.log(`Done: ${target}\n\n${closeSummary(p, step, target, partId, null)}\n\nRoute "${state.route}" complete.\nWhole route in one page: ${cmd('flow.mjs', 'report')}`);
+  const info = instruction(p, state);
+  console.log(`Done: ${target}\n\n${closeSummary(p, step, target, partId, info)}\n\n${renderInstruction(info)}`);
 }
 
 /** `scaffold [<step>[.<part>]]`: the micro-step it names, or the current one of the active route. */
@@ -706,7 +786,7 @@ function scaffold(p, target) {
 
 /** `report <step>`: the fixed checklist of a step closed with free evidence, written once and never overwritten. */
 function report(p, step) {
-  if (!step) throw new UsageError(`report needs a step (reports exist for: ${REPORT_STEPS_TEXT})`);
+  if (!step) return routeReport(p);
   if (!REPORT_STEPS.includes(step)) throw new UsageError(`step "${step}" has no report (reports exist for: ${REPORT_STEPS_TEXT})`);
   const { abs, shown } = artifactPath(p, `out:reports/${step}-report.md`);
   const existing = existsSync(abs) ? readFileSync(abs, 'utf8') : null;

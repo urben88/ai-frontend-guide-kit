@@ -1946,3 +1946,104 @@ test('a refused done keeps no tool record, and a decision part still asks for th
   const before = raw(dir);
   assert.match(refusal(guidedRaw(dir, home(), 'done', 'direction.questions', '--tools', 'recipe'), dir, before), /is the user's decision/);
 });
+
+// ---------------------------------------------------------------- guided flow: the summary for the user (guided-flow S4)
+
+test('done prints a summary for the user before the next instruction: what was done, the tools, the files and the next micro-step (guided-flow S4)', () => {
+  const dir = project();
+  const homeDir = home();
+  decisionAt(dir, 'direction', []);
+  put(dir, BRIEF);
+  const run = guidedRaw(dir, homeDir, 'done', 'direction.questions', '--answer', 'Landing for solar panels; the action is to ask for a quote', '--tools', 'recipe');
+  assert.equal(run.status, 0, run.stderr);
+  const lines = run.stdout.split('\n');
+  assert.equal(lines[0], 'Done: direction.questions');
+  const at = lines.indexOf('Summary for the user — direction.questions');
+  assert.ok(at > 0, run.stdout);
+  assert.equal(lines[at + 1], '- What was done: ask the user about the product, the audience and the goal. The user answered: "Landing for solar panels; the action is to ask for a quote"');
+  assert.match(lines[at + 2], /^- Tools: chosen by the user: recipe · commands of this step: recipe\.mjs$/);
+  assert.equal(lines[at + 3], `- Files written: ${BRIEF_SHOWN}`);
+  assert.equal(lines[at + 4], '- Next: direction.classify — choose the archetype, the philosophy and the navigation model');
+  assert.ok(lines.findIndex((line) => line.startsWith('Next step: direction')) > at + 4, 'the instruction follows the summary');
+});
+
+test('the summary says "none recorded" when no tool was picked, and "none" when the user wanted none (guided-flow S4)', () => {
+  const dir = project();
+  decisionAt(dir, 'direction', []);
+  put(dir, BRIEF);
+  assert.match(guidedRaw(dir, home(), 'done', 'direction.questions', '--answer', 'x').stdout, /- Tools: chosen by the user: none recorded · commands of this step: recipe\.mjs/);
+  const other = project();
+  decisionAt(other, 'direction', []);
+  put(other, BRIEF);
+  assert.match(guidedRaw(other, home(), 'done', 'direction.questions', '--answer', 'x', '--tools', 'none').stdout, /- Tools: chosen by the user: none \(the user wanted no extra tool\)/);
+});
+
+test('closing the last step prints its summary and points at flow report for the whole route (guided-flow S4)', () => {
+  const dir = project();
+  const homeDir = home();
+  assert.equal(guidedRaw(dir, homeDir, 'start', 'architecture').status, 0);
+  provide(dir, [`${O}/ux/REPO-CONTEXT.md`, `${O}/UI-MAP.md`]);
+  assert.equal(guided(dir, homeDir, 'done', 'intake').status, 0);
+  put(dir, 'architecture.json');
+  const run = guidedRaw(dir, homeDir, 'done', 'architecture');
+  assert.equal(run.status, 0, run.stderr);
+  assert.match(run.stdout, /^Done: architecture\n\nSummary for the user — architecture\n- What was done: record which folder holds what\.\n/);
+  assert.match(run.stdout, /- Files written: ai-frontend-output\/architecture\.json\n/);
+  assert.match(run.stdout, /- Next: none, the route is complete\n/);
+  assert.match(run.stdout, /Route "architecture" complete\.\nWhole route in one page: .*flow\.mjs report\n$/);
+});
+
+test('flow report (no step) writes FLOW-REPORT.md: every step in route order with its status, answers, tools and files (guided-flow S4)', () => {
+  const dir = project();
+  const homeDir = home();
+  const steps = [
+    { id: 'intake', status: 'done', done_at: '2026-11-17T09:00:00.000Z', evidence: 'context and map written' },
+    { id: 'direction', status: 'pending', parts_done: ['questions'], answers: [{ part: 'questions', at: '2026-11-17T09:01:00.000Z', answer: 'Solar landing; ask for a quote', tools: ['recipe', 'technique'] }] },
+    { id: 'ux', status: 'pending' },
+    { id: 'tokens', status: 'pending' },
+    { id: 'compose', status: 'pending' },
+    { id: 'polish', status: 'pending' },
+  ];
+  put(dir, 'flow-state.json', JSON.stringify({ route: 'new', gates: 1, started_at: '2026-11-17T08:58:00.000Z', complete: false, steps }));
+  provide(dir, [`${O}/ux/REPO-CONTEXT.md`, `${O}/UI-MAP.md`]);
+  put(dir, BRIEF);
+  const run = guidedRaw(dir, homeDir, 'report');
+  assert.equal(run.status, 0, run.stderr);
+  const file = readFileSync(out(dir, 'FLOW-REPORT.md'), 'utf8');
+  assert.equal(run.stdout, `${file}\nWritten: ai-frontend-output/FLOW-REPORT.md\n`);
+  assert.match(file, /^# Flow report\n/);
+  assert.match(file, /Route `new` — New frontend or major build/);
+  assert.match(file, /1 of 6 steps done/);
+  const order = ['## 1. intake — done', '## 2. direction — in progress (part 2 of 6)', '## 3. ux — pending', '## 4. tokens — pending', '## 5. compose — pending', '## 6. polish — pending'].map((heading) => file.indexOf(heading));
+  assert.ok(order.every((index) => index >= 0), order.join(','));
+  assert.deepEqual([...order].sort((a, b) => a - b), order, 'in route order');
+  assert.match(file, /- What was done: read the project context\. context and map written/);
+  assert.match(file, /- Files written: ai-frontend-output\/ux\/REPO-CONTEXT\.md, ai-frontend-output\/UI-MAP\.md/);
+  assert.match(file, /- What the user answered:\n  - questions: "Solar landing; ask for a quote" \(tools: recipe, technique\)/);
+  assert.match(file, /- Tools: chosen by the user: recipe, technique · commands of this step: recipe\.mjs/);
+  assert.match(file, /## 3\. ux — pending\n[^\n]*\n- Not started\./);
+});
+
+test('flow report needs a route; with a step it still writes that step\'s checklist and no FLOW-REPORT.md (guided-flow S4, previous behavior)', () => {
+  const dir = project();
+  const none = guidedRaw(dir, home(), 'report');
+  assert.equal(none.status, 2);
+  assert.match(none.stderr, /report needs a step \(reports exist for: iterate, redesign, polish, visual-feedback\), or an active route for the summary of the whole route/);
+  const step = guidedRaw(dir, home(), 'report', 'polish');
+  assert.equal(step.status, 0, step.stderr);
+  assert.ok(existsSync(out(dir, 'reports/polish-report.md')));
+  assert.equal(existsSync(out(dir, 'FLOW-REPORT.md')), false);
+});
+
+test('flow report works on a route started before answers existed, and on a complete route (guided-flow S4, previous behavior)', () => {
+  const dir = project();
+  const steps = ['intake', 'direction', 'ux', 'tokens', 'compose', 'polish'].map((id) => ({ id, status: 'done', done_at: '2026-11-13T00:00:00.000Z', ...(id === 'direction' ? { parts_done: ['questions', 'classify', 'journey', 'references', 'directions', 'choose'] } : {}) }));
+  put(dir, 'flow-state.json', JSON.stringify({ route: 'new', started_at: '2026-11-13T00:00:00.000Z', complete: true, steps }));
+  const run = guidedRaw(dir, home(), 'report');
+  assert.equal(run.status, 0, run.stderr);
+  const file = readFileSync(out(dir, 'FLOW-REPORT.md'), 'utf8');
+  assert.match(file, /6 of 6 steps done/);
+  assert.match(file, /## 2\. direction — done/);
+  assert.doesNotMatch(file, /What the user answered/, 'an old state holds no answers: the line is left out');
+  assert.match(file, /- Tools: chosen by the user: none recorded/);
+});
