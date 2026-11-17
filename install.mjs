@@ -16,6 +16,7 @@ import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, symli
 import { spawnSync } from 'node:child_process';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { detect as detectStorybook } from './ai-frontend-guide-kit/tools/board.mjs';
 
 const REPO_ROOT = dirname(fileURLToPath(import.meta.url));
 const KIT_SOURCE = join(REPO_ROOT, 'ai-frontend-guide-kit');
@@ -191,7 +192,9 @@ What it does:
   6. Always scans the project with ui-map (node ai-frontend-guide-kit/tools/ui-map.mjs build) and writes
      ai-frontend-output/ui-map.json, UI-MAP.md and ui-history.jsonl. It never edits source; a failed scan
      only prints a warning. History is preserved on refresh.
-  7. Checks Python/Laya; with --with-laya installs it and verifies.
+  7. Looks for Storybook in the project (the design board). When it is missing it prints the proposal and the exact
+     install command; the installer never installs it: the agent asks the user first (flow step "board").
+  8. Checks Python/Laya; with --with-laya installs it and verifies.
 `);
 }
 
@@ -435,6 +438,21 @@ function buildUiMap(target, kitDest) {
   console.warn(`  ! ui-map: scan failed (${reason}); continuing. Retry later: node ai-frontend-guide-kit/tools/ui-map.mjs build`);
 }
 
+/**
+ * Storybook is the design board of the project (ai-frontend-guide-kit/guides/14-DESIGN-BOARD.md). The installer only looks
+ * (board.mjs detect) and tells: it never runs the install, because the agent asks the user first.
+ */
+function proposeStorybook(target) {
+  const info = detectStorybook(target);
+  if (info.present) {
+    console.log(`- Storybook (design board): found (${info.packages.join(', ') || '.storybook/'}); nothing to install. Boards: node ai-frontend-guide-kit/tools/board.mjs plan`);
+    return;
+  }
+  console.log('- Storybook (design board): not found in this project. The kit proposes it so the pages can be seen and compared as stories.');
+  console.log(`    exact command (version pinned by the kit): ${info.install}`);
+  console.log('    The installer never installs it: the agent asks the user first (flow step "board", route new), and a no is kept on record with its reason.');
+}
+
 const CURSOR_RULE = join('.cursor', 'rules', 'ai-frontend-guide-kit.mdc');
 const CURSOR_HEADER = '---\ndescription: Always follow the ai-frontend-guide-kit flow for any frontend, UI, UX or design work\nalwaysApply: true\n---';
 
@@ -525,6 +543,8 @@ function main() {
     console.log('- MCP setup skipped (--no-mcp)');
   }
 
+  proposeStorybook(target);
+
   const python = findPython();
   if (!python) {
     console.log('- Laya: Python 3.10+ not found; ranking unavailable (find/get still work)');
@@ -561,6 +581,8 @@ Done. Next steps for the agent:
      python ai-frontend-guide-kit/tools/laya_select.py --need "..." --confirmed.
   4. Phase 3 (polish): use the frontend-polish skill with Playwright MCP; run
      npx playwright install chromium once before the first browser pass.
+  5. Design board (Storybook): the flow step board asks the user before anything is installed;
+     node ai-frontend-guide-kit/tools/board.mjs detect prints the command. Never install it without a yes.
 `);
 }
 

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -189,4 +189,61 @@ test('a block written before the repertoire existed is refreshed in place, keeps
   assert.equal(count(text, START), 1);
   assert.ok(blockOf(text).includes('technique.mjs find'));
   assert.match(run(target, 'update').stdout, /AGENTS\.md: kit routing block unchanged/);
+});
+
+// ---------------------------------------------------------------- Storybook is proposed, never installed (storybook-board S1, S4, T5)
+
+const PINNED = /npx storybook@\d+\.\d+\.\d+ init/;
+const listing = (dir) => readdirSync(dir).sort();
+
+test('init with no Storybook in the project proposes it with the exact command, says it asks first, and installs nothing (S1, S4)', () => {
+  const target = project();
+  const manifest = JSON.stringify({ name: 'app', dependencies: { react: '19.0.0' } });
+  put(target, 'package.json', manifest);
+  const result = run(target, 'init');
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /Storybook \(design board\): not found in this project/);
+  assert.match(result.stdout, PINNED);
+  assert.match(result.stdout, /asks the user first/i);
+  assert.match(result.stdout, /never installs/i);
+  assert.match(result.stdout, /flow step "board"|board step/);
+  assert.equal(read(target, 'package.json'), manifest, 'package.json is untouched');
+  for (const name of ['.storybook', 'node_modules', 'package-lock.json', 'src']) assert.equal(existsSync(join(target, name)), false, `${name} was not created`);
+  assert.ok(!listing(target).some((name) => /storybook/i.test(name)), 'nothing named storybook appeared');
+});
+
+test('init finds Storybook when the project has it, and then proposes nothing (S1)', () => {
+  const target = project();
+  put(target, 'package.json', JSON.stringify({ name: 'app', devDependencies: { storybook: '10.6.7', react: '19.0.0' } }));
+  const result = run(target, 'update');
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /Storybook \(design board\): found \(storybook\)/);
+  assert.doesNotMatch(result.stdout, PINNED);
+  assert.doesNotMatch(result.stdout, /not found in this project/);
+});
+
+test('a project with only a .storybook folder counts as having Storybook; the folder is not modified (S1)', () => {
+  const target = project();
+  put(target, '.storybook/main.js', "export default { stories: ['../src/**/*.stories.jsx'] };\n");
+  const before = read(target, '.storybook/main.js');
+  const result = run(target, 'init');
+  assert.match(result.stdout, /Storybook \(design board\): found/);
+  assert.equal(read(target, '.storybook/main.js'), before);
+});
+
+test('the installer help says that Storybook is proposed and never installed (S4)', () => {
+  const help = spawnSync(process.execPath, [join(ROOT, 'install.mjs'), '--help'], { encoding: 'utf8' });
+  assert.equal(help.status, 0, help.stderr);
+  assert.match(help.stdout, /Storybook/);
+  assert.match(help.stdout, /never installs/i);
+});
+
+test('the rest of the installer output is as before: the same lines appear with and without Storybook in the project (previous behavior)', () => {
+  const bare = project();
+  const withSb = project();
+  put(withSb, 'package.json', JSON.stringify({ devDependencies: { storybook: '10.6.7' } }));
+  const strip = (text, dir) => text.split(dir.replace(/\\/g, '/')).join('<T>').split(dir).join('<T>').split('\n').filter((line) => !/storybook|never installs it/i.test(line)).join('\n');
+  const a = run(bare, 'init');
+  const b = run(withSb, 'init');
+  assert.equal(strip(a.stdout, bare), strip(b.stdout, withSb));
 });
